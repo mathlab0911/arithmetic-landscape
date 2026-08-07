@@ -11,3 +11,6 @@
 Thumbs.db
 .DS_Store
 desktop.ini
+
+# Personal correspondence (contains endorsement code when filled in)
+endorsement_request.md
