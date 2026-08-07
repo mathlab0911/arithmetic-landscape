@@ -1,0 +1,12 @@
+﻿.\Pnp\Theory\Fiber.lean:31:65: error: Invalid argument name `s` for function `Finset.inter_subset_left`
+
+Hint: Perhaps you meant one of the following parameter names:
+  窶｢ `ﾎｱ`: sﾌｵﾎｱﾌｲ
+  窶｢ `s竄～: s竄⇔ｲ
+  窶｢ `s竄Ａ: s竄のｲ
+  窶｢ `x`: sﾌｵxﾌｲ
+.\Pnp\Theory\Fiber.lean:29:47: error: unsolved goals
+k : 邃・A : Fin k 竊・邃・S I : Finset (Fin k)
+竓｢ (S 竏ｩ I).sum A + (S \ I).sum A = S.sum A
+'ALT.sum_inter_add_sum_sdiff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.fiber_card_eq_repCount' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

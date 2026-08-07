@@ -1,0 +1,30 @@
+﻿.\Pnp\Theory\Fiber.lean:30:2: error(lean.unknownIdentifier): Unknown constant `Finset.sum_inter_add_sum_diff`
+.\Pnp\Theory\Fiber.lean:63:45: error: typeclass instance problem is stuck
+  DecidableEq ?m.198
+
+Note: Lean will not try to resolve this typeclass instance problem because the type argument to `DecidableEq` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+.\Pnp\Theory\Fiber.lean:88:18: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (fun U => U 竏ｪ J) U1
+in the target expression
+  (U1 竏ｪ J) \ J = (U2 竏ｪ J) \ J
+
+k : 邃・A : Fin k 竊・邃・n : 邃・I J : Finset (Fin k)
+hJ : J 竓・I
+F : Finset (Finset (Fin k)) := {U | U 竓・I盡・竏ｧ U.sum A + J.sum A = n}
+hF : F = {U | U 竓・I盡・竏ｧ U.sum A + J.sum A = n}
+hUJ : 竏 U 竏・F, Disjoint U J
+himg : {S | S.sum A = n 竏ｧ S 竏ｩ I = J} = Finset.image (fun U => U 竏ｪ J) F
+U1 : Finset (Fin k)
+h1 : U1 竏・竊詮
+U2 : Finset (Fin k)
+h2 : U2 竏・竊詮
+heq : (fun U => U 竏ｪ J) U1 = (fun U => U 竏ｪ J) U2
+d1 : Disjoint U1 J
+d2 : Disjoint U2 J
+e1 : (U1 竏ｪ J) \ J = U1
+e2 : (U2 竏ｪ J) \ J = U2
+竓｢ (U1 竏ｪ J) \ J = (U2 竏ｪ J) \ J
+'ALT.sum_inter_add_sum_sdiff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.fiber_card_eq_repCount' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,2 @@
+﻿'ALT.sum_inter_add_sum_sdiff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.fiber_card_eq_repCount' depends on axioms: [propext, Classical.choice, Quot.sound]

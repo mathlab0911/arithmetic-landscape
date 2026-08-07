@@ -1,0 +1,9 @@
+﻿[3, 5, 7, 11]
+true
+.\Pnp\Theory\Bridge.lean:200:4: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'ALT.sum_fin_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.exists_sum_succ_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.mem_subsetSums_ofFn_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.gs_ofFn_eq_energy_min' depends on axioms: [propext, Classical.choice, Quot.sound]

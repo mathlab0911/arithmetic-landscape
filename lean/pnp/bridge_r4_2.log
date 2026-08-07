@@ -1,0 +1,47 @@
+﻿.\Pnp\Theory\Bridge.lean:52:45: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  if 0 竏・S then ?m.346 else ?m.347
+in the target expression
+  A 0 + 竏・j 竏・T, A j.succ = 竏・j 竏・T, A j.succ + if 0 竏・insert 0 M then A 0 else 0
+
+case pos
+k : 邃・A : Fin (k + 1) 竊・邃・S : Finset (Fin (k + 1))
+T : Finset (Fin k) := {j | j.succ 竏・S}
+hT : T = {j | j.succ 竏・S}
+M : Finset (Fin (k + 1)) := Finset.map { toFun := Fin.succ, inj' := 站ｯ } T
+hM : M = Finset.map { toFun := Fin.succ, inj' := 站ｯ } T
+hMmem : 竏 (i : Fin (k + 1)), i 竏・M 竊・i 竕 0 竏ｧ i 竏・S
+hMsum : M.sum A = 竏・j 竏・T, A j.succ
+h0 : 0 竏・S
+hnot : 0 竏・M
+hSeq : S = insert 0 M
+竓｢ A 0 + 竏・j 竏・T, A j.succ = 竏・j 竏・T, A j.succ + if 0 竏・insert 0 M then A 0 else 0
+.\Pnp\Theory\Bridge.lean:62:21: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  if 0 竏・S then ?m.393 else ?m.394
+in the target expression
+  竏・j 竏・T, A j.succ = 竏・j 竏・T, A j.succ + if 0 竏・M then A 0 else 0
+
+case neg
+k : 邃・A : Fin (k + 1) 竊・邃・S : Finset (Fin (k + 1))
+T : Finset (Fin k) := {j | j.succ 竏・S}
+hT : T = {j | j.succ 竏・S}
+M : Finset (Fin (k + 1)) := Finset.map { toFun := Fin.succ, inj' := 站ｯ } T
+hM : M = Finset.map { toFun := Fin.succ, inj' := 站ｯ } T
+hMmem : 竏 (i : Fin (k + 1)), i 竏・M 竊・i 竕 0 竏ｧ i 竏・S
+hMsum : M.sum A = 竏・j 竏・T, A j.succ
+h0 : 0 竏・S
+hSeq : S = M
+竓｢ 竏・j 竏・T, A j.succ = 竏・j 竏・T, A j.succ + if 0 竏・M then A 0 else 0
+.\Pnp\Theory\Bridge.lean:85:26: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  b 竕･ 0
+  a 竕･ 0
+  a - b 竕･ 1
+where
+ a := 竊・竏・j with j.succ 竏・S, A j.succ)
+ b := 竊・竏・j 竏・?m.175, A j.succ)
+[3, 5, 7, 11]
+true
+'ALT.sum_fin_succ' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.exists_sum_succ_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.mem_subsetSums_ofFn_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.gs_ofFn_eq_energy_min' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

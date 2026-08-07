@@ -1,0 +1,10 @@
+﻿[3, 5, 7, 11]
+true
+.\Pnp\Theory\Bridge.lean:226:60: error: mod_cast has type
+  ?m.417 a = ?m.417 (2 * (a / 2) + 1)
+but is expected to have type
+  a = 2 * (a / 2) + 1
+'ALT.sum_fin_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.exists_sum_succ_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.mem_subsetSums_ofFn_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.gs_ofFn_eq_energy_min' depends on axioms: [propext, Classical.choice, Quot.sound]

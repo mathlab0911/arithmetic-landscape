@@ -1,0 +1,15 @@
+﻿.\Pnp\Theory\Symmetry.lean:8:0: error: unknown module prefix 'Pnp'
+
+No directory 'Pnp' or file 'Pnp.olean' in the search path entries:
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\Cli\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\batteries\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\Qq\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\aesop\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\proofwidgets\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\importGraph\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\LeanSearchClient\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\plausible\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\packages\mathlib\.lake\build\lib\lean
+C:\Users\amake\Claude\Projects\study\lean\pnp\.lake\build\lib\lean
+c:\Users\amake\.elan\toolchains\leanprover--lean4---v4.32.2\lib\lean
+c:\Users\amake\.elan\toolchains\leanprover--lean4---v4.32.2\lib\lean

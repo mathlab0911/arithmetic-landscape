@@ -1,0 +1,17 @@
+﻿.\Pnp\Theory\Fiber.lean:34:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  e 竕･ 0
+  d 竕･ 0
+  c 竕･ 0
+  c - d - e 竕･ 1
+  b 竕･ 0
+  a 竕･ 0
+  a - b 竕､ 0
+where
+ a := 竊・竏・x 竏・S 竏ｩ I, A x)
+ b := 竊・竏・x 竏・S, A x)
+ c := 竊・S.sum A)
+ d := 竊・(S 竏ｩ I).sum A)
+ e := 竊・(S \ I).sum A)
+'ALT.sum_inter_add_sum_sdiff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.fiber_card_eq_repCount' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

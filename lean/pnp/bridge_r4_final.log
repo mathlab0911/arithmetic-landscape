@@ -1,0 +1,17 @@
+﻿[3, 5, 7, 11]
+true
+5
+5
+true
+1402281 / 262144
+1402281 / 262144
+true
+true
+4
+9 / 2
+'ALT.sum_fin_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.exists_sum_succ_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.mem_subsetSums_ofFn_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.gs_ofFn_eq_energy_min' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.window_term_cons' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.windowSeries_eq_gapSeries' depends on axioms: [propext, Classical.choice, Quot.sound]

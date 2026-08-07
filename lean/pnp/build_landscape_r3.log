@@ -1,0 +1,28 @@
+﻿邃ｹ [2997/2997] Built Pnp.Theory.Landscape (7.4s)
+info: Pnp/Theory/Landscape.lean:357:0: 5609051 / 1048576
+info: Pnp/Theory/Landscape.lean:358:0: 1048565 / 524288
+info: Pnp/Theory/Landscape.lean:359:0: 3145685 / 1048576
+info: Pnp/Theory/Landscape.lean:360:0: 3145485 / 524288
+info: Pnp/Theory/Landscape.lean:361:0: 20
+info: Pnp/Theory/Landscape.lean:368:0: 2
+info: Pnp/Theory/Landscape.lean:369:0: 2
+info: Pnp/Theory/Landscape.lean:370:0: 1
+info: Pnp/Theory/Landscape.lean:371:0: [1, 1]
+info: Pnp/Theory/Landscape.lean:377:0: true
+info: Pnp/Theory/Landscape.lean:378:0: true
+info: Pnp/Theory/Landscape.lean:413:0: 'ALT.gs_le_of_mem' depends on axioms: [propext]
+info: Pnp/Theory/Landscape.lean:414:0: 'ALT.gs_le_target' depends on axioms: [propext, Quot.sound]
+info: Pnp/Theory/Landscape.lean:415:0: 'ALT.gs_le_total_dist' depends on axioms: [propext, Quot.sound]
+info: Pnp/Theory/Landscape.lean:416:0: 'ALT.compl_mem_subsetSums' depends on axioms: [propext, Quot.sound]
+info: Pnp/Theory/Landscape.lean:417:0: 'ALT.ndist_compl' depends on axioms: [propext, Quot.sound]
+info: Pnp/Theory/Landscape.lean:418:0: 'ALT.foldl_min_attained' depends on axioms: [propext]
+info: Pnp/Theory/Landscape.lean:419:0: 'ALT.gs_attained' depends on axioms: [propext, Quot.sound]
+info: Pnp/Theory/Landscape.lean:420:0: 'ALT.gs_compl' depends on axioms: [propext, Quot.sound]
+info: Pnp/Theory/Landscape.lean:421:0: 'ALT.isStrictLocalMin_iff_of_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/Landscape.lean:422:0: 'ALT.isStrictLocalMin_iff_of_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/Landscape.lean:423:0: 'ALT.isStrictLocalMin_of_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/Landscape.lean:424:0: 'ALT.isStrictLocalMin_iff_classCond' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/Landscape.lean:425:0: 'ALT.lm_eq_lmClassCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/Landscape.lean:426:0: 'ALT.gapSeries_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/Landscape.lean:427:0: 'ALT.gapSeries_le_of_forall_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (2997 jobs).

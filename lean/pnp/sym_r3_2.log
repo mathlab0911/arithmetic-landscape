@@ -1,0 +1,13 @@
+﻿.\Pnp\Theory\Symmetry.lean:153:27: warning: `List.Sublist.cons竄Ａ has been deprecated: Use `List.Sublist.cons_cons` instead
+.\Pnp\Theory\Symmetry.lean:158:6: error: Invalid alternative name `cons竄Ａ: Expected `slnil` or `cons_cons`
+.\Pnp\Theory\Symmetry.lean:156:6: error: Alternative `cons_cons` has not been provided
+'ALT.card_filter_compl_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.compl_flip' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.energy_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.isStrictLocalMin_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.lm_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.ndist_mod_two' depends on axioms: [propext, Quot.sound]
+'ALT.no_flat_edge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.isStrictLocalMin_iff_le_of_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.mem_subsetSums_iff_sublist' depends on axioms: [propext, sorryAx, Quot.sound]
+'ALT.gs_eq_zero_iff' depends on axioms: [propext, sorryAx, Quot.sound]

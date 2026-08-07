@@ -1,0 +1,13 @@
+# Lean / Lake build artifacts (~6.5 GB locally — never commit)
+.lake/
+*.olean
+*.ilean
+*.trace
+
+# Compiled executables
+*.exe
+
+# OS cruft
+Thumbs.db
+.DS_Store
+desktop.ini

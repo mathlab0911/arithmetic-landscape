@@ -1,0 +1,18 @@
+﻿.\Pnp\Theory\Bridge.lean:54:2: error: unsolved goals
+case neg
+k : 邃・A : Fin (k + 1) 竊・邃・S : Finset (Fin (k + 1))
+T : Finset (Fin k) := {j | j.succ 竏・S}
+hT : T = {j | j.succ 竏・S}
+M : Finset (Fin (k + 1)) := Finset.map { toFun := Fin.succ, inj' := 站ｯ } T
+hM : M = Finset.map { toFun := Fin.succ, inj' := 站ｯ } T
+hMmem : 竏 (i : Fin (k + 1)), i 竏・M 竊・i 竕 0 竏ｧ i 竏・S
+hMsum : M.sum A = 竏・j 竏・T, A j.succ
+h0 : 0 竏・S
+hSeq : S = M
+竓｢ 竏・j 竏・T, A j.succ = 竏・j 竏・T, A j.succ + 0
+[3, 5, 7, 11]
+true
+'ALT.sum_fin_succ' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.exists_sum_succ_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.mem_subsetSums_ofFn_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.gs_ofFn_eq_energy_min' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

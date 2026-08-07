@@ -1,0 +1,18 @@
+name = "pnp"
+version = "0.1.0"
+defaultTargets = ["Pnp"]
+
+[[lean_lib]]
+name = "Pnp"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.32.2"
+
+
+[[lean_exe]]
+name = "landscape"
+
+[[lean_exe]]
+name = "seeds"

@@ -1,0 +1,5 @@
+﻿'ALT.ratio_bounds_of_flat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.overCount_eq_repCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.underCount_eq_repCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.stratum_ratio_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.sandwich_partial' depends on axioms: [propext, Classical.choice, Quot.sound]

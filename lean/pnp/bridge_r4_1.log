@@ -1,0 +1,42 @@
+﻿.\Pnp\Theory\Bridge.lean:37:45: error(lean.unknownIdentifier): Unknown constant `Finset.not_mem_empty`
+.\Pnp\Theory\Bridge.lean:38:15: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+k : 邃・A : Fin (k + 1) 竊・邃・S : Finset (Fin (k + 1))
+hsplit : 竏・x 竏・S with x = 0, A x + 竏・x 竏・S with ﾂｬx = 0, A x = 竏・x 竏・S, A x
+h : 0 竏・S
+i : Fin (k + 1)
+竓｢ i 竏・S 竏ｧ i = 0 竊・i 竏・竏・.\Pnp\Theory\Bridge.lean:54:37: error(lean.unknownIdentifier): Unknown identifier `j`
+.\Pnp\Theory\Bridge.lean:56:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  d 竕･ 0
+  c 竕･ 0
+  b 竕･ 0
+  b + c - d 竕･ 1
+  a 竕･ 0
+  a - b 竕･ 0
+where
+ a := 竊・竏・x 竏・S, A x)
+ b := 竊・{i 竏・S | i = 0}.sum A)
+ c := 竊・竏・j with j.succ 竏・S, A j.succ)
+ d := 竊・S.sum A)
+.\Pnp\Theory\Bridge.lean:37:67: warning: This simp argument is unused:
+  iff_false
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_filter, Finset.not_mem_empty,ﾌｵ ﾌｵiﾌｵfﾌｵfﾌｵ_ﾌｵfﾌｵaﾌｵlﾌｵsﾌｵeﾌｵ]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+.\Pnp\Theory\Bridge.lean:69:38: error: Application type mismatch: The argument
+  rfl
+has type
+  ?m.106 = ?m.106
+but is expected to have type
+  竏・j 竏・?m.104, A j.succ = 竏・j with j.succ 竏・S, A j.succ + 0
+in the application
+  Exists.intro ?m.104 rfl
+true
+[3, 5, 7, 11]
+'ALT.sum_fin_succ' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.exists_sum_succ_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.mem_subsetSums_ofFn_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ALT.gs_ofFn_eq_energy_min' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

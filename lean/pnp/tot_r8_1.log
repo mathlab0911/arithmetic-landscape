@@ -1,0 +1,12 @@
+﻿.\Pnp\Theory\Total.lean:22:53: error: Application type mismatch: The argument
+  hM
+has type
+  P 竕､ M
+but is expected to have type
+  竏 x < ?m.27, x 竏・?m.28
+in the application
+  Finset.range_subset.mpr hM
+.\Pnp\Theory\Total.lean:121:11: error(lean.unknownIdentifier): Unknown constant `Nat.min_le_iff.mp`
+.\Pnp\Theory\Total.lean:121:37: error: Tactic `rcases` failed: `x笨・: ?m.469` is not an inductive datatype
+.\Pnp\Theory\Total.lean:128:11: error(lean.unknownIdentifier): Unknown constant `Nat.min_le_iff.mp`
+.\Pnp\Theory\Total.lean:128:37: error: Tactic `rcases` failed: `x笨・: ?m.511` is not an inductive datatype

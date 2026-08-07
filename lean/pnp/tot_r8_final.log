@@ -1,0 +1,12 @@
+﻿true
+[10, 10, 2]
+21 / 4
+5
+'ALT.sum_range_eq_of_vanish' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.sum_range_congr_of_vanish' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.overCount_eq_zero_of_sum_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.underCount_eq_zero_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.underCount_zero_eq_degCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.lm_eq_lmPartial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.lm_eq_lmPartial_of_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ALT.sandwich_total' depends on axioms: [propext, Classical.choice, Quot.sound]
