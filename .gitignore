@@ -7,6 +7,16 @@
 # Compiled executables
 *.exe
 
+# LaTeX build artefacts (paper.pdf is tracked on purpose)
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
+*.synctex.gz
+paper/*.log
+paper/*.png
+
 # OS cruft
 Thumbs.db
 .DS_Store

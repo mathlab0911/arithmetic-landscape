@@ -1,0 +1,42 @@
+name: Lean build
+
+# Verifies that the whole formal development compiles: every theorem in the
+# paper, with no `sorry` and no additional axioms.
+
+on:
+  push:
+    paths:
+      - 'lean/**'
+      - '.github/workflows/lean.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean/pnp
+          build-args: ''
+          use-mathlib-cache: true
+
+      - name: Check that no declaration depends on sorryAx
+        working-directory: lean/pnp
+        run: |
+          set -o pipefail
+          for f in Pnp/Theory/*.lean; do
+            echo "--- $f"
+            lake env lean "$f" 2>&1 | tee /tmp/out.txt
+            if grep -q "sorryAx" /tmp/out.txt; then
+              echo "::error file=$f::declaration depends on sorryAx"
+              exit 1
+            fi
+            if grep -qE "^.*error:" /tmp/out.txt; then
+              echo "::error file=$f::elaboration error"
+              exit 1
+            fi
+          done
