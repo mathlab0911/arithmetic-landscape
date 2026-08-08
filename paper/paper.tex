@@ -822,11 +822,10 @@ $1/\sqrt2\approx0.707$.
 So the informal reading is: random odd sequences are about as flat as the
 modulus-$4$ obstruction permits, and the primes are two orders of magnitude
 less flat than that, for the arithmetic reason isolated in
-Proposition~\ref{prop:mod6}. Making the first half of that sentence a theorem
---- a genuine lower bound for $\varepsilon_d$ --- requires transferring
-Theorem~\ref{thm:floor} from residue classes to bounded windows, which needs
-the local central limit theorem of Conjecture~\ref{conj:ripple}. We record it
-as Problem~\ref{prob:window-floor}.
+Proposition~\ref{prop:mod6}. One cannot, however, upgrade the first half of that
+sentence to a theorem covering all odd sequences: no window analogue of
+Theorem~\ref{thm:floor} holds, and Remark~\ref{rem:no-window-floor} exhibits
+sequences with $\varepsilon_2=0$ exactly.
 
 \subsection{Flatness measured}\label{sec:flatness-measured}
 
@@ -1084,16 +1083,31 @@ asymptotic with the pre-exponential factor for distinct-prime partitions of
 truncated prime sequences, or a direct exponential-sum estimate of Vinogradov
 type for $r_{B_d}$.
 
-\begin{problem}[From residue classes to windows]\label{prob:window-floor}
-Transfer Theorem~\ref{thm:floor} from the aggregate counts $R_c$ to the bounded
-windows $\mathrm{Win}_d$: show that $\varepsilon_d\gg2^{-|B_d|/2}$ for every odd
-sequence, or exhibit a sequence whose window flatness beats the modulus-$4$
-scale. The numerics of \S\ref{sec:floor} suggest the former, with the two
-quantities agreeing to within a factor $2$ for random sequences; a proof
-appears to need the local central limit theorem of
-Conjecture~\ref{conj:ripple}, since a bound on residue-class totals says
-nothing directly about $O(1)$ many points.
-\end{problem}
+\begin{remark}[There is no window analogue of Theorem~\ref{thm:floor}]
+\label{rem:no-window-floor}
+It is natural to ask whether Theorem~\ref{thm:floor} transfers from the
+aggregate counts $R_c$ to the bounded windows $\mathrm{Win}_d$, giving a lower
+bound $\varepsilon_d\gg2^{-|B_d|/2}$ valid for every odd sequence. It does not:
+the window flatness can vanish identically. For $d=2$ and a sequence $A$ with
+$\min A>4$ one has $I_2=\varnothing$, so $\mathrm{Win}_2=\{n-2,n,n+2\}$ has only
+three points, and $r_{B_2}$ can be made constant on them. For example, with
+\[
+  A=(7,15,21,45,49,55,67,69,73,75,81,85,89,93,97,105,107,113,115,131,135,141,145,147,151,155,159,161)
+\]
+$(k=28)$ all three values equal $377736$, so $\varepsilon_2=0$ exactly. The
+agreement is to one part in $3.8\times10^{5}$ and is therefore not an artefact
+of the integrality of $r$; sequences with $\varepsilon_2=0$ were found by local
+search at every size tested, with the common value growing from $10$ at $k=12$
+to $377736$ at $k=28$.
+
+The reason is simply that $\mathrm{Win}_d$ imposes $O(1)$ constraints on a
+sequence with $k$ degrees of freedom. Theorem~\ref{thm:floor} constrains the
+\emph{global} distribution of $r_B$ modulo $4$ and says nothing about any fixed
+finite set of points. What survives is the statement for the sequences we care
+about: for random odd sequences $\varepsilon_2$ sits at the modulus-$4$ scale
+(\S\ref{sec:floor}), and for the primes it sits two orders of magnitude above
+it --- but neither is forced by Theorem~\ref{thm:floor} alone.
+\end{remark}
 
 \begin{conjecture}[Ripple amplitude]\label{conj:ripple}
 For the odd primes and fixed $d\ge2$,
