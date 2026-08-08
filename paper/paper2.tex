@@ -87,7 +87,7 @@ $|F_B|$ at the rationals $\theta=2\pi j/q$.
 \subsection{Results}
 
 Section~\ref{sec:m1} determines the sub-peak spectrum. Writing
-$G_B(\theta)=\prod_{a\in B}\cos(a\theta/2)$, so that $|F_B|=2^{|B|}|G_B|$, the
+$G_B(\theta)=\prod_{a\in B}\cos(a\theta/2)$, so that $|F_B|=2^{b}|G_B|$, where $b=|B|$, the
 natural per-element height at modulus $q$ is
 \[
   M(q)=\Bigl(\prod_{\substack{1\le r\le q\\ \gcd(r,q)=1}}|\cos(\pi r/q)|\Bigr)^{1/\varphi(q)} .
@@ -292,8 +292,9 @@ under equidistribution.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig_mq.pdf}
-\caption{The per-element sub-peak height $M(q)$. The supremum $\sqrt3/2$ is
-attained only at $q=6$; $q=10$ and $q=4$ are the runners-up.}
+\caption{The per-element sub-peak height $M(q)$ (exact values, by
+Proposition~\ref{thm:cyc}). The supremum $\sqrt3/2$ is attained only at $q=6$;
+$q=10$ and $q=4$ are the runners-up.}
 \label{fig:mq}
 \end{figure}
 
@@ -302,7 +303,8 @@ attained only at $q=6$; $q=10$ and $q=4$ are the runners-up.}
 \includegraphics[width=\textwidth]{fig_peaks.pdf}
 \caption{Measured $|G_B(\theta)|/2^{b}$ for the first $b=24$ primes $\ge5$. The
 peaks at $q=2p$ with $p\in B$ are identically zero
-(Lemma~\ref{lem:vanish}); $\theta=\pi$ vanishes by parity.}
+(Lemma~\ref{lem:vanish}, proved); $\theta=\pi$ vanishes by parity. Computed
+exactly; no asymptotics enter this figure.}
 \label{fig:peaks}
 \end{figure}
 
@@ -569,7 +571,8 @@ still decreasing.
 \caption{Measured flatness $\varepsilon_d(k)$ for the primes against the
 modulus-$6$ rate. The curve for $d=1$ lies two orders of magnitude lower
 because $3\in B_1$ and the modulus-$6$ peak is extinguished
-(Lemma~\ref{lem:vanish}).}
+(Lemma~\ref{lem:vanish}). Measured by exact dynamic programming; the reference
+line is not a fit.}
 \label{fig:epsd}
 \end{figure}
 
@@ -721,9 +724,15 @@ $\|p\theta/2\pi-\tfrac12\|<\delta_0$.
 \item \emph{Harmonics stay minor.} For $n\le N_0$ the reduced denominator of
       $n\theta/2\pi$ is at least $q/\gcd(n,q)\ge b^{1/4}$, so every harmonic
       appearing below lies on a minor arc.
-\item \emph{The exponential sums.} Vaughan's identity bounds
-      $S_B(\alpha)=\sum_{p\in B}e(p\alpha)$ by
-      $\ll N(\log N)^{3}q_n^{-1/2}$ on such arcs; summing the head
+\item \emph{The exponential sums.} With the Dirichlet parameter
+      $\tau=b^{1/2}$ the denominators occurring in step~1 satisfy
+      $q_n\in[b^{1/4},b^{1/2}]$, and since $N=p_k\asymp k\log k$ this interval
+      lies inside $[(\log N)^{A},N(\log N)^{-A}]$ for every fixed $A$ once $k$ is
+      large. On that range Vaughan's identity gives
+      $S_B(\alpha)=\sum_{p\in B}e(p\alpha)\ll
+      \bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr)(\log N)^{4}$, hence
+      $S_B\ll N(\log N)^{4}b^{-1/8}=o(\pi(N))$; a log-free version with a wider
+      range of $q$ is available in~\cite{L25}. Summing the head
       $\sum_{n\le N_0}|S_B(n\theta)|/n\le(\log N_0)\max_n|S_B(n\theta)|$ gives
       $o(b)$.
 \item \emph{Bad points.} $|B_{\mathrm{bad}}|\le(D_B(\theta)+2\delta_0)b=o(b)$,
@@ -806,7 +815,7 @@ that already at $b=99$.
 Nothing new is proved in this section; it is the inventory that assembles the
 previous ones.
 
-\begin{theorem}[Asymptotic flatness]\label{thm:t2main}
+\begin{theorem}[Asymptotic flatness; scope as in Section~\ref{sec:remains}]\label{thm:t2main}
 Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With $B=B_d(k)$, $b=|B|$, as
 $k\to\infty$,
 \[
@@ -952,21 +961,63 @@ Theorem~\ref{thm:p5exact} is within one standard error at $k=100,400,800$
 For a statement in probability rather than in mean one needs a lower tail bound,
 and the following suffices.
 
-\begin{proposition}[Sketch]\label{prop:p5tail}
-Fix $J$ and $\delta>0$. Then
-$\mathbb{P}\bigl[a_{(J)}\le\delta N/k\bigr]\le(e\delta/2J)^{J}$, whence
-$\Gamma(R_k)\ge2^{-J}\delta N/k$ with probability at least
-$1-(e\delta/2J)^{J}$. Choosing $\delta=1/2$ and then $J$ large gives
-$\Gamma(R_k)\ge c_0\log k$ with probability $1-o(1)$, and therefore
-$\Gamma(P_k)/\Gamma(R_k)\to0$ in probability.
+\begin{proposition}\label{prop:p5tail}
+Let $R_k$ be a uniform $k$-subset of $\{1,\dots,N\}$ and let $X_{(J)}$ denote its
+$J$-th order statistic. For every integer $J\ge1$ and every $\delta>0$,
+\[
+  \mathbb{P}\bigl[X_{(J)}\le\delta N/k\bigr]
+   \;\le\;\frac{1}{\sqrt{2\pi J}}\Bigl(\frac{e\delta}{J}\Bigr)^{J}.
+\]
 \end{proposition}
 
-\noindent
-The tail bound was checked over $48$ combinations
+\begin{proof}
+Write $m=\lfloor\delta N/k\rfloor$. The event $X_{(J)}\le\delta N/k$ says that at
+least $J$ of the $k$ sampled points lie in $\{1,\dots,m\}$. Bounding the
+probability of that event by the union over all $J$-subsets of $\{1,\dots,m\}$ of
+the event that the whole subset is sampled,
+\[
+  \mathbb{P}\bigl[X_{(J)}\le\delta N/k\bigr]
+  \;\le\;\binom{m}{J}\frac{k(k-1)\cdots(k-J+1)}{N(N-1)\cdots(N-J+1)}
+  \;\le\;\binom{m}{J}\Bigl(\frac{k}{N}\Bigr)^{J},
+\]
+the last step because $(k-i)/(N-i)\le k/N$ for $0\le i<J\le k\le N$. Now
+$\binom{m}{J}\le m^{J}/J!$ and, by Stirling, $J!\ge\sqrt{2\pi J}(J/e)^{J}$, so
+\[
+  \mathbb{P}\bigl[X_{(J)}\le\delta N/k\bigr]
+  \le\frac{1}{\sqrt{2\pi J}}\Bigl(\frac{emk}{JN}\Bigr)^{J}
+  \le\frac{1}{\sqrt{2\pi J}}\Bigl(\frac{e\delta}{J}\Bigr)^{J},
+\]
+using $m\le\delta N/k$.
+\end{proof}
+
+\begin{corollary}\label{cor:p5prob}
+$\Gamma(P_k)/\Gamma(R_k)\to0$ in probability.
+\end{corollary}
+
+\begin{proof}[Sketch]
+On the complement of the event above, $\Gamma(R_k)\ge2^{-J}a_{(J)}
+\ge2^{-J}(2\delta N/k)$. Fix $\delta=1/2$ and let $J\to\infty$ slowly; the
+failure probability $(e/2J)^{J}/\sqrt{2\pi J}$ tends to $0$, while
+$2^{-J}N/k\to\infty$ because $N/k\asymp\log k$ and $J$ may be taken as slowly
+growing as one likes. Since $\Gamma(P_k)$ is bounded, the claim follows. The
+quantifier bookkeeping is routine and is the only part not written out here.
+\end{proof}
+
+\begin{remark}
+Proposition~\ref{prop:p5tail} was checked over $48$ combinations
 $k\in\{100,400,1600,3200\}$, $J\in\{1,2,4,8\}$, $\delta\in\{0.25,0.5,1\}$ with
-$10^{4}$ samples each; it held in every case, with the measured probability
-between one half and one seventh of the bound. A complete proof will appear with
-the assembly of Problem~\ref{prob:assembly}.
+$10^{4}$ samples each; it held in every case, and in fact the sharper bound
+$(e\delta/2J)^{J}$ also held throughout. We state only the weaker form because
+that is what the argument above proves; the conclusion is unaffected, since $J$
+is chosen after $\delta$.
+\end{remark}
+
+\section*{Data availability}
+
+Every numerical value quoted in this paper was produced by a script in the
+accompanying repository, and each script writes a log file of the same name.
+The scripts, the logs and the Lean development are available at
+\url{https://github.com/mathlab0911/arithmetic-landscape}.
 
 \begin{thebibliography}{XXXXXX}
 
@@ -1003,6 +1054,11 @@ H.~A.~Helfgott,
 F.~F.~Ferreira and J.~F.~Fontanari,
 \emph{Probabilistic analysis of the number partitioning problem},
 J. Phys. A \textbf{31} (1998), 3417--3428.
+
+\bibitem[Sr25]{L25}
+P.~Srivastav,
+\emph{Log-free bounds on exponential sums over primes}, preprint (2025),
+\href{https://arxiv.org/abs/2505.07803}{arXiv:2505.07803}.
 
 \bibitem[MB26]{MB26}
 M.~V.~N.~Murthy and M.~Brack,
