@@ -728,16 +728,43 @@ $\|p\theta/2\pi-\tfrac12\|<\delta_0$.
       $\tau=b^{1/2}$ the denominators occurring in step~1 satisfy
       $q_n\in[b^{1/4},b^{1/2}]$, and since $N=p_k\asymp k\log k$ this interval
       lies inside $[(\log N)^{A},N(\log N)^{-A}]$ for every fixed $A$ once $k$ is
-      large. On that range Vaughan's identity gives
+      large. It is worth recording why this single range suffices. The classical
+      treatment splits the circle into three tiers: $q=O(1)$, where the sum is
+      genuinely large; $2\le q\le(\log N)^{A}$, where the Siegel--Walfisz theorem
+      supplies the saving; and $q>(\log N)^{A}$, where Vaughan's identity does.
+      Only the third tier occurs here, because step~1 has already forced
+      $q_n\ge b^{1/4}$, which outgrows any fixed power of $\log N$. The first two
+      tiers are not lost --- they are precisely the arcs already handled by
+      Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a}, where the
+      cyclotomic constants $M(q)$ give the bound directly and no exponential sum
+      is needed at all. On the surviving range Vaughan's identity gives
       $S_B(\alpha)=\sum_{p\in B}e(p\alpha)\ll
       \bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr)(\log N)^{4}$, hence
       $S_B\ll N(\log N)^{4}b^{-1/8}=o(\pi(N))$; a log-free version with a wider
-      range of $q$ is available in~\cite{L25}. Summing the head
+      range of $q$ is available in~\cite{Sr25}. Summing the head
       $\sum_{n\le N_0}|S_B(n\theta)|/n\le(\log N_0)\max_n|S_B(n\theta)|$ gives
       $o(b)$.
-\item \emph{Bad points.} $|B_{\mathrm{bad}}|\le(D_B(\theta)+2\delta_0)b=o(b)$,
-      and each bad $p$ contributes at most $\log2$ to~\eqref{eq:fourier}, so
-      their total effect is $o(b)$.
+\item \emph{Bad points.} Each bad $p$ contributes at most $\log2$
+      to~\eqref{eq:fourier}, so it suffices that $|B_{\mathrm{bad}}|=o(b)$. This
+      needs no input beyond step~2. Majorising the indicator of the interval
+      $\|x-\tfrac12\|<\delta_0$ by a Selberg polynomial of degree $N_0$ --- the
+      one-interval form of the Erd\H{o}s--Tur\'an inequality --- gives
+      \[
+        |B_{\mathrm{bad}}|\;\le\;b\Bigl(2\delta_0+\frac{1}{N_0}\Bigr)
+          +\sum_{n\le N_0}c_n\,\bigl|S_B(n\theta)\bigr|,
+        \qquad |c_n|\le\min\Bigl(2\delta_0+\tfrac{1}{N_0},\tfrac1n\Bigr),
+      \]
+      and the sum on the right is the \emph{same} head already shown to be
+      $o(b)$ in step~2. Since $\delta_0\to0$ and $N_0\to\infty$, the whole
+      expression is $o(b)$.
+
+      We stress the point, because it removes a dependency rather than adding
+      one: no external discrepancy theorem for $\{p\theta\}$ is required. The
+      literature on $\alpha p$ modulo one --- Vinogradov, Vaughan, Harman,
+      Matom\"aki --- proves \emph{small-value} statements, that some prime
+      $p\le N$ makes $\|\alpha p-\beta\|$ small; that is a statement about the
+      extreme of the sequence and does not by itself bound its discrepancy. The
+      route above uses only the exponential sums we already have.
 \item \emph{Good points.} For $p$ good the series~\eqref{eq:fourier} is
       truncated at $N_0$; since $\|p\theta/2\pi-\tfrac12\|\ge\delta_0$,
       summation by parts against the Dirichlet kernel bounds the tail by
@@ -758,11 +785,14 @@ step~4 does its work.
 \end{remark}
 
 \begin{remark}[An alternative route]
-One can instead avoid~\eqref{eq:fourier} and argue through the discrepancy of
-$\{p\theta/2\pi\}_{p\in B}$ directly: bound it by Erd\H{o}s--Tur\'an from the
-same exponential sums, then apply Koksma's inequality to the truncated function
-$\max(\log|\cos\pi x|,\log\delta)$. The two routes give the same conclusion; we
-prefer the one above because the decomposition~\eqref{eq:fourier} is exact.
+One can instead avoid~\eqref{eq:fourier} altogether and argue through the full
+discrepancy $D_B(\theta)$ of $\{p\theta/2\pi\}_{p\in B}$: bound it by
+Erd\H{o}s--Tur\'an from the same exponential sums, then apply Koksma's
+inequality to the truncated function $\max(\log|\cos\pi x|,\log\delta)$. The two
+routes give the same conclusion. We prefer the one above for two reasons:
+\eqref{eq:fourier} is an exact identity, and step~3 needs the Erd\H{o}s--Tur\'an
+machinery only for a single interval, where it is elementary, rather than
+uniformly over all intervals.
 \end{remark}
 
 \begin{remark}[Where the effective constants are, and are not]
@@ -815,8 +845,11 @@ that already at $b=99$.
 Nothing new is proved in this section; it is the inventory that assembles the
 previous ones.
 
-\begin{theorem}[Asymptotic flatness; scope as in Section~\ref{sec:remains}]\label{thm:t2main}
-Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With $B=B_d(k)$, $b=|B|$, as
+\begin{theorem}[Asymptotic flatness, conditional]\label{thm:t2main}
+\emph{Assume the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\ that
+$|G_B(\theta)|\le(1/2+o(1))^{b}$ off all the envelopes of
+Proposition~\ref{prop:curv}; that section establishes it at the level of a
+sketch. Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With $B=B_d(k)$, $b=|B|$, as
 $k\to\infty$,
 \[
   \varepsilon_d(k)=4\Bigl(\frac{\sqrt3}{2}\Bigr)^{b+1}K_2(k)\,\kappa_d(k)\,
@@ -829,7 +862,13 @@ $w_d$ is the window width. In particular $\varepsilon_d(k)\to0$ at the
 geometric rate $\sqrt3/2$ per element.
 \end{theorem}
 
-\begin{corollary}\label{cor:goal}
+\begin{remark}
+The hypothesis is not decorative: it is the one statement of this paper that is
+not proved, and we prefer to carry it explicitly rather than to bury it. It
+disappears once the programme of Section~\ref{sec:l5c} is written out in full.
+\end{remark}
+
+\begin{corollary}[conditional, as above]\label{cor:goal}
 Combining Theorem~\ref{thm:t2main} with the sandwich theorem of the companion
 paper and the identity $W_D=\Gamma+(2D+1)2^{-k}$,
 \[
@@ -1006,10 +1045,13 @@ quantifier bookkeeping is routine and is the only part not written out here.
 \begin{remark}
 Proposition~\ref{prop:p5tail} was checked over $48$ combinations
 $k\in\{100,400,1600,3200\}$, $J\in\{1,2,4,8\}$, $\delta\in\{0.25,0.5,1\}$ with
-$10^{4}$ samples each; it held in every case, and in fact the sharper bound
-$(e\delta/2J)^{J}$ also held throughout. We state only the weaker form because
-that is what the argument above proves; the conclusion is unaffected, since $J$
-is chosen after $\delta$.
+$10^{4}$ samples each; it held in every case. Numerically the smaller quantity
+$(e\delta/2J)^{J}$ also dominated the observed frequencies throughout, but this
+reflects only the slack in the bound and not a sharper theorem: the expected
+number of sample points below $\delta N/k$ is $\delta$, not $\delta/2$, so no
+factor $2$ is available at this step. The stated form is the one the argument
+proves, and the conclusion is unaffected in any case, since $J$ is chosen
+after~$\delta$.
 \end{remark}
 
 \section*{Data availability}
@@ -1055,7 +1097,7 @@ F.~F.~Ferreira and J.~F.~Fontanari,
 \emph{Probabilistic analysis of the number partitioning problem},
 J. Phys. A \textbf{31} (1998), 3417--3428.
 
-\bibitem[Sr25]{L25}
+\bibitem[Sr25]{Sr25}
 P.~Srivastav,
 \emph{Log-free bounds on exponential sums over primes}, preprint (2025),
 \href{https://arxiv.org/abs/2505.07803}{arXiv:2505.07803}.
