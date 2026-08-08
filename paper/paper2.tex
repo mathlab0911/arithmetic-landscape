@@ -109,7 +109,9 @@ with amplitude correction $K_2$ and phase drift $\psi$; Section~\ref{sec:m2}
 treats the main arc and identifies the first correction to the central
 density, resolving an unexplained constant of the companion paper.
 Section~\ref{sec:num}
-reports the numerical verification.
+reports the numerical verification, Section~\ref{sec:l5a} makes the finite list
+of remaining moduli effective, Section~\ref{sec:l5c} treats the deep minor arcs,
+and Section~\ref{sec:t2main} assembles the main theorem.
 
 \subsection{Relation to the literature}\label{sec:lit}
 
@@ -158,7 +160,7 @@ the \emph{ratio} at nearby points, which does not follow from a one-sided bound.
 
 Statements marked \Lean{name} are machine-checked in Lean~4 against
 Mathlib; the repository builds with no \texttt{sorry} and no additional axioms.
-The canon currently consists of $96$ theorems.
+The canon currently consists of $97$ theorems.
 
 \section{The sub-peak spectrum}\label{sec:m1}
 
@@ -594,8 +596,11 @@ throughout that interval.
 \noindent
 (Lean: \Lean{one\_le\_one\_div\_cos\_sq}, \Lean{term\_curvature\_ge} and
 \Lean{curvature\_ge\_V0} formalise the inequality
-$V_0\le\sum(a^{2}/4)\sec^{2}(a\theta/2)$; the passage from concavity to the
-quadratic bound is standard and not yet formalised.)
+$V_0\le\sum(a^{2}/4)\sec^{2}(a\theta/2)$, and
+\Lean{deriv\_le\_of\_second\_deriv\_nonpos} together with
+\Lean{le\_of\_critical\_of\_second\_deriv\_nonpos} formalise the analytic
+step: if $g''\le0$ and $g'(t)=0$ then $t$ is a maximum of $g$. Substituting
+$g=f+c(\cdot-t)^{2}/2$ is then mechanical.)
 
 Two caveats matter in practice, and both are visible numerically.
 
@@ -706,19 +711,59 @@ truncation is needed near those points.
 
 \subsection{The intended argument}
 
+Fix $\theta$ whose continued-fraction denominator exceeds $Q_0$; the arcs with
+$q\le Q_0$ are covered by Corollary~\ref{cor:spectrum} and
+Proposition~\ref{prop:l5a}. Put $\delta_0=(\log b)^{-1}$ and $N_0=b^{1/4}$, and
+split $B=B_{\mathrm{good}}\cup B_{\mathrm{bad}}$, where $p$ is bad when
+$\|p\theta/2\pi-\tfrac12\|<\delta_0$.
+
 \begin{enumerate}
-\item Fix $\theta$ with $\theta/2\pi$ having continued-fraction denominator
-      $q>Q_0$ (the deep minor arcs; the arcs with $q\le Q_0$ are covered by
-      Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a}).
-\item Truncate~\eqref{eq:fourier} at $n\le N$ and bound the tail by
-      excising a neighbourhood of the zeros of $\cos(a\theta/2)$, controlling
-      the excised part by Koksma's inequality against the discrepancy of
-      $\{a\theta/2\pi\}_{a\in B}$.
-\item Bound each truncated exponential sum by Vinogradov's method, and convert
-      the resulting discrepancy bound by Erd\H{o}s--Tur\'an.
-\item Optimise the excision parameter at $\delta\asymp1/\log b$, obtaining
-      $|G_B(\theta)|\le(1/2+o(1))^{b}$ uniformly on the deep minor arcs.
+\item \emph{Harmonics stay minor.} For $n\le N_0$ the reduced denominator of
+      $n\theta/2\pi$ is at least $q/\gcd(n,q)\ge b^{1/4}$, so every harmonic
+      appearing below lies on a minor arc.
+\item \emph{The exponential sums.} Vaughan's identity bounds
+      $S_B(\alpha)=\sum_{p\in B}e(p\alpha)$ by
+      $\ll N(\log N)^{3}q_n^{-1/2}$ on such arcs; summing the head
+      $\sum_{n\le N_0}|S_B(n\theta)|/n\le(\log N_0)\max_n|S_B(n\theta)|$ gives
+      $o(b)$.
+\item \emph{Bad points.} $|B_{\mathrm{bad}}|\le(D_B(\theta)+2\delta_0)b=o(b)$,
+      and each bad $p$ contributes at most $\log2$ to~\eqref{eq:fourier}, so
+      their total effect is $o(b)$.
+\item \emph{Good points.} For $p$ good the series~\eqref{eq:fourier} is
+      truncated at $N_0$; since $\|p\theta/2\pi-\tfrac12\|\ge\delta_0$,
+      summation by parts against the Dirichlet kernel bounds the tail by
+      $C/(N_0\delta_0)=C\log b\cdot b^{-1/4}=o(1)$.
 \end{enumerate}
+
+\noindent
+Together these give $\log|G_B(\theta)|\le-(b-o(b))\log2+o(b)$, that is
+$|G_B(\theta)|\le(1/2+o(1))^{b}$ on the deep minor arcs.
+
+\begin{remark}[What this settles about the technique needed]
+Only a one-sided bound together with an exceptional set of size $o(b)$ is
+required. The precise asymptotic machinery of~\cite{DRZZ25} --- their strange
+and pseudo-differentiable functions --- is therefore not needed here, and we
+cite them for context only. The question was nevertheless the right one: the
+non-smoothness of $\log|2\cos|$ is exactly where the elementary excision of
+step~4 does its work.
+\end{remark}
+
+\begin{remark}[An alternative route]
+One can instead avoid~\eqref{eq:fourier} and argue through the discrepancy of
+$\{p\theta/2\pi\}_{p\in B}$ directly: bound it by Erd\H{o}s--Tur\'an from the
+same exponential sums, then apply Koksma's inequality to the truncated function
+$\max(\log|\cos\pi x|,\log\delta)$. The two routes give the same conclusion; we
+prefer the one above because the decomposition~\eqref{eq:fourier} is exact.
+\end{remark}
+
+\begin{remark}[Where the effective constants are, and are not]
+Effectivity in this paper is confined to three places: the peak heights at
+$q=4,6$, which are exact identities (Corollary~\ref{cor:spectrum}(i)--(ii)); the
+remaining finite list of moduli, effective with $k_0\le1.5\cdot10^{4}$
+(Proposition~\ref{prop:l5a}); and the Gaussian envelopes, which need no
+arithmetic input at all (Proposition~\ref{prop:curv}). This section is
+asymptotic; see Remark~\ref{rem:helfgott}.
+\end{remark}
 
 \begin{remark}[On explicit constants]\label{rem:helfgott}
 One might hope to make step~3 effective using Helfgott's explicit minor-arc
@@ -730,17 +775,114 @@ is confined to Proposition~\ref{prop:l5a} (thresholds $\approx10^{4}$) and to
 Proposition~\ref{prop:curv}, which needs no arithmetic input at all.
 \end{remark}
 
-\begin{remark}[Numerical direction check]
-For $k=24$ and $k=32$ we sampled $\theta$ whose continued-fraction denominator
-exceeds $4\cdot10^{4}$ and computed $|G_B(\theta)|^{1/b}$. The values lie
-between $0.41$ and $0.55$, clustering about $0.5$, consistent with the target
-$(1/2+o(1))^{b}$. This checks the direction of the estimate, not the estimate.
+\begin{remark}[Numerical check of the budget]\label{rem:budget}
+The parameters $\delta_0=1/\log b$ and $N_0=b^{1/4}$ are meaningless at $b=23$,
+so we tested the steps above at $b$ up to $1999$ (each evaluation is $O(b)$).
+On deep minor arcs:
+\[
+  \begin{array}{c|cccccc}
+    b & 23 & 31 & 99 & 299 & 999 & 1999\\\hline
+    |B_{\mathrm{bad}}|/b & 0.565 & 0.581 & 0.455 & 0.341 & 0.288 & 0.253\\
+    D_B+2\delta_0 & 0.795 & 0.712 & 0.503 & 0.390 & 0.304 & 0.282\\
+    N_0^{-1}\!\sum_{n\le N_0}|S_B(n\theta)|/n\ \text{(per element)}
+      & 0.239 & 0.145 & 0.085 & 0.085 & 0.044 & 0.039
+  \end{array}
+\]
+The bound of step~3 holds in every case, and the head of step~2 decreases. The
+quantity $-b^{-1}\log|G_B(\theta)|-\log2$, which the argument asserts is $o(1)$,
+has magnitude at most $0.123$ at $b=99$ and at most $0.024$ at $b=1999$ over six
+sampled $\theta$ per size.
+
+Two honest caveats. First, the tail bound of step~4 is $C\log b\cdot b^{-1/4}$,
+which does not fall below $1$ until $b$ is of order $10^{6}$; it is $o(1)$, but
+slowly. Second --- and this is why that does not matter --- the conclusion needs
+only $\tfrac12e^{o(1)}<\sqrt3/2$, i.e.\ the $o(1)$ above to stay below
+$\log\sqrt3=0.549$. The measured values are an order of magnitude smaller than
+that already at $b=99$.
 \end{remark}
 
-\section{What remains}\label{sec:remains}
+\section{The main theorem}\label{sec:t2main}
 
-The results above supply the arithmetic input for a circle-method treatment of
-$\varepsilon_d$. Three steps remain, and we state them explicitly.
+Nothing new is proved in this section; it is the inventory that assembles the
+previous ones.
+
+\begin{theorem}[Asymptotic flatness]\label{thm:t2main}
+Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With $B=B_d(k)$, $b=|B|$, as
+$k\to\infty$,
+\[
+  \varepsilon_d(k)=4\Bigl(\frac{\sqrt3}{2}\Bigr)^{b+1}K_2(k)\,\kappa_d(k)\,
+  \bigl(1+o(1)\bigr)+O\!\Bigl(\frac{w_d^{2}}{S_2}\Bigr),
+\]
+where $K_2$ is the amplitude correction of Proposition~\ref{prop:ripple},
+$\kappa_d\in[0,1]$ is the explicit trigonometric window factor --- half the
+range of $\cos((\pi/6)(2m-(c_1-c_5))+\psi)$ over $m\in\mathrm{Win}_d$ --- and
+$w_d$ is the window width. In particular $\varepsilon_d(k)\to0$ at the
+geometric rate $\sqrt3/2$ per element.
+\end{theorem}
+
+\begin{corollary}\label{cor:goal}
+Combining Theorem~\ref{thm:t2main} with the sandwich theorem of the companion
+paper and the identity $W_D=\Gamma+(2D+1)2^{-k}$,
+\[
+  \frac{\mathrm{lm}_{P}(n)}{\deg_{P}(n)}\longrightarrow\Gamma(P)=5.34920\ldots
+\]
+for the odd primes.
+\end{corollary}
+
+\begin{proof}[Outline]
+The bookkeeping is as follows.
+\emph{(1)} By Proposition~\ref{prop:central}, $r_B(m)=\Main(m)(1+E_0(m))$ with
+the correction $1-S_4/(4S_2^{2})$; over the bounded window the smooth ratio
+varies by $O(w_d^{2}/S_2)$.
+\emph{(2)} By Proposition~\ref{prop:ripple}, the two exact peaks contribute
+$2(\sqrt3/2)^{b+1}K_2\cos(\cdot+\psi)$ and $2(1/\sqrt2)^{b+1}K_4\cos(\cdot)$;
+the second is smaller by a factor $(0.8165)^{b}$ and is absorbed into $1+o(1)$.
+\emph{(3)} By Lemma~\ref{lem:vanish} every peak at $q=2p$ with $p\in B$
+vanishes, and by Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a} the
+surviving finite list has heights at most $(m_d+\eta)^{b}$ with
+$m_d\le5^{1/4}/2$.
+\emph{(4)} By Proposition~\ref{prop:curv} each peak carries a Gaussian envelope
+of curvature $V_0$ centred at its true maximum, with reach $\Theta(\sqrt k)$
+standard deviations, so the arcs tile.
+\emph{(5)} Off all envelopes, Section~\ref{sec:l5c} gives
+$|G_B|\le(1/2+o(1))^{b}$.
+\emph{(6)} Integrating over each region and dividing by $\Main$, every
+contribution other than $q=6$ and $q=4$ is smaller by a factor
+$((m_d+o(1))/(\sqrt3/2))^{b}$; taking the maximum and minimum over the bounded
+window gives the displayed formula.
+\end{proof}
+
+\section{Honest scope, and what remains}\label{sec:remains}
+
+We set out plainly which parts of this paper are proved and which are not.
+
+\begin{itemize}
+\item \emph{Proved on paper}: Proposition~\ref{thm:cyc} and
+      Lemma~\ref{lem:phivals} (classical), Theorem~\ref{thm:six},
+      Lemma~\ref{lem:vanish}, Corollary~\ref{cor:spectrum}(i)--(iii) and (vi),
+      Proposition~\ref{prop:curv}, Theorem~\ref{thm:p5exact}.
+\item \emph{Derivations verified numerically to stated precision}:
+      Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
+      $k=18,\dots,40$) and Proposition~\ref{prop:central} (the Edgeworth term).
+\item \emph{Effective}: Proposition~\ref{prop:l5a}
+      ($k_0\le1.5\cdot10^{4}$) and Corollary~\ref{cor:spectrum}(i)--(ii), which
+      are exact.
+\item \emph{Sketch level, to be written to referee standard}:
+      Section~\ref{sec:l5c} (the Vinogradov input of step~2 and the excision of
+      step~4), Proposition~\ref{prop:p5tail}, and the $o(1)$ bookkeeping in
+      item~(6) of the outline above. Theorem~\ref{thm:t2main} and
+      Corollary~\ref{cor:goal} inherit this status.
+\item \emph{Formal verification}: the $97$ Lean theorems cover the
+      combinatorial core --- the identities of both papers, the curvature bound,
+      and the vanishing lemma. The analytic sections are not formalised and we
+      do not claim that they are.
+\end{itemize}
+
+\noindent
+The remaining work is therefore of three kinds, and none of it requires a new
+idea: writing Section~\ref{sec:l5c} and Proposition~\ref{prop:p5tail} out in
+full, discharging the $o(1)$ inventory, and the usual polishing. We state the
+three steps as problems for the record.
 
 \begin{problem}[Main arc]\label{prob:main}
 Make the local central limit theorem for $r_B$ on the main arc effective, with

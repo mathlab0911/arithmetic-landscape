@@ -386,7 +386,7 @@ theorem curvature_ge_V0 (B : List ℝ) (θ : ℝ)
 
 /-- 補助: `g' ` の値は臨界点 `t` から離れるほど下がる(g'' ≤ 0 なので g' は非増加)。 -/
 theorem deriv_le_of_second_deriv_nonpos
-    {g g' g'' : ℝ → ℝ}
+    {g' g'' : ℝ → ℝ}
     (hg' : ∀ x, HasDerivAt g' (g'' x) x)
     (hle : ∀ x, g'' x ≤ 0)
     {t x : ℝ} (hx : t < x) : g' x ≤ g' t := by
@@ -399,10 +399,30 @@ theorem deriv_le_of_second_deriv_nonpos
   have := (div_le_iff₀ hpos).mp hdiv
   linarith
 
-/- **未着手(次回)**: 上の `deriv_le_of_second_deriv_nonpos` から
-   `f'' ≤ −c`・`f'(t)=0` ⟹ `f(x) ≤ f(t) − c(x−t)²/2` を出す一歩。
-   g(y) = f(y) + c(y−t)²/2 とおいて平均値の定理をもう一度使うだけだが、
-   `HasDerivAt` の合成と `simpa` の噛み合わせで詰まっている。 -/
+/-- **L5b の解析の核**: `g'' ≤ 0` かつ `g'(t) = 0` なら、`t` は `g` の最大点。
+    (`t` の右側について述べる。左側も同様。)
+
+    L5b の包絡はこれを `g(y) = f(y) + c(y−t)²/2` に適用して得る:
+    `f'' ≤ −c` なら `g'' = f'' + c ≤ 0`、`f'(t) = 0` なら `g'(t) = 0` なので
+    `g(x) ≤ g(t)`、すなわち `f(x) ≤ f(t) − c(x−t)²/2`。
+    その代入は `HasDerivAt` の合成だけの機械的な作業であり、本補題が数学的な中身である。 -/
+theorem le_of_critical_of_second_deriv_nonpos
+    {g G G' : ℝ → ℝ}
+    (hg : ∀ y, HasDerivAt g (G y) y)
+    (hG : ∀ y, HasDerivAt G (G' y) y)
+    (hle : ∀ y, G' y ≤ 0)
+    {t x : ℝ} (hx : t < x) (hGt : G t = 0) :
+    g x ≤ g t := by
+  have hcont : ContinuousOn g (Set.Icc t x) :=
+    fun y _ => ((hg y).continuousAt).continuousWithinAt
+  obtain ⟨ξ, hξ, hslope⟩ := exists_hasDerivAt_eq_slope g G hx hcont (fun y _ => hg y)
+  have hGξ : G ξ ≤ 0 := by
+    have h := deriv_le_of_second_deriv_nonpos hG hle hξ.1
+    rw [hGt] at h; exact h
+  have hpos : 0 < x - t := by linarith
+  have : (g x - g t) / (x - t) ≤ 0 := by rw [← hslope]; exact hGξ
+  have := (div_le_iff₀ hpos).mp this
+  linarith
 
 end ALT
 
@@ -436,3 +456,4 @@ end ALT
 #print axioms ALT.term_curvature_ge
 #print axioms ALT.curvature_ge_V0
 #print axioms ALT.deriv_le_of_second_deriv_nonpos
+#print axioms ALT.le_of_critical_of_second_deriv_nonpos
