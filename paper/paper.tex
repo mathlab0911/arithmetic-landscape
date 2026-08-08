@@ -978,15 +978,35 @@ the tails: at $k=26$ the ratio to $2(\sqrt3/2)^{|B_d|+1}$ is
 $0.972,\,0.991,\,1.056$ for half-widths $24,\,90,\,180$ respectively, while
 $\sigma=\sqrt{V_0}\approx147$. Taking a narrow window (half-width $24$, about
 $0.15\sigma$, still eight full periods) the ratio is stable in the window and
-reads
+approaches $1$; the corresponding ratios to $2(\sqrt3/2)^{|B_d|}$ move
+\emph{away} from $1$, which is what identifies the extra factor $\sqrt3/2$.
+
+The approach to $1$ splits into two branches according to the value of
+$c_1-c_5$, which is also the phase:
 \[
-  0.963,\;0.965,\;0.968,\;0.970,\;0.972,\;0.974,\;0.976
-  \qquad (k=18,20,\dots,30),
+\begin{array}{llll}
+  c_1-c_5=-1: & 0.965,\,0.968,\,0.970,\,0.972,\,0.974,\,0.976,\,0.981,\,0.981
+    & (k=20,\dots,30,36,38) & \text{from below},\\[2pt]
+  c_1-c_5=-3: & 1.025,\,1.019,\,1.015
+    & (k=32,34,40) & \text{from above}.
+\end{array}
 \]
-increasing monotonically towards $1$; the corresponding ratios to
-$2(\sqrt3/2)^{|B_d|}$ move \emph{away} from $1$, which is what identifies the
-extra factor $\sqrt3/2$. The value at $k=32$ is $1.025$, an outlier stable
-across window widths that we do not presently explain.
+Both branches converge to $1$, from opposite sides. Since the phase itself is
+reproduced to within $7\times10^{-4}$ in both branches, the residual is not an
+error in the phase but a \emph{phase-coupled} correction to the amplitude ---
+which is what one expects from interference between the leading sub-arc term and
+the next one. We regard this as evidence for
+Conjecture~\ref{conj:ripple} and as a constraint on any refinement of it.
+
+We have also verified the width factor at a second modulus. For $q=4$ the
+prediction is $\sqrt{V_0/V_4}=1/\sqrt2$, and measuring the period-$4$ component
+on the stratum $d=1$ of the primes (where $3\in B_1$ kills the period-$6$ mode)
+gives ratios $0.91$--$0.97$ to the prediction \emph{with} the width factor
+against $0.64$--$0.69$ \emph{without} it; for random odd sequences the
+corresponding medians are $\approx1.05$ and $\approx0.75$. The modulus $q=3$
+cannot be tested this way: for any odd sequence coprime to $3$ one has
+$\rho_3=(1/2)^{|B|}$, which is dominated by $\rho_4=(1/\sqrt2)^{|B|}$, so the
+period-$3$ component never rises above the period-$4$ one.
 
 \begin{conjecture}[Extremality of the modulus $6$]\label{conj:mod6}
 Let $M(q)$ denote the geometric mean of $|\cos(\pi r/q)|$ over $r$ coprime to

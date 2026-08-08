@@ -93,6 +93,55 @@ theorem G_even (A : List ℕ) (θ : ℝ) : G A (-θ) = G A θ := by
 theorem G_odd_part_zero (A : List ℕ) (θ : ℝ) : G A θ - G A (-θ) = 0 := by
   rw [G_even]; ring
 
+/- ============ L3 の幅因子(算術部分): V₆ = Σa²/3 ============
+   サブ弧 θ = 2π/6 での曲率は V_q = (1/4) Σ a² sec²(πa/q)。
+   5以上の素数は ±1 mod 6 なので cos²(πa/6) = 3/4 が厳密に成り立ち、
+   sec² = 4/3、したがって V₆ = (1/4)(4/3)Σa² = Σa²/3。
+   幅因子 √(V₀/V₆) = √((1/4)/(1/3)) = √3/2 が、振幅の指数の「+1」の正体。 -/
+
+/-- 補助: cos² は π の整数倍の平行移動で不変。 -/
+theorem cos_sq_add_nat_mul_pi (x : ℝ) : ∀ m : ℕ,
+    Real.cos (x + m * Real.pi) ^ 2 = Real.cos x ^ 2
+  | 0 => by simp
+  | (m + 1) => by
+      have h : x + (↑(m + 1) : ℝ) * Real.pi = (x + m * Real.pi) + Real.pi := by
+        push_cast; ring
+      rw [h, Real.cos_add_pi, neg_pow, cos_sq_add_nat_mul_pi x m]
+      simp
+
+/-- a ≡ 1 (mod 6) なら cos²(πa/6) = 3/4。 -/
+theorem cos_sq_pi_mul_div_six_of_one {a : ℕ} (h : a % 6 = 1) :
+    Real.cos (Real.pi * a / 6) ^ 2 = 3 / 4 := by
+  obtain ⟨m, hm⟩ : ∃ m : ℕ, a = 6 * m + 1 := ⟨a / 6, by omega⟩
+  subst hm
+  have h2 : Real.pi * ((6 * m + 1 : ℕ) : ℝ) / 6 = Real.pi / 6 + m * Real.pi := by
+    push_cast; ring
+  rw [h2, cos_sq_add_nat_mul_pi, Real.cos_pi_div_six]
+  rw [div_pow, Real.sq_sqrt (by norm_num : (3:ℝ) ≥ 0)]
+  norm_num
+
+/-- a ≡ 5 (mod 6) なら cos²(πa/6) = 3/4(5π/6 での余弦は符号違いで同じ2乗)。 -/
+theorem cos_sq_pi_mul_div_six_of_five {a : ℕ} (h : a % 6 = 5) :
+    Real.cos (Real.pi * a / 6) ^ 2 = 3 / 4 := by
+  obtain ⟨m, hm⟩ : ∃ m : ℕ, a = 6 * m + 5 := ⟨a / 6, by omega⟩
+  subst hm
+  have h2 : Real.pi * ((6 * m + 5 : ℕ) : ℝ) / 6
+      = (Real.pi - Real.pi / 6) + (m * Real.pi + Real.pi / 3 * 0) := by
+    push_cast; ring
+  rw [h2]
+  simp only [mul_zero, add_zero]
+  rw [cos_sq_add_nat_mul_pi, Real.cos_pi_sub, Real.cos_pi_div_six]
+  rw [neg_pow, div_pow, Real.sq_sqrt (by norm_num : (3:ℝ) ≥ 0)]
+  norm_num
+
+/-- 定理(L3 幅因子の算術部分): 5 以上の素数(= ±1 mod 6)では
+    sec²(πa/6) = 4/3 が厳密。ゆえに V₆ = Σa²/3 で、幅因子は √(V₀/V₆) = √3/2。 -/
+theorem sec_sq_pi_mul_div_six {a : ℕ} (h : a % 6 = 1 ∨ a % 6 = 5) :
+    1 / Real.cos (Real.pi * a / 6) ^ 2 = 4 / 3 := by
+  rcases h with h | h
+  · rw [cos_sq_pi_mul_div_six_of_one h]; norm_num
+  · rw [cos_sq_pi_mul_div_six_of_five h]; norm_num
+
 end ALT
 
 #print axioms ALT.normSq_one_add_exp
@@ -103,3 +152,7 @@ end ALT
 #print axioms ALT.M12_gap
 #print axioms ALT.G_even
 #print axioms ALT.G_odd_part_zero
+#print axioms ALT.cos_sq_add_nat_mul_pi
+#print axioms ALT.cos_sq_pi_mul_div_six_of_one
+#print axioms ALT.cos_sq_pi_mul_div_six_of_five
+#print axioms ALT.sec_sq_pi_mul_div_six
