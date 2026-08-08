@@ -1043,7 +1043,7 @@ We set out plainly which parts of this paper are proved and which are not.
       Lemma~\ref{lem:vanish}, Corollary~\ref{cor:spectrum}(i)--(iii) and (vi),
       Proposition~\ref{prop:curv}, Lemma~\ref{lem:cover}, Lemma~\ref{lem:fejer},
       Lemma~\ref{lem:window}, Lemma~\ref{lem:twist}, Lemma~\ref{lem:annulus},
-      Theorem~\ref{thm:p5exact}.
+      Lemma~\ref{lem:closed}, Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
       $k=18,\dots,40$) and Proposition~\ref{prop:central} (the Edgeworth term).
@@ -1068,8 +1068,12 @@ We set out plainly which parts of this paper are proved and which are not.
       proof. The repair is Lemma~\ref{lem:annulus}, which replaces the question
       rather than answering it: a profile valid at every distance makes the
       matching of radii unnecessary. That lemma is now proved; what survives of
-      the gap is the sign of $\Phi_q$ on one compact range of $x$, which is
-      Problem~\ref{prob:annulus} and is a finite computation.
+      the gap is one inequality on one compact range of $x$, which is
+      Problem~\ref{prob:annulus}. By Lemma~\ref{lem:closed} that inequality is
+      about a running average of $\log|\Phi_q|$ along the unit circle and
+      contains no arithmetic, so it is a finite computation. We warn that the
+      naive form of it --- $\Phi_q\le0$ --- is \emph{false}, for the reason
+      given in Remark~\ref{rem:phipos}.
 \item \emph{Formal verification}: the $97$ Lean theorems cover the
       combinatorial core --- the identities of both papers, the curvature bound,
       and the vanishing lemma. The analytic sections are not formalised and we
@@ -1101,11 +1105,17 @@ behaviour looks like the right tool for that excision, although their limit
 \end{problem}
 
 \begin{problem}[The annulus]\label{prob:annulus}
-Show that $\Phi_q(x)<0$ for $\;0<x\le2\pi^{2}/\bigl(3\log(2M(q))\bigr)$ and
-every $q\le(\log N)^{A}$, closing the compact range left open in
-Remark~\ref{rem:profileuse}. The series defining $\Phi_q$ converges absolutely
-there and contains no arithmetic beyond the Ramanujan sums, so this is a finite
-rigorous computation rather than a theorem in wait of an idea.
+Show that
+\[
+  \log M(q)+\Phi_q(x)\;\le\;\log\frac{\sqrt3}{2}
+  \qquad\text{for }x_{\mathrm{env}}\ (\approx1.5)\le x\le\frac{2\pi^{2}}{3\log(2M(q))}
+\]
+and every $q\le Q_2$, closing the compact range left open in
+Remark~\ref{rem:profileuse}. By Lemma~\ref{lem:closed} the series defining
+$\Phi_q$ is a running average of an explicit elementary function, so this is a
+finite rigorous computation rather than a theorem in wait of an idea. Note that
+the tight case is $q=6$, where the two sides agree at $x=0$; for every other $q$
+there is a margin of at least $\log(\sqrt3/2)-\log M(10)=0.147$.
 \end{problem}
 
 \begin{lemma}[Twisted sums, uniformly]\label{lem:twist}
@@ -1204,11 +1214,58 @@ $|c_q(n)|\le\varphi(q)$ gives $|R_q(x)|\le\tfrac{\pi^{2}}{3x}$, hence
 which is $x\ge12.0$ for $q=6$, $x\ge16.4$ for $q=10$ and $x\ge19.0$ for $q=4$.
 The envelope of Proposition~\ref{prop:curv} reaches only $x=N|t|\approx1.5$.
 \emph{The compact range in between is covered by neither.} It is a much smaller
-gap than the one it replaces --- the series is absolutely convergent there, with
-no arithmetic content, so a rigorous finite computation settles it --- but we do
-not claim it. Numerically $\Phi_6$ is $-0.144$ at $x=1.5$, $-0.314$ at $x=2$ and
-below $-0.549$ from $x=3$ onwards, so the profile does not return to zero; we
-record the statement as Problem~\ref{prob:annulus}.
+gap than the one it replaces --- by Lemma~\ref{lem:closed} the quantity involved
+is a running average of an explicit elementary function, with no arithmetic in
+it --- so a rigorous finite computation settles it; but we do not claim it.
+Numerically $\Phi_6$ is $-0.144$ at $x=1.5$, $-0.314$ at $x=2$ and below
+$-0.549$ from $x=3$ onwards, so the profile does not return to zero. We record
+the statement as Problem~\ref{prob:annulus}.
+\end{remark}
+
+\begin{lemma}[Closed form of the profile]\label{lem:closed}
+For $q\ge3$ and $x>0$,
+\[
+  \Phi_q(x)=\frac{1}{\varphi(q)}\Bigl(\frac1x\int_0^{x}
+    \log\bigl|\Phi_q(-e^{-iv})\bigr|\,dv-\log\bigl|\Phi_q(-1)\bigr|\Bigr),
+\]
+where $\Phi_q$ on the right is the $q$-th cyclotomic polynomial. In particular
+$\Phi_q(x)$ is a running average of $\log|\Phi_q|$ along the unit circle,
+started at the point $-1$ and normalised to vanish at $x=0$.
+\end{lemma}
+
+\begin{proof}
+$\mathrm{Re}\,\widetilde I(nx)=\sin(nx)/(nx)=\frac1x\int_0^{x}\cos(nv)\,dv$, so
+interchanging the sum and the integral,
+\[
+  \Phi_q(x)+\log\bigl(2M(q)\bigr)
+  =\frac1x\int_0^{x}\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\frac{c_q(n)}{\varphi(q)}
+     \cos(nv)\,dv .
+\]
+Writing $c_q(n)=\sum_{(r,q)=1}\cos(2\pi nr/q)$, pairing $r$ with $-r$, and using
+$\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\cos(n\vartheta)=\log|2\cos(\vartheta/2)|$, the
+inner sum equals $\varphi(q)^{-1}\sum_{(r,q)=1}\log|2\cos(v/2+\pi r/q)|$.
+Finally $\prod_{(r,q)=1}(1+z\zeta_q^{r})=(-z)^{\varphi(q)}\Phi_q(-1/z)$ gives
+$\sum_{(r,q)=1}\log|2\cos(v/2+\pi r/q)|=\log|\Phi_q(-e^{-iv})|$ for $|z|=1$, and
+the constant is the value at $v=0$.
+\end{proof}
+
+\begin{remark}[Why $\Phi_q\le0$ is false in general]\label{rem:phipos}
+Lemma~\ref{lem:closed} settles the shape of the question and also shows that the
+naive form of it is wrong. By Jensen's formula the mean of $\log|\Phi_q|$ over
+the whole circle is $\log$ of the Mahler measure of $\Phi_q$, which is $0$. So
+if $|\Phi_q(-1)|=1$ --- equivalently $M(q)=1/2$ --- the running average starts at
+$0$ and returns to $0$, hence must be positive somewhere, and $\Phi_q\le0$
+fails. Numerically $q=12,15,20,21,24$ are all counterexamples, with maxima up to
+$+0.109$. This costs nothing: those are exactly the $q$ with the smallest peak,
+and $\log M(q)+0.109=-0.584$ is still far below $\log(\sqrt3/2)=-0.144$. It is
+the reason Problem~\ref{prob:annulus} is stated for $\log M(q)+\Phi_q$ rather
+than for $\Phi_q$ alone. For $q=6$, where $\Phi_6(-1)=3$, the statement
+specialises to
+\[
+  \frac1Y\int_0^{Y}\log|1+2\cos v|\,dv\;\le\;\log3\qquad(Y>0),
+\]
+which is sharp only as $Y\to0^{+}$: numerically the supremum over $Y\ge1$ is
+$0.981$.
 \end{remark}
 
 \begin{remark}[Numerical test of Lemma~\ref{lem:annulus}]\label{rem:profile}
