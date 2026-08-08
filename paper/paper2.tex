@@ -105,7 +105,10 @@ the circle method is that the minor arcs carry, up to a fixed finite list, only
 two live peaks.
 
 Section~\ref{sec:l3} derives a second-order formula for the modulus-$6$ ripple,
-with amplitude correction $K_2$ and phase drift $\psi$. Section~\ref{sec:num}
+with amplitude correction $K_2$ and phase drift $\psi$; Section~\ref{sec:m2}
+treats the main arc and identifies the first correction to the central
+density, resolving an unexplained constant of the companion paper.
+Section~\ref{sec:num}
 reports the numerical verification.
 
 \subsection{Formal verification}
@@ -325,6 +328,41 @@ the verified range together with $o(1)$ asymptotics, rather than adding further
 terms, which carry no structural information.
 \end{remark}
 
+\section{The main arc and the central density}\label{sec:m2}
+
+The main arc contributes the smooth part of $r_B$. The leading term is the local
+central limit theorem; what matters for the companion paper's absolute formula
+is the \emph{first correction} to it.
+
+\begin{proposition}[Central density with first correction]\label{prop:central}
+Let $B$ be a set of $b$ odd integers, $V_0=S_2/4$, and let $m$ be at the centre
+$T/2$. Then
+\[
+  r_B(m)=\frac{2^{b}}{\sqrt{2\pi V_0}}\Bigl(1-\frac{S_4}{4S_2^{2}}+O\bigl((S_4/S_2^{2})^{2}\bigr)\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}[Derivation]
+Write $\log G_B(\theta)=\sum_{a\in B}\log\cos(a\theta/2)
+=-\tfrac{V_0}{2}\theta^{2}-\tfrac{S_4}{192}\theta^{4}+O(S_6\theta^{6})$, using
+$\log\cos u=-u^{2}/2-u^{4}/12+O(u^{6})$ and $u=a\theta/2$. Since $G_B$ is even
+(Lean: \Lean{G\_even}), all odd-order terms vanish identically, so the first
+correction is the quartic one. Integrating
+$e^{-V_0\theta^{2}/2}(1-\tfrac{S_4}{192}\theta^{4})$ over the main arc and using
+$\int\theta^{4}e^{-V_0\theta^{2}/2}=3\sqrt{2\pi}V_0^{-5/2}$ gives the stated
+factor $1-\tfrac{S_4}{192}\cdot 3V_0^{-2}=1-\tfrac{S_4}{4S_2^{2}}$.
+\end{proof}
+
+\begin{remark}[The absolute formula of the companion paper]\label{rem:absolute}
+The companion paper predicts the number of strict local minima by
+$\mathrm{lm}\approx\Gamma\cdot 2^{b}/\sqrt{2\pi V_0}$, i.e.\ by replacing the
+ground-state count by its Gaussian estimate. The measured ratio of the two sides
+sits systematically below $1$ --- about $0.97$ --- with no explanation offered
+there. Proposition~\ref{prop:central} identifies the deficit as
+$S_4/(4S_2^{2})$, which at $k=20$ equals $0.0246$. Section~\ref{sec:m2num}
+verifies this.
+\end{remark}
+
 \section{Numerical verification}\label{sec:num}
 
 All computations below are exact integer dynamic programming for $r_B$, followed
@@ -356,9 +394,14 @@ branch B.}
 On branch B the individual values of $\text{measured}/K_2$ are $0.9991$
 ($k=32$), $0.9990$ ($k=34$) and $0.9997$ ($k=40$), against $0.9904$, $0.9923$
 and $0.9952$ without the corrections. The largest residual over the whole range
-is $0.0034$, attained at $k=18$; this is the smallest $k$ in the range and the
-one where the class-independent term $S_4/S_2^{2}$ is largest ($0.1111$,
-decreasing monotonically to $0.0507$ at $k=40$).
+is $0.0034$, attained at $k=18$. The omitted contributions are dominated by the
+class-independent tail $O((S_4/S_2^{2})^{2})$, and $S_4/S_2^{2}$ decreases
+monotonically over the range, from $0.1111$ at $k=18$ to $0.0507$ at $k=40$;
+hence the residual is largest at the smallest $k$. That the $\Delta$-dependent
+quantity $\Delta_3^{2}/S_2^{3}$ is in fact largest at $k=32$
+($2.70\cdot10^{-3}$, against $1.04\cdot10^{-3}$ at $k=18$) without producing an
+excess residual there is corroborating evidence that the $\Delta$-dependence is
+already absorbed into $K_2$.
 
 \subsection{The phase drift}
 
@@ -373,9 +416,14 @@ that $\psi$ as stated is correct, with the deficit in $c$ a finite-window
 effect.
 
 \begin{remark}[Extraction]\label{rem:extraction}
-The amplitude is extracted from a narrow window (half-width $24$, which is
-between $0.08$ and $0.30$ standard deviations over the range); wide windows
-corrupt the Gaussian reference. The phase slope requires \emph{wide} windows,
+The amplitude is extracted from a narrow window of fixed half-width $24$, i.e.\
+eight full periods of the modulus-$6$ ripple, which over $k=18,\dots,40$ is
+between $0.08$ and $0.30$ standard deviations; both requirements --- enough
+periods, and narrower than $\sigma$ --- hold throughout. Wide windows corrupt
+the Gaussian reference. As a check, at $k=18$ the ratio
+$\text{measured}/K_2$ is $0.9988$, $0.9974$, $1.0034$ and $1.0065$ at
+half-widths $12,16,24$ and $32$, so the window choice moves the residual by
+less than $1\%$. The phase slope requires \emph{wide} windows,
 half-width $96$ to $192$; at half-width $384$ the normalisation breaks down in
 the Gaussian tails. For $|\Delta|\le3$ the true slope is at the level of
 extraction noise in narrow windows.
@@ -412,7 +460,51 @@ confirming that no equidistribution hypothesis enters items (i) and (ii) of
 Corollary~\ref{cor:spectrum}. For the remaining moduli the ratio to $M(q)^{b}$
 lies between $0.14$ and $2.3$: the equidistribution approximation is
 \emph{not} accurate at these sizes, which is precisely why the exact
-identities matter.
+identities matter. This is to be expected, since the error in the prime number
+theorem in arithmetic progressions decreases only logarithmically, so at
+$b=21,\dots,31$ the $o(1)$ in items (iv)--(v) of
+Corollary~\ref{cor:spectrum} has not yet become small.
+
+\subsection{The central density}\label{sec:m2num}
+
+We test Proposition~\ref{prop:central} using only ground-state counts. Write
+$\lambda(B)=\deg(B)\sqrt{2\pi V_0}/2^{b}-1$ for the measured relative deficit,
+where $\deg(B)$ is the number of subsets attaining the minimum of
+$|\sum S-\lfloor T/2\rfloor|$. Proposition~\ref{prop:central} predicts
+$\lambda\approx-S_4/(4S_2^{2})$.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+$k$ & $\deg$ & measured $\lambda$ & predicted & difference\\
+\midrule
+$16$ & $394$    & $-0.024764$ & $-0.031338$ & $+0.006573$\\
+$18$ & $1290$   & $-0.025573$ & $-0.027754$ & $+0.002181$\\
+$20$ & $4344$   & $-0.024036$ & $-0.024629$ & $+0.000594$\\
+$24$ & $51068$  & $-0.021467$ & $-0.020830$ & $-0.000637$\\
+$28$ & $634568$ & $-0.017663$ & $-0.017574$ & $-0.000090$\\
+\bottomrule
+\end{tabular}
+\caption{Central-density deficit for the first $k$ odd primes. The agreement is
+within $0.5\%$ for $k\ge18$ and improves to $0.01\%$ at $k=28$.}
+\label{tab:central}
+\end{table}
+
+Over an ensemble of $100$ random odd sequences per size (drawn from the same
+range as the primes), the mean absolute difference is $0.0171$ at $k=16$,
+$0.0079$ at $k=18$ and $0.0038$ at $k=20$; the ensemble is noisier than the
+primes because $\deg$ is a small integer subject to arithmetic fluctuation.
+
+The consequence for Remark~\ref{rem:absolute} is direct. Writing
+$\rho=\mathrm{lm}/(\Gamma\cdot 2^{b}/\sqrt{2\pi V_0})$ for the ratio in the
+absolute formula, the ensemble mean of $\rho$ is $0.9462$, $0.9621$, $0.9672$
+and $0.9716$ at $k=12,16,18,20$, while the mean of
+$\rho/(1-S_4/(4S_2^{2}))$ is $0.9812$, $0.9888$, $0.9912$ and $0.9933$. The
+correction removes about three quarters of the deficit, and the share it removes
+grows with $k$. We therefore record the systematic part of the $0.97$ as
+explained; the residual $0.7\%$ at $k=20$ is a separate and smaller effect,
+still decreasing.
 
 \begin{figure}[htbp]
 \centering
