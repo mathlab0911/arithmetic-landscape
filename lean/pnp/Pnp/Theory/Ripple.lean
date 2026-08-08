@@ -9,6 +9,8 @@
    L2 (奇数列の3次項ゼロ): G(θ) = Π cos(aθ/2) が偶関数であること。 -/
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import Mathlib.Analysis.Calculus.MeanValue
+import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Tactic
 
 namespace ALT
@@ -372,6 +374,36 @@ theorem curvature_ge_V0 (B : List ℝ) (θ : ℝ)
       simp only [List.map_cons, List.sum_cons]
       exact add_le_add (term_curvature_ge ha) (ih ht)
 
+/-! ## L5b の解析の一歩: 曲率 ≤ −c と臨界点から二次上界(33周目)
+
+`curvature_ge_V0` で「log|G| の曲率はどこでも −V₀ 以下」が言えた。
+残りは純粋な実解析の一歩:
+
+    f'' ≤ −c かつ f'(t) = 0  ⟹  f(x) ≤ f(t) − c(x−t)²/2.
+
+`g(x) = f(x) + c(x−t)²/2` とおくと `g'' ≤ 0`、`g'(t) = 0`。
+平均値の定理を2回使って `g(x) ≤ g(t)` を出す。 -/
+
+/-- 補助: `g' ` の値は臨界点 `t` から離れるほど下がる(g'' ≤ 0 なので g' は非増加)。 -/
+theorem deriv_le_of_second_deriv_nonpos
+    {g g' g'' : ℝ → ℝ}
+    (hg' : ∀ x, HasDerivAt g' (g'' x) x)
+    (hle : ∀ x, g'' x ≤ 0)
+    {t x : ℝ} (hx : t < x) : g' x ≤ g' t := by
+  have hcont : ContinuousOn g' (Set.Icc t x) :=
+    fun y _ => ((hg' y).continuousAt).continuousWithinAt
+  obtain ⟨ζ, hζ, hslope⟩ :=
+    exists_hasDerivAt_eq_slope g' g'' hx hcont (fun y _ => hg' y)
+  have hpos : 0 < x - t := by linarith
+  have hdiv : (g' x - g' t) / (x - t) ≤ 0 := by rw [← hslope]; exact hle ζ
+  have := (div_le_iff₀ hpos).mp hdiv
+  linarith
+
+/- **未着手(次回)**: 上の `deriv_le_of_second_deriv_nonpos` から
+   `f'' ≤ −c`・`f'(t)=0` ⟹ `f(x) ≤ f(t) − c(x−t)²/2` を出す一歩。
+   g(y) = f(y) + c(y−t)²/2 とおいて平均値の定理をもう一度使うだけだが、
+   `HasDerivAt` の合成と `simpa` の噛み合わせで詰まっている。 -/
+
 end ALT
 
 #print axioms ALT.normSq_one_add_exp
@@ -403,3 +435,4 @@ end ALT
 #print axioms ALT.one_le_one_div_cos_sq
 #print axioms ALT.term_curvature_ge
 #print axioms ALT.curvature_ge_V0
+#print axioms ALT.deriv_le_of_second_deriv_nonpos

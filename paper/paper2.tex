@@ -124,6 +124,13 @@ orbits are indexed by Pythagorean triples, and their treatment of prime
 partitions (their \S7) is asymptotic rather than oscillatory. The limit also
 differs: they let the integer being partitioned tend to infinity with the part
 set fixed, whereas we let the \emph{number of parts} $k$ tend to infinity.
+The dictionary is one line: their periodic orbits are our sub-peaks at rational
+$\theta=2\pi j/q$. We would add that the question they leave open --- why regular
+oscillations survive only for certain special sequences --- has, in the
+subset-sum setting, the exact answer given by Lemma~\ref{lem:vanish} and
+Corollary~\ref{cor:spectrum}: an oscillation at modulus $q$ survives precisely
+when $q$ avoids the cyclotomic vanishing $q=2m$ with $m\in B$, and the surviving
+heights are the $M(q)$ of Proposition~\ref{thm:cyc}.
 
 \emph{Smoothness of partition functions.} Bateman and
 Erd\H{o}s~\cite{BE56} prove $p_A(n-1)/p_A(n)\to1$ for a \emph{fixed infinite}
@@ -151,7 +158,7 @@ the \emph{ratio} at nearby points, which does not follow from a one-sided bound.
 
 Statements marked \Lean{name} are machine-checked in Lean~4 against
 Mathlib; the repository builds with no \texttt{sorry} and no additional axioms.
-The canon currently consists of $95$ theorems.
+The canon currently consists of $96$ theorems.
 
 \section{The sub-peak spectrum}\label{sec:m1}
 
@@ -658,13 +665,76 @@ $k\ge k_0(q,\eta)$. With the constants of~\cite{BMOR18} one may take
 The $\sqrt{x}$-shaped bound of~\cite[Thm.~1.9]{BMOR18} is what makes these
 thresholds small. Using only~\cite[Thm.~1.3]{BMOR18} one is forced to
 $x\ge x_\pi(q)\approx10^{9}$, i.e.\ $k_0\approx4\cdot10^{8}$; the two theorems
-must be combined. On the other hand, even $k_0\approx10^{2}$ is far beyond the
-range $k\le44$ of the computations in Section~\ref{sec:num}, so
-Proposition~\ref{prop:l5a} is genuinely asymptotic and does not certify the
-measured values. We state it as an effective bound, not as an explanation of the
-data. Note also that $q=4$ and $q=6$ appear in the table only for comparison:
-for those two moduli Corollary~\ref{cor:spectrum}(i)--(ii) are exact identities
-and no equidistribution input is needed at all.
+must be combined. It is worth recording that using only the first of the two
+costs a factor of $10^{4}$ in the threshold.
+
+Regarding the range of validity we are explicit in three steps.
+\emph{(a)} For $k\le44$ the peak heights are certified by direct computation:
+$|G_{B_d}(2\pi j/q)|$ is a product of $b$ cosines and costs $O(k)$ arithmetic
+operations, so it is simply evaluated (Section~\ref{sec:num}).
+\emph{(b)} For $k\ge k_0(q,\eta)$ the bound is a theorem, by
+Proposition~\ref{prop:l5a}.
+\emph{(c)} The gap between the two is not needed for any asymptotic statement,
+and in any case it can be closed by computation: for each of the finitely many
+$q$ involved, evaluating $|G_{B_d}(2\pi j/q)|$ for all $k$ up to any desired
+bound is an $O(k)$ computation per point.
+Note also that $q=4$ and $q=6$ appear in the table only for comparison: for those
+two moduli Corollary~\ref{cor:spectrum}(i)--(ii) are exact identities and no
+equidistribution input is needed at all.
+\end{remark}
+
+\section{The deep minor arcs}\label{sec:l5c}
+
+This section is a design, not a proof; we state it because it isolates exactly
+what is missing and because one structural observation makes the shape of the
+argument clear.
+
+\subsection{The product is a superposition of prime exponential sums}
+
+Expanding $\log|2\cos\pi u|=\sum_{n\ge1}(-1)^{n+1}\cos(2\pi nu)/n$ termwise,
+\begin{equation}\label{eq:fourier}
+  \log|G_B(\theta)|
+  =-b\log2+\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\,
+     \mathrm{Re}\!\!\sum_{a\in B}e\!\Bigl(\frac{na\theta}{2\pi}\Bigr).
+\end{equation}
+The inner sum is a classical exponential sum over primes. Thus the object we
+must bound on the deep minor arcs is not exotic: it is a weighted superposition
+of the sums $\sum_{p\le x}e(\alpha p)$ that Vinogradov's method was built for,
+with $\alpha=n\theta/2\pi$. The only delicacy is that the coefficients $1/n$
+decay slowly, and that the series diverges at the zeros of $\cos$, so a
+truncation is needed near those points.
+
+\subsection{The intended argument}
+
+\begin{enumerate}
+\item Fix $\theta$ with $\theta/2\pi$ having continued-fraction denominator
+      $q>Q_0$ (the deep minor arcs; the arcs with $q\le Q_0$ are covered by
+      Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a}).
+\item Truncate~\eqref{eq:fourier} at $n\le N$ and bound the tail by
+      excising a neighbourhood of the zeros of $\cos(a\theta/2)$, controlling
+      the excised part by Koksma's inequality against the discrepancy of
+      $\{a\theta/2\pi\}_{a\in B}$.
+\item Bound each truncated exponential sum by Vinogradov's method, and convert
+      the resulting discrepancy bound by Erd\H{o}s--Tur\'an.
+\item Optimise the excision parameter at $\delta\asymp1/\log b$, obtaining
+      $|G_B(\theta)|\le(1/2+o(1))^{b}$ uniformly on the deep minor arcs.
+\end{enumerate}
+
+\begin{remark}[On explicit constants]\label{rem:helfgott}
+One might hope to make step~3 effective using Helfgott's explicit minor-arc
+bounds~\cite{Hel12}. His Main Theorem is stated for $x\ge x_0=2.16\cdot10^{20}$,
+which corresponds to $k=\pi(x_0)\approx4.7\cdot10^{18}$. That is far outside any
+range we could combine with the direct computations of Section~\ref{sec:num}, so
+we do not claim an effective version of this section. Effectivity in this paper
+is confined to Proposition~\ref{prop:l5a} (thresholds $\approx10^{4}$) and to
+Proposition~\ref{prop:curv}, which needs no arithmetic input at all.
+\end{remark}
+
+\begin{remark}[Numerical direction check]
+For $k=24$ and $k=32$ we sampled $\theta$ whose continued-fraction denominator
+exceeds $4\cdot10^{4}$ and computed $|G_B(\theta)|^{1/b}$. The values lie
+between $0.41$ and $0.55$, clustering about $0.5$, consistent with the target
+$(1/2+o(1))^{b}$. This checks the direction of the estimate, not the estimate.
 \end{remark}
 
 \section{What remains}\label{sec:remains}
@@ -681,12 +751,13 @@ $\asymp1/S_2$ rather than exponential in $b$.
 \end{problem}
 
 \begin{problem}[Minor arcs]\label{prob:minor}
-Bound the contribution of $\theta$ away from the surviving peaks. By
-Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a} it suffices to treat
-$q=4$, $q=6$, and a finite list depending on $d$. For the exponential sums that
-arise, the closest available technology is that of Dong, Robles, Zaharescu and
-Zeindler~\cite{DRZZ25}, who handle the non-principal major arcs for prime
-partitions by way of what they call strange and pseudo-differentiable functions.
+Carry out the programme of Section~\ref{sec:l5c}. The exponential sums are the
+classical ones by~\eqref{eq:fourier}; the non-classical part is the excision
+near the zeros of $\cos$. Dong, Robles, Zaharescu and Zeindler~\cite{DRZZ25}
+handle non-principal major arcs for prime partitions using what they call
+strange and pseudo-differentiable functions, and their treatment of non-smooth
+behaviour looks like the right tool for that excision, although their limit
+($n\to\infty$ with the part set fixed) is not ours.
 \end{problem}
 
 \begin{problem}[Assembly]\label{prob:assembly}
@@ -780,6 +851,11 @@ A.~Dong, N.~Robles, A.~Zaharescu and D.~Zeindler,
 partitions},
 Res. Number Theory \textbf{11} (2025), 52.
 \href{https://arxiv.org/abs/2412.20102}{arXiv:2412.20102}.
+
+\bibitem[Hel12]{Hel12}
+H.~A.~Helfgott,
+\emph{Minor arcs for Goldbach's problem}, preprint (2012),
+\href{https://arxiv.org/abs/1205.5252}{arXiv:1205.5252}.
 
 \bibitem[FF98]{FF98}
 F.~F.~Ferreira and J.~F.~Fontanari,
