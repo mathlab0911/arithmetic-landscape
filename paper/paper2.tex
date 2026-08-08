@@ -115,7 +115,7 @@ reports the numerical verification.
 
 Statements marked \Lean{name} are machine-checked in Lean~4 against
 Mathlib; the repository builds with no \texttt{sorry} and no additional axioms.
-The canon currently consists of $92$ theorems.
+The canon currently consists of $95$ theorems.
 
 \section{The sub-peak spectrum}\label{sec:m1}
 
@@ -515,6 +515,58 @@ because $3\in B_1$ and the modulus-$6$ peak is extinguished
 (Lemma~\ref{lem:vanish}).}
 \label{fig:epsd}
 \end{figure}
+
+\section{A free Gaussian envelope at every peak}\label{sec:l5b}
+
+The following is elementary but useful: every sub-peak carries an envelope as
+sharp as the main arc, with no arithmetic input at all.
+
+\begin{proposition}[Curvature bound]\label{prop:curv}
+Let $B$ be any finite set of positive reals and $V_0=\tfrac14\sum_{a\in B}a^{2}$.
+On any interval where $G_B$ has no zero,
+\[
+  \frac{d^{2}}{d\theta^{2}}\log|G_B(\theta)|
+  =-\sum_{a\in B}\frac{a^{2}}{4}\sec^{2}\!\Bigl(\frac{a\theta}{2}\Bigr)\;\le\;-V_0 ,
+\]
+because $\sec^{2}\ge1$. Consequently $\log|G_B|$ is concave there with curvature
+at least $V_0$, and if $\theta^{*}$ is an interior local maximum then
+\[
+  |G_B(\theta)|\;\le\;|G_B(\theta^{*})|\,e^{-V_0(\theta-\theta^{*})^{2}/2}
+\]
+throughout that interval.
+\end{proposition}
+
+\noindent
+(Lean: \Lean{one\_le\_one\_div\_cos\_sq}, \Lean{term\_curvature\_ge} and
+\Lean{curvature\_ge\_V0} formalise the inequality
+$V_0\le\sum(a^{2}/4)\sec^{2}(a\theta/2)$; the passage from concavity to the
+quadratic bound is standard and not yet formalised.)
+
+Two caveats matter in practice, and both are visible numerically.
+
+\begin{remark}[The centre is not $2\pi/q$]\label{rem:centre}
+The envelope must be anchored at the true local maximum, which is displaced from
+$2\pi/q$ by $-h'(0)/h''(0)$ with $h=\log|G_B|$; by Lemma~\ref{lem:local} this is
+$\asymp\Delta/S_2$ at $q=6$. For the first $24$ odd primes truncated at $d=2$
+the measured displacements are $+1.316\cdot10^{-5}$ ($q=6$),
+$+3.795\cdot10^{-4}$ ($q=4$) and $-2.097\cdot10^{-3}$ ($q=8$), against predicted
+$+1.316\cdot10^{-5}$, $+3.800\cdot10^{-4}$ and $-2.021\cdot10^{-3}$. Anchoring
+at $2\pi/q$ instead makes the envelope fail, by $7.6\cdot10^{-6}$ at $q=6$ and
+$4.7\cdot10^{-3}$ at $q=4$ in the same data.
+\end{remark}
+
+\begin{remark}[Validity radius]\label{rem:radius}
+The bound holds only inside the zero-free interval, whose half-width is
+$\approx\pi/(2\max B)$. Measured in units of the envelope scale
+$V_0^{-1/2}=2/\sqrt{S_2}$, this is
+\[
+  \frac{\pi}{2\max B}\cdot\frac{\sqrt{S_2}}{2}\;\approx\;\frac{\pi}{4}\sqrt{k/3}
+  \;\approx\;0.45\sqrt{k},
+\]
+so the envelope covers a growing number of standard deviations: $1.72$ at
+$k=16$, $2.08$ at $k=24$, $2.71$ at $k=40$ and $2.92$ at $k=48$, against the
+prediction $1.80,2.21,2.85,3.12$.
+\end{remark}
 
 \section{What remains}\label{sec:remains}
 

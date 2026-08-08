@@ -328,6 +328,50 @@ theorem F_nat_eq_zero_of_mem {B : List ℕ} {m : ℕ} (hm : 0 < m) (h : m ∈ B)
 theorem q4_floor_never_vanishes (a : ℕ) (h : a % 2 = 1) :
     (1 + Complex.I ^ a) ≠ 0 := normSq_one_add_I_pow_odd_ne_zero a h
 
+/-! ## L5b の算術的な核: 曲率が至るところ −V₀ 以下(21周目)
+
+`log|G_B(θ)| = Σ_{a∈B} log|cos(aθ/2)|` の2階微分は
+`−Σ (a²/4)·sec²(aθ/2)`。**sec² ≥ 1 なので、これは常に `−Σ a²/4 = −V₀` 以下**。
+したがって G がゼロを持たない区間では log|G| は曲率 ≤ −V₀ で凹になり、
+**どの副次峰も主要弧と同じ鋭さのガウス包絡を「無料で」持つ**(fable-5 の L5b)。
+
+ここでは算術的な核(sec² ≥ 1 と、それを重み付き総和に持ち上げた形)を形式化する。
+包絡そのものを導く解析の一歩(凹性 ⇒ 二次上界)は Mathlib の凸性補題を使う予定で、未着手。 -/
+
+/-- `sec² x ≥ 1`。`cos² x ≤ 1` の逆数版。 -/
+theorem one_le_one_div_cos_sq {x : ℝ} (h : Real.cos x ≠ 0) :
+    (1 : ℝ) ≤ 1 / Real.cos x ^ 2 := by
+  have h1 : Real.cos x ^ 2 ≤ 1 := by
+    have := Real.neg_one_le_cos x
+    have := Real.cos_le_one x
+    nlinarith [Real.neg_one_le_cos x, Real.cos_le_one x]
+  have hpos : 0 < Real.cos x ^ 2 := by positivity
+  rw [le_div_iff₀ hpos]
+  linarith
+
+/-- 重み付き1項の曲率下界: `(a²/4) ≤ (a²/4)·sec²(aθ/2)`。 -/
+theorem term_curvature_ge {a θ : ℝ} (h : Real.cos (a * θ / 2) ≠ 0) :
+    a ^ 2 / 4 ≤ a ^ 2 / 4 * (1 / Real.cos (a * θ / 2) ^ 2) := by
+  have h1 := one_le_one_div_cos_sq h
+  have h2 : (0 : ℝ) ≤ a ^ 2 / 4 := by positivity
+  nlinarith [h1, h2]
+
+/-- **L5b の核(総和形)**: `V₀ = Σ a²/4` に対し
+    `V₀ ≤ Σ (a²/4)·sec²(aθ/2) = −(d²/dθ²) log|G_B(θ)|`。
+    すなわち **log|G| の曲率はどこでも主要弧の曲率以上に急**。 -/
+theorem curvature_ge_V0 (B : List ℝ) (θ : ℝ)
+    (h : ∀ a ∈ B, Real.cos (a * θ / 2) ≠ 0) :
+    (B.map (fun a => a ^ 2 / 4)).sum
+      ≤ (B.map (fun a => a ^ 2 / 4 * (1 / Real.cos (a * θ / 2) ^ 2))).sum := by
+  induction B with
+  | nil => simp
+  | cons a t ih =>
+      have ha : Real.cos (a * θ / 2) ≠ 0 := h a (by simp)
+      have ht : ∀ x ∈ t, Real.cos (x * θ / 2) ≠ 0 := fun x hx =>
+        h x (by simp [hx])
+      simp only [List.map_cons, List.sum_cons]
+      exact add_le_add (term_curvature_ge ha) (ih ht)
+
 end ALT
 
 #print axioms ALT.normSq_one_add_exp
@@ -356,3 +400,6 @@ end ALT
 #print axioms ALT.not_mem_of_F_ne_zero
 #print axioms ALT.F_nat_eq_zero_of_mem
 #print axioms ALT.q4_floor_never_vanishes
+#print axioms ALT.one_le_one_div_cos_sq
+#print axioms ALT.term_curvature_ge
+#print axioms ALT.curvature_ge_V0
