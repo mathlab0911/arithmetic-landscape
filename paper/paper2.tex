@@ -953,9 +953,9 @@ previous ones.
 \emph{Assume} (a) \emph{the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\
 that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
 Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
---- \emph{and} (b) \emph{that $\Phi_q<0$ on the compact range of
-Problem~\ref{prob:annulus}} --- the rest of the annulus is now covered by
-Lemma~\ref{lem:annulus}, which is proved. Fix $d\ge2$ and let
+--- \emph{and} (b) \emph{the sup-norm bound $\|\Phi_q\|_\infty\le3^{\varphi(q)/2}$ of
+Problem~\ref{prob:supnorm}}, which by Remark~\ref{rem:flat} is needed only for a
+finite list of $q$ and has been verified there for $q\le60$. Fix $d\ge2$ and let
 $n=\lfloor T/2\rfloor$. With
 $B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
@@ -1043,7 +1043,8 @@ We set out plainly which parts of this paper are proved and which are not.
       Lemma~\ref{lem:vanish}, Corollary~\ref{cor:spectrum}(i)--(iii) and (vi),
       Proposition~\ref{prop:curv}, Lemma~\ref{lem:cover}, Lemma~\ref{lem:fejer},
       Lemma~\ref{lem:window}, Lemma~\ref{lem:twist}, Lemma~\ref{lem:annulus},
-      Lemma~\ref{lem:closed}, Theorem~\ref{thm:p5exact}.
+      Lemma~\ref{lem:closed}, Lemma~\ref{lem:supnorm},
+      Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
       $k=18,\dots,40$) and Proposition~\ref{prop:central} (the Edgeworth term).
@@ -1068,11 +1069,11 @@ We set out plainly which parts of this paper are proved and which are not.
       proof. The repair is Lemma~\ref{lem:annulus}, which replaces the question
       rather than answering it: a profile valid at every distance makes the
       matching of radii unnecessary. That lemma is now proved; what survives of
-      the gap is one inequality on one compact range of $x$, which is
-      Problem~\ref{prob:annulus}. By Lemma~\ref{lem:closed} that inequality is
-      about a running average of $\log|\Phi_q|$ along the unit circle and
-      contains no arithmetic, so it is a finite computation. We warn that the
-      naive form of it --- $\Phi_q\le0$ --- is \emph{false}, for the reason
+      the gap is Problem~\ref{prob:supnorm}, a bound on the sup norm of a
+      cyclotomic polynomial on the unit circle, needed only for a finite list of
+      $q$ (Remark~\ref{rem:flat}) and verified for $q\le60$. No range of $x$ has
+      to be examined: see Remark~\ref{rem:trivial}. We warn that the naive form
+      of the inequality --- $\Phi_q\le0$ --- is \emph{false}, for the reason
       given in Remark~\ref{rem:phipos}.
 \item \emph{Formal verification}: the $97$ Lean theorems cover the
       combinatorial core --- the identities of both papers, the curvature bound,
@@ -1110,12 +1111,62 @@ Show that
   \log M(q)+\Phi_q(x)\;\le\;\log\frac{\sqrt3}{2}
   \qquad\text{for }x_{\mathrm{env}}\ (\approx1.5)\le x\le\frac{2\pi^{2}}{3\log(2M(q))}
 \]
-and every $q\le Q_2$, closing the compact range left open in
-Remark~\ref{rem:profileuse}. By Lemma~\ref{lem:closed} the series defining
-$\Phi_q$ is a running average of an explicit elementary function, so this is a
-finite rigorous computation rather than a theorem in wait of an idea. Note that
-the tight case is $q=6$, where the two sides agree at $x=0$; for every other $q$
-there is a margin of at least $\log(\sqrt3/2)-\log M(10)=0.147$.
+and every $q\le Q_2$. \emph{This is now a lemma; see
+Lemma~\ref{lem:supnorm} below.}
+\end{problem}
+
+\begin{lemma}[The annulus, resolved]\label{lem:supnorm}
+For every $q$ and every $x>0$,
+\[
+  \log M(q)+\Phi_q(x)\;\le\;\frac{1}{\varphi(q)}\log\|\Phi_q\|_{\infty}-\log2,
+  \qquad \|\Phi_q\|_{\infty}:=\max_{|z|=1}|\Phi_q(z)| .
+\]
+Consequently $\log M(q)+\Phi_q(x)\le\log(\sqrt3/2)$ for all $x>0$ as soon as
+$\|\Phi_q\|_{\infty}\le3^{\varphi(q)/2}$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:closed}, $\log M(q)+\Phi_q(x)=-\log2+\frac1x\int_0^{x}h_q$
+where $h_q(v)=\varphi(q)^{-1}\log|\Phi_q(-e^{-iv})|$. Bound the integrand by its
+supremum, $h_q(v)\le\varphi(q)^{-1}\log\|\Phi_q\|_{\infty}$, and average.
+\end{proof}
+
+\begin{remark}[What this replaces]\label{rem:trivial}
+This is worth stating plainly, because it is the third and last form the
+question took. We first asked for the reach of the envelope, then for the sign
+of $\Phi_q$ on a compact range of $x$, and expected to settle the latter by
+certified numerical integration. Once Lemma~\ref{lem:closed} had put $\Phi_q$
+in the form of a running average, no integration was needed: a running average
+never exceeds the supremum of what is averaged, so \emph{no range of $x$ has to
+be examined at all}. The tight case $q=6$ is immediate from $|1+2\cos v|\le3$.
+
+The same identity explains Remark~\ref{rem:phipos} exactly: $\Phi_q\le0$ holds
+precisely when $\|\Phi_q\|_{\infty}=|\Phi_q(-1)|$, that is, when $|\Phi_q|$
+attains its maximum on the circle at $z=-1$. For $q=4,6,8,10,18$ it does; for
+$q=12,15,20,21,24$ it does not, and those are exactly the counterexamples of
+Remark~\ref{rem:phipos}.
+\end{remark}
+
+\begin{remark}[Large $q$ needs nothing new]\label{rem:flat}
+For $n\le N_0$, H\"older's formula
+$c_q(n)=\mu(q/g)\varphi(q)/\varphi(q/g)$ with $g=\gcd(n,q)\le N_0$ gives
+$|c_q(n)|/\varphi(q)\le1/\varphi(q/g)$, and $\varphi(m)\gg m/\log\log m$ then
+yields $|c_q(n)|/\varphi(q)\ll N_0\log\log q/q$. (One may not write
+$\varphi(q/g)\ge\varphi(q/N_0)$: $\varphi$ is not monotone.) Hence
+$\Phi_q\to0$ uniformly as $q\to\infty$, and
+$\log M(q)+\Phi_q\le\log(\sqrt3/2)+o(1)$ by Theorem~\ref{thm:six}. So only a
+finite list of $q$ is ever at issue in Problem~\ref{prob:supnorm}.
+\end{remark}
+
+\begin{problem}[Sup norms of cyclotomic polynomials]\label{prob:supnorm}
+Show that $\|\Phi_q\|_{\infty}\le3^{\varphi(q)/2}$ for every $q\ge3$. We have
+verified this by direct evaluation for $3\le q\le60$; the only cases of equality
+are $q=3$ and $q=6$. For large $q$ it is not delicate, since
+$\|\Phi_q\|_{\infty}$ grows subexponentially in $q$ while
+$3^{\varphi(q)/2}=\exp(\varphi(q)\log\sqrt3)$ grows exponentially and
+$\varphi(q)\gg q/\log\log q$; what is missing is a citable explicit bound making
+the crossover effective. By Remark~\ref{rem:flat} this is in any case needed
+only for a finite list of $q$.
 \end{problem}
 
 \begin{lemma}[Twisted sums, uniformly]\label{lem:twist}
