@@ -101,9 +101,14 @@ $R^2=0.999$. A partial-correlation analysis shows that $\Gamma$ subsumes the
 coefficient of variation of the weights, the statistic previously proposed for
 this role by Alyahya and Rowe.
 
-All theorems below are formally verified in Lean~4 with Mathlib; no proof
-contains \Lean{sorry} and no additional axiom is used. The development is
-available at \url{https://github.com/mathlab0911/arithmetic-landscape}.
+The combinatorial theorems below --- the classification, the window identity,
+the stratification, the sandwich and the modulus-$4$ obstruction --- are
+formally verified in Lean~4 with Mathlib; no proof contains \Lean{sorry} and no
+additional axiom is used. One statement is verified only in part: for the
+extremality of the modulus $6$ the finite check is formalised, while the
+supremum over all $q$ rests on the classical values of $\Phi_q(-1)$. The
+development is available at
+\url{https://github.com/mathlab0911/arithmetic-landscape}.
 \end{abstract}
 
 \noindent\textbf{2020 MSC.} 11B75 (primary); 05A17, 68Q25, 82B44.
@@ -1017,7 +1022,10 @@ $1$-bit-flip NPP landscape correlates strongly and negatively with the
 coefficient of variation $CV=\mathrm{sd}(a)/\mathrm{mean}(a)$ of the weights,
 and proposed an estimator on that basis. Using the $100$-seed data of
 \S\ref{sec:experiments} we first reproduce their finding, then separate the two
-predictors.
+predictors. This section is empirical throughout: it compares two statistics on
+a fixed random model and claims no theorem. What it is meant to settle is a
+question of \emph{which} quantity the theorems of \S\ref{sec:window} and
+\S\ref{sec:sandwich} are about, not how well either quantity predicts.
 
 \begin{table}[htbp]
 \centering

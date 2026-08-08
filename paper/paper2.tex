@@ -57,7 +57,7 @@ only competitors of the modulus-$6$ peak are the modulus-$4$ floor
 $(1/\sqrt2)^{|B|}$, which never vanishes, and a finite list depending on the
 truncation level. We also derive and verify numerically a second-order formula
 for the modulus-$6$ ripple, giving amplitude and phase to within $0.1\%$ over
-$k=18,\dots,40$. Key steps are formally verified in Lean~4.
+$k=18,\dots,76$. Key steps are formally verified in Lean~4.
 \end{abstract}
 
 \section{Introduction}
@@ -161,6 +161,15 @@ the \emph{ratio} at nearby points, which does not follow from a one-sided bound.
 Statements marked \Lean{name} are machine-checked in Lean~4 against
 Mathlib; the repository builds with no \texttt{sorry} and no additional axioms.
 The canon currently consists of $97$ theorems.
+
+\begin{remark}[A convention about the remarks]
+Several approaches to the results below were tried and abandoned. Where an
+abandoned approach is instructive --- because the obstruction it meets is real,
+or because the natural first guess is false --- we record it as a remark with
+the reason, rather than silently omitting it. Readers who want only the proofs
+may skip those; readers who want to know where the ground is soft should read
+them first.
+\end{remark}
 
 \section{The sub-peak spectrum}\label{sec:m1}
 
@@ -455,6 +464,38 @@ corrections are needed: either one alone leaves a residual of about $0.4\%$ on
 branch B.}
 \label{tab:k2}
 \end{table}
+
+\begin{remark}[How far the check reaches, and what stops it]\label{rem:ripplerange}
+The comparison above was originally made over $k=18,\dots,40$. We have extended
+it, computing $r_B$ exactly in integer arithmetic, to $k\le100$:
+\[
+  \begin{array}{l|ccc}
+    \text{range} & \text{mean }|{\rm meas}/K_2-1| & \text{max} & n\\\hline
+    k=18,\dots,40 & 0.00073 & 0.00339 & 12\\
+    k=44,\dots,76 & 0.00077 & 0.00205 & 9\\
+    k=80,\dots,100 & 0.0102 & 0.0211 & 6
+  \end{array}
+\]
+So the agreement is unchanged out to $k=76$ --- the range of the claim roughly
+doubles at no cost --- and then degrades. The degradation is a limit of the
+measurement, not of the formula, and one can say so quantitatively. The ripple
+being extracted has relative size $4(\sqrt3/2)^{b}$, which is
+$1.5\cdot10^{-2}$ at $k=40$ but $2.6\cdot10^{-6}$ at $k=100$, whereas the smooth
+background it sits on --- the Edgeworth correction, of size $S_4/S_2^{2}$ ---
+only decays like $1/b$, from $0.051$ to $0.020$. The ratio of background to
+signal therefore climbs from $3.5$ at $k=40$ to $7.6\cdot10^{3}$ at $k=100$.
+Multiplying the observed discrepancy by the reciprocal of that ratio gives
+$8.9,6.5,4.1,2.8$ (all $\times10^{-6}$) at $k=64,76,88,100$: \emph{constant to
+within a factor of three while the ratio itself moves by two orders of
+magnitude}. In other words the leakage of the smooth background into the
+modulus-$6$ Fourier bin is a fixed $\approx5\cdot10^{-6}$ of that background,
+and it becomes visible in the ratio only because the signal is shrinking
+underneath it. Below $k\approx52$ the residual is instead dominated by the
+accuracy of $K_2$ itself, at $3$--$6\cdot10^{-4}$. Reaching beyond $k\approx80$
+would require subtracting the background to better than one part in $10^{5}$,
+which is a question about the reference expansion and not about
+Proposition~\ref{prop:ripple}.
+\end{remark}
 
 On branch B the individual values of $\text{measured}/K_2$ are $0.9991$
 ($k=32$), $0.9990$ ($k=34$) and $0.9997$ ($k=40$), against $0.9904$, $0.9923$
@@ -1051,7 +1092,8 @@ We set out plainly which parts of this paper are proved and which are not.
       Proposition~\ref{prop:supnorm}, Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
-      $k=18,\dots,40$) and Proposition~\ref{prop:central} (the Edgeworth term).
+      $k=18,\dots,76$; see Remark~\ref{rem:ripplerange} for why the check stops
+      there) and Proposition~\ref{prop:central} (the Edgeworth term).
 \item \emph{Effective}: Proposition~\ref{prop:l5a}
       ($k_0\le1.5\cdot10^{4}$) and Corollary~\ref{cor:spectrum}(i)--(ii), which
       are exact.
@@ -1246,7 +1288,9 @@ $2\varphi_{\omega+1}+2\le(p-1)(2\varphi_\omega+2)$, so
 \]
 using $S(\omega)\ge0$ for the middle step and $\log(p-1)\le p-3$ (valid for
 every prime $p\ge5$) for the last. So the induction runs on the auxiliary
-invariant $\varphi_\omega\log3\ge2^{\omega+1}$, which holds at $\omega=3$
+invariant $\varphi_\omega\log3\ge2^{\omega+1}$ --- which does double duty, since
+$2^{\omega+1}>2^{\omega}$ makes it imply the monotonicity condition
+$\varphi>2^{\omega}/\log3$ used above --- and which holds at $\omega=3$
 ($52.7\ge16$) and is preserved because $\varphi$ is multiplied by
 $p-1\ge10$ at each step while $2^{\omega+1}$ only doubles: the ratio grows by a
 factor at least $5$ per step, from $3.3$ at $\omega=3$ to $5.9\cdot10^{9}$ at
