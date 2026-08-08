@@ -1099,8 +1099,7 @@ We set out plainly which parts of this paper are proved and which are not.
       are exact.
 \item \emph{Sketch level, to be written to referee standard}:
       Section~\ref{sec:l5c} (the Vinogradov input of step~2 and the excision of
-      step~4), Proposition~\ref{prop:p5tail}, and the $o(1)$ bookkeeping in
-      item~(6) of the outline above. Theorem~\ref{thm:t2main} and
+      step~4) and the $o(1)$ bookkeeping in item~(6) of the outline above. Theorem~\ref{thm:t2main} and
       Corollary~\ref{cor:goal} inherit this status.
 \item \emph{A gap we have found and not closed}. Lemma~\ref{lem:cover} sorts
       every $\theta$ by \emph{denominator}, but the two mechanisms it hands
@@ -1129,8 +1128,8 @@ We set out plainly which parts of this paper are proved and which are not.
 
 \noindent
 The remaining work is therefore of three kinds, and none of it requires a new
-idea: writing Section~\ref{sec:l5c} and Proposition~\ref{prop:p5tail} out in
-full, discharging the $o(1)$ inventory, and the usual polishing. We state the
+idea: writing Section~\ref{sec:l5c} out in full, discharging the $o(1)$
+inventory, and the usual polishing. We state the
 three steps as problems for the record.
 
 \begin{problem}[Main arc]\label{prob:main}
@@ -1757,14 +1756,42 @@ using $m\le\delta N/k$.
 $\Gamma(P_k)/\Gamma(R_k)\to0$ in probability.
 \end{corollary}
 
-\begin{proof}[Sketch]
-On the complement of the event above, $\Gamma(R_k)\ge2^{-J}a_{(J)}
-\ge2^{-J}(2\delta N/k)$. Fix $\delta=1/2$ and let $J\to\infty$ slowly; the
-failure probability $(e/2J)^{J}/\sqrt{2\pi J}$ tends to $0$, while
-$2^{-J}N/k\to\infty$ because $N/k\asymp\log k$ and $J$ may be taken as slowly
-growing as one likes. Since $\Gamma(P_k)$ is bounded, the claim follows. The
-quantifier bookkeeping is routine and is the only part not written out here.
+\begin{proof}
+Since $\Gamma(P_k)\to5.34920\ldots$ is bounded, say by $C$, it suffices to show
+$\Gamma(R_k)\to\infty$ in probability: that for every $M>0$ and every $\eta>0$
+there is $k_0$ with $\mathbb{P}[\Gamma(R_k)\le M]<\eta$ for all $k\ge k_0$.
+
+Fix $M$ and $\eta$. The order of choice matters, so we set it out.
+
+\emph{First choose $J$, depending only on $\eta$.} Take $\delta=\tfrac12$ in
+Proposition~\ref{prop:p5tail}: the failure probability is
+$(2\pi J)^{-1/2}(e/2J)^{J}$, which tends to $0$ as $J\to\infty$, so there is a
+$J=J(\eta)$ with $(2\pi J)^{-1/2}(e/2J)^{J}<\eta$. \emph{Fix that $J$ for the
+rest of the argument}; it does not grow with $k$.
+
+\emph{Then choose $k_0$, depending on $J$ and $M$.} All terms of
+$\Gamma(R_k)=\sum_{j}a_{(j)}2^{-j}$ are positive, so
+$\Gamma(R_k)\ge2^{-J}a_{(J)}=2^{-J}X_{(J)}$. On the complement of the event of
+Proposition~\ref{prop:p5tail} we have $X_{(J)}>N/(2k)$, whence
+$\Gamma(R_k)>2^{-J-1}N/k$. Now $N=(p_k-3)/2+1$ and $p_k\sim k\log k$, so
+$N/k\sim\tfrac12\log k\to\infty$; since $J$ is already fixed, there is
+$k_0=k_0(J,M)$ with $2^{-J-1}N/k>M$ for all $k\ge k_0$.
+
+\emph{Conclude.} For $k\ge k_0$ the event $\Gamma(R_k)\le M$ is contained in the
+event of Proposition~\ref{prop:p5tail}, so
+$\mathbb{P}[\Gamma(R_k)\le M]\le(2\pi J)^{-1/2}(e/2J)^{J}<\eta$. Hence
+$\Gamma(R_k)\to\infty$ and $\Gamma(P_k)/\Gamma(R_k)\le C/\Gamma(R_k)\to0$, both
+in probability.
 \end{proof}
+
+\begin{remark}
+The bookkeeping is worth one sentence because our earlier sketch made it look
+harder than it is. We had written ``let $J\to\infty$ slowly'', which forces one
+to balance two limits; in fact $J$ need not grow at all. For each tolerance
+$\eta$ a single fixed $J$ suffices, and only $k_0$ then depends on the target
+$M$. This is also why the factor $2$ discussed in the remark below is
+irrelevant: $J$ is chosen before $M$ and never revisited.
+\end{remark}
 
 \begin{remark}
 Proposition~\ref{prop:p5tail} was checked over $48$ combinations
