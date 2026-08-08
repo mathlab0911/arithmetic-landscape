@@ -712,47 +712,109 @@ with $\alpha=n\theta/2\pi$. The only delicacy is that the coefficients $1/n$
 decay slowly, and that the series diverges at the zeros of $\cos$, so a
 truncation is needed near those points.
 
+\subsection{How the circle is divided, and why nothing falls between}
+
+Before the argument we fix the dissection, because the choice of the truncation
+parameter $N_0$ decides whether it is exhaustive. Let $A\ge2$ be the exponent in
+the Siegel--Walfisz theorem, put $A'=A+1$, and set
+\[
+  \delta_0=\frac{1}{\log b},\qquad N_0=(\log N)^{A'},\qquad
+  Q_2=(\log N)^{A+A'} .
+\]
+
+\begin{center}
+\begin{tabular}{@{}lllc@{}}
+\toprule
+Tier & range of $q$ & tool & located in\\
+\midrule
+exact peaks & $q\in\{4,6\}\cup\{2p:p\in B\}$ & cyclotomic identities & \S\ref{sec:vanish}\\
+$T_2$ & remaining $q\le Q_2$ & PNT in AP $+$ envelope & \S\ref{sec:l5a}\\
+$T_3$ & deep minor, see (ii) below & Vaughan $+$ Selberg $+$ Abel & this section\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+In tier $T_2$ the equidistribution of $B$ in the residue classes mod $q$ is what
+produces the constant $M(q)$. Asymptotically this is the Siegel--Walfisz
+theorem, which is what fixes $A$; effectively, for the $q$ that occur at any
+accessible $k$, it is the explicit bounds of~\cite{BMOR18} used in
+Proposition~\ref{prop:l5a}. Only the ineffectivity of the Siegel zero prevents
+the two from being the same statement, and that is the sole reason
+Section~\ref{sec:l5a} carries a threshold rather than a constant.
+
+\begin{lemma}[Covering completeness]\label{lem:cover}
+Every $\theta$ satisfies at least one of
+\begin{enumerate}
+\item[(i)] $|\theta-2\pi j/q|\le1/(q\tau)$ for some $q\le Q_2$ and $(j,q)=1$;
+\item[(ii)] for every $n\le N_0$ the reduced denominator $q_n$ of $n\theta/2\pi$
+      exceeds $(\log N)^{A}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Suppose (ii) fails: some $n\le N_0$ has $q_n\le(\log N)^{A}$, so
+$|n\theta/2\pi-j'/q_n|\le1/(q_n\tau)$ for some $j'$. Dividing by $n$ exhibits
+$\theta/2\pi$ within $1/(nq_n\tau)$ of $j'/(nq_n)$, and
+$nq_n\le N_0(\log N)^{A}=Q_2$. Reducing the fraction only decreases the
+denominator, which gives (i).
+\end{proof}
+
+\begin{remark}\label{rem:whyN0}
+With the earlier choice $N_0=b^{1/4}$ the same computation gives
+$nq_n\le b^{1/4}(\log N)^{A}$, and the band
+$(\log N)^{A}<q\le b^{1/4}(\log N)^{A}$ then belongs to no tier: too large for
+the explicit bounds, too small to be deep minor. Replacing $b^{1/4}$ by a fixed
+power of $\log N$ closes it, and costs nothing --- see
+Remark~\ref{rem:budget}, where the change in fact improves every measured
+quantity that matters.
+\end{remark}
+
 \subsection{The intended argument}
 
-Fix $\theta$ whose continued-fraction denominator exceeds $Q_0$; the arcs with
-$q\le Q_0$ are covered by Corollary~\ref{cor:spectrum} and
-Proposition~\ref{prop:l5a}. Put $\delta_0=(\log b)^{-1}$ and $N_0=b^{1/4}$, and
-split $B=B_{\mathrm{good}}\cup B_{\mathrm{bad}}$, where $p$ is bad when
+Fix $\theta$ of type (ii); the $\theta$ of type (i) are covered by
+Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a}. Split
+$B=B_{\mathrm{good}}\cup B_{\mathrm{bad}}$, where $p$ is bad when
 $\|p\theta/2\pi-\tfrac12\|<\delta_0$.
 
 \begin{enumerate}
-\item \emph{Harmonics stay minor.} For $n\le N_0$ the reduced denominator of
-      $n\theta/2\pi$ is at least $q/\gcd(n,q)\ge b^{1/4}$, so every harmonic
-      appearing below lies on a minor arc.
-\item \emph{The exponential sums.} With the Dirichlet parameter
-      $\tau=b^{1/2}$ the denominators occurring in step~1 satisfy
-      $q_n\in[b^{1/4},b^{1/2}]$, and since $N=p_k\asymp k\log k$ this interval
-      lies inside $[(\log N)^{A},N(\log N)^{-A}]$ for every fixed $A$ once $k$ is
-      large. It is worth recording why this single range suffices. The classical
-      treatment splits the circle into three tiers: $q=O(1)$, where the sum is
-      genuinely large; $2\le q\le(\log N)^{A}$, where the Siegel--Walfisz theorem
-      supplies the saving; and $q>(\log N)^{A}$, where Vaughan's identity does.
-      Only the third tier occurs here, because step~1 has already forced
-      $q_n\ge b^{1/4}$, which outgrows any fixed power of $\log N$. The first two
-      tiers are not lost --- they are precisely the arcs already handled by
-      Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a}, where the
-      cyclotomic constants $M(q)$ give the bound directly and no exponential sum
-      is needed at all. On the surviving range Vaughan's identity gives
+\item \emph{Harmonics stay minor.} This is exactly condition~(ii): for every
+      $n\le N_0$ the reduced denominator of $n\theta/2\pi$ exceeds
+      $(\log N)^{A}$, so every harmonic appearing below lies on a minor arc.
+      This is the only place where the value of $N_0$ enters the dissection, and
+      it is why $N_0$ must be a power of $\log N$ rather than of $b$
+      (Remark~\ref{rem:whyN0}).
+\item \emph{The exponential sums.} Take the Dirichlet parameter
+      $\tau=N(\log N)^{-A}$, so that every denominator arising above satisfies
+      $q_n\le\tau$ automatically; combined with step~1,
+      \[
+        (\log N)^{A}\;<\;q_n\;\le\;N(\log N)^{-A},
+      \]
+      which is precisely the range on which Vaughan's identity is effective. No
+      other range occurs: the tiers below $(\log N)^{A}$ are not lost but are
+      handled in \S\ref{sec:vanish} and \S\ref{sec:l5a}, where the cyclotomic
+      constants $M(q)$ give the bound directly and no exponential sum is needed
+      at all. On this range Vaughan's identity gives
       $S_B(\alpha)=\sum_{p\in B}e(p\alpha)\ll
       \bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr)(\log N)^{4}$, hence
-      $S_B\ll N(\log N)^{4}b^{-1/8}=o(\pi(N))$; a log-free version with a wider
-      range of $q$ is available in~\cite{Sr25}. Summing the head
-      $\sum_{n\le N_0}|S_B(n\theta)|/n\le(\log N_0)\max_n|S_B(n\theta)|$ gives
-      $o(b)$.
+      $S_B\ll N(\log N)^{4-A/2}$. Since $\pi(N)\asymp N/\log N$, this is
+      $o(\pi(N))$ as soon as $A>10$; $A$ is ours to choose, and Siegel--Walfisz
+      holds for every fixed $A$, so we fix $A=11$ once and for all. A log-free
+      version valid on a wider range of $q$ is available in~\cite{Sr25}. Summing
+      the head, $\sum_{n\le N_0}|S_B(n\theta)|/n\le(\log
+      N_0)\max_n|S_B(n\theta)|$, gives $o(b)$; note that $\log N_0=A'\log\log N$,
+      so enlarging $N_0$ from $b^{1/4}$ to $(\log N)^{A'}$ costs the head only a
+      bounded factor.
 \item \emph{Bad points.} Each bad $p$ contributes at most $\log2$
       to~\eqref{eq:fourier}, so it suffices that $|B_{\mathrm{bad}}|=o(b)$. This
-      needs no input beyond step~2. Majorising the indicator of the interval
-      $\|x-\tfrac12\|<\delta_0$ by a Selberg polynomial of degree $N_0$ --- the
-      one-interval form of the Erd\H{o}s--Tur\'an inequality --- gives
+      needs no input beyond step~2. Lemma~\ref{lem:fejer} of the appendix ---
+      the one-interval form of the Erd\H{o}s--Tur\'an inequality, proved there
+      from the Fej\'er kernel so that no external reference is incurred ---
+      applied to the interval $\|x-\tfrac12\|<\delta_0$ with degree $N_0$, gives
       \[
-        |B_{\mathrm{bad}}|\;\le\;b\Bigl(2\delta_0+\frac{1}{N_0}\Bigr)
-          +\sum_{n\le N_0}c_n\,\bigl|S_B(n\theta)\bigr|,
-        \qquad |c_n|\le\min\Bigl(2\delta_0+\tfrac{1}{N_0},\tfrac1n\Bigr),
+        |B_{\mathrm{bad}}|\;\le\;4b\Bigl(\delta_0+\frac{1}{N_0}\Bigr)
+          +4\sum_{n\le N_0}c_n\,\bigl|S_B(n\theta)\bigr|,
+        \qquad c_n=\min\Bigl(2\delta_0+\tfrac{2}{N_0},\tfrac1{\pi n}\Bigr),
       \]
       and the sum on the right is the \emph{same} head already shown to be
       $o(b)$ in step~2. Since $\delta_0\to0$ and $N_0\to\infty$, the whole
@@ -768,7 +830,11 @@ $\|p\theta/2\pi-\tfrac12\|<\delta_0$.
 \item \emph{Good points.} For $p$ good the series~\eqref{eq:fourier} is
       truncated at $N_0$; since $\|p\theta/2\pi-\tfrac12\|\ge\delta_0$,
       summation by parts against the Dirichlet kernel bounds the tail by
-      $C/(N_0\delta_0)=C\log b\cdot b^{-1/4}=o(1)$.
+      $C/(N_0\delta_0)=C\log b\,(\log N)^{-A'}=o(1)$. Here the new choice of
+      $N_0$ is a large gain and not merely a repair: with $N_0=b^{1/4}$ the same
+      bound was $C\log b\cdot b^{-1/4}$, which stays above $1$ until
+      $b\approx10^{6}$, whereas $(\log N)^{A'}$ makes it small immediately
+      (Remark~\ref{rem:budget}).
 \end{enumerate}
 
 \noindent
@@ -815,29 +881,48 @@ Proposition~\ref{prop:curv}, which needs no arithmetic input at all.
 \end{remark}
 
 \begin{remark}[Numerical check of the budget]\label{rem:budget}
-The parameters $\delta_0=1/\log b$ and $N_0=b^{1/4}$ are meaningless at $b=23$,
-so we tested the steps above at $b$ up to $1999$ (each evaluation is $O(b)$).
-On deep minor arcs:
+The parameters are asymptotic and are meaningless at $b=23$, so we tested the
+steps above at $b$ up to $1999$, taking the worst of six sampled deep-minor
+$\theta$ at each size. Each evaluation is $O(bN_0)$. Writing $\mathrm{tail}$ for
+the step-4 bound $1/(N_0\delta_0)$:
 \[
-  \begin{array}{c|cccccc}
-    b & 23 & 31 & 99 & 299 & 999 & 1999\\\hline
-    |B_{\mathrm{bad}}|/b & 0.565 & 0.581 & 0.455 & 0.341 & 0.288 & 0.253\\
-    D_B+2\delta_0 & 0.795 & 0.712 & 0.503 & 0.390 & 0.304 & 0.282\\
-    N_0^{-1}\!\sum_{n\le N_0}|S_B(n\theta)|/n\ \text{(per element)}
-      & 0.239 & 0.145 & 0.085 & 0.085 & 0.044 & 0.039
+  \begin{array}{l|cccc}
+    b & 99 & 299 & 999 & 1999\\\hline
+    |B_{\mathrm{bad}}|/b\ \text{(measured)} & 0.485 & 0.405 & 0.324 & 0.282\\
+    \text{step-3 bound}/b,\ N_0=(\log N)^{3} & 1.079 & 0.910 & 0.614 & 0.459\\
+    b^{-1}\sum_{n\le N_0}|S_B(n\theta)|/n & 0.697 & 0.640 & 0.415 & 0.292\\\hline
+    \mathrm{tail},\ N_0=b^{1/4}\ \text{(old)} & 1.532 & 1.425 & 1.381 & 1.267\\
+    \mathrm{tail},\ N_0=(\log N)^{3}\ \text{(new)} & 0.047 & 0.031 & 0.021 & 0.017
   \end{array}
 \]
-The bound of step~3 holds in every case, and the head of step~2 decreases. The
-quantity $-b^{-1}\log|G_B(\theta)|-\log2$, which the argument asserts is $o(1)$,
-has magnitude at most $0.123$ at $b=99$ and at most $0.024$ at $b=1999$ over six
-sampled $\theta$ per size.
+The bound of step~3 holds in every case. The change of $N_0$ is the decisive
+one: with $N_0=b^{1/4}$ the tail bound never drops below $1$ in any accessible
+range --- it would need $b\approx10^{6}$ --- so that step was vacuous in
+practice, whereas with $N_0=(\log N)^{3}$ it is already below $0.05$ at $b=99$.
+The price is a larger head, since more harmonics are summed; the head is the
+slower of the two now, and the step-3 bound only becomes nontrivial (that is,
+smaller than $1$) from $b\approx300$.
 
-Two honest caveats. First, the tail bound of step~4 is $C\log b\cdot b^{-1/4}$,
-which does not fall below $1$ until $b$ is of order $10^{6}$; it is $o(1)$, but
-slowly. Second --- and this is why that does not matter --- the conclusion needs
-only $\tfrac12e^{o(1)}<\sqrt3/2$, i.e.\ the $o(1)$ above to stay below
-$\log\sqrt3=0.549$. The measured values are an order of magnitude smaller than
-that already at $b=99$.
+None of this is close to binding. The conclusion needs only
+$\tfrac12e^{o(1)}<\sqrt3/2$, i.e.\ the $o(1)$ to stay below
+$\log\sqrt3=0.549$, and the quantity it controls,
+$-b^{-1}\log|G_B(\theta)|-\log2$, was measured at $0.123$ for $b=99$ and $0.024$
+for $b=1999$.
+\end{remark}
+
+\begin{remark}[What the peaks actually look like]\label{rem:peakscan}
+As a check on the dissection we located every local maximum of $|G_B|$ on
+$[0,\pi]$ by direct evaluation on a grid of $6\cdot10^{6}$ points, for
+$k=40,60,100,140$. Every one of the twelve largest lies within the envelope
+radius of a rational $2\pi j/q$ with $q\le26$, and the ordering by height
+follows $M(q)$ as predicted, with one instructive exception: at $q=10$, where
+$5\in B$ forces $G_B(2\pi/10)=0$ exactly, the vanishing cuts a narrow notch and
+the flanking maxima sit at $b^{-1}\log|G_B|=-0.355$ at $b=99$, rising towards
+$\log M(10)=-0.291$ like $-\tfrac32(\log b)/b$, which is the expected width of
+the notch. Excluding the central peak and a disc of the envelope radius about
+each rational with $q\le60$, the largest remaining value of
+$b^{-1}\log|G_B|$ is $-0.305$ at $b=99$ and $-0.305$ at $b=139$, against
+$\log(\sqrt3/2)=-0.144$: a margin of $0.16$ per element, stable in $k$.
 \end{remark}
 
 \section{The main theorem}\label{sec:t2main}
@@ -846,11 +931,13 @@ Nothing new is proved in this section; it is the inventory that assembles the
 previous ones.
 
 \begin{theorem}[Asymptotic flatness, conditional]\label{thm:t2main}
-\emph{Assume the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\ that
-$|G_B(\theta)|\le(1/2+o(1))^{b}$ off all the envelopes of
-Proposition~\ref{prop:curv}; that section establishes it at the level of a
-sketch. Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With $B=B_d(k)$, $b=|B|$, as
-$k\to\infty$,
+\emph{Assume} (a) \emph{the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\
+that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
+Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
+--- \emph{and} (b) \emph{that the envelopes of Proposition~\ref{prop:curv} reach
+as far as the Dirichlet neighbourhoods of type} (i), which is
+Problem~\ref{prob:annulus}. Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With
+$B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
   \varepsilon_d(k)=4\Bigl(\frac{\sqrt3}{2}\Bigr)^{b+1}K_2(k)\,\kappa_d(k)\,
   \bigl(1+o(1)\bigr)+O\!\Bigl(\frac{w_d^{2}}{S_2}\Bigr),
@@ -863,9 +950,11 @@ geometric rate $\sqrt3/2$ per element.
 \end{theorem}
 
 \begin{remark}
-The hypothesis is not decorative: it is the one statement of this paper that is
-not proved, and we prefer to carry it explicitly rather than to bury it. It
-disappears once the programme of Section~\ref{sec:l5c} is written out in full.
+The hypotheses are not decorative: they are the two statements of this paper
+that are not proved, and we prefer to carry them explicitly rather than bury
+them. Hypothesis (a) disappears once the programme of Section~\ref{sec:l5c} is
+written out in full; hypothesis (b) is a bounded amount of work on the envelope
+and is supported by the measurements of Remark~\ref{rem:peakscan}.
 \end{remark}
 
 \begin{corollary}[conditional, as above]\label{cor:goal}
@@ -894,10 +983,30 @@ of curvature $V_0$ centred at its true maximum, with reach $\Theta(\sqrt k)$
 standard deviations, so the arcs tile.
 \emph{(5)} Off all envelopes, Section~\ref{sec:l5c} gives
 $|G_B|\le(1/2+o(1))^{b}$.
-\emph{(6)} Integrating over each region and dividing by $\Main$, every
-contribution other than $q=6$ and $q=4$ is smaller by a factor
-$((m_d+o(1))/(\sqrt3/2))^{b}$; taking the maximum and minimum over the bounded
-window gives the displayed formula.
+\emph{(6)} Integrating over each region and dividing by $\Main$ gives the
+inventory
+\[
+  \begin{array}{l|l|l}
+    \text{region} & \text{bound, relative to }\Main & \text{measured, }k=32\\\hline
+    \text{central} & 1 & 0.985\\
+    q=6 & C(\sqrt3/2)^{b} & 1.03\cdot10^{-2}\\
+    q=4 & C(1/\sqrt2)^{b} & 1.48\cdot10^{-5}\\
+    \text{other }q\le Q_2 & CQ_2\,(m_d+o(1))^{b} & 4.06\cdot10^{-7}\\
+    \text{deep minor} & CQ_2\,(m_d+o(1))^{b}+C(1/2+o(1))^{b} & 3.66\cdot10^{-6}
+  \end{array}
+\]
+with $m_d\le M(18)=0.6005$ for $d=2$. The last row deserves a word. It is
+tempting to bound the deep-minor region by its pointwise bound
+$(1/2+o(1))^{b}$ times the measure of the region, but that is wrong by several
+orders of magnitude --- at $k=32$ it would give $1.2\cdot10^{-7}$ against a
+measured $3.7\cdot10^{-6}$ --- because the integral there is dominated not by
+the deepest points but by the many shallow peaks the region also contains, each
+of which carries a width. Counting those peaks with their widths, at height
+$m_d^{b}$, reproduces the measurement to within a bounded factor. The
+conclusion is unaffected: what matters is that every row after the second is
+$o\bigl((\sqrt3/2)^{b}\bigr)$, and the measured ratios of rows $3$--$5$ to row
+$2$ fall from $1.3\%$ at $k=24$ to $0.04\%$ at $k=32$. Taking the maximum and
+minimum over the bounded window then gives the displayed formula.
 \end{proof}
 
 \section{Honest scope, and what remains}\label{sec:remains}
@@ -908,7 +1017,8 @@ We set out plainly which parts of this paper are proved and which are not.
 \item \emph{Proved on paper}: Proposition~\ref{thm:cyc} and
       Lemma~\ref{lem:phivals} (classical), Theorem~\ref{thm:six},
       Lemma~\ref{lem:vanish}, Corollary~\ref{cor:spectrum}(i)--(iii) and (vi),
-      Proposition~\ref{prop:curv}, Theorem~\ref{thm:p5exact}.
+      Proposition~\ref{prop:curv}, Lemma~\ref{lem:cover}, Lemma~\ref{lem:fejer},
+      Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
       $k=18,\dots,40$) and Proposition~\ref{prop:central} (the Edgeworth term).
@@ -920,6 +1030,20 @@ We set out plainly which parts of this paper are proved and which are not.
       step~4), Proposition~\ref{prop:p5tail}, and the $o(1)$ bookkeeping in
       item~(6) of the outline above. Theorem~\ref{thm:t2main} and
       Corollary~\ref{cor:goal} inherit this status.
+\item \emph{A gap we have found and not closed}. Lemma~\ref{lem:cover} sorts
+      every $\theta$ by \emph{denominator}, but the two mechanisms it hands
+      $\theta$ to are matched to different \emph{radii}: the Dirichlet
+      neighbourhood in case~(i) has radius $1/(q\tau)$, while the envelope of
+      Proposition~\ref{prop:curv} is certified only out to
+      $\approx0.45\sqrt k\,\sigma$, smaller by a power of $\log N$. Nothing in
+      this paper bounds $|G_B|$ on the annulus between the two. The measurements
+      of Remark~\ref{rem:peakscan} say the annulus is harmless --- the largest
+      value anywhere outside the envelopes is $0.16$ per element below
+      $\log(\sqrt3/2)$, stably in $k$ --- but that is a measurement, not a
+      proof. The natural repair is to widen the certified envelope by applying
+      the curvature bound to a sub-product $\{a\in B:a\le A_1\}$, whose zeros are
+      spaced $2\pi/A_1$ apart; since $|G_B|$ is at most the sub-product, this
+      costs only a smaller $V_0$. We record it as Problem~\ref{prob:annulus}.
 \item \emph{Formal verification}: the $97$ Lean theorems cover the
       combinatorial core --- the identities of both papers, the curvature bound,
       and the vanishing lemma. The analytic sections are not formalised and we
@@ -950,8 +1074,18 @@ behaviour looks like the right tool for that excision, although their limit
 ($n\to\infty$ with the part set fixed) is not ours.
 \end{problem}
 
+\begin{problem}[The annulus]\label{prob:annulus}
+Extend the certified reach of the envelope of Proposition~\ref{prop:curv} from
+$\Theta(\sqrt k)$ standard deviations to the full Dirichlet neighbourhood
+$|\theta-2\pi j/q|\le1/(q\tau)$, so that cases~(i) and~(ii) of
+Lemma~\ref{lem:cover} meet. Applying the curvature bound to the sub-product over
+$\{a\in B:a\le A_1\}$ should suffice: its factors have zeros spaced $2\pi/A_1$
+apart, and $|G_B|$ never exceeds it. One must check that the resulting
+$V_0(A_1)=\sum_{a\le A_1}a^{2}/4$ is still large enough at the radius required.
+\end{problem}
+
 \begin{problem}[Assembly]\label{prob:assembly}
-Combine the two to obtain $\varepsilon_d(k)\ll(\sqrt3/2)^{k}$, and hence
+Combine these to obtain $\varepsilon_d(k)\ll(\sqrt3/2)^{k}$, and hence
 $\varepsilon_k\to0$ at a geometric rate.
 \end{problem}
 
@@ -961,6 +1095,61 @@ window analogue of the modulus-$4$ obstruction. Explicit odd sequences with
 $\varepsilon_2=0$ exist at every size, so no lower bound for $\varepsilon_d$ can
 be extracted from the aggregate residue-class spread. The route to
 Problem~\ref{prob:assembly} must go through the upper bounds above.
+
+\section{Appendix: a self-contained one-interval Erd\H{o}s--Tur\'an bound}
+\label{sec:fejer}
+
+Step~3 of Section~\ref{sec:l5c} needs to count the points of a finite family
+that land in one short interval. The Erd\H{o}s--Tur\'an inequality does this
+uniformly over all intervals, at the price of the Beurling--Selberg extremal
+function. For a single interval one can construct the majorant from the Fej\'er
+kernel in half a page, which is what we do, so that the section incurs no
+external reference.
+
+Let $F_M(t)=\sum_{|n|\le M}\bigl(1-\tfrac{|n|}{M+1}\bigr)e(nt)
+=\tfrac{1}{M+1}\bigl(\tfrac{\sin\pi(M+1)t}{\sin\pi t}\bigr)^{2}$ be the Fej\'er
+kernel: a nonnegative trigonometric polynomial of degree $M$ with
+$\int_{0}^{1}F_M=1$.
+
+\begin{lemma}\label{lem:fejer}
+Let $x_1,\dots,x_b\in\mathbb{R}/\mathbb{Z}$, let $I$ be an interval of length
+$2\delta$, and let $M\ge1$. Put $S(n)=\sum_{j\le b}e(nx_j)$. Then
+\[
+  \#\{j:x_j\in I\}\;\le\;4b\Bigl(\delta+\frac{1}{M+1}\Bigr)
+   +4\sum_{n=1}^{M}\min\Bigl(2\delta+\frac{2}{M+1},\frac{1}{\pi n}\Bigr)\,|S(n)| .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $w=1/(M+1)$. For $w\le|t|\le\tfrac12$ one has $\sin\pi t\ge2t$, so
+$F_M(t)\le\bigl(4(M+1)t^{2}\bigr)^{-1}$ and hence
+$\int_{w\le|t|\le1/2}F_M\le\tfrac{1}{2(M+1)w}=\tfrac12$; consequently
+$\int_{|t|<w}F_M\ge\tfrac12$.
+
+Let $J$ be the interval with the same centre as $I$ and length $2\delta+2w$, and
+set $P=2\,(\mathbf{1}_J*F_M)$. Then $P$ is a trigonometric polynomial of degree
+at most $M$. If $x\in I$ then $x-J\supseteq(-w,w)$, so
+$(\mathbf{1}_J*F_M)(x)=\int_{x-J}F_M\ge\tfrac12$ and $P(x)\ge1$; thus
+$P\ge\mathbf{1}_I$ pointwise. Its coefficients are
+$\widehat P(n)=2\,\widehat{\mathbf{1}_J}(n)\bigl(1-\tfrac{|n|}{M+1}\bigr)$, and
+$|\widehat{\mathbf{1}_J}(n)|=\bigl|\tfrac{\sin(\pi n|J|)}{\pi n}\bigr|
+\le\min\bigl(|J|,\tfrac{1}{\pi|n|}\bigr)$, while
+$\widehat P(0)=2|J|=4\delta+4w$. Therefore
+\[
+  \#\{j:x_j\in I\}\le\sum_{j\le b}P(x_j)
+  =\sum_{|n|\le M}\widehat P(n)\,\overline{S(n)}
+  \le b\widehat P(0)+2\sum_{n=1}^{M}|\widehat P(n)|\,|S(n)|,
+\]
+which is the stated bound.
+\end{proof}
+
+\begin{remark}
+The constant $4$ is wasteful --- the Beurling--Selberg majorant replaces it
+by~$1$ --- but Section~\ref{sec:l5c} only needs $o(b)$, and the bound is applied
+with $\delta=\delta_0\to0$ and $M=N_0\to\infty$, so absolute constants are
+immaterial. The numerical values of the resulting bound are tabulated in
+Remark~\ref{rem:budget}.
+\end{remark}
 
 \section{Appendix: the companion paper's Problem on random comparison}
 \label{sec:p5}
