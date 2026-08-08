@@ -262,6 +262,12 @@ Let $B_d$ be the set of primes in $(2d,x]$ and $b=|B_d|$. Then:
       whatsoever, since $|\cos(\pi a/4)|=1/\sqrt2$ for all odd $a$. This is the
       Fourier form of the modulus-$4$ obstruction of the companion paper.
 \item $|G_{B_d}(2\pi/(2p))|=0$ exactly, for every prime $p$ with $2d<p\le x$.
+      The vanishing is \emph{pointwise} and must not be read as the absence of a
+      peak: one factor is removed at one point, and the surrounding mass is
+      still $(M(2p)+o(1))^{b}$. The two maxima flanking the resulting notch sit
+      at height $(M(2p)+o(1))^{b}b^{-3/2}$, the notch having width $\asymp1/p$
+      --- see Remark~\ref{rem:notch}, where this is measured and matched against
+      Lemma~\ref{lem:annulus}.
 \item For the finitely many primes $p\le 2d$ the peak at $q=2p$ survives, at
       height $(M(2p)+o(1))^{b}\le(5^{1/4}/2+o(1))^{b}$ by the prime number
       theorem in arithmetic progressions.
@@ -883,8 +889,14 @@ Proposition~\ref{prop:curv}, which needs no arithmetic input at all.
 \begin{remark}[Numerical check of the budget]\label{rem:budget}
 The parameters are asymptotic and are meaningless at $b=23$, so we tested the
 steps above at $b$ up to $1999$, taking the worst of six sampled deep-minor
-$\theta$ at each size. Each evaluation is $O(bN_0)$. Writing $\mathrm{tail}$ for
-the step-4 bound $1/(N_0\delta_0)$:
+$\theta$ at each size. Each evaluation is $O(bN_0)$. One substitution is forced:
+the argument takes $N_0=(\log N)^{A'}$ with $A'=12$, which at $b=1999$ is about
+$2\cdot10^{10}$ and cannot be computed; the table therefore uses
+$N_0=(\log b)^{3}$, which is the same qualitative object --- a fixed power of a
+logarithm --- and is the smallest such choice for which the tail is already
+meaningful. Increasing the exponent only improves the tail and worsens the head,
+both monotonically, so the comparison with $b^{1/4}$ below is not sensitive to
+it. Writing $\mathrm{tail}$ for the step-4 bound $1/(N_0\delta_0)$:
 \[
   \begin{array}{l|cccc}
     b & 99 & 299 & 999 & 1999\\\hline
@@ -934,9 +946,9 @@ previous ones.
 \emph{Assume} (a) \emph{the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\
 that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
 Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
---- \emph{and} (b) \emph{that the envelopes of Proposition~\ref{prop:curv} reach
-as far as the Dirichlet neighbourhoods of type} (i), which is
-Problem~\ref{prob:annulus}. Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With
+--- \emph{and} (b) \emph{the annulus profile of Lemma~\ref{lem:annulus}}, which is
+stated there at the level of a design and tested numerically in
+Remark~\ref{rem:profile}. Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With
 $B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
   \varepsilon_d(k)=4\Bigl(\frac{\sqrt3}{2}\Bigr)^{b+1}K_2(k)\,\kappa_d(k)\,
@@ -992,10 +1004,14 @@ inventory
     q=6 & C(\sqrt3/2)^{b} & 1.03\cdot10^{-2}\\
     q=4 & C(1/\sqrt2)^{b} & 1.48\cdot10^{-5}\\
     \text{other }q\le Q_2 & CQ_2\,(m_d+o(1))^{b} & 4.06\cdot10^{-7}\\
+    q=2p,\ p\in B & CQ_2\,(M(2p)+o(1))^{b}b^{-3/2} & \text{---}\\
     \text{deep minor} & CQ_2\,(m_d+o(1))^{b}+C(1/2+o(1))^{b} & 3.66\cdot10^{-6}
   \end{array}
 \]
-with $m_d\le M(18)=0.6005$ for $d=2$. The last row deserves a word. It is
+with $m_d\le M(18)=0.6005$ for $d=2$. The row for $q=2p$ is there because the
+vanishing of Corollary~\ref{cor:spectrum}(iii) is pointwise: it contributes no
+mass at the rational itself but the notch is narrow and the flanking peaks
+are not removed (Remark~\ref{rem:notch}). The last row deserves a word. It is
 tempting to bound the deep-minor region by its pointwise bound
 $(1/2+o(1))^{b}$ times the measure of the region, but that is wrong by several
 orders of magnitude --- at $k=32$ it would give $1.2\cdot10^{-7}$ against a
@@ -1004,7 +1020,7 @@ the deepest points but by the many shallow peaks the region also contains, each
 of which carries a width. Counting those peaks with their widths, at height
 $m_d^{b}$, reproduces the measurement to within a bounded factor. The
 conclusion is unaffected: what matters is that every row after the second is
-$o\bigl((\sqrt3/2)^{b}\bigr)$, and the measured ratios of rows $3$--$5$ to row
+$o\bigl((\sqrt3/2)^{b}\bigr)$, and the measured ratios of rows $3$--$6$ to row
 $2$ fall from $1.3\%$ at $k=24$ to $0.04\%$ at $k=32$. Taking the maximum and
 minimum over the bounded window then gives the displayed formula.
 \end{proof}
@@ -1040,10 +1056,10 @@ We set out plainly which parts of this paper are proved and which are not.
       of Remark~\ref{rem:peakscan} say the annulus is harmless --- the largest
       value anywhere outside the envelopes is $0.16$ per element below
       $\log(\sqrt3/2)$, stably in $k$ --- but that is a measurement, not a
-      proof. The natural repair is to widen the certified envelope by applying
-      the curvature bound to a sub-product $\{a\in B:a\le A_1\}$, whose zeros are
-      spaced $2\pi/A_1$ apart; since $|G_B|$ is at most the sub-product, this
-      costs only a smaller $V_0$. We record it as Problem~\ref{prob:annulus}.
+      proof. The repair is Lemma~\ref{lem:annulus}, which replaces the question
+      rather than answering it: a profile bound valid at every distance makes
+      the matching of radii unnecessary. That lemma is stated as a design and
+      is Problem~\ref{prob:annulus}.
 \item \emph{Formal verification}: the $97$ Lean theorems cover the
       combinatorial core --- the identities of both papers, the curvature bound,
       and the vanishing lemma. The analytic sections are not formalised and we
@@ -1075,14 +1091,101 @@ behaviour looks like the right tool for that excision, although their limit
 \end{problem}
 
 \begin{problem}[The annulus]\label{prob:annulus}
-Extend the certified reach of the envelope of Proposition~\ref{prop:curv} from
-$\Theta(\sqrt k)$ standard deviations to the full Dirichlet neighbourhood
-$|\theta-2\pi j/q|\le1/(q\tau)$, so that cases~(i) and~(ii) of
-Lemma~\ref{lem:cover} meet. Applying the curvature bound to the sub-product over
-$\{a\in B:a\le A_1\}$ should suffice: its factors have zeros spaced $2\pi/A_1$
-apart, and $|G_B|$ never exceeds it. One must check that the resulting
-$V_0(A_1)=\sum_{a\le A_1}a^{2}/4$ is still large enough at the radius required.
+Prove Lemma~\ref{lem:annulus} below, which supersedes the question of extending
+the envelope: it bounds $|G_B|$ at \emph{every} distance from a low-denominator
+rational, so cases (i) and (ii) of Lemma~\ref{lem:cover} no longer have to meet
+at a common radius.
 \end{problem}
+
+\begin{lemma}[Annulus profile; \textup{design}]\label{lem:annulus}
+Let $q\le(\log N)^{A}$, let $\theta=2\pi j/q+t$ with $(j,q)=1$, and let
+$\Phi_q(x)=\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\,\frac{c_q(n)}{\varphi(q)}
+\bigl(\mathrm{Re}\,\widetilde I(nx)-1\bigr)$, where $c_q$ is the Ramanujan sum and
+$\widetilde I$ is the window of Appendix~\ref{sec:window}. Then
+\[
+  \tfrac1b\log|G_B(\theta)|\;\le\;\log M(q)+\Phi_q(N|t|)+o(1),
+\]
+where $\Phi_q(x)\to0$ as $x\to0$ and $\Phi_q(x)\to-\log2-\log M(q)$ as
+$x\to\infty$, so the bound interpolates between the peak height and the
+deep-minor bound of Section~\ref{sec:l5c}.
+\end{lemma}
+
+\noindent
+\emph{Design of the proof.} In the identity~\eqref{eq:fourier} split
+$S_B(n\theta)=\sum_{r\bmod q}e(nrj/q)\sum_{p\equiv r}e(pnt/2\pi)$. For
+$n\le N_0$ the phase $pnt$ makes at most $\mathrm{polylog}$ turns over
+$p\in[2d,N]$, so the prime number theorem in arithmetic progressions together
+with partial summation gives $\sum_{p\equiv r}e(pnt/2\pi)
+=(b/\varphi(q))\widetilde I(Nnt)+o(b/\varphi(q))$ uniformly in $r$. Summing over
+$r$ turns the character sum into $c_q(nj)=c_q(n)$, and the terms with $q\mid n$
+reassemble $\log M(q)$ while $|\widetilde I|\le\min(1,C/x)$ supplies the decay.
+The tail $n>N_0$ is the Abel summation of step~4 and the bad points are
+Lemma~\ref{lem:fejer}; the only new analytic ingredient is the uniformity of the
+partial summation in~(i).
+
+\begin{remark}[Numerical test of Lemma~\ref{lem:annulus}]\label{rem:profile}
+The profile is a prediction with no free parameters, so it can be falsified. We
+swept $t$ at $q=6$ for $k=40,60,100,140$ and compared the measured drop
+$\tfrac1b\log|G_B(2\pi/6+t)|-\tfrac1b\log|G_B(2\pi/6)|$ against
+$\Phi_6(Nt)$, computing the window exactly from $B$ rather than from its
+smooth approximation, so that only the decoupling of equidistribution from the
+$t$-oscillation is being tested. Over $36$ values of $x=Nt$ in $[0.25,40]$:
+\[
+  \begin{array}{l|cccc}
+    b & 39 & 59 & 99 & 139\\\hline
+    \text{max}|{\rm error}| & 0.107 & 0.082 & 0.054 & 0.059\\
+    \text{RMS error} & 0.0354 & 0.0370 & 0.0202 & 0.0186\\
+    \sqrt b\cdot\text{RMS} & 0.221 & 0.284 & 0.201 & 0.219
+  \end{array}
+\]
+The last row is flat, so the error is of the square-root size $b^{-1/2}$ one
+would expect, and it is an error in both directions --- the profile is an
+asymptotic equality, not a pointwise majorant, and the measurement exceeds it at
+about half the sample points. This is why the $o(1)$ in
+Lemma~\ref{lem:annulus} cannot be dropped. The saturation value is measured at
+$-0.52$ against the predicted $-\log2-\log M(6)=-0.549$, and at $x=0.25,1,1.75$
+the agreement at $b=139$ is $-0.00308$ versus $-0.00310$, $-0.05233$ versus
+$-0.05221$, $-0.18862$ versus $-0.18683$.
+\end{remark}
+
+\begin{remark}[The notch at $q=10$, and why it is a free test]\label{rem:notch}
+For $d=2$ one has $5\in B$, so $G_B(2\pi/10)=0$ exactly by
+Lemma~\ref{lem:vanish}. The vanishing is \emph{pointwise}: it removes one factor
+at one point and leaves the surrounding peak intact. Lemma~\ref{lem:annulus},
+applied to $B\smallsetminus\{5\}$ and multiplied by the explicit factor
+$|\cos(5\theta/2)|=|\sin(5t/2)|$, predicts the height of the two maxima flanking
+the notch with no free parameter. Maximising
+$b^{-1}\log|\sin(5t/2)|+\tfrac{b-1}{b}(\log M(10)+\Phi_{10}(Nt))$ gives
+\[
+  \begin{array}{l|cccc}
+    b & 39 & 59 & 99 & 139\\\hline
+    \text{measured} & -0.446 & -0.404 & -0.366 & -0.351\\
+    \text{predicted} & -0.429 & -0.394 & -0.361 & -0.345\\
+    \log M(10)-\tfrac32(\log b)/b & -0.432 & -0.394 & -0.360 & -0.344
+  \end{array}
+\]
+The third row is the closed form obtained by balancing $b^{-1}\log(5t/2)$
+against the quadratic part of $\Phi_{10}$; it agrees with the full profile to
+three decimals. So the flank height tends to $\log M(10)$ at the rate
+$\tfrac32(\log b)/b$, and since $M(10)=5^{1/4}/2>1/\sqrt2=M(4)$, the
+second-largest peak family for $d=2$ is asymptotically $q=10$ rather than $q=4$.
+It remains far below $\sqrt3/2$.
+\end{remark}
+
+\begin{remark}[A sub-product bound, and its range]\label{rem:subproduct}
+One can also try to widen the certified envelope directly, by applying
+Proposition~\ref{prop:curv} to the sub-product over $\{a\in B:a\le A_1\}$: its
+factors have zeros spaced $2\pi/A_1$ apart, and $|G_B|$ never exceeds it, so the
+only cost is the smaller curvature $V_0(A_1)=\sum_{a\le A_1}a^{2}/4$. The
+counting decides where this is useful. An annulus exists only for
+$q\lesssim(\log N)^{A}$, and there the admissible cutoff is
+$A_1\lesssim qN/(\log N)^{A}$, leaving $\pi(A_1)\approx bq/(\log N)^{A}$
+factors. For $q$ near the top of the band this is a positive proportion of $b$
+and the argument works; for small $q$ --- including $q=6$, the case that
+matters --- the exponent collapses by a factor $(\log N)^{A}$ and no bound of
+the form $(\text{const})^{b}$ survives. We record the device for the thin band
+where it applies and rely on Lemma~\ref{lem:annulus} elsewhere.
+\end{remark}
 
 \begin{problem}[Assembly]\label{prob:assembly}
 Combine these to obtain $\varepsilon_d(k)\ll(\sqrt3/2)^{k}$, and hence
@@ -1095,6 +1198,45 @@ window analogue of the modulus-$4$ obstruction. Explicit odd sequences with
 $\varepsilon_2=0$ exist at every size, so no lower bound for $\varepsilon_d$ can
 be extracted from the aggregate residue-class spread. The route to
 Problem~\ref{prob:assembly} must go through the upper bounds above.
+
+\section{Appendix: the window function}\label{sec:window}
+
+Lemma~\ref{lem:annulus} needs one elementary object: the Fourier transform of
+the interval $[0,N]$, normalised to $1$ at the origin.
+
+\begin{definition}
+$\displaystyle\widetilde I(x)=\frac1N\int_0^{N}e\Bigl(\frac{ux}{2\pi N}\Bigr)du
+ =\frac{e^{ix}-1}{ix}$, extended by $\widetilde I(0)=1$.
+\end{definition}
+
+\begin{lemma}\label{lem:window}
+$\widetilde I$ is continuous, $\widetilde I(0)=1$,
+$\mathrm{Re}\,\widetilde I(x)=\sin x/x$, and
+\[
+  |\widetilde I(x)|=\frac{2|\sin(x/2)|}{|x|}\le\min\Bigl(1,\frac{2}{|x|}\Bigr),
+  \qquad
+  \mathrm{Re}\,\widetilde I(x)=1-\frac{x^{2}}{6}+O(x^{4}) .
+\]
+\end{lemma}
+
+\begin{proof}
+$\int_0^{N}e^{iux/N}du=N(e^{ix}-1)/(ix)$; then
+$|e^{ix}-1|=2|\sin(x/2)|\le\min(|x|,2)$, and the expansion is that of
+$\sin x/x$.
+\end{proof}
+
+\begin{remark}
+The primes are not uniform on $[0,N]$ but have density $1/\log u$, so the
+window that actually occurs is
+$\widetilde I_{\log}(x)=b^{-1}\int_2^{N}e^{iux/N}\,du/\log u$. The second mean
+value theorem gives $|\widetilde I_{\log}(x)|\le\min(1,C\log N/|x|)$, which is
+the same shape with a $\log N$ in the constant; since $\Phi_q$ is only ever used
+through $|\widetilde I|\le\min(1,C/x)$, nothing downstream changes. In the
+numerical test of Remark~\ref{rem:profile} we did not use either approximation:
+the window was computed exactly as $b^{-1}\sum_{p\in B}e^{ipt}$, so that the
+only thing being tested was the decoupling of equidistribution from the
+oscillation in $t$.
+\end{remark}
 
 \section{Appendix: a self-contained one-interval Erd\H{o}s--Tur\'an bound}
 \label{sec:fejer}
