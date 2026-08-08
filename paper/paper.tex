@@ -913,22 +913,93 @@ truncated prime sequences, or a direct exponential-sum estimate of Vinogradov
 type for $r_{B_d}$.
 
 \begin{conjecture}[Ripple amplitude]\label{conj:ripple}
-For the sequence of odd primes, the relative amplitude of the period-$6$ ripple
-in $r_{B_d}$ is $\asymp(\sqrt3/2)^{|B_d|}$, and consequently
-$\varepsilon_d(k)\asymp(\sqrt3/2)^{k}$ for fixed $d$.
+For the odd primes and fixed $d\ge2$,
+\[
+  \frac{r_{B_d}(m)}{\mathrm{Main}(m)}-1
+  \;=\;2\Bigl(\tfrac{\sqrt3}{2}\Bigr)^{|B_d|+1}
+        \cos\Bigl(\tfrac{\pi m}{3}-\tfrac{\pi}{6}(c_1-c_5)\Bigr)
+        +o\bigl((\sqrt3/2)^{k}\bigr),
+\]
+where $\mathrm{Main}$ is the local-CLT Gaussian and
+$c_j=\#\{a\in B_d: a\equiv j\bmod 6\}$; consequently
+$\varepsilon_d(k)\asymp(\sqrt3/2)^{k}$.
 \end{conjecture}
 
-The heuristic of \S\ref{sec:flatness-measured}(i) predicts the constant
-$\sqrt3/2$, and the measurements of Table~\ref{tab:rates} agree to within
-$1.1\%$ with $R^2\ge0.98$. A proof would require evaluating the relevant
-character product exactly, and would give Problem~\ref{prob:flatness} for the
-primes with a geometric rate.
+The arithmetic input here is not conjectural. Write $\zeta=e^{2\pi i/6}$ and
+$F_B(z)=\prod_{a\in B}(1+z^{a})$, so the $r_B$ are the coefficients of $F_B$.
+
+\begin{proposition}[Character values]\label{prop:character}
+$|1+\zeta^{a}|$ depends only on $a\bmod6$, taking the values
+$2,\sqrt3,1,0,1,\sqrt3$ for $a\equiv0,\dots,5$. Hence if every element of $B$ is
+a prime $\ge5$ then $F_B(\zeta)=3^{|B|/2}e^{i(\pi/6)(c_1-c_5)}$, so that
+$|F_B(\zeta)|/2^{|B|}=(\sqrt3/2)^{|B|}$ \emph{exactly}; if $3\in B$ then
+$F_B(\zeta)=0$; and $F_B(-1)=0$ for any odd $B$, which is
+Theorem~\ref{thm:no-flat} in Fourier form.
+\end{proposition}
+
+\begin{proof}
+$|1+e^{i\pi a/3}|^{2}=2+2\cos(\pi a/3)$ takes the stated values. Every prime
+$\ge5$ is $\equiv\pm1\pmod6$ and $1+\zeta^{\pm1}=\sqrt3\,e^{\pm i\pi/6}$;
+multiplying gives the formula. For $a\equiv3$ the factor $1+\zeta^{3}$ vanishes,
+and $\zeta^{3}=-1$ gives the last claim.
+\end{proof}
+
+What remains conjectural is only the transfer from this Fourier datum to
+pointwise ratios. The exponent $|B_d|+1$ rather than $|B_d|$ comes from the
+width factor $\sqrt{V_0/V_6}=\sqrt3/2$ at the sub-arc, where
+$V_0=\tfrac14\sum a^{2}$ and $V_6=\tfrac14\sum a^{2}\sec^{2}(\pi a/6)
+=\tfrac13\sum a^{2}$. Extracting the period-$6$ Fourier component of
+$r_{B_d}/\mathrm{Main}-1$ numerically for $k\le28$ confirms both parts: the
+amplitude ratio to $2(\sqrt3/2)^{|B_d|+1}$ is
+$1.016,\,1.004,\,0.995,\,0.991,\,0.989$ at $k=20,\dots,28$, against
+$0.880,\dots,0.856$ for the exponent $|B_d|$, which drifts; and the measured
+phase agrees with $(\pi/6)(c_1-c_5)$ to four decimal places, including at
+$k=16$, where $c_1-c_5=-3$ moves the predicted phase to $-\pi/2$.
+
+\begin{conjecture}[Extremality of the modulus $6$]\label{conj:mod6}
+Let $M(q)$ denote the geometric mean of $|\cos(\pi r/q)|$ over $r$ coprime to
+$q$. Then $M(q)=\tfrac12|\Phi_q(-1)|^{1/\varphi(q)}$, where $\Phi_q$ is the
+$q$-th cyclotomic polynomial, and $\sup_{q\ge3}M(q)=\sqrt3/2$, attained only at
+$q=6$; the next largest value is $M(10)=5^{1/4}/2$. For a sequence
+equidistributed among the residues coprime to $q$, $M(q)$ is the decay rate of
+$|F_B(\zeta_q)|/2^{|B|}$, so $q=6$ is the slowest mode.
+\end{conjecture}
+
+The identity follows from $\prod_{r\perp q}(x-\zeta_q^{r})=\Phi_q(x)$ at $x=-1$
+together with $|1+\zeta_q^{r}|=2|\cos(\pi r/q)|$, and the supremum from the
+classical values $\Phi_q(-1)=p$ for $q=2p^{j}$, $2$ for $q=2^{j}$ with $j\ge2$,
+and $1$ otherwise; we have checked the identity numerically for $3\le q\le40$ to
+machine precision, obtaining $M(6)=0.866025$, $M(10)=0.747674$,
+$M(4)=0.707107$, $M(14)=0.691544$. This is the precise sense in which the bias
+of the primes modulo $6$, and no other congruence obstruction, governs the
+flatness.
 
 \begin{conjecture}[Oscillation]\label{conj:oscillation}
 The oscillation of $Q(k)$ for the primes observed in \S\ref{sec:oscillation} is
 caused by the ripple of Conjecture~\ref{conj:ripple} beating against
-$n=\lfloor T/2\rfloor$, and its sign is determined by $T\bmod6$.
+$n=\lfloor T/2\rfloor$. Precisely, writing $A_d,\varphi_d$ for the amplitude and
+phase in Conjecture~\ref{conj:ripple} and
+$P_d=\prod_{a\in I_d}(1+e^{-i\pi a/3})$,
+\[
+  \frac{\lm_A(n)}{\deg_A(n)}-W_D(A)\;\approx\;
+  \sum_{d\ge1}2^{-N(d)}\,\mathrm{Re}\Bigl[A_de^{-i\varphi_d}
+  \bigl(e^{i\pi(n+d)/3}+e^{i\pi(n-d-\sigma_d)/3}
+        -2e^{i\pi n/3}P_d2^{-N(d)}\bigr)\Bigr].
+\]
 \end{conjecture}
+
+Evaluating the right-hand side for $k\le26$ reproduces the sign of the observed
+deviation in $9$ of the $10$ cases (all but $k=8$) and its magnitude to within a
+factor $0.5$--$1.7$, with a systematic under-estimate of about $25\%$ that we
+attribute to higher-order sub-arc corrections. The stratum $d=2$ dominates, and
+$d=1$ contributes exactly zero because $3\in B_1$ forces $F_{B_1}(\zeta)=0$ by
+Proposition~\ref{prop:character} --- which also explains why $\varepsilon_1$ is
+two orders of magnitude below $\varepsilon_2$ in Table~\ref{tab:flatness}.
+
+We warn against the simpler guess that the sign is governed by $T\bmod6$ alone:
+for the primes $T\equiv2\pmod6$ throughout $k=8,\dots,14$ and $k=18,\dots,26$,
+yet the sign of the deviation alternates across that range. The dependence on
+$c_1-c_5$ and on $\sigma_d$ in the displayed formula is essential.
 
 \begin{problem}[Asymptotic smoothness of the primes]\label{prob:primes}
 Determine whether $\lm_{P_k}(n)/\lm_{R_k}(n)\to0$ as $k\to\infty$, where $P_k$
