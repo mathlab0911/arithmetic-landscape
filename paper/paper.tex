@@ -82,9 +82,9 @@ for the generating polynomial of the representation counts, we show that
 $|F_B(i)|=2^{|B|/2}$ exactly for \emph{every} odd sequence $B$ --- the
 modulus-$4$ character never degenerates, whereas the modulus-$6$ one vanishes
 as soon as $3\in B$. Consequently the representation counts are never
-equidistributed modulo $4$, with relative spread at least
-$2\sqrt2\cdot2^{-|B|/2}$, a bound that is attained: no odd sequence is flat
-beyond the scale $2^{-|B|/2}$. We also determine which congruence is
+equidistributed modulo $4$: the spread of the residue-class totals is
+determined exactly by the parity of $|B|$, and the relative spread is always at
+least $2\sqrt2\cdot2^{-|B|/2}$. We also determine which congruence is
 responsible: the geometric mean $M(q)$ of $|\cos(\pi r/q)|$ over $r$ coprime to
 $q$ equals $\tfrac12|\Phi_q(-1)|^{1/\varphi(q)}$, and $\sup_{q\ge3}M(q)=\sqrt3/2$
 is attained at $q=6$ alone. The primes, confined modulo $6$ to the two residues
@@ -235,19 +235,28 @@ coefficients of $F_B$, and let $R_c=\sum_{m\equiv c\,(4)}r_B(m)$.
 \begin{theoremE}[Universal obstruction; \S\ref{sec:floor}]
 For every finite sequence $B$ of odd positive integers, $|F_B(i)|=2^{|B|/2}$
 exactly, whatever the residues of the elements. Consequently the counts $R_c$
-are never all equal, and
+are never all equal; their spread is determined by the parity of $|B|$,
 \[
-  \frac{\max_c R_c-\min_c R_c}{\tfrac14\sum_c R_c}\;\ge\;2\sqrt2\cdot2^{-|B|/2},
+  \max_c R_c-\min_c R_c=2^{|B|/2}\ \ (|B|\text{ even}),
+  \qquad 2^{(|B|-1)/2}\ \ (|B|\text{ odd}),
 \]
-with equality attained. No odd sequence is flat beyond the scale $2^{-|B|/2}$.
+so the relative spread is always at least $2\sqrt2\cdot2^{-|B|/2}$.
 \end{theoremE}
 
 This is a lower bound, in contrast with Theorems~B--D, and it is elementary:
 $1+i^{a}=1\pm i$ has modulus $\sqrt2$ for \emph{every} odd $a$, so the
 modulus-$4$ character never degenerates. The modulus-$6$ character does: if
-$3\in B$ then $F_B(\zeta_6)=0$. The primes are therefore not the flattest odd
-sequences but among the least flat: their obstruction decays at rate
-$\sqrt3/2\approx0.866$, above the universal floor $1/\sqrt2\approx0.707$.
+$3\in B$ then $F_B(\zeta_6)=0$.
+
+The obstruction of Theorem~E is a statement about the distribution of $r_B$
+across residue classes modulo $4$, not about the pointwise flatness
+$\varepsilon_d$ of Theorem~D; we do not derive a lower bound for the latter,
+and \S\ref{sec:floor} explains why the transfer needs an input we do not have.
+Numerically, however, the two sit at the same scale for random odd sequences,
+whereas for the primes $\varepsilon_2$ exceeds the modulus-$4$ scale by two
+orders of magnitude at $k=32$: their obstruction decays at rate
+$\sqrt3/2\approx0.866$, against $1/\sqrt2\approx0.707$. In that sense the
+primes are not the flattest odd sequences but among the least flat.
 
 We emphasise what Theorem~D does \emph{not} assume. The statistical-mechanics
 treatment of the NPP proceeds through the annealed approximation, in which
@@ -721,28 +730,33 @@ $F_B(z)=\prod_{a\in B}(1+z^{a})$ and set $b=|B|$ and
 $R_c=\sum_{m\equiv c\,(4)}r_B(m)$ for $c\in\mathbb{Z}/4$.
 
 \begin{theorem}[Universal modulus-$4$ obstruction]\label{thm:floor}
-Let $B$ be any finite sequence of odd positive integers. Then
+Let $B$ be any finite sequence of odd positive integers, $b=|B|$. Then
 \begin{enumerate}
 \item $|F_B(i)|=2^{b/2}$, exactly, independently of the residues of the elements
-      of $B$; in particular $F_B(i)\ne0$.
-\item Writing $F_B(i)=2^{b/2}e^{i\varphi}$,
+      of $B$; in particular $F_B(i)\ne0$. More precisely
+      $F_B(i)=2^{b/2}e^{i\pi(p-q)/4}$ where $p=\#\{a\in B:a\equiv1\,(4)\}$ and
+      $q=\#\{a\in B:a\equiv3\,(4)\}$.
+\item The spread of the residue-class totals is given \emph{exactly} by the
+      parity of $b$:
       \[
-        \max_c R_c-\min_c R_c\;=\;2^{b/2}\max\bigl(|\cos\varphi|,|\sin\varphi|\bigr)
-        \;\ge\;2^{(b-1)/2}.
+        \max_c R_c-\min_c R_c=
+        \begin{cases} 2^{b/2} & b \text{ even},\\[2pt] 2^{(b-1)/2} & b \text{ odd}.\end{cases}
       \]
-\item Since $\sum_c R_c=2^{b}$, the relative spread satisfies
+\item Since $\sum_c R_c=2^{b}$, the relative spread equals $4\cdot2^{-b/2}$ for
+      $b$ even and $2\sqrt2\cdot2^{-b/2}$ for $b$ odd; in either case
       \[
-        \frac{\max_c R_c-\min_c R_c}{\frac14\sum_c R_c}\;\ge\;2\sqrt2\cdot2^{-b/2},
+        \frac{\max_c R_c-\min_c R_c}{\frac14\sum_c R_c}\;\ge\;2\sqrt2\cdot2^{-b/2}.
       \]
-      and the constant $2\sqrt2$ is attained.
 \end{enumerate}
-\textup{(Lean: \Lean{normSq\_one\_add\_I\_pow\_odd}, \Lean{spread\_lower\_bound}.)}
+\textup{(Lean: \Lean{normSq\_one\_add\_I\_pow\_odd}, \Lean{max\_abs\_cos\_sin\_sq\_ge},
+\Lean{spread\_lower\_bound} give (i) and the inequality in (iii).)}
 \end{theorem}
 
 \begin{proof}
-(i) For odd $a$ we have $i^{a}=\pm i$, so $1+i^{a}=1\pm i$ and
-$|1+i^{a}|=\sqrt2$ regardless of $a\bmod4$. Multiplying over $B$ gives
-$|F_B(i)|=2^{b/2}$.
+(i) For odd $a$ we have $i^{a}=\pm i$, so $1+i^{a}$ is $1+i$ or $1-i$ according
+as $a\equiv1$ or $3\pmod4$; both have modulus $\sqrt2$, and
+$1\pm i=\sqrt2\,e^{\pm i\pi/4}$. Multiplying over $B$ gives
+$F_B(i)=2^{b/2}e^{i\pi(p-q)/4}$.
 
 (ii) By discrete Fourier inversion on $\mathbb{Z}/4$,
 \[
@@ -750,16 +764,25 @@ $|F_B(i)|=2^{b/2}$.
      =\tfrac14\Bigl(2^{b}+2\,\mathrm{Re}\bigl(i^{-c}F_B(i)\bigr)\Bigr),
 \]
 because $F_B(1)=2^{b}$ and $F_B(-1)=\prod_{a\in B}(1+(-1)^{a})=0$, every $a$
-being odd. As $c$ runs over $\mathbb{Z}/4$ the quantity
+being odd. Writing $\varphi=\pi(p-q)/4$, the quantity
 $\mathrm{Re}(i^{-c}F_B(i))/2^{b/2}$ runs over
-$\{\cos\varphi,\sin\varphi,-\cos\varphi,-\sin\varphi\}$, whose maximum is
-$\max(|\cos\varphi|,|\sin\varphi|)\ge1/\sqrt2$ and whose minimum is its
-negative. The stated identity and bound follow.
+$\{\cos\varphi,\sin\varphi,-\cos\varphi,-\sin\varphi\}$ as $c$ runs over
+$\mathbb{Z}/4$, so the spread is $2^{b/2}\cdot2\max(|\cos\varphi|,|\sin\varphi|)/2$.
+By (i) $\varphi$ is a multiple of $\pi/4$, and $p+q=b$ forces
+$p-q\equiv b\pmod2$. If $b$ is even then $\varphi$ is a multiple of $\pi/2$ and
+$\max(|\cos\varphi|,|\sin\varphi|)=1$; if $b$ is odd then $\varphi$ is an odd
+multiple of $\pi/4$ and the maximum is $1/\sqrt2$. This gives the two cases.
 
-(iii) Divide by $\tfrac14\sum_cR_c=2^{b-2}$. Equality in (ii) occurs when
-$\varphi$ is an odd multiple of $\pi/4$; for instance $B=(1,3,5,\dots,29)$
-realises it.
+(iii) Divide by $\tfrac14\sum_cR_c=2^{b-2}$.
 \end{proof}
+
+The identity in (ii) is worth emphasising: the spread is not merely bounded
+below, it is \emph{determined}, and only by the parity of $b$ --- the residues
+of the individual elements are irrelevant. We have checked it numerically for
+the truncated prime sequences and for random odd sequences up to $k=32$, where
+the ratio of the measured relative spread to $2\sqrt2\cdot2^{-b/2}$ is exactly
+$1$ when $b$ is odd and exactly $\sqrt2$ when $b$ is even, with no intermediate
+values.
 
 Two remarks. First, the vanishing $F_B(-1)=0$ used in the proof is
 Theorem~\ref{thm:no-flat} (no flat edges) in Fourier form, so the parity
@@ -769,12 +792,41 @@ modulus-$4$ obstruction.
 Second, the contrast with the modulus $6$ is the point. The factor
 $1+\zeta_6^{a}$ \emph{can} vanish, namely when $a\equiv3\pmod6$, and then the
 whole modulus-$6$ mode disappears. The factor $1+i^{a}$ never vanishes for odd
-$a$. Hence flatness beyond the scale $2^{-b/2}$ is impossible for any odd
-sequence, whereas the modulus-$6$ obstruction of the primes, decaying at rate
-$\sqrt3/2\approx0.866$, sits \emph{above} the universal floor
-$1/\sqrt2\approx0.707$. In this sense the primes are not the flattest odd
-sequences but among the least flat, and $\varepsilon_k\to0$ --- if true --- can
-hold at best geometrically, never faster than $2^{-k/2}$.
+$a$: the modulus-$4$ obstruction is present in every odd sequence, and by (ii)
+its size is the same for all of them.
+
+\subsubsection*{What Theorem~\ref{thm:floor} does and does not say}
+
+We must be careful about which quantity is being bounded, and we state the
+limitation explicitly because it is easy to overread the theorem.
+
+Theorem~\ref{thm:floor} concerns the \emph{aggregate} counts
+$R_c=\sum_{m\equiv c\,(4)}r_B(m)$, sums over full residue classes. The quantity
+appearing in Theorem~\ref{thm:sandwich} is different: $\varepsilon_d$ is a
+\emph{pointwise} oscillation over the bounded window $\mathrm{Win}_d$. The
+former is a statement about the global distribution of $r_B$ modulo $4$; the
+latter about its behaviour on $O(1)$ many points. Neither implies the other
+formally, and we do not claim a lower bound for $\varepsilon_d$.
+
+What we can say is that the two live at the same scale, and that the numerics
+bear this out. Write $L(b)=2\sqrt2\cdot2^{-b/2}$ for the quantity in (iii).
+For random odd sequences the measured $\varepsilon_2$ satisfies
+$\varepsilon_2/L(b)\in[0.85,1.77]$ over $k=16,\dots,32$, hovering about $1$ ---
+and note that it dips \emph{below} $1$ at $k=24$, which is possible precisely
+because $L$ bounds the aggregate spread and not $\varepsilon_2$. For the primes,
+by contrast, $\varepsilon_2/L(b)$ grows from $11.7$ at $k=16$ to $293.8$ at
+$k=32$, since the modulus-$6$ obstruction decays at rate
+$\sqrt3/2\approx0.866$ against the modulus-$4$ rate
+$1/\sqrt2\approx0.707$.
+
+So the informal reading is: random odd sequences are about as flat as the
+modulus-$4$ obstruction permits, and the primes are two orders of magnitude
+less flat than that, for the arithmetic reason isolated in
+Proposition~\ref{prop:mod6}. Making the first half of that sentence a theorem
+--- a genuine lower bound for $\varepsilon_d$ --- requires transferring
+Theorem~\ref{thm:floor} from residue classes to bounded windows, which needs
+the local central limit theorem of Conjecture~\ref{conj:ripple}. We record it
+as Problem~\ref{prob:window-floor}.
 
 \subsection{Flatness measured}\label{sec:flatness-measured}
 
@@ -1031,6 +1083,17 @@ the logarithmic scale and does not suffice}, since flatness is a statement about
 asymptotic with the pre-exponential factor for distinct-prime partitions of
 truncated prime sequences, or a direct exponential-sum estimate of Vinogradov
 type for $r_{B_d}$.
+
+\begin{problem}[From residue classes to windows]\label{prob:window-floor}
+Transfer Theorem~\ref{thm:floor} from the aggregate counts $R_c$ to the bounded
+windows $\mathrm{Win}_d$: show that $\varepsilon_d\gg2^{-|B_d|/2}$ for every odd
+sequence, or exhibit a sequence whose window flatness beats the modulus-$4$
+scale. The numerics of \S\ref{sec:floor} suggest the former, with the two
+quantities agreeing to within a factor $2$ for random sequences; a proof
+appears to need the local central limit theorem of
+Conjecture~\ref{conj:ripple}, since a bound on residue-class totals says
+nothing directly about $O(1)$ many points.
+\end{problem}
 
 \begin{conjecture}[Ripple amplitude]\label{conj:ripple}
 For the odd primes and fixed $d\ge2$,
