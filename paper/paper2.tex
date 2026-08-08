@@ -801,12 +801,19 @@ $\|p\theta/2\pi-\tfrac12\|<\delta_0$.
       handled in \S\ref{sec:vanish} and \S\ref{sec:l5a}, where the cyclotomic
       constants $M(q)$ give the bound directly and no exponential sum is needed
       at all. On this range Vaughan's identity gives
-      $S_B(\alpha)=\sum_{p\in B}e(p\alpha)\ll
-      \bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr)(\log N)^{4}$, hence
-      $S_B\ll N(\log N)^{4-A/2}$. Since $\pi(N)\asymp N/\log N$, this is
-      $o(\pi(N))$ as soon as $A>10$; $A$ is ours to choose, and Siegel--Walfisz
-      holds for every fixed $A$, so we fix $A=11$ once and for all. A log-free
-      version valid on a wider range of $q$ is available in~\cite{Sr25}. Summing
+      \[
+        S_B(\alpha)=\sum_{p\in B}e(p\alpha)\ll(\log N)^{3}
+        \bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr),
+      \]
+      valid whenever $1\le q_n\le N$, $(a,q_n)=1$ and $|q_n\alpha-a|\le
+      q_n^{-1}$; this is Lemma~3.1 of Kumchev's survey~\cite{Ku05}, where it is
+      attributed to Vaughan as the sharpest form of Vinogradov's 1937 estimate.
+      Our Dirichlet parameter gives $|q_n\alpha-a|\le1/\tau\le1/q_n$, so the
+      hypotheses hold. Hence $S_B\ll N(\log N)^{3-A/2}$, which, since
+      $\pi(N)\asymp N/\log N$, is $o(\pi(N))$ as soon as $A>8$; $A$ is ours to
+      choose and Siegel--Walfisz holds for every fixed $A$, so we fix $A=11$
+      once and for all. A log-free version valid on a wider range of $q$ is
+      available in~\cite{Sr25}. Summing
       the head, $\sum_{n\le N_0}|S_B(n\theta)|/n\le(\log
       N_0)\max_n|S_B(n\theta)|$, gives $o(b)$; note that $\log N_0=A'\log\log N$,
       so enlarging $N_0$ from $b^{1/4}$ to $(\log N)^{A'}$ costs the head only a
@@ -946,9 +953,10 @@ previous ones.
 \emph{Assume} (a) \emph{the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\
 that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
 Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
---- \emph{and} (b) \emph{the annulus profile of Lemma~\ref{lem:annulus}}, which is
-stated there at the level of a design and tested numerically in
-Remark~\ref{rem:profile}. Fix $d\ge2$ and let $n=\lfloor T/2\rfloor$. With
+--- \emph{and} (b) \emph{that $\Phi_q<0$ on the compact range of
+Problem~\ref{prob:annulus}} --- the rest of the annulus is now covered by
+Lemma~\ref{lem:annulus}, which is proved. Fix $d\ge2$ and let
+$n=\lfloor T/2\rfloor$. With
 $B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
   \varepsilon_d(k)=4\Bigl(\frac{\sqrt3}{2}\Bigr)^{b+1}K_2(k)\,\kappa_d(k)\,
@@ -1034,6 +1042,7 @@ We set out plainly which parts of this paper are proved and which are not.
       Lemma~\ref{lem:phivals} (classical), Theorem~\ref{thm:six},
       Lemma~\ref{lem:vanish}, Corollary~\ref{cor:spectrum}(i)--(iii) and (vi),
       Proposition~\ref{prop:curv}, Lemma~\ref{lem:cover}, Lemma~\ref{lem:fejer},
+      Lemma~\ref{lem:window}, Lemma~\ref{lem:twist}, Lemma~\ref{lem:annulus},
       Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
@@ -1057,9 +1066,10 @@ We set out plainly which parts of this paper are proved and which are not.
       value anywhere outside the envelopes is $0.16$ per element below
       $\log(\sqrt3/2)$, stably in $k$ --- but that is a measurement, not a
       proof. The repair is Lemma~\ref{lem:annulus}, which replaces the question
-      rather than answering it: a profile bound valid at every distance makes
-      the matching of radii unnecessary. That lemma is stated as a design and
-      is Problem~\ref{prob:annulus}.
+      rather than answering it: a profile valid at every distance makes the
+      matching of radii unnecessary. That lemma is now proved; what survives of
+      the gap is the sign of $\Phi_q$ on one compact range of $x$, which is
+      Problem~\ref{prob:annulus} and is a finite computation.
 \item \emph{Formal verification}: the $97$ Lean theorems cover the
       combinatorial core --- the identities of both papers, the curvature bound,
       and the vanishing lemma. The analytic sections are not formalised and we
@@ -1091,37 +1101,115 @@ behaviour looks like the right tool for that excision, although their limit
 \end{problem}
 
 \begin{problem}[The annulus]\label{prob:annulus}
-Prove Lemma~\ref{lem:annulus} below, which supersedes the question of extending
-the envelope: it bounds $|G_B|$ at \emph{every} distance from a low-denominator
-rational, so cases (i) and (ii) of Lemma~\ref{lem:cover} no longer have to meet
-at a common radius.
+Show that $\Phi_q(x)<0$ for $\;0<x\le2\pi^{2}/\bigl(3\log(2M(q))\bigr)$ and
+every $q\le(\log N)^{A}$, closing the compact range left open in
+Remark~\ref{rem:profileuse}. The series defining $\Phi_q$ converges absolutely
+there and contains no arithmetic beyond the Ramanujan sums, so this is a finite
+rigorous computation rather than a theorem in wait of an idea.
 \end{problem}
 
-\begin{lemma}[Annulus profile; \textup{design}]\label{lem:annulus}
+\begin{lemma}[Twisted sums, uniformly]\label{lem:twist}
+Let $q\le(\log N)^{A}$, let $r$ be coprime to $q$, let $n\le N_0$ and let
+$|t|\le1/(q\tau)$. Then
+\[
+  \sum_{\substack{p\in B\\ p\equiv r\ (q)}}e(pnt)
+  \;=\;\frac{1}{\varphi(q)}\sum_{p\in B}e(pnt)
+   \;+\;O\!\bigl(N e^{-c\sqrt{\log N}}(\log N)^{A+A'}\bigr),
+\]
+uniformly in $t$, $n$ and $r$.
+\end{lemma}
+
+\begin{proof}
+Put $f(u)=e(unt)$, $F(u)=\#\{p\in B:p\le u,\ p\equiv r\ (q)\}$ and
+$G(u)=\#\{p\in B:p\le u\}$. Abel summation gives
+$\sum_{p\equiv r}e(pnt)=f(N)F(N)-\int_{2d}^{N}F(u)f'(u)\,du$ and the same
+identity with $G/\varphi(q)$ in place of $F$. Subtracting and writing
+$E(u)=F(u)-G(u)/\varphi(q)$,
+\[
+  \Bigl|\sum_{p\equiv r}e(pnt)-\frac{1}{\varphi(q)}\sum_{p}e(pnt)\Bigr|
+  \;\le\;|E(N)|+\int_{2d}^{N}|E(u)|\,|f'(u)|\,du
+  \;\le\;E^{*}\bigl(1+2\pi N|nt|\bigr),
+\]
+since $|f'(u)|=2\pi|nt|$. Two inputs finish it. First, $E^{*}=\sup_{u\le
+N}|E(u)|\ll Ne^{-c\sqrt{\log u}}$ uniformly for $q\le(\log N)^{A}$, by the
+Siegel--Walfisz theorem applied to $\pi(u;q,r)$ and the prime number theorem
+applied to $\pi(u)$: both have main term $\mathrm{li}(u)/\varphi(q)$ and
+$\mathrm{li}(u)$ respectively, and these cancel in $E$. Second,
+$|t|\le1/(q\tau)=(\log N)^{A}/(qN)$ and $n\le N_0=(\log N)^{A'}$ give
+$N|nt|\le(\log N)^{A+A'}/q$.
+\end{proof}
+
+\begin{remark}
+It is worth keeping the Siegel--Walfisz saving in the form
+$e^{-c\sqrt{\log N}}$ rather than converting it to $(\log N)^{-C}$ for some
+fixed $C$. The assembly below multiplies the error by $\varphi(q)\le(\log
+N)^{A}$, sums it against $\sum_{n\le N_0}1/n$, and compares it with
+$b/N_0\gg N(\log N)^{-1-A'}$; a fixed power of $\log N$ would have to be chosen
+larger than $2(A+A')+1$, which with $A=11$, $A'=12$ means $C>47$. Carrying
+$e^{-c\sqrt{\log N}}$, which beats every power of $\log N$, removes the
+bookkeeping entirely.
+\end{remark}
+
+\begin{lemma}[Annulus profile]\label{lem:annulus}
 Let $q\le(\log N)^{A}$, let $\theta=2\pi j/q+t$ with $(j,q)=1$, and let
 $\Phi_q(x)=\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\,\frac{c_q(n)}{\varphi(q)}
 \bigl(\mathrm{Re}\,\widetilde I(nx)-1\bigr)$, where $c_q$ is the Ramanujan sum and
 $\widetilde I$ is the window of Appendix~\ref{sec:window}. Then
 \[
-  \tfrac1b\log|G_B(\theta)|\;\le\;\log M(q)+\Phi_q(N|t|)+o(1),
+  \tfrac1b\log|G_B(\theta)|\;=\;\log M(q)+\Phi_q(N|t|)+o(1),
 \]
-where $\Phi_q(x)\to0$ as $x\to0$ and $\Phi_q(x)\to-\log2-\log M(q)$ as
-$x\to\infty$, so the bound interpolates between the peak height and the
-deep-minor bound of Section~\ref{sec:l5c}.
+an \emph{equality}, where $\Phi_q(x)\to0$ as $x\to0$ and
+$\Phi_q(x)\to-\log2-\log M(q)$ as $x\to\infty$, so the profile interpolates
+between the peak height and the deep-minor bound of Section~\ref{sec:l5c}.
 \end{lemma}
 
-\noindent
-\emph{Design of the proof.} In the identity~\eqref{eq:fourier} split
-$S_B(n\theta)=\sum_{r\bmod q}e(nrj/q)\sum_{p\equiv r}e(pnt/2\pi)$. For
-$n\le N_0$ the phase $pnt$ makes at most $\mathrm{polylog}$ turns over
-$p\in[2d,N]$, so the prime number theorem in arithmetic progressions together
-with partial summation gives $\sum_{p\equiv r}e(pnt/2\pi)
-=(b/\varphi(q))\widetilde I(Nnt)+o(b/\varphi(q))$ uniformly in $r$. Summing over
-$r$ turns the character sum into $c_q(nj)=c_q(n)$, and the terms with $q\mid n$
-reassemble $\log M(q)$ while $|\widetilde I|\le\min(1,C/x)$ supplies the decay.
-The tail $n>N_0$ is the Abel summation of step~4 and the bad points are
-Lemma~\ref{lem:fejer}; the only new analytic ingredient is the uniformity of the
-partial summation in~(i).
+\begin{proof}
+In~\eqref{eq:fourier} write $\theta=2\pi j/q+t$ and split the inner sum by
+residue class, $S_B(n\theta)=\sum_{r\bmod q}e(nrj/q)\sum_{p\equiv
+r}e(pnt)$. The classes with $(r,q)>1$ contain at most $\omega(q)$ primes in
+total, so they contribute $O(\omega(q))=O(\log\log N)$. To the remaining
+$\varphi(q)$ classes apply Lemma~\ref{lem:twist}; the errors add to
+$\varphi(q)\cdot O(Ne^{-c\sqrt{\log N}}(\log N)^{A+A'})
+\ll Ne^{-c\sqrt{\log N}}(\log N)^{2A+A'}=o(b/N_0)$, and the main terms
+assemble as
+\[
+  S_B(n\theta)=\frac{c_q(nj)}{\varphi(q)}\sum_{p\in B}e(pnt)+o(b/N_0)
+  =\frac{c_q(n)}{\varphi(q)}\,b\,\widetilde I(Nnt)+o(b/N_0),
+\]
+using $(j,q)=1$ to replace $c_q(nj)$ by $c_q(n)$. Summing over $n\le N_0$
+against $1/n$ multiplies the error by $O(\log N_0)$ and leaves $o(b)$. The tail
+$n>N_0$ is the Abel summation of step~4 of Section~\ref{sec:l5c}, and the points
+where the series must be truncated are counted by Lemma~\ref{lem:fejer}. What
+remains is $-b\log2+b\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\frac{c_q(n)}{\varphi(q)}
+\mathrm{Re}\,\widetilde I(Nnt)$, which is $b(\log M(q)+\Phi_q(N|t|))$ by the
+definition of $\Phi_q$ and the cyclotomic identity
+$-\log2+\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\frac{c_q(n)}{\varphi(q)}=\log M(q)$ at
+$t=0$.
+\end{proof}
+
+\begin{remark}[How the profile may and may not be used]\label{rem:profileuse}
+Lemma~\ref{lem:annulus} is an asymptotic equality, and the $o(1)$ is two-sided:
+Remark~\ref{rem:profile} finds the measurement above the profile at about half
+the sampled points. To use it as an upper bound one needs
+$\Phi_q(x)\le-c<0$ for $x$ beyond the reach of the envelope. Writing
+$\Phi_q(x)=R_q(x)-\log(2M(q))$ with
+$R_q(x)=\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\frac{c_q(n)}{\varphi(q)}
+\mathrm{Re}\,\widetilde I(nx)$, the bound $|\mathrm{Re}\,\widetilde
+I|\le\min(1,2/x)$ of Lemma~\ref{lem:window} together with
+$|c_q(n)|\le\varphi(q)$ gives $|R_q(x)|\le\tfrac{\pi^{2}}{3x}$, hence
+\[
+  \Phi_q(x)\le-\tfrac12\log(2M(q))\quad\text{for}\quad
+  x\ge\frac{2\pi^{2}}{3\log(2M(q))},
+\]
+which is $x\ge12.0$ for $q=6$, $x\ge16.4$ for $q=10$ and $x\ge19.0$ for $q=4$.
+The envelope of Proposition~\ref{prop:curv} reaches only $x=N|t|\approx1.5$.
+\emph{The compact range in between is covered by neither.} It is a much smaller
+gap than the one it replaces --- the series is absolutely convergent there, with
+no arithmetic content, so a rigorous finite computation settles it --- but we do
+not claim it. Numerically $\Phi_6$ is $-0.144$ at $x=1.5$, $-0.314$ at $x=2$ and
+below $-0.549$ from $x=3$ onwards, so the profile does not return to zero; we
+record the statement as Problem~\ref{prob:annulus}.
+\end{remark}
 
 \begin{remark}[Numerical test of Lemma~\ref{lem:annulus}]\label{rem:profile}
 The profile is a prediction with no free parameters, so it can be falsified. We
@@ -1427,6 +1515,13 @@ H.~A.~Helfgott,
 F.~F.~Ferreira and J.~F.~Fontanari,
 \emph{Probabilistic analysis of the number partitioning problem},
 J. Phys. A \textbf{31} (1998), 3417--3428.
+
+\bibitem[Ku05]{Ku05}
+A.~V.~Kumchev,
+\emph{An invitation to additive prime number theory},
+Serdica Math.\ J.\ \textbf{31} (2005), 1--74;
+\href{https://tigerweb.towson.edu/akumchev/a17.pdf}{open access}.
+Lemma~3.1 is the bound we use.
 
 \bibitem[Sr25]{Sr25}
 P.~Srivastav,
