@@ -37,6 +37,8 @@
 \renewcommand{\thetheoremC}{}
 \newtheorem{theoremD}{Theorem D}
 \renewcommand{\thetheoremD}{}
+\newtheorem{theoremE}{Theorem E}
+\renewcommand{\thetheoremE}{}
 
 \DeclareMathOperator{\lm}{lm}
 \DeclareMathOperator{\gs}{gs}
@@ -73,12 +75,28 @@ a factor $1+\varepsilon$ on an explicit window, then
 \frac{W_D(A)}{1+\varepsilon}\;\le\;\frac{\lm_A(n)}{\deg_A(n)}\;\le\;(1+\varepsilon)\,W_D(A).
 \]
 This replaces the annealed (independence) approximation standard in the
-statistical-mechanics literature by a finite, checkable hypothesis. We compute
-$\varepsilon$ exactly for $k\le24$: for the odd primes it decays geometrically
-at rate $\approx\sqrt3/2$, matching to within $1\%$ a prediction derived from
-the bias of primes modulo $6$, while for random odd sequences it decays
-strictly faster. Over $100$ random sequences per $k\in\{8,12,16,18,20\}$ we
-find $(\lm/\deg)/\Gamma\to1$ with standard deviation $0.0067$ at $k=20$ and
+statistical-mechanics literature by a finite, checkable hypothesis.
+
+We complement it with a lower bound. Writing $F_B(z)=\prod_{a\in B}(1+z^{a})$
+for the generating polynomial of the representation counts, we show that
+$|F_B(i)|=2^{|B|/2}$ exactly for \emph{every} odd sequence $B$ --- the
+modulus-$4$ character never degenerates, whereas the modulus-$6$ one vanishes
+as soon as $3\in B$. Consequently the representation counts are never
+equidistributed modulo $4$, with relative spread at least
+$2\sqrt2\cdot2^{-|B|/2}$, a bound that is attained: no odd sequence is flat
+beyond the scale $2^{-|B|/2}$. We also determine which congruence is
+responsible: the geometric mean $M(q)$ of $|\cos(\pi r/q)|$ over $r$ coprime to
+$q$ equals $\tfrac12|\Phi_q(-1)|^{1/\varphi(q)}$, and $\sup_{q\ge3}M(q)=\sqrt3/2$
+is attained at $q=6$ alone. The primes, confined modulo $6$ to the two residues
+realising this maximum, sit at rate $\sqrt3/2\approx0.866$ --- above the
+universal floor $1/\sqrt2\approx0.707$, so they are among the \emph{least} flat
+odd sequences rather than the flattest.
+
+We compute $\varepsilon$ exactly for $k\le32$: for the odd primes it decays
+geometrically at rate $\approx\sqrt3/2$, matching the modulus-$6$ prediction to
+within $1\%$, while for random odd sequences it decays strictly faster. Over
+$100$ random sequences per $k\in\{8,12,16,18,20\}$ we find
+$(\lm/\deg)/\Gamma\to1$ with standard deviation $0.0067$ at $k=20$ and
 $R^2=0.999$. A partial-correlation analysis shows that $\Gamma$ subsumes the
 coefficient of variation of the weights, the statistic previously proposed for
 this role by Alyahya and Rowe.
@@ -209,6 +227,27 @@ $\{n-\sigma(J):J\subseteq I_d\}\cup\{n+d,\;n-d-\sigma(I_d)\}$. Then
 Combining Theorems~B and~D, $\lm/\deg$ is pinned to $\Gamma(A)$ with a
 multiplicative error controlled by a single, explicitly computable number
 $\varepsilon$.
+
+The flatness $\varepsilon$ cannot be made to vanish arbitrarily fast. Write
+$F_B(z)=\prod_{a\in B}(1+z^{a})$, so the representation counts $r_B$ are the
+coefficients of $F_B$, and let $R_c=\sum_{m\equiv c\,(4)}r_B(m)$.
+
+\begin{theoremE}[Universal obstruction; \S\ref{sec:floor}]
+For every finite sequence $B$ of odd positive integers, $|F_B(i)|=2^{|B|/2}$
+exactly, whatever the residues of the elements. Consequently the counts $R_c$
+are never all equal, and
+\[
+  \frac{\max_c R_c-\min_c R_c}{\tfrac14\sum_c R_c}\;\ge\;2\sqrt2\cdot2^{-|B|/2},
+\]
+with equality attained. No odd sequence is flat beyond the scale $2^{-|B|/2}$.
+\end{theoremE}
+
+This is a lower bound, in contrast with Theorems~B--D, and it is elementary:
+$1+i^{a}=1\pm i$ has modulus $\sqrt2$ for \emph{every} odd $a$, so the
+modulus-$4$ character never degenerates. The modulus-$6$ character does: if
+$3\in B$ then $F_B(\zeta_6)=0$. The primes are therefore not the flattest odd
+sequences but among the least flat: their obstruction decays at rate
+$\sqrt3/2\approx0.866$, above the universal floor $1/\sqrt2\approx0.707$.
 
 We emphasise what Theorem~D does \emph{not} assume. The statistical-mechanics
 treatment of the NPP proceeds through the annealed approximation, in which
@@ -674,6 +713,69 @@ taken to $0$ as $k\to\infty$ --- is the subject of
 \S\ref{sec:flatness-measured} and \S\ref{sec:open}.
 \end{remark}
 
+\subsection{A universal obstruction to flatness}\label{sec:floor}
+
+Before measuring $\varepsilon$ we record a lower bound for it, valid for every
+odd sequence and proved by an entirely elementary character computation. Recall
+$F_B(z)=\prod_{a\in B}(1+z^{a})$ and set $b=|B|$ and
+$R_c=\sum_{m\equiv c\,(4)}r_B(m)$ for $c\in\mathbb{Z}/4$.
+
+\begin{theorem}[Universal modulus-$4$ obstruction]\label{thm:floor}
+Let $B$ be any finite sequence of odd positive integers. Then
+\begin{enumerate}
+\item $|F_B(i)|=2^{b/2}$, exactly, independently of the residues of the elements
+      of $B$; in particular $F_B(i)\ne0$.
+\item Writing $F_B(i)=2^{b/2}e^{i\varphi}$,
+      \[
+        \max_c R_c-\min_c R_c\;=\;2^{b/2}\max\bigl(|\cos\varphi|,|\sin\varphi|\bigr)
+        \;\ge\;2^{(b-1)/2}.
+      \]
+\item Since $\sum_c R_c=2^{b}$, the relative spread satisfies
+      \[
+        \frac{\max_c R_c-\min_c R_c}{\frac14\sum_c R_c}\;\ge\;2\sqrt2\cdot2^{-b/2},
+      \]
+      and the constant $2\sqrt2$ is attained.
+\end{enumerate}
+\textup{(Lean: \Lean{normSq\_one\_add\_I\_pow\_odd}, \Lean{spread\_lower\_bound}.)}
+\end{theorem}
+
+\begin{proof}
+(i) For odd $a$ we have $i^{a}=\pm i$, so $1+i^{a}=1\pm i$ and
+$|1+i^{a}|=\sqrt2$ regardless of $a\bmod4$. Multiplying over $B$ gives
+$|F_B(i)|=2^{b/2}$.
+
+(ii) By discrete Fourier inversion on $\mathbb{Z}/4$,
+\[
+  R_c=\tfrac14\sum_{j=0}^{3}i^{-jc}F_B(i^{j})
+     =\tfrac14\Bigl(2^{b}+2\,\mathrm{Re}\bigl(i^{-c}F_B(i)\bigr)\Bigr),
+\]
+because $F_B(1)=2^{b}$ and $F_B(-1)=\prod_{a\in B}(1+(-1)^{a})=0$, every $a$
+being odd. As $c$ runs over $\mathbb{Z}/4$ the quantity
+$\mathrm{Re}(i^{-c}F_B(i))/2^{b/2}$ runs over
+$\{\cos\varphi,\sin\varphi,-\cos\varphi,-\sin\varphi\}$, whose maximum is
+$\max(|\cos\varphi|,|\sin\varphi|)\ge1/\sqrt2$ and whose minimum is its
+negative. The stated identity and bound follow.
+
+(iii) Divide by $\tfrac14\sum_cR_c=2^{b-2}$. Equality in (ii) occurs when
+$\varphi$ is an odd multiple of $\pi/4$; for instance $B=(1,3,5,\dots,29)$
+realises it.
+\end{proof}
+
+Two remarks. First, the vanishing $F_B(-1)=0$ used in the proof is
+Theorem~\ref{thm:no-flat} (no flat edges) in Fourier form, so the parity
+structure that makes $\lm$ well defined is the same structure that forces the
+modulus-$4$ obstruction.
+
+Second, the contrast with the modulus $6$ is the point. The factor
+$1+\zeta_6^{a}$ \emph{can} vanish, namely when $a\equiv3\pmod6$, and then the
+whole modulus-$6$ mode disappears. The factor $1+i^{a}$ never vanishes for odd
+$a$. Hence flatness beyond the scale $2^{-b/2}$ is impossible for any odd
+sequence, whereas the modulus-$6$ obstruction of the primes, decaying at rate
+$\sqrt3/2\approx0.866$, sits \emph{above} the universal floor
+$1/\sqrt2\approx0.707$. In this sense the primes are not the flattest odd
+sequences but among the least flat, and $\varepsilon_k\to0$ --- if true --- can
+hold at best geometrically, never faster than $2^{-k/2}$.
+
 \subsection{Flatness measured}\label{sec:flatness-measured}
 
 We computed $\varepsilon_d$ exactly, by dynamic programming over $\mathbb{Z}$,
@@ -1008,23 +1110,52 @@ cannot be tested this way: for any odd sequence coprime to $3$ one has
 $\rho_3=(1/2)^{|B|}$, which is dominated by $\rho_4=(1/\sqrt2)^{|B|}$, so the
 period-$3$ component never rises above the period-$4$ one.
 
-\begin{conjecture}[Extremality of the modulus $6$]\label{conj:mod6}
-Let $M(q)$ denote the geometric mean of $|\cos(\pi r/q)|$ over $r$ coprime to
-$q$. Then $M(q)=\tfrac12|\Phi_q(-1)|^{1/\varphi(q)}$, where $\Phi_q$ is the
-$q$-th cyclotomic polynomial, and $\sup_{q\ge3}M(q)=\sqrt3/2$, attained only at
-$q=6$; the next largest value is $M(10)=5^{1/4}/2$. For a sequence
-equidistributed among the residues coprime to $q$, $M(q)$ is the decay rate of
-$|F_B(\zeta_q)|/2^{|B|}$, so $q=6$ is the slowest mode.
-\end{conjecture}
+\begin{proposition}[Extremality of the modulus $6$]\label{prop:mod6}
+Let $M(q)$ denote the geometric mean of $|\cos(\pi r/q)|$ over the $r$ coprime
+to $q$. Then
+\[
+  M(q)=\tfrac12\,|\Phi_q(-1)|^{1/\varphi(q)},
+\]
+where $\Phi_q$ is the $q$-th cyclotomic polynomial, and
+\[
+  \sup_{q\ge3}M(q)=\frac{\sqrt3}{2},
+\]
+attained at $q=6$ and nowhere else. The next largest values are
+$M(10)=5^{1/4}/2$, $M(4)=1/\sqrt2$ and $M(14)=7^{1/6}/2$.
+\textup{(Lean, finite part: \Lean{M12\_six\_maximal}, \Lean{M12\_gap}.)}
+\end{proposition}
 
-The identity follows from $\prod_{r\perp q}(x-\zeta_q^{r})=\Phi_q(x)$ at $x=-1$
-together with $|1+\zeta_q^{r}|=2|\cos(\pi r/q)|$, and the supremum from the
-classical values $\Phi_q(-1)=p$ for $q=2p^{j}$, $2$ for $q=2^{j}$ with $j\ge2$,
-and $1$ otherwise; we have checked the identity numerically for $3\le q\le40$ to
-machine precision, obtaining $M(6)=0.866025$, $M(10)=0.747674$,
-$M(4)=0.707107$, $M(14)=0.691544$. This is the precise sense in which the bias
-of the primes modulo $6$, and no other congruence obstruction, governs the
-flatness.
+\begin{proof}
+Since $\prod_{r\perp q}(x-\zeta_q^{r})=\Phi_q(x)$, evaluating at $x=-1$ and
+using $|1+\zeta_q^{r}|=2|\cos(\pi r/q)|$ gives
+$|\Phi_q(-1)|=2^{\varphi(q)}\prod_{r\perp q}|\cos(\pi r/q)|$, which is the
+identity. For the supremum use the classical values: $\Phi_q(-1)=p$ when
+$q=2p^{j}$ with $p$ an odd prime, $\Phi_q(-1)=2$ when $q=2^{j}$ with $j\ge2$,
+and $\Phi_q(-1)=1$ for all other $q\ge3$. Hence $M(q)=1/2$ except in two
+families. For $q=2p^{j}$ we get $M(q)=\tfrac12p^{1/(p^{j-1}(p-1))}$, which is
+largest when the exponent is largest, i.e.\ at $j=1$; and
+$p\mapsto p^{1/(p-1)}$ decreases on odd primes ($3^{1/2}>5^{1/4}>7^{1/6}>\cdots$),
+so the family is maximised at $q=6$ with value $\sqrt3/2$, the runner-up being
+$q=10$. For $q=2^{j}$, $j\ge2$, we get $M(q)=\tfrac12\cdot2^{1/2^{j-1}}$,
+maximised at $j=2$ with value $1/\sqrt2<\sqrt3/2$.
+\end{proof}
+
+We verified the identity numerically for $3\le q\le40$ to machine precision,
+obtaining $M(6)=0.866025$, $M(10)=0.747674$, $M(4)=0.707107$,
+$M(14)=0.691544$. The finite comparison is also formalised: raising to the
+twelfth power clears denominators, giving $729,125,64,49,8$ over $4096$ for
+$q=6,10,4,14,8$ and $1/4096$ otherwise, so the maximality of $q=6$ reduces to a
+comparison of rationals.
+
+The number-theoretic content is this. For a sequence equidistributed among the
+residues coprime to $q$, $M(q)$ is the decay rate of $|F_B(\zeta_q)|/2^{|B|}$;
+Proposition~\ref{prop:mod6} then says that $q=6$ is the slowest mode available
+to any such sequence. The primes are confined to exactly two residues modulo
+$6$, both of which realise the maximal $|\cos|$, and no other modulus offers a
+comparable concentration --- which is why the bias modulo $6$, and no other
+congruence obstruction, governs the flatness of the primes. The step from
+equidistribution to the decay rate is the one genuinely analytic ingredient
+here, and we do not prove it; see Problem~\ref{prob:flatness}.
 
 \begin{conjecture}[Oscillation]\label{conj:oscillation}
 The oscillation of $Q(k)$ for the primes observed in \S\ref{sec:oscillation} is
@@ -1153,6 +1284,10 @@ Cor.~\ref{cor:deg-rep} & \Lean{degCount\_eq\_sum\_repCount} & \Lean{Theory/Fiber
 Cor.~\ref{cor:strata-rep} & \Lean{overCount\_eq\_repCount} etc. & \Lean{Theory/Sandwich.lean}\\
 Lem.~\ref{lem:flat-ratio} & \Lean{ratio\_bounds\_of\_flat} & \Lean{Theory/Sandwich.lean}\\
 Thm.~\ref{thm:sandwich} & \Lean{sandwich\_partial}, \Lean{sandwich\_total} & \Lean{Theory/Sandwich.lean}, \Lean{Theory/Total.lean}\\
+Thm.~\ref{thm:floor}(i) & \Lean{normSq\_one\_add\_I\_pow\_odd} & \Lean{Theory/Ripple.lean}\\
+Thm.~\ref{thm:floor}(iii) & \Lean{max\_abs\_cos\_sin\_sq\_ge}, \Lean{spread\_lower\_bound} & \Lean{Theory/Ripple.lean}\\
+Prop.~\ref{prop:mod6} (finite) & \Lean{M12\_six\_maximal}, \Lean{M12\_gap} & \Lean{Theory/Ripple.lean}\\
+Prop.~\ref{prop:character} & \Lean{normSq\_one\_add\_exp} and specialisations & \Lean{Theory/Ripple.lean}\\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -142,6 +142,63 @@ theorem sec_sq_pi_mul_div_six {a : ℕ} (h : a % 6 = 1 ∨ a % 6 = 5) :
   · rw [cos_sq_pi_mul_div_six_of_one h]; norm_num
   · rw [cos_sq_pi_mul_div_six_of_five h]; norm_num
 
+/- ============ 定理E: 奇数列の普遍的な mod-4 障害(床) ============
+   奇数 a に対し i^a = ±i なので 1 + i^a = 1 ± i、絶対値は剰余に依らず常に √2。
+   ⇒ |F_B(i)| = 2^{b/2} が厳密。**決してゼロにならない**(mod 6 とはここが違う)。
+   一方 F_B(−1) = 0(奇数だから)。この2つから mod 4 の表現数分布のずれに
+   下界 2√2·2^{−b/2} が出る(定理 thm:floor)。 -/
+
+/-- 奇数 a に対し |1 + i^a|² = 2(a mod 4 が 1 でも 3 でも同じ)。
+    これが「mod 4 のさざ波は消せない」ことの正体。 -/
+theorem normSq_one_add_I_pow_odd (a : ℕ) (h : a % 2 = 1) :
+    Complex.normSq (1 + Complex.I ^ a) = 2 := by
+  obtain ⟨m, hm⟩ : ∃ m, a = 2 * m + 1 := ⟨a / 2, by omega⟩
+  subst hm
+  rw [pow_add, pow_mul, pow_one]
+  have hI2 : (Complex.I ^ 2) ^ m = (-1 : ℂ) ^ m := by
+    rw [Complex.I_sq]
+  rw [hI2]
+  rcases Nat.even_or_odd m with he | ho
+  · rw [he.neg_one_pow]
+    simp [Complex.normSq_apply]; norm_num
+  · rw [ho.neg_one_pow]
+    simp [Complex.normSq_apply]; norm_num
+
+/-- 対比: 1 + ζ₆^a は a ≡ 3 (mod 6) でゼロになる。つまり mod 6 のさざ波は消せる。
+    (`normSq_at_pi` が ζ₆³ = −1 での消滅。ここでは「消えない」側を主張する。) -/
+theorem normSq_one_add_I_pow_odd_ne_zero (a : ℕ) (h : a % 2 = 1) :
+    (1 + Complex.I ^ a) ≠ 0 := by
+  intro hz
+  have := normSq_one_add_I_pow_odd a h
+  rw [hz] at this
+  simp at this
+
+/-- 4点 {cos φ, sin φ, −cos φ, −sin φ} の最大値の2乗は 1/2 以上。
+    (max² は cos², sin² の大きいほうで、和が 1 だから半分は超える。) -/
+theorem max_abs_cos_sin_sq_ge (φ : ℝ) :
+    (1 : ℝ) / 2 ≤ (max |Real.cos φ| |Real.sin φ|) ^ 2 := by
+  have hpyth := Real.sin_sq_add_cos_sq φ
+  rcases le_total |Real.cos φ| |Real.sin φ| with h | h
+  · rw [max_eq_right h, sq_abs]
+    nlinarith [abs_nonneg (Real.cos φ), abs_nonneg (Real.sin φ),
+      sq_abs (Real.cos φ), sq_abs (Real.sin φ)]
+  · rw [max_eq_left h, sq_abs]
+    nlinarith [abs_nonneg (Real.cos φ), abs_nonneg (Real.sin φ),
+      sq_abs (Real.cos φ), sq_abs (Real.sin φ)]
+
+/-- 定理E(iii)の核となる不等式。
+    相対スプレッドは 2^{b/2}·max(|cos φ|,|sin φ|) / 2^{b−2} = 4·max·2^{−b/2} なので、
+    主張「相対スプレッド ≥ 2√2·2^{−b/2}」は 2^{−b/2} を約せば
+    **4·max(|cos φ|,|sin φ|) ≥ 2√2** に帰着する。それをここで証明する。 -/
+theorem spread_lower_bound (φ : ℝ) :
+    2 * Real.sqrt 2 ≤ 4 * max |Real.cos φ| |Real.sin φ| := by
+  have h := max_abs_cos_sin_sq_ge φ
+  have hnn : (0:ℝ) ≤ max |Real.cos φ| |Real.sin φ| :=
+    le_max_of_le_left (abs_nonneg _)
+  have hs : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+  have hsn : (0:ℝ) ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
+  nlinarith [h, hnn, hs, hsn]
+
 end ALT
 
 #print axioms ALT.normSq_one_add_exp
@@ -156,3 +213,7 @@ end ALT
 #print axioms ALT.cos_sq_pi_mul_div_six_of_one
 #print axioms ALT.cos_sq_pi_mul_div_six_of_five
 #print axioms ALT.sec_sq_pi_mul_div_six
+#print axioms ALT.normSq_one_add_I_pow_odd
+#print axioms ALT.normSq_one_add_I_pow_odd_ne_zero
+#print axioms ALT.max_abs_cos_sin_sq_ge
+#print axioms ALT.spread_lower_bound
