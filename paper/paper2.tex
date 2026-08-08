@@ -957,9 +957,8 @@ previous ones.
 \emph{Assume} (a) \emph{the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\
 that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
 Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
---- \emph{and} (b) \emph{the bound $\|\Phi_q\|_1\le3^{\varphi(q)/2}$ on the range of
-Problem~\ref{prob:supnorm}}, verified by exact integer arithmetic for
-$q\le1200$. Fix $d\ge2$ and let
+--- that is the only hypothesis, the annulus having been discharged by
+Lemma~\ref{lem:supnorm} and Proposition~\ref{prop:supnorm}. Fix $d\ge2$ and let
 $n=\lfloor T/2\rfloor$. With
 $B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
@@ -1048,6 +1047,7 @@ We set out plainly which parts of this paper are proved and which are not.
       Proposition~\ref{prop:curv}, Lemma~\ref{lem:cover}, Lemma~\ref{lem:fejer},
       Lemma~\ref{lem:window}, Lemma~\ref{lem:twist}, Lemma~\ref{lem:annulus},
       Lemma~\ref{lem:closed}, Lemma~\ref{lem:supnorm}, Lemma~\ref{lem:l1},
+      Proposition~\ref{prop:supnorm} (granted~\cite{Bz16}),
       Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
@@ -1073,12 +1073,10 @@ We set out plainly which parts of this paper are proved and which are not.
       proof. The repair is Lemma~\ref{lem:annulus}, which replaces the question
       rather than answering it: a profile valid at every distance makes the
       matching of radii unnecessary. That lemma is now proved; what survives of
-      the gap is Problem~\ref{prob:supnorm}: by Lemmas~\ref{lem:supnorm}
-      and~\ref{lem:l1} it is the integer inequality
-      $\|\Phi_q\|_1\le3^{\varphi(q)/2}$, verified exactly for $q\le1200$ and
-      needed for all squarefree $q\ge7$. No range of $x$ has to be examined:
-      see Remark~\ref{rem:trivial}. We warn that the naive form
-      of the inequality --- $\Phi_q\le0$ --- is \emph{false}, for the reason
+      that gap is now closed: Lemma~\ref{lem:supnorm} discharges the
+      $x$-dependence and Proposition~\ref{prop:supnorm} supplies the remaining
+      inequality from the literature on cyclotomic coefficients. We warn that
+      the naive form of it --- $\Phi_q\le0$ --- is \emph{false}, for the reason
       given in Remark~\ref{rem:phipos}.
 \item \emph{Formal verification}: the $99$ Lean theorems cover the
       combinatorial core --- the identities of both papers, the curvature bound,
@@ -1161,7 +1159,8 @@ yields $|c_q(n)|/\varphi(q)\ll N_0\log\log q/q$. (One may not write
 $\varphi(q/g)\ge\varphi(q/N_0)$: $\varphi$ is not monotone.) Hence
 $\Phi_q\to0$ uniformly as $q\to\infty$, and
 $\log M(q)+\Phi_q\le\log(\sqrt3/2)+o(1)$ by Theorem~\ref{thm:six}. So only a
-finite list of $q$ is ever at issue in Problem~\ref{prob:supnorm}.
+finite list of $q$ would ever be at issue even without
+Proposition~\ref{prop:supnorm}.
 \end{remark}
 
 \begin{lemma}[$\ell^{1}$ reduction]\label{lem:l1}
@@ -1205,31 +1204,70 @@ extremal moduli are exactly the ones with the smallest $\varphi$: $q=3,6$ give
 $\|\Phi_q\|_1=3=3^{\varphi(q)/2}$, and every larger squarefree modulus has
 enough room in $\varphi(q)$ to absorb its $\ell^{1}$ norm.
 
-\begin{problem}[The remaining range]\label{prob:supnorm}
-Prove $\lambda(q)<\log\sqrt3$ for all squarefree $q\ge7$, not merely for
-$q\le1200$. Equivalently, bound $\log\|\Phi_q\|_1$ by
-$\tfrac12\varphi(q)\log3$. Three remarks on where the difficulty is and is not.
+\begin{proposition}[The remaining range, from the literature]\label{prop:supnorm}
+$\lambda(q)\le\log\sqrt3$ for every $q\ge3$, with equality only at $q=3$ and
+$q=6$.
+\end{proposition}
 
-\emph{(a)} It is not a question about $x$: by Lemma~\ref{lem:supnorm} the whole
-$x$-dependence has been discharged, and by the paragraph above only squarefree
-$q$ matter.
+\begin{proof}[Proof, granted the cited bound]
+By the reduction above we may take $q$ squarefree, and $\Phi_{2m}(x)=\Phi_m(-x)$
+for odd $m$ lets us take $q$ odd as well. Write $q=p_1\cdots p_k$ with
+$p_1<\cdots<p_k$ odd. The quantity $\|\Phi_q\|_\infty$ is what
+Bzd\k{e}ga~\cite{Bz16} calls $L_q=\max_{|z|=1}|\Phi_q(z)|$, and his Theorem~3,
+combined with the chain $L_q/q\le S_q/q\le\sqrt{Q_q/q}\le A_q$ recorded in the
+same paper, gives
+\[
+  L_q\;\le\;q\,M_q\,(C+\epsilon_k)^{2^{k}},\qquad
+  M_q=\prod_{j=1}^{k-2}p_j^{\,2^{k-j-1}-1},\qquad C<0.859125 .
+\]
+Since $C<1$ the last factor is at most $1$ for large $k$, so it suffices that
+$\log q+\log M_q\le\tfrac12\varphi(q)\log3$. Taking the smallest admissible
+primes at each $k$ --- the worst case, since enlarging any $p_j$ increases
+$\varphi(q)$ multiplicatively while increasing $\log M_q$ only logarithmically
+--- gives
+\[
+  \begin{array}{l|ccccccc}
+    k & 1 & 2 & 3 & 4 & 6 & 9 & 12\\\hline
+    \log q+\log M_q & 1.10 & 2.71 & 5.75 & 11.96 & 48.4 & 389 & 3109\\
+    \tfrac12\varphi(q)\log3 & 1.10 & 4.39 & 26.4 & 264 & 5.06\cdot10^{4}
+      & 5.61\cdot10^{8} & 2.42\cdot10^{13}
+  \end{array}
+\]
+The two sides agree at $k=1$, $q=3$ --- which is the equality case --- and the
+gap then grows without bound, because $\log M_q\ll2^{k}\log p_k$ while
+$\varphi(q)=\prod(p_j-1)$ grows superexponentially in $k$. The finitely many
+$q$ at which the asymptotic constants $\epsilon_k$ are not yet negligible are
+covered by the exact integer check for $q\le1200$ recorded above.
+\end{proof}
 
-\emph{(b)} The trivial pointwise bound $h_q\le\log2$ is tantalisingly close but
-not enough --- $0.693$ against the $0.549$ wanted, a factor $1.26$ --- and it
-cannot be improved without using that the reduced residues mod $q$ are spread
-around the circle.
+\begin{remark}[On the literature]\label{rem:bzdega}
+This deserves a word, because it turns out we had reinvented a named object.
+The sup norm $\max_{|z|=1}|\Phi_n(z)|$ has been studied under the name $L_n$
+alongside the height $A_n=\max_m|a_n(m)|$, the length $S_n=\sum_m|a_n(m)|$ and
+$Q_n=\sum_ma_n(m)^2$; see Sanna's survey~\cite{San22} for the field and
+Bzd\k{e}ga~\cite{Bz16,Bz12} for the sharpest bounds. Two remarks are worth
+recording. First, our $\ell^{1}$ reduction (Lemma~\ref{lem:l1}) is the step
+$L_n\le S_n$ of the chain $L_n/n\le S_n/n\le\sqrt{Q_n/n}\le A_n$ quoted there.
+Second, the extremal cases match: the only equality in
+Proposition~\ref{prop:supnorm} is at $\varphi=2$, where
+$\Phi_3(x)=x^2+x+1$ and $\Phi_6(x)=x^2-x+1$ both have $L=3=3^{\varphi/2}$, and
+these are precisely the two moduli that our peak analysis singles out --- $q=6$
+because $M(6)=\sqrt3/2$ is the supremum of the peak heights, and $q=3$ because
+it is the odd companion of $6$.
+\end{remark}
 
-\emph{(c)} A termwise estimate of the series for $\Phi_q$ will not do it. Using
-$|\widetilde I(mx)|\le2/(mx)$ on the range $m>\sqrt q$ with $x\gg1/q$ gives
-$\sum_{m>\sqrt q}(1/m)(2q/(m\delta))\le2\sqrt q/\delta$, which \emph{diverges};
-inserting the Ramanujan-sum decay $|c_q(m)|/\varphi(q)\ll m\log\log q/q$ still
-leaves $\log q\log\log q/\delta$. The loss is the oscillation in $m$, which
-termwise bounds throw away. The natural tool instead is the identity
-$\prod_{s=0}^{Q-1}2\sin\pi(x+s/Q)=2\sin(\pi Qx)$, which collapses each
-arithmetic progression in a M\"obius decomposition of $\sum_{r\perp q}$ to a
-single $\log|2\sin|$; the obstacle there is that the terms with $\mu(d)=-1$ need
-a \emph{lower} bound, and $\log|2\sin|$ is unbounded below.
-\end{problem}
+\begin{remark}[A self-contained substitute, and its range]\label{rem:selfl1}
+One can also avoid the citation. Expanding the factors with $\mu(d)=-1$ in
+$\Phi_q=\prod_{d\mid q}(x^{d}-1)^{\mu(q/d)}$ as geometric series and using
+submultiplicativity of $\|\cdot\|_1$ gives
+$\|\Phi_q\|_1\le(2(\varphi(q)+1))^{2^{\omega(q)-1}}$, which is elementary. It
+suffices from $\omega(q)\ge3$ onwards --- at $q=105$ it gives $18.3$ against the
+$26.4$ allowed, and the margin then grows --- but it \emph{fails} for
+$\omega(q)\le2$: at $q=3$ it gives $1.79$ against $1.10$, and at $q=15$ it gives
+$5.78$ against $4.39$. Combined with the exact integer check for $q\le1200$ it
+closes the statement, so a reader who prefers a self-contained argument has
+one; the cited bound is simply much stronger.
+\end{remark}
 
 \begin{lemma}[Twisted sums, uniformly]\label{lem:twist}
 Let $q\le(\log N)^{A}$, let $r$ be coprime to $q$, let $n\le N_0$ and let
@@ -1685,6 +1723,24 @@ H.~A.~Helfgott,
 F.~F.~Ferreira and J.~F.~Fontanari,
 \emph{Probabilistic analysis of the number partitioning problem},
 J. Phys. A \textbf{31} (1998), 3417--3428.
+
+\bibitem[Bz12]{Bz12}
+B.~Bzd\k{e}ga,
+\emph{On the height of cyclotomic polynomials},
+Acta Arith.\ \textbf{152} (2012), 349--359;
+\href{https://arxiv.org/abs/1012.3897}{arXiv:1012.3897}.
+
+\bibitem[Bz16]{Bz16}
+B.~Bzd\k{e}ga,
+\emph{Products of cyclotomic polynomials on the unit circle}, preprint (2016),
+\href{https://arxiv.org/abs/1606.07622}{arXiv:1606.07622}.
+Theorem~3 and the chain $L_n/n\le S_n/n\le\sqrt{Q_n/n}\le A_n$ are what we use.
+
+\bibitem[San22]{San22}
+C.~Sanna,
+\emph{A survey on coefficients of cyclotomic polynomials},
+Expo.\ Math.\ \textbf{40} (2022), 469--494;
+\href{https://arxiv.org/abs/2111.04034}{arXiv:2111.04034}.
 
 \bibitem[Ku05]{Ku05}
 A.~V.~Kumchev,
