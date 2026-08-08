@@ -1014,11 +1014,43 @@ geometric rate $\sqrt3/2$ per element.
 \end{theorem}
 
 \begin{remark}
-The hypotheses are not decorative: they are the two statements of this paper
-that are not proved, and we prefer to carry them explicitly rather than bury
-them. Hypothesis (a) disappears once the programme of Section~\ref{sec:l5c} is
-written out in full; hypothesis (b) is a bounded amount of work on the envelope
-and is supported by the measurements of Remark~\ref{rem:peakscan}.
+The hypothesis is not decorative: it is the one statement of this paper that is
+not proved, and we prefer to carry it explicitly rather than bury it. It
+disappears once the programme of Section~\ref{sec:l5c} is written out in full,
+which is a matter of substituting a quoted estimate, not of finding an
+argument.
+\end{remark}
+
+\begin{remark}[What the conclusion needs, and what it does not]\label{rem:whatneeded}
+The displayed formula and the conclusion $\varepsilon_d\to0$ have different
+statuses, and it is worth separating them, because only the first involves
+anything that is merely calibrated numerically.
+
+The \emph{conclusion} $\varepsilon_d(k)\to0$ at rate $\sqrt3/2$ per element
+needs, besides hypothesis (a): the exact peak heights of
+Corollary~\ref{cor:spectrum}, which are identities; the envelope of
+Proposition~\ref{prop:curv}, which is proved; the annulus bound of
+Lemma~\ref{lem:supnorm} with Proposition~\ref{prop:supnorm}, which is proved;
+and only that $K_2=O(1)$ and $\kappa_d\in[0,1]$. The first of these is immediate
+from the definition of $K_2$ as the exponential of a sum of terms each tending
+to $0$ (indeed $K_2\to1$), and the second from the definition of $\kappa_d$ as
+half the range of a cosine. \emph{No part of the conclusion rests on
+Proposition~\ref{prop:ripple}.}
+
+What Proposition~\ref{prop:ripple} supplies is the \emph{value} of the constant
+in front --- the second-order amplitude --- and that is the part verified
+numerically rather than proved (Remark~\ref{rem:ripplerange}). A reader who
+distrusts it may delete $K_2$ from the display and read the statement as
+$\varepsilon_d(k)\asymp(\sqrt3/2)^{b}$; nothing else changes.
+
+One further point, since it is a natural worry about any argument that passes
+through Fourier data. There is no step here from ``global integrals'' to
+``pointwise ratios'': $r_B(m)=\frac1{2\pi}\int_0^{2\pi}F_B(\theta)e^{-im\theta}
+\,d\theta$ is an exact identity for each individual $m$, and every bound in
+Sections~\ref{sec:l5b}--\ref{sec:l5c} is a bound on the integrand $|G_B(\theta)|$
+at each $\theta$, integrated afterwards. The place where care is genuinely
+needed is the $o(1)$ inventory of item~(6) in the outline below, which is why we
+list it there rather than hide it.
 \end{remark}
 
 \begin{corollary}[conditional, as above]\label{cor:goal}
