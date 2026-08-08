@@ -128,6 +128,17 @@ The purpose of this paper is to show that this innocuous-looking quantity
 controls a genuinely combinatorial object: the local structure of the
 subset-sum problem for $A$.
 
+\begin{remark}[Terminology]
+The name is meant to record the second formula above: $\Gamma$ is a dyadically
+weighted series in the gaps of $A$. It should not be confused with the
+\emph{gap-sum sequence} of an integer sequence in the sense of Barry~\cite{Ba21},
+which is formed from the integers \emph{absent} between consecutive terms; that
+construction and ours share no content beyond the word ``gap''.
+Readers who prefer an unambiguous name may read $\Gamma$ as the
+\emph{dyadic gap series}, or simply as the generating function of $A$ evaluated
+at $x=1/2$.
+\end{remark}
+
 \subsection{Subset-sum landscapes}
 
 Fix a target $n\in\mathbb{N}$. For $S\subseteq\{1,\dots,k\}$ put
@@ -339,6 +350,13 @@ $n+d-a_i$, whose error is $|d-a_i|$; this is $\ge d$ precisely when $a_i\ge2d$,
 and $>d$ precisely when $a_i>2d$. Adding $i\notin S$ only increases the error,
 since $a_i>0$. The deficient case is symmetric.
 \end{proof}
+
+We claim no originality for Theorem~\ref{thm:classification}: the computation is
+immediate, and some form of it is presumably known to anyone who has looked at
+the $1$-bit-flip landscape of the NPP, though we have not located an explicit
+statement in the literature. We record it here because everything below is built
+on it, and because the formal development requires a precise version. What we do
+claim is the use made of it in \S\S\ref{sec:window}--\ref{sec:sandwich}.
 
 \begin{corollary}\label{cor:ground-is-min}
 A ground state ($d=0$) is always a strict local minimum.
@@ -948,13 +966,27 @@ What remains conjectural is only the transfer from this Fourier datum to
 pointwise ratios. The exponent $|B_d|+1$ rather than $|B_d|$ comes from the
 width factor $\sqrt{V_0/V_6}=\sqrt3/2$ at the sub-arc, where
 $V_0=\tfrac14\sum a^{2}$ and $V_6=\tfrac14\sum a^{2}\sec^{2}(\pi a/6)
-=\tfrac13\sum a^{2}$. Extracting the period-$6$ Fourier component of
-$r_{B_d}/\mathrm{Main}-1$ numerically for $k\le28$ confirms both parts: the
-amplitude ratio to $2(\sqrt3/2)^{|B_d|+1}$ is
-$1.016,\,1.004,\,0.995,\,0.991,\,0.989$ at $k=20,\dots,28$, against
-$0.880,\dots,0.856$ for the exponent $|B_d|$, which drifts; and the measured
-phase agrees with $(\pi/6)(c_1-c_5)$ to four decimal places, including at
-$k=16$, where $c_1-c_5=-3$ moves the predicted phase to $-\pi/2$.
+=\tfrac13\sum a^{2}$. We have tested both parts numerically for $k\le32$ by
+extracting the period-$6$ Fourier component of $r_{B_d}/\mathrm{Main}-1$.
+
+The measured phase agrees with $(\pi/6)(c_1-c_5)$ to four decimal places,
+including at $k=16$, where $c_1-c_5=-3$ moves the predicted phase to $-\pi/2$.
+
+For the amplitude, the extraction is sensitive to the width of the window over
+which the Fourier component is taken, because the Gaussian reference degrades in
+the tails: at $k=26$ the ratio to $2(\sqrt3/2)^{|B_d|+1}$ is
+$0.972,\,0.991,\,1.056$ for half-widths $24,\,90,\,180$ respectively, while
+$\sigma=\sqrt{V_0}\approx147$. Taking a narrow window (half-width $24$, about
+$0.15\sigma$, still eight full periods) the ratio is stable in the window and
+reads
+\[
+  0.963,\;0.965,\;0.968,\;0.970,\;0.972,\;0.974,\;0.976
+  \qquad (k=18,20,\dots,30),
+\]
+increasing monotonically towards $1$; the corresponding ratios to
+$2(\sqrt3/2)^{|B_d|}$ move \emph{away} from $1$, which is what identifies the
+extra factor $\sqrt3/2$. The value at $k=32$ is $1.025$, an outlier stable
+across window widths that we do not presently explain.
 
 \begin{conjecture}[Extremality of the modulus $6$]\label{conj:mod6}
 Let $M(q)$ denote the geometric mean of $|\cos(\pi r/q)|$ over $r$ coprime to
@@ -1026,6 +1058,11 @@ K.~Alyahya and J.~E.~Rowe,
 in: Parallel Problem Solving from Nature --- PPSN XIII,
 Lecture Notes in Computer Science \textbf{8672}, Springer, Cham, 2014,
 pp.~862--871. \href{https://doi.org/10.1007/978-3-319-10762-2_85}{DOI:10.1007/978-3-319-10762-2\_85}.
+
+\bibitem[Ba21]{Ba21}
+P.~Barry,
+\emph{On the gap-sum and gap-product sequences of integer sequences},
+preprint (2021), \href{https://arxiv.org/abs/2104.05593}{arXiv:2104.05593}.
 
 \bibitem[BCP01]{BCP01}
 C.~Borgs, J.~T.~Chayes and B.~Pittel,
