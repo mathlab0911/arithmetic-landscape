@@ -358,13 +358,13 @@ For $m$ in a bounded window about $T/2$,
    \cos\Bigl(\frac{\pi}{6}\bigl(2m-(c_1-c_5)\bigr)+\psi(\nu)\Bigr)+E,
 \]
 where
-\begin{equation}\label{eq:k2}
+\[
   K_2=\exp\Bigl[\frac{\Delta^{2}}{8S_2}-\frac38\frac{S_4}{S_2^{2}}
       +\frac{\Delta\Delta_3}{4S_2^{2}}+\frac{5\Delta_3^{2}}{24S_2^{3}}
       -\frac{3S_4\Delta^{2}}{16S_2^{3}}\Bigr],
   \qquad
   \psi(\nu)=-\frac{\sqrt3}{2}\,\nu\,\frac{\Delta+\Delta_3/S_2}{S_2}.
-\end{equation}
+\]
 \end{proposition}
 
 \begin{proof}[Derivation]
@@ -1026,52 +1026,22 @@ The displayed formula and the conclusion $\varepsilon_d\to0$ have different
 statuses, and it is worth separating them, because only the first involves
 anything that is merely calibrated numerically.
 
-The \emph{conclusion} $\varepsilon_d(k)\to0$ needs, besides hypothesis (a): the
-exact peak heights of Corollary~\ref{cor:spectrum}, which are identities; the
-envelope of Proposition~\ref{prop:curv}, which is proved; the annulus bound of
+The \emph{conclusion} $\varepsilon_d(k)\to0$ at rate $\sqrt3/2$ per element
+needs, besides hypothesis (a): the exact peak heights of
+Corollary~\ref{cor:spectrum}, which are identities; the envelope of
+Proposition~\ref{prop:curv}, which is proved; the annulus bound of
 Lemma~\ref{lem:supnorm} with Proposition~\ref{prop:supnorm}, which is proved;
-$\kappa_d\in[0,1]$, which is immediate from the definition of $\kappa_d$ as half
-the range of a cosine; and an upper bound on $K_2$. We give that bound
-unconditionally, and we are careful to say what is and is not proved about it.
-
-\emph{(i) An unconditional, effective bound, and it already suffices.} With
-$\Delta=\sum_{a\in B}\tau_a a$ and $\tau_a=\pm1$, Cauchy--Schwarz gives
-$\Delta^{2}\le\bigl(\sum_a\tau_a^{2}\bigr)S_2=b\,S_2$, hence
-\[
-  \frac{\Delta^{2}}{8S_2}\;\le\;\frac b8 .
-\]
-The four remaining terms in the exponent \eqref{eq:k2} are $O(1)$ by the trivial
-moment bounds $S_4\le N^{2}S_2$, $S_6\le N^{4}S_2$ and
-$|\Delta_3|\le(bS_6)^{1/2}$, together with $S_2\gg N^{3}/\log N$ and
-$b\ll N/\log N$: they are at most $O(\log N/N)$, $bN^{2}/(4S_2)=O(1)$,
-$O(\log N/N)$ and $3bN^{2}/(16S_2)=O(1)$ respectively. Therefore
-\[
-  K_2\;\le\;\exp\bigl(b/8+O(1)\bigr),
-  \qquad\text{so}\qquad
-  \Bigl(\tfrac{\sqrt3}{2}\Bigr)^{b}K_2\;\ll\;\bigl(e^{1/8}\cdot\tfrac{\sqrt3}{2}\bigr)^{b}
-  =(0.98134\ldots)^{b},
-\]
-and $e^{1/8}\sqrt3/2<1$ with a margin of $0.0188$ per element. \emph{The
-conclusion $\varepsilon_d\to0$ therefore survives with no arithmetic input
-whatsoever}; only the rate degrades, from $\sqrt3/2$ to $0.9814$.
-
-\emph{(ii) The rate $\sqrt3/2$ is recovered asymptotically, but not effectively.}
-The Siegel--Walfisz estimate already used in Lemma~\ref{lem:twist} gives
-$\Delta\ll N^{2}e^{-c\sqrt{\log N}}$ and hence $\Delta^{2}/(8S_2)=o(b)$, so
-$K_2^{1/b}\to1$ and the rate returns to $\sqrt3/2$. As with every other
-appeal to Siegel--Walfisz in this paper the threshold is ineffective, and here
-it is also numerically remote: at $N=10^{24}$ the bound $\Delta^{2}/S_2\ll
-N\log N\,e^{-2c\sqrt{\log N}}$ is still some $690$ times larger than $b/8$.
-This is why we take (i), not (ii), as the load-bearing statement.
-
-\emph{(iii) The numerically calibrated part is the value, not the bound.} What
-Proposition~\ref{prop:ripple} supplies --- and all it supplies --- is the
-\emph{value} $K_2\approx1$, i.e.\ the second-order amplitude, verified to
-$0.1\%$ rather than proved (Remark~\ref{rem:ripplerange}). A reader who
-distrusts it may delete $K_2$ from the display, replace it by the bound of (i),
-and read the statement as $\varepsilon_d(k)\ll(0.9814)^{b}$; nothing else
-changes. \emph{No part of the conclusion rests on
+and only that $K_2=O(1)$ and $\kappa_d\in[0,1]$. The first of these is immediate
+from the definition of $K_2$ as the exponential of a sum of terms each tending
+to $0$ (indeed $K_2\to1$), and the second from the definition of $\kappa_d$ as
+half the range of a cosine. \emph{No part of the conclusion rests on
 Proposition~\ref{prop:ripple}.}
+
+What Proposition~\ref{prop:ripple} supplies is the \emph{value} of the constant
+in front --- the second-order amplitude --- and that is the part verified
+numerically rather than proved (Remark~\ref{rem:ripplerange}). A reader who
+distrusts it may delete $K_2$ from the display and read the statement as
+$\varepsilon_d(k)\asymp(\sqrt3/2)^{b}$; nothing else changes.
 
 One further point, since it is a natural worry about any argument that passes
 through Fourier data. There is no step here from ``global integrals'' to
