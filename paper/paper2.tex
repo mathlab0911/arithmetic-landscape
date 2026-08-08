@@ -1109,16 +1109,6 @@ behaviour looks like the right tool for that excision, although their limit
 ($n\to\infty$ with the part set fixed) is not ours.
 \end{problem}
 
-\begin{problem}[The annulus]\label{prob:annulus}
-Show that
-\[
-  \log M(q)+\Phi_q(x)\;\le\;\log\frac{\sqrt3}{2}
-  \qquad\text{for }x_{\mathrm{env}}\ (\approx1.5)\le x\le\frac{2\pi^{2}}{3\log(2M(q))}
-\]
-and every $q\le Q_2$. \emph{This is now a lemma; see
-Lemma~\ref{lem:supnorm} below.}
-\end{problem}
-
 \begin{lemma}[The annulus, resolved]\label{lem:supnorm}
 For every $q$ and every $x>0$,
 \[
@@ -1243,6 +1233,26 @@ For $\omega=2$ the values $\varphi=8$ ($q=15$) fails, $104976>6561$, and
 $\varphi=12$ ($q=21$) passes, $26^{4}=456976\le3^{12}=531441$. For $\omega=1$,
 $\varphi=2$ ($q=3$) fails, $36>9$; $\varphi=4$ ($q=5$) fails, $100>81$;
 $\varphi=6$ ($q=7$) passes, $196\le729$. Monotonicity closes each case upward.
+
+It remains to pass from the finitely many $\omega$ inspected to all of them.
+Write $\varphi_\omega$ for the value at the odd primorial and
+$S(\omega)=\varphi_\omega\log3-2^{\omega}\log(2\varphi_\omega+2)$. With
+$p=p_{\omega+2}$ the next prime, $\varphi_{\omega+1}=(p-1)\varphi_\omega$ and
+$2\varphi_{\omega+1}+2\le(p-1)(2\varphi_\omega+2)$, so
+\[
+  S(\omega+1)\;\ge\;(p-1)\varphi_\omega\log3-2^{\omega+1}
+     \bigl[\log(2\varphi_\omega+2)+\log(p-1)\bigr]
+  \;\ge\;(p-3)\bigl[\varphi_\omega\log3-2^{\omega+1}\bigr],
+\]
+using $S(\omega)\ge0$ for the middle step and $\log(p-1)\le p-3$ (valid for
+every prime $p\ge5$) for the last. So the induction runs on the auxiliary
+invariant $\varphi_\omega\log3\ge2^{\omega+1}$, which holds at $\omega=3$
+($52.7\ge16$) and is preserved because $\varphi$ is multiplied by
+$p-1\ge10$ at each step while $2^{\omega+1}$ only doubles: the ratio grows by a
+factor at least $5$ per step, from $3.3$ at $\omega=3$ to $5.9\cdot10^{9}$ at
+$\omega=12$. Hence $S(\omega)\ge0$ for all $\omega\ge3$; numerically the ratio
+of the two sides falls from $0.696$ at $\omega=3$ to $2.7\cdot10^{-9}$ at
+$\omega=12$.
 \end{proof}
 
 \begin{proposition}[The sup-norm bound]\label{prop:supnorm}
@@ -1413,7 +1423,7 @@ is a running average of an explicit elementary function, with no arithmetic in
 it --- so a rigorous finite computation settles it; but we do not claim it.
 Numerically $\Phi_6$ is $-0.144$ at $x=1.5$, $-0.314$ at $x=2$ and below
 $-0.549$ from $x=3$ onwards, so the profile does not return to zero. We record
-the statement as Problem~\ref{prob:annulus}.
+the statement, and Proposition~\ref{prop:supnorm} below settles it.
 \end{remark}
 
 \begin{lemma}[Closed form of the profile]\label{lem:closed}
@@ -1452,8 +1462,8 @@ $0$ and returns to $0$, hence must be positive somewhere, and $\Phi_q\le0$
 fails. Numerically $q=12,15,20,21,24$ are all counterexamples, with maxima up to
 $+0.109$. This costs nothing: those are exactly the $q$ with the smallest peak,
 and $\log M(q)+0.109=-0.584$ is still far below $\log(\sqrt3/2)=-0.144$. It is
-the reason Problem~\ref{prob:annulus} is stated for $\log M(q)+\Phi_q$ rather
-than for $\Phi_q$ alone. For $q=6$, where $\Phi_6(-1)=3$, the statement
+the reason Proposition~\ref{prop:supnorm} is stated for
+$\|\Phi_q\|_\infty$ rather than for the sign of $\Phi_q$ alone. For $q=6$, where $\Phi_6(-1)=3$, the statement
 specialises to
 \[
   \frac1Y\int_0^{Y}\log|1+2\cos v|\,dv\;\le\;\log3\qquad(Y>0),
