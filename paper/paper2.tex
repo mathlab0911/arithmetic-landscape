@@ -699,9 +699,13 @@ equidistribution input is needed at all.
 
 \section{The deep minor arcs}\label{sec:l5c}
 
-This section is a design, not a proof; we state it because it isolates exactly
-what is missing and because one structural observation makes the shape of the
-argument clear.
+Most of this section is now proved: the dissection (Lemma~\ref{lem:cover}), the
+counting of bad points (Lemma~\ref{lem:fejer}), the twisted sums
+(Lemma~\ref{lem:twist}), the annulus profile with its closed form and its
+consequence (Lemmas~\ref{lem:annulus}, \ref{lem:closed}, \ref{lem:supnorm}).
+What is not written out to referee standard is the substitution of the quoted
+exponential-sum bound in step~2 and the excision of step~4; we flag those
+explicitly where they occur, and Section~\ref{sec:remains} keeps the ledger.
 
 \subsection{The product is a superposition of prime exponential sums}
 
@@ -953,9 +957,9 @@ previous ones.
 \emph{Assume} (a) \emph{the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\
 that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
 Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
---- \emph{and} (b) \emph{the sup-norm bound $\|\Phi_q\|_\infty\le3^{\varphi(q)/2}$ of
-Problem~\ref{prob:supnorm}}, which by Remark~\ref{rem:flat} is needed only for a
-finite list of $q$ and has been verified there for $q\le60$. Fix $d\ge2$ and let
+--- \emph{and} (b) \emph{the bound $\|\Phi_q\|_1\le3^{\varphi(q)/2}$ on the range of
+Problem~\ref{prob:supnorm}}, verified by exact integer arithmetic for
+$q\le240$. Fix $d\ge2$ and let
 $n=\lfloor T/2\rfloor$. With
 $B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
@@ -1043,7 +1047,7 @@ We set out plainly which parts of this paper are proved and which are not.
       Lemma~\ref{lem:vanish}, Corollary~\ref{cor:spectrum}(i)--(iii) and (vi),
       Proposition~\ref{prop:curv}, Lemma~\ref{lem:cover}, Lemma~\ref{lem:fejer},
       Lemma~\ref{lem:window}, Lemma~\ref{lem:twist}, Lemma~\ref{lem:annulus},
-      Lemma~\ref{lem:closed}, Lemma~\ref{lem:supnorm},
+      Lemma~\ref{lem:closed}, Lemma~\ref{lem:supnorm}, Lemma~\ref{lem:l1},
       Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
@@ -1069,16 +1073,18 @@ We set out plainly which parts of this paper are proved and which are not.
       proof. The repair is Lemma~\ref{lem:annulus}, which replaces the question
       rather than answering it: a profile valid at every distance makes the
       matching of radii unnecessary. That lemma is now proved; what survives of
-      the gap is Problem~\ref{prob:supnorm}, a bound on the sup norm of a
-      cyclotomic polynomial on the unit circle, needed only for a finite list of
-      $q$ (Remark~\ref{rem:flat}) and verified for $q\le60$. No range of $x$ has
-      to be examined: see Remark~\ref{rem:trivial}. We warn that the naive form
+      the gap is Problem~\ref{prob:supnorm}: by Lemmas~\ref{lem:supnorm}
+      and~\ref{lem:l1} it is the integer inequality
+      $\|\Phi_q\|_1\le3^{\varphi(q)/2}$, verified exactly for $q\le240$ but not
+      yet for the growing range $q\le Q_3$. No range of $x$ has to be examined:
+      see Remark~\ref{rem:trivial}. We warn that the naive form
       of the inequality --- $\Phi_q\le0$ --- is \emph{false}, for the reason
       given in Remark~\ref{rem:phipos}.
-\item \emph{Formal verification}: the $97$ Lean theorems cover the
+\item \emph{Formal verification}: the $99$ Lean theorems cover the
       combinatorial core --- the identities of both papers, the curvature bound,
-      and the vanishing lemma. The analytic sections are not formalised and we
-      do not claim that they are.
+      the vanishing lemma, and now Lemma~\ref{lem:l1} in the form
+      \texttt{norm\_poly\_le\_l1\_on\_circle}. The analytic sections are not
+      formalised and we do not claim that they are.
 \end{itemize}
 
 \noindent
@@ -1158,15 +1164,40 @@ $\log M(q)+\Phi_q\le\log(\sqrt3/2)+o(1)$ by Theorem~\ref{thm:six}. So only a
 finite list of $q$ is ever at issue in Problem~\ref{prob:supnorm}.
 \end{remark}
 
-\begin{problem}[Sup norms of cyclotomic polynomials]\label{prob:supnorm}
-Show that $\|\Phi_q\|_{\infty}\le3^{\varphi(q)/2}$ for every $q\ge3$. We have
-verified this by direct evaluation for $3\le q\le60$; the only cases of equality
-are $q=3$ and $q=6$. For large $q$ it is not delicate, since
-$\|\Phi_q\|_{\infty}$ grows subexponentially in $q$ while
-$3^{\varphi(q)/2}=\exp(\varphi(q)\log\sqrt3)$ grows exponentially and
-$\varphi(q)\gg q/\log\log q$; what is missing is a citable explicit bound making
-the crossover effective. By Remark~\ref{rem:flat} this is in any case needed
-only for a finite list of $q$.
+\begin{lemma}[$\ell^{1}$ reduction]\label{lem:l1}
+$\|\Phi_q\|_{\infty}\le\|\Phi_q\|_{1}:=\sum_i|c_i|$, where $\Phi_q=\sum_ic_ix^i$.
+\end{lemma}
+
+\begin{proof}
+$|\Phi_q(z)|=|\sum_ic_iz^{i}|\le\sum_i|c_i||z|^{i}=\sum_i|c_i|$ for $|z|=1$.
+(Formalised: \texttt{norm\_poly\_le\_l1\_on\_circle}.)
+\end{proof}
+
+\noindent
+Since $\varphi(q)$ is even for $q\ge3$, the quantity $3^{\varphi(q)/2}$ is an
+integer, so the criterion of Lemma~\ref{lem:supnorm} becomes a comparison of two
+integers:
+\[
+  \sum_i|c_i|\;\le\;3^{\varphi(q)/2}.
+\]
+We have verified this by exact integer arithmetic for $3\le q\le240$. It holds
+throughout, with equality \emph{only} at $q=3$ and $q=6$, and the margin per
+element $(\tfrac12\varphi(q)\log3-\log\|\Phi_q\|_1)/\varphi(q)$ grows: it is
+$0$ at $q=6$, $0.275$ at $q=12$, $0.428$ at $q=60$, $0.475$ at $q=105$ and
+$0.519$ at $q=240$. The $\ell^{1}$ norm itself barely moves --- it is $7$ at
+$q=240$, against $3^{32}$ on the right.
+
+\begin{problem}[The remaining range]\label{prob:supnorm}
+Extend the check above to all $q\le Q_3$, where $Q_3$ is the threshold beyond
+which Remark~\ref{rem:flat} takes over. Two honest points. First, $Q_3$ grows
+with $N$ --- $\varepsilon$-uniformity in Remark~\ref{rem:flat} needs
+$q\gg N_0\log\log q$ --- so a check up to a fixed bound does not by itself
+suffice; one wants either a bound on $\|\Phi_q\|_1$ of Bateman type, or a
+quantitative form of Remark~\ref{rem:flat}. Second, the trivial pointwise bound
+$h_q\le\log2$ is tantalisingly close but not enough: it gives
+$\log2=0.693$ where $\log\sqrt3=0.549$ is wanted, a factor $1.26$. The gap is
+closed by the equidistribution of the reduced residues mod $q$, which forces
+$h_q\to0$; making that explicit is what remains.
 \end{problem}
 
 \begin{lemma}[Twisted sums, uniformly]\label{lem:twist}
