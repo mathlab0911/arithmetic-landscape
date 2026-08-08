@@ -1047,8 +1047,8 @@ We set out plainly which parts of this paper are proved and which are not.
       Proposition~\ref{prop:curv}, Lemma~\ref{lem:cover}, Lemma~\ref{lem:fejer},
       Lemma~\ref{lem:window}, Lemma~\ref{lem:twist}, Lemma~\ref{lem:annulus},
       Lemma~\ref{lem:closed}, Lemma~\ref{lem:supnorm}, Lemma~\ref{lem:l1},
-      Proposition~\ref{prop:supnorm} (granted~\cite{Bz16}),
-      Theorem~\ref{thm:p5exact}.
+      Lemma~\ref{lem:l1geom}, Lemma~\ref{lem:l1small},
+      Proposition~\ref{prop:supnorm}, Theorem~\ref{thm:p5exact}.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
       $k=18,\dots,40$) and Proposition~\ref{prop:central} (the Edgeworth term).
@@ -1204,51 +1204,106 @@ extremal moduli are exactly the ones with the smallest $\varphi$: $q=3,6$ give
 $\|\Phi_q\|_1=3=3^{\varphi(q)/2}$, and every larger squarefree modulus has
 enough room in $\varphi(q)$ to absorb its $\ell^{1}$ norm.
 
-\begin{proposition}[The remaining range, from the literature]\label{prop:supnorm}
-$\lambda(q)\le\log\sqrt3$ for every $q\ge3$, with equality only at $q=3$ and
-$q=6$.
+\begin{lemma}[$\ell^{1}$ from the M\"obius product]\label{lem:l1geom}
+For squarefree $q$ with $\omega(q)=\omega$ prime factors,
+$\|\Phi_q\|_1\le\bigl(2(\varphi(q)+1)\bigr)^{2^{\omega-1}}$.
+\end{lemma}
+
+\begin{proof}
+Write $\Phi_q=\prod_{d\mid q}(x^{d}-1)^{\mu(q/d)}$. Exactly $2^{\omega-1}$
+divisors have $\mu(q/d)=+1$ and $2^{\omega-1}$ have $\mu(q/d)=-1$. Each factor
+of the first kind has $\|x^{d}-1\|_1=2$. For the second kind expand
+$(x^{d}-1)^{-1}=-(1+x^{d}+x^{2d}+\cdots)$ and truncate above degree
+$\varphi(q)=\deg\Phi_q$: the truncation has at most $\varphi(q)+1$ terms, all of
+modulus~$1$, so its $\ell^{1}$ norm is at most $\varphi(q)+1$. Since
+$\Phi_q$ is a polynomial of degree $\varphi(q)$, its coefficients agree with
+those of the product of the truncations, and $\|\cdot\|_1$ is submultiplicative.
+\end{proof}
+
+\begin{lemma}[Comparison, as an integer inequality]\label{lem:l1small}
+For $q$ odd, squarefree and $q\notin\{3,5,15\}$,
+\[
+  \bigl(2\varphi(q)+2\bigr)^{2^{\omega(q)}}\;\le\;3^{\varphi(q)},
+\]
+which is exactly $\bigl(2(\varphi+1)\bigr)^{2^{\omega-1}}\le3^{\varphi/2}$.
+\end{lemma}
+
+\begin{proof}
+Both sides are integers, so the statement is a comparison of integers. Set
+$D(\varphi)=\tfrac12\varphi\log3-2^{\omega-1}\log(2\varphi+2)$ at fixed
+$\omega$. Then $D'(\varphi)=\tfrac12\log3-2^{\omega}/(2\varphi+2)$, so $D$ is
+increasing once $\varphi+1>2^{\omega}/\log3$. For each $\omega$ the smallest
+admissible $\varphi$ is that of the odd primorial $3\cdot5\cdots p_{\omega+1}$,
+namely $2,8,48,480,5760,\dots$, and these already exceed the thresholds
+$1.82,3.64,7.28,14.6,29.1,\dots$; so $D$ is increasing on the whole admissible
+range of $\varphi$ for every $\omega$, and it suffices to inspect the smallest
+few values of $\varphi$ at each $\omega$. For $\omega\ge3$ the minimum already
+passes: at $\varphi=48$ one has $98^{8}=8.5\cdot10^{15}\le3^{48}=8.0\cdot10^{22}$.
+For $\omega=2$ the values $\varphi=8$ ($q=15$) fails, $104976>6561$, and
+$\varphi=12$ ($q=21$) passes, $26^{4}=456976\le3^{12}=531441$. For $\omega=1$,
+$\varphi=2$ ($q=3$) fails, $36>9$; $\varphi=4$ ($q=5$) fails, $100>81$;
+$\varphi=6$ ($q=7$) passes, $196\le729$. Monotonicity closes each case upward.
+\end{proof}
+
+\begin{proposition}[The sup-norm bound]\label{prop:supnorm}
+$\|\Phi_q\|_\infty\le\|\Phi_q\|_1\le3^{\varphi(q)/2}$ for every $q\ge3$, with
+equality only at $q=3$ and $q=6$. Hence $\lambda(q)\le\log\sqrt3$ throughout.
 \end{proposition}
 
-\begin{proof}[Proof, granted the cited bound]
-By the reduction above we may take $q$ squarefree, and $\Phi_{2m}(x)=\Phi_m(-x)$
-for odd $m$ lets us take $q$ odd as well. Write $q=p_1\cdots p_k$ with
-$p_1<\cdots<p_k$ odd. The quantity $\|\Phi_q\|_\infty$ is what
-Bzd\k{e}ga~\cite{Bz16} calls $L_q=\max_{|z|=1}|\Phi_q(z)|$, and his Theorem~3,
-combined with the chain $L_q/q\le S_q/q\le\sqrt{Q_q/q}\le A_q$ recorded in the
-same paper, gives
-\[
-  L_q\;\le\;q\,M_q\,(C+\epsilon_k)^{2^{k}},\qquad
-  M_q=\prod_{j=1}^{k-2}p_j^{\,2^{k-j-1}-1},\qquad C<0.859125 .
-\]
-Since $C<1$ the last factor is at most $1$ for large $k$, so it suffices that
-$\log q+\log M_q\le\tfrac12\varphi(q)\log3$. Taking the smallest admissible
-primes at each $k$ --- the worst case, since enlarging any $p_j$ increases
-$\varphi(q)$ multiplicatively while increasing $\log M_q$ only logarithmically
---- gives
-\[
-  \begin{array}{l|ccccccc}
-    k & 1 & 2 & 3 & 4 & 6 & 9 & 12\\\hline
-    \log q+\log M_q & 1.10 & 2.71 & 5.75 & 11.96 & 48.4 & 389 & 3109\\
-    \tfrac12\varphi(q)\log3 & 1.10 & 4.39 & 26.4 & 264 & 5.06\cdot10^{4}
-      & 5.61\cdot10^{8} & 2.42\cdot10^{13}
-  \end{array}
-\]
-The two sides agree at $k=1$, $q=3$ --- which is the equality case --- and the
-gap then grows without bound, because $\log M_q\ll2^{k}\log p_k$ while
-$\varphi(q)=\prod(p_j-1)$ grows superexponentially in $k$. The finitely many
-$q$ at which the asymptotic constants $\epsilon_k$ are not yet negligible are
-covered by the exact integer check for $q\le1200$ recorded above.
+\begin{proof}
+\emph{Powers of two.} For $q=2^{j}$ with $j\ge2$, $\Phi_q(x)=x^{2^{j-1}}+1$, so
+$\|\Phi_q\|_1=2\le3=3^{\varphi(q)/2}$ at $j=2$ and more comfortably beyond.
+
+\emph{Reduction to odd squarefree $q$.} By the paragraph above,
+$\lambda(n)\le\lambda(\mathrm{rad}\,n)$, so $q$ may be taken squarefree. If
+$q=2m$ with $m$ odd then $\Phi_{2m}(x)=\Phi_m(-x)$, which changes only the signs
+of the coefficients: $\|\Phi_{2m}\|_1=\|\Phi_m\|_1$ and
+$\varphi(2m)=\varphi(m)$, so $\lambda(2m)=\lambda(m)$ exactly.
+
+\emph{The three exceptions.} For $q=3,5$ the polynomial is
+$1+x+\cdots+x^{q-1}$, so $\|\Phi_q\|_1=q$: this gives $3\le3^{1}$ with
+\emph{equality}, and $5\le3^{2}=9$. For $q=15$, $\|\Phi_{15}\|_1=7\le3^{4}=81$.
+
+\emph{Everything else.} Lemma~\ref{lem:l1geom} followed by
+Lemma~\ref{lem:l1small}.
+
+\emph{Equality.} By the reduction, $q=6$ inherits the equality at $q=3$; and
+the exact integer comparisons above show these are the only two.
 \end{proof}
+
+\begin{remark}[The two equality cases are one polynomial]\label{rem:onepoly}
+It is worth pausing on this, because it closes the circle the paper opened.
+The only equalities are $q=3$ and $q=6$, and by the reduction above they are the
+\emph{same} polynomial seen from two sides: $\Phi_6(x)=\Phi_3(-x)$, that is,
+$x^2-x+1$ and $x^2+x+1$. The first section of the paper derived the peak height
+$M(q)=\tfrac12|\Phi_q(-1)|^{1/\varphi(q)}$, whose supremum $\sqrt3/2$ is
+attained exactly at $q=6$ because $\Phi_6(-1)=3$; the last section needs
+$\|\Phi_q\|_\infty\le3^{\varphi(q)/2}$, whose only equalities are at
+$\Phi_3$ and $\Phi_6$ because $\|\Phi_3\|_1=3$. The value of the polynomial at
+$-1$ and its maximum modulus on the circle coincide there, and it is the same
+$3$ both times.
+\end{remark}
 
 \begin{remark}[On the literature]\label{rem:bzdega}
 This deserves a word, because it turns out we had reinvented a named object.
 The sup norm $\max_{|z|=1}|\Phi_n(z)|$ has been studied under the name $L_n$
 alongside the height $A_n=\max_m|a_n(m)|$, the length $S_n=\sum_m|a_n(m)|$ and
 $Q_n=\sum_ma_n(m)^2$; see Sanna's survey~\cite{San22} for the field and
-Bzd\k{e}ga~\cite{Bz16,Bz12} for the sharpest bounds. Two remarks are worth
+Bzd\k{e}ga~\cite{Bz16,Bz12} for the sharpest bounds. Three remarks are worth
 recording. First, our $\ell^{1}$ reduction (Lemma~\ref{lem:l1}) is the step
-$L_n\le S_n$ of the chain $L_n/n\le S_n/n\le\sqrt{Q_n/n}\le A_n$ quoted there.
-Second, the extremal cases match: the only equality in
+$L_n\le S_n$ of the chain $L_n/n\le S_n/n\le\sqrt{Q_n/n}\le A_n$ quoted there,
+and the sharp order in that literature is $M_n=\prod_{j\le k-2}p_j^{2^{k-j-1}-1}$,
+against which our Lemma~\ref{lem:l1geom} is very crude --- but crude is enough
+here, and it is effective.
+
+Second, a caution we record because we walked into it. The sharpest constants
+there are stated for $\mathcal{B}_k=\limsup_{p_1\to\infty}A_n/M_n$, a limit as
+the \emph{smallest} prime factor grows, with an error $\epsilon_k\to0$ carrying
+no explicit rate. Our worst case is the odd primorial $3\cdot5\cdot7\cdots$,
+whose smallest prime factor is fixed at $3$ --- precisely outside that limit ---
+so those constants cannot be used as a pointwise bound here. This is why
+Proposition~\ref{prop:supnorm} is proved from scratch above.
+Third, the extremal cases match: the only equality in
 Proposition~\ref{prop:supnorm} is at $\varphi=2$, where
 $\Phi_3(x)=x^2+x+1$ and $\Phi_6(x)=x^2-x+1$ both have $L=3=3^{\varphi/2}$, and
 these are precisely the two moduli that our peak analysis singles out --- $q=6$
@@ -1256,18 +1311,6 @@ because $M(6)=\sqrt3/2$ is the supremum of the peak heights, and $q=3$ because
 it is the odd companion of $6$.
 \end{remark}
 
-\begin{remark}[A self-contained substitute, and its range]\label{rem:selfl1}
-One can also avoid the citation. Expanding the factors with $\mu(d)=-1$ in
-$\Phi_q=\prod_{d\mid q}(x^{d}-1)^{\mu(q/d)}$ as geometric series and using
-submultiplicativity of $\|\cdot\|_1$ gives
-$\|\Phi_q\|_1\le(2(\varphi(q)+1))^{2^{\omega(q)-1}}$, which is elementary. It
-suffices from $\omega(q)\ge3$ onwards --- at $q=105$ it gives $18.3$ against the
-$26.4$ allowed, and the margin then grows --- but it \emph{fails} for
-$\omega(q)\le2$: at $q=3$ it gives $1.79$ against $1.10$, and at $q=15$ it gives
-$5.78$ against $4.39$. Combined with the exact integer check for $q\le1200$ it
-closes the statement, so a reader who prefers a self-contained argument has
-one; the cited bound is simply much stronger.
-\end{remark}
 
 \begin{lemma}[Twisted sums, uniformly]\label{lem:twist}
 Let $q\le(\log N)^{A}$, let $r$ be coprime to $q$, let $n\le N_0$ and let
