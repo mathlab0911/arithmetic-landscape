@@ -269,6 +269,65 @@ theorem quarter_even_gt_odd : Real.sqrt 2 / 2 < 1 := by
   have hsn : (0:ℝ) ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
   nlinarith [hs, hsn]
 
+/-! ## 補題M1.5(消滅)と系M1.6(生存スペクトル)の形式化(17周目)
+
+特性積 `F_B(θ) = Π_{a∈B} (1 + e^{iaθ})` の副次峰は θ = 2π/q に立つ。
+`q = 2m` に対し θ = π/m であり、**B が m を含めば因子 `1 + e^{iπ} = 0` が現れて積が消える**。
+これは論文1の `normSq_at_pi`(a ≡ 3 mod 6 で消える)の一般化であり、
+「素数列では q = 2p の峰が死に、層 d では p ≤ 2d の分だけ復活する」の骨格である。 -/
+
+/-- 特性積 `F_B(θ) = Π_{a∈B} (1 + e^{iaθ})`。振幅が |F|、位相が arg F。
+    実数リストで定義しておく(整数列は `B.map (Nat.cast)` として渡す)。 -/
+noncomputable def F (B : List ℝ) (θ : ℝ) : ℂ :=
+  (B.map (fun a => 1 + Complex.exp ((a * θ : ℝ) * Complex.I))).prod
+
+/-- 核: 角が π の奇数倍なら因子はゼロ。`e^{i(2t+1)π} = −1` による。 -/
+theorem one_add_exp_odd_pi (t : ℕ) :
+    1 + Complex.exp ((((2 * t + 1 : ℕ) : ℝ) * Real.pi : ℝ) * Complex.I) = 0 := by
+  have hcast : (((2 * t + 1 : ℕ) : ℝ) * Real.pi : ℝ) * Complex.I
+      = ((2 * t + 1 : ℕ) : ℂ) * ((Real.pi : ℂ) * Complex.I) := by
+    push_cast; ring
+  rw [hcast, Complex.exp_nat_mul, Complex.exp_pi_mul_I]
+  have : Odd (2 * t + 1) := ⟨t, by ring⟩
+  rw [this.neg_one_pow]
+  ring
+
+/-- **補題M1.5(消滅)**: `m ∈ B` かつ `m > 0` なら `F_B(π/m) = 0`。
+    すなわち q = 2m の副次峰は厳密に消灯する。 -/
+theorem F_eq_zero_of_mem {B : List ℝ} {m : ℝ} (hm : m ≠ 0) (h : m ∈ B) :
+    F B (Real.pi / m) = 0 := by
+  have hz : (1 + Complex.exp ((m * (Real.pi / m) : ℝ) * Complex.I)) = 0 := by
+    have hθ : m * (Real.pi / m) = Real.pi := by field_simp
+    rw [hθ, Complex.exp_pi_mul_I]
+    ring
+  apply List.prod_eq_zero
+  exact List.mem_map.mpr ⟨m, h, hz⟩
+
+/-- 同じことを「q = 2m の角 2π/q」の形で述べたもの(論文の書き方に合わせる)。 -/
+theorem F_eq_zero_at_two_pi_div {B : List ℝ} {m : ℝ} (hm : m ≠ 0) (h : m ∈ B) :
+    F B (2 * Real.pi / (2 * m)) = 0 := by
+  have hrw : 2 * Real.pi / (2 * m) = Real.pi / m := by
+    rw [mul_div_mul_left _ _ (two_ne_zero)]
+  rw [hrw]
+  exact F_eq_zero_of_mem hm h
+
+/-- **系M1.6 の対偶側**: 消滅は `m ∈ B` からしか来ない、という主張を使うための形。
+    `F_B(π/m) ≠ 0` なら `m ∉ B`。層 d を上げて m を落とすと峰が復活する、の形式的裏付け。 -/
+theorem not_mem_of_F_ne_zero {B : List ℝ} {m : ℝ} (hm : m ≠ 0)
+    (h : F B (Real.pi / m) ≠ 0) : m ∉ B := fun hmem => h (F_eq_zero_of_mem hm hmem)
+
+/-- 整数列に対する形(論文で使う版): `m ∈ B`(自然数、m > 0)なら
+    `F` を実数化した列で評価すると q = 2m の峰は消える。 -/
+theorem F_nat_eq_zero_of_mem {B : List ℕ} {m : ℕ} (hm : 0 < m) (h : m ∈ B) :
+    F (B.map (fun a => (a : ℝ))) (Real.pi / (m : ℝ)) = 0 := by
+  apply F_eq_zero_of_mem (Nat.cast_ne_zero.mpr hm.ne')
+  simpa using h
+
+/-- 対照: q = 4 の床は消えない。奇数 a に対し `1 + i^a ≠ 0`(定理E(i))なので
+    `F_B(π/2)` の因子は一つもゼロにならない。`normSq_one_add_I_pow_odd_ne_zero` を参照。 -/
+theorem q4_floor_never_vanishes (a : ℕ) (h : a % 2 = 1) :
+    (1 + Complex.I ^ a) ≠ 0 := normSq_one_add_I_pow_odd_ne_zero a h
+
 end ALT
 
 #print axioms ALT.normSq_one_add_exp
@@ -291,3 +350,9 @@ end ALT
 #print axioms ALT.max_abs_cos_sin_quarter_even
 #print axioms ALT.max_abs_cos_sin_quarter_odd
 #print axioms ALT.quarter_even_gt_odd
+#print axioms ALT.one_add_exp_odd_pi
+#print axioms ALT.F_eq_zero_of_mem
+#print axioms ALT.F_eq_zero_at_two_pi_div
+#print axioms ALT.not_mem_of_F_ne_zero
+#print axioms ALT.F_nat_eq_zero_of_mem
+#print axioms ALT.q4_floor_never_vanishes
