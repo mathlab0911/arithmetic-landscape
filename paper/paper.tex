@@ -749,7 +749,11 @@ Let $B$ be any finite sequence of odd positive integers, $b=|B|$. Then
       \]
 \end{enumerate}
 \textup{(Lean: \Lean{normSq\_one\_add\_I\_pow\_odd}, \Lean{max\_abs\_cos\_sin\_sq\_ge},
-\Lean{spread\_lower\_bound} give (i) and the inequality in (iii).)}
+\Lean{spread\_lower\_bound} give (i) and the inequality in (iii);
+\Lean{max\_abs\_cos\_sin\_sq}, \Lean{max\_abs\_cos\_sin\_quarter\_even} and
+\Lean{max\_abs\_cos\_sin\_quarter\_odd} give the parity dichotomy in (ii), the
+spread being $2^{b/2}\max(|\cos\varphi|,|\sin\varphi|)$ with
+$\varphi=\pi(p-q)/4$ and $p-q\equiv b\pmod 2$.)}
 \end{theorem}
 
 \begin{proof}

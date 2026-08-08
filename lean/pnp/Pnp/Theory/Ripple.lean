@@ -199,6 +199,76 @@ theorem spread_lower_bound (φ : ℝ) :
   have hsn : (0:ℝ) ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
   nlinarith [h, hnn, hs, hsn]
 
+/-! ## 定理E(ii): スプレッドは b の偶奇だけで決まる(15周目に形式化)
+
+`R_c = Σ_{m ≡ c (4)} r_B(m)` は逆離散フーリエ変換で
+`R_c = 2^{b−2} + (1/2)·2^{b/2}·cos(φ − cπ/2)`(φ = π(p−q)/4)と書ける。
+4点 `{cos φ, sin φ, −cos φ, −sin φ}` の最大と最小の差は `2·max(|cos φ|, |sin φ|)` なので
+
+    max_c R_c − min_c R_c = 2^{b/2} · max(|cos φ|, |sin φ|).
+
+したがって定理E(ii)は、**この max が φ = π·n/4 の n の偶奇だけで決まる**ことに帰着する。
+n = p − q は p + q = b と同じ偶奇なので、n の偶奇 = b の偶奇。以下それを証明する。 -/
+
+/-- max(|cos φ|, |sin φ|)² = (1 + |cos 2φ|)/2。倍角公式そのもの。 -/
+theorem max_abs_cos_sin_sq (φ : ℝ) :
+    (max |Real.cos φ| |Real.sin φ|) ^ 2 = (1 + |Real.cos (2 * φ)|) / 2 := by
+  have hpyth : Real.sin φ ^ 2 + Real.cos φ ^ 2 = 1 := Real.sin_sq_add_cos_sq φ
+  have hdbl : Real.cos (2 * φ) = Real.cos φ ^ 2 - Real.sin φ ^ 2 := by
+    rw [two_mul, Real.cos_add]; ring
+  rcases le_total |Real.cos φ| |Real.sin φ| with h | h
+  · have hc : Real.cos φ ^ 2 ≤ Real.sin φ ^ 2 := by
+      nlinarith [abs_nonneg (Real.cos φ), abs_nonneg (Real.sin φ),
+        sq_abs (Real.cos φ), sq_abs (Real.sin φ), h]
+    rw [max_eq_right h, sq_abs, hdbl, abs_of_nonpos (by linarith)]
+    linarith
+  · have hc : Real.sin φ ^ 2 ≤ Real.cos φ ^ 2 := by
+      nlinarith [abs_nonneg (Real.cos φ), abs_nonneg (Real.sin φ),
+        sq_abs (Real.cos φ), sq_abs (Real.sin φ), h]
+    rw [max_eq_left h, sq_abs, hdbl, abs_of_nonneg (by linarith)]
+    linarith
+
+/-- b が偶数(n = 2m)のとき max(|cos(πn/4)|, |sin(πn/4)|) = 1。
+    ⇒ スプレッド = 2^{b/2}。 -/
+theorem max_abs_cos_sin_quarter_even (m : ℕ) :
+    max |Real.cos ((2 * m : ℕ) * Real.pi / 4)| |Real.sin ((2 * m : ℕ) * Real.pi / 4)| = 1 := by
+  set φ : ℝ := ((2 * m : ℕ) : ℝ) * Real.pi / 4 with hφ
+  have h2 : 2 * φ = 0 + m * Real.pi := by rw [hφ]; push_cast; ring
+  have habs : |Real.cos (2 * φ)| = 1 := by
+    have hsq1 : Real.cos (2 * φ) ^ 2 = 1 := by
+      rw [h2, cos_sq_add_nat_mul_pi]; simp
+    nlinarith [abs_nonneg (Real.cos (2 * φ)), sq_abs (Real.cos (2 * φ)), hsq1]
+  have hsq : (max |Real.cos φ| |Real.sin φ|) ^ 2 = 1 := by
+    rw [max_abs_cos_sin_sq, habs]; norm_num
+  have hnn : (0:ℝ) ≤ max |Real.cos φ| |Real.sin φ| := le_max_of_le_left (abs_nonneg _)
+  nlinarith [hsq, hnn]
+
+/-- b が奇数(n = 2m+1)のとき max(|cos(πn/4)|, |sin(πn/4)|) = √2/2 = 1/√2。
+    ⇒ スプレッド = 2^{b/2}/√2 = 2^{(b−1)/2}。 -/
+theorem max_abs_cos_sin_quarter_odd (m : ℕ) :
+    max |Real.cos ((2 * m + 1 : ℕ) * Real.pi / 4)| |Real.sin ((2 * m + 1 : ℕ) * Real.pi / 4)|
+      = Real.sqrt 2 / 2 := by
+  set φ : ℝ := ((2 * m + 1 : ℕ) : ℝ) * Real.pi / 4 with hφ
+  have h2 : 2 * φ = Real.pi / 2 + m * Real.pi := by rw [hφ]; push_cast; ring
+  have habs : |Real.cos (2 * φ)| = 0 := by
+    have hz : Real.cos (2 * φ) ^ 2 = 0 := by
+      rw [h2, cos_sq_add_nat_mul_pi, Real.cos_pi_div_two]; norm_num
+    have : Real.cos (2 * φ) = 0 := by nlinarith [hz]
+    rw [this]; simp
+  have hsq : (max |Real.cos φ| |Real.sin φ|) ^ 2 = 1 / 2 := by
+    rw [max_abs_cos_sin_sq, habs]; norm_num
+  have hnn : (0:ℝ) ≤ max |Real.cos φ| |Real.sin φ| := le_max_of_le_left (abs_nonneg _)
+  have hs : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+  have hsn : (0:ℝ) ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
+  nlinarith [hsq, hnn, hs, hsn]
+
+/-- 系: 偶数側の値 1 は奇数側の値 √2/2 より真に大きい。
+    「b が偶数のほうがスプレッドが √2 倍大きい」ことの形式化。 -/
+theorem quarter_even_gt_odd : Real.sqrt 2 / 2 < 1 := by
+  have hs : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+  have hsn : (0:ℝ) ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
+  nlinarith [hs, hsn]
+
 end ALT
 
 #print axioms ALT.normSq_one_add_exp
@@ -217,3 +287,7 @@ end ALT
 #print axioms ALT.normSq_one_add_I_pow_odd_ne_zero
 #print axioms ALT.max_abs_cos_sin_sq_ge
 #print axioms ALT.spread_lower_bound
+#print axioms ALT.max_abs_cos_sin_sq
+#print axioms ALT.max_abs_cos_sin_quarter_even
+#print axioms ALT.max_abs_cos_sin_quarter_odd
+#print axioms ALT.quarter_even_gt_odd
