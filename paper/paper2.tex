@@ -959,7 +959,7 @@ that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
 Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
 --- \emph{and} (b) \emph{the bound $\|\Phi_q\|_1\le3^{\varphi(q)/2}$ on the range of
 Problem~\ref{prob:supnorm}}, verified by exact integer arithmetic for
-$q\le240$. Fix $d\ge2$ and let
+$q\le1200$. Fix $d\ge2$ and let
 $n=\lfloor T/2\rfloor$. With
 $B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
@@ -1075,8 +1075,8 @@ We set out plainly which parts of this paper are proved and which are not.
       matching of radii unnecessary. That lemma is now proved; what survives of
       the gap is Problem~\ref{prob:supnorm}: by Lemmas~\ref{lem:supnorm}
       and~\ref{lem:l1} it is the integer inequality
-      $\|\Phi_q\|_1\le3^{\varphi(q)/2}$, verified exactly for $q\le240$ but not
-      yet for the growing range $q\le Q_3$. No range of $x$ has to be examined:
+      $\|\Phi_q\|_1\le3^{\varphi(q)/2}$, verified exactly for $q\le1200$ and
+      needed for all squarefree $q\ge7$. No range of $x$ has to be examined:
       see Remark~\ref{rem:trivial}. We warn that the naive form
       of the inequality --- $\Phi_q\le0$ --- is \emph{false}, for the reason
       given in Remark~\ref{rem:phipos}.
@@ -1180,24 +1180,55 @@ integers:
 \[
   \sum_i|c_i|\;\le\;3^{\varphi(q)/2}.
 \]
-We have verified this by exact integer arithmetic for $3\le q\le240$. It holds
-throughout, with equality \emph{only} at $q=3$ and $q=6$, and the margin per
-element $(\tfrac12\varphi(q)\log3-\log\|\Phi_q\|_1)/\varphi(q)$ grows: it is
-$0$ at $q=6$, $0.275$ at $q=12$, $0.428$ at $q=60$, $0.475$ at $q=105$ and
-$0.519$ at $q=240$. The $\ell^{1}$ norm itself barely moves --- it is $7$ at
-$q=240$, against $3^{32}$ on the right.
+We have verified this by exact integer arithmetic for $3\le q\le1200$. It holds
+throughout, with equality \emph{only} at $q=3$ and $q=6$. Writing
+$\lambda(q)=\varphi(q)^{-1}\log\|\Phi_q\|_1$ for the quantity that must stay
+below $\log\sqrt3=0.5493$:
+\[
+  \begin{array}{l|ccccccc}
+    Q & 3 & 7 & 13 & 61 & 241 & 481 & 961\\\hline
+    \sup_{q\ge Q}\lambda(q) & 0.5493 & 0.4024 & 0.3243 & 0.1354 & 0.0526
+      & 0.0337 & 0.0182
+  \end{array}
+\]
+So $Q_4=7$ suffices: past the two extremal moduli $q=3,6$ the margin is already
+$0.147$ per element, and it grows. The $\ell^{1}$ norm itself barely moves ---
+it is $7$ at $q=240$, against $3^{32}$ on the right.
+
+Two structural remarks cut the problem down further. First,
+$\Phi_n(x)=\Phi_{\mathrm{rad}(n)}(x^{n/\mathrm{rad}(n)})$, so
+$\|\Phi_n\|_1=\|\Phi_{\mathrm{rad}(n)}\|_1$ exactly, while
+$\varphi(n)\ge\varphi(\mathrm{rad}(n))$; hence
+$\lambda(n)\le\lambda(\mathrm{rad}(n))$ and \emph{only squarefree $q$ need be
+considered}. (Verified for $3\le n\le300$: no exceptions.) Second, the
+extremal moduli are exactly the ones with the smallest $\varphi$: $q=3,6$ give
+$\|\Phi_q\|_1=3=3^{\varphi(q)/2}$, and every larger squarefree modulus has
+enough room in $\varphi(q)$ to absorb its $\ell^{1}$ norm.
 
 \begin{problem}[The remaining range]\label{prob:supnorm}
-Extend the check above to all $q\le Q_3$, where $Q_3$ is the threshold beyond
-which Remark~\ref{rem:flat} takes over. Two honest points. First, $Q_3$ grows
-with $N$ --- $\varepsilon$-uniformity in Remark~\ref{rem:flat} needs
-$q\gg N_0\log\log q$ --- so a check up to a fixed bound does not by itself
-suffice; one wants either a bound on $\|\Phi_q\|_1$ of Bateman type, or a
-quantitative form of Remark~\ref{rem:flat}. Second, the trivial pointwise bound
-$h_q\le\log2$ is tantalisingly close but not enough: it gives
-$\log2=0.693$ where $\log\sqrt3=0.549$ is wanted, a factor $1.26$. The gap is
-closed by the equidistribution of the reduced residues mod $q$, which forces
-$h_q\to0$; making that explicit is what remains.
+Prove $\lambda(q)<\log\sqrt3$ for all squarefree $q\ge7$, not merely for
+$q\le1200$. Equivalently, bound $\log\|\Phi_q\|_1$ by
+$\tfrac12\varphi(q)\log3$. Three remarks on where the difficulty is and is not.
+
+\emph{(a)} It is not a question about $x$: by Lemma~\ref{lem:supnorm} the whole
+$x$-dependence has been discharged, and by the paragraph above only squarefree
+$q$ matter.
+
+\emph{(b)} The trivial pointwise bound $h_q\le\log2$ is tantalisingly close but
+not enough --- $0.693$ against the $0.549$ wanted, a factor $1.26$ --- and it
+cannot be improved without using that the reduced residues mod $q$ are spread
+around the circle.
+
+\emph{(c)} A termwise estimate of the series for $\Phi_q$ will not do it. Using
+$|\widetilde I(mx)|\le2/(mx)$ on the range $m>\sqrt q$ with $x\gg1/q$ gives
+$\sum_{m>\sqrt q}(1/m)(2q/(m\delta))\le2\sqrt q/\delta$, which \emph{diverges};
+inserting the Ramanujan-sum decay $|c_q(m)|/\varphi(q)\ll m\log\log q/q$ still
+leaves $\log q\log\log q/\delta$. The loss is the oscillation in $m$, which
+termwise bounds throw away. The natural tool instead is the identity
+$\prod_{s=0}^{Q-1}2\sin\pi(x+s/Q)=2\sin(\pi Qx)$, which collapses each
+arithmetic progression in a M\"obius decomposition of $\sum_{r\perp q}$ to a
+single $\log|2\sin|$; the obstacle there is that the terms with $\mu(d)=-1$ need
+a \emph{lower} bound, and $\log|2\sin|$ is unbounded below.
 \end{problem}
 
 \begin{lemma}[Twisted sums, uniformly]\label{lem:twist}
