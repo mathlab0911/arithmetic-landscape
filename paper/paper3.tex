@@ -1,0 +1,281 @@
+% paper3.tex --- Arithmetic Landscape Theory, paper 3.
+% SCAFFOLDING ONLY (round 86). Section structure and the verified data are in place;
+% the theorem skeleton is fable-5's next deliverable (spec_t3rigid_r085.md).
+% Nothing here is a claim-language upgrade: every statement carries its status explicitly.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[margin=28mm]{geometry}
+\usepackage{microtype}
+\usepackage[colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\lm}{\mathrm{lm}}
+\newcommand{\Lean}[1]{\texttt{#1}}
+\newcommand{\TODO}[1]{\textcolor{red}{[\textbf{TODO} #1]}}
+\newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
+
+\title{Rigidity of the gap series off centre, and the transfer function of a
+subset-sum landscape\\[4pt]
+\normalsize\textsf{(working title --- scaffolding, round 86)}}
+\author{Kentaro Amauchi\thanks{Independent researcher.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\TODO{written last, after the theorem statements are fixed.} The three things this
+paper is to establish: (i) that $\lm_A(n)/\deg_A(n)\to\Gamma(A)$ holds for every fixed
+target fraction $\rho$, not only at the centre --- so that $\Gamma$ is an invariant of the
+landscape and not of one point of it; (ii) that the ratio is a universal functional of the
+\emph{local logarithmic slope} of the representation count alone, through an explicit
+transfer function $\Phi$; and (iii) that the hypothesis the first statement needs is exactly
+the convergence of the series that gives the second one --- with a profile for which it fails.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+
+\TODO{full introduction.} Skeleton of the argument, and what each part rests on:
+
+\begin{itemize}
+\item The companion papers establish $\lm/\deg\to\Gamma$ \emph{at the centre}
+      $n=\lfloor T/2\rfloor$: paper~1 reduces it to a flatness hypothesis and paper~2
+      discharges that hypothesis unconditionally. The obvious question --- whether $\Gamma$ is
+      a property of the landscape or of its centre --- is what this paper answers.
+\item The combinatorial layer (classification, exact stratification, sandwich) was proved
+      \emph{for every target} in paper~1 and is formally verified; nothing there needs redoing.
+      \STATUS{Lean-verified}
+\item The minor-arc estimates of paper~2 bound $|G_B(\theta)|$ as a function of $\theta$ only.
+      They do not refer to the extraction point $m$, which enters
+      $r_B(m)=\frac1{2\pi}\int F_B(\theta)e^{-im\theta}d\theta$ only through a phase. They
+      therefore transfer to off-centre targets unchanged. \STATUS{quoted from paper 2}
+\item What is new is the middle: a tilted local limit theorem and a cancellation lemma for the
+      odd orders in $\lambda$. \TODO{fable-5, \texttt{spec\_t3rigid\_r085.md}}
+\end{itemize}
+
+\section{Notation, and what is inherited}\label{sec:notation}
+
+\TODO{transcribe the definitions from paper 1 in a form that does not assume $n=T/2$.}
+Fix throughout an increasing sequence $A=(a_1,\dots,a_k)$ of odd positive integers,
+$T=\sigma(A)$, $S_2=\sum a_i^2$, $V=S_2/4$, and a target $n$. Write $\rho=n/T$ and
+$x=\tfrac12-\rho$. For $d\ge1$ put
+\[
+  N_d=\#\{i:a_i\le2d\},\qquad
+  \sigma_d=\!\!\sum_{a_i\le 2d}\!\! a_i,\qquad
+  s_d=\!\!\sum_{a_i\le 2d}\!\! a_i^{2},\qquad
+  \delta_d=d+\tfrac{\sigma_d}{2},
+\]
+and let $B_d=\{a_i:a_i>2d\}$ be the layer-$d$ ensemble, of variance
+$V_d=(S_2-s_d)/4=V-s_d/4$.
+
+\begin{definition}[local logarithmic slope]\label{def:slope}
+$\lambda(n)$ is the logarithmic derivative of the representation count at the target,
+\[
+  \lambda(n)\;=\;-\frac{d}{dm}\log r_A(m)\Big|_{m=n}
+  \;=\;\tfrac14\log\frac{r_A(n-2)}{r_A(n+2)}+O(\cdot).
+\]
+\end{definition}
+
+\begin{remark}[why the slope and not the offset]\label{rem:whyslope}
+The Gaussian approximation $\lambda\approx(T/2-n)/V$ is what one writes down first, and it is
+wrong at the 10\% level for the purposes of this paper. \TODO{write out: the substitution turns
+a $15$--$18\%$ drift in the measured coefficient into $0.03\%$, and it is the reason an earlier
+draft of this programme reported a spurious non-integer exponent.} This is not a cosmetic
+choice: every statement below is false at the stated precision if $(T/2-n)/V$ is substituted
+for $\lambda$.
+\end{remark}
+
+\section{Rigidity}\label{sec:rigid}
+
+\begin{theorem}[T3-Rigid, to be proved]\label{thm:rigid}
+\TODO{statement from \texttt{spec\_t3rigid\_r085.md}.} Informally: for the odd primes and every
+fixed $\rho\in(0,1)$, $\lm_P(\lfloor\rho T\rfloor)/\deg_P(\lfloor\rho T\rfloor)\to\Gamma(P)$,
+under the hypothesis of \S\ref{sec:counterexample}.
+\end{theorem}
+
+\STATUS{experimentally confirmed} The evidence the theorem is modelled on. With
+$\mathrm{ratio}(\rho,k)=[\lm/\deg]/\Gamma(P_k)$, the spread over $\rho$ contracts monotonically:
+
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+$k$ & 40 & 52 & 64 & 76 & 88 & 100\\
+\midrule
+$\max_\rho-\min_\rho$ & 0.01051 & 0.00283 & 0.00257 & 0.00162 & 0.00113 & 0.00083\\
+$\max_\rho|\mathrm{ratio}-1|$ & 0.00921 & 0.00276 & 0.00244 & 0.00156 & 0.00109 & 0.00081\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+over $\rho\in[0.20,0.50]$, by exact integer computation. \TODO{full table; state the
+granularity guard $\deg\ge10^4$ and the two correctness checks (agreement with brute force over
+all $2^k$ subsets; the reflection identity $\lm(n)=\lm(T-n)$, which is exact).}
+
+\section{The transfer function}\label{sec:transfer}
+
+\begin{theorem}[correction theorem, to be proved]\label{thm:transfer}
+\TODO{statement.} Informally:
+\begin{equation}\label{eq:phi}
+  \frac{\lm_A(n)}{\deg_A(n)}\;=\;\Phi\bigl(\lambda(n)\bigr)\,(1+o(1)),
+  \qquad
+  \Phi(\lambda)=1+\sum_{d\ge1}2^{1-N_d}\,
+     e^{-\lambda^{2}s_d/8}\,\cosh(\lambda\delta_d).
+\end{equation}
+\end{theorem}
+
+Three features of \eqref{eq:phi} deserve to be stated before any proof.
+
+\begin{remark}[the ratio sees the target only through one number]
+$\Phi$ depends on $A$ alone. The target enters only through $\lambda(n)$. This is a stronger
+statement than rigidity: rigidity says the limit does not move, \eqref{eq:phi} says how it
+fails to move.
+\end{remark}
+
+\begin{remark}[$\lambda=0$ recovers paper 1]\label{rem:lam0}
+The layer weight $e^{-\lambda^2s_d/8}$ is $1$ at $\lambda=0$, so
+$\Phi(0)=1+\sum_{d\ge1}2^{1-N_d}$, which is the window identity
+$W_D(A)=\Gamma(A)+(2D+1)2^{-k}$ of paper~1 --- already formally verified.
+Numerically, $\Phi(0)-\Gamma(A)$ is $0$, $-4.7\cdot10^{-14}$ and $-2.7\cdot10^{-15}$ for the
+three sequences of Table~\ref{tab:one}.
+\end{remark}
+
+\begin{remark}[each layer is a smaller ensemble]\label{rem:weight}
+The factor $e^{-\lambda^2 s_d/8}$ is not a fudge: it is what remains when the Gaussian
+normalisations of $B_d$ and of $A$ fail to cancel, because $V_d=V-s_d/4$. Expanding to second
+order gives the coefficient of $\lambda^2$ as $\delta_d^2-s_d/4$ rather than $\delta_d^2$.
+\TODO{write out the two lines; note that the correction is termwise smaller than the term it
+corrects, $s_d/4\le d\sigma_d/2<\delta_d^2$, so the sum stays positive.}
+\end{remark}
+
+\subsection{Verification}\label{sec:table1}
+
+\STATUS{experimentally confirmed} Table~\ref{tab:one} evaluates \eqref{eq:phi} at the measured
+$\lambda(n)$ against the exactly computed $\lm/\deg$.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lccccccc}
+\toprule
+$x=\frac12-\rho$ & 0.06 & 0.08 & 0.10 & 0.15 & 0.20 & 0.25 & 0.30\\
+\midrule
+odds, $k=220$      & 0.84\% & 0.85\% & 0.85\% & 0.86\% & 0.88\% & 0.92\% & 0.97\%\\
+squares, $k=170$   & 1.66\% & 1.67\% & 1.68\% & 1.70\% & 1.74\% & 1.80\% & 1.89\%\\
+primes, $k=220$    & 0.91\% & 0.92\% & 0.92\% & 0.94\% & 0.96\% & 0.99\% & 1.05\%\\
+\bottomrule
+\end{tabular}
+\caption{Residual $|\,\mathrm{measured}-\Phi(\lambda)\,|$ \textbf{as a fraction of the centred
+signal} $\lm/\deg-[\lm/\deg]_{n=T/2}$. Absolute residuals are $10^{-5}$ to $10^{-6}$; quoting
+them as significant figures of the ratio would be meaningless, since the signal itself lives in
+the fifth and sixth digit.}
+\label{tab:one}
+\end{table}
+
+\begin{remark}[why the residual is quoted this way]\label{rem:signalfraction}
+Against the \emph{uncentred} signal the same residuals read $2\%$ to $300\%$, the large values
+occurring precisely where the signal is smallest. Neither number is wrong; the centred one is
+the one the theorem is about, because $\Phi(0)=\Gamma$ is an identity and the finite-$k$ offset
+$[\lm/\deg]_{n=T/2}-\Gamma$ is a separate quantity of size $10^{-6}$.
+\TODO{keep this remark: an earlier draft of the programme reported ``agreement to five or six
+significant figures'' for a model that was $12\%$ wrong on the signal.}
+\end{remark}
+
+\section{Universality of the rate function}\label{sec:universality}
+
+\STATUS{experimentally confirmed, $k=16..56$, three reference sequences}
+\TODO{full table.} With $\hat I_A(\rho)=-k^{-1}\log(\deg_A(\lfloor\rho T\rfloor)/2^k)$ and
+$D_k=\hat I_P-\hat I_{\mathrm{ref}}$, the difference tends to $0$ for each of three reference
+sequences: the odd numbers, the arithmetic progression $6n+5$, and a random odd sequence of the
+same range. The sign is a property of the reference, not a universal fact --- it is positive
+against the odd numbers, negative against the random sequence, and changes sign near $k=48$
+against the progression.
+
+\begin{remark}[the primes sit near the random sequence]\label{rem:random}
+At $k=56$ the distance to a random odd sequence is $0.0016$ against $0.0146$ to the arithmetic
+progression --- an order of magnitude. \TODO{develop: this is the direct evidence for the
+reading that the main term is universal and the arithmetic of the sequence appears only in the
+correction.}
+\end{remark}
+
+\section{A profile for which the hypothesis fails}\label{sec:counterexample}
+
+The hypothesis Theorem~\ref{thm:rigid} needs is the convergence, with room, of the series in
+\eqref{eq:phi} --- qualitatively, that $N_d\to\infty$ fast enough. \TODO{state it precisely
+once fable-5's skeleton fixes the form.}
+
+\STATUS{experimentally confirmed} It is not vacuous. For the odd-ified cubes
+$a_i=2\lfloor i^3/2\rfloor+1$:
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+profile & odds & primes & squares & cubes\\
+\midrule
+$N_d$ at $d=10$ (any $k$) & 10 & 7 & 4 & \textbf{2}\\
+$Q(0)=\Gamma^{-1}\sum2^{-N_d}(\delta_d^2-s_d/4)$ & 20.3 & 50.4 & 916 & \textbf{381\,904}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Only $\{1,9\}$ ever lie below $20$, at any $k$, so $2^{-N_d}$ never damps the growing
+$\delta_d^2$ and the series turns over only near $d\approx10^4$. At $k=70$ the finite-size
+offset is still $1.75\cdot10^{-2}$ while the signal is $1.7\cdot10^{-11}$: nine orders of
+magnitude, so the profile is not merely slow but undecidable at any accessible size.
+\TODO{present this as the counterexample that makes the hypothesis non-vacuous, not as a
+failure.}
+
+\section{Honest scope}\label{sec:scope}
+
+\TODO{in the style of paper 1 \S10 and paper 2 \S10.} The classification to fill in:
+
+\begin{itemize}
+\item \emph{Formally verified}: the combinatorial layer, inherited from paper~1, for every
+      target.
+\item \emph{Proved}: \TODO{after fable-5's skeleton.} The minor-arc input is quoted from
+      paper~2 and is $m$-independent; paper~2's own ineffectivity through the Siegel--Walfisz
+      constant is inherited.
+\item \emph{Experimentally confirmed, with the range stated}: rigidity
+      (\S\ref{sec:rigid}), the transfer function to $0.8$--$1.9\%$ of the signal
+      (Table~\ref{tab:one}), universality (\S\ref{sec:universality}), the profile-dependent
+      constant $4(2\alpha+1)/(\alpha+1)$ verified on four profiles.
+\item \emph{Not claimed}: the residual $0.8$--$1.9\%$ of Table~\ref{tab:one} is consistent
+      with finite size and shrinks in $k$, but we do not claim it is zero.
+\end{itemize}
+
+\begin{remark}[approaches that did not work]\label{rem:graveyard}
+\TODO{as in paper 2, keep the dead ends with their reasons.} At least: the tilted-measure
+($\Gamma_x$) reading of off-centre targets, which the data rejected --- rewriting the collapse
+in the exact tilt parameter makes it worse, not better; and the reading of the correction as a
+third-cumulant effect, which was an artefact of using the Gaussian slope.
+\end{remark}
+
+\section*{Data availability}
+\TODO{scripts and logs, as in papers 1 and 2.}
+
+\begin{thebibliography}{9}
+\bibitem{P1} K.~Amauchi, \emph{The gap series of an integer sequence: an arithmetic invariant
+governing subset-sum landscapes}. \TODO{arXiv number}
+\bibitem{P2} K.~Amauchi, \emph{Asymptotic flatness of subset-sum landscapes of primes: the
+sub-peak spectrum and the constant $\sqrt3/2$}. \TODO{arXiv number}
+\end{thebibliography}
+
+\end{document}
