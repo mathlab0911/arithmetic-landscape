@@ -1,0 +1,16 @@
+cor:oddsclosed
+def:gq
+lem:termwise
+rem:assign
+rem:measurefree
+rem:physics
+sec:biased
+sec:e5
+sec:e6
+sec:inherited
+sec:intro
+sec:outlook
+sec:phiq
+sec:random
+sec:scope
+thm:fair

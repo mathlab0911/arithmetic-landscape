@@ -1,0 +1,262 @@
+% paper4.tex --- Arithmetic Landscape Theory, paper 4.
+% Scaffolding (round 100). Section 2 is written; everything else is TODO-tagged.
+% Every statement carries its status explicitly.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage[margin=28mm]{geometry}
+\usepackage{microtype}
+\usepackage[colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\lm}{\mathrm{lm}}
+\newcommand{\Lean}[1]{\texttt{#1}}
+\newcommand{\TODO}[1]{\textcolor{red}{[\textbf{TODO} #1]}}
+\newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
+
+\title{Subset-sum landscapes under deformed and random measures:\\
+the biased invariant $\Gamma^{(q)}$ and unconditional rigidity\\[4pt]
+\normalsize\textsf{(working title --- scaffolding, round 100)}}
+\author{Kentaro Amauchi\thanks{Independent researcher.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\TODO{written last.} Papers 1--3 fixed both the sequence and the measure. This paper moves
+the measure along two axes --- bias the coin, and randomise the sequence --- and collects the
+two open questions recorded in paper~3.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+\TODO{full introduction.} The two deformation axes, and why each is worth taking:
+\begin{itemize}
+\item \emph{Bias.} The classification theorem of paper~1 is a statement about which elements
+      lie on which side of a target; it says nothing about how configurations are weighted.
+      So the whole combinatorial layer survives verbatim when the uniform measure is replaced
+      by the Bernoulli$(q)$ product measure, and the gap series deforms into an explicit
+      one-parameter family. \S\ref{sec:biased} does this, and the answer has a shape worth
+      stating in the introduction: \textbf{the fair coin gives the least rugged landscape}.
+\item \emph{Randomness.} For a random odd sequence the minor-arc input that cost paper~2
+      fifty rounds is replaced by a second-moment bound. \S\ref{sec:random} is therefore
+      expected to carry \emph{no ineffective constant at all} --- the first such statement in
+      the series. \TODO{write; see \S\ref{sec:random}.}
+\end{itemize}
+
+\section{The biased invariant}\label{sec:biased}
+
+Let $P_q$ be the product measure under which each $a_i\in A$ is present independently with
+probability $q\in(0,1)$, and write $\lm_q(n)$, $\deg_q(n)$ for the $P_q$-measures of the sets
+of strict local minima and of ground states at the target $n$. The target is taken at the
+$q$-tilted centre $n_q=\lfloor qT\rceil$.
+
+\begin{definition}[biased gap series]\label{def:gq}
+\[
+  \Gamma^{(q)}(A)\;=\;1+\sum_{d\ge1}\Bigl[q^{N_d}+(1-q)^{N_d}\Bigr].
+\]
+\end{definition}
+
+At $q=\tfrac12$ every bracket is $2\cdot2^{-N_d}$ and $\Gamma^{(1/2)}$ is the window series
+$W_D$ of paper~1, hence $\Gamma(A)+(2D+1)2^{-k}$.
+
+\begin{remark}[why the classification survives the deformation]\label{rem:measurefree}
+Paper~1's classification is measure-free: at error $d$, an overshooting configuration is a
+strict local minimum exactly when every $a\le2d$ is \emph{excluded}, and an undershooting one
+exactly when every $a\le2d$ is \emph{included}. Under $P_q$ those two events have probability
+$(1-q)^{N_d}$ and $q^{N_d}$, which is Definition~\ref{def:gq}. Writing
+$r^{q}_B(m)=\sum_{U\subseteq B,\ \sigma(U)=m}q^{|U|}(1-q)^{|B|-|U|}$ and factorising $P_q$
+across $I_d$ and $B_d$,
+\[
+  \mathrm{over}_q=(1-q)^{N_d}r^{q}_{B_d}(n+d),\quad
+  \mathrm{under}_q=q^{N_d}r^{q}_{B_d}(n-d-\sigma_d),\quad
+  \deg_q=\!\!\sum_{J\subseteq I_d}\!\!q^{|J|}(1-q)^{N_d-|J|}r^{q}_{B_d}(n-\sigma(J)),
+\]
+and the binomial sum over $J$ is exactly $1$, so a flat $r^{q}$ gives the $d$-th term of
+Definition~\ref{def:gq}. \STATUS{derived; the assignment verified per stratum, see
+Remark~\ref{rem:assign}}
+\end{remark}
+
+\subsection{The fair coin is the flattest}
+
+\begin{lemma}[termwise minimality]\label{lem:termwise}
+For every integer $N\ge0$ the function $f_N(q)=q^{N}+(1-q)^{N}$ on $(0,1)$ is symmetric about
+$q=\tfrac12$ and convex, and $f_N(q)\ge f_N(\tfrac12)=2^{1-N}$, with strict inequality for
+$q\ne\tfrac12$ as soon as $N\ge2$.
+\end{lemma}
+
+\begin{proof}
+$f_N(1-q)=f_N(q)$ is immediate. For $N\ge2$,
+$f_N'(q)=N\bigl[q^{N-1}-(1-q)^{N-1}\bigr]$ and
+$f_N''(q)=N(N-1)\bigl[q^{N-2}+(1-q)^{N-2}\bigr]>0$, so $f_N$ is strictly convex; and
+$t\mapsto t^{N-1}$ is strictly increasing, so $f_N'<0$ on $(0,\tfrac12)$ and $f_N'>0$ on
+$(\tfrac12,1)$. For $N\in\{0,1\}$, $f_N$ is the constant $2$ or $1$.
+\end{proof}
+
+\begin{theorem}[the fair coin minimises the invariant]\label{thm:fair}
+For every finite increasing sequence $A$ of odd positive integers with $|A|\ge2$ and every
+$q\in(0,1)$,
+\[
+  \Gamma^{(q)}(A)\;\ge\;\Gamma^{(1/2)}(A),
+\]
+with equality if and only if $q=\tfrac12$.
+\end{theorem}
+
+\begin{proof}
+Sum Lemma~\ref{lem:termwise} over $d$. For strictness it suffices that some $d\le D$ has
+$N_d\ge2$: take any $d\ge(a_2-1)/2$, which is at most $D=(a_k-1)/2$ because $a_2\le a_k$.
+\end{proof}
+
+\begin{remark}[what the theorem says]\label{rem:physics}
+$q(1-q)$ is the per-element variance of the coin. Biasing the coin in either direction
+lowers that variance and raises the invariant: \textbf{the more predictable the coin, the more
+rugged the landscape}. The effect is exactly symmetric in $q\leftrightarrow1-q$, as it must
+be, since complementing every configuration exchanges $q$ with $1-q$ and $n$ with $T-n$.
+\end{remark}
+
+\begin{corollary}[closed form for the odd numbers]\label{cor:oddsclosed}
+For $A=(1,3,\dots,2k-1)$ one has $N_d=d$ for $d\le k$, so in the limit $k\to\infty$
+\[
+  \Gamma^{(q)}=1+\frac{q}{1-q}+\frac{1-q}{q}=\frac{1}{q(1-q)}-1\;\ge\;3,
+\]
+with equality only at $q=\tfrac12$: \emph{the invariant of the odd numbers is the reciprocal
+of the coin's variance, minus one}. \STATUS{verified against the summed series to
+$5.3\cdot10^{-15}$ over $q=0.10,\dots,0.80$; \texttt{e5\_r098}}
+\end{corollary}
+
+\subsection{Verification}\label{sec:e5}
+
+\STATUS{experimentally confirmed} Measured $\lm_q/\deg_q$ at $n_q$ against the point
+prediction of Definition~\ref{def:gq}, relative error:
+
+\begin{center}
+\begin{tabular}{llccc}
+\toprule
+profile & $q$ & $k=60$ & $k=100$ & $k=140$\\
+\midrule
+odds & 0.20 & $1.00\cdot10^{-2}$ & $3.16\cdot10^{-3}$ & $1.49\cdot10^{-3}$\\
+odds & 0.30 & $2.63\cdot10^{-3}$ & $8.02\cdot10^{-4}$ & $3.75\cdot10^{-4}$\\
+odds & 0.50 & $2.73\cdot10^{-4}$ & $5.99\cdot10^{-5}$ & $2.19\cdot10^{-5}$\\
+primes & 0.30 & $2.18\cdot10^{-3}$ & $5.02\cdot10^{-4}$ & $2.20\cdot10^{-4}$\\
+primes & 0.50 & $1.73\cdot10^{-4}$ & $2.26\cdot10^{-5}$ & $7.32\cdot10^{-6}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+There are no free parameters. Two features: the error decays faster than $1/k$ (fitted
+exponent $2.25$ at $q=0.2$ to $3.0$ at $q=0.5$), and it grows monotonically as $q$ leaves
+$\tfrac12$, by a factor $\approx40$ from $q=0.5$ to $q=0.2$ at fixed $k$. The second is what
+the biased flatness hypothesis will have to quantify. \TODO{state the biased (H); design
+after \S\ref{sec:e6}.}
+
+\begin{remark}[the assignment, and a test that could not decide it]\label{rem:assign}
+Definition~\ref{def:gq} is symmetric in $q\leftrightarrow1-q$, and so is the exact
+complementation identity $\lm_q(n)=\lm_{1-q}(T-n)$ --- at the $q$-tilted centre,
+$T-qT=(1-q)T$. Neither can therefore distinguish the assignment of $q^{N_d}$ and
+$(1-q)^{N_d}$ to the two strata: measured at $k=100$, the ratio at $q=0.4$ and at $q=0.6$
+agrees to every printed digit. The discriminating test is per stratum,
+$\mathrm{over}_q/\deg_q$ against $(1-q)^{N_d}$ and $\mathrm{under}_q/\deg_q$ against
+$q^{N_d}$; measured, both ratios lie in $[0.9978,1.0018]$ over $d\le6$, whereas a swap would
+disagree by a factor of $161$ at $d=6$. \STATUS{experimentally confirmed; \texttt{e5\_r098}}
+\end{remark}
+
+\subsection{The bias breaks the reflection symmetry}\label{sec:e6}
+
+\STATUS{experimentally confirmed, shape} Off the $q$-tilted centre the deviation
+$\mathrm{dev}_q=(\lm_q/\deg_q)/\Gamma^{(q)}-1$ behaves differently at $q=\tfrac12$ and away
+from it, and the reason is structural. Paper~3's transfer function is even in $\lambda$
+because the two strata sit at $\pm\delta_d$ about a common centre --- the analytic form of
+$\lm(n)=\lm(T-n)$. Under bias that symmetry maps $q$ to $1-q$ rather than to itself, so the
+odd orders need not cancel, and the first-order coefficient is
+\[
+  L^{(q)}(A)\;=\;\sum_{d\ge1}\delta_d\Bigl[q^{N_d}-(1-q)^{N_d}\Bigr],
+\]
+which is antisymmetric in $q\leftrightarrow1-q$ and vanishes identically at $q=\tfrac12$.
+Measured for the odd numbers at $k=80$: $L^{(q)}=-28.634,\,-8.843,\,0,\,+8.843,\,+28.634$ at
+$q=0.3,0.4,0.5,0.6,0.7$, and for the primes $-83.717,\,-23.677,\,0,\,+23.677,\,+83.717$.
+
+The data agree. Over the same range of targets, the spread (max over min) of
+$|\mathrm{dev}_q-\mathrm{dev}_q(0)|$ divided by $\lambda_q$ and by $\lambda_q^2$:
+
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+profile & $q$ & divided by $\lambda_q$ & divided by $\lambda_q^{2}$\\
+\midrule
+odds & 0.30 & \textbf{1.329} & 9.644\\
+odds & 0.50 & 5.091 & \textbf{1.001}\\
+primes & 0.30 & \textbf{1.284} & 8.858\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+So the response is linear in $\lambda$ under bias and quadratic at $q=\tfrac12$, where
+$(\mathrm{dev}-\mathrm{dev}_0)/\lambda^{2}$ is constant to four digits ($19.8186$ to
+$19.8352$ across a fivefold range of the target offset). \STATUS{experimentally confirmed;
+\texttt{e6\_r100}} \TODO{the primes at $q=\tfrac12$ are not a clean test in this range:
+$\mathrm{dev}-\mathrm{dev}_0$ crosses zero inside it, and dropping the single point where it
+is $2.7\cdot10^{-7}$ leaves the quadratic ratio in $[45.06,48.86]$. Re-measure on a target
+range that does not straddle the crossing.}
+
+\section{The biased transfer function}\label{sec:phiq}
+\TODO{fable-5: derive $\Phi^{(q)}$ by the partition-function method of paper 3's
+\textup{rem:mushift}, with the biased normaliser. The two strata carry unequal weights
+$q^{N_d}$ and $(1-q)^{N_d}$ and a $q$-shifted $\mu_d$, so the $\cosh$ becomes a general
+combination of two exponentials; \S\ref{sec:e6} says the surviving odd part has coefficient
+$L^{(q)}$, which is the first thing the derivation must reproduce.}
+
+\section{Random sequences, unconditionally}\label{sec:random}
+\TODO{fable-5: for random odd $A$ the minor-arc input is a second-moment bound
+$\mathbb{E}|S_A|^{2}=b$ plus Borel--Cantelli on a $\theta$-net --- no Kumchev, no
+Siegel--Walfisz, no Siegel constant. If it lands it is the trilogy's first
+zero-ineffective-constant rigidity theorem. The modulus-$4$ floor of papers 1--2, which is
+universal for odd sequences, is then the exact leading ripple.}
+
+\section{Two questions inherited from paper 3}\label{sec:inherited}
+\TODO{(i) the $c_d$ fold-in: paper 3 keeps $\Phi$ as printed and counts
+$c_d=e^{-\delta_d^{2}/2K''_d}$ in $E_k$, on the measurement that folding it in accounts for
+at most $3\%$ of the residual. Extend that measurement across profiles and $k$ and decide.
+(ii) the mechanism behind $c_A=c_A'$, conjectured in paper 3's \textup{rem:onek}.}
+
+\section{Outlook}\label{sec:outlook}
+\TODO{the algorithmic reading --- local search on structured instances --- which is where
+this programme started. Outlook only; no claims.}
+
+\section{Honest scope}\label{sec:scope}
+\begin{itemize}
+\item \emph{Proved}: Lemma~\ref{lem:termwise}, Theorem~\ref{thm:fair},
+      Corollary~\ref{cor:oddsclosed}; and Remark~\ref{rem:measurefree}'s derivation of
+      Definition~\ref{def:gq} modulo the biased flatness hypothesis, which is not yet stated.
+\item \emph{Experimentally confirmed, with the range stated}: the point prediction
+      (\S\ref{sec:e5}, two profiles, five $q$, three $k$), the stratum assignment
+      (Remark~\ref{rem:assign}), the linear response under bias (\S\ref{sec:e6}).
+\item \emph{Not yet written}: \S\S\ref{sec:phiq}--\ref{sec:outlook}, and the biased
+      hypothesis that \S\ref{sec:biased} needs to become a theorem.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{P1} K.~Amauchi, \emph{The gap series of an integer sequence}. Manuscript, 2026.
+\bibitem{P2} K.~Amauchi, \emph{Asymptotic flatness of subset-sum landscapes of primes}.
+Manuscript, 2026.
+\bibitem{P3} K.~Amauchi, \emph{The transfer function of subset-sum landscapes}.
+Manuscript, 2026.
+\end{thebibliography}
+
+\end{document}
