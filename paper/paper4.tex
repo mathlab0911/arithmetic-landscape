@@ -40,7 +40,10 @@ the biased invariant $\Gamma^{(q)}$ and unconditional rigidity\\[4pt]
 
 \begin{abstract}
 Papers 1--3 of this series fixed both the sequence and the measure on its subsets. Here we
-move each. Replacing the uniform measure by a Bernoulli$(q)$ product measure deforms the gap
+move each. Along the way the per-element energy $-\log|\cos\pi t|$ turns out to satisfy an exact
+coarse-graining identity: its average over a coset of index $v$ is the same function at $v$ times
+the frequency, plus $(1-1/v)\log2$. We prove it twice, and it is what the minor-arc argument of
+this paper runs on. Replacing the uniform measure by a Bernoulli$(q)$ product measure deforms the gap
 series into an explicit family $\Gamma^{(q)}$, and we prove that the fair coin minimises it
 for every sequence, with equality only at $q=\tfrac12$; the argument is termwise and is
 machine-checked in Lean~4. We derive the corresponding transfer function $\Phi^{(q)}$ and
@@ -50,11 +53,12 @@ point prediction with no free parameter, and it is confirmed against the natural
 to within $0.4\%$. Replacing the primes by a random odd sequence, we prove that the extremal
 modulus of the minor arcs moves from $6$ to $4$, so that the peak height available to a random
 odd sequence is $1/\sqrt2$ where the primes have $\sqrt3/2$ --- the primes are the harder
-case. That the geometric \emph{rate} follows is left at the level of a proof skeleton: its
-arithmetic half is the theorem just stated, and its probabilistic half is a second-moment
-argument, written out in four steps, which carries no ineffective constant. Two questions
-inherited from paper 3 are also settled or sharpened. Every claim is tagged with its status,
-and the numerical work is reproducible from logged scripts.
+case. We then prove that the geometric \emph{rate} follows: almost surely the minor-arc maximum
+of $F_A^{1/b}$ tends to $1/\sqrt2$. The proof carries no ineffective constant and needs no
+equidistribution input, because the coarse-graining identity replaces the usual discrepancy
+estimate by an equality. Two questions inherited from paper 3 are also settled or sharpened.
+Every claim is tagged with its status, and the numerical work is reproducible from logged
+scripts.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -76,13 +80,22 @@ cosmetic: paper 3's $\cosh$ splits into two unequal exponentials with offsets in
 $q:(1-q)$, so the biased landscape responds to a shift of target at \emph{first} order rather
 than second (\S\ref{sec:phiq}). Rigidity off the fair coin is a tilt, not a plateau.
 
+\paragraph{Coarse-graining.} \S\ref{sec:coset} is one lemma and it is the technical spine of the
+paper. Averaging the energy $X(t)=-\log|\cos\pi t|$ over the coset $\{t+k/v\}$ returns
+$X$ at $v$ times the frequency, plus $(1-1/v)\log2$, exactly (Lemma~\ref{lem:coset}, proved by
+the multiplication formula and again by Fourier). Since $X\ge0$, the rational points are
+therefore the \emph{minima} of the coset average, not merely convenient sample points
+(Corollary~\ref{cor:floor}) --- so the step of a minor-arc argument that normally costs a
+quantitative equidistribution estimate costs nothing here. Read as physics it is a block-spin
+step with an exact fixed point; we say so once, in Remark~\ref{rem:renorm}, and deduce nothing
+from the reading.
+
 \paragraph{Randomness.} For a random odd sequence the minor-arc input that cost paper~2 fifty
-rounds is replaced by a second-moment bound, so \S\ref{sec:random} is expected to carry
+rounds is replaced by a concentration bound, and \S\ref{sec:random} carries
 \emph{no ineffective constant at all} --- the first such statement in the series. What we did
 not expect is that the random case is also \emph{easier}: the extremal modulus moves from $6$
-to $4$ (Theorem~\ref{thm:modfour}), so the peak height drops from $\sqrt3/2$ to $1/\sqrt2$ and
-the geometric rate should improve in step --- ``should'', because the rate statement itself
-(Proposition~\ref{prop:rate}) is proved only in its arithmetic half. The modulus moves for a
+to $4$ (Theorem~\ref{thm:modfour}), so the peak height drops from $\sqrt3/2$ to $1/\sqrt2$, and
+the geometric rate improves in step (Theorem~\ref{prop:rate}). The modulus moves for a
 one-line arithmetic reason --- a set of primes contains at most one element
 $\equiv3\pmod6$, a random odd set contains a third of them --- and the consequence is that
 paper 2's $\sqrt3/2$ is a property of the primes, not a limitation of the method.
@@ -110,6 +123,84 @@ The direction differs: that work attacks named open problems, whereas the presen
 builds a small theory from its definitions upward, so the certificates here anchor
 \emph{definitions and structural lemmas} rather than headline resolutions. The verification
 ethos is the same one, and we take it as read rather than arguing for it.
+
+\section{An exact coarse-graining identity}\label{sec:coset}
+
+Papers 1--3 borrowed the vocabulary of statistical physics --- landscape, energy, transfer
+function, tilt --- and used it as a source of the right questions. This section is the first
+place where the borrowing runs the other way and produces an exact recursion rather than an
+analogy. Everything later in the paper that concerns minor arcs
+(\S\ref{sec:modfour}, \S\ref{sec:rate}) is a corollary of it.
+
+Throughout write
+\[
+   X(t)\;=\;-\log|\cos\pi t|\;\in[0,\infty],
+\]
+the per-element energy of papers 1--3 at phase $t$.
+
+\begin{lemma}[coset identity]\label{lem:coset}
+For every integer $v\ge1$ and every real $t$,
+\[
+   \frac1v\sum_{k=0}^{v-1}X\Bigl(t+\frac kv\Bigr)
+   \;=\;\Bigl(1-\frac1v\Bigr)\log2\;+\;\frac1v\,X(vt+\tau_v),
+   \qquad
+   \tau_v=\begin{cases}0,&v\text{ odd},\\[2pt]\tfrac12,&v\text{ even}.\end{cases}
+\]
+Equivalently $\prod_{k<v}|\cos\pi(t+k/v)|=2^{\,1-v}\,|\cos\pi(vt+\tau_v)|$.
+\end{lemma}
+
+\begin{proof}[First proof (multiplication formula)]
+Write $2\cos\pi z=2\sin\pi(z+\tfrac12)$ and apply
+$\prod_{k<v}2\sin\pi(y+\tfrac kv)=2\sin(v\pi y)$ --- the factorisation of $x^{v}-1$ read on the
+unit circle --- with $y=t+\tfrac12$. The product of the $2|\cos|$ is $2|\sin\pi(vt+\tfrac v2)|$,
+which is $2|\cos\pi vt|$ for $v$ odd and $2|\sin\pi vt|=2|\cos\pi(vt+\tfrac12)|$ for $v$ even.
+Divide by $2^{v}$ and take logarithms.
+\end{proof}
+
+\begin{proof}[Second proof (Fourier)]
+From $-\log|2\sin\pi u|=\sum_{n\ge1}\cos(2\pi nu)/n$ and $u=t+\tfrac12$,
+\[
+   X(t)=\log2+\sum_{n\ge1}\frac{(-1)^n\cos(2\pi nt)}{n}.
+\]
+Averaging over the coset annihilates every harmonic but those with $v\mid n$, since
+$v^{-1}\sum_{k<v}\cos(2\pi n(t+k/v))$ is $\cos(2\pi nt)$ when $v\mid n$ and $0$ otherwise.
+Writing $n=vp$ and using $(-1)^{vp}=(-1)^p$ for $v$ odd and $1$ for $v$ even, the surviving
+series is $v^{-1}(X(vt+\tau_v)-\log2)$.
+\end{proof}
+
+\noindent
+Two proofs check the \emph{statement}; one proof checks only the argument. The identity is
+verified in product form for $v\le60$ at $200$ random shifts each, worst discrepancy
+$2.5\cdot10^{-16}$, and the two Fourier partial sums agree to $8.8\cdot10^{-14}$.
+\STATUS{proved, twice; and checked numerically, \texttt{stab\_r110}, \texttt{rate\_r112}}
+
+\begin{corollary}[the rational points are the minima]\label{cor:floor}
+$\displaystyle\frac1v\sum_{k<v}X\bigl(t+\tfrac kv\bigr)\ \ge\ \Bigl(1-\frac1v\Bigr)\log2$
+for every $t$, with equality exactly when $vt+\tau_v\in\mathbb{Z}$.
+\end{corollary}
+
+\begin{proof}
+$X\ge0$.
+\end{proof}
+
+\begin{remark}[what this says, and in which language]\label{rem:renorm}
+The identity has two readings and they have different statuses; the paper keeps them apart.
+
+\emph{As arithmetic} (proved) it says that averaging $X$ over a coset of index $v$ returns
+\emph{$X$ itself, at $v$ times the frequency}, plus a constant --- so the family
+$\{X(v\,\cdot\,)\}$ is closed under coarse-graining, exactly, with no error term. That is what
+Corollary~\ref{cor:floor} turns into a uniform lower bound, and it is why \S\ref{sec:rate} needs
+no equidistribution input: the question ``how far can the mean fall when the rational grid is
+shifted?'' has the answer \emph{it cannot fall at all}.
+
+\emph{As physics} (an interpretation, and nothing is deduced from it) this is a block-spin step.
+Coarse-graining the phase lattice by a factor $v$ maps the energy to a rescaled copy of itself;
+the map has an exact fixed-point structure rather than an approximate one, and the constant
+$(1-1/v)\log2$ is the free energy released per coarse-graining step, additive over successive
+steps because $\tau$ composes. Papers 1--3 treated the landscape picture as a source of
+questions; this is the first identity in the series that the picture predicts and the arithmetic
+confirms. \S\ref{sec:outlook} says what we would want to do with it and does not do it here.
+\end{remark}
 
 \section{The biased invariant}\label{sec:biased}
 
@@ -462,30 +553,26 @@ For $r$ coprime to $q$ the map $j\mapsto jr$ permutes $R_q$, so $M_{\mathrm{odd}
 depend on the numerator of the rational $r/q$.
 \end{definition}
 
-The closed form of $M_{\mathrm{odd}}$ is best proved in a form that also says what happens when
-the rational grid is \emph{shifted}, because that stronger statement is what the minor-arc
-argument of \S\ref{sec:rate} will need, and it costs nothing extra.
+Everything below is a corollary of the coset identity of \S\ref{sec:coset}, because
+$\{j/q:j\in R_q\}$ \emph{is} a coset of $(1/v)\mathbb{Z}$.
 
-\begin{lemma}[the coset identity]\label{lem:coset}
+\begin{corollary}[the identity in the form \S\ref{sec:rate} uses]\label{cor:cosetRq}
 Let $q\ge2$, put $v=q$ for $q$ odd and $v=q/2$ for $q$ even, and let $\sigma=\tfrac12$ if
 $q\equiv2\pmod 4$ and $\sigma=0$ otherwise. Then $|R_q|=v$ and, for every real $s$,
 \[
    \prod_{j\in R_q}\Bigl|\cos\pi\Bigl(s+\frac jq\Bigr)\Bigr|
-   \;=\;2^{\,1-v}\,\bigl|\cos\pi(vs+\sigma)\bigr| .
+   \;=\;2^{\,1-v}\,\bigl|\cos\pi(vs+\sigma)\bigr| ,\qquad\text{hence}\qquad
+   \frac1v\sum_{j\in R_q}X\Bigl(s+\frac jq\Bigr)\;\ge\;\Bigl(1-\frac1v\Bigr)\log2 .
 \]
-\end{lemma}
+\end{corollary}
 
 \begin{proof}
-In both cases $\{j/q:j\in R_q\}$ is an arithmetic progression of $v$ terms and step $1/v$: it is
-$\{i/q\}_{i<q}$ for $q$ odd, and $\{\tfrac1q+\tfrac iu\}_{i<u}$ for $q=2u$. Write
-$2\cos\pi z=2\sin\pi(z+\tfrac12)$ and apply the multiplication formula
-$\prod_{i=0}^{r-1}2\sin\pi(y+\tfrac ir)=2\sin(r\pi y)$, which is the factorisation of $x^{r}-1$
-read on the unit circle. The product of $2|\cos|$ is therefore $2|\sin\pi(vs+\tau)|$ with
-$\tau=\tfrac v2$ for $q$ odd and $\tau=\tfrac12+\tfrac v2$ for $q$ even. If $v$ is odd and $q$ is
-odd then $|\sin\pi(vs+\tfrac v2)|=|\cos\pi vs|$; if $v$ is even then
-$|\sin\pi(vs+\tfrac12+\tfrac v2)|=|\cos\pi vs|$; and if $v$ is odd and $q$ is even then
-$\tfrac12+\tfrac v2$ is an integer and $|\sin\pi vs|=|\cos\pi(vs+\tfrac12)|$. Dividing by $2^{v}$
-gives the three cases, and $v$ odd with $q$ even is exactly $q\equiv2\pmod4$.
+$\{j/q:j\in R_q\}$ is $\{k/v\}_{k<v}$ for $q$ odd and $\{\tfrac1{2v}+\tfrac kv\}_{k<v}$ for $q$
+even. Apply Lemma~\ref{lem:coset} at $t=s$ and at $t=s+\tfrac1{2v}$ respectively. In the second
+case the shift contributes $v\cdot\tfrac1{2v}=\tfrac12$ to the argument, so the total offset is
+$\tau_v+\tfrac12$, which is an integer when $v$ is even and $\tfrac12$ when $v$ is odd; and $v$
+odd with $q$ even is exactly $q\equiv2\pmod4$. The inequality is
+Corollary~\ref{cor:floor}.
 \end{proof}
 
 \begin{lemma}[closed form]\label{lem:moddclosed}
@@ -494,8 +581,8 @@ $M_{\mathrm{odd}}(q)=2^{1/u-1}$ if $u$ is even, and $M_{\mathrm{odd}}(q)=0$ if $
 \end{lemma}
 
 \begin{proof}
-Put $s=0$ in Lemma~\ref{lem:coset}: the right-hand side is $2^{1-v}$ when $\sigma=0$ and $0$ when
-$\sigma=\tfrac12$. Take $v$-th roots.
+Put $s=0$ in Corollary~\ref{cor:cosetRq}: the right-hand side is $2^{1-v}$ when $\sigma=0$ and
+$0$ when $\sigma=\tfrac12$. Take $v$-th roots.
 \end{proof}
 
 \begin{remark}[a second proof of the odd case, with no roots of unity]\label{rem:doubleangle}
@@ -524,9 +611,9 @@ $2^{-2/3}<2^{-1/2}$.
 \end{proof}
 
 Lemma~\ref{lem:moddclosed} is verified against the product for all $q\le200$, worst discrepancy
-$4.4\cdot10^{-16}$; the identity of Lemma~\ref{lem:coset} is verified in its product form for
-$q\le120$ at $400$ random shifts each, worst discrepancy $4.4\cdot10^{-16}$, and independently at
-$60$ decimal digits, worst discrepancy $2.2\cdot10^{-61}$.
+$4.4\cdot10^{-16}$; Corollary~\ref{cor:cosetRq} is verified in its product form for $q\le120$ at
+$400$ random shifts each, worst discrepancy $4.4\cdot10^{-16}$, and independently at $60$ decimal
+digits, worst discrepancy $2.2\cdot10^{-61}$.
 \STATUS{proved; and checked numerically, \texttt{mq4\_r107}, \texttt{stab\_r110}}
 
 \begin{remark}[what is machine-checked here, and what is not]\label{rem:leanmodfour}
@@ -580,17 +667,18 @@ $(1/\sqrt2)^{|A|}>0$.
 
 \subsection{The rate, and what is still missing}\label{sec:rate}
 
-\begin{proposition}[minor-arc rate for random odd sequences]\label{prop:rate}
+\begin{theorem}[minor-arc rate for random odd sequences]\label{prop:rate}
 Let $A$ be drawn from the Cram\'er model above and let
 $F_A(\theta)=\prod_{a\in A}|\cos(\pi a\theta)|$. Then almost surely
 \[
-   \lim_{b\to\infty}\ \max_{\theta\ \mathrm{minor}}\ F_A(\theta)^{1/b}\;=\;\frac1{\sqrt2},
+   \lim_{b\to\infty}\ \max_{\theta\ \mathrm{minor}}\ F_A(\theta)^{1/b}\;=\;\frac1{\sqrt2}.
 \]
-the maximum being attained in a shrinking neighbourhood of $\theta=\tfrac14$.
-\end{proposition}
+Here \emph{minor} means $\|\theta\|\ge1/N$, with $\|\cdot\|$ the distance to the nearest integer;
+Step~$2''$ shows that this radius is large enough, so nothing is left unowned.
+\end{theorem}
 
-The arithmetic half is Theorem~\ref{thm:modfour}. Here is the rest, in the four steps it
-takes, now with the constants named. Fix the Dirichlet parameter $Q=\lfloor\sqrt N\rfloor$
+The arithmetic half is Theorem~\ref{thm:modfour}. Here is the rest, in the steps it
+takes, with the constants named. Fix the Dirichlet parameter $Q=\lfloor\sqrt N\rfloor$
 --- Step~2$'$ says why that value and not another --- and set
 \[
    M=\log\frac{2Q}{\pi}+1,\qquad
@@ -617,10 +705,10 @@ $v$ after $2$ is $v=3$. \textbf{So the binding competitor is $q=3$ and the gap i
 $\delta=\tfrac16\log2$}, with $q=8$ next at $\tfrac14\log2$. Step~2$'$ will replace the entry
 $\delta=\infty$ at $q\equiv2\pmod4$ by the finite value $(\tfrac12-\tfrac1u)\log2$: off the
 rational point the vanishing residue no longer vanishes, and $q=6$ then \emph{ties} with $q=3$
-at $\tfrac16\log2$. The constant is unchanged and two moduli bind it rather than one. Only
-$q=2$, where $v=1$ and the floor degenerates to $0$, needs an argument of its own, and it is the
-easy one: there $\theta$ is near $\tfrac12$, every $X_m$ is large, and the measured mean over the
-whole Dirichlet box stays above $0.60$.
+at $\tfrac16\log2$. The constant is unchanged and two moduli bind it rather than one. The two
+moduli with $v\le2$ --- $q=4$, where the floor is $\tfrac12\log2$ exactly and is meant to be, and
+$q=2$, where $v=1$ and the floor degenerates to $0$ --- are handled in Step~$2''$, together with
+$q=1$.
 \STATUS{proved from Lemma~\ref{lem:moddclosed}; checked against the direct residue average for
 all $q\le400$, worst discrepancy $1.0\cdot10^{-15}$, and the minimum located at $q=3$ over
 $q\le2000$; \texttt{delta\_r109}}
@@ -655,47 +743,133 @@ rational values are the true minima, not merely convenient sample points.
 \eqref{eq:nodent} is checked to equal $-\log M_{\mathrm{odd}}(q)$ to $3\cdot10^{-16}$ for
 $15$ moduli, and to survive truncation at $M$ for every $q\le1000$; \texttt{stab\_r110}}
 
-What \eqref{eq:nodent} does not by itself cover is that element $m$ of the class $j$ sits at
-$ja/q+m\beta$, so the shift varies \emph{within} a class rather than being common to all of
-$R_q$. Partitioning the odd $m$ into consecutive blocks of $|R_q|$ terms --- each block meets
-every residue of $R_q$ exactly once --- writes the weighted mean as a convex combination of
-left-hand sides of \eqref{eq:nodent}, each $\ge-\log M_{\mathrm{odd}}(q)$, plus two errors: the
-arithmetic-progression-versus-integral comparison inside a class, which is at most $4qM/N$
-$+\,4M/(Q+1)$ because $X^{(M)}$ has variation $\le2M$ per period and the progression has step
-$2q|\beta|$; and the variation of the weights $p_m$ across a block, which is $O(q/(N\log N))$
-relatively. \emph{Both are minimised at $Q=\lfloor\sqrt N\rfloor$, where the total is
-$O(M/\sqrt N)$} --- which is why the Dirichlet parameter is $\sqrt N$ and not, as one first
-writes, $N$. At $Q=N$ the argument fails twice over: the residue classes hold $O(1)$ elements
-each, and $|\beta|\le1/(qN)$ makes every sweep shorter than a single period.
-\STATUS{derived; the shortfall at the binding modulus $q=3$ is measured as
+First, truncation does not spoil \eqref{eq:nodent}. The loss $(X-M)^{+}$ is nonzero only within
+$e^{-M}/\pi$ of a pole, and the coset points are $1/v\ge1/Q>1/(Qe)=2e^{-M}/\pi$ apart, so at most
+one residue is affected; if it lies at distance $d$ from the pole then
+$X\le\log\frac1{2d}$, while the excess term of \eqref{eq:nodent} is
+$\tfrac1vX(vs+\sigma)\ge\tfrac1v\log\frac1{\pi vd}$ because $vs+\sigma$ sits at distance $vd$ from
+a pole. The floor therefore survives as soon as $M\ge\log(\pi v/2)$, and with $M=\log(2Q/\pi)+1$
+and $v\le Q$ that reads $1\ge\log(\pi^2/4)$ --- true, \textbf{with a margin of exactly
+$1-\log(\pi^2/4)=0.0968$}. This is the third place the $+1$ in $M$ earns itself.
+\STATUS{proved; and $\min_s\Phi^{(M)}_q(s)-(1-1/v)\log2$ is checked to be $\ge-5.6\cdot10^{-16}$
+for every $q\le1000$; \texttt{stab\_r110}, \texttt{rate\_r112}}
+
+\emph{Step $2'$ continued (the two error terms, in full).} What \eqref{eq:nodent} does not by
+itself cover is that element $m$ of the class $j$ sits at $ja/q+m\beta$, so the shift varies
+\emph{within} a class. Fix $q\notin\{1,2\}$ and group the odd $m\in[3,N]$ by residue class mod
+$q$. In a class the $m$ form an arithmetic progression of common difference $2v$ (for $q$ odd the
+odd numbers in a class mod $q$ step by $2q=2v$; for $q=2u$ they step by $q=2v$), so the phases
+form an arithmetic progression of step $\eta=2v\beta$ sweeping an arc of length $L=N|\beta|$, and
+the class starts at $x_j+m_j\beta$ where $m_j\le 2v$ is its first element. Three errors, and
+nothing else:
+
+\emph{(i) Progression versus integral.} $X^{(M)}$ is of bounded variation, at most $2M$ per
+period, so for a progression of step $\eta$ over an arc of length $L$,
+$\bigl|\sum_rX^{(M)}-\eta^{-1}\!\int\bigr|\le2M(L+1)$. There are $v$ classes and $\asymp N/2$
+terms in all, so in the mean this costs at most $4qM/N+4M/(Q+1)$, using $v|\beta|\le1/(Q+1)$.
+
+\emph{(ii) Jitter.} Replacing the arc of class $j$ by the common arc costs
+$|m_j\beta|\le2v|\beta|=(2v/N)L$ in translation, and translating a function of variation
+$V\le2M(L+2)$ by $\epsilon$ changes its integral by at most $\epsilon V$; per element this is at
+most $8qM/N+4M/(Q+1)$.
+
+\emph{(iii) Unequal class counts.} They differ by at most $1$, costing $vM$ in the sum, i.e.\
+$2qM/N$ in the mean.
+
+After (i)--(iii) the integrand is the honest coset average, which is $\ge(1-1/v)\log2$ pointwise
+by \eqref{eq:nodent}; integrating a pointwise inequality needs no further hypothesis, and in
+particular \emph{no case distinction on the length of the sweep} --- which is what makes the
+route robust in $Q$ where an arc-comparison design is not. Collecting,
+\[
+   \frac{\sum_m p_mX^{(M)}_m(\theta)}{\sum_m p_m}\;\ge\;\Bigl(1-\frac1v\Bigr)\log2
+   \;-\;E,\qquad E\;\le\;\frac{14\,qM}{N}+\frac{8M}{Q+1}.
+\]
+\emph{Both terms are minimised together at $Q=\lfloor\sqrt N\rfloor$, where $E=O(M/\sqrt N)$} ---
+which is why the Dirichlet parameter is $\sqrt N$ and not, as one first writes, $N$. At $Q=N$ the
+argument fails twice over: the residue classes hold $O(1)$ elements each, and $|\beta|\le1/(qN)$
+makes every sweep shorter than a single period.
+
+\emph{The weights need no argument at all.} $p_m=2/\log m$ is \emph{decreasing}, so by Abel
+summation a bound valid for every prefix $\{m\le N'\}$ passes to the $p$-weighted mean unchanged:
+if $S(N')\ge c\,P(N')-\mathcal{E}(N')$ for all $N'$, then
+$\sum p_mX^{(M)}_m\ge c\sum p_m-\sum_k(p_k-p_{k+1})\mathcal{E}(k)-p_{N}\mathcal{E}(N)$, and with
+$\mathcal{E}(N')\le C M(\sqrt N+N'/\sqrt N)$ the subtracted term is
+$O(M\sqrt N)+O(M/\sqrt N)\sum p_m$, i.e.\ $O(M\log N/\sqrt N)$ relative. There is no block-weight
+condition to check.
+\STATUS{proved; the shortfall at the binding modulus $q=3$ is measured as
 $1.9\cdot10^{-3},5.8\cdot10^{-4},1.7\cdot10^{-4},4.8\cdot10^{-5}$ at
-$N=2001,8001,32001,128001$, i.e.\ $\asymp qM/N$ as derived, and nowhere in any Dirichlet box does
-the deficit reach $\delta/2$; \texttt{stab\_r110}}
+$N=2001,8001,32001,128001$, and $\mathrm{deficit}\cdot N/(qM)$ is
+$0.3057,0.3140,0.3199$ at $N=8001,32001,128001$ --- constant, i.e.\ the measured deficit has
+exactly the derived shape $qM/N$; \texttt{stab\_r110}, \texttt{rate\_r112}}
+
+\emph{Step $2''$ (the three moduli with $v\le2$, and the major arc).} Corollary~\ref{cor:floor}
+gives $\tfrac12\log2$ at $q=4$ ($v=2$) and nothing at all at $q\in\{1,2\}$ ($v=1$). The last two
+are not prose; they are the following lemma, and $q=4$ needs no more than the identity because
+$\tfrac12\log2$ is exactly the value the theorem is about.
+
+\begin{lemma}[the degenerate moduli]\label{lem:vone}
+Let $\phi(w)=-\log|\sin\pi w|$ and $L>0$. Then
+$\frac1L\int_0^L\phi=\log2+\mathrm{Cl}_2(2\pi\{L\})/(2\pi L)$, and
+\[
+   \frac1L\int_0^L\phi\;>\;\tfrac12\log2\quad\text{for every }L>0,
+   \qquad
+   \frac1L\int_0^L X\;\ge\;\log2-\frac{\mathrm{Cl}_2(\pi/3)}{2\pi}=0.5316\quad\text{for }L\ge1.
+\]
+Consequently the mean over a $q=2$ sweep exceeds $\tfrac12\log2$, and so does the mean over a
+$q=1$ sweep once $L=N\|\theta\|\ge1$ --- which is exactly the definition of \emph{minor}.
+\end{lemma}
+
+\begin{proof}
+The closed form is $\int_0^x\phi=x\log2+\mathrm{Cl}_2(2\pi x)/(2\pi)$ together with the
+periodicity of $\phi$. For $L\le\tfrac12$: $\phi$ is convex on $(0,1)$, so the average over
+$[0,L]$ is at least the midpoint value $-\log\sin(\pi L/2)\ge-\log\sin(\pi/4)=\tfrac12\log2$; at
+the endpoint $L=\tfrac12$ the two-point midpoint bound $\tfrac12[\phi(L/4)+\phi(3L/4)]=0.51986$
+shows the inequality is strict there. For $L\ge\tfrac12$: $1/(2\pi L)\le1/\pi$ and
+$|\mathrm{Cl}_2|\le\mathrm{Cl}_2(\pi/3)$, so the average is at least
+$\log2-\mathrm{Cl}_2(\pi/3)/\pi=0.3701>\tfrac12\log2$. For $q=1$ the same computation with $X$
+in place of $\phi$ gives $\log2+\mathrm{Cl}_2(2\pi L+\pi)/(2\pi L)$, and $L\ge1$ makes the
+correction at most $\mathrm{Cl}_2(\pi/3)/(2\pi)=0.1615$.
+\end{proof}
+
+\noindent
+The true $q=2$ floor is $0.4945$ at $L=0.7908$ --- above $\tfrac12\log2+\delta$, not merely above
+$\tfrac12\log2$ --- but that is measured, not proved, and the theorem does not need it. The
+smallest $L$ at which the $q=1$ average reaches $\tfrac12\log2+\delta$ is $0.4528$, so the radius
+$1/N$ in the definition of \emph{minor} is comfortable rather than tight.
+\STATUS{proved; the Clausen closed form checked against direct quadrature to $4.5\cdot10^{-5}$,
+and the convexity bound verified at $5000$ values of $L$; \texttt{rate\_r112}}
 
 \emph{Step 3 (concentration).} The summands are independent and lie in $[0,M]$, and there are
 $n=\lfloor(N-1)/2\rfloor$ of them, so Hoeffding gives
-$\Pr[\sum\xi_mX^{(M)}_m<\mathbb{E}-t]\le\exp(-2t^2/(nM^2))$. Taking
-$t=\tfrac12\delta\,\mathbb{E}|A|$ and using $\mathbb{E}|A|\asymp2N/\log N$, $n\asymp N/2$,
-$Q=N$ and hence $M\asymp\log N$, the exponent is $\asymp4\delta^2N/(M^2\log^2N)$, i.e.\ the
-failure probability at one $\theta$ is
+$\Pr[\sum\xi_mX^{(M)}_m<\mathbb{E}-t]\le\exp(-2t^2/(nM^2))$. Take $t=\varepsilon\,\mathbb{E}|A|$
+and use $\mathbb{E}|A|\asymp2N/\log N$, $n\asymp N/2$, $Q=\lfloor\sqrt N\rfloor$ and hence
+$M\asymp\tfrac12\log N$: the failure probability at one $\theta$ is
 \[
-   \exp\bigl(-c\,N/\log^4N\bigr),\qquad c=4\delta^2=0.0534\ldots
+   \exp\bigl(-c\,\varepsilon^2N/\log^4N\bigr),\qquad c=64 .
 \]
-No second moment of an exponential sum appears: the randomness is in the \emph{sequence}, not
-in the phases.
+Two readings of the same bound, and the theorem uses the second. With $\varepsilon=\tfrac12\delta$
+this is the fixed-margin statement, $\exp(-cN/\log^4N)$ with $c=16\delta^2=0.2136$. But the
+theorem only needs the mean to survive to within $o(1)$, so one may instead take
+$\varepsilon=N^{-1/4}$, which still leaves the exponent $\asymp\sqrt N/\log^4N\to\infty$.
+\emph{That is why $q\in\{1,2\}$ need only clear $\tfrac12\log2$ and not $\tfrac12\log2+\delta$},
+and it is what makes Lemma~\ref{lem:vone} sufficient. No second moment of an exponential sum
+appears: the randomness is in the \emph{sequence}, not in the phases.
 
 \emph{Step 4 (net, then Borel--Cantelli).} Where $X_m<M$ we have $|\cos(\pi m\theta)|\ge e^{-M}$,
-hence $|\partial_\theta X^{(M)}_m|=\pi m|\tan(\pi m\theta)|\le\pi Ne^{M}\le2eNQ$, so with $Q=N$
-a net of spacing $\varepsilon/(2eN^2b)$ suffices and has $O(N^3/\varepsilon)$ points. Since
-$N^3\exp(-cN/\log^4N)\to0$ and is summable in $N$, the union bound and Borel--Cantelli give the
-almost-sure statement.
-\STATUS{proof skeleton --- Theorem~\ref{thm:modfour} proved, Steps 1, 2, 2$'$, 3 and 4 with the
-constants above, the main term of Step 2$'$ proved as an identity}
-\TODO{what remains is no longer a missing tool but a written-out error estimate. The main term of
-Step~2$'$ is exact; the two error terms named there --- the progression-versus-integral
-comparison inside a residue class, and the variation of $p_m$ across a block --- are derived and
-measured at $O(M/\sqrt N)$ but not written out as a proof. Until they are, the statement above
-is a skeleton and not a theorem. Nothing else is outstanding.}
+hence $|\partial_\theta X^{(M)}_m|=\pi m|\tan(\pi m\theta)|\le\pi Ne^{M}\le2eNQ\le2eN^{3/2}$, so
+a net of spacing $\varrho/(2eN^{3/2}b)$ suffices and has $O(N^{5/2}/\varrho)$ points. Since
+$N^{5/2}\exp(-c\varepsilon^2N/\log^4N)$ is summable in $N$ for $\varepsilon=N^{-1/4}$, the union
+bound and Borel--Cantelli give the almost-sure statement.
+
+\emph{Assembling.} Steps 1--4 give, almost surely and uniformly over minor $\theta$,
+$b^{-1}\sum_{a\in A}X_a(\theta)\ge\tfrac12\log2-o(1)$, i.e.\
+$\max_{\theta\ \mathrm{minor}}F_A(\theta)^{1/b}\le2^{-1/2}(1+o(1))$: at $q=4$ the floor is
+$\tfrac12\log2$ by Corollary~\ref{cor:floor}, at every other $q\ge3$ it is $\tfrac12\log2+\delta$,
+at $q\in\{1,2\}$ it is above $\tfrac12\log2$ by Lemma~\ref{lem:vone}, and the error of Step $2'$
+is $O(M\log N/\sqrt N)$. The matching lower bound is free: $\theta=\tfrac14$ is minor and
+$X_a(\tfrac14)=\tfrac12\log2$ for \emph{every} odd $a$, so $F_A(\tfrac14)^{1/b}=2^{-1/2}$
+identically. Hence the limit is $2^{-1/2}$. \qed
+\STATUS{proved}
 
 Measured, at $\theta=r/q$ for $q\le12$ and eight instances at $b\approx190$: the mean of
 $b^{-1}\sum_a-\log|\cos(\pi a/q)|$ agrees with $-\log M_{\mathrm{odd}}(q)$ within the
@@ -706,7 +880,9 @@ $0.000000$ --- deterministic, as Definition~\ref{def:modd} says it must be.
 \begin{remark}[$\theta=\tfrac14$ is the limit of the maxima, not a maximum]\label{rem:notmax}
 A first scan of $F_A(\theta)^{1/b}$ over a fine net asked whether anything exceeds $1/\sqrt2$,
 and found that something does. That is not a counterexample and the reason is worth stating,
-because it fixes the form of Proposition~\ref{prop:rate}. Moving off $\tfrac14$ by $\delta$
+because it fixes the form of Theorem~\ref{prop:rate}: the maximum is \emph{approached} at
+$\tfrac14$, and the statement is about the limit of $\max_\theta F_A^{1/b}$, not about where a
+maximum sits at finite $b$. Moving off $\tfrac14$ by $\delta$
 changes $\log F_A^{1/b}$ by $\delta\,b^{-1}\sum_a(\pm\pi a)+O(\delta^{2})$, and the signs
 depend on $a\bmod 4$, so the first-order term is a random walk of size $b^{-1}\sqrt{S_2}$.
 Optimising $\delta$ gives an excess of $O(1/b)$ in the exponent --- a \emph{bounded
@@ -736,6 +912,23 @@ limit, not a proof of one. F45 stands: substituting $s$ for $\lambda$ makes the 
 three times worse.}
 
 \section{Where this sits, and the algorithmic reading}\label{sec:outlook}
+
+\subsection{Iterating the coarse-graining}
+
+Lemma~\ref{lem:coset} is used once, in one direction, and that is not the only thing it says.
+Written as an operator, $(\mathcal{C}_vf)(t)=v^{-1}\sum_{k<v}f(t+k/v)$ acts on $X$ by
+$\mathcal{C}_vX=(1-1/v)\log2+v^{-1}X(v\,\cdot+\tau_v)$, so $X$ spans a one-dimensional affine
+invariant subspace of every $\mathcal{C}_v$ at once, and the constants compose:
+$\mathcal{C}_{v'}\mathcal{C}_v=\mathcal{C}_{vv'}$ on this subspace, with released constants
+adding as $(1-1/v)+v^{-1}(1-1/v')=1-1/(vv')$. Three questions we have not attempted, listed so
+that the omission is deliberate rather than silent. \emph{(i)} Which energies other than $X$ have
+this property --- is $-\log|\cos|$ characterised by being an exact fixed point of the family
+$\{\mathcal{C}_v\}$ up to affine terms? \emph{(ii)} Is there a transfer-operator reading in which
+$\Phi$ of paper~3 is the spectral object and $\mathcal{C}_v$ the renormalisation map? \emph{(iii)}
+Papers 1--3's landscape language was a source of questions; here it produced an identity. Does the
+same happen for the \emph{biased} energy of \S\ref{sec:phiq}, where the coset structure is
+weighted by $q$?
+\STATUS{conjectural directions; nothing in this paper depends on any of them}
 
 \subsection{Related work}
 
@@ -795,8 +988,10 @@ basin-size distribution, not more landscape statistics.}
       (Remark~\ref{rem:lean22}), including the equality case; and the maximisation step of
       Theorem~\ref{thm:modfour} (Remark~\ref{rem:leanmodfour}), the closed form being taken
       as a definition there; and the two peak facts of Remark~\ref{rem:twoclasses}
-      (\texttt{Pnp/Theory/OddPeaks.lean}). The canon also passes an independent kernel replay
-      (\texttt{lean4checker}, 13 modules, with a negative control).
+      (\texttt{Pnp/Theory/OddPeaks.lean}); and the odd branch of Lemma~\ref{lem:moddclosed}
+      itself, by the double-angle route (\texttt{Pnp/Theory/OddProd.lean},
+      Remark~\ref{rem:doubleangle}). The canon also passes an independent kernel replay
+      (\texttt{lean4checker}, 14 modules, with a negative control).
 \item \emph{Proved}: Lemma~\ref{lem:termwise}, Theorem~\ref{thm:fair},
       Corollary~\ref{cor:oddsclosed}; and Remark~\ref{rem:measurefree}'s derivation of
       Definition~\ref{def:gq} modulo the biased flatness hypothesis, which is not yet stated.
@@ -808,12 +1003,13 @@ basin-size distribution, not more landscape statistics.}
       point prediction confirmed against the naive alternative on $36$ discriminating rows
       (\S\ref{sec:e10}); the random-ensemble floor of \S\ref{sec:random}; the $c_d$
       verdict of \S\ref{sec:inherited}.
-\item \emph{Proved}: Theorem~\ref{thm:modfour} and Lemma~\ref{lem:moddclosed}, the
-      arithmetic half of \S\ref{sec:random}.
-\item \emph{Proof skeleton}: Proposition~\ref{prop:rate}, whose four steps are written out
-      with the constants left implicit.
-\item \emph{Not yet written}: the passage from $(\mathrm{H}_q)$ to a rigidity statement, and
-      the explicit constants of Steps 2--4 in \S\ref{sec:random}.
+\item \emph{Proved}: Lemma~\ref{lem:coset} (twice) with Corollaries~\ref{cor:floor}
+      and~\ref{cor:cosetRq}; Theorem~\ref{thm:modfour} and Lemma~\ref{lem:moddclosed};
+      Lemma~\ref{lem:vone}; and Theorem~\ref{prop:rate}, all constants written out.
+\item \emph{Interpretation, with nothing deduced from it}: the renormalisation reading of
+      Lemma~\ref{lem:coset} (Remark~\ref{rem:renorm}) and the three questions of
+      \S\ref{sec:outlook}.
+\item \emph{Not yet written}: the passage from $(\mathrm{H}_q)$ to a rigidity statement.
 \end{itemize}
 
 \begin{thebibliography}{9}

@@ -1,3 +1,5 @@
+cor:cosetRq
+cor:floor
 cor:oddsclosed
 def:gq
 def:modd
@@ -6,6 +8,7 @@ eq:phiq
 lem:coset
 lem:moddclosed
 lem:termwise
+lem:vone
 prop:rate
 prop:tilted
 rem:assign
@@ -15,9 +18,11 @@ rem:leanmodfour
 rem:measurefree
 rem:notmax
 rem:physics
+rem:renorm
 rem:twoclasses
 sec:biased
 sec:biasedH
+sec:coset
 sec:e10
 sec:e5
 sec:e6

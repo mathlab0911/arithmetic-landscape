@@ -1,0 +1,147 @@
+====================================================================================================
+(A) THE COSET IDENTITY AND ITS FOURIER PROOF
+====================================================================================================
+  product form, v = 1..60, 200 random t each      : worst |LHS-RHS| = 2.524e-16
+  Fourier mechanism: the coset average annihilates every harmonic with v not dividing n,
+  so the two partial sums below are EQUAL TERM BY TERM, not merely close.
+  Fourier partial sums to n = 3000, 10 values of v : worst |A-B| = 8.793e-14 (at v = 1)
+  (A) VERDICT: identity and its Fourier proof both confirmed
+
+====================================================================================================
+(B) q = 2, WITH A PROOF AND A CONSTANT.  arc average G(L) = log2 + Cl_2(2pi{L})/(2pi L)
+====================================================================================================
+  Cl_2(pi/3) = 1.0149416064   (the maximum of the Clausen function on (0, 2 pi))
+  MY FALSIFIED PREDICTION  log2 - 3 Cl_2(pi/3)/(5 pi) = 0.4993076122  (claimed at L = 5/6;
+  wrong, because L is in the denominator too -- the extremiser of Cl_2 is not the
+  extremiser of Cl_2(2 pi L)/L.  Kept in the log on purpose.)
+  half log 2                                  = 0.3465735903   <- what the theorem needs
+  target with the margin, (1/2) log2 + delta   = 0.4620981204
+  TRUE minimum over L in (0,6]:  0.494530 at L = 0.790827   (measured, not proved; clears (1/2)log2 + delta by 0.032432)
+         L    Clausen form   direct quadrature       diff
+    0.2500      1.27626899          1.27628337   1.44e-05
+    0.5000      0.69314718          0.69316243   1.53e-05
+    0.8333      0.49930761          0.49932350   1.59e-05
+    1.0000      0.69314718          0.69319211   4.49e-05
+    3.0000      0.69314718          0.69319073   4.36e-05
+
+  THE BOUND THAT IS PROVABLE BY HAND (this is what goes in the paper):
+    L <= 1/2 (convexity, midpoint):  G >= -log sin(pi L/2) >= -log sin(pi/4) = 0.346574 = (1/2) log 2
+       midpoint bound valid at every L (min over L of G - midpoint bound) : 3.069e-01  (must be >= 0)
+       at the endpoint L = 1/2 the two-point midpoint bound gives          : 0.519860  (so the inequality is strict there)
+    L >= 1/2 (Clausen, 1/(2 pi L) <= 1/pi):  G >= log2 - Cl_2(pi/3)/pi     = 0.370081
+  (B) VERDICT: both branches clear (1/2) log 2, so q = 2 has a proof
+  NOTE what the theorem actually needs: mean >= (1/2) log2 - o(1) at EVERY minor theta.
+  The delta margin exists only so Hoeffding can take a bite, and the bite can be taken
+  as o(1) instead -- so q = 1 and q = 2 do not need the margin, only (1/2) log 2.
+
+====================================================================================================
+(C) q = 1: the explicit major-arc radius.   arc average = log2 + Cl_2(2 pi L + pi)/(2 pi L)
+====================================================================================================
+         L    arc average  >= target?
+    0.1000     0.01661481       False
+    0.3000     0.16403408       False
+    0.5000     0.69314718        True
+    0.6993     0.92029732        True
+    0.8000     0.84928132        True
+    1.0000     0.69314718        True
+    2.0000     0.69314718        True
+    5.0000     0.69314718        True
+  smallest L with arc average >= target: L_0 = 0.452834
+  and the average stays above the target for every larger L: True
+  => defining the major arc as ||theta|| < 1/N is safe (L_0 = 0.4528 < 1), and no
+     theta is left unowned (F04).
+
+====================================================================================================
+(D) THE TRUNCATION MARGIN IS A NAMED CONSTANT:  1 - log(pi^2/4)
+====================================================================================================
+  M >= log(pi v/2) is needed;  M = log(2Q/pi) + 1 and v <= Q give margin 1 - log(pi^2/4) = 0.096835
+  pole separation: spacing 1/v >= 1/Q must exceed 2 e^{-M}/pi = 1/(Q e) -- true, factor e.
+  direct check:       Q        M     min over q<=Q of [min_t Phi^(M) - floor]
+                     40   4.2373                                   -3.331e-16   (at q = 36)
+                    200   5.8467                                   -4.441e-16   (at q = 95)
+                   1000   7.4562                                   -5.551e-16   (at q = 426)
+
+====================================================================================================
+(E)/(F) THE BLOCK-WEIGHT QUESTION DISSOLVES:  p_m = 2/log m is DECREASING, so Abel
+        summation passes any prefix bound to the weighted mean.  Class balance at both
+        ends of q <= sqrt N is checked anyway (fable's marked spot (b)).
+====================================================================================================
+  N =    8001, Q =   89:  p decreasing = True
+           q     v  max cnt  min cnt   |G(a/q) - floor|  derived bound
+           3     3     1334     1333           0.000577       0.474179
+          45    45       89       88           0.000288       0.844357
+          89    89       45       44           0.001261       1.232161
+  N =   32001, Q =  178:  p decreasing = True
+           q     v  max cnt  min cnt   |G(a/q) - floor|  derived bound
+           3     3     5334     5333           0.000169       0.263619
+          89    89      180      179           0.000231       0.479211
+         178    89      180      179           0.013643       0.702324
+  N =  128001, Q =  357:  p decreasing = True
+           q     v  max cnt  min cnt   |G(a/q) - floor|  derived bound
+           3     3    21334    21333           0.000048       0.145710
+         179   179      358      357           0.000355       0.269412
+         357   357      180      179           0.000170       0.394520
+
+====================================================================================================
+(G) THE ASSEMBLED BOUND.   deficit := floor(q) - min over the Dirichlet box of G ;
+    bound := 14qM/N + 8M/(Q+1).   TWO SEPARATE QUESTIONS, and only the second is
+    informative at accessible N: (i) does the bound dominate -- it does, but at these N
+    the bound is larger than the floor itself, so that is nearly vacuous; (ii) does the
+    measured deficit have the DERIVED SHAPE qM/N?  The last column is deficit*N/(qM) and
+    a roughly constant column is the real evidence (F27: report the constant column).
+====================================================================================================
+  --- N = 8001, Q = 89, M = 5.0371
+           q     v      floor   min box G     deficit      bound   ok  deficit*N/(qM)
+           2     1   0.000000    0.645933  -6.459e-01   0.465366 True       -513.0095
+           3     3   0.462098    0.461521   5.773e-04   0.474179 True          0.3057
+           4     2   0.346574    0.346574  -1.110e-16   0.482993 True         -0.0000
+           5     5   0.554518    0.555179  -6.611e-04   0.491807 True         -0.2100
+           6     3   0.462098    0.676556  -2.145e-01   0.500621 True        -56.7753
+           8     4   0.519860    0.520618  -7.572e-04   0.518248 True         -0.1504
+           9     9   0.616131    0.616920  -7.890e-04   0.527062 True         -0.1393
+          16     8   0.606504    0.606754  -2.499e-04   0.588758 True         -0.0248
+          89    89   0.685359    0.684098   1.261e-03   1.232161 True          0.0225
+  --- N = 32001, Q = 178, M = 5.7302
+           q     v      floor   min box G     deficit      bound   ok  deficit*N/(qM)
+           2     1   0.000000    0.624439  -6.244e-01   0.261112 True      -1743.6269
+           3     3   0.462098    0.461929   1.687e-04   0.263619 True          0.3140
+           4     2   0.346574    0.346574  -1.110e-16   0.266126 True         -0.0000
+           5     5   0.554518    0.554716  -1.984e-04   0.268633 True         -0.2215
+           6     3   0.462098    0.669246  -2.071e-01   0.271140 True       -192.8071
+           8     4   0.519860    0.520088  -2.276e-04   0.276153 True         -0.1589
+           9     9   0.616131    0.616415  -2.838e-04   0.278660 True         -0.1761
+          16     8   0.606504    0.606583  -7.891e-05   0.296209 True         -0.0275
+         178    89   0.685359    0.689296  -3.937e-03   0.702324 True         -0.1235
+  --- N = 128001, Q = 357, M = 6.4262
+           q     v      floor   min box G     deficit      bound   ok  deficit*N/(qM)
+           2     1   0.000000    0.606838  -6.068e-01   0.145007 True      -6043.7336
+           3     3   0.462098    0.462050   4.818e-05   0.145710 True          0.3199
+           4     2   0.346574    0.346574  -5.551e-17   0.146413 True         -0.0000
+           5     5   0.554518    0.554576  -5.783e-05   0.147115 True         -0.2304
+           6     3   0.462098    0.663693  -2.016e-01   0.147818 True       -669.2532
+           8     4   0.519860    0.519927  -6.645e-05   0.149224 True         -0.1654
+           9     9   0.616131    0.616197  -6.619e-05   0.149927 True         -0.1465
+          16     8   0.606504    0.606528  -2.386e-05   0.154847 True         -0.0297
+         357   357   0.691206    0.691036   1.700e-04   0.394520 True          0.0095
+
+  the derived bound dominates the measured deficit at every tested (N,q).
+
+====================================================================================================
+(H) GLOBAL CHECK WITH A POSITIVE CONTROL (F55).  Scan G over the minor arc
+    ||theta|| >= 1/N.  The control: the scan must recover theta = 1/4 with (1/2)log2.
+====================================================================================================
+  global min G = 0.346574 at theta = 0.250000      [(1/2) log2 = 0.346574]
+  POSITIVE CONTROL: passed -- the scan resolves the dip at 1/4
+  best away from 1/4: G = 0.461563 at theta = 0.333333, shortfall vs target = 5.353e-04, bound = 0.474179
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+  coset identity + Fourier proof   : CONFIRMED
+  q = 2: my closed form for the minimiser was FALSIFIED (0.4993 at 5/6 claimed; true
+         minimum 0.494530 at L = 0.7908).  The hand-provable two-branch bound
+         holds: 0.346574 and 0.370081, both >= (1/2) log 2 = 0.346574 : CONFIRMED
+  major-arc radius  L_0 = 0.4528 < 1, so ||theta|| >= 1/N is a safe minor arc
+  truncation margin  1 - log(pi^2/4) = 0.096835
+  derived error bound dominates    : YES
+  positive control on the scan     : passed

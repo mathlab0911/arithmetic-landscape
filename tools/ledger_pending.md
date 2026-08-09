@@ -24,6 +24,23 @@ rule      : before setting the floor of a fail rule, identify the operation in t
 
 ---
 
+## Append to F03 (evaluate at the worst case in range) — new instance, r112
+
+```
+claimed   : "min_L [log2 + Cl_2(2 pi L)/(2 pi L)] = log2 - 3 Cl_2(pi/3)/(5 pi) = 0.4993,
+             attained at L = 5/6, because Cl_2 is minimal at 5 pi/3"
+actual    : the minimum is 0.494530 at L = 0.7908.  L sits in the DENOMINATOR as well as
+            inside Cl_2, so minimising the numerator locates the wrong point.
+check     : one line -- scan the quantity itself over the parameter, not the factor you can
+            recognise.  Written into the script as a prediction, it was falsified in the
+            first run and cost nothing.
+rule      : the extremiser of one factor of a product or ratio is not the extremiser of the
+            product or ratio.  When a bound has the shape f(x)/x, or f(x) g(x), locate the
+            extremum of the whole expression -- a named constant sitting inside it is a
+            temptation to stop early, not a shortcut.  (Corollary of F03's "evaluate at the
+            worst case in range": first find out where the worst case IS.)
+```
+
 ## F55 — a search over a net needs a positive control
 
 ```
