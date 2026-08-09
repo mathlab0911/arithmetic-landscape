@@ -10,6 +10,7 @@ not only in the ledger.  Each check below names the ledger entry it enforces.
   C3  F21  exactly one live report per direction; the rest are archived
   C4  F40  no \label{} disappears from a paper without being declared
   C5  ---  repository naming convention (README): rNNN, three digits, no suffix
+  C6  7.0  ledger entries written but not yet folded into the skill are surfaced, not lost
 
 Usage:  python3 tools/check.py            (from the repository root)
 Exit:   0 = all pass, 1 = at least one failure.
@@ -136,8 +137,18 @@ def c5_naming():
     notes.append('C5      report naming')
 
 
+def c6_pending():
+    p = os.path.join(ROOT, 'tools', 'ledger_pending.md')
+    if not os.path.exists(p):
+        return
+    heads = [l.strip() for l in open(p, encoding='utf-8') if l.startswith('## ')]
+    if heads:
+        notes.append('C6      ledger entries PENDING a skill save: '
+                     + '; '.join(h[3:] for h in heads))
+
+
 if __name__ == '__main__':
-    for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming):
+    for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending):
         fn()
     for n in notes:
         print('  ok   ' + n)

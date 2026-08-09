@@ -3,11 +3,14 @@ def:tilt
 eq:phi
 lem:eta
 lem:kappa
+lem:six
+prop:alphalb
 rem:graveyard
 rem:kapparho
 rem:lam0
 rem:noKappa
 rem:nocover
+rem:oneconstant
 rem:onek
 rem:principal
 rem:random
@@ -25,6 +28,7 @@ sec:rigid
 sec:scope
 sec:table1
 sec:transfer
+sec:twofailures
 sec:universality
 tab:one
 thm:rigid

@@ -68,6 +68,10 @@ the convergence of the series that gives the second one --- with a profile for w
       therefore transfer to off-centre targets unchanged. \STATUS{quoted from paper 2}
 \item What is new is the middle: a tilted local limit theorem and a cancellation lemma for the
       odd orders in $\lambda$. \TODO{fable-5, \texttt{spec\_t3rigid\_r085.md}}
+\item One consequence of quoting rather than reproving deserves saying at the outset: \emph{the
+      only ineffective constant in the trilogy is one and the same Siegel--Walfisz constant,
+      and it enters each paper at exactly one point} --- here, part (b) of
+      Lemma~\ref{lem:eta}. See \S\ref{sec:scope}.
 \end{itemize}
 
 \section{Notation, and what is inherited}\label{sec:notation}
@@ -265,8 +269,36 @@ numbers. The constants $c_A$ coincide numerically with those of
 Remark~\ref{rem:tiltslope} --- the same mean--mode gap seen twice --- but substituting $s$ for
 $\lambda$ does not remove the residual, so the coincidence is a shared order of magnitude and
 not a shared cause. \STATUS{experimentally confirmed; \texttt{tilt\_r088}, \texttt{sres\_r088}}
-\TODO{fable: is $c_A$ the second Edgeworth coefficient? The odd orders cancel by the
-reflection symmetry, so the first survivor is of exactly this size.}
+
+What they share is a driver. The saddle-point representation gives the exact identity
+\[
+  s(n)-|\lambda(n)|\;=\;\frac{K'''(s)}{2K''(s)^{2}},
+  \qquad K''=\sum a^{2}p_a(1-p_a),\quad K'''=\sum a^{3}p_a(1-p_a)(1-2p_a),
+\]
+tested pointwise to a relative error $0.54/k$ \STATUS{experimentally confirmed;
+\texttt{saddle\_r092}}, and for small tilt $K'''/(2K''^{2})\approx sS_4/S_2^{2}$, so that
+$c_A'=k(s/|\lambda|-1)\to kS_4/S_2^{2}$. For $a_i\asymp i^{\alpha}$ this is
+$(2\alpha+1)^{2}/(4\alpha+1)$. The measured $c_A$ of this remark agrees with $c_A'$ to within
+$1\%$ on four profiles:
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+ & $\alpha$ & $kS_4/S_2^2$ & $c_A'$ & $c_A$ & $c_A/c_A'$\\
+\midrule
+odd numbers & 1 & 1.8000 & 1.8525 & 1.8674 & 1.008\\
+$a_i\asymp i^{3/2}$ & 3/2 & 2.2794 & 2.3494 & 2.3318 & 0.993\\
+squares & 2 & 2.7714 & 2.8615 & 2.8377 & 0.992\\
+primes & --- & 1.9731 & 2.0251 & 2.0253 & 1.000\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+at $k=220$. \STATUS{experimentally confirmed, four profiles; \texttt{saddle\_r092},
+\texttt{alpha\_r092}} \TODO{fable: $c_A=c_A'$ is still a conjecture --- the driver is shared,
+the causation is not (substituting $s$ makes the residual worse). State it as a conjecture
+with the table as its evidence.}
 \end{remark}
 
 \subsection{The bridge to paper 2}\label{sec:bridge}
@@ -352,8 +384,9 @@ at $\theta=1/(2N)$ --- which is also, and not by accident, the largest $\theta$ 
 quadratic bound is valid at all. What remains, $|\theta|\le\theta_1$, is the principal arc,
 where P3 supplies the main term rather than a bound.
 \STATUS{experimentally confirmed; \texttt{gap\_r090}}
-\TODO{fable: the bookkeeping of the constant $C$ against P3's local limit theorem is the one
-place this could still pinch. $\theta_1\asymp\sqrt{b/V}$ is $\sqrt b$ times the natural LCLT
+\TODO{\textbf{Seam C.} The bookkeeping of the constant $C$ against P3's local limit theorem is
+the one place this could still pinch; it is assigned to the P3 write-out and carried as a named
+seam until then. $\theta_1\asymp\sqrt{b/V}$ is $\sqrt b$ times the natural LCLT
 width $V^{-1/2}$, which is fine because the integrand is already $e^{-Cb}$ at the edge, but the
 error term should be written out rather than asserted.}
 \end{remark}
@@ -366,17 +399,25 @@ The quotation in (c) is therefore valid on a strictly larger set of $\theta$ tha
 type~(ii).
 \end{remark}
 
-\begin{remark}[the same $q=6$, twice]\label{rem:sixagain}
-Among $q\ge3$ the quantity $\mu(q)/\varphi(q)$ of Lemma~\ref{lem:eta}(b) is maximal at
-$q=6$, where it equals $+\tfrac12$, and \textbf{the maximum is attained there only}: $\varphi(q)=2$
-forces $q\in\{3,4,6\}$, and $\mu(3)=-1$, $\mu(4)=0$, $\mu(6)=+1$. So the worst point of the
-additive estimate is $\theta=1/6$, with $\operatorname{Re}S_A/b\to\tfrac12=\cos60^\circ$.
+\begin{lemma}[the extremiser of the additive estimate]\label{lem:six}
+$\displaystyle\max_{q\ge3}\frac{\mu(q)}{\varphi(q)}=\frac12$, and the maximum is attained at
+$q=6$ and at no other $q$.
+\end{lemma}
 
-Paper~2's multiplicative estimate has its worst point at the same $q$: $\sup_qM(q)=M(6)=
-\sqrt3/2=\cos30^\circ$. Both are the statement that the odd primes lie in $\pm1\pmod 6$ and
-nowhere else, read once through $\prod|\cos|$ and once through $\sum\cos$. Measured on the odd
-primes below $10^{7}$, $\operatorname{Re}S_A(1/6)/b=0.499998$ against the predicted $1/2$, and
-$q=6$ is the maximiser over $2\le q\le16$.
+\begin{proof}
+$\varphi(q)=2$ holds exactly for $q\in\{3,4,6\}$, where $\mu$ takes the values $-1$, $0$, $+1$;
+so among these the maximum is $\mu(6)/\varphi(6)=1/2$. Every other $q\ge3$ has $\varphi(q)\ge4$
+and hence $\mu(q)/\varphi(q)\le1/4<1/2$.
+\end{proof}
+
+\begin{remark}[the same $q=6$, twice]\label{rem:sixagain}
+By Lemma~\ref{lem:eta}(b) the worst point of the additive estimate is therefore $\theta=1/6$,
+with $\operatorname{Re}S_A/b\to\tfrac12=\cos60^\circ$. Paper~2's multiplicative estimate has its
+worst point at the same $q$: $\sup_qM(q)=M(6)=\sqrt3/2=\cos30^\circ$. \textbf{Same extremiser,
+same cause, two functionals} --- both say that the odd primes lie in $\pm1\pmod6$ and nowhere
+else, read once through $\prod|\cos|$ and once through $\sum\cos$. Measured on the odd primes
+below $10^{7}$, $\operatorname{Re}S_A(1/6)/b=0.499998$ against the predicted $1/2$, and $q=6$
+is the maximiser over $2\le q\le16$ at each of $N=10^{5},10^{6},10^{7}$.
 \STATUS{experimentally confirmed; \texttt{eta\_r090}}
 \end{remark}
 
@@ -441,6 +482,42 @@ magnitude, so the profile is not merely slow but undecidable at any accessible s
 \TODO{present this as the counterexample that makes the hypothesis non-vacuous, not as a
 failure.}
 
+\subsection{Two different kinds of failure}\label{sec:twofailures}
+
+The cubes fail \emph{effectively} and not asymptotically, and the distinction is worth
+keeping. Computed directly, $\sum_d2^{-N_d}\delta_d^2$ for the odd-ified cubes settles at
+$1.112\cdot10^{7}$ and does not grow with $k$ (values at $k=60,100,140,180$:
+$1.112\cdot10^{7}$ from $k\approx140$ on, against $69.5$ for the odd numbers, $266.1$ for
+$\alpha=3/2$ and $6473$ for the squares --- each of them $k$-independent as well).
+\STATUS{experimentally confirmed; \texttt{alpha\_r092}} So \textup{(H)} is not what the cubes
+violate; what they violate is any hope of seeing the asymptotics, the constant being four
+orders of magnitude larger than the odd numbers'.
+
+A profile that fails \textup{(H)} outright is available, and on the other side:
+
+\begin{proposition}[no profile below $\alpha=1$]\label{prop:alphalb}
+Let $a_i\asymp c\,i^{\alpha}$ be distinct odd integers with $\alpha<1$. Then
+$c\gg k^{1-\alpha}$, hence $a_1\to\infty$, hence $N_d=0$ for all $d<a_1/2$ and
+\[
+  \sum_{d\ge1}2^{-N_d}\delta_d^{2}\;\ge\;\sum_{d<a_1/2}2d^{2}\;\asymp\;a_1^{3}
+  \;\longrightarrow\;\infty .
+\]
+So \textup{(H)} fails for every $\alpha<1$.
+\end{proposition}
+
+\begin{proof}
+The $k$ values $a_1<\dots<a_k$ are distinct odd integers, so $a_k\ge2k-1$; with
+$a_k\asymp ck^{\alpha}$ this forces $c\gg k^{1-\alpha}$. For $d<a_1/2$ no $a_i$ is $\le2d$, so
+$N_d=0$, $\sigma_d=0$ and $\delta_d=d$, and the displayed terms are $2d^2$.
+\end{proof}
+
+\noindent
+Measured on an $\alpha=1/2$ profile, $\sum2^{-N_d}\delta_d^2=4923,\,10245,\,16608,\,24464$ at
+$k=60,100,140,180$ --- growing like $k^{3/2}$, as the proposition predicts.
+\STATUS{experimentally confirmed; \texttt{alpha\_r092}} The hypothesis therefore cuts the
+power profiles at $\alpha=1$ exactly, and the cubes sit inside the admissible range but
+beyond the reach of computation.
+
 \section{Honest scope}\label{sec:scope}
 
 \TODO{in the style of paper 1 \S10 and paper 2 \S10.} The classification to fill in:
@@ -458,6 +535,15 @@ failure.}
 \item \emph{Not claimed}: the residual $0.8$--$1.9\%$ of Table~\ref{tab:one} is consistent
       with finite size and shrinks in $k$, but we do not claim it is zero.
 \end{itemize}
+
+\begin{remark}[the single ineffective constant]\label{rem:oneconstant}
+Precisely: every estimate used here is effective except part~(b) of Lemma~\ref{lem:eta}, whose
+error term is the Siegel--Walfisz error, and paper~2's appendix identifies the same constant
+$C_1$ as the only ineffective one in that paper, entering there at one point as well. Paper~1
+is unconditional and effective throughout. \textbf{Ineffective is not conditional}: no
+statement here depends on an unproved hypothesis; what is not available is a numerical
+threshold beyond which the asymptotics take hold.
+\end{remark}
 
 \begin{remark}[approaches that did not work]\label{rem:graveyard}
 \TODO{as in paper 2, keep the dead ends with their reasons.} At least: the tilted-measure
