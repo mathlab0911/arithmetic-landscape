@@ -821,83 +821,214 @@ Remark~\ref{rem:budget}, where the change in fact improves every measured
 quantity that matters.
 \end{remark}
 
-\subsection{The intended argument}
+\subsection{The deep-minor bound}
 
-Fix $\theta$ of type (ii); the $\theta$ of type (i) are covered by
-Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a}. Split
-$B=B_{\mathrm{good}}\cup B_{\mathrm{bad}}$, where $p$ is bad when
-$\|p\theta/2\pi-\tfrac12\|<\delta_0$.
+We now write the argument out. Throughout, $\theta$ is of type~(ii) of
+Lemma~\ref{lem:cover}; the $\theta$ of type~(i) are covered by
+Corollary~\ref{cor:spectrum} and Proposition~\ref{prop:l5a}. Write
+\[
+  \alpha_n=\frac{n\theta}{2\pi},\qquad
+  u_p=\frac{p\theta}{2\pi},\qquad
+  v_p=u_p-\tfrac12 ,
+\]
+and split $B=B_{\mathrm{good}}\cup B_{\mathrm{bad}}$, where $p$ is \emph{bad}
+when $\|v_p\|<\delta_0$.
 
-\begin{enumerate}
-\item \emph{Harmonics stay minor.} This is exactly condition~(ii): for every
-      $n\le N_0$ the reduced denominator of $n\theta/2\pi$ exceeds
-      $(\log N)^{A}$, so every harmonic appearing below lies on a minor arc.
-      This is the only place where the value of $N_0$ enters the dissection, and
-      it is why $N_0$ must be a power of $\log N$ rather than of $b$
-      (Remark~\ref{rem:whyN0}).
-\item \emph{The exponential sums.} Take the Dirichlet parameter
-      $\tau=N(\log N)^{-A}$, so that every denominator arising above satisfies
-      $q_n\le\tau$ automatically; combined with step~1,
-      \[
-        (\log N)^{A}\;<\;q_n\;\le\;N(\log N)^{-A},
-      \]
-      which is precisely the range on which Vaughan's identity is effective. No
-      other range occurs: the tiers below $(\log N)^{A}$ are not lost but are
-      handled in \S\ref{sec:vanish} and \S\ref{sec:l5a}, where the cyclotomic
-      constants $M(q)$ give the bound directly and no exponential sum is needed
-      at all. On this range Vaughan's identity gives
-      \[
-        S_B(\alpha)=\sum_{p\in B}e(p\alpha)\ll(\log N)^{3}
-        \bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr),
-      \]
-      valid whenever $1\le q_n\le N$, $(a,q_n)=1$ and $|q_n\alpha-a|\le
-      q_n^{-1}$; this is Lemma~3.1 of Kumchev's survey~\cite{Ku05}, where it is
-      attributed to Vaughan as the sharpest form of Vinogradov's 1937 estimate.
-      Our Dirichlet parameter gives $|q_n\alpha-a|\le1/\tau\le1/q_n$, so the
-      hypotheses hold. Hence $S_B\ll N(\log N)^{3-A/2}$, which, since
-      $\pi(N)\asymp N/\log N$, is $o(\pi(N))$ as soon as $A>8$; $A$ is ours to
-      choose and Siegel--Walfisz holds for every fixed $A$, so we fix $A=11$
-      once and for all. A log-free version valid on a wider range of $q$ is
-      available in~\cite{Sr25}. Summing
-      the head, $\sum_{n\le N_0}|S_B(n\theta)|/n\le(\log
-      N_0)\max_n|S_B(n\theta)|$, gives $o(b)$; note that $\log N_0=A'\log\log N$,
-      so enlarging $N_0$ from $b^{1/4}$ to $(\log N)^{A'}$ costs the head only a
-      bounded factor.
-\item \emph{Bad points.} Each bad $p$ contributes at most $\log2$
-      to~\eqref{eq:fourier}, so it suffices that $|B_{\mathrm{bad}}|=o(b)$. This
-      needs no input beyond step~2. Lemma~\ref{lem:fejer} of the appendix ---
-      the one-interval form of the Erd\H{o}s--Tur\'an inequality, proved there
-      from the Fej\'er kernel so that no external reference is incurred ---
-      applied to the interval $\|x-\tfrac12\|<\delta_0$ with degree $N_0$, gives
-      \[
-        |B_{\mathrm{bad}}|\;\le\;4b\Bigl(\delta_0+\frac{1}{N_0}\Bigr)
-          +4\sum_{n\le N_0}c_n\,\bigl|S_B(n\theta)\bigr|,
-        \qquad c_n=\min\Bigl(2\delta_0+\tfrac{2}{N_0},\tfrac1{\pi n}\Bigr),
-      \]
-      and the sum on the right is the \emph{same} head already shown to be
-      $o(b)$ in step~2. Since $\delta_0\to0$ and $N_0\to\infty$, the whole
-      expression is $o(b)$.
-
-      We stress the point, because it removes a dependency rather than adding
-      one: no external discrepancy theorem for $\{p\theta\}$ is required. The
-      literature on $\alpha p$ modulo one --- Vinogradov, Vaughan, Harman,
-      Matom\"aki --- proves \emph{small-value} statements, that some prime
-      $p\le N$ makes $\|\alpha p-\beta\|$ small; that is a statement about the
-      extreme of the sequence and does not by itself bound its discrepancy. The
-      route above uses only the exponential sums we already have.
-\item \emph{Good points.} For $p$ good the series~\eqref{eq:fourier} is
-      truncated at $N_0$; since $\|p\theta/2\pi-\tfrac12\|\ge\delta_0$,
-      summation by parts against the Dirichlet kernel bounds the tail by
-      $C/(N_0\delta_0)=C\log b\,(\log N)^{-A'}=o(1)$. Here the new choice of
-      $N_0$ is a large gain and not merely a repair: with $N_0=b^{1/4}$ the same
-      bound was $C\log b\cdot b^{-1/4}$, which stays above $1$ until
-      $b\approx10^{6}$, whereas $(\log N)^{A'}$ makes it small immediately
-      (Remark~\ref{rem:budget}).
-\end{enumerate}
+\begin{proposition}[Deep minor arcs]\label{prop:deepminor}
+Let $\theta$ be of type~\textup{(ii)} and let $A>8$. Then
+\[
+  \frac1b\log|G_B(\theta)|\;\le\;-\log2\;+\;R(\theta),
+  \qquad
+  R(\theta)\;\ll\;\delta_0\log\log N+\frac{1}{N_0\delta_0}
+    +(\log N)^{4-A/2}(\log\log N)^{2},
+\]
+uniformly in $\theta$. With $A=11$, $A'=12$ and $\delta_0=1/\log b$ this reads
+$R(\theta)\ll\log\log N/\log N$. In particular
+$|G_B(\theta)|\le\bigl(\tfrac12+o(1)\bigr)^{b}$ on the deep minor arcs.
+\end{proposition}
 
 \noindent
-Together these give $\log|G_B(\theta)|\le-(b-o(b))\log2+o(b)$, that is
-$|G_B(\theta)|\le(1/2+o(1))^{b}$ on the deep minor arcs.
+Before the proof we record the exponent budget, so that the reader can see which
+step is the slow one. Every entry is a bound on the named quantity \emph{divided
+by} $b$.
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+step & quantity & bound $/b$ & at $A=11$, $\delta_0=1/\log b$\\
+\midrule
+2 & $\max_{n\le N_0}|S_B(\alpha_n)|$ & $(\log N)^{4-A/2}$ & $(\log N)^{-3/2}$\\
+2 & $H(\theta)=\sum_{n\le N_0}n^{-1}|S_B(\alpha_n)|$
+  & $(\log N)^{4-A/2}\log\log N$ & $(\log N)^{-3/2}\log\log N$\\
+3 & $|B_{\mathrm{bad}}|$ & $\delta_0+N_0^{-1}+b^{-1}H$ & $(\log N)^{-1}$\\
+4a & $\sum_{p\in B_{\mathrm{bad}}}\log|2\cos\pi u_p|$ & $(\log2)\,b^{-1}|B_{\mathrm{bad}}|$
+  & $(\log N)^{-1}$\\
+4b & tails past $N_0$, good $p$ & $(2N_0\delta_0)^{-1}+N_0^{-1}$ & $(\log N)^{1-A'}$\\
+4c & $B_{\mathrm{bad}}$ inside the head & $(1+\log N_0)\,b^{-1}|B_{\mathrm{bad}}|$
+  & $\log\log N/\log N$\ \ \textbf{(slowest)}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{proof}
+\emph{Step 1: harmonics stay minor.} This is condition~(ii) verbatim: for every
+$n\le N_0$ the denominator $q_n$ produced by Dirichlet's theorem with parameter
+$\tau=N(\log N)^{-A}$ satisfies $q_n>(\log N)^{A}$. This is the only place where
+the value of $N_0$ enters the dissection, and it is why $N_0$ must be a power of
+$\log N$ rather than of $b$ (Remark~\ref{rem:whyN0}).
+
+\emph{Step 2: the head of \eqref{eq:fourier}.} Dirichlet's theorem with
+parameter $\tau$ gives, for each $n$, a fraction $a_n/q_n$ with $q_n\le\tau$,
+$(a_n,q_n)=1$ and $|\alpha_n-a_n/q_n|\le1/(q_n\tau)$. Since $q_n\le\tau$ we have
+$|q_n\alpha_n-a_n|\le1/\tau\le1/q_n$, so the hypothesis of Lemma~3.1
+of~\cite{Ku05} holds; and $q_n\le\tau\le N$. Combining with step~1,
+\begin{equation}\label{eq:qrange}
+  (\log N)^{A}\;<\;q_n\;\le\;N(\log N)^{-A}\qquad(n\le N_0),
+\end{equation}
+which is exactly the range on which Vaughan's identity is effective. No other
+range occurs: the tiers below $(\log N)^{A}$ are not lost but are handled in
+\S\ref{sec:vanish} and \S\ref{sec:l5a}, where the cyclotomic constants $M(q)$
+give the bound directly and no exponential sum is needed at all. On this range
+Lemma~3.1 of~\cite{Ku05} --- attributed there to Vaughan, as the sharpest form
+of Vinogradov's 1937 estimate --- gives
+\[
+  S_B(\alpha_n)=\sum_{p\in B}e(p\alpha_n)
+  \;\ll\;(\log N)^{3}\bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr).
+\]
+Insert the two ends of \eqref{eq:qrange}: the first term is
+$\ll N(\log N)^{-A/2}$ by the lower end, and the third is
+$\le(N\cdot N(\log N)^{-A})^{1/2}=N(\log N)^{-A/2}$ by the upper end --- the two
+ends are used in opposite directions, which is why both are needed. Hence,
+uniformly in $n\le N_0$,
+\begin{equation}\label{eq:sbbound}
+  |S_B(\alpha_n)|\;\ll\;N(\log N)^{3-A/2}+N^{4/5}(\log N)^{3}.
+\end{equation}
+Since $b=\pi(N)=(1+o(1))N/\log N$, dividing by $b$ turns \eqref{eq:sbbound} into
+$(\log N)^{4-A/2}+N^{-1/5}(\log N)^{4}\ll(\log N)^{4-A/2}$, the second term
+being negligible. Summing the head with the weights $1/n$,
+\[
+  H(\theta):=\sum_{n\le N_0}\frac{|S_B(\alpha_n)|}{n}
+  \;\le\;(1+\log N_0)\max_{n\le N_0}|S_B(\alpha_n)|,
+  \qquad \log N_0=A'\log\log N,
+\]
+so that
+\begin{equation}\label{eq:head}
+  \frac{H(\theta)}{b}\;\ll\;(\log N)^{4-A/2}\log\log N .
+\end{equation}
+This is $o(1)$ precisely when $A>8$; $A$ is ours to choose and Siegel--Walfisz
+holds for every fixed $A$, so we fix $A=11$ once and for all, giving
+$H(\theta)/b\ll(\log N)^{-3/2}\log\log N$. A log-free version valid on a wider
+range of $q$ is available in~\cite{Sr25}.
+
+\emph{Step 3: the bad points are few.} Apply Lemma~\ref{lem:fejer} --- the
+one-interval form of the Erd\H{o}s--Tur\'an inequality, proved in the appendix
+from the Fej\'er kernel so that no external reference is incurred --- to the
+points $u_p$, the interval $\|x-\tfrac12\|<\delta_0$ and the degree $N_0$:
+\[
+  |B_{\mathrm{bad}}|\;\le\;4b\Bigl(\delta_0+\frac{1}{N_0}\Bigr)
+    +4\sum_{n\le N_0}c_n|S_B(\alpha_n)|,
+  \qquad c_n=\min\Bigl(2\delta_0+\tfrac{2}{N_0},\tfrac1{\pi n}\Bigr).
+\]
+Bounding $c_n\le1/(\pi n)$ and using \eqref{eq:head},
+\begin{equation}\label{eq:bad}
+  \frac{|B_{\mathrm{bad}}|}{b}\;\le\;4\delta_0+\frac4{N_0}
+    +\frac4\pi\cdot\frac{H(\theta)}{b}
+  \;\ll\;\delta_0+\frac1{N_0}+(\log N)^{4-A/2}\log\log N .
+\end{equation}
+We stress that this removes a dependency rather than adding one: no external
+discrepancy theorem for $\{p\theta\}$ is required. The literature on $\alpha p$
+modulo one --- Vinogradov, Vaughan, Harman, Matom\"aki --- proves \emph{small-value}
+statements, that some prime $p\le N$ makes $\|\alpha p-\beta\|$ small; that is a
+statement about the extreme of the sequence and does not by itself bound its
+discrepancy. The route above uses only the exponential sums of step~2.
+
+\emph{Step 4: excision.} Since
+$\log|G_B(\theta)|=-b\log2+\sum_{p\in B}\log|2\cos\pi u_p|$, it suffices to bound
+the last sum above by $bR(\theta)$. Split it over $B_{\mathrm{bad}}$ and
+$B_{\mathrm{good}}$ and, on $B_{\mathrm{good}}$, split \eqref{eq:fourier} at
+$N_0$:
+\[
+  \sum_{p\in B}\log|2\cos\pi u_p|
+  \;\le\;\underbrace{|B_{\mathrm{bad}}|\log2}_{\text{(4a)}}
+   +\underbrace{\Bigl|\sum_{n\le N_0}\frac{(-1)^{n+1}}{n}
+       \mathrm{Re}\!\!\sum_{p\in B_{\mathrm{good}}}\!\!e(p\alpha_n)\Bigr|}_{\text{(4c)}}
+   +\underbrace{\sum_{p\in B_{\mathrm{good}}}|T_p|}_{\text{(4b)}} ,
+\]
+where $T_p$ is the tail of \eqref{eq:fourier} past $N_0$ at the point $u_p$.
+
+\emph{(4a)} $\log|2\cos\pi u|\le\log2$ for every $u$, so this term is at most
+$|B_{\mathrm{bad}}|\log2$, which is $\ll b\,\bigl(\delta_0+N_0^{-1}
++(\log N)^{4-A/2}\log\log N\bigr)$ by \eqref{eq:bad}.
+
+\emph{(4b)} Put $v=v_p$, so that $\log|2\cos\pi u_p|=\log|2\sin\pi v|
+=-\sum_{n\ge1}\cos(2\pi nv)/n$ and $\|v\|\ge\delta_0$. The Dirichlet kernel
+$D_M(v)=\sum_{n\le M}\cos2\pi nv=\frac{\sin((2M+1)\pi v)}{2\sin\pi v}-\frac12$
+satisfies, using $|\sin\pi v|\ge2\|v\|$,
+\[
+  |D_M(v)|\;\le\;\frac{1}{4\|v\|}+\frac12\qquad\text{for every }M\ge1 .
+\]
+Summation by parts against $1/n$ on $(N_0,M]$ gives
+$\bigl|\sum_{N_0<n\le M}\cos(2\pi nv)/n\bigr|\le
+|D_M|/M+|D_{N_0}|/(N_0+1)+\sup_n|D_n|\sum_{n>N_0}\bigl(\tfrac1n-\tfrac1{n+1}\bigr)$,
+and letting $M\to\infty$,
+\begin{equation}\label{eq:tailbound}
+  |T_p|\;\le\;\frac{2}{N_0+1}\Bigl(\frac1{4\|v_p\|}+\frac12\Bigr)
+  \;\le\;\frac{1}{2N_0\delta_0}+\frac1{N_0}.
+\end{equation}
+Summing over at most $b$ good points, (4b) is at most
+$b\bigl((2N_0\delta_0)^{-1}+N_0^{-1}\bigr)$.
+
+\emph{(4c)} Write $\sum_{p\in B_{\mathrm{good}}}e(p\alpha_n)
+=S_B(\alpha_n)-\sum_{p\in B_{\mathrm{bad}}}e(p\alpha_n)$ and bound the second
+sum trivially by $|B_{\mathrm{bad}}|$. Then
+\[
+  \text{(4c)}\;\le\;H(\theta)+(1+\log N_0)\,|B_{\mathrm{bad}}| .
+\]
+
+Collecting (4a)--(4c), dividing by $b$, using \eqref{eq:bad} and $\delta_0\le1$
+(so that $N_0^{-1}\le(N_0\delta_0)^{-1}$), and absorbing the factor
+$1+\log N_0\asymp A'\log\log N$ into the bracket of \eqref{eq:bad}, gives
+\[
+  R(\theta)\;\ll\;\delta_0\log\log N+\frac{1}{N_0\delta_0}
+    +(\log N)^{4-A/2}(\log\log N)^{2},
+\]
+which is the stated bound. With $A=11$, $A'=12$ and $\delta_0=1/\log b$ the
+three terms are $\asymp\log\log N/\log N$, $\asymp(\log N)^{1-A'}$ and
+$\asymp(\log N)^{-3/2}(\log\log N)^{2}$; the first dominates.
+\end{proof}
+
+\begin{remark}[$\delta_0$ is free, and $1/\log b$ is not the best choice]
+\label{rem:delta0}
+The proof uses only $N_0\delta_0\to\infty$ and $\delta_0\log\log N\to0$. Within
+that range the two $\delta_0$-terms of Proposition~\ref{prop:deepminor} balance
+at $\delta_0\asymp(N_0\log\log N)^{-1/2}$; the simpler choice
+$\delta_0=N_0^{-1/2}=(\log N)^{-A'/2}$ already sends both of them below the
+exponential-sum term, improving the rate from
+$\log\log N/\log N$ to $(\log N)^{4-A/2}(\log\log N)^{2}$, i.e.\ to
+$(\log N)^{-3/2}(\log\log N)^{2}$ at $A=11$. We keep $\delta_0=1/\log b$ because
+it is the value at which the budget of Remark~\ref{rem:budget} was measured, and
+because the conclusion is the same; a reader who wants the better rate may
+substitute throughout.
+
+The rate is in any case at the mercy of $A$: the exponential-sum term is
+$(\log N)^{4-A/2}$ up to log-logs, so any fixed $J$ is reached by taking
+$A\ge2J+8$. That is free asymptotically but not for free in
+Proposition~\ref{prop:l5a}, whose explicit constants are calibrated to
+$q\le Q_2=(\log N)^{A+A'}$; raising $A$ raises that threshold. Since this
+section is in any case ineffective through $C_1$
+(Appendix~\ref{sec:constants}), we do not optimise.
+\end{remark}
+
+\begin{remark}[What the proved rate is, and what is measured]
+Proposition~\ref{prop:deepminor} gives $R(\theta)\ll\log\log N/\log N$, and the
+implied constant, while absolute, is generous: the Erd\H{o}s--Tur\'an factor $4$
+of Lemma~\ref{lem:fejer}, the trivial bound $|B_{\mathrm{bad}}|$ used in (4c),
+and the crude $c_n\le1/(\pi n)$ each cost a factor. The proof needs only $o(1)$
+and gets it. What the quantity actually does is recorded separately in
+Remark~\ref{rem:budget}: the measured
+$-b^{-1}\log|G_B(\theta)|-\log2$ was $0.123$ at $b=99$ and $0.024$ at $b=1999$,
+against the $\log\sqrt3=0.549$ that the conclusion needs.
+\end{remark}
 
 \begin{remark}[What this settles about the technique needed]
 Only a one-sided bound together with an exceptional set of size $o(b)$ is
@@ -929,7 +1060,8 @@ asymptotic; see Remark~\ref{rem:helfgott}.
 \end{remark}
 
 \begin{remark}[On explicit constants]\label{rem:helfgott}
-One might hope to make step~3 effective using Helfgott's explicit minor-arc
+One might hope to make step~2, and hence step~3, effective using Helfgott's
+explicit minor-arc
 bounds~\cite{Hel12}. His Main Theorem is stated for $x\ge x_0=2.16\cdot10^{20}$,
 which corresponds to $k=\pi(x_0)\approx4.7\cdot10^{18}$. That is far outside any
 range we could combine with the direct computations of Section~\ref{sec:num}, so
@@ -1164,7 +1296,7 @@ We set out plainly which parts of this paper are proved and which are not.
       Section~\ref{sec:l5c} (the Vinogradov input of step~2 and the excision of
       step~4) and the $o(1)$ bookkeeping in item~(6) of the outline above. Theorem~\ref{thm:t2main} and
       Corollary~\ref{cor:goal} inherit this status.
-\item \emph{A gap we have found and not closed}. Lemma~\ref{lem:cover} sorts
+\item \emph{A gap we found, and how it was closed}. Lemma~\ref{lem:cover} sorts
       every $\theta$ by \emph{denominator}, but the two mechanisms it hands
       $\theta$ to are matched to different \emph{radii}: the Dirichlet
       neighbourhood in case~(i) has radius $1/(q\tau)$, while the envelope of
@@ -1179,7 +1311,8 @@ We set out plainly which parts of this paper are proved and which are not.
       matching of radii unnecessary. That lemma is now proved; what survives of
       that gap is now closed: Lemma~\ref{lem:supnorm} discharges the
       $x$-dependence and Proposition~\ref{prop:supnorm} supplies the remaining
-      inequality from the literature on cyclotomic coefficients. We warn that
+      inequality, self-contained and effective --- its proof quotes nothing, the
+      literature entering only as context in Remark~\ref{rem:bzdega}. We warn that
       the naive form of it --- $\Phi_q\le0$ --- is \emph{false}, for the reason
       given in Remark~\ref{rem:phipos}.
 \item \emph{Formal verification}: the $99$ Lean theorems cover the
@@ -1680,8 +1813,8 @@ $\tau$ & $N(\log N)^{-A}$ & \S\ref{sec:l5c}, step 1 & Dirichlet dissection
   denominator\\
 $Q_2$ & $(\log N)^{A+A'}$ & \S\ref{sec:l5c} & major/minor boundary\\
 $\delta_0$ & $1/\log b$ & \S\ref{sec:l5c}, step 4 & half-width of the bad set\\
-$Q_4$ & $7$ & Proposition~\ref{prop:supnorm} & beyond $q=3,6$ the sup-norm
-  margin is positive\\
+$Q_4$ & $7$ \emph{(det.)} & Proposition~\ref{prop:supnorm} & \emph{not} a choice: the least $q$
+  beyond which\\ &&& the sup-norm margin is positive\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1753,8 +1886,13 @@ stale when the numbering shifts.
 
 \subsection{Three consequences worth stating}
 
-\emph{First, $C_1$ is the only ineffective constant in the paper.} It is
-Siegel's, and it propagates to exactly two places: Lemma~\ref{lem:twist} (hence
+\emph{First, $C_1$ is the only ineffective constant in the paper.} Its
+ineffectivity is not an artefact of how we quote the theorem: for a
+\emph{fixed} modulus the prime number theorem in arithmetic progressions is
+effective, and what makes $C_1$ ineffective is that we need it uniformly for
+$q\le(\log N)^{A+A'}$, a range in which a real character may have a Siegel
+zero whose location no known argument pins down. It is Siegel's constant, and
+it propagates to exactly two places: Lemma~\ref{lem:twist} (hence
 Lemma~\ref{lem:annulus}) and step 2 of Section~\ref{sec:l5c}. Everything else
 --- the whole spectral chain of Sections~\ref{sec:m1}--\ref{sec:l5a}, the
 envelope of Proposition~\ref{prop:curv}, and the entire sup-norm argument of
