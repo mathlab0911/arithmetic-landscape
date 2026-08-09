@@ -1058,11 +1058,12 @@ whatsoever}; only the rate degrades, from $\sqrt3/2$ to $0.9814$.
 \emph{(ii) The rate $\sqrt3/2$ is recovered asymptotically, but not effectively.}
 The Siegel--Walfisz estimate already used in Lemma~\ref{lem:twist} gives
 $\Delta\ll N^{2}e^{-c\sqrt{\log N}}$ and hence $\Delta^{2}/(8S_2)=o(b)$, so
-$K_2^{1/b}\to1$ and the rate returns to $\sqrt3/2$. As with every other
-appeal to Siegel--Walfisz in this paper the threshold is ineffective, and here
-it is also numerically remote: at $N=10^{24}$ the bound $\Delta^{2}/S_2\ll
-N\log N\,e^{-2c\sqrt{\log N}}$ is still some $690$ times larger than $b/8$.
-This is why we take (i), not (ii), as the load-bearing statement.
+$K_2^{1/b}\to1$ and the rate returns to $\sqrt3/2$. As with every other appeal
+to Siegel--Walfisz in this paper the threshold is ineffective: the ratio of the
+resulting bound to $b/8$ is $\asymp(\log N)^{2}e^{-2c\sqrt{\log N}}$, which
+tends to $0$ but at a point that depends on the admissible $c$, and $c$ is not
+pinned down here. This is why we take (i), not (ii), as the load-bearing
+statement.
 
 \emph{(iii) The numerically calibrated part is the value, not the bound.} What
 Proposition~\ref{prop:ripple} supplies --- and all it supplies --- is the
@@ -1652,6 +1653,127 @@ window analogue of the modulus-$4$ obstruction. Explicit odd sequences with
 $\varepsilon_2=0$ exist at every size, so no lower bound for $\varepsilon_d$ can
 be extracted from the aggregate residue-class spread. The route to
 Problem~\ref{prob:assembly} must go through the upper bounds above.
+
+\section{Appendix: constants and parameters}\label{sec:constants}
+
+This appendix collects every parameter and every implied constant that the
+argument uses, says where each is fixed, and records which of them are
+effective. We do so because the paper mixes three kinds of quantity ---
+parameters we choose, constants that are absolute and computable in principle,
+and one constant that is not computable at all --- and a reader is entitled to
+see the boundary between them drawn explicitly rather than inferred.
+
+\subsection{Parameters we choose}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+symbol & value & fixed at & what forces it\\
+\midrule
+$A$ & $11$ & \S\ref{sec:l5c}, step 2 & $A>8$ from Kumchev's $(\log n)^{3}$;
+  \\ &&& $A>10$ from Vaughan's $(\log N)^{4}$\\
+$A'$ & $A+1=12$ & \S\ref{sec:l5c} & one power of $\log N$ of slack in
+  Lemma~\ref{lem:cover}\\
+$N_0$ & $(\log N)^{A'}$ & \S\ref{sec:l5c} & truncation degree of
+  \eqref{eq:fourier}\\
+$\tau$ & $N(\log N)^{-A}$ & \S\ref{sec:l5c}, step 1 & Dirichlet dissection
+  denominator\\
+$Q_2$ & $(\log N)^{A+A'}$ & \S\ref{sec:l5c} & major/minor boundary\\
+$\delta_0$ & $1/\log b$ & \S\ref{sec:l5c}, step 4 & half-width of the bad set\\
+$Q_4$ & $7$ & Proposition~\ref{prop:supnorm} & beyond $q=3,6$ the sup-norm
+  margin is positive\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+These are choices, not discoveries: any $A>10$ with $A'=A+1$ runs the same
+argument. We fix numerical values only so that the reader can check the
+bookkeeping.
+
+\subsection{Implied constants}
+
+We name the nine implied constants that the argument actually uses. Each is
+absolute --- none depends on $N$, $b$, $q$, $d$ or $\theta$ --- and each may be
+assumed $\ge1$.
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+& first used in & bounds & effective?\\
+\midrule
+$C_1$ & Lemma~\ref{lem:twist}; \S\ref{sec:l5c} step 2
+  & $\max_{u\le N}|E(u)|\le C_1Ne^{-c\sqrt{\log u}}$, $q\le(\log N)^{A}$
+  & \textbf{no}\\
+$C_2$ & \S\ref{sec:l5c}, step 2
+  & Kumchev's Lemma 3.1 for $S_B(\alpha)$ & yes\\
+$C_3$ & Lemma~\ref{lem:twist}
+  & the $O(Ne^{-c\sqrt{\log N}}(\log N)^{A+A'})$ error & inherits $C_1$\\
+$C_4$ & Remark~\ref{rem:whatneeded}(i)
+  & the $O(1)$ in $K_2\le\exp(b/8+O(1))$ & yes\\
+$C_5$ & Lemma~\ref{lem:annulus} & the $o(1)$ in the profile identity
+  & inherits $C_3$\\
+$C_6$ & \S\ref{sec:l5c}, step 4 & the Dirichlet-kernel tail $C/(N_0\delta_0)$
+  & yes\\
+$C_7$ & Proposition~\ref{prop:central} & the tail $O((S_4/S_2^{2})^{2})$ & yes\\
+$C_8$ & Proposition~\ref{prop:ripple} & the fifth-order remainder & yes\\
+$C_9$ & Lemma~\ref{lem:cover} & the covering overlap & yes\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{The dependency graph}
+
+\begin{verbatim}
+  A = 11  --->  A' = 12  --->  N_0, tau, Q_2      [C_9: lem:cover]
+
+  C_1  Siegel-Walfisz  (INEFFECTIVE) --+
+  C_2  Kumchev         (effective)   --+--> C_3  (lem:twist)
+                                                    |
+                                                    +--> C_5  (lem:annulus)
+                                                    |
+  C_6  Fejer tail, step 4 (effective) --------------+
+                                                    |
+                                                    v
+                                 deep minor arcs (sec:l5c)  =  HYPOTHESIS (a)
+                                                    |
+  C_4  K_2 moments     (effective) --+              |
+  C_7  Edgeworth tail  (effective) --+--> thm:t2main  <-----+
+  C_8  ripple, 5th ord (effective) --+        ^
+                                              |
+                       carrying no implied constant at all:
+                       thm:cyc, cor:spectrum, prop:curv, prop:supnorm,
+                       lem:l1, lem:l1geom, lem:l1small, lem:fejer
+\end{verbatim}
+
+\noindent
+Nodes are named by label rather than by number, so that the graph cannot go
+stale when the numbering shifts.
+
+
+\subsection{Three consequences worth stating}
+
+\emph{First, $C_1$ is the only ineffective constant in the paper.} It is
+Siegel's, and it propagates to exactly two places: Lemma~\ref{lem:twist} (hence
+Lemma~\ref{lem:annulus}) and step 2 of Section~\ref{sec:l5c}. Everything else
+--- the whole spectral chain of Sections~\ref{sec:m1}--\ref{sec:l5a}, the
+envelope of Proposition~\ref{prop:curv}, and the entire sup-norm argument of
+Section~\ref{sec:remains} --- is effective, and in the case of
+Propositions~\ref{prop:curv} and \ref{prop:supnorm} and
+Lemmas~\ref{lem:l1}--\ref{lem:l1small} there is no implied constant to name:
+those statements are inequalities between explicit quantities.
+
+\emph{Second, the ineffective part and the hypothesised part do not coincide,
+and we do not claim they do.} Hypothesis (a) is the deep-minor bound of
+Section~\ref{sec:l5c}. Lemma~\ref{lem:twist} is proved, not hypothesised, yet it
+carries $C_1$. So the honest statement is: Theorem~\ref{thm:t2main} is
+conditional on (a) \emph{and} ineffective through $C_1$, and these are two
+separate deficiencies with two separate remedies.
+
+\emph{Third, the rate itself needs none of this.} By
+Remark~\ref{rem:whatneeded}(i) the conclusion $\varepsilon_d\to0$ at rate
+$e^{1/8}\sqrt3/2=0.98134\ldots$ per element uses only $C_4$, which is effective
+and absolute. The improvement to the rate $\sqrt3/2$ is what costs $C_1$.
 
 \section{Appendix: the window function}\label{sec:window}
 
