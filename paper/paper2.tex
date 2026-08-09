@@ -57,7 +57,14 @@ only competitors of the modulus-$6$ peak are the modulus-$4$ floor
 $(1/\sqrt2)^{|B|}$, which never vanishes, and a finite list depending on the
 truncation level. We also derive and verify numerically a second-order formula
 for the modulus-$6$ ripple, giving amplitude and phase to within $0.1\%$ over
-$k=18,\dots,76$. Key steps are formally verified in Lean~4.
+$k=18,\dots,76$. Combining these with the deep-minor bound of
+Section~\ref{sec:l5c}, which is proved here, we obtain $\varepsilon_d(k)\to0$
+at the geometric rate $\sqrt3/2$ per element, and hence
+$\mathrm{lm}_P(n)/\deg_P(n)\to\Gamma(P)=5.34920\ldots$ for the odd primes; this
+answers Problem 10.1 of the companion paper. The theorem carries no hypothesis.
+It is, however, ineffective, and at exactly one point: the Siegel--Walfisz
+constant, which Appendix~\ref{sec:constants} isolates as the only ineffective
+constant in the paper. Key steps are formally verified in Lean~4.
 \end{abstract}
 
 \section{Introduction}
@@ -811,6 +818,15 @@ $nq_n\le N_0(\log N)^{A}=Q_2$. Reducing the fraction only decreases the
 denominator, which gives (i).
 \end{proof}
 
+\noindent
+The last line is the reason $Q_2$ has the value it does. A $\theta$ escapes
+tier~$T_2$ only if \emph{every} harmonic $n\theta$ with $n\le N_0$ has
+denominator above $(\log N)^{A}$; a single failure drags $\theta$ itself into a
+major arc of denominator at most $N_0\cdot(\log N)^{A}$. So $Q_2$ is not a free
+parameter once $N_0$ and $A$ are chosen: it is exactly the product
+$(\log N)^{A'}\cdot(\log N)^{A}$, and the lower end of \eqref{eq:qrange} is the
+same statement read the other way.
+
 \begin{remark}\label{rem:whyN0}
 With the earlier choice $N_0=b^{1/4}$ the same computation gives
 $nq_n\le b^{1/4}(\log N)^{A}$, and the band
@@ -1126,12 +1142,8 @@ $\log(\sqrt3/2)=-0.144$: a margin of $0.16$ per element, stable in $k$.
 Nothing new is proved in this section; it is the inventory that assembles the
 previous ones.
 
-\begin{theorem}[Asymptotic flatness, conditional]\label{thm:t2main}
-\emph{Assume} (a) \emph{the deep-minor bound of Section~\ref{sec:l5c}}, i.e.\
-that $|G_B(\theta)|\le(1/2+o(1))^{b}$ for $\theta$ of type (ii) of
-Lemma~\ref{lem:cover} --- that section establishes it at the level of a sketch
---- that is the only hypothesis, the annulus having been discharged by
-Lemma~\ref{lem:supnorm} and Proposition~\ref{prop:supnorm}. Fix $d\ge2$ and let
+\begin{theorem}[Asymptotic flatness]\label{thm:t2main}
+Fix $d\ge2$ and let
 $n=\lfloor T/2\rfloor$. With
 $B=B_d(k)$, $b=|B|$, as $k\to\infty$,
 \[
@@ -1146,11 +1158,13 @@ geometric rate $\sqrt3/2$ per element.
 \end{theorem}
 
 \begin{remark}
-The hypothesis is not decorative: it is the one statement of this paper that is
-not proved, and we prefer to carry it explicitly rather than bury it. It
-disappears once the programme of Section~\ref{sec:l5c} is written out in full,
-which is a matter of substituting a quoted estimate, not of finding an
-argument.
+Earlier versions of this paper carried the deep-minor bound as a hypothesis,
+on the ground that Section~\ref{sec:l5c} gave a programme rather than a proof.
+It is now Proposition~\ref{prop:deepminor}, and the theorem above is
+unconditional. What is quoted from outside is a single exponential-sum
+estimate, Lemma~3.1 of~\cite{Ku05}; everything the present paper adds to it is
+written out, with the exponent budget displayed so that the substitution can be
+checked line by line.
 \end{remark}
 
 \begin{remark}[What the conclusion needs, and what it does not]\label{rem:whatneeded}
@@ -1158,7 +1172,7 @@ The displayed formula and the conclusion $\varepsilon_d\to0$ have different
 statuses, and it is worth separating them, because only the first involves
 anything that is merely calibrated numerically.
 
-The \emph{conclusion} $\varepsilon_d(k)\to0$ needs, besides hypothesis (a): the
+The \emph{conclusion} $\varepsilon_d(k)\to0$ needs: the
 exact peak heights of Corollary~\ref{cor:spectrum}, which are identities; the
 envelope of Proposition~\ref{prop:curv}, which is proved; the annulus bound of
 Lemma~\ref{lem:supnorm} with Proposition~\ref{prop:supnorm}, which is proved;
@@ -1216,7 +1230,7 @@ needed is the $o(1)$ inventory of item~(6) in the outline below, which is why we
 list it there rather than hide it.
 \end{remark}
 
-\begin{corollary}[conditional, as above]\label{cor:goal}
+\begin{corollary}\label{cor:goal}
 Combining Theorem~\ref{thm:t2main} with the sandwich theorem of the companion
 paper and the identity $W_D=\Gamma+(2D+1)2^{-k}$,
 \[
@@ -1292,10 +1306,14 @@ We set out plainly which parts of this paper are proved and which are not.
 \item \emph{Effective}: Proposition~\ref{prop:l5a}
       ($k_0\le1.5\cdot10^{4}$) and Corollary~\ref{cor:spectrum}(i)--(ii), which
       are exact.
-\item \emph{Sketch level, to be written to referee standard}:
-      Section~\ref{sec:l5c} (the Vinogradov input of step~2 and the excision of
-      step~4) and the $o(1)$ bookkeeping in item~(6) of the outline above. Theorem~\ref{thm:t2main} and
-      Corollary~\ref{cor:goal} inherit this status.
+\item \emph{Sketch level}: \emph{none}. This category was occupied until
+      recently by two items --- the quantifiers of
+      Corollary~\ref{cor:p5prob} and Section~\ref{sec:l5c} (the Vinogradov
+      input of step~2 and the excision of step~4) --- and both have since been
+      written out, the latter as Proposition~\ref{prop:deepminor} with the
+      exponent budget displayed. We record the fact rather than deleting the
+      heading, because the reader of an earlier version deserves to know what
+      changed.
 \item \emph{A gap we found, and how it was closed}. Lemma~\ref{lem:cover} sorts
       every $\theta$ by \emph{denominator}, but the two mechanisms it hands
       $\theta$ to are matched to different \emph{radii}: the Dirichlet
@@ -1868,7 +1886,7 @@ $C_9$ & Lemma~\ref{lem:cover} & the covering overlap & yes\\
   C_6  Fejer tail, step 4 (effective) --------------+
                                                     |
                                                     v
-                                 deep minor arcs (sec:l5c)  =  HYPOTHESIS (a)
+                                 deep minor arcs (prop:deepminor)  [proved]
                                                     |
   C_4  K_2 moments     (effective) --+              |
   C_7  Edgeworth tail  (effective) --+--> thm:t2main  <-----+
@@ -1901,12 +1919,15 @@ Propositions~\ref{prop:curv} and \ref{prop:supnorm} and
 Lemmas~\ref{lem:l1}--\ref{lem:l1small} there is no implied constant to name:
 those statements are inequalities between explicit quantities.
 
-\emph{Second, the ineffective part and the hypothesised part do not coincide,
-and we do not claim they do.} Hypothesis (a) is the deep-minor bound of
-Section~\ref{sec:l5c}. Lemma~\ref{lem:twist} is proved, not hypothesised, yet it
-carries $C_1$. So the honest statement is: Theorem~\ref{thm:t2main} is
-conditional on (a) \emph{and} ineffective through $C_1$, and these are two
-separate deficiencies with two separate remedies.
+\emph{Second, ineffectivity is not incompleteness, and the distinction is
+worth keeping in view.} While the deep-minor bound was still carried as a
+hypothesis, this paper had two deficiencies of quite different kinds: one that
+writing more would cure, and one that writing more would not.
+Proposition~\ref{prop:deepminor} has removed the first.
+Theorem~\ref{thm:t2main} is now unconditional, and $C_1$ is its only remaining
+deficiency --- a property of Siegel's theorem, not of our argument. Note that
+the two were never located in the same place: Lemma~\ref{lem:twist} was proved,
+not hypothesised, yet it carried $C_1$ throughout.
 
 \emph{Third, the rate itself needs none of this.} By
 Remark~\ref{rem:whatneeded}(i) the conclusion $\varepsilon_d\to0$ at rate
