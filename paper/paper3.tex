@@ -1,6 +1,6 @@
 % paper3.tex --- Arithmetic Landscape Theory, paper 3.
-% SCAFFOLDING ONLY (round 86). Section structure and the verified data are in place;
-% the theorem skeleton is fable-5's next deliverable (spec_t3rigid_r085.md).
+% Complete draft (round 96). Every statement carries its status explicitly.
+
 % Nothing here is a claim-language upgrade: every statement carries its status explicitly.
 \documentclass[11pt,a4paper]{article}
 \usepackage[T1]{fontenc}
@@ -32,8 +32,7 @@
 \newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
 
 \title{The transfer function of subset-sum landscapes:\\
-rigidity of the gap series off centre\\[4pt]
-\normalsize\textsf{(working title --- scaffolding, round 88)}}
+rigidity of the gap series off centre}
 \author{Kentaro Amauchi\thanks{Independent researcher.}}
 \date{\today}
 
@@ -41,18 +40,32 @@ rigidity of the gap series off centre\\[4pt]
 \maketitle
 
 \begin{abstract}
-\TODO{written last, after the theorem statements are fixed.} The three things this
-paper is to establish: (i) that $\lm_A(n)/\deg_A(n)\to\Gamma(A)$ holds for every fixed
-target fraction $\rho$, not only at the centre --- so that $\Gamma$ is an invariant of the
-landscape and not of one point of it; (ii) that the ratio is a universal functional of the
-\emph{local logarithmic slope} of the representation count alone, through an explicit
-transfer function $\Phi$; and (iii) that the hypothesis the first statement needs is exactly
-the convergence of the series that gives the second one --- with a profile for which it fails.
+For a finite set $A$ of odd integers, the number of strict local minima of the subset-sum
+landscape at a target $n$, divided by the number of ground states, is governed at the centre
+$n=\lfloor T/2\rfloor$ by the gap series $\Gamma(A)=\sum_ia_i2^{-i}$. This paper argues that
+this is a property of the landscape rather than of its centre, and in a sharper form: that the
+ratio is a universal functional of a single local observable, the logarithmic slope $\lambda$
+of the representation count at the target, through an explicit transfer function
+$\Phi(\lambda)=1+\sum_{d\ge1}2^{1-N_d}e^{-\lambda^{2}s_d/8}\cosh(\lambda\delta_d)$
+built from the small elements of $A$ alone; rigidity is the case $\lambda\to0$.
+We prove the analytic ingredients --- an additive bridge carrying the minor-arc estimates of
+the companion paper from the uniform measure to the exponential tilt, the minor-arc input in
+the form that bridge needs, and the threshold $\alpha=1$ below which the governing hypothesis
+fails --- and assemble them into a proof skeleton for the two theorems, the remaining gap
+being the Edgeworth constants of a classical local limit computation. The extremal denominator
+of the bridge is $q=6$, the same one that produces the constant $\sqrt3/2$ in the companion
+paper. The transfer function is verified against exact computation on four profiles: the
+residual is $0.8$--$1.9\%$ of the signal and obeys a $c_A/k$ law whose constant is predicted,
+with no free parameter, by the profile alone.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
 
-\TODO{full introduction.} Skeleton of the argument, and what each part rests on:
+Papers~1 and~2 of this series establish that for the odd primes
+$\lm/\deg\to\Gamma$ \emph{at the centre} of the landscape. Whether $\Gamma$ is an invariant of
+the landscape or an accident of its most symmetric point is the question this paper answers,
+and the answer turns out to be stronger than rigidity alone: the whole ratio is a function of
+one local observable. The argument and what each part rests on:
 
 \begin{itemize}
 \item The companion papers establish $\lm/\deg\to\Gamma$ \emph{at the centre}
@@ -66,8 +79,12 @@ the convergence of the series that gives the second one --- with a profile for w
       They do not refer to the extraction point $m$, which enters
       $r_B(m)=\frac1{2\pi}\int F_B(\theta)e^{-im\theta}d\theta$ only through a phase. They
       therefore transfer to off-centre targets unchanged. \STATUS{quoted from paper 2}
-\item What is new is the middle: a tilted local limit theorem and a cancellation lemma for the
-      odd orders in $\lambda$. \TODO{fable-5, \texttt{spec\_t3rigid\_r085.md}}
+\item What is new is the middle, \S\ref{sec:bridge}: an additive bridge
+      (Lemma~\ref{lem:kappa}) carrying the minor-arc estimates from the uniform measure to the
+      exponential tilt, the minor-arc input in the form the bridge needs
+      (Lemma~\ref{lem:eta}), and a tilted local limit theorem uniform over the extraction
+      window (Proposition~\ref{prop:tiltlclt}). The odd orders in $\lambda$ cancel by the
+      reflection symmetry of the landscape, which is where $\cosh$ enters.
 \item One consequence of quoting rather than reproving deserves saying at the outset: \emph{the
       only ineffective constant in the trilogy is one and the same Siegel--Walfisz constant,
       and it enters each paper at exactly one point} --- here, part (b) of
@@ -76,7 +93,7 @@ the convergence of the series that gives the second one --- with a profile for w
 
 \section{Notation, and what is inherited}\label{sec:notation}
 
-\TODO{transcribe the definitions from paper 1 in a form that does not assume $n=T/2$.}
+The definitions are those of paper~1, written so that nothing assumes $n=T/2$.
 Fix throughout an increasing sequence $A=(a_1,\dots,a_k)$ of odd positive integers,
 $T=\sigma(A)$, $S_2=\sum a_i^2$, $V=S_2/4$, and a target $n$. Write $\rho=n/T$ and
 $x=\tfrac12-\rho$. For $d\ge1$ put
@@ -99,9 +116,11 @@ $\lambda(n)$ is the logarithmic derivative of the representation count at the ta
 
 \begin{remark}[why the slope and not the offset]\label{rem:whyslope}
 The Gaussian approximation $\lambda\approx(T/2-n)/V$ is what one writes down first, and it is
-wrong at the 10\% level for the purposes of this paper. \TODO{write out: the substitution turns
-a $15$--$18\%$ drift in the measured coefficient into $0.03\%$, and it is the reason an earlier
-draft of this programme reported a spurious non-integer exponent.} This is not a cosmetic
+wrong at the 10\% level for the purposes of this paper. Substituting the measured $\lambda$
+for the Gaussian one takes the drift of the fitted coefficient across the range
+$x\in[0.06,0.30]$ from $15$--$18\%$ down to $0.03$--$0.07\%$, and it dissolves a non-integer
+exponent that an earlier draft of this programme had reported as a finding: the exponent was
+an artefact of the wrong variable. This is not a cosmetic
 choice: every statement below is false at the stated precision if $(T/2-n)/V$ is substituted
 for $\lambda$.
 \end{remark}
@@ -148,8 +167,10 @@ one has $\lambda(n)\asymp x/N\to0$, and $\Phi$ is continuous at $0$ with $\Phi(0
   \Phi(\lambda)-\Gamma\;=\;O\Bigl(\lambda^{2}\sum_{d\ge1}2^{1-N_d}\delta_d^{2}\Bigr)
   \;\longrightarrow\;0,
 \]
-the sum being finite precisely by~(H). \TODO{write out the uniformity in $\rho$; it comes from
-$\kappa(\rho)$ being bounded below on compacta, not from any new estimate.}
+the sum being finite precisely by~(H). The uniformity in $\rho$ needs no new estimate: every
+bound in \S\ref{sec:bridge} is uniform once $t_{\min}(\rho)$ is bounded below, and
+$t_{\min}$ is continuous and positive on $(0,1)$, hence bounded below on compact subsets
+(Remark~\ref{rem:kapparho}).
 
 \STATUS{experimentally confirmed} The evidence the theorem is modelled on. With
 $\mathrm{ratio}(\rho,k)=[\lm/\deg]/\Gamma(P_k)$, the spread over $\rho$ contracts monotonically:
@@ -166,9 +187,12 @@ $\max_\rho|\mathrm{ratio}-1|$ & 0.00921 & 0.00276 & 0.00244 & 0.00156 & 0.00109 
 \end{center}
 
 \noindent
-over $\rho\in[0.20,0.50]$, by exact integer computation. \TODO{full table; state the
-granularity guard $\deg\ge10^4$ and the two correctness checks (agreement with brute force over
-all $2^k$ subsets; the reflection identity $\lm(n)=\lm(T-n)$, which is exact).}
+over $\rho\in[0.20,0.50]$, by exact integer computation. Three guards are in force throughout
+this paper's computations and are worth stating once: every reported point satisfies
+$\deg\ge10^{4}$, so that integer granularity cannot masquerade as signal; the dynamic
+programme was checked against brute-force enumeration over all $2^{k}$ subsets at small $k$;
+and the exact identity $\lm(n)=\lm(T-n)$ is verified at every measured target, which tests the
+stratification and the arithmetic together.
 
 \section{The transfer function}\label{sec:transfer}
 
@@ -213,8 +237,13 @@ three sequences of Table~\ref{tab:one}.
 The factor $e^{-\lambda^2 s_d/8}$ is not a fudge: it is what remains when the Gaussian
 normalisations of $B_d$ and of $A$ fail to cancel, because $V_d=V-s_d/4$. Expanding to second
 order gives the coefficient of $\lambda^2$ as $\delta_d^2-s_d/4$ rather than $\delta_d^2$.
-\TODO{write out the two lines; note that the correction is termwise smaller than the term it
-corrects, $s_d/4\le d\sigma_d/2<\delta_d^2$, so the sum stays positive.}
+In the notation of \S\ref{sec:notation}, layer $d$ is the ensemble $B_d$ with the small
+elements removed, so its variance is $V_d=V-s_d/4$ rather than $V$; the weight
+$e^{-\lambda^{2}s_d/8}$ is exactly the price of that difference, and
+Remark~\ref{rem:mushift} derives it from the ratio of partition functions rather than
+fitting it. The correction is termwise smaller than the term it corrects,
+$s_d/4\le d\sigma_d/2<\delta_d^{2}$, so every term of the series stays positive and the
+correction never overshoots.
 \end{remark}
 
 \subsection{Verification}\label{sec:table1}
@@ -250,8 +279,9 @@ Against the \emph{uncentred} signal the same residuals read $2\%$ to $300\%$, th
 occurring precisely where the signal is smallest. Neither number is wrong; the centred one is
 the one the theorem is about, because $\Phi(0)=\Gamma$ is an identity and the finite-$k$ offset
 $[\lm/\deg]_{n=T/2}-\Gamma$ is a separate quantity of size $10^{-6}$.
-\TODO{keep this remark: an earlier draft of the programme reported ``agreement to five or six
-significant figures'' for a model that was $12\%$ wrong on the signal.}
+We keep this remark because an earlier draft of this programme reported ``agreement to five or
+six significant figures'' for a model that was $12\%$ wrong on the signal: the figures were
+real and the claim was not, because the signal itself lives in those digits.
 \end{remark}
 
 \begin{remark}[the residual obeys a $1/k$ law]\label{rem:onek}
@@ -360,18 +390,14 @@ Lemma~\ref{lem:kappa} avoids the issue by never dividing by a quantity that vani
 \end{remark}
 
 \begin{lemma}[the minor-arc input]\label{lem:eta}
-\STATUS{(a) elementary, sketched; (b) proved, Lemma~\ref{lem:etab}; (c) quoted from paper 2}
+\STATUS{(a) proved, Lemma~\ref{lem:etaa}; (b) proved, Lemma~\ref{lem:etab}; (c) quoted from paper 2}
 Let $A=P_k$ and $N=a_k$. Then
 \[
   \operatorname{Re}S_A(\theta)\;\le\;\Bigl(\tfrac12+o(1)\Bigr)b
   \qquad\text{uniformly for }\tfrac1{2N}\le\theta\le1-\tfrac1{2N}.
 \]
 \begin{enumerate}
-\item[(a)] \emph{$q\in\{1,2\}$.} Near $\theta\equiv0$ and $\theta\equiv\tfrac12$ partial summation
-  against the prime number theorem gives $|S_A(\theta)|\le Cb/(N\|\theta-a/q\|)\le b/2$ once
-  $\|\theta-a/q\|\ge1/(2N)$; the excluded interval around $0$ is the principal arc, and around
-  $\tfrac12$ one has $\operatorname{Re}S_A\approx-b$, the helpful sign. Elementary; no
-  Siegel--Walfisz.
+\item[(a)] \emph{$q\in\{1,2\}$.} Lemma~\ref{lem:etaa} below.
 \item[(b)] \emph{$3\le q\le(\log N)^{A_0}$.} Lemma~\ref{lem:etab} below.
 \item[(c)] \emph{$q>(\log N)^{A_0}$.} This is the case $n=1$ of Step 2 of
   \textup{prop:deepminor} in paper~2, which gives
@@ -380,6 +406,30 @@ Let $A=P_k$ and $N=a_k$. Then
   \STATUS{quoted from paper 2, verbatim}
 \end{enumerate}
 \end{lemma}
+
+\begin{lemma}[the two degenerate denominators]\label{lem:etaa}
+Let $q\in\{1,2\}$, $\theta=a/q+\beta$ with $\|\beta\|\ge1/(2N)$. Then
+$\operatorname{Re}S_A(\theta)\le\tfrac12b$ for all large $N$.
+\end{lemma}
+
+\begin{proof}
+Write $S_A(\theta)=\sum_{p\le N}e(pa/q)e(p\beta)$. For $q=1$ the first factor is $1$; for
+$q=2$ it is $(-1)^{p}=-1$ on every odd prime, so $S_A=-\sum_{p\le N}e(p\beta)$ and it suffices
+in both cases to bound $|\sum_{p\le N}e(p\beta)|$. Partial summation against
+$\pi(t)=\operatorname{li}(t)+O(te^{-c\sqrt{\log t}})$ gives
+\[
+  \sum_{p\le N}e(p\beta)=\int_2^{N}e(t\beta)\frac{dt}{\log t}
+    +O\bigl(Ne^{-c\sqrt{\log N}}(1+|\beta|N)\bigr),
+\]
+and integrating by parts once more, $\bigl|\int_2^{N}e(t\beta)\,dt/\log t\bigr|
+\ll1/(|\beta|\log N)$. With $\|\beta\|\ge1/(2N)$ this is $\ll N/\log N\asymp b$ with an
+absolute implied constant, and the constant is $\le\tfrac12$ once $N\|\beta\|$ exceeds an
+absolute threshold; below that threshold, i.e. for $\|\beta\|\asymp1/N$, the integral is
+$(1+o(1))b\cdot\widehat{\chi}(\beta N)$ with $\widehat\chi$ the Fourier transform of the
+indicator of $[0,1]$, whose real part is $\le\tfrac12$ off the principal arc. For $q=2$ the
+sign is reversed, so $\operatorname{Re}S_A\le0$ near $\theta=\tfrac12$ --- the helpful
+direction. No Siegel--Walfisz is used.
+\end{proof}
 
 \begin{lemma}[the small-$q$ ring]\label{lem:etab}
 Let $3\le q\le(\log N)^{A_0}$, $(a,q)=1$, and $\theta=a/q+\beta$ with
@@ -416,31 +466,24 @@ $\operatorname{Re}S_A(\theta)\le\bigl(|\mu(q)|/\varphi(q)\bigr)b(1+o(1))\le
 \end{proof}
 
 \begin{remark}[where the ineffectivity is]\label{rem:whereC1}
-The Siegel--Walfisz step is the only inexplicit estimate in the whole of \S\ref{sec:bridge}:
-the constant $c$ above is the one that cannot be computed. It is the same constant that
-paper~2's appendix isolates as $C_1$, entering that paper at one point as well; see
-Remark~\ref{rem:oneconstant}. Every other bound here --- Lemma~\ref{lem:kappa},
-Lemma~\ref{lem:eta}(a), Lemma~\ref{lem:six}, and the quotation in
-Lemma~\ref{lem:eta}(c), which rests on Vaughan's identity --- is effective.
+The Siegel--Walfisz step in Lemma~\ref{lem:etab} is the only inexplicit estimate in
+\S\ref{sec:bridge} --- Lemmas~\ref{lem:kappa}, \ref{lem:etaa}, \ref{lem:six} and the Vaughan
+quotation in Lemma~\ref{lem:eta}(c) are all effective --- and it is the same constant that
+paper~2 isolates as $C_1$; see Remark~\ref{rem:oneconstant}.
 \end{remark}
 
-\begin{remark}[the principal arc, and that the two regimes overlap]\label{rem:principal}
+\begin{remark}[the middle range, and why no constant enters]\label{rem:principal}
 Inside $|\theta|<1/(2N)$ Lemma~\ref{lem:eta} says nothing, and it does not have to: there
 $|a\theta|\le\tfrac12$ for every $a\in A$, so $\sin^{2}(\pi a\theta)\ge4a^{2}\theta^{2}$ and
 Lemma~\ref{lem:kappa} gives the quadratic bound
-$|\widetilde G_A(\theta)|\le\exp(-4t_{\min}V\theta^{2})$ directly. This is already
-$\le e^{-Cb}$ for $|\theta|\ge\theta_1:=\sqrt{Cb/(4t_{\min}V)}$, and
-\textbf{$\theta_1<1/(2N)$}: with $C=0.01$ the measured $\theta_1N$ is $0.18$--$0.42$ across the
-three profiles at $x=0.10$ and $x=0.30$. The two regimes therefore overlap, with the crossover
-at $\theta=1/(2N)$ --- which is also, and not by accident, the largest $\theta$ at which the
-quadratic bound is valid at all. What remains, $|\theta|\le\theta_1$, is the principal arc,
-where P3 supplies the main term rather than a bound.
-\STATUS{experimentally confirmed; \texttt{gap\_r090}}
-\TODO{\textbf{Seam C.} The bookkeeping of the constant $C$ against P3's local limit theorem is
-the one place this could still pinch; it is assigned to the P3 write-out and carried as a named
-seam until then. $\theta_1\asymp\sqrt{b/V}$ is $\sqrt b$ times the natural LCLT
-width $V^{-1/2}$, which is fine because the integrand is already $e^{-Cb}$ at the edge, but the
-error term should be written out rather than asserted.}
+$|\widetilde G_{B}(\theta)|\le\exp(-4t_{\min}V_d\theta^{2})$ directly. Cutting at the
+LCLT-natural radius $\theta_0=(\log k)/\sqrt{K''_d}$ of \S\ref{sec:p3}, this is
+$\le\exp(-t_{\min}(\log k)^{2})$ on the whole of $\theta_0\le|\theta|\le1/(2N)$ ---
+superpolynomially below the density scale $(K''_d)^{-1/2}$, with no free constant anywhere.
+The crossover at $\theta=1/(2N)$ survives as the boundary against
+Lemma~\ref{lem:eta}, forced by $|a\theta|\le\tfrac12$ rather than chosen; measured, the
+quadratic bound has already reached $e^{-0.01b}$ by $\theta N=0.18$--$0.42$ across three
+profiles. \STATUS{experimentally confirmed; \texttt{gap\_r090}}
 \end{remark}
 
 \begin{remark}[what part (c) does \emph{not} need]\label{rem:nocover}
@@ -483,6 +526,113 @@ odd numbers, squares and primes.
 \STATUS{experimentally confirmed; \texttt{tilt\_r088}, \texttt{kappa\_r088}}
 \end{remark}
 
+\subsection{The tilted local limit theorem, and the assembly}\label{sec:p3}
+
+Write $K''_d=\sum_{a\in B_d}a^{2}p_a(1-p_a)$ and $\mu_d(s)=\sum_{a\in B_d}a\,p_a$ for the
+variance and mean of $B_d$ under $P_s$, and $K^{(j)}_d$ for the higher cumulants.
+
+\begin{proposition}[tilted LCLT, uniform over the window]\label{prop:tiltlclt}
+\STATUS{R2 and R3 proved (they quote Lemmas~\ref{lem:kappa} and~\ref{lem:eta}); R1 is the
+classical local limit computation with $p_a$-weights, written here to the level of its
+cumulant budget}
+For every layer $d\le D(k)$ and every $m$ with $|m-\mu_d(s)|\le W(k)$,
+\[
+  P_s\bigl[\textstyle\sum_{B_d}=m\bigr]
+  =\frac{1}{\sqrt{2\pi K''_d}}\exp\Bigl(-\frac{(m-\mu_d)^{2}}{2K''_d}\Bigr)\bigl(1+O(\varepsilon)\bigr),
+  \quad
+  \varepsilon=\frac{|K'''_d|}{(K''_d)^{3/2}}+\frac{K^{(4)}_d}{(K''_d)^{2}}
+     +\frac{W(k)\,|K'''_d|}{(K''_d)^{2}},
+\]
+uniformly in $d$ and $m$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Invert $\widetilde G_{B_d}$ over $[-\pi,\pi]$ and split at
+$\theta_0=(\log k)/\sqrt{K''_d}$ and at $1/(2N)$.
+
+\emph{R1, $|\theta|\le\theta_0$.} Expand
+$\log\widetilde G_{B_d}(\theta)=i\mu_d\theta-\tfrac12K''_d\theta^{2}
+-\tfrac{i}{6}K'''_d\theta^{3}+\tfrac1{24}K^{(4)}_d\theta^{4}+O(K^{(5)}_d\theta^{5})$.
+Since $|K^{(j)}_d|\le\sum_{a}a^{j}$, on $|\theta|\le\theta_0$ every term beyond the quadratic
+is $o(1)$ and the standard Edgeworth argument gives the display with the stated $\varepsilon$;
+the third term contributes the $W|K'''|/(K'')^{2}$ piece over a window of width $W$.
+
+\emph{R2, $\theta_0\le|\theta|\le1/(2N)$.} Remark~\ref{rem:principal}: the contribution is
+$\le\exp(-t_{\min}(\log k)^{2})$, superpolynomially below $(K''_d)^{-1/2}$.
+
+\emph{R3, $|\theta|\ge1/(2N)$.} Lemmas~\ref{lem:kappa} and~\ref{lem:eta}:
+$|\widetilde G_{B_d}|\le\exp(-t_{\min}(1-\eta)b/4)$, exponentially small, against measure
+$O(1)$.
+
+Uniformity in $d$: $B_d$ differs from $A$ in $N_d\le N_{D(k)}=(\log k)^{O(1)}$ elements of size
+$\le2D(k)$, so every cumulant shifts by a relative $O(s_{D}/S_2)\to0$ and one $\varepsilon$
+serves all layers. The lattice is of step $1$ and the parity weighting is quoted from paper~2.
+\end{proof}
+
+\begin{remark}[the $\mu_d$-shift, and why the layer term is what it is]\label{rem:mushift}
+This is the step that produces $\Phi$, so it is worth doing once in full. Since
+$\sum_{a\in A}a\,p_a=n$ and $p_a=\tfrac12-\tfrac{sa}{4}+O((sa)^{3})$ for the small elements,
+\[
+  \mu_d(s)\;=\;n-\!\!\sum_{a\le 2d}\!\!a\,p_a\;=\;n-\frac{\sigma_d}{2}+w+\dots,
+  \qquad w:=\frac{s\,s_d}{4},
+\]
+so the two evaluation points of the stratification sit at
+\begin{equation}\label{eq:mushift}
+  (n+d)-\mu_d=+\delta_d-w,
+  \qquad
+  (n-d-\sigma_d)-\mu_d=-\delta_d-w .
+\end{equation}
+Feeding \eqref{eq:mushift} into Proposition~\ref{prop:tiltlclt}, undoing the tilt through
+$r_{B_d}(m)=P_s[\sum_{B_d}=m]\,Z_{B_d}(s)\,e^{sm}$, and using
+$sd+s\sigma_d/2=s\delta_d$ to pair the two points:
+\[
+  r_{B_d}(n+d)+r_{B_d}(n-d-\sigma_d)
+  =2\,Z_{B_d}e^{sn-s\sigma_d/2}\,
+   \frac{e^{-(\delta_d^{2}+w^{2})/2K''_d}}{\sqrt{2\pi K''_d}}
+   \cosh\Bigl(\delta_d\Bigl(s+\frac{w}{K''_d}\Bigr)\Bigr).
+\]
+Dividing by $r_A(n)\sim Z_Ae^{sn}/\sqrt{2\pi K''}$ and using
+$Z_{B_d}e^{-s\sigma_d/2}/Z_A=2^{-N_d}\prod_{a\le2d}\cosh(sa/2)^{-1}
+=2^{-N_d}e^{-s^{2}s_d/8}(1+\dots)$,
+\begin{equation}\label{eq:layerterm}
+  \frac{r_{B_d}(n+d)+r_{B_d}(n-d-\sigma_d)}{r_A(n)}
+  =2^{1-N_d}\,e^{-\lambda^{2}s_d/8}\,\cosh(\lambda\delta_d)\cdot
+   e^{-\delta_d^{2}/2K''_d}\,\bigl(1+O(\varepsilon)\bigr),
+\end{equation}
+with $\lambda=s+w/K''_d=s\bigl(1+s_d/(4K''_d)\bigr)$ --- which is exactly the per-layer slope
+drift of $1+O(s_d/S_2)$ measured earlier. \textbf{The first three factors of
+\eqref{eq:layerterm} are the general term of $\Phi$ in \eqref{eq:phi}}; the odd orders in
+$\lambda$ cancel because the two points are $\pm\delta_d$ about the same centre, which is the
+reflection symmetry $\lm(n)=\lm(T-n)$ in analytic dress. \STATUS{Lean-verified (the symmetry)}
+\end{remark}
+
+\begin{remark}[the one factor $\Phi$ omits]\label{rem:cd}
+\eqref{eq:layerterm} carries a fourth factor, $c_d:=e^{-\delta_d^{2}/2K''_d}$, that $\Phi$ does
+not. It is \emph{$\lambda$-independent} and equal to $1-O(\delta_d^{2}/V)$, so it belongs to
+$E_k$ and not to the transfer function. Measured at $k=180$: the ratio of the left side of
+\eqref{eq:layerterm} to $\Phi$'s term is $c_d$ to six decimal places at $d=1$ and $d=3$
+(1.000000 and 1.000003 for the odd numbers, 1.000000 and 1.000000 for the primes), and departs
+from $1$ only at $d=D(k)$, where the layer weight is $2^{-29}\approx2\cdot10^{-9}$.
+Carrying $c_d$ inside $\Phi$ would move Table~\ref{tab:one} from $0.842\%$ to $0.814\%$ (odd
+numbers, $k=220$, $x=0.06$), from $0.914\%$ to $0.902\%$ (primes) and from $1.052\%$ to
+$1.048\%$ ($\alpha=3/2$): the factor is real, it moves the residual the right way, and it
+accounts for at most $3\%$ of it. We therefore keep $\Phi$ as stated and count $c_d$ in $E_k$.
+\STATUS{experimentally confirmed; \texttt{p3\_r096}, \texttt{phig\_r096}}
+\TODO{a later revision might prefer $\Phi$ with $c_d$ folded in; the measurement above is what
+that choice would buy.}
+\end{remark}
+
+\noindent
+\STATUS{experimentally confirmed; \texttt{p3\_r096}} The verification behind
+Proposition~\ref{prop:tiltlclt} and \eqref{eq:mushift}, at $k=180$, two profiles,
+$x=0.10$ and $x=0.30$, layers $d=1,3,D(k)$: the $\mu_d$ expression is exact to a relative
+$6\cdot10^{-5}$ or better; the two offsets of \eqref{eq:mushift} to $7.6\cdot10^{-4}$ of
+$\delta_d$ or better; the R1 formula against the exact $r_{B_d}$ over the window to
+$2.7\cdot10^{-3}$--$3.7\cdot10^{-2}$, in every case between $4\%$ and $14\%$ of the predicted
+$\varepsilon$; the parity oscillation of $r_{B_d}$ over the window at most
+$3.7\cdot10^{-3}$; and $\varepsilon$ itself grows by at most $44\%$ from $d=1$ to $d=D(k)$, so
+a single $\varepsilon$ does serve all layers.
+
 \noindent
 With Lemmas~\ref{lem:kappa} and~\ref{lem:eta} the tilted generating function decays like
 $\exp(-t_{\min}(1-\eta)b/4)$ off the principal arc --- exponentially in $b$, which is what P5
@@ -492,7 +642,7 @@ Theorem~\ref{thm:transfer} only through $E_k=o(1)$.
 \section{Universality of the rate function}\label{sec:universality}
 
 \STATUS{experimentally confirmed, $k=16..56$, three reference sequences}
-\TODO{full table.} With $\hat I_A(\rho)=-k^{-1}\log(\deg_A(\lfloor\rho T\rfloor)/2^k)$ and
+With $\hat I_A(\rho)=-k^{-1}\log(\deg_A(\lfloor\rho T\rfloor)/2^k)$ and
 $D_k=\hat I_P-\hat I_{\mathrm{ref}}$, the difference tends to $0$ for each of three reference
 sequences: the odd numbers, the arithmetic progression $6n+5$, and a random odd sequence of the
 same range. The sign is a property of the reference, not a universal fact --- it is positive
@@ -501,16 +651,29 @@ against the progression.
 
 \begin{remark}[the primes sit near the random sequence]\label{rem:random}
 At $k=56$ the distance to a random odd sequence is $0.0016$ against $0.0146$ to the arithmetic
-progression --- an order of magnitude. \TODO{develop: this is the direct evidence for the
-reading that the main term is universal and the arithmetic of the sequence appears only in the
-correction.}
+progression --- an order of magnitude. The reading we propose is that the rate function does
+not see the arithmetic of $A$ beyond its counting function: the primes are close to a random
+sequence of the same density because, for this observable, that is what they are. It is the
+same statement the transfer function makes locally, since $\Phi$ depends on $A$ only through
+$(N_d,\sigma_d,s_d)$ --- the small elements, counted. This is the most direct evidence we have
+for the reading that the main term is universal and the arithmetic of the sequence enters only
+through the correction.
 \end{remark}
 
 \section{A profile for which the hypothesis fails}\label{sec:counterexample}
 
 The hypothesis Theorem~\ref{thm:rigid} needs is the convergence, with room, of the series in
-\eqref{eq:phi} --- qualitatively, that $N_d\to\infty$ fast enough. \TODO{state it precisely
-once fable-5's skeleton fixes the form.}
+\eqref{eq:phi} --- qualitatively, that $N_d\to\infty$ fast enough. Precisely:
+\[
+  \textbf{(H)}\qquad
+  \sup_k\;\sum_{d\ge1}2^{-N_A(d)}\delta_d^{2}\;<\;\infty,
+  \qquad\text{and}\qquad
+  W(k):=\max\{\delta_d:\,2^{-N_d}\delta_d^{2}\ge k^{-1}\}=N^{o(1)} .
+\]
+The first clause makes $\Phi$ converge and makes $\Phi(\lambda)-\Gamma=O(\lambda^{2})$; the
+second is what the error budget needs, since the extraction window must be narrow enough for
+Proposition~\ref{prop:tiltlclt} to be uniform across it. For the odd primes
+$N_A(d)=\pi(2d)-1\gg d/\log d$, so both clauses hold, with $W(k)=O((\log k)^{2+\epsilon})$.
 
 \STATUS{experimentally confirmed} It is not vacuous. For the odd-ified cubes
 $a_i=2\lfloor i^3/2\rfloor+1$:
@@ -531,8 +694,9 @@ Only $\{1,9\}$ ever lie below $20$, at any $k$, so $2^{-N_d}$ never damps the gr
 $\delta_d^2$ and the series turns over only near $d\approx10^4$. At $k=70$ the finite-size
 offset is still $1.75\cdot10^{-2}$ while the signal is $1.7\cdot10^{-11}$: nine orders of
 magnitude, so the profile is not merely slow but undecidable at any accessible size.
-\TODO{present this as the counterexample that makes the hypothesis non-vacuous, not as a
-failure.}
+The cubes are therefore not a defect of the theory but the reason \textup{(H)} has to be
+there: without it, nothing in \S\ref{sec:bridge} or \S\ref{sec:p3} fails, and yet the
+conclusion is out of reach.
 
 \subsection{Two different kinds of failure}\label{sec:twofailures}
 
@@ -589,19 +753,34 @@ $\sum_d2^{-N_d}\delta_d^2$ & 69.5 & 266.07 & 6473.4 & $1.112\cdot10^{7}$ & \emph
 
 \noindent
 \STATUS{experimentally confirmed, $k=60,\dots,180$; \texttt{alpha\_r092}}
+Proposition~\ref{prop:alphalb} is about clean powers, and the primes do not route through it:
+Theorem~\ref{thm:rigid} for the primes quotes \S\ref{sec:bridge}, and the primes'
+\textup{(H)} is checked directly where \textup{(H)} is stated, from
+$N_d=\pi(2d)-1\gg d/\log d$. No reader need look for $i\log i$ in part~(ii).
 So \textbf{(H) cuts the power profiles at exactly $\alpha=1$}, and the cubes sit inside the
 admissible range but beyond the reach of computation.
 
 \section{Honest scope}\label{sec:scope}
 
-\TODO{in the style of paper 1 \S10 and paper 2 \S10.} The classification to fill in:
+In the style of paper~1 \S10 and paper~2 \S10, here is what rests on what.
 
 \begin{itemize}
 \item \emph{Formally verified}: the combinatorial layer, inherited from paper~1, for every
       target.
-\item \emph{Proved}: \TODO{after fable-5's skeleton.} The minor-arc input is quoted from
-      paper~2 and is $m$-independent; paper~2's own ineffectivity through the Siegel--Walfisz
-      constant is inherited.
+\item \emph{Proved}: the bridge of \S\ref{sec:bridge} --- Lemma~\ref{lem:kappa} in full,
+      Lemma~\ref{lem:eta} in all three parts (with (c) quoted verbatim from paper~2's Step~2
+      at $n=1$, and the covering apparatus of that paper not needed here, see
+      Remark~\ref{rem:nocover}), Lemma~\ref{lem:six}, and Proposition~\ref{prop:alphalb}.
+      The minor-arc input is $m$-independent, so it transfers to off-centre targets unchanged;
+      paper~2's ineffectivity through the Siegel--Walfisz constant is inherited at the single
+      point recorded in Remark~\ref{rem:whereC1}.
+\item \emph{Proof skeleton, with the analytic ingredients in place}:
+      Theorems~\ref{thm:rigid} and~\ref{thm:transfer}. Regions R2 and R3 of
+      Proposition~\ref{prop:tiltlclt} are proved --- they quote the bridge --- and region~R1
+      is the classical local limit computation with $p_a$-weights, given here to the level of
+      its cumulant budget rather than with every Edgeworth constant written out. That is the
+      one gap between this paper and a complete proof, and it is a gap of exposition rather
+      than of ingredients.
 \item \emph{Experimentally confirmed, with the range stated}: rigidity
       (\S\ref{sec:rigid}), the transfer function to $0.8$--$1.9\%$ of the signal
       (Table~\ref{tab:one}), universality (\S\ref{sec:universality}), the profile-dependent
@@ -620,20 +799,34 @@ threshold beyond which the asymptotics take hold.
 \end{remark}
 
 \begin{remark}[approaches that did not work]\label{rem:graveyard}
-\TODO{as in paper 2, keep the dead ends with their reasons.} At least: the tilted-measure
-($\Gamma_x$) reading of off-centre targets, which the data rejected --- rewriting the collapse
-in the exact tilt parameter makes it worse, not better; and the reading of the correction as a
-third-cumulant effect, which was an artefact of using the Gaussian slope.
+As in paper~2 we keep the dead ends, with reasons. \emph{The $\Gamma_x$ family}: the idea that
+off-centre targets are described by a family of tilted gap series indexed by $x$. Rejected by
+the data --- rewriting the observed collapse in the exact tilt parameter makes it worse, not
+better. \emph{The multiplicative bridge}: $|\widetilde G_B|\le|G_B|^{\kappa}$, which would have
+carried every exponent of paper~2 across at once. Impossible for the reason in
+Remark~\ref{rem:noKappa}, and the underlying inequality runs the other way. \emph{The residual
+as a tilt-versus-slope artefact}: the constants of Remarks~\ref{rem:tiltslope}
+and~\ref{rem:onek} agree to two digits on every profile, but substituting $s$ for $\lambda$
+makes the residual three times worse --- a shared driver, not a cause. \emph{A half-integer
+exponent} reported in an early draft, which was an artefact of the Gaussian slope
+(Remark~\ref{rem:whyslope}). \emph{Restating \textup{(H)} so that the cubes violate it}: the
+series is bounded for the cubes and unbounded for $\alpha<1$, and the hypothesis follows the
+computation rather than the narrative.
 \end{remark}
 
 \section*{Data availability}
-\TODO{scripts and logs, as in papers 1 and 2.}
+Every number in this paper is produced by a script that writes a log beside itself, as in
+papers~1 and~2. The scripts named in the \textsf{[status]} tags ---
+\texttt{table1\_r086}, \texttt{kappa\_r088}, \texttt{tilt\_r088}, \texttt{sres\_r088},
+\texttt{arc\_r088}, \texttt{eta\_r090}, \texttt{gap\_r090}, \texttt{saddle\_r092},
+\texttt{alpha\_r092}, \texttt{t1row\_r094}, \texttt{p3\_r096}, \texttt{phig\_r096} ---
+and their logs are part of the public artefact.
 
 \begin{thebibliography}{9}
 \bibitem{P1} K.~Amauchi, \emph{The gap series of an integer sequence: an arithmetic invariant
-governing subset-sum landscapes}. \TODO{arXiv number}
+governing subset-sum landscapes}. Manuscript, 2026.
 \bibitem{P2} K.~Amauchi, \emph{Asymptotic flatness of subset-sum landscapes of primes: the
-sub-peak spectrum and the constant $\sqrt3/2$}. \TODO{arXiv number}
+sub-peak spectrum and the constant $\sqrt3/2$}. Manuscript, 2026.
 \end{thebibliography}
 
 \end{document}

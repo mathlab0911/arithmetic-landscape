@@ -1,0 +1,17 @@
+Table-1 residual (fraction of the centred signal): Phi as printed  vs  Phi with c_d
+         ens     k     variable    x=0.06   x=0.10   x=0.20   x=0.30
+        odds   180          Phi    1.040%   1.048%   1.094%   1.202%
+        odds   180 Phi with c_d    0.989%   0.997%   1.042%   1.150%
+        odds   220          Phi    0.842%   0.849%   0.884%   0.970%
+        odds   220 Phi with c_d    0.814%   0.821%   0.856%   0.941%
+
+      primes   180          Phi    1.128%   1.137%   1.183%   1.296%
+      primes   180 Phi with c_d    1.106%   1.114%   1.161%   1.273%
+      primes   220          Phi    0.914%   0.921%   0.958%   1.047%
+      primes   220 Phi with c_d    0.902%   0.909%   0.946%   1.036%
+
+       a=3/2   180          Phi    1.290%   1.300%   1.351%   1.474%
+       a=3/2   180 Phi with c_d    1.282%   1.291%   1.342%   1.465%
+       a=3/2   220          Phi    1.052%   1.060%   1.101%   1.201%
+       a=3/2   220 Phi with c_d    1.048%   1.056%   1.098%   1.197%
+
