@@ -1,0 +1,21 @@
+========================================================================================================
+Does lm/deg -> Gamma hold AT THE CENTRE (rho=1/2) for each profile?  dev = (lm/deg)/Gamma - 1
+========================================================================================================
+  profile                 k=20       k=30       k=40       k=50       k=60       k=70        Gamma
+  odds  a_i=2i-1             +nan -2.026e-03 -9.019e-04 -4.677e-04 -2.730e-04 -1.729e-04      3.000
+  squares ~i^2               +nan -2.391e-02 -5.301e-03 +1.143e-03 +2.454e-04 -7.018e-05      6.333
+  cubes ~i^3                 +nan +3.128e-01 +1.650e-01 +7.426e-02 -3.126e-02 -1.747e-02     26.333
+  primes                     +nan -4.685e-03 -1.303e-03 -4.909e-05 -1.734e-04 -6.534e-05      5.349
+
+  interpretation: for the lambda^2 law to be testable on a profile, dev at the centre
+  must already be ~0. If it is not, Gamma itself is not the limit for that profile.
+
+========================================================================================================
+How many elements are 'small'? N_A(d)=#{a<=2d} at d=2,5,10 -- the quantity the
+classification theorem actually sees. A profile with too few small elements has no flatness.
+========================================================================================================
+  profile               k=40: N(2) N(5) N(10)     k=70: N(2) N(5) N(10)     largest element
+  odds  a_i=2i-1              2    5    10            2    5    10         139
+  squares ~i^2                1    3     4            1    3     4         4901
+  cubes ~i^3                  1    2     2            1    2     2         343001
+  primes                      1    3     7            1    3     7         353
