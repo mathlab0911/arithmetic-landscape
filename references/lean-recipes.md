@@ -80,9 +80,33 @@ anything touching `Tendsto`/measure) would need.
 `github.com/leanprover/comparator`. `nanoda_bin` is an independent Lean 4 type-checker;
 `lean4export` dumps the environment; `landrun` sandboxes the run.
 
-**Feasibility for our canon**: structurally yes — we are a Lake project with 10 canon files,
-which is what it consumes. Three external binaries must be installed on the PC, so this
-**needs Kentaro's approval before anything is installed** (standing rule).
+**Feasibility for our canon — settled by doing it (r108).** Kentaro lifted the
+ask-before-installing rule, so this was executed rather than estimated.
+
+1. **The documented Comparator set cannot run on Windows.** `landrun` is a Linux sandbox
+   built on Landlock; there is no Windows equivalent. `nanoda_bin` needs Rust, and this
+   machine has no `cargo`/`rustc`. So the harness as published is out.
+2. **But the half that matters is already installed.** `leanchecker.exe` ships *inside* the
+   elan toolchain (`~/.elan/bin/leanchecker.exe`), and the lean4checker repository's most
+   recent commit is a deprecation notice saying exactly that: *"leanchecker is now built into
+   Lean"*. Nothing needed installing for the core capability.
+3. The external `lean4checker` was built anyway because it takes an explicit module list.
+   Its newest tag is `v4.29.0-rc8`, but overwriting `lean-toolchain` with
+   `leanprover/lean4:v4.32.2` and running `lake build` succeeds (23 jobs, about a minute).
+4. **Result on our canon**: `lake env lean4checker Pnp` → 11 modules, **exit 0 in 47 s**.
+   Every constant in the canon has now been replayed through the kernel from the imports up,
+   independently of the elaborator that produced it.
+5. **Negative control, because a check that cannot fail is not a check (F47)**: their three
+   poisoned test modules (`AddFalse`, `ReplaceAxiom`, `AddFalseConstructor`) are all rejected
+   with exit 1, and their clean one (`QuotEq`) passes. The harness is doing work.
+6. Wrapped as `tools/check_lean.ps1`, which runs the negative control first and refuses to
+   report a pass if the control passes too.
+
+**What this buys and what it does not.** It removes trust in the elaborator, the tactic
+framework, and anything that could have altered the environment after the fact (`unsafe`,
+`implemented_by`, `native_decide`, a swapped axiom). It does **not** remove trust in the
+kernel itself — same implementation — which is the one thing `nanoda_bin` would add, at the
+cost of a Rust toolchain.
 
 **One correction to the brief, and it matters.** r106 calls Comparator "F52's philosophy as
 infrastructure". It is the *orthogonal* axis:

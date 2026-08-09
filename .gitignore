@@ -24,3 +24,5 @@ desktop.ini
 
 # Personal correspondence (contains endorsement code when filled in)
 endorsement_request.md
+lean/pnp/run_checker.ps1
+lean/pnp/build_r105.log
