@@ -1,0 +1,10 @@
+================================================================================================
+k-dependence of  Qhat_c(lambda_true) / Q(0)_predicted   (measured at x=0.10)
+================================================================================================
+  ensemble      k=60       k=100      k=140      k=180      k=220  
+  odds          0.84689    0.86107    0.86616    0.86882    0.87046
+  squares      -2.68400    0.57049    0.87864    0.88150    0.88150
+  primes        0.81142    0.86254    0.87149    0.87436    0.87619
+
+  If these sit on a constant, the mismatch is a normalisation factor to be found.
+  If they climb toward 1, it is finite size and (**) needs no correction.

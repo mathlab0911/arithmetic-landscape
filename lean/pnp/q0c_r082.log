@@ -1,0 +1,46 @@
+============================================================================================================
+Residual  D(x) := dev_measured - dev_(*)   as a function of k.  Shrinking => finite size.
+============================================================================================================
+
+  ### odds
+      k        x=0.10            x=0.20            x=0.30        
+              D(x)      D/lam^2    D(x)      D/lam^2    D(x)      D/lam^2 
+     60    -4.90e-05     -1.96  -1.18e-04     -1.18  +9.09e-04     +4.04 
+    100    -1.92e-05     -2.13  -1.84e-05     -0.51  +4.27e-04     +5.27 
+    140    -9.87e-06     -2.15  -3.68e-06     -0.20  +2.39e-04     +5.79 
+    180    -5.97e-06     -2.15  -2.63e-07     -0.02  +1.52e-04     +6.09 
+    220    -3.98e-06     -2.14  +6.69e-07     +0.09  +1.05e-04     +6.27 
+
+  ### primes
+      k        x=0.10            x=0.20            x=0.30        
+              D(x)      D/lam^2    D(x)      D/lam^2    D(x)      D/lam^2 
+     60    -7.58e-05    -17.03  -1.49e-04     -8.37  +1.34e-04     +3.35 
+    100    -6.62e-06     -5.13  -4.43e-06     -0.86  +1.69e-04    +14.50 
+    140    -2.91e-06     -5.02  +6.03e-08     +0.03  +8.10e-05    +15.53 
+    180    -1.59e-06     -4.98  +6.46e-07     +0.51  +4.69e-05    +16.33 
+    220    -9.88e-07     -4.94  +6.44e-07     +0.81  +3.02e-05    +16.80 
+
+  If D/lambda^2 is roughly k-independent, the missing term scales the same way as the
+  signal and is a structural omission; if it decays, it is a finite-size effect.
+
+============================================================================================================
+Cube arm (item 3): partial sums of (**) -- the explanation of the r080 failure
+============================================================================================================
+   d <=       1:  N_d= 1  sigma_d=        1  partial SUM =              1.1   Q(0) so far =            0.0
+   d <=       2:  N_d= 1  sigma_d=        1  partial SUM =              4.2   Q(0) so far =            0.2
+   d <=       4:  N_d= 1  sigma_d=        1  partial SUM =             20.5   Q(0) so far =            0.8
+   d <=       8:  N_d= 2  sigma_d=       10  partial SUM =            154.0   Q(0) so far =            5.8
+   d <=      16:  N_d= 3  sigma_d=       37  partial SUM =            897.6   Q(0) so far =           34.1
+   d <=      32:  N_d= 3  sigma_d=       37  partial SUM =           4638.1   Q(0) so far =          176.1
+   d <=      64:  N_d= 5  sigma_d=      227  partial SUM =          24928.4   Q(0) so far =          946.6
+   d <=     128:  N_d= 6  sigma_d=      444  partial SUM =         116391.8   Q(0) so far =         4419.9
+   d <=     256:  N_d= 7  sigma_d=      787  partial SUM =         454948.2   Q(0) so far =        17276.5
+   d <=    1024:  N_d=12  sigma_d=     6090  partial SUM =        3575902.6   Q(0) so far =       135793.8
+   d <=    4096:  N_d=20  sigma_d=    44110  partial SUM =        9459753.0   Q(0) so far =       359231.1
+   d <=   16384:  N_d=31  sigma_d=   246031  partial SUM =       11093217.5   Q(0) so far =       421261.4
+   d <=   65536:  N_d=50  sigma_d=  1625650  partial SUM =       11120035.1   Q(0) so far =       422279.8
+   d <=  171500:  N_d=69  sigma_d=  5832259  partial SUM =       11120039.6   Q(0) so far =       422280.0
+
+   final Q(0)_cubes = 422280.0   (odds 23.2, primes 57.0, squares 1022)
+   the series does not converge in any useful sense at k=70 -- N_d stays tiny for a long time,
+   so 2^{-N_d} never damps the growing delta_d^2. That is exactly the starvation seen in r080.
