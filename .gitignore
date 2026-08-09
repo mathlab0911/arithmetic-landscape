@@ -26,3 +26,6 @@ desktop.ini
 endorsement_request.md
 lean/pnp/run_checker.ps1
 lean/pnp/build_r105.log
+lean/pnp/run_r109.ps1
+lean/pnp/run_r109b.ps1
+lean/pnp/mf.log

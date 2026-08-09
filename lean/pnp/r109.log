@@ -1,0 +1,30 @@
+﻿=== lake build ===
+info: Pnp/Theory/TermwiseMin.lean:120:0: 'Pnp.termwise_min'' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/TermwiseMin.lean:121:0: 'Pnp.termwise_min_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/TermwiseMin.lean:122:0: 'Pnp.termwise_min_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/TermwiseMin.lean:123:0: 'Pnp.two_mul_half_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+邃ｹ [8665/8667] Built Pnp.Theory.ModFour (12s)
+info: Pnp/Theory/ModFour.lean:134:0: 'Pnp.ModdCF_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/ModFour.lean:135:0: 'Pnp.ModdCF_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/ModFour.lean:136:0: 'Pnp.ModdCF_lt_of_ne_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/ModFour.lean:137:0: 'Pnp.ModdCF_le_one_div_sqrt_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/ModFour.lean:138:0: 'Pnp.two_rpow_neg_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+笨・[8666/8667] Built Pnp (10s)
+Build completed successfully (8667 jobs).
+BUILD_EXIT=0
+=== independent kernel replay (tools\check_lean.ps1) ===
+=== negative control: modules that MUST fail ===
+powershell : lake : lean4checker found a problem in Lean4CheckerTests.AddFalse
+発生場所 C:\Users\amake\Claude\Projects\study\lean\pnp\run_r109.ps1:7 文字:1
++ powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\amake\C ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (lake : lean4che...rTests.AddFalse:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+At C:\Users\amake\Claude\Projects\study\tools\check_lean.ps1:39 char:3
++   lake env $exe $m *> $null
++   ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (lean4checker fo...rTests.AddFalse:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+CHECK_EXIT=1

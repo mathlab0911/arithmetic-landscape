@@ -8,6 +8,7 @@ prop:rate
 prop:tilted
 rem:assign
 rem:lean22
+rem:leanmodfour
 rem:measurefree
 rem:notmax
 rem:physics

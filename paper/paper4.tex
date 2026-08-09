@@ -493,6 +493,20 @@ $2^{-2/3}<2^{-1/2}$.
 Verified against the product for all $q\le200$, worst discrepancy $4.4\cdot10^{-16}$.
 \STATUS{proved; and checked numerically, \texttt{mq4\_r107}}
 
+\begin{remark}[what is machine-checked here, and what is not]\label{rem:leanmodfour}
+The two halves of the argument have different statuses and the difference is worth stating.
+\emph{The maximisation is formally verified.} Taking the closed form of
+Lemma~\ref{lem:moddclosed} as a definition, \Lean{ModdCF\_le} gives
+$M_{\mathrm{odd}}(q)\le2^{-1/2}$ for every $q\ge2$, \Lean{ModdCF\_eq\_iff} the equality case as
+a biconditional, \Lean{ModdCF\_lt\_of\_ne\_four} the strict bound off $q=4$ by a second route,
+and \Lean{two\_rpow\_neg\_half} the normalisation $2^{-1/2}=1/\sqrt2$. This is the step where
+an error would hide --- a case split over three residue classes and the comparison of
+$2^{-2/3}$ with $2^{-1/2}$ --- and it is now checked by machine.
+\emph{The closed form itself is not formalised}: it rests on two evaluations of a root-of-unity
+product, is proved above, and is checked against the product for every $q\le200$.
+\STATUS{Lean-verified (maximisation only); \texttt{Pnp/Theory/ModFour.lean}}
+\end{remark}
+
 \begin{remark}[the two classes, side by side]\label{rem:twoclasses}
 \begin{center}
 \begin{tabular}{lccc}
@@ -664,7 +678,10 @@ basin-size distribution, not more landscape statistics.}
 \section{Honest scope}\label{sec:scope}
 \begin{itemize}
 \item \emph{Lean-verified}: Lemma~\ref{lem:termwise} in all three forms
-      (Remark~\ref{rem:lean22}), including the equality case.
+      (Remark~\ref{rem:lean22}), including the equality case; and the maximisation step of
+      Theorem~\ref{thm:modfour} (Remark~\ref{rem:leanmodfour}), the closed form being taken
+      as a definition there. The canon also passes an independent kernel replay
+      (\texttt{lean4checker}, 12 modules, with a negative control).
 \item \emph{Proved}: Lemma~\ref{lem:termwise}, Theorem~\ref{thm:fair},
       Corollary~\ref{cor:oddsclosed}; and Remark~\ref{rem:measurefree}'s derivation of
       Definition~\ref{def:gq} modulo the biased flatness hypothesis, which is not yet stated.

@@ -16,7 +16,11 @@
 # Fail rule: EXIT 0 with the negative control failing is a pass.  EXIT 0 with the negative
 #            control ALSO passing means the harness is broken -- report, do not celebrate.
 
-$ErrorActionPreference = 'Stop'
+# NOTE, and it cost a run: this script deliberately invokes commands that MUST fail (the
+# negative control).  With $ErrorActionPreference = 'Stop' PowerShell turns their stderr into
+# a terminating error and the harness dies reporting its own success criterion as a crash.
+# A harness that runs negative controls must not treat their failure as its own.
+$ErrorActionPreference = 'Continue'
 $env:Path = "$env:USERPROFILE\.elan\bin;" + $env:Path
 
 $exe  = "C:\Users\amake\Claude\Projects\tools\lean4checker\.lake\build\bin\lean4checker.exe"
@@ -36,7 +40,7 @@ $ncOk = $true
 Push-Location "C:\Users\amake\Claude\Projects\tools\lean4checker"
 foreach ($m in @('Lean4CheckerTests.AddFalse','Lean4CheckerTests.ReplaceAxiom',
                  'Lean4CheckerTests.AddFalseConstructor')) {
-  lake env $exe $m *> $null
+  & { lake env $exe $m } 2>&1 | Out-Null
   if ($LASTEXITCODE -eq 0) { Write-Host "  !! $m PASSED -- the harness is not checking anything"; $ncOk = $false }
   else                     { Write-Host "  ok $m rejected (exit $LASTEXITCODE)" }
 }
@@ -46,7 +50,7 @@ if (-not $ncOk) { Write-Host "NEGATIVE CONTROL FAILED -- do not trust the run be
 Write-Host "=== canon: Pnp ==="
 Push-Location $proj
 $t0 = Get-Date
-lake env $exe Pnp
+& { lake env $exe Pnp } 2>&1 | Write-Host
 $code = $LASTEXITCODE
 Pop-Location
 $sec = [math]::Round(((Get-Date) - $t0).TotalSeconds, 1)
