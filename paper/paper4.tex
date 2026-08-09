@@ -525,6 +525,16 @@ of primes contains at most one element $\equiv3\pmod 6$, and it leaves $B_d$ at 
 random odd sequence contains a positive proportion of them at every $d$. \emph{So the primes
 are the harder case, by a factor $\sqrt{3/2}=1.2247$ in the geometric rate}, and paper~2's
 $\sqrt3/2$ is a feature of the primes rather than a limitation of the method.
+
+Both halves of that comparison are machine-checked. \Lean{abs\_cos\_pi\_mul\_div\_four} gives
+$|\cos(\pi a/4)|=1/\sqrt2$ for \emph{every} odd $a$, so \Lean{prod\_abs\_cos\_four} makes the
+modulus-4 floor $(1/\sqrt2)^{|A|}$ \emph{deterministic} rather than merely universal; and
+\Lean{cos\_pi\_mul\_div\_six\_eq\_zero} gives $\cos(\pi a/6)=0$ whenever $a\equiv3\pmod6$, so
+\Lean{prod\_abs\_cos\_six\_eq\_zero} kills the modulus-6 peak on a single element.
+\Lean{six\_dies\_four\_survives} is the separation itself: for an odd sequence containing such
+an element the modulus-6 product is $0$ while the modulus-4 product is still exactly
+$(1/\sqrt2)^{|A|}>0$.
+\STATUS{Lean-verified; \texttt{Pnp/Theory/OddPeaks.lean}}
 \end{remark}
 
 \subsection{The rate, and what is still missing}
@@ -680,8 +690,9 @@ basin-size distribution, not more landscape statistics.}
 \item \emph{Lean-verified}: Lemma~\ref{lem:termwise} in all three forms
       (Remark~\ref{rem:lean22}), including the equality case; and the maximisation step of
       Theorem~\ref{thm:modfour} (Remark~\ref{rem:leanmodfour}), the closed form being taken
-      as a definition there. The canon also passes an independent kernel replay
-      (\texttt{lean4checker}, 12 modules, with a negative control).
+      as a definition there; and the two peak facts of Remark~\ref{rem:twoclasses}
+      (\texttt{Pnp/Theory/OddPeaks.lean}). The canon also passes an independent kernel replay
+      (\texttt{lean4checker}, 13 modules, with a negative control).
 \item \emph{Proved}: Lemma~\ref{lem:termwise}, Theorem~\ref{thm:fair},
       Corollary~\ref{cor:oddsclosed}; and Remark~\ref{rem:measurefree}'s derivation of
       Definition~\ref{def:gq} modulo the biased flatness hypothesis, which is not yet stated.

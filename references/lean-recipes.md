@@ -108,6 +108,57 @@ framework, and anything that could have altered the environment after the fact (
 kernel itself — same implementation — which is the one thing `nanoda_bin` would add, at the
 cost of a Rust toolchain.
 
+---
+
+## nanoda — a genuinely independent kernel (r111): built, verified, not yet usable on our canon
+
+**Built.** `nanoda_bin 0.4.13` and `lean4export 3.1.0`, both on this machine. Four things had
+to be got right, and each is a trap worth recording:
+
+1. **`nanoda_bin` is not on crates.io.** `cargo install nanoda_bin` fails with *could not find
+   `nanoda_bin` in registry*. Build from `github.com/ammkrn/nanoda_lib` instead.
+2. **The MSVC linker is absent.** Rust's default Windows toolchain needs `link.exe` from
+   Visual Studio Build Tools. Rather than install several GB of Visual Studio,
+   `rustup default stable-x86_64-pc-windows-gnu` — the GNU toolchain ships its own linker and
+   `nanoda_lib` then builds in 20 s. *(This changed the machine's default Rust toolchain;
+   `rustup default stable-msvc` reverses it.)*
+3. **`nanoda_bin` has no CLI.** Its single argument is a path to a JSON config,
+   `{"export_file_path": "..."}`. Passing the export file directly makes it panic in the JSON
+   parser — which looks like a corrupt export and is not.
+4. **PowerShell `>` writes UTF-16.** `lake env lean4export Mod > out.export` produces a file
+   nanoda rejects with *stream did not contain valid UTF-8*. Redirect through
+   `cmd /c "... > out.export"`. Also, running `lean4export.exe` outside `lake env` fails with
+   exit `-1073741515` (DLL not found): put `$(lean --print-prefix)\bin` on `PATH`.
+
+**Verified end to end, with a negative control.** On a self-contained `prelude` module
+(two inductives, two theorems, no Mathlib): export 9,396 bytes, nanoda **exit 0**. Then the
+control — swap the `value` fields of the two theorems in the JSON so each claims the other's
+proof term — and nanoda **exit 101**. *Honest caveat:* the rejection came from the parser
+(`assertion failed: idx < self.dag.exprs.len()`), not the type checker, because the swapped
+index is not yet defined when the first theorem is read. The harness rejects a corrupted
+export; it has not yet been shown to reject a well-formed but ill-typed one.
+
+Two earlier passes were **discarded rather than reported**: the first ran nanoda on an empty
+export (the tiny module had failed to compile) and got exit 0; the second corrupted a
+bookkeeping field (`all`) rather than the proof term and got exit 0. Both were caught only
+because the control was written first. This is F47 three times in one afternoon.
+
+**Not run on the canon, and the reason is scale.** `lean4export` exports the whole transitive
+environment as text. Core `Init` alone is **671 MB in 66 s**; a `Pnp` export had reached
+**692 MB after 90 s** and was still growing. nanoda would then have to type-check all of
+Mathlib, not our 12 files.
+
+**The distinction worth keeping:**
+
+| | granularity | cost here |
+|---|---|---|
+| `lean4checker` | replays the listed modules' constants against an already-loaded environment | 13 modules, 170 s |
+| `nanoda` | must be handed the entire environment as text | multi-GB export, all of Mathlib |
+
+So the two are not substitutes: `lean4checker` is the one that fits a working loop, and
+`nanoda` is the one that would remove the last trust assumption — if someone first solves the
+export-size problem.
+
 **One correction to the brief, and it matters.** r106 calls Comparator "F52's philosophy as
 infrastructure". It is the *orthogonal* axis:
 

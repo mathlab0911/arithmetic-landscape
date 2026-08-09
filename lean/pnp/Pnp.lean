@@ -11,3 +11,4 @@ import Pnp.Theory.Total
 import Pnp.Theory.Ripple
 import Pnp.Theory.TermwiseMin
 import Pnp.Theory.ModFour
+import Pnp.Theory.OddPeaks
