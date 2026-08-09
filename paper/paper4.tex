@@ -553,55 +553,77 @@ the maximum being attained in a shrinking neighbourhood of $\theta=\tfrac14$.
 \end{proposition}
 
 The arithmetic half is Theorem~\ref{thm:modfour}. Here is the rest, in the four steps it
-actually takes; each is elementary, and the point of the section is that none of them needs
-Siegel--Walfisz, Kumchev, or any ineffective constant.
-
+takes, now with the constants named. Fix a parameter $Q$ (the Dirichlet parameter) and set
+\[
+   M=\log\frac{2Q}{\pi}+1,\qquad
+   \boxed{\ \delta=\tfrac16\log 2=0.1155245\ldots\ }
+\]
 Write $X_m(\theta)=-\log|\cos(\pi m\theta)|\in[0,\infty]$, so that
 $-\log F_A(\theta)=\sum_m\xi_mX_m(\theta)$ with $\xi_m$ the independent indicators of the
 model. Only a \emph{lower} bound on this sum is wanted, which is what makes the argument easy.
 
 \emph{Step 1 (truncate; the unbounded tail is free).} Put $X^{(M)}_m=\min(X_m,M)$. Then
-$\sum\xi_mX_m\ge\sum\xi_mX^{(M)}_m$, so it suffices to bound the truncated sum below, and the
-summands now lie in $[0,M]$. At $\theta=\tfrac14$ truncation is inactive once
-$M>\tfrac12\log2$, since $X_m(\tfrac14)=\tfrac12\log2$ for every odd $m$.
+$\sum\xi_mX_m\ge\sum\xi_mX^{(M)}_m$, and the summands now lie in $[0,M]$. At $\theta=\tfrac14$
+truncation is inactive, since $X_m(\tfrac14)=\tfrac12\log2$ for every odd $m$.
 
-\emph{Step 2 (the mean, and where Theorem~\ref{thm:modfour} enters).} For $\theta=r/q$ the
-values $X_m(\theta)$ over odd $m$ are a permutation of $\{-\log|\cos(\pi j/q)|:j\in R_q\}$
-repeated, so
-$\mathbb{E}\sum_m\xi_mX_m(r/q)=\bigl(-\log M_{\mathrm{odd}}(q)+o(1)\bigr)\mathbb{E}|A|$, and
-Theorem~\ref{thm:modfour} says this is at least $\tfrac12\log2$ per element, with a strict gap
-$\delta(q)>0$ for every $q\ne4$ and $\delta(q)\to\log2$ as $q\to\infty$. \emph{This is the only
-step where arithmetic appears}, and it is the step where the primes and a random odd sequence
-part company. For general $\theta$ one reduces to a nearby rational by Dirichlet
-approximation; the arc geometry is paper~2's and is used verbatim, only the peak-height input
-changing from $M$ to $M_{\mathrm{odd}}$.
+\emph{Step 2 (the mean, and the constant $\delta$).} At $\theta=r/q$ the values $X_m$ over odd
+$m$ run through $\{-\log|\cos(\pi j/q)|:j\in R_q\}$, so by Lemma~\ref{lem:moddclosed} their
+mean is $-\log M_{\mathrm{odd}}(q)=(1-1/v)\log2$ and the \emph{gap} over the value $\tfrac12\log2$
+at $q=4$ is
+\[
+   \delta(q)\;=\;\Bigl(\tfrac12-\tfrac1v\Bigr)\log 2 ,\qquad
+   v=q\ (q\text{ odd}),\quad v=q/2\ (q\equiv0\bmod4),\quad \delta=\infty\ (q\equiv2\bmod4).
+\]
+This vanishes exactly at $v=2$, i.e.\ $q=4$, and increases with $v$; the smallest admissible
+$v$ after $2$ is $v=3$. \textbf{So the binding competitor is $q=3$ and the gap is
+$\delta=\tfrac16\log2$}, with $q=8$ next at $\tfrac14\log2$.
+\STATUS{proved from Lemma~\ref{lem:moddclosed}; checked against the direct residue average for
+all $q\le400$, worst discrepancy $1.0\cdot10^{-15}$, and the minimum located at $q=3$ over
+$q\le2000$; \texttt{delta\_r109}}
 
-\emph{Step 3 (concentration).} The summands are independent and lie in $[0,M]$, so Hoeffding
-gives
-$\Pr\bigl[\sum_m\xi_mX^{(M)}_m<\mathbb{E}-t\bigr]\le\exp(-2t^{2}/(\pi(N)M^{2}))$, and with
-$t=\tfrac12\delta b$ this is $\exp(-c\delta^{2}b/M^{2})$. No second moment of an exponential
-sum is needed --- the randomness is in the \emph{sequence}, not in the phases.
+Truncation does not eat this. For $q\not\equiv2\pmod4$ one has $|\cos(\pi j/q)|\ge\sin(\pi/2q)$,
+so $\max_jX_m\le\log(2q/\pi)<M$ and truncation is \emph{inactive} at every $q\le Q$
+--- measured, the largest value over all such $q\le1000$ is $6.4552$ against
+$M-1=6.4562$, so the bound $\log(2Q/\pi)$ is sharp and the $+1$ in $M$ is there to keep the
+argument off a knife edge. For $q=2u\equiv2\pmod4$ truncation \emph{is} active, at the single
+odd residue $j=u$ where the cosine vanishes; putting $x=-1$ in $(x^u+1)/(x+1)$ gives
+$\prod_{j\ne u}|\cos(\pi j/q)|=u\,2^{1-u}$, so the truncated mean is
+$[(u-1)\log2-\log u+M]/u$, which exceeds $\tfrac12\log2+\delta$ by between $0.23$ and $1.25$
+over $q\le198$ at $Q=200$.
+\STATUS{experimentally confirmed, exact to $4.4\cdot10^{-16}$; \texttt{delta\_r109}}
 
-\emph{Step 4 (net, then Borel--Cantelli).} On the region where $X_m<M$ one has
-$|\cos(\pi m\theta)|\ge e^{-M}$, hence
-$|\partial_\theta X^{(M)}_m|=\pi m|\tan(\pi m\theta)|\le\pi Ne^{M}$, so a net of spacing
-$\eta=\varepsilon/(\pi bNe^{M})$ controls $\theta$, and the net has
-$O(bNe^{M}/\varepsilon)$ points. The union bound survives as long as
-$c\delta^{2}b/M^{2}\gg\log N+M$, and $b\asymp N/\log N$ in the model, so any
-$M=M(b)\to\infty$ with $M=o(b^{1/3})$ will do. Summability over $b$ then gives the almost-sure
-statement by Borel--Cantelli.
-\STATUS{proof skeleton --- Theorem~\ref{thm:modfour} proved, Steps 1--4 as above with the
-constants left implicit; measured in the two tables of this section}
-\TODO{write Steps 2--4 out with explicit constants. The only non-routine point is the
-Dirichlet reduction in Step 2, and paper~2's \S major/minor decomposition already contains it;
-what has to be checked is that its arc radii are still admissible when the peak height drops
-from $\sqrt3/2$ to $1/\sqrt2$ --- they should only get easier.}
+\emph{Step 3 (concentration).} The summands are independent and lie in $[0,M]$, and there are
+$n=\lfloor(N-1)/2\rfloor$ of them, so Hoeffding gives
+$\Pr[\sum\xi_mX^{(M)}_m<\mathbb{E}-t]\le\exp(-2t^2/(nM^2))$. Taking
+$t=\tfrac12\delta\,\mathbb{E}|A|$ and using $\mathbb{E}|A|\asymp2N/\log N$, $n\asymp N/2$,
+$Q=N$ and hence $M\asymp\log N$, the exponent is $\asymp4\delta^2N/(M^2\log^2N)$, i.e.\ the
+failure probability at one $\theta$ is
+\[
+   \exp\bigl(-c\,N/\log^4N\bigr),\qquad c=4\delta^2=0.0534\ldots
+\]
+No second moment of an exponential sum appears: the randomness is in the \emph{sequence}, not
+in the phases.
+
+\emph{Step 4 (net, then Borel--Cantelli).} Where $X_m<M$ we have $|\cos(\pi m\theta)|\ge e^{-M}$,
+hence $|\partial_\theta X^{(M)}_m|=\pi m|\tan(\pi m\theta)|\le\pi Ne^{M}\le2eNQ$, so with $Q=N$
+a net of spacing $\varepsilon/(2eN^2b)$ suffices and has $O(N^3/\varepsilon)$ points. Since
+$N^3\exp(-cN/\log^4N)\to0$ and is summable in $N$, the union bound and Borel--Cantelli give the
+almost-sure statement.
+\STATUS{proof skeleton --- Theorem~\ref{thm:modfour} proved, Steps 1, 3 and 4 with the constants
+above, Step 2 proved at the rationals}
+\TODO{one ingredient is still missing, and it is now a single named one rather than a vague
+``write out the constants''. Step 2 gives the mean bound at $\theta=r/q$; passing to a general
+$\theta$ needs a quantitative equidistribution estimate --- Erd\H{o}s--Tur\'an or Koksma ---
+saying that the mean at $\theta$ is at least $\min_{q\le Q}$ of the rational values minus an
+error controlled by the Dirichlet approximation quality. The two ends are comfortable: at a
+generic $\theta$ the mean tends to $\int_0^1-\log|\cos\pi t|\,dt=\log2=0.693$, twice the value
+$\tfrac12\log2$ at $\theta=\tfrac14$, so the interpolation has a wide margin to play with.}
 
 Measured, at $\theta=r/q$ for $q\le12$ and eight instances at $b\approx190$: the mean of
 $b^{-1}\sum_a-\log|\cos(\pi a/q)|$ agrees with $-\log M_{\mathrm{odd}}(q)$ within the
 $O(b^{-1/2})$ fluctuation at every $q$, and at $q=4$ it is $0.346574$ with standard deviation
 $0.000000$ --- deterministic, as Definition~\ref{def:modd} says it must be.
-\STATUS{experimentally confirmed; \texttt{mq4\_r107}}
+\STATUS{experimentally confirmed; \texttt{mq4\_r107}, \texttt{delta\_r109}}
 
 \begin{remark}[$\theta=\tfrac14$ is the limit of the maxima, not a maximum]\label{rem:notmax}
 A first scan of $F_A(\theta)^{1/b}$ over a fine net asked whether anything exceeds $1/\sqrt2$,
