@@ -72,6 +72,32 @@ anything touching `Tendsto`/measure) would need.
 
 ---
 
+## Traps met in our own canon
+
+### T1. `%` inside a real-valued expression is REAL modulo (r111, `OddProd.lean`)
+`|Real.sin (π * (2 * j % q) / q)|` with `j q : ℕ` does **not** mean what it looks like. Lean
+unifies at `ℝ` and reads `%` as `Real.instMod`, so `Nat.mod_eq_of_lt` and friends never fire and
+the errors say only *"did not find an occurrence of the pattern"*. Cast the natural-number
+reduction explicitly: `((2 * j % q : ℕ) : ℝ)`. The same trap waits for `/` (integer versus real
+division) in any statement that mixes `ℕ` indices with `ℝ` values.
+
+### T2. `rw [← h]` rewrites *every* occurrence, including the one you meant to keep
+Deriving `S = c * (S * C)` from `P = S` and `P = c * (S * C)` by `rw [← hleft, hright]` rewrites
+the `S` inside `(S * C)` as well and produces a self-referential goal. Compose the equalities
+instead: `hleft.symm.trans hright`. Rule of thumb: when the same term appears on both sides of
+the goal, use `Eq.trans`/`calc`, not `rw`.
+
+### T3. `set x := e with h` after the fact, not before
+`set` abstracts only the occurrences present when it runs; products created later by
+`Finset.prod_mul_distrib` are *not* abstracted, and then `rw [h]` goes the wrong way. Prove the
+lemmas with the full expressions first and `set` at the end, when everything is in place.
+
+### T4. `try ring` leaves its suggestion in the log
+When `ring` fails inside `try`, the error is swallowed but the *"Try this: ring_nf"* message is
+still printed, which looks like a failure in a log that is meant to be clean. Use `try ring_nf`.
+
+---
+
 ## Comparator — assessment (r107)
 
 `ComparatorChallenges/README.md`, in full, is short: install `landrun`, `lean4export` and

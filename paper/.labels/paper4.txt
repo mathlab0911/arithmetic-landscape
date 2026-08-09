@@ -1,12 +1,15 @@
 cor:oddsclosed
 def:gq
 def:modd
+eq:nodent
 eq:phiq
+lem:coset
 lem:moddclosed
 lem:termwise
 prop:rate
 prop:tilted
 rem:assign
+rem:doubleangle
 rem:lean22
 rem:leanmodfour
 rem:measurefree
@@ -24,6 +27,7 @@ sec:modfour
 sec:outlook
 sec:phiq
 sec:random
+sec:rate
 sec:scope
 thm:fair
 thm:modfour
