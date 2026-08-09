@@ -1,0 +1,4 @@
+﻿Pow.lean:59: lemma one_add_mul_le_pow_of_sq_nonneg (Hsq : 0 ≤ a ^ 2) (Hsq' : 0 ≤ (1 + a) ^ 2) (H : 0 ≤ 2 + a)
+Pow.lean:100: lemma one_add_mul_le_pow (H : -2 ≤ a) (n : ℕ) : 1 + n * a ≤ (1 + a) ^ n :=
+Mul.lean:157: lemma convexOn_pow : ∀ n, ConvexOn 𝕜 (Ici 0) fun x : 𝕜 ↦ x ^ n :=
+Deriv.lean:43: theorem strictConvexOn_pow {n : ℕ} (hn : 2 ≤ n) : StrictConvexOn ℝ (Ici 0) fun x : ℝ => x ^ n := by

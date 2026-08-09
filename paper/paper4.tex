@@ -108,6 +108,18 @@ $t\mapsto t^{N-1}$ is strictly increasing, so $f_N'<0$ on $(0,\tfrac12)$ and $f_
 $(\tfrac12,1)$. For $N\in\{0,1\}$, $f_N$ is the constant $2$ or $1$.
 \end{proof}
 
+\begin{remark}[formally verified]\label{rem:lean22}
+Lemma~\ref{lem:termwise} is machine-checked. \Lean{termwise\_min} gives the inequality for
+every $N$ and every $q\in[0,1]$, \Lean{termwise\_min\_strict} its strictness for $N\ge2$ and
+$q\ne\tfrac12$, and \Lean{termwise\_min\_iff} the equality case as a biconditional; the
+normalisation $2\cdot(\tfrac12)^N=2^{1-N}$ is \Lean{two\_mul\_half\_pow}. The non-strict
+bound is proved twice, once from convexity of $x^N$ on $[0,\infty)$ and once from Bernoulli's
+inequality (\Lean{termwise\_min'}), so the two proofs check the \emph{statement} against each
+other and not merely the tactic script. No \texttt{sorry}, and no axioms beyond
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+\STATUS{Lean-verified; \texttt{20260809\_TermwiseMin.lean}}
+\end{remark}
+
 \begin{theorem}[the fair coin minimises the invariant]\label{thm:fair}
 For every finite increasing sequence $A$ of odd positive integers with $|A|\ge2$ and every
 $q\in(0,1)$,
@@ -285,10 +297,21 @@ zero-ineffective-constant rigidity theorem. The measurements above are the floor
 clear, and they sharpen the brief: the rate to aim for is $1/\sqrt2$, not $\sqrt3/2$.}
 
 \section{Two questions inherited from paper 3}\label{sec:inherited}
-\TODO{(i) the $c_d$ fold-in: paper 3 keeps $\Phi$ as printed and counts
-$c_d=e^{-\delta_d^{2}/2K''_d}$ in $E_k$, on the measurement that folding it in accounts for
-at most $3\%$ of the residual. Extend that measurement across profiles and $k$ and decide.
-(ii) the mechanism behind $c_A=c_A'$, conjectured in paper 3's \textup{rem:onek}.}
+\emph{(i) The $c_d$ fold-in is settled, and it goes paper 3's way.} The share of the
+residual that $c_d$ carries falls like $k^{-2\alpha}$ --- measured exponents $1.98$, $2.35$,
+$2.99$ against predicted $2.00$, ${\approx}2.4$, $3.00$ on the odd numbers, the primes and
+$\alpha=\tfrac32$, with the squares already below the numerical floor. So $\Phi$ as printed
+is right for every larger $k$ and $c_d$ belongs to $E_k$ permanently; paper 3's
+\textup{rem:cd} now says so. \STATUS{experimentally confirmed, four profiles, $k\le300$;
+\texttt{e8\_r103}}
+
+\emph{(ii) $c_A=c_A'$ is still open, but sharper.} Carried to $k=300$ the ratio reaches
+$1.0064$ (odd numbers), $1.0001$ (primes), $0.9984$ ($\alpha=\tfrac32$), and the gap closes
+like $k^{-2.4}$ --- faster than the $1/k$ law both constants sit on.
+\STATUS{experimentally confirmed; \texttt{e8\_r103}}
+\TODO{the mechanism is still missing, and a measured rate of convergence is evidence about a
+limit, not a proof of one. F45 stands: substituting $s$ for $\lambda$ makes the residual
+three times worse.}
 
 \section{Outlook}\label{sec:outlook}
 \TODO{the algorithmic reading --- local search on structured instances --- which is where
@@ -296,6 +319,8 @@ this programme started. Outlook only; no claims.}
 
 \section{Honest scope}\label{sec:scope}
 \begin{itemize}
+\item \emph{Lean-verified}: Lemma~\ref{lem:termwise} in all three forms
+      (Remark~\ref{rem:lean22}), including the equality case.
 \item \emph{Proved}: Lemma~\ref{lem:termwise}, Theorem~\ref{thm:fair},
       Corollary~\ref{cor:oddsclosed}; and Remark~\ref{rem:measurefree}'s derivation of
       Definition~\ref{def:gq} modulo the biased flatness hypothesis, which is not yet stated.

@@ -2,6 +2,7 @@ cor:oddsclosed
 def:gq
 lem:termwise
 rem:assign
+rem:lean22
 rem:measurefree
 rem:physics
 sec:biased

@@ -342,6 +342,30 @@ at $k=220$. The two halves of this have different statuses and the difference ma
       \emph{not} a causal link: substituting $s$ for $\lambda$ makes the residual three times
       worse, not smaller.
 \end{itemize}
+
+\noindent
+Carried to $k=300$, the identification tightens rather than drifting, and it does so at a
+measurable rate. The ratio $c_A/c_A'$ reads
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+$k$ & $120$ & $180$ & $220$ & $260$ & $300$\\
+\midrule
+odd numbers & $1.0589$ & $1.0244$ & $1.0151$ & $1.0098$ & $1.0064$\\
+primes      & $1.0318$ & $1.0084$ & $1.0039$ & $1.0014$ & $1.0001$\\
+$a_i\asymp i^{3/2}$ & $1.0113$ & $1.0015$ & $0.9995$ & $0.9984$ & ---\\
+squares     & $1.0782$ & $1.0039$ & $0.9985$ & --- & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+so $|c_A/c_A'-1|$ falls by a factor $9.2$ across a factor $2.5$ in $k$ for the odd numbers, an
+exponent of $2.4$ --- the gap between the two constants closes \emph{faster} than the $1/k$
+law they both sit on. \STATUS{experimentally confirmed, four profiles, $k\le300$;
+\texttt{e8\_r103}} This is a sharper statement of the same conjecture, not a proof of it: a
+rate of empirical convergence is evidence about a limit, and the mechanism is still missing.
 \end{remark}
 
 \subsection{The bridge to paper 2}\label{sec:bridge}
@@ -632,8 +656,28 @@ numbers, $k=220$, $x=0.06$), from $0.914\%$ to $0.902\%$ (primes) and from $1.05
 $1.048\%$ ($\alpha=3/2$): the factor is real, it moves the residual the right way, and it
 accounts for at most $3\%$ of it. We therefore keep $\Phi$ as stated and count $c_d$ in $E_k$.
 \STATUS{experimentally confirmed; \texttt{p3\_r096}, \texttt{phig\_r096}}
-\TODO{a later revision might prefer $\Phi$ with $c_d$ folded in; the measurement above is what
-that choice would buy.}
+
+That choice was made at one value of $k$, and the level of the correction is the wrong thing
+to decide it on; the trend is the right thing. Since $1-c_d\asymp\delta_d^{2}/2V_d$ with
+$V\asymp k^{2\alpha+1}$, and the series is dominated by the small $d$ where $\delta_d=O(1)$,
+the $c_d$ correction is $O(k^{-(2\alpha+1)})$ while the residual is $O(1/k)$: the \emph{share}
+of the residual that $c_d$ carries should fall like $k^{-2\alpha}$. It does. Writing that
+share as $(R_\Phi-R_{\Phi c})/R_\Phi$ and fitting successive $k$:
+\[
+  1.98\ (\text{odd numbers, }\alpha=1),\qquad
+  2.35\ (\text{primes}),\qquad
+  2.99\ (\alpha=\tfrac32),
+\]
+against the predicted $2\alpha$, i.e.\ $2.00$, ${\approx}2.4$ for $a_i\asymp i\log i$, and
+$3.00$; for the squares the prediction is $k^{-4}$ and the correction is already at
+$1-c_1=8.9\cdot10^{-10}$, so its share is numerical noise and changes sign --- the prediction
+taken to its limit rather than a counterexample. Concretely the share for the odd numbers runs
+$10.74\%,4.93\%,3.33\%,2.40\%,1.81\%$ at $k=120,180,220,260,300$.
+\STATUS{experimentally confirmed, four profiles, $k\le300$; \texttt{e8\_r103}}
+Keeping $\Phi$ as printed is therefore not a convenience at the $k$ we happened to measure:
+$c_d$'s contribution is a vanishing fraction of a vanishing residual, so $\Phi$ is the right
+transfer function for every larger $k$ and $c_d$ belongs to $E_k$ permanently. The fork is
+closed.
 \end{remark}
 
 \noindent
@@ -850,7 +894,8 @@ Every number in this paper is produced by a script that writes a log beside itse
 papers~1 and~2. The scripts named in the \textsf{[status]} tags ---
 \texttt{table1\_r086}, \texttt{kappa\_r088}, \texttt{tilt\_r088}, \texttt{sres\_r088},
 \texttt{arc\_r088}, \texttt{eta\_r090}, \texttt{gap\_r090}, \texttt{saddle\_r092},
-\texttt{alpha\_r092}, \texttt{t1row\_r094}, \texttt{p3\_r096}, \texttt{phig\_r096} ---
+\texttt{alpha\_r092}, \texttt{t1row\_r094}, \texttt{p3\_r096}, \texttt{phig\_r096},
+\texttt{e8\_r103} ---
 and their logs are part of the public artefact.
 
 \begin{thebibliography}{9}

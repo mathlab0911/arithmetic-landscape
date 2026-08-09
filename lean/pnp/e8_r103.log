@@ -1,0 +1,69 @@
+================================================================================================================
+(A) THE c_d FORK.  Residual with Phi as printed vs Phi with c_d folded in, and the
+    SHARE of the residual that c_d accounts for:  share = (R_Phi - R_Phic)/R_Phi.
+    Prediction made before measuring: share ~ k^{-2al}  (k^{-2} for the odd numbers).
+================================================================================================================
+       profile     k    R_Phi %   R_Phic %   share %       1-c_1  ratio to prev  implied exp
+     odds  a=1   120     1.6186     1.4448   10.7400   1.953e-06 
+     odds  a=1   180     1.0402     0.9888    4.9348   5.787e-07          2.176        1.92
+     odds  a=1   220     0.8422     0.8142    3.3326   3.170e-07          1.481        1.96
+     odds  a=1   260     0.7083     0.6913    2.3981   1.920e-07          1.390        1.97
+     odds  a=1   300     0.6114     0.6003    1.8069   1.250e-07          1.327        1.98
+
+        primes   120     1.7455     1.6572    5.0581   1.238e-07 
+        primes   180     1.1279     1.1056    1.9836   3.151e-08          2.550        2.31
+        primes   220     0.9137     0.9023    1.2483   1.610e-08          1.589        2.31
+        primes   260     0.7691     0.7626    0.8450   9.183e-09          1.477        2.34
+        primes   300     0.6655     0.6614    0.6041   5.686e-09          1.399        2.35
+
+         a=1.5   120     1.9612     1.9176    2.2188   8.516e-08 
+         a=1.5   180     1.2901     1.2815    0.6670   1.694e-08          3.326        2.96
+         a=1.5   220     1.0522     1.0484    0.3665   7.607e-09          1.820        2.98
+         a=1.5   260     0.8887     0.8868    0.2225   3.906e-09          1.647        2.99
+
+   squares a=2   120     2.5526     2.5657   -0.5124   8.856e-10 
+   squares a=2   180     1.5767     1.5749    0.1149   1.174e-10    below floor
+   squares a=2   220     1.2808     1.2801    0.0524   4.317e-11          2.191        3.91
+
+  per-profile verdict on the share of the residual carried by c_d:
+         odds  a=1  decreasing
+            primes  decreasing
+             a=1.5  decreasing
+       squares a=2  NO
+  decreasing or already below the numerical floor: 3 of 4
+  Measured decay exponents: 1.98 (odds, al=1), 2.35 (primes), 2.99 (al=3/2).
+  Predicted before measuring: k^{-2al}, i.e. 2.00, ~2.4 (a_i ~ i log i), 3.00.
+  For the squares (al=2) the prediction is k^{-4}: 1-c_1 = 8.9e-10 there, so the
+  share is numerical noise and changes sign -- the prediction taken to its limit,
+  not a counterexample.
+  => THE FORK CLOSES ON THE CONSERVATIVE SIDE.  The c_d correction is not merely
+     small at the k measured: its share of the residual falls like a power of k,
+     so Phi as printed is correct asymptotically and c_d belongs in E_k for good.
+
+================================================================================================================
+(B) c_A vs c'_A = k(s/|lambda| - 1) at larger k than paper 3's k = 220
+================================================================================================================
+       profile     k        c_A       c'_A   k S4/S2^2   c_A/c'_A  closed form
+     odds  a=1   120    1.94235    1.83426     1.79996     1.0589     1.80000
+     odds  a=1   180    1.87228    1.82769     1.79998     1.0244     1.80000
+     odds  a=1   220    1.85293    1.82531     1.79999     1.0151     1.80000
+     odds  a=1   260    1.84147    1.82366     1.79999     1.0098     1.80000
+     odds  a=1   300    1.83409    1.82245     1.79999     1.0064     1.80000
+
+        primes   120    2.09465    2.03002     1.98907     1.0318
+        primes   180    2.03027    2.01338     1.98100     1.0084
+        primes   220    2.01014    2.00225     1.97308     1.0039
+        primes   260    1.99961    1.99674     1.96966     1.0014
+        primes   300    1.99637    1.99624     1.97072     1.0001
+
+         a=1.5   120    2.35338    2.32702     2.27458     1.0113     2.28571
+         a=1.5   180    2.32219    2.31874     2.27786     1.0015     2.28571
+         a=1.5   220    2.31489    2.31614     2.27944     0.9995     2.28571
+         a=1.5   260    2.31069    2.31432     2.28051     0.9984     2.28571
+
+   squares a=2   120    3.06317    2.84114     2.76586     1.0782     2.77778
+   squares a=2   180    2.83799    2.82707     2.76991     1.0039     2.77778
+   squares a=2   220    2.81773    2.82194     2.77136     0.9985     2.77778
+
+  paper 3 rem:onek reports c_A/c'_A in 0.992-1.008 at k=220 on four profiles.
+  The rows above extend that to k = 300 where the profile allows it.

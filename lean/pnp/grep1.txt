@@ -1,0 +1,25 @@
+﻿* `convexOn_rpow`, `strictConvexOn_rpow` : For `p : ℝ`, `fun x ↦ x ^ p` is convex on $[0, +∞)$ when
+theorem strictConvexOn_rpow {p : ℝ} (hp : 1 < p) : StrictConvexOn ℝ (Ici 0) fun x : ℝ ↦ x ^ p := by
+theorem convexOn_rpow {p : ℝ} (hp : 1 ≤ p) : ConvexOn ℝ (Ici 0) fun x : ℝ ↦ x ^ p := by
+exact (strictConvexOn_rpow hp).convexOn
+theorem convexOn_rpow_left {b : ℝ} (hb : 0 < b) : ConvexOn ℝ Set.univ (fun (x : ℝ) => b ^ x) := by
+MeanInequalitiesPow.lean: different theorems for natural exponents (`pow_arith_mean_le_arith_mean_pow`), integer exponents
+MeanInequalitiesPow.lean: (`zpow_arith_mean_le_arith_mean_zpow`), and real exponents (`rpow_arith_mean_le_arith_mean_rpow` and
+MeanInequalitiesPow.lean: theorem pow_arith_mean_le_arith_mean_pow (w z : ι → ℝ) (hw : ∀ i ∈ s, 0 ≤ w i)
+MeanInequalitiesPow.lean: theorem pow_arith_mean_le_arith_mean_pow_of_even (w z : ι → ℝ) (hw : ∀ i ∈ s, 0 ≤ w i)
+MeanInequalitiesPow.lean: theorem zpow_arith_mean_le_arith_mean_zpow (w z : ι → ℝ) (hw : ∀ i ∈ s, 0 ≤ w i)
+MeanInequalitiesPow.lean: theorem rpow_arith_mean_le_arith_mean_rpow (w z : ι → ℝ) (hw : ∀ i ∈ s, 0 ≤ w i)
+MeanInequalitiesPow.lean: · exact rpow_arith_mean_le_arith_mean_rpow s w z hw hw' hz hp
+MeanInequalitiesPow.lean: theorem pow_arith_mean_le_arith_mean_pow (w z : ι → ℝ≥0) (hw' : ∑ i ∈ s, w i = 1) (n : ℕ) :
+MeanInequalitiesPow.lean: Real.pow_arith_mean_le_arith_mean_pow s _ _ (fun i _ => (w i).coe_nonneg)
+MeanInequalitiesPow.lean: theorem rpow_arith_mean_le_arith_mean_rpow (w z : ι → ℝ≥0) (hw' : ∑ i ∈ s, w i = 1) {p : ℝ}
+MeanInequalitiesPow.lean: Real.rpow_arith_mean_le_arith_mean_rpow s _ _ (fun i _ => (w i).coe_nonneg)
+MeanInequalitiesPow.lean: theorem rpow_arith_mean_le_arith_mean2_rpow (w₁ w₂ z₁ z₂ : ℝ≥0) (hw' : w₁ + w₂ = 1) {p : ℝ}
+MeanInequalitiesPow.lean: have h := rpow_arith_mean_le_arith_mean_rpow univ ![w₁, w₂] ![z₁, z₂] ?_ hp
+MeanInequalitiesPow.lean: rpow_arith_mean_le_arith_mean2_rpow (1 / 2) (1 / 2) (2 * z₁) (2 * z₂) (add_halves 1) hp using 1
+MeanInequalitiesPow.lean: theorem rpow_arith_mean_le_arith_mean_rpow (w z : ι → ℝ≥0∞) (hw' : ∑ i ∈ s, w i = 1) {p : ℝ}
+MeanInequalitiesPow.lean: -- by using `NNReal.rpow_arith_mean_le_arith_mean_rpow`.
+MeanInequalitiesPow.lean: NNReal.rpow_arith_mean_le_arith_mean_rpow s (fun i => (w i).toNNReal)
+MeanInequalitiesPow.lean: theorem rpow_arith_mean_le_arith_mean2_rpow (w₁ w₂ z₁ z₂ : ℝ≥0∞) (hw' : w₁ + w₂ = 1) {p : ℝ}
+MeanInequalitiesPow.lean: have h := rpow_arith_mean_le_arith_mean_rpow univ ![w₁, w₂] ![z₁, z₂] ?_ hp
+MeanInequalitiesPow.lean: rpow_arith_mean_le_arith_mean2_rpow (1 / 2) (1 / 2) (2 * z₁) (2 * z₂) (ENNReal.add_halves 1) hp

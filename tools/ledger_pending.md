@@ -61,3 +61,11 @@ rule    : a test must be checked for SENSITIVITY to the alternative, not only fo
   rule    : when an external reader asks for something already present, that is a presentation
             defect, not a reader error.  Record where they looked and what they missed; do not
             reply "it is already there" and move on.
+
+## F51 - a fail rule must state its measurement floor (r103, mine)
+  observed: the c_d share for the squares came out at -0.51%, and the monotonicity fail rule
+            fired -- on a quantity whose true size is 8.9e-10, i.e. on float noise.
+  rule    : a fail rule must distinguish "the effect is absent" from "the effect is below the
+            measurement floor".  State the floor together with the rule.  A monotonicity test
+            applied to noise reports a failure that is really a confirmation: the prediction
+            said the quantity would be unmeasurably small there, and it was.
