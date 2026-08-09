@@ -1,0 +1,92 @@
+====================================================================================================
+(1) OBSTRUCTION 1: the Bernoulli part of a single summand a*Bernoulli(p)
+====================================================================================================
+      a      p     vartheta   (their Theorem 1.7 needs this > 0)
+      3   0.50     0.000000
+      3   0.30     0.000000
+      5   0.50     0.000000
+      5   0.30     0.000000
+      7   0.50     0.000000
+      7   0.30     0.000000
+    101   0.50     0.000000
+    101   0.30     0.000000
+  Exactly zero, for every odd a >= 3 and every p: the law charges 0 and a only, and
+  those are never adjacent.  Theta_n = 0 and Corollary 1.8 is vacuous.  Their own
+  Remark 1.3 names this degenerate case.
+
+====================================================================================================
+(2) THE REPAIR: block the sequence.  How large must a block be before vartheta > 0?
+====================================================================================================
+  sequence                      block   m     p     vartheta
+      odds                        [1]   1  0.50     0.500000
+      odds                     [1, 3]   2  0.50     0.500000
+      odds                  [1, 3, 5]   3  0.50     0.625000
+      odds               [1, 3, 5, 7]   4  0.50     0.750000
+      odds            [1, 3, 5, 7, 9]   5  0.50     0.812500
+
+    primes                        [3]   1  0.50     0.000000
+    primes                     [3, 5]   2  0.50     0.000000
+    primes                  [3, 5, 7]   3  0.50     0.125000
+    primes              [3, 5, 7, 11]   4  0.50     0.375000
+    primes          [3, 5, 7, 11, 13]   5  0.50     0.531250
+
+====================================================================================================
+(3a) A CORRECTION TO MY OWN FIRST PASS.  Blocking by three gave a Theta that did not
+     grow with k at all -- 0.6250 for the odd numbers at every k -- and the reason is
+     that only the FIRST block contributes.  A block of three LARGE elements, say
+     {7,9,11}, has subset sums {0,7,9,11,16,18,20,27}: no two adjacent, vartheta = 0.
+     Adjacency needs the block to have more subset sums than its span, so the block
+     size must GROW.  vartheta by block position, m = 3:
+====================================================================================================
+  sequence                  block   vartheta
+      odds              [1, 3, 5]   0.625000
+      odds             [7, 9, 11]   0.000000
+      odds           [19, 21, 23]   0.000000
+      odds           [43, 45, 47]   0.000000
+
+    primes              [3, 5, 7]   0.125000
+    primes           [11, 13, 17]   0.000000
+    primes           [31, 37, 41]   0.000000
+    primes           [83, 89, 97]   0.000000
+
+====================================================================================================
+(3b) So: how large must the LAST block be before vartheta > 0?
+     Heuristic before measuring: a block of m elements has 2^m subset sums spread over
+     a span of about m * a_max, so adjacency needs 2^m >~ m * a_max, i.e. m >~ log2 k.
+====================================================================================================
+  sequence     k   a_max   min m with last-block vartheta>0  log2(k)
+      odds    16      31                                  7     4.00
+      odds    32      63                                 11     5.00
+      odds    64     127                                 15     6.00
+      odds   128     255                               None     7.00
+
+    primes    16      59                                  7     4.00
+    primes    32     137                                 10     5.00
+    primes    64     313                                 15     6.00
+    primes   128     727                               None     7.00
+
+====================================================================================================
+(3c) OBSTRUCTION 2, with blocks of the size (3b) forces.
+     Rem 1.9 quantity  R := (Var/Theta)^(1/2) * (H + 1/Theta),  H ~ Lyapunov ratio.
+     Their condition is R -> 0.  The test is the TREND in k.
+====================================================================================================
+  sequence     k    m  #blocks     Theta           Var         H            R
+      odds    16    7        2    1.0000        1364.0   0.32460        48.92
+      odds    32   11        2    1.2002       10920.0   0.22961       101.38  UP
+      odds    64   15        4    1.3832       87376.0   0.16237       222.51  UP
+      odds   128   20        6    1.5853      699040.0   0.11482       495.14  UP
+
+    primes    16    7        2    0.9375        4188.0   0.34097        94.08
+    primes    32   10        3    1.2480       43690.0   0.24160       195.12  UP
+    primes    64   15        4    1.5746      471840.0   0.17056       441.01  UP
+    primes   128   20        6    1.9223     5012920.0   0.12025      1034.24  UP
+
+  R grows with k on both sequences, so Giuliano-Weber Remark 1.9 is violated, not
+  merely unverified.  The reason is structural: their Var grows like the NUMBER of
+  summands, ours like its cube, because our summands carry weights a_j ~ j.  Blocking
+  makes it worse, not better: it buys vartheta > 0 at the cost of Theta <~ k/log k.
+
+  VERDICT for paper 3 rem:closing.  The Bernoulli-part-extraction route cannot be
+  quoted for prop:tiltlclt.  Obstruction 1 is repairable by blocking; obstruction 2 is
+  not, and it is the same feature -- large weights -- that makes our LCLT interesting.
+  The Edgeworth constants have to be derived, not imported.

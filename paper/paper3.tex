@@ -709,21 +709,45 @@ $\exp(-t_{\min}(1-\eta)b/4)$ off the principal arc --- exponentially in $b$, whi
 quotes. The tilted analogue of the $M(q)$ spectrum is lost, and is not needed: the rate enters
 Theorem~\ref{thm:transfer} only through $E_k=o(1)$.
 
-\begin{remark}[what closing the skeleton would take, and where to look]\label{rem:closing}
+\begin{remark}[why the constants cannot be imported]\label{rem:closing}
 What Proposition~\ref{prop:tiltlclt} leaves open is not a mechanism but a list of explicit
-Edgeworth constants in region R1, and it is worth saying that there are two ways to get them.
-Deriving them by hand from the characteristic function is possible and unpleasant. Quoting
-them may not be: $\sigma(S)=\sum a_iX_i$ is a \emph{weighted} sum of independent Bernoulli
-variables, and that is precisely the class for which the Bernoulli-part-extraction method
-yields local limit theorems with explicit universal constants for non-identically distributed
-lattice summands. Two features of Proposition~\ref{prop:tiltlclt} are absent from the standard
-statements and would have to be supplied: the summands are tilted, and the conclusion must be
-uniform over the extraction window and across the layers $B_d$. The first is harmless, since
-the tilt only changes $p_a$; the second is what check (D) of \S\ref{sec:p3} measures, and it
-found the layer spread to be at most $44\%$. \TODO{this remark records a route, not a result.
-The leads are the Bernoulli-part-extraction literature (Giuliano--Weber and the subsequent
-work on general weighted Bernoulli sums); neither has been read against
-Proposition~\ref{prop:tiltlclt}, and until one has, nothing here may be cited as a proof.}
+Edgeworth constants in region R1, so it is natural to ask whether they can be quoted rather
+than derived. The natural source is the Bernoulli-part-extraction literature, which produces
+local limit theorems with explicit universal constants for non-identically distributed lattice
+summands, and $\sigma(S)=\sum a_iX_i$ is a sum of independent lattice summands. We checked,
+and the answer is no, for two reasons; we record them because a reader will otherwise ask the
+same question.
+
+Write, following Giuliano and Weber \cite{GW},
+$\vartheta_X=\sum_k\mathbb{P}\{X=k\}\wedge\mathbb{P}\{X=k+1\}$ and
+$\Theta_n=\sum_j\vartheta_{X_j}$; their local limit theorem carries the error
+$C\Theta_n^{-1/2}(H_n+\Theta_n^{-1})$ plus a term
+$(\log\Theta_n/(\operatorname{Var}\cdot\Theta_n))^{1/2}$, with $H_n$ a Berry--Esseen distance,
+and is useful exactly when
+$(\operatorname{Var}/\Theta_n)^{1/2}(H_n+\Theta_n^{-1})\to0$.
+
+\emph{First, the hypothesis is void here.} Our summands are $X_j=a_jX_j'$ with $a_j$ odd and
+at least $3$, so the law of $X_j$ charges the two integers $0$ and $a_j$ and no two
+\emph{adjacent} ones. Hence $\vartheta_{X_j}=0$ exactly, for every $j$ and every $p$, so
+$\Theta_n=0$ and the bound reads $\le\infty$. Their own remark names this degenerate case.
+
+\emph{Second, the obvious repair does not help.} One can block the sequence and apply the
+method to block sums, whose laws do charge adjacent integers --- but only once a block is
+large enough to have more subset sums than its span, and for blocks of \emph{large} elements
+that takes a long time: $\{7,9,11\}$ has subset sums $\{0,7,9,11,16,18,20,27\}$, no two
+adjacent. Measured, the smallest final block with $\vartheta>0$ has size $7,11,15$ and more
+than $20$ at $k=16,32,64,128$, growing like $\log k$, so blocking buys $\Theta_n\lesssim
+k/\log k$. And then the applicability condition fails outright: our weights grow, so
+$\operatorname{Var}\asymp S_2\asymp k^{3}$ while $\Theta_n\lesssim k$ and $H_n\asymp
+k^{-1/2}$, giving $(\operatorname{Var}/\Theta_n)^{1/2}(H_n+\Theta_n^{-1})\asymp k^{1/2}$.
+Measured, that quantity runs $48.9,101.4,222.5,495.1$ for the odd numbers and
+$94.1,195.1,441.0,1034.2$ for the primes at $k=16,32,64,128$ --- increasing, not tending to
+zero. \STATUS{experimentally confirmed; \texttt{bpart\_r110}}
+
+The obstruction is the same feature that makes the present local limit theorem worth proving:
+the summands carry weights $a_j\asymp j$, so the variance grows like the cube of the number of
+summands rather than linearly, and a method calibrated to the latter has nothing to give.
+\emph{The Edgeworth constants of R1 have to be derived, not imported.}
 \end{remark}
 
 \section{Universality of the rate function}\label{sec:universality}
@@ -867,7 +891,10 @@ In the style of paper~1 \S10 and paper~2 \S10, here is what rests on what.
       is the classical local limit computation with $p_a$-weights, given here to the level of
       its cumulant budget rather than with every Edgeworth constant written out. That is the
       one gap between this paper and a complete proof, and it is a gap of exposition rather
-      than of ingredients.
+      than of ingredients. Remark~\ref{rem:closing} records that those constants cannot be
+      imported from the effective local-limit literature, and why: our summands have
+      Bernoulli part exactly $0$, and their weights make the variance grow like the cube of
+      the number of summands, which is outside the regime that literature is calibrated to.
 \item \emph{Experimentally confirmed, with the range stated}: rigidity
       (\S\ref{sec:rigid}), the transfer function to $0.8$--$1.9\%$ of the signal
       (Table~\ref{tab:one}), universality (\S\ref{sec:universality}), the profile-dependent
@@ -907,7 +934,7 @@ papers~1 and~2. The scripts named in the \textsf{[status]} tags ---
 \texttt{table1\_r086}, \texttt{kappa\_r088}, \texttt{tilt\_r088}, \texttt{sres\_r088},
 \texttt{arc\_r088}, \texttt{eta\_r090}, \texttt{gap\_r090}, \texttt{saddle\_r092},
 \texttt{alpha\_r092}, \texttt{t1row\_r094}, \texttt{p3\_r096}, \texttt{phig\_r096},
-\texttt{e8\_r103} ---
+\texttt{e8\_r103}, \texttt{bpart\_r110} ---
 and their logs are part of the public artefact.
 
 \begin{thebibliography}{9}
@@ -915,6 +942,10 @@ and their logs are part of the public artefact.
 governing subset-sum landscapes}. Manuscript, 2026.
 \bibitem{P2} K.~Amauchi, \emph{Asymptotic flatness of subset-sum landscapes of primes: the
 sub-peak spectrum and the constant $\sqrt3/2$}. Manuscript, 2026.
+\bibitem{GW} R.~Giuliano and M.~Weber, \emph{Approximate local limit theorems with effective
+rate and application to random walks in random scenery}. Bernoulli \textbf{23} (2017),
+3268--3310; arXiv:1412.3980. Cited only for the definition and the applicability condition
+quoted in Remark~\ref{rem:closing}.
 \end{thebibliography}
 
 \end{document}
