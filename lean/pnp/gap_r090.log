@@ -1,0 +1,69 @@
+================================================================================================
+crossover check, target decay exp(-0.01*b) ;  crossover tested at theta = K/N, K = 0.5/1/2
+================================================================================================
+
+  odds, k=200, x=0.10:  t_min=0.9126  theta_1*N = 0.181   (quadratic bound valid only for theta*N <= 0.5)
+    K= 0.5:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.217222   OK
+    K= 1.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.217179   OK
+    K= 2.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.217209   OK
+      theta*N   -(1/b)log|G~|    Re S_A/b  verdict
+         0.25        0.103023    0.635025  decayed
+         0.50        0.470683   -0.002500  decayed
+         1.00        0.549528    0.002500  decayed
+         2.00        0.553399    0.002500  decayed
+         5.00        0.554094    0.002500  decayed
+
+  odds, k=200, x=0.30:  t_min=0.3616  theta_1*N = 0.287   (quadratic bound valid only for theta*N <= 0.5)
+    K= 0.5:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.217222   OK
+    K= 1.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.217179   OK
+    K= 2.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.217209   OK
+      theta*N   -(1/b)log|G~|    Re S_A/b  verdict
+         0.25        0.054670    0.635025  decayed
+         0.50        0.185697   -0.002500  decayed
+         1.00        0.289579    0.002500  decayed
+         2.00        0.315228    0.002500  decayed
+         5.00        0.323244    0.002500  decayed
+
+  squares, k=150, x=0.10:  t_min=0.8938  theta_1*N = 0.235   (quadratic bound valid only for theta*N <= 0.5)
+    K= 0.5:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.412647   OK
+    K= 1.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.512494   OK
+    K= 2.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.475544   OK
+      theta*N   -(1/b)log|G~|    Re S_A/b  verdict
+         0.25        0.061648    0.776550  decayed
+         0.50        0.273538    0.367311  decayed
+         1.00        0.397479    0.244086  decayed
+         2.00        0.454718    0.175171  decayed
+         5.00        0.505359    0.111464  decayed
+
+  squares, k=150, x=0.30:  t_min=0.2792  theta_1*N = 0.420   (quadratic bound valid only for theta*N <= 0.5)
+    K= 0.5:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.412647   OK
+    K= 1.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.512494   OK
+    K= 2.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.475544   OK
+      theta*N   -(1/b)log|G~|    Re S_A/b  verdict
+         0.25        0.030170    0.776550  decayed
+         0.50        0.103865    0.367311  decayed
+         1.00        0.201229    0.244086  decayed
+         2.00        0.268879    0.175171  decayed
+         5.00        0.326020    0.111464  decayed
+
+  primes, k=200, x=0.10:  t_min=0.9081  theta_1*N = 0.192   (quadratic bound valid only for theta*N <= 0.5)
+    K= 0.5:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.493196   OK
+    K= 1.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.493034   OK
+    K= 2.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.492603   OK
+      theta*N   -(1/b)log|G~|    Re S_A/b  verdict
+         0.25        0.091594    0.673509  decayed
+         0.50        0.415640    0.094933  decayed
+         1.00        0.520385    0.051506  decayed
+         2.00        0.529053    0.032490  decayed
+         5.00        0.555399    0.005923  decayed
+
+  primes, k=200, x=0.30:  t_min=0.3407  theta_1*N = 0.313   (quadratic bound valid only for theta*N <= 0.5)
+    K= 0.5:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.493196   OK
+    K= 1.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.493034   OK
+    K= 2.0:  eta = max Re S_A/b over [K/N, 1-K/N] =  0.492603   OK
+      theta*N   -(1/b)log|G~|    Re S_A/b  verdict
+         0.25        0.047753    0.673509  decayed
+         0.50        0.162821    0.094933  decayed
+         1.00        0.269854    0.051506  decayed
+         2.00        0.307667    0.032490  decayed
+         5.00        0.330548    0.005923  decayed

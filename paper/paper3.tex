@@ -125,11 +125,27 @@ behaviour of $\Phi$ predicts. \STATUS{experimentally confirmed; \texttt{sres\_r0
 
 \section{Rigidity}\label{sec:rigid}
 
-\begin{theorem}[T3-Rigid, to be proved]\label{thm:rigid}
-\TODO{statement from \texttt{spec\_t3rigid\_r085.md}.} Informally: for the odd primes and every
-fixed $\rho\in(0,1)$, $\lm_P(\lfloor\rho T\rfloor)/\deg_P(\lfloor\rho T\rfloor)\to\Gamma(P)$,
-under the hypothesis of \S\ref{sec:counterexample}.
+\begin{theorem}[rigidity of the gap series]\label{thm:rigid}
+\STATUS{proof skeleton: spec\_t3rigid\_r087 as amended in \S\ref{sec:bridge}}
+Let $P=P_k$ be the first $k$ odd primes and let $\rho\in(0,1)$ be fixed. Then
+\[
+  \frac{\lm_P(\lfloor\rho T\rfloor)}{\deg_P(\lfloor\rho T\rfloor)}
+  \;\xrightarrow[k\to\infty]{}\;\Gamma(P),
+\]
+uniformly for $\rho$ in compact subsets of $(0,1)$. For a general profile $A$ the same holds
+under hypothesis~\textup{(H)} of \S\ref{sec:counterexample}.
 \end{theorem}
+
+\noindent
+$\Gamma(A)=\sum_i a_i2^{-i}$ is therefore an invariant of the landscape and not of its centre.
+Theorem~\ref{thm:rigid} is the case $\lambda\to0$ of Theorem~\ref{thm:transfer}: at fixed $\rho$
+one has $\lambda(n)\asymp x/N\to0$, and $\Phi$ is continuous at $0$ with $\Phi(0)=\Gamma$, so
+\[
+  \Phi(\lambda)-\Gamma\;=\;O\Bigl(\lambda^{2}\sum_{d\ge1}2^{1-N_d}\delta_d^{2}\Bigr)
+  \;\longrightarrow\;0,
+\]
+the sum being finite precisely by~(H). \TODO{write out the uniformity in $\rho$; it comes from
+$\kappa(\rho)$ being bounded below on compacta, not from any new estimate.}
 
 \STATUS{experimentally confirmed} The evidence the theorem is modelled on. With
 $\mathrm{ratio}(\rho,k)=[\lm/\deg]/\Gamma(P_k)$, the spread over $\rho$ contracts monotonically:
@@ -152,15 +168,26 @@ all $2^k$ subsets; the reflection identity $\lm(n)=\lm(T-n)$, which is exact).}
 
 \section{The transfer function}\label{sec:transfer}
 
-\begin{theorem}[correction theorem, to be proved]\label{thm:transfer}
-\TODO{statement.} Informally:
+\begin{theorem}[transfer]\label{thm:transfer}
+\STATUS{proof skeleton: spec\_t3rigid\_r087 as amended in \S\ref{sec:bridge}}
+Let $A=P_k$ be the first $k$ odd primes, or a general profile satisfying~\textup{(H)}, and let
+$n=\lfloor\rho T\rfloor$ with $\rho\in(0,1)$ fixed. Then
 \begin{equation}\label{eq:phi}
-  \frac{\lm_A(n)}{\deg_A(n)}\;=\;\Phi\bigl(\lambda(n)\bigr)\,(1+o(1)),
+  \frac{\lm_A(n)}{\deg_A(n)}\;=\;\Phi_k\bigl(\lambda(n)\bigr)\;+\;E_k,
   \qquad
-  \Phi(\lambda)=1+\sum_{d\ge1}2^{1-N_d}\,
-     e^{-\lambda^{2}s_d/8}\,\cosh(\lambda\delta_d).
+  \Phi_k(\lambda)=1+\sum_{d\ge1}2^{1-N_d}\,
+     e^{-\lambda^{2}s_d/8}\,\cosh(\lambda\delta_d),
 \end{equation}
+with $E_k\to0$ as $k\to\infty$, uniformly for $\rho$ in compact subsets of $(0,1)$.
 \end{theorem}
+
+\begin{remark}[what the theorem does and does not claim about $E_k$]\label{rem:whatEk}
+The assertion is $E_k\to0$ in absolute terms, nothing sharper. The measured rate
+$E_k\asymp c_A/k$ of Remark~\ref{rem:onek} is \emph{not} part of the statement; it is quoted as
+\STATUS{experimentally confirmed, $k\le220$, three profiles} and stated as an open problem in
+\S\ref{sec:scope}. Distinguishing the two matters here more than usual, because the numerical
+agreement is far better than what is proved.
+\end{remark}
 
 Three features of \eqref{eq:phi} deserve to be stated before any proof.
 
@@ -241,6 +268,133 @@ not a shared cause. \STATUS{experimentally confirmed; \texttt{tilt\_r088}, \text
 \TODO{fable: is $c_A$ the second Edgeworth coefficient? The odd orders cancel by the
 reflection symmetry, so the first survivor is of exactly this size.}
 \end{remark}
+
+\subsection{The bridge to paper 2}\label{sec:bridge}
+
+Both theorems reduce to the same five parts. \textbf{P1} is the exact combinatorial
+stratification, proved for every target in paper~1 \STATUS{Lean-verified}; \textbf{P3} is a
+local limit theorem for the tilted ensemble of Definition~\ref{def:tilt}; \textbf{P4} is the
+assembly, in which the odd orders in $\lambda$ cancel by the reflection symmetry
+$\lm(n)=\lm(T-n)$ \STATUS{Lean-verified}; \textbf{P5} is the error budget, which converges
+exactly under~(H). Only \textbf{P2} is new: the minor-arc estimates of paper~2 are proved for
+the \emph{uniform} measure, and P3 needs them for the tilted one.
+
+Write $\widetilde G_B(\theta)=\prod_{a\in B}\bigl(1-p_a+p_ae(a\theta)\bigr)$ for the tilted
+generating function and $S_B(\theta)=\sum_{a\in B}e(a\theta)$ for the linear exponential sum.
+
+\begin{lemma}[the bridge]\label{lem:kappa}
+Put $t_a=4p_a(1-p_a)$ and $t_{\min}=\min_{a\in B}t_a$. For every $\theta$,
+\[
+  \bigl|\widetilde G_B(\theta)\bigr|^{2}
+  =\prod_{a\in B}\Bigl(1-t_a\sin^{2}(\pi a\theta)\Bigr)
+  \;\le\;\exp\Bigl(-t_{\min}\!\!\sum_{a\in B}\!\sin^{2}(\pi a\theta)\Bigr)
+  \;=\;\exp\Bigl(-\tfrac{t_{\min}}{2}\bigl(b-\operatorname{Re}S_B(\theta)\bigr)\Bigr).
+\]
+Consequently, if $\operatorname{Re}S_B(\theta)\le\eta\,b$ then
+$|\widetilde G_B(\theta)|\le\exp\bigl(-t_{\min}(1-\eta)b/4\bigr)$.
+\end{lemma}
+
+\begin{proof}
+The identity $|1-p+pe(\phi)|^{2}=1-4p(1-p)\sin^{2}(\pi\phi)$ is a computation;
+$t_a\ge t_{\min}$ and $1-u\le e^{-u}$ give the middle step; and
+$\sum_a\sin^{2}(\pi a\theta)=\tfrac12\bigl(b-\operatorname{Re}S_B(\theta)\bigr)$ is the
+double-angle formula summed.
+\end{proof}
+
+\begin{remark}[why the bound is additive, and a bound that is not available]\label{rem:noKappa}
+It is tempting to transfer multiplicatively, as $|\widetilde G_B(\theta)|\le|G_B(\theta)|^{\kappa}$
+with $G_B$ the untilted product, since that would carry every exponent of paper~2 across at
+once. \textbf{No such $\kappa>0$ exists.} At any $\theta$ with $a\theta\in\tfrac12+\mathbb Z$ for
+some $a\in B$ the untilted factor $\cos(\pi a\theta)$ vanishes, so the right-hand side is $0$,
+while the tilted factor equals $\sqrt{1-t_a}>0$. Equivalently
+$\log(1-ty)/\log(1-y)\to0$ as $y\to1$. The underlying inequality
+$1-ty\le(1-y)^{t}$ is false for every $t\in(0,1)$ --- $s\mapsto(1-y)^{s}$ is convex and
+therefore lies \emph{below} its chord $1-sy$, with deficit exactly $-(1-t)$ at $y=1$.
+Lemma~\ref{lem:kappa} avoids the issue by never dividing by a quantity that vanishes.
+\STATUS{refuted numerically on a $40\,575$-point grid and structurally; \texttt{kappa\_r088}}
+\end{remark}
+
+\begin{lemma}[the minor-arc input]\label{lem:eta}
+\STATUS{proof skeleton; parts (a) and (c) are quotations, part (b) needs writing}
+Let $A=P_k$ and $N=a_k$. Then
+\[
+  \operatorname{Re}S_A(\theta)\;\le\;\Bigl(\tfrac12+o(1)\Bigr)b
+  \qquad\text{uniformly for }\tfrac1{2N}\le\theta\le1-\tfrac1{2N}.
+\]
+\begin{enumerate}
+\item[(a)] \emph{$q\in\{1,2\}$.} Near $\theta\equiv0$ and $\theta\equiv\tfrac12$ partial summation
+  against the prime number theorem gives $|S_A(\theta)|\le Cb/(N\|\theta-a/q\|)\le b/2$ once
+  $\|\theta-a/q\|\ge1/(2N)$; the excluded interval around $0$ is the principal arc, and around
+  $\tfrac12$ one has $\operatorname{Re}S_A\approx-b$, the helpful sign. Elementary; no
+  Siegel--Walfisz.
+\item[(b)] \emph{$3\le q\le(\log N)^{A_0}$.} Splitting into residue classes and applying
+  Siegel--Walfisz, $S_A(a/q+\beta)=\bigl(\mu(q)/\varphi(q)\bigr)W(\beta)+O(\cdot)$ with
+  $|W|\le b$, whence $\operatorname{Re}S_A/b\le|\mu(q)|/\varphi(q)\le\tfrac12$. Same toolset as
+  paper~2's small-$q$ tier. \TODO{write out; the error term is paper 2's $C_1$, the one
+  ineffective constant, and it enters here in the same way and nowhere else.}
+\item[(c)] \emph{$q>(\log N)^{A_0}$.} This is the case $n=1$ of Step 2 of
+  \textup{prop:deepminor} in paper~2, which gives
+  $|S_A(\theta)|\ll N(\log N)^{3-A_0/2}+N^{4/5}(\log N)^{3}$, i.e.\
+  $\operatorname{Re}S_A/b\ll(\log N)^{4-A_0/2}=o(1)$ for $A_0>8$.
+  \STATUS{quoted from paper 2, verbatim}
+\end{enumerate}
+\end{lemma}
+
+\begin{remark}[the principal arc, and that the two regimes overlap]\label{rem:principal}
+Inside $|\theta|<1/(2N)$ Lemma~\ref{lem:eta} says nothing, and it does not have to: there
+$|a\theta|\le\tfrac12$ for every $a\in A$, so $\sin^{2}(\pi a\theta)\ge4a^{2}\theta^{2}$ and
+Lemma~\ref{lem:kappa} gives the quadratic bound
+$|\widetilde G_A(\theta)|\le\exp(-4t_{\min}V\theta^{2})$ directly. This is already
+$\le e^{-Cb}$ for $|\theta|\ge\theta_1:=\sqrt{Cb/(4t_{\min}V)}$, and
+\textbf{$\theta_1<1/(2N)$}: with $C=0.01$ the measured $\theta_1N$ is $0.18$--$0.42$ across the
+three profiles at $x=0.10$ and $x=0.30$. The two regimes therefore overlap, with the crossover
+at $\theta=1/(2N)$ --- which is also, and not by accident, the largest $\theta$ at which the
+quadratic bound is valid at all. What remains, $|\theta|\le\theta_1$, is the principal arc,
+where P3 supplies the main term rather than a bound.
+\STATUS{experimentally confirmed; \texttt{gap\_r090}}
+\TODO{fable: the bookkeeping of the constant $C$ against P3's local limit theorem is the one
+place this could still pinch. $\theta_1\asymp\sqrt{b/V}$ is $\sqrt b$ times the natural LCLT
+width $V^{-1/2}$, which is fine because the integrand is already $e^{-Cb}$ at the edge, but the
+error term should be written out rather than asserted.}
+\end{remark}
+
+\begin{remark}[what part (c) does \emph{not} need]\label{rem:nocover}
+Paper~2 must control every harmonic $n\theta$ with $n\le N_0$, and pays for it with a covering
+lemma and the parameter $Q_2=(\log N)^{A_0+A_0'}$. Here only $n=1$ occurs, so the dichotomy in
+Lemma~\ref{lem:eta} is on the single denominator $q_1(\theta)$ and no covering lemma is needed.
+The quotation in (c) is therefore valid on a strictly larger set of $\theta$ than paper~2's
+type~(ii).
+\end{remark}
+
+\begin{remark}[the same $q=6$, twice]\label{rem:sixagain}
+Among $q\ge3$ the quantity $\mu(q)/\varphi(q)$ of Lemma~\ref{lem:eta}(b) is maximal at
+$q=6$, where it equals $+\tfrac12$, and \textbf{the maximum is attained there only}: $\varphi(q)=2$
+forces $q\in\{3,4,6\}$, and $\mu(3)=-1$, $\mu(4)=0$, $\mu(6)=+1$. So the worst point of the
+additive estimate is $\theta=1/6$, with $\operatorname{Re}S_A/b\to\tfrac12=\cos60^\circ$.
+
+Paper~2's multiplicative estimate has its worst point at the same $q$: $\sup_qM(q)=M(6)=
+\sqrt3/2=\cos30^\circ$. Both are the statement that the odd primes lie in $\pm1\pmod 6$ and
+nowhere else, read once through $\prod|\cos|$ and once through $\sum\cos$. Measured on the odd
+primes below $10^{7}$, $\operatorname{Re}S_A(1/6)/b=0.499998$ against the predicted $1/2$, and
+$q=6$ is the maximiser over $2\le q\le16$.
+\STATUS{experimentally confirmed; \texttt{eta\_r090}}
+\end{remark}
+
+\begin{remark}[the honest form of the tilt constant]\label{rem:kapparho}
+$t_{\min}=t_{\min}(\rho)$ is positive for every fixed $\rho\in(0,1)$ and bounded below on
+compact subsets, which is all Lemma~\ref{lem:kappa} needs. It is \emph{not} governed by the
+approximation $sN\approx6x$: that relation is the small-$x$ asymptote only, and the measured
+ratio $sN/6x$ is $1.02$--$1.13$ at $x=0.10$ but $1.22$--$1.39$ at $x=0.30$. Measured values of
+$t_{\min}$: $0.91$, $0.89$, $0.91$ at $x=0.10$ and $0.36$, $0.28$, $0.34$ at $x=0.30$ for the
+odd numbers, squares and primes.
+\STATUS{experimentally confirmed; \texttt{tilt\_r088}, \texttt{kappa\_r088}}
+\end{remark}
+
+\noindent
+With Lemmas~\ref{lem:kappa} and~\ref{lem:eta} the tilted generating function decays like
+$\exp(-t_{\min}(1-\eta)b/4)$ off the principal arc --- exponentially in $b$, which is what P5
+quotes. The tilted analogue of the $M(q)$ spectrum is lost, and is not needed: the rate enters
+Theorem~\ref{thm:transfer} only through $E_k=o(1)$.
 
 \section{Universality of the rate function}\label{sec:universality}
 
