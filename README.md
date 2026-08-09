@@ -74,3 +74,12 @@ deleted.
 Experiment scripts and logs written before round 082 use two-digit round numbers
 (`e4d_r80.py`). They are referenced by name from the archived reports, so renaming them would
 break the trail. **The three-digit rule applies to everything created from round 082 onward.**
+
+## Pre-commit check
+
+```
+python3 tools/check.py
+```
+
+Mechanised failure-ledger entries (F19/F20/F21/F40) plus the naming convention. Exit 1 on
+failure. Add a check here whenever a ledger entry turns out to be mechanically testable.

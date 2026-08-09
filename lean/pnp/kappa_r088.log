@@ -1,0 +1,33 @@
+/sessions/friendly-laughing-cerf/mnt/study/lean/pnp/kappa_r088.py:43: RuntimeWarning: overflow encountered in exp
+  while (a / (1.0 + np.exp(hi * a))).sum() > tgt:
+/sessions/friendly-laughing-cerf/mnt/study/lean/pnp/kappa_r088.py:49: RuntimeWarning: overflow encountered in exp
+  if (a / (1.0 + np.exp(mid * a))).sum() > tgt:
+==========================================================================
+(A) is  1 - t*y <= (1-y)^t  true?   [min over y of RHS-LHS; <0 means FALSE]
+==========================================================================
+     t    min[(1-y)^t-(1-ty)]     at y    min[(1-y)^.18-(1-ty)]     at y
+  0.18              -0.820000    1.000                -0.820000    1.000
+  0.30              -0.700000    1.000                -0.700000    1.000
+  0.50              -0.500000    1.000                -0.500000    1.000
+  0.70              -0.300000    1.000                -0.300000    1.000
+  0.90              -0.100000    1.000                -0.100000    1.000
+  1.00               0.000000    0.000                 0.000000    0.000
+
+==========================================================================
+(C) pointwise product test on a minor-arc theta grid
+==========================================================================
+     ens     k   rho          s   kappa     s*N       viol/tot  max(logG~-k logG)
+    odds   200  0.40  1.528e-03  0.9126   0.610  40160/40575            62598.883
+    odds   200  0.20  5.493e-03  0.3616   2.192    222/40575            24771.438
+ squares   150  0.40  3.006e-05  0.8938   0.676  35947/40575            22922.684
+ squares   150  0.20  1.113e-04  0.2792   2.505     31/40575             7093.187
+  primes   200  0.40  5.093e-04  0.9081   0.626  40298/40575            62258.945
+  primes   200  0.20  1.843e-03  0.3407   2.265     14/40575            23304.574
+
+(D) additive repair  2log|G~| <= -t_min*sum sin^2 : min slack over grid
+       odds rho=0.40  min slack = 0.005715   (OK)
+       odds rho=0.20  min slack = 0.030642   (OK)
+    squares rho=0.40  min slack = 10.895225   (OK)
+    squares rho=0.20  min slack = 21.252811   (OK)
+     primes rho=0.40  min slack = 0.059751   (OK)
+     primes rho=0.20  min slack = 0.274432   (OK)

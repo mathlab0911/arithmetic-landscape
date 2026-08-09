@@ -31,9 +31,9 @@
 \newcommand{\TODO}[1]{\textcolor{red}{[\textbf{TODO} #1]}}
 \newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
 
-\title{Rigidity of the gap series off centre, and the transfer function of a
-subset-sum landscape\\[4pt]
-\normalsize\textsf{(working title --- scaffolding, round 86)}}
+\title{The transfer function of subset-sum landscapes:\\
+rigidity of the gap series off centre\\[4pt]
+\normalsize\textsf{(working title --- scaffolding, round 88)}}
 \author{Kentaro Amauchi\thanks{Independent researcher.}}
 \date{\today}
 
@@ -100,6 +100,27 @@ a $15$--$18\%$ drift in the measured coefficient into $0.03\%$, and it is the re
 draft of this programme reported a spurious non-integer exponent.} This is not a cosmetic
 choice: every statement below is false at the stated precision if $(T/2-n)/V$ is substituted
 for $\lambda$.
+\end{remark}
+
+\begin{definition}[the tilt]\label{def:tilt}
+$P_s$ is the product measure on subsets under which $a_i$ is present with probability
+$p_{a}=(1+e^{sa})^{-1}$, and $s=s(n)>0$ is chosen so that $\sum_a a\,p_a=n$; thus $P_s$ is the
+exponential tilt of the uniform measure whose mean sits at the target.
+\end{definition}
+
+\begin{remark}[the tilt and the slope agree to first order]\label{rem:tiltslope}
+$s$ and $\lambda$ are the same quantity to leading order but not exactly: $s$ makes the
+tilted \emph{mean} equal $n$, whereas $\lambda$ is the slope of $\log r_A$ \emph{at} $n$, and
+the two differ by the mean--mode gap. Measured on three profiles,
+\[
+   \frac{s(n)}{\lambda(n)}\;=\;1+\frac{c_A}{k}+O(k^{-2}),
+   \qquad c_A\approx1.85\ (\text{odds}),\ 2.03\ (\text{primes}),\ 2.87\ (\text{squares}),
+\]
+stable in $x$ and clean in $k$ over $k=100,\dots,220$.
+\STATUS{experimentally confirmed; \texttt{tilt\_r088}}
+The statements below are formulated in $\lambda$, and \emph{not} in $s$: substituting $s$
+multiplies the residual of Table~\ref{tab:one} by three, exactly as the $\lambda^{2}$ leading
+behaviour of $\Phi$ predicts. \STATUS{experimentally confirmed; \texttt{sres\_r088}}
 \end{remark}
 
 \section{Rigidity}\label{sec:rigid}
@@ -196,6 +217,29 @@ the one the theorem is about, because $\Phi(0)=\Gamma$ is an identity and the fi
 $[\lm/\deg]_{n=T/2}-\Gamma$ is a separate quantity of size $10^{-6}$.
 \TODO{keep this remark: an earlier draft of the programme reported ``agreement to five or six
 significant figures'' for a model that was $12\%$ wrong on the signal.}
+\end{remark}
+
+\begin{remark}[the residual obeys a $1/k$ law]\label{rem:onek}
+Table~\ref{tab:one} is one column of a $k$-scan. Writing $R_A(k)$ for the residual in the
+sense of the caption, the measurement over $k=60,\dots,220$ gives
+\[
+   k\,R_A(k)\;\longrightarrow\;
+   \begin{cases}
+     1.85\% & \text{odds } (k=60,100,140,180,220:\ 2.29,2.00,1.91,1.87,1.85),\\
+     2.01\% & \text{primes } (k=100,\dots,220:\ 2.38,2.06,2.03,2.01),\\
+     2.82\% & \text{squares } (k=130,\dots,190:\ 3.78,2.85,2.83,2.82).
+   \end{cases}
+\]
+Two things follow. First, the residual is $O(1/k)$ and therefore vanishes, which is the form
+Theorem~\ref{thm:transfer} asserts; the table's $1\%$ is a finite-$k$ number and not a floor.
+Second, the squares row is the loosest of the three because $c_A$ is larger, not because the
+decay is different: squares obey the same law with a constant $1.52$ times that of the odd
+numbers. The constants $c_A$ coincide numerically with those of
+Remark~\ref{rem:tiltslope} --- the same mean--mode gap seen twice --- but substituting $s$ for
+$\lambda$ does not remove the residual, so the coincidence is a shared order of magnitude and
+not a shared cause. \STATUS{experimentally confirmed; \texttt{tilt\_r088}, \texttt{sres\_r088}}
+\TODO{fable: is $c_A$ the second Edgeworth coefficient? The odd orders cancel by the
+reflection symmetry, so the first survivor is of exactly this size.}
 \end{remark}
 
 \section{Universality of the rate function}\label{sec:universality}
