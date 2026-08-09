@@ -1,0 +1,12 @@
+﻿CubicDiscriminant.lean:73: theorem C_mul_prod_X_sub_C_eq [CommRing S] {w x y z : S} :
+CubicDiscriminant.lean:79: theorem prod_X_sub_C_eq [CommRing S] {x y z : S} :
+CubicDiscriminant.lean:82: rw [← one_mul <| X - C x, ← C_1, C_mul_prod_X_sub_C_eq, one_mul, one_mul, one_mul]
+CubicDiscriminant.lean:438: · rw [eq_prod_three_roots ha h3, C_mul_prod_X_sub_C_eq]
+Finset.lean:274: theorem prod_one_sub_ordered [LinearOrder ι] (s : Finset ι) (f : ι → R) :
+BigOperators.lean:328: lemma natDegree_multiset_prod_X_sub_C_eq_card (s : Multiset R) :
+BigOperators.lean:334: @[simp] lemma natDegree_finsetProd_X_sub_C_eq_card {α} (s : Finset α) (f : α → R) :
+BigOperators.lean:337: natDegree_multiset_prod_X_sub_C_eq_card, Multiset.card_map, Finset.card]
+BigOperators.lean:340: alias natDegree_finset_prod_X_sub_C_eq_card := natDegree_finsetProd_X_sub_C_eq_card
+Roots.lean:835: natDegree_multiset_prod_X_sub_C_eq_card]
+Roots.lean:846: ((natDegree_multiset_prod_X_sub_C_eq_card _).trans hroots).ge).symm
+Splits.lean:369: · conv_lhs => rw [hf.eq_prod_roots, natDegree_C_mul hf0, natDegree_multiset_prod_X_sub_C_eq_card]
