@@ -1,5 +1,5 @@
 % paper4.tex --- Arithmetic Landscape Theory, paper 4.
-% Scaffolding (round 100). Section 2 is written; everything else is TODO-tagged.
+% Draft (round 107). Sections 1-5 written; section 6 and polishing remain.
 % Every statement carries its status explicitly.
 \documentclass[11pt,a4paper]{article}
 \usepackage[T1]{fontenc}
@@ -31,7 +31,7 @@
 
 \title{Subset-sum landscapes under deformed and random measures:\\
 the biased invariant $\Gamma^{(q)}$ and unconditional rigidity\\[4pt]
-\normalsize\textsf{(working title --- scaffolding, round 100)}}
+\normalsize\textsf{(working title --- draft, round 107)}}
 \author{Kentaro Amauchi\thanks{Independent researcher.}}
 \date{\today}
 
@@ -39,25 +39,73 @@ the biased invariant $\Gamma^{(q)}$ and unconditional rigidity\\[4pt]
 \maketitle
 
 \begin{abstract}
-\TODO{written last.} Papers 1--3 fixed both the sequence and the measure. This paper moves
-the measure along two axes --- bias the coin, and randomise the sequence --- and collects the
-two open questions recorded in paper~3.
+Papers 1--3 of this series fixed both the sequence and the measure on its subsets. Here we
+move each. Replacing the uniform measure by a Bernoulli$(q)$ product measure deforms the gap
+series into an explicit family $\Gamma^{(q)}$, and we prove that the fair coin minimises it
+for every sequence, with equality only at $q=\tfrac12$; the argument is termwise and is
+machine-checked in Lean~4. We derive the corresponding transfer function $\Phi^{(q)}$ and
+show that the bias splits paper 3's symmetric pair of strata in the ratio $q:(1-q)$, so that
+the biased landscape responds to a shift of target at first order; the resulting slope is a
+point prediction with no free parameter, and it is confirmed against the natural alternative
+to within $0.4\%$. Replacing the primes by a random odd sequence, we prove that the extremal
+modulus of the minor arcs moves from $6$ to $4$ and the geometric rate improves from
+$\sqrt3/2$ to $1/\sqrt2$, so the primes are the harder case; the remaining half of that
+statement is a second-moment argument that carries no ineffective constant. Two questions
+inherited from paper 3 are also settled or sharpened. Every claim is tagged with its status,
+and the numerical work is reproducible from logged scripts.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
-\TODO{full introduction.} The two deformation axes, and why each is worth taking:
-\begin{itemize}
-\item \emph{Bias.} The classification theorem of paper~1 is a statement about which elements
-      lie on which side of a target; it says nothing about how configurations are weighted.
-      So the whole combinatorial layer survives verbatim when the uniform measure is replaced
-      by the Bernoulli$(q)$ product measure, and the gap series deforms into an explicit
-      one-parameter family. \S\ref{sec:biased} does this, and the answer has a shape worth
-      stating in the introduction: \textbf{the fair coin gives the least rugged landscape}.
-\item \emph{Randomness.} For a random odd sequence the minor-arc input that cost paper~2
-      fifty rounds is replaced by a second-moment bound. \S\ref{sec:random} is therefore
-      expected to carry \emph{no ineffective constant at all} --- the first such statement in
-      the series. \TODO{write; see \S\ref{sec:random}.}
-\end{itemize}
+
+Papers 1--3 fixed two things at once: the sequence $A$, and the measure on its subsets. Every
+statement of the trilogy is about a specific $A$ under the uniform measure. This paper moves
+each of them, one at a time, and the two moves turn out to be worth making for different
+reasons.
+
+\paragraph{Bias.} The classification theorem of paper~1 says which elements lie on which side
+of a target. It says nothing about how configurations are weighted, so the entire
+combinatorial layer survives verbatim when the uniform measure is replaced by the
+Bernoulli$(q)$ product measure, and the gap series deforms into an explicit one-parameter
+family $\Gamma^{(q)}$ (\S\ref{sec:biased}). The answer has a shape worth putting in the
+introduction: \textbf{the fair coin gives the least rugged landscape}, for every sequence, by
+a termwise convexity argument that is machine-checked (Theorem~\ref{thm:fair},
+Remark~\ref{rem:lean22}). The transfer function deforms too, and here the deformation is not
+cosmetic: paper 3's $\cosh$ splits into two unequal exponentials with offsets in the ratio
+$q:(1-q)$, so the biased landscape responds to a shift of target at \emph{first} order rather
+than second (\S\ref{sec:phiq}). Rigidity off the fair coin is a tilt, not a plateau.
+
+\paragraph{Randomness.} For a random odd sequence the minor-arc input that cost paper~2 fifty
+rounds is replaced by a second-moment bound, so \S\ref{sec:random} is expected to carry
+\emph{no ineffective constant at all} --- the first such statement in the series. What we did
+not expect is that the random case is also \emph{easier}: the extremal modulus moves from $6$
+to $4$ and the geometric rate improves from $\sqrt3/2$ to $1/\sqrt2$
+(Theorem~\ref{thm:modfour}). The reason is a one-line arithmetic fact --- a set of primes
+contains at most one element $\equiv3\pmod6$, a random odd set contains a third of them ---
+and its consequence is that paper 2's $\sqrt3/2$ is a property of the primes, not a limitation
+of the method. \emph{The primes are the hard case.}
+
+\paragraph{A methodological remark that this paper earned twice.} Deformations are not only a
+way to generalise; they are a way to \emph{see}. \textbf{A deformation that breaks a symmetry
+makes measurable everything the symmetry was hiding.} Constructing $\Gamma^{(q)}$ and
+$\Phi^{(q)}$ audited paper 3 for free, twice. First, the $c_d$ fork: asking how the omitted
+factor behaves as $k$ grows, rather than how large it is at one $k$, closed a question paper 3
+had left open (\S\ref{sec:inherited}). Second, and more sharply, the sign of $\lambda$: paper
+3's $\Phi$ is an \emph{even} function of $\lambda$, so no observable in that paper depends on
+the sign, and a definition that carried the wrong one survived three papers and an external
+referee. Splitting the $\cosh$ made the sign observable in a single measurement. We record the
+principle because it is a design rule, not an anecdote: when a quantity cannot be checked,
+deform the problem until it can.
+
+\paragraph{Verification, and the genre.} Every numbered claim carries a status tag: proved,
+Lean-verified, experimentally confirmed with the range stated, or conjectured. The scripts
+that produce every number in this paper write logs beside themselves and are part of the
+artefact. This is now a recognisable genre --- machine-assisted mathematics shipped with
+formal certificates, of which \emph{Ten advances in mathematics and theoretical computer
+science} \cite{TenProofs} and its accompanying Lean~4 repository are the visible precedent.
+The direction differs: that work attacks named open problems, whereas the present series
+builds a small theory from its definitions upward, so the certificates here anchor
+\emph{definitions and structural lemmas} rather than headline resolutions. The verification
+ethos is the same one, and we take it as read rather than arguing for it.
 
 \section{The biased invariant}\label{sec:biased}
 
@@ -391,11 +439,120 @@ So the random theorem should come out with the geometric rate $1/\sqrt2=0.7071$ 
 rather than the $\sqrt3/2=0.8660$ of papers 1--2: \emph{the primes are the harder case, and
 the modulus-$6$ ripple is a structural feature of the primes that the random model destroys.}
 
-\TODO{fable-5: for random odd $A$ the minor-arc input is a second-moment bound
-$\mathbb{E}|S_A|^{2}=b$ plus Borel--Cantelli on a $\theta$-net --- no Kumchev, no
-Siegel--Walfisz, no Siegel constant. If it lands it is the trilogy's first
-zero-ineffective-constant rigidity theorem. The measurements above are the floor it must
-clear, and they sharpen the brief: the rate to aim for is $1/\sqrt2$, not $\sqrt3/2$.}
+\subsection{The modulus-4 theorem}\label{sec:modfour}
+
+The observation above is not an accident of the ensemble; it is a theorem about residues, and
+it is the exact counterpart of paper~2's modulus-$6$ theorem for a different equidistribution
+class. Paper~2 averages $|\cos|$ over the \emph{reduced} residues, which is the right class
+for the primes. A random odd sequence is equidistributed over the \emph{odd} residues
+instead, so the relevant quantity is a different one.
+
+\begin{definition}\label{def:modd}
+For $q\ge2$ let $R_q=\mathbb{Z}/q$ if $q$ is odd and $R_q=\{j:\ j\text{ odd}\}\subset
+\mathbb{Z}/q$ if $q$ is even --- for $q$ even and $m$ odd, $m\bmod q$ is odd, so $R_q$ is the
+set of residues an odd sequence can occupy. Put
+\[
+   M_{\mathrm{odd}}(q)\;=\;\Bigl(\prod_{j\in R_q}\bigl|\cos(\pi j/q)\bigr|\Bigr)^{1/|R_q|}.
+\]
+For $r$ coprime to $q$ the map $j\mapsto jr$ permutes $R_q$, so $M_{\mathrm{odd}}(q)$ does not
+depend on the numerator of the rational $r/q$.
+\end{definition}
+
+\begin{lemma}[closed form]\label{lem:moddclosed}
+$M_{\mathrm{odd}}(q)=2^{1/q-1}$ for $q$ odd. For $q=2u$ even,
+$M_{\mathrm{odd}}(q)=2^{1/u-1}$ if $u$ is even, and $M_{\mathrm{odd}}(q)=0$ if $u$ is odd.
+\end{lemma}
+
+\begin{proof}
+Write $|\cos(\pi j/q)|=|1+e^{2\pi ij/q}|/2$.
+
+If $q$ is odd, $e^{2\pi ij/q}$ runs over all $q$-th roots of unity as $j$ runs over $R_q$.
+Setting $x=-1$ in $x^{q}-1=\prod_\rho(x-\rho)$ gives $\prod_\rho(-1-\rho)=-2$, and
+$\prod_\rho(-1-\rho)=(-1)^{q}\prod_\rho(1+\rho)=-\prod_\rho(1+\rho)$ because $q$ is odd, so
+$\prod_\rho(1+\rho)=2$ and $\prod_{j}|\cos(\pi j/q)|=2^{-q}\cdot2=2^{1-q}$.
+
+If $q=2u$ and $j$ is odd, $e^{2\pi ij/q}=e^{\pi ij/u}$ runs over the $u$ roots of $x^{u}+1$.
+Setting $x=-1$ in $x^{u}+1=\prod_\rho(x-\rho)$ gives $(-1)^{u}+1=(-1)^{u}\prod_\rho(1+\rho)$,
+so $\prod_\rho(1+\rho)=1+(-1)^{u}$, which is $2$ for $u$ even and $0$ for $u$ odd. Hence
+$\prod_j|\cos|=2^{-u}\cdot2=2^{1-u}$ or $0$. Taking $|R_q|$-th roots gives the statement.
+\end{proof}
+
+\begin{theorem}[the modulus-4 theorem]\label{thm:modfour}
+$\displaystyle\max_{q\ge2}M_{\mathrm{odd}}(q)=\frac1{\sqrt2}$, attained at $q=4$ and nowhere
+else.
+\end{theorem}
+
+\begin{proof}
+$v\mapsto2^{1/v-1}$ is strictly decreasing. For $q$ odd, $q\ge3$, Lemma~\ref{lem:moddclosed}
+gives $M_{\mathrm{odd}}(q)=2^{1/q-1}\le2^{-2/3}$. For $q\equiv2\pmod4$ it gives $0$. For
+$q\equiv0\pmod4$, write $q=2u$ with $u$ even, $u\ge2$; then
+$M_{\mathrm{odd}}(q)=2^{1/u-1}\le2^{-1/2}$ with equality exactly when $u=2$, i.e.\ $q=4$. And
+$2^{-2/3}<2^{-1/2}$.
+\end{proof}
+
+Verified against the product for all $q\le200$, worst discrepancy $4.4\cdot10^{-16}$.
+\STATUS{proved; and checked numerically, \texttt{mq4\_r107}}
+
+\begin{remark}[the two classes, side by side]\label{rem:twoclasses}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+ & class of residues & extremal $q$ & rate per element\\
+\midrule
+primes (paper~2) & reduced & $6$ & $\sqrt3/2=0.8660$\\
+random odd $A$ (here) & odd & $4$ & $1/\sqrt2=0.7071$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+The two disagree exactly at $q\equiv2\pmod4$: $M(6)=\sqrt3/2$ but
+$M_{\mathrm{odd}}(6)=0$, because $j=3$ is an odd residue mod $6$ and $\cos(\pi/2)=0$. A set
+of primes contains at most one element $\equiv3\pmod 6$, and it leaves $B_d$ at $d\ge2$; a
+random odd sequence contains a positive proportion of them at every $d$. \emph{So the primes
+are the harder case, by a factor $\sqrt{3/2}=1.2247$ in the geometric rate}, and paper~2's
+$\sqrt3/2$ is a feature of the primes rather than a limitation of the method.
+\end{remark}
+
+\subsection{The rate, and what is still missing}
+
+\begin{proposition}[minor-arc rate for random odd sequences]\label{prop:rate}
+Let $A$ be drawn from the Cram\'er model above and let
+$F_A(\theta)=\prod_{a\in A}|\cos(\pi a\theta)|$. Then almost surely
+\[
+   \lim_{b\to\infty}\ \max_{\theta\ \mathrm{minor}}\ F_A(\theta)^{1/b}\;=\;\frac1{\sqrt2},
+\]
+the maximum being attained in a shrinking neighbourhood of $\theta=\tfrac14$.
+\end{proposition}
+
+The arithmetic half is Theorem~\ref{thm:modfour} and is proved. The probabilistic half ---
+concentration of $b^{-1}\sum_{a\in A}\log|\cos(\pi a\theta)|$ about its mean, uniformly over a
+$\theta$-net, then Borel--Cantelli --- is a second-moment argument and needs no
+Siegel--Walfisz, no Kumchev and no ineffective constant, which is the point of the section.
+\STATUS{proof skeleton; the arithmetic half proved, the concentration measured}
+\TODO{write the concentration and the net. The unbounded-below tail of $\log|\cos|$ is
+harmless because only a \emph{lower} bound on the sum is needed; truncate at $M$ and take
+$M\to\infty$ after the net.}
+
+Measured, at $\theta=r/q$ for $q\le12$ and eight instances at $b\approx190$: the mean of
+$b^{-1}\sum_a-\log|\cos(\pi a/q)|$ agrees with $-\log M_{\mathrm{odd}}(q)$ within the
+$O(b^{-1/2})$ fluctuation at every $q$, and at $q=4$ it is $0.346574$ with standard deviation
+$0.000000$ --- deterministic, as Definition~\ref{def:modd} says it must be.
+\STATUS{experimentally confirmed; \texttt{mq4\_r107}}
+
+\begin{remark}[$\theta=\tfrac14$ is the limit of the maxima, not a maximum]\label{rem:notmax}
+A first scan of $F_A(\theta)^{1/b}$ over a fine net asked whether anything exceeds $1/\sqrt2$,
+and found that something does. That is not a counterexample and the reason is worth stating,
+because it fixes the form of Proposition~\ref{prop:rate}. Moving off $\tfrac14$ by $\delta$
+changes $\log F_A^{1/b}$ by $\delta\,b^{-1}\sum_a(\pm\pi a)+O(\delta^{2})$, and the signs
+depend on $a\bmod 4$, so the first-order term is a random walk of size $b^{-1}\sqrt{S_2}$.
+Optimising $\delta$ gives an excess of $O(1/b)$ in the exponent --- a \emph{bounded
+multiplicative factor} on $F_A$, not a geometric one. Measured over
+$b=111,190,310,542$: $\max_\theta F_A^{1/b}-1/\sqrt2$ is
+$9.0\cdot10^{-4}$, $1.8\cdot10^{-3}$, $1.1\cdot10^{-4}$, $1.2\cdot10^{-3}$, and
+$b\log(\sqrt2\max_\theta F_A^{1/b})$ stays in $[0.05,0.89]$ --- $O(1)$, as derived. The
+argmax sits at $\theta=0.24996,\dots,0.25001$.
+\STATUS{experimentally confirmed; \texttt{mq4\_r107}}
+\end{remark}
 
 \section{Two questions inherited from paper 3}\label{sec:inherited}
 \emph{(i) The $c_d$ fold-in is settled, and it goes paper 3's way.} The share of the
@@ -438,6 +595,9 @@ this programme started. Outlook only; no claims.}
 \end{itemize}
 
 \begin{thebibliography}{9}
+\bibitem{TenProofs} OpenAI, \emph{Ten advances in mathematics and theoretical computer
+science}, 2026, with Lean~4 certificates at \texttt{github.com/openai/ten-proofs}.
+Cited here only as a precedent for the genre; no mathematical result of that work is used.
 \bibitem{P1} K.~Amauchi, \emph{The gap series of an integer sequence}. Manuscript, 2026.
 \bibitem{P2} K.~Amauchi, \emph{Asymptotic flatness of subset-sum landscapes of primes}.
 Manuscript, 2026.

@@ -84,3 +84,11 @@ rule    : a test must be checked for SENSITIVITY to the alternative, not only fo
             it is not small compared with the effect, difference the effect against itself
             (central difference) instead of against the baseline.  The information needed to
             predict this failure was already in my own earlier log.
+
+## F54 - keep the two verification axes apart (r107, mine)
+  observed: an independent proof-checker (Comparator: lean4export + nanoda_bin) was described
+            as mechanising F52.  It does not: it re-checks the proof TERM with a second kernel.
+  rule    : "is the proof valid" and "is the statement the one I meant" are different
+            questions with different tools, and the second is the likelier failure.  A tool
+            that answers one must never be booked as answering the other.  An independent
+            kernel cannot tell you a theorem is not vacuously true.
