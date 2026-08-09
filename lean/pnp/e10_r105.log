@@ -1,0 +1,183 @@
+================================================================================================================
+(0) F34: the numpy biased DP against the audited r098 implementation
+================================================================================================================
+  odds k=30, q=0.3: deg rel diff = 0.00e+00, lm rel diff = 0.00e+00
+  odds k=30, q=0.5: deg rel diff = 0.00e+00, lm rel diff = 0.00e+00
+
+================================================================================================================
+(1) FREE CHECKS on Phi^{(q)} -- fable's algebra against itself, before any measurement
+================================================================================================================
+     odds k=60 q=0.3:  |Phi(0)-Gamma^(q)| = 0.00e+00   |Phi^(q)(l) - Phi^(1-q)(-l)| = 0.00e+00
+     odds k=60 q=0.5:  |Phi(0)-Gamma^(q)| = 0.00e+00   |Phi^(q)(l) - Phi^(1-q)(-l)| = 0.00e+00  |Phi^(1/2) - paper3 Phi| = 0.00e+00
+   primes k=60 q=0.3:  |Phi(0)-Gamma^(q)| = 0.00e+00   |Phi^(q)(l) - Phi^(1-q)(-l)| = 0.00e+00
+   primes k=60 q=0.5:  |Phi(0)-Gamma^(q)| = 0.00e+00   |Phi^(q)(l) - Phi^(1-q)(-l)| = 0.00e+00  |Phi^(1/2) - paper3 Phi| = 0.00e+00
+
+================================================================================================================
+(2) ★ THE DECISIVE TEST, CENTRED.  A first pass that compared lm_q/deg_q directly with
+    Gamma^{(q)} failed, and the failure was mine, not the spec's: E5 already showed the
+    point prediction carries an O(1e-3) offset at the biased centre, which swamps a
+    linear term of the same size.  The estimator must kill constants, so use a CENTRAL
+    difference about n_q = round(qT):
+        Lhat(h) = [ R(n+) - R(n-) ] / [ lambda(n+) - lambda(n-) ],  n+- = round((q +- hq)T)
+    and compare with Phi^{(q)'}(0).  No fitting; h -> 0 is the only extrapolation.
+================================================================================================================
+
+  odds, k=80, q=0.3:  Gamma^(q) = 3.761905, split = +19.59184, half = +28.63406, separation = 31.6%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    2.5723e-04    -4.9711e-03     -19.32567       0.9864       0.6749
+        0.02    5.1450e-04    -9.9434e-03     -19.32646       0.9865       0.6749
+        0.03    7.8541e-04    -1.5180e-02     -19.32786       0.9865       0.6750
+        0.05    1.3006e-03    -2.5144e-02     -19.33214       0.9867       0.6751
+
+  odds, k=80, q=0.4:  Gamma^(q) = 3.166667, split = +7.08333, half = +8.84259, separation = 19.9%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    3.0980e-04    -2.1810e-03      -7.03992       0.9939       0.7961
+        0.02    6.0775e-04    -4.2786e-03      -7.04012       0.9939       0.7962
+        0.03    9.1774e-04    -6.4613e-03      -7.04048       0.9939       0.7962
+        0.05    1.5264e-03    -1.0748e-02      -7.04159       0.9941       0.7963
+
+  odds, k=80, q=0.5:  Gamma^(q) = 3.000000, split = +0.00000, half = +0.00000, separation = 0.0%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    3.6665e-04     0.0000e+00   below floor
+        0.02    7.3339e-04    -4.4409e-16   below floor
+        0.03    1.1003e-03    -4.4409e-16   below floor
+        0.05    1.8352e-03    -4.4409e-16   below floor
+
+  odds, k=80, q=0.6:  Gamma^(q) = 3.166667, split = -7.08333, half = -8.84259, separation = 19.9%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    4.5281e-04    +3.1878e-03      +7.04000       0.9939       0.7961
+        0.02    9.1774e-04    +6.4613e-03      +7.04048       0.9939       0.7962
+        0.03    1.3712e-03    +9.6547e-03      +7.04126       0.9941       0.7963
+        0.05    2.2920e-03    +1.6144e-02      +7.04379       0.9944       0.7966
+
+  primes, k=80, q=0.3:  Gamma^(q) = 6.620106, split = +56.65019, half = +83.71739, separation = 32.3%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    8.5419e-05    -5.5545e-03     -65.02583       1.1478       0.7767
+        0.02    2.2214e-04    -1.1617e-02     -52.29511       0.9231       0.6247
+        0.03    2.8990e-04    -1.6728e-02     -57.70326       1.0186       0.6893
+        0.05    5.0065e-04    -2.8234e-02     -56.39525       0.9955       0.6736
+
+  primes, k=80, q=0.4:  Gamma^(q) = 5.619598, split = +18.89455, half = +23.67737, separation = 20.2%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    1.2087e-04    -2.2940e-03     -18.97873       1.0045       0.8016
+        0.02    2.4363e-04    -4.5818e-03     -18.80647       0.9953       0.7943
+        0.03    3.6179e-04    -6.8493e-03     -18.93155       1.0020       0.7996
+        0.05    6.0138e-04    -1.1342e-02     -18.86036       0.9982       0.7966
+
+  primes, k=80, q=0.5:  Gamma^(q) = 5.349288, split = +0.00000, half = +0.00000, separation = 0.0%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    1.4518e-04     8.8818e-16   below floor
+        0.02    2.8849e-04     0.0000e+00   below floor
+        0.03    4.3378e-04     0.0000e+00   below floor
+        0.05    7.2287e-04     0.0000e+00   below floor
+
+  primes, k=80, q=0.6:  Gamma^(q) = 5.619598, split = -18.89455, half = -23.67737, separation = 20.2%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    1.8052e-04    +3.4154e-03     +18.91979       1.0013       0.7991
+        0.02    3.6179e-04    +6.8493e-03     +18.93155       1.0020       0.7996
+        0.03    5.4355e-04    +1.0231e-02     +18.82244       0.9962       0.7950
+        0.05    9.0104e-04    +1.6942e-02     +18.80245       0.9951       0.7941
+
+  odds, k=120, q=0.3:  Gamma^(q) = 3.761905, split = +19.59184, half = +28.63406, separation = 31.6%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    1.7423e-04    -3.3947e-03     -19.48441       0.9945       0.6805
+        0.02    3.4848e-04    -6.7902e-03     -19.48493       0.9945       0.6805
+        0.03    5.2686e-04    -1.0266e-02     -19.48583       0.9946       0.6805
+        0.05    8.7584e-04    -1.7069e-02     -19.48865       0.9947       0.6806
+
+  odds, k=120, q=0.4:  Gamma^(q) = 3.166667, split = +7.08333, half = +8.84259, separation = 19.9%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    2.0643e-04    -1.4587e-03      -7.06620       0.9976       0.7991
+        0.02    4.0935e-04    -2.8926e-03      -7.06633       0.9976       0.7991
+        0.03    6.1590e-04    -4.3523e-03      -7.06655       0.9976       0.7991
+        0.05    1.0259e-03    -7.2501e-03      -7.06726       0.9977       0.7992
+
+  odds, k=120, q=0.5:  Gamma^(q) = 3.000000, split = +0.00000, half = +0.00000, separation = 0.0%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    2.4628e-04     0.0000e+00   below floor
+        0.02    4.9263e-04     0.0000e+00   below floor
+        0.03    7.3911e-04     0.0000e+00   below floor
+        0.05    1.2327e-03     0.0000e+00   below floor
+
+  odds, k=120, q=0.6:  Gamma^(q) = 3.166667, split = -7.08333, half = -8.84259, separation = 19.9%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    3.0610e-04    +2.1630e-03      +7.06625       0.9976       0.7991
+        0.02    6.1590e-04    +4.3523e-03      +7.06655       0.9976       0.7991
+        0.03    9.2242e-04    +6.5188e-03      +7.06705       0.9977       0.7992
+        0.05    1.5404e-03    +1.0889e-02      +7.06865       0.9979       0.7994
+
+  primes, k=120, q=0.3:  Gamma^(q) = 6.620106, split = +56.65019, half = +83.71739, separation = 32.3%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    6.3561e-05    -3.5938e-03     -56.54141       0.9981       0.6754
+        0.02    1.2788e-04    -7.2065e-03     -56.35346       0.9948       0.6731
+        0.03    1.9124e-04    -1.0803e-02     -56.49027       0.9972       0.6748
+        0.05    3.1888e-04    -1.8006e-02     -56.46586       0.9967       0.6745
+
+  primes, k=120, q=0.4:  Gamma^(q) = 5.619598, split = +18.89455, half = +23.67737, separation = 20.2%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    7.4745e-05    -1.4099e-03     -18.86291       0.9983       0.7967
+        0.02    1.4948e-04    -2.8197e-03     -18.86385       0.9984       0.7967
+        0.03    2.2429e-04    -4.2309e-03     -18.86391       0.9984       0.7967
+        0.05    3.7399e-04    -7.0556e-03     -18.86561       0.9985       0.7968
+
+  primes, k=120, q=0.5:  Gamma^(q) = 5.349288, split = +0.00000, half = +0.00000, separation = 0.0%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    8.9607e-05     0.0000e+00   below floor
+        0.02    1.7973e-04     0.0000e+00   below floor
+        0.03    2.6941e-04     0.0000e+00   below floor
+        0.05    4.4950e-04     0.0000e+00   below floor
+
+  primes, k=120, q=0.6:  Gamma^(q) = 5.619598, split = -18.89455, half = -23.67737, separation = 20.2%
+           h     d(lambda)           d(R)          Lhat  -Lhat/split   -Lhat/half
+        0.01    1.1224e-04    +2.1173e-03     +18.86355       0.9984       0.7967
+        0.02    2.2429e-04    +4.2309e-03     +18.86391       0.9984       0.7967
+        0.03    3.3667e-04    +6.3515e-03     +18.86547       0.9985       0.7968
+        0.05    5.6171e-04    +1.0598e-02     +18.86793       0.9986       0.7969
+
+================================================================================================================
+(3) VERDICT on the discriminating rows (separation > 5%, h <= 0.03)
+================================================================================================================
+  36 discriminating rows.
+      split (fable): median |Lhat/L - 1| = 0.0041, worst = 0.1478
+      half  (naive): median |Lhat/L - 1| = 0.2038, worst = 0.3753
+  => SPLIT WINS.  The q*sigma_d mean shift is confirmed at first order:
+     spot 1 of the spec survives and Phi^{(q)} may enter paper 4 section 3.
+
+================================================================================================================
+(4) ★ THE SIGN OF LAMBDA -- newly observable, and paper 3 has it backwards
+================================================================================================================
+  Every ratio above needed a MINUS sign to come out near +1.  Under this programme's
+  script convention  lambda = (1/4)log(r(n-2)/r(n+2)),  lambda < 0 below the centre,
+  and the measured response has the opposite sign to Phi^{(q)}'(0).  The convention
+  that matches is
+        lambda(n) = +d/dm log r|_{m=n} = (1/4) log( r(n+2) / r(n-2) ),
+  which is POSITIVE below the centre -- and that is the sign that makes paper 3's
+  rem:tiltslope ratio s/lambda positive, with s > 0 for rho < 1/2.
+  paper 3 def:slope writes lambda = -d/dm log r = (1/4)log(r(n-2)/r(n+2)); the two
+  halves of that line disagree in sign, and rem:tiltslope uses the other one.
+  It has never mattered: Phi is EVEN in lambda, so the sign was unobservable.
+  Splitting the cosh makes it observable.  ERRATUM for paper 3, and paper 4 must state
+  the convention before Phi^{(q)} is written down.
+
+================================================================================================================
+(5) per-stratum asymmetry at lambda != 0 (spec section 4 item 3)
+    over/deg vs (1-q)^{N_d} e^{l d+_d} G_d ;  under/deg vs q^{N_d} e^{-l d-_d} G_d
+================================================================================================================
+
+  odds, k=80, q=0.3, lambda = -9.3438e-05
+      d  N_d      over/deg          pred     ratio |     under/deg          pred     ratio
+      1    1  7.000815e-01  6.999150e-01   1.00024 |  2.999496e-01  3.000477e-01   0.99967
+      2    2  4.901329e-01  4.898535e-01   1.00057 |  8.995318e-02  9.004037e-02   0.99903
+      3    3  3.431532e-01  3.428174e-01   1.00098 |  2.696922e-02  2.702347e-02   0.99799
+      4    4  2.402483e-01  2.399026e-01   1.00144 |  8.082580e-03  8.111512e-03   0.99643
+      5    5  1.681964e-01  1.678738e-01   1.00192 |  2.420970e-03  2.435114e-03   0.99419
+      6    6  1.177442e-01  1.174644e-01   1.00238 |  7.245972e-04  7.311281e-04   0.99107
+
+  primes, k=80, q=0.3, lambda = -5.0457e-05
+      d  N_d      over/deg          pred     ratio |     under/deg          pred     ratio
+      1    0  1.000059e+00  9.999495e-01   1.00011 |  9.999192e-01  1.000050e+00   0.99987
+      2    1  7.000953e-01  6.998976e-01   1.00028 |  2.999899e-01  3.000621e-01   0.99976
+      3    2  4.900565e-01  4.898665e-01   1.00039 |  8.998224e-02  9.003906e-02   0.99937
+      4    3  3.430198e-01  3.428529e-01   1.00049 |  2.698183e-02  2.701976e-02   0.99860
+      5    3  3.430497e-01  3.428356e-01   1.00062 |  2.697871e-02  2.702112e-02   0.99843
+      6    4  2.401838e-01  2.399329e-01   1.00105 |  8.089873e-03  8.109896e-03   0.99753

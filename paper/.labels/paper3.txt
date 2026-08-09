@@ -23,6 +23,7 @@ rem:oneconstant
 rem:onek
 rem:principal
 rem:random
+rem:sign
 rem:signalfraction
 rem:sixagain
 rem:tiltslope

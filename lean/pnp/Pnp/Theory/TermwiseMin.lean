@@ -1,5 +1,5 @@
 /-
-  r103 / E9.  Paper 4, Lemma 2.2 (termwise minimality) and Theorem 2.3 (the fair coin
+  Canon file 10.  Paper 4, Lemma 2.2 (termwise minimality) and Theorem 2.3 (the fair coin
   gives the flattest landscape).
 
   Statement.  For every integer N >= 2 and every q in [0,1],
@@ -114,6 +114,7 @@ theorem two_mul_half_pow (N : ℕ) : 2 * (1 / 2 : ℝ) ^ N = (2 : ℝ) ^ (1 - (N
 
 end Pnp
 
+-- Promoted from Experiments/ to Theory/ at r105, section 2 of paper 4 having stabilised.
 -- Audit trail: no `sorry`, and no axioms beyond Lean's three.
 #print axioms Pnp.termwise_min
 #print axioms Pnp.termwise_min'

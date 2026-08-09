@@ -1,11 +1,15 @@
 cor:oddsclosed
 def:gq
+eq:phiq
 lem:termwise
+prop:tilted
 rem:assign
 rem:lean22
 rem:measurefree
 rem:physics
 sec:biased
+sec:biasedH
+sec:e10
 sec:e5
 sec:e6
 sec:inherited

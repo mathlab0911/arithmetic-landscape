@@ -109,10 +109,22 @@ $V_d=(S_2-s_d)/4=V-s_d/4$.
 \begin{definition}[local logarithmic slope]\label{def:slope}
 $\lambda(n)$ is the logarithmic derivative of the representation count at the target,
 \[
-  \lambda(n)\;=\;-\frac{d}{dm}\log r_A(m)\Big|_{m=n}
-  \;=\;\tfrac14\log\frac{r_A(n-2)}{r_A(n+2)}+O(\cdot).
+  \lambda(n)\;=\;+\frac{d}{dm}\log r_A(m)\Big|_{m=n}
+  \;=\;\tfrac14\log\frac{r_A(n+2)}{r_A(n-2)}+O(\cdot),
 \]
+so $\lambda>0$ below the centre, where $r_A$ is increasing.
 \end{definition}
+
+\begin{remark}[on the sign, and why it took until paper 4 to matter]\label{rem:sign}
+An earlier version of this definition carried the opposite sign, which made it disagree with
+Remark~\ref{rem:whyslope} (where $\lambda\approx(T/2-n)/V>0$ below the centre) and with
+Remark~\ref{rem:tiltslope} (where $s/\lambda\to1$ with $s>0$ below the centre). Nothing in
+this paper changed when the sign was corrected, and nothing could have: $\Phi$ is an
+\emph{even} function of $\lambda$, so the sign of $\lambda$ is not observable anywhere in the
+transfer function. It becomes observable only when the $\cosh$ is split into two unequal
+exponentials, which is what happens under a biased measure; the discrepancy was found there
+and is recorded here. The convention above is the one that makes $\lambda\approx s$.
+\end{remark}
 
 \begin{remark}[why the slope and not the offset]\label{rem:whyslope}
 The Gaussian approximation $\lambda\approx(T/2-n)/V$ is what one writes down first, and it is

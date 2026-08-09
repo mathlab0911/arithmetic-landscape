@@ -9,3 +9,4 @@ import Pnp.Theory.Fiber
 import Pnp.Theory.Sandwich
 import Pnp.Theory.Total
 import Pnp.Theory.Ripple
+import Pnp.Theory.TermwiseMin

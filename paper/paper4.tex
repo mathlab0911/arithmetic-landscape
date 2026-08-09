@@ -117,7 +117,7 @@ bound is proved twice, once from convexity of $x^N$ on $[0,\infty)$ and once fro
 inequality (\Lean{termwise\_min'}), so the two proofs check the \emph{statement} against each
 other and not merely the tactic script. No \texttt{sorry}, and no axioms beyond
 \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
-\STATUS{Lean-verified; \texttt{20260809\_TermwiseMin.lean}}
+\STATUS{Lean-verified; \texttt{Pnp/Theory/TermwiseMin.lean}}
 \end{remark}
 
 \begin{theorem}[the fair coin minimises the invariant]\label{thm:fair}
@@ -228,11 +228,112 @@ is $2.7\cdot10^{-7}$ leaves the quadratic ratio in $[45.06,48.86]$. Re-measure o
 range that does not straddle the crossing.}
 
 \section{The biased transfer function}\label{sec:phiq}
-\TODO{fable-5: derive $\Phi^{(q)}$ by the partition-function method of paper 3's
-\textup{rem:mushift}, with the biased normaliser. The two strata carry unequal weights
-$q^{N_d}$ and $(1-q)^{N_d}$ and a $q$-shifted $\mu_d$, so the $\cosh$ becomes a general
-combination of two exponentials; \S\ref{sec:e6} says the surviving odd part has coefficient
-$L^{(q)}$, which is the first thing the derivation must reproduce.}
+
+\subsection{The sign of $\lambda$, which now matters}
+
+Paper 3's transfer function is even in $\lambda$, so the sign of the slope is not observable
+there. Splitting the $\cosh$ makes it observable, so we fix it first:
+\[
+  \lambda_q(n)\;=\;+\frac{d}{dm}\log r^{q}_A(m)\Big|_{m=n}
+  \;=\;\tfrac14\log\frac{r^{q}_A(n+2)}{r^{q}_A(n-2)}+O(\cdot),
+\]
+positive below the biased centre. This is the convention under which $\lambda\approx s$;
+paper 3's \textup{def:slope} carried the opposite sign and has been corrected, with no
+numerical consequence there for exactly the reason just given.
+
+\subsection{The derivation}
+
+Take $P_{q,s}$: element $a$ present with weight $q\,e^{-sa}$, absent with weight $1-q$, so
+$p_a=q e^{-sa}/((1-q)+qe^{-sa})$ and $p_a=q-q(1-q)sa+O(s^2a^2)$. Two consequences, both
+absent at $q=\tfrac12$:
+\begin{itemize}
+\item the per-element variance is $a^2p_a(1-p_a)=q(1-q)a^2(1+O(sa))$, so the layer weight of
+      paper 3's \textup{rem:mushift} becomes $e^{-\lambda^2q(1-q)s_d/2}$;
+\item removing $I_d$ removes mean $q\sigma_d$, so the two strata no longer sit at $\pm\delta_d$
+      about a common centre. They sit at
+      \[
+        \delta^{+}_d=d+q\sigma_d,\qquad -\delta^{-}_d,\quad \delta^{-}_d=d+(1-q)\sigma_d .
+      \]
+      \textbf{The bias splits the pair asymmetrically, in the ratio $q:(1-q)$.}
+\end{itemize}
+Hence
+\begin{equation}\label{eq:phiq}
+  \Phi^{(q)}(\lambda)\;=\;1+\sum_{d\ge1}
+  \Bigl[(1-q)^{N_d}e^{\lambda\delta^{+}_d}+q^{N_d}e^{-\lambda\delta^{-}_d}\Bigr]
+  e^{-\lambda^{2}q(1-q)s_d/2}.
+\end{equation}
+\STATUS{derived; three internal checks below are exact, the point prediction is verified}
+
+Three checks are built in, and all three hold to machine zero ($0.00\cdot10^{0}$, two
+profiles, $k=60$): $\Phi^{(q)}(0)=\Gamma^{(q)}$ of Definition~\ref{def:gq}; the
+complementation symmetry $\Phi^{(q)}(\lambda)=\Phi^{(1-q)}(-\lambda)$, which holds because
+$\delta^{+}(q)=\delta^{-}(1-q)$; and $\Phi^{(1/2)}$ is paper 3's $\Phi$ term by term.
+\STATUS{experimentally confirmed; \texttt{e10\_r105}}
+
+\subsection{Tilted rigidity}
+
+\begin{proposition}[the biased landscape responds at first order]\label{prop:tilted}
+$\displaystyle \Phi^{(q)\prime}(0)=\sum_{d\ge1}\Bigl[(1-q)^{N_d}\delta^{+}_d-q^{N_d}\delta^{-}_d\Bigr]$,
+which vanishes identically at $q=\tfrac12$ and is non-zero otherwise. So rigidity at a biased
+measure is not flatness: it is a \emph{tilt} of a definite slope, and the slope is a point
+prediction with no free parameter.
+\end{proposition}
+
+This is what \S\ref{sec:e6} demanded of the derivation, and it is a sharper demand than it
+looks. The naive guess --- keep paper 3's $\delta_d=d+\sigma_d/2$ and merely split the
+weights --- gives instead $\sum[(1-q)^{N_d}-q^{N_d}]\delta_d$, and the two differ by exactly
+$(\tfrac12-q)\sum_d\sigma_d[q^{N_d}+(1-q)^{N_d}]$: zero at $q=\tfrac12$, and $20$--$32\%$ of
+the prediction at the $q$ tested. The measurement therefore decides between them.
+
+\subsection{Verification}\label{sec:e10}
+
+The estimator must kill constants, because the point prediction of \S\ref{sec:e5} carries an
+$O(10^{-3})$ offset at the biased centre which is the same size as the linear term. So we use
+a central difference about $n_q$: with $n_\pm=\lfloor(q\pm hq)T\rceil$,
+\[
+  \widehat{L}(h)=\frac{(\lm_q/\deg_q)(n_+)-(\lm_q/\deg_q)(n_-)}
+                      {\lambda_q(n_+)-\lambda_q(n_-)} .
+\]
+Ratios of $\widehat{L}$ to the two candidates, at $h=0.01$:
+
+\begin{center}
+\begin{tabular}{llccc}
+\toprule
+profile & $q$ & separation & $\widehat L/\Phi^{(q)\prime}(0)$ & $\widehat L/$naive\\
+\midrule
+odd numbers, $k=120$ & $0.30$ & $31.6\%$ & $\mathbf{0.9945}$ & $0.6805$\\
+odd numbers, $k=120$ & $0.40$ & $19.9\%$ & $\mathbf{0.9976}$ & $0.7991$\\
+odd numbers, $k=120$ & $0.50$ & --- & \multicolumn{2}{c}{$\Delta(\lm_q/\deg_q)=0$ exactly}\\
+odd numbers, $k=120$ & $0.60$ & $19.9\%$ & $\mathbf{0.9976}$ & $0.7991$\\
+primes, $k=120$ & $0.30$ & $32.3\%$ & $\mathbf{0.9981}$ & $0.6754$\\
+primes, $k=120$ & $0.40$ & $20.2\%$ & $\mathbf{0.9983}$ & $0.7967$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Over all $36$ discriminating rows (two profiles, $k=80,120$, four $q$, four $h$), the median
+$|\widehat L/\Phi^{(q)\prime}(0)-1|$ is $0.0041$ against $0.2038$ for the naive candidate. The
+one row above $10\%$ is the primes at $k=80$, $q=0.3$, $h=0.01$, where $\Delta\lambda=8.5\cdot
+10^{-5}$ and the integer rounding of $n_\pm$ is a visible fraction of the step; the same row
+at $k=120$ reads $0.9981$. At $q=\tfrac12$ the numerator is $0$ or $4.4\cdot10^{-16}$, below
+the stated floor --- the fair coin has no linear response, which is the content of
+Proposition~\ref{prop:tilted} at its zero. \STATUS{experimentally confirmed; \texttt{e10\_r105}}
+
+The split is also visible stratum by stratum, which tests the offsets directly rather than
+through their sum: at $k=80$, $q=0.3$, $\mathrm{over}_q/\deg_q$ against
+$(1-q)^{N_d}e^{\lambda\delta^{+}_d}e^{-\lambda^2q(1-q)s_d/2}$ agrees to within $0.24\%$ over
+$d=1,\dots,6$, and $\mathrm{under}_q/\deg_q$ against its partner to within $0.9\%$.
+\STATUS{experimentally confirmed; \texttt{e10\_r105}}
+
+\subsection{The biased hypothesis}\label{sec:biasedH}
+
+$(\mathrm{H}_q)$: $\sum_d[(1-q)^{N_d}(\delta^{+}_d)^2+q^{N_d}(\delta^{-}_d)^2]<\infty$,
+uniformly for $q\in[q_0,1-q_0]$. Since $\max(q,1-q)\le1-q_0<1$, the geometric damping of
+paper 3's (H) survives with base $1-q_0$, and the constant degrades as $q_0\to0$ --- which is
+the $\sim40\times$ growth of the \S\ref{sec:e5} error already measured between $q=\tfrac12$
+and $q=0.2$. The $\alpha=1$ threshold of paper 3 is unchanged, the damping argument being
+base-agnostic. \STATUS{derived; the degradation matches the measured trend}
 
 \section{Random sequences, unconditionally}\label{sec:random}
 
@@ -327,8 +428,13 @@ this programme started. Outlook only; no claims.}
 \item \emph{Experimentally confirmed, with the range stated}: the point prediction
       (\S\ref{sec:e5}, two profiles, five $q$, three $k$), the stratum assignment
       (Remark~\ref{rem:assign}), the linear response under bias (\S\ref{sec:e6}).
-\item \emph{Not yet written}: \S\S\ref{sec:phiq}--\ref{sec:outlook}, and the biased
-      hypothesis that \S\ref{sec:biased} needs to become a theorem.
+\item \emph{Derived and verified}: $\Phi^{(q)}$ of \eqref{eq:phiq} and
+      Proposition~\ref{prop:tilted} --- three exact internal checks, and the first-order
+      point prediction confirmed against the naive alternative on $36$ discriminating rows
+      (\S\ref{sec:e10}); the random-ensemble floor of \S\ref{sec:random}; the $c_d$
+      verdict of \S\ref{sec:inherited}.
+\item \emph{Not yet written}: \S\S\ref{sec:outlook}, the theorem of \S\ref{sec:random},
+      and the passage from $(\mathrm{H}_q)$ to a rigidity statement.
 \end{itemize}
 
 \begin{thebibliography}{9}

@@ -69,3 +69,18 @@ rule    : a test must be checked for SENSITIVITY to the alternative, not only fo
             measurement floor".  State the floor together with the rule.  A monotonicity test
             applied to noise reports a failure that is really a confirmation: the prediction
             said the quantity would be unmeasurably small there, and it was.
+
+## F52 - prove load-bearing formal statements twice (r105, fable's wording)
+  practice: for a load-bearing formal statement, prove it twice by unrelated routes.
+            Two proofs check the STATEMENT; one proof checks the tactic script.
+            (TermwiseMin: convexity and Bernoulli.)
+
+## F53 - know the error of your baseline before differencing against it (r105, mine)
+  claimed : "measure the first-order response as (R(n) - Gamma^{(q)}) / lambda"
+  actual  : the point prediction carries a known O(1e-3) offset at the biased centre -- E5
+            measured it -- and the linear term at the targets used is the same size.  The
+            estimator was measuring the offset, and Lhat swung from -11 to -70.
+  rule    : before extracting a derivative, ask what the KNOWN error of the baseline is.  If
+            it is not small compared with the effect, difference the effect against itself
+            (central difference) instead of against the baseline.  The information needed to
+            predict this failure was already in my own earlier log.
