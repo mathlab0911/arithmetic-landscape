@@ -11,7 +11,9 @@ lem:six
 prop:alphalb
 prop:tiltlclt
 rem:cd
+rem:closing
 rem:graveyard
+rem:grh
 rem:kapparho
 rem:lam0
 rem:mushift

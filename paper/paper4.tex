@@ -223,11 +223,66 @@ combination of two exponentials; \S\ref{sec:e6} says the surviving odd part has 
 $L^{(q)}$, which is the first thing the derivation must reproduce.}
 
 \section{Random sequences, unconditionally}\label{sec:random}
+
+Before the theorem, the floor it has to stand on. Let $A$ be drawn from the Cram\'er model on
+the odd integers: each odd $m\in[3,N]$ is included independently with probability $2/\log m$,
+and $N$ is fixed by $\mathbb{E}|A|=k$. Nothing is conditioned, so $|A|$ fluctuates from
+instance to instance. That is deliberate: $kR_A(k)$ is the $k$-invariant quantity of paper~3's
+\textup{rem:onek}, so an ensemble of genuinely different sizes tests the $1/k$ law for free.
+Twenty instances at each of two sizes, each through the whole paper-3 pipeline with its own
+$N_d$ and $\sigma_d$:
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+$\mathbb{E}|A|$ & range of $k$ & (H) series & mean $kR$ & sd & sd/mean\\
+\midrule
+$120$ & $101$--$135$ & $133.79$--$320.79$ & $214.96$ & $10.58$ & $4.92\%$\\
+$180$ & $146$--$191$ & $132.94$--$471.77$ & $206.32$ & $6.94$  & $3.37\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+at $x=0.06$; $c_A=kR/100$. Three things, and the third is the one to keep.
+\STATUS{experimentally confirmed; \texttt{e7\_r102}}
+
+\emph{(i) The hypothesis holds on the ensemble.} All forty instances have a bounded (H)
+series and a window that tracks the primes'. This is a precondition, not a result: a theorem
+about random sequences is unconditional only if the random sequences satisfy (H) themselves.
+
+\emph{(ii) The constant concentrates.} The spread across instances is under $5\%$ and falls
+with $k$, while the mean of $kR$ moves by $4\%$ between the two sizes --- the $1/k$ law of
+paper~3 surviving an ensemble it was not fitted on.
+
+\emph{(iii) The primes sit inside the ensemble and the odd numbers do not.} Against the
+$k\approx180$ ensemble ($2.0632\pm0.0694$ in $c_A$), the primes score $z=-0.39$ and the odd
+numbers $z=-2.70$, at every one of the four targets. In this statistic the primes are
+indistinguishable from a random odd sequence of the same density; the odd numbers are a
+different object.
+
+There is one place where the random model is \emph{not} like the primes, and it is the place
+that matters for the minor arcs. Write
+$h_d(q)=\max_{(r,q)=1}\bigl(\prod_{a\in B_d}|\cos(\pi ra/q)|\bigr)^{1/|B_d|}$.
+Since $|\cos(\pi a/4)|=1/\sqrt2$ for \emph{every} odd $a$, the modulus-$4$ floor
+$h_d(4)=1/\sqrt2$ is deterministic, not merely universal. Paper~2's vanishing lemma kills the
+modulus-$2m$ peak ($m$ odd) as soon as $B_d$ contains an element $\equiv3\pmod 6$. A set of
+primes contains exactly one such element, namely $3$, and $3$ leaves $B_d$ at $d\ge2$, so the
+primes keep $h_d(6)=\sqrt3/2$; a random odd sequence contains about $|B_d|/3$ of them and
+loses the peak at every $d$. Measured over $q\le120$ at $d=1,2,5$: every random instance has
+$\max_{q\ge3}h_d(q)=1/\sqrt2$ attained at $q=4$, and the primes have $\sqrt3/2$ at $q=6$.
+\STATUS{experimentally confirmed; \texttt{e7\_r102}}
+
+\noindent
+So the random theorem should come out with the geometric rate $1/\sqrt2=0.7071$ per element
+rather than the $\sqrt3/2=0.8660$ of papers 1--2: \emph{the primes are the harder case, and
+the modulus-$6$ ripple is a structural feature of the primes that the random model destroys.}
+
 \TODO{fable-5: for random odd $A$ the minor-arc input is a second-moment bound
 $\mathbb{E}|S_A|^{2}=b$ plus Borel--Cantelli on a $\theta$-net --- no Kumchev, no
 Siegel--Walfisz, no Siegel constant. If it lands it is the trilogy's first
-zero-ineffective-constant rigidity theorem. The modulus-$4$ floor of papers 1--2, which is
-universal for odd sequences, is then the exact leading ripple.}
+zero-ineffective-constant rigidity theorem. The measurements above are the floor it must
+clear, and they sharpen the brief: the rate to aim for is $1/\sqrt2$, not $\sqrt3/2$.}
 
 \section{Two questions inherited from paper 3}\label{sec:inherited}
 \TODO{(i) the $c_d$ fold-in: paper 3 keeps $\Phi$ as printed and counts

@@ -472,6 +472,20 @@ quotation in Lemma~\ref{lem:eta}(c) are all effective --- and it is the same con
 paper~2 isolates as $C_1$; see Remark~\ref{rem:oneconstant}.
 \end{remark}
 
+\begin{remark}[what would make $C_1$ effective]\label{rem:grh}
+Two escapes are worth recording, because $C_1$ is the only inexplicit quantity in the
+trilogy. \emph{Under GRH}, the Siegel--Walfisz input of Lemma~\ref{lem:etab} may be replaced
+by $\pi(t;q,r)=\mathrm{li}(t)/\varphi(q)+O\bigl(t^{1/2}\log t\bigr)$ with an absolute implied
+constant, uniformly for $q\le t^{1/2}$. The range Lemma~\ref{lem:etab} actually uses,
+$q\le(\log N)^{A_0}$, is far inside that, so on GRH the constant becomes effective and every
+constant in the trilogy is explicit. \emph{Unconditionally}, the ineffectivity is confined to
+the possible existence of a Siegel zero for a single modulus $q\le(\log N)^{A_0}$: for every
+modulus with an explicit zero-free region the estimate is already effective. The inexplicit
+constant is therefore not a feature of the argument but a hostage to one hypothetical zero,
+and the range it is held over is only $(\log N)^{A_0}$, not $N$. Neither escape is used
+below; the theorems are stated unconditionally.
+\end{remark}
+
 \begin{remark}[the middle range, and why no constant enters]\label{rem:principal}
 Inside $|\theta|<1/(2N)$ Lemma~\ref{lem:eta} says nothing, and it does not have to: there
 $|a\theta|\le\tfrac12$ for every $a\in A$, so $\sin^{2}(\pi a\theta)\ge4a^{2}\theta^{2}$ and
@@ -638,6 +652,23 @@ With Lemmas~\ref{lem:kappa} and~\ref{lem:eta} the tilted generating function dec
 $\exp(-t_{\min}(1-\eta)b/4)$ off the principal arc --- exponentially in $b$, which is what P5
 quotes. The tilted analogue of the $M(q)$ spectrum is lost, and is not needed: the rate enters
 Theorem~\ref{thm:transfer} only through $E_k=o(1)$.
+
+\begin{remark}[what closing the skeleton would take, and where to look]\label{rem:closing}
+What Proposition~\ref{prop:tiltlclt} leaves open is not a mechanism but a list of explicit
+Edgeworth constants in region R1, and it is worth saying that there are two ways to get them.
+Deriving them by hand from the characteristic function is possible and unpleasant. Quoting
+them may not be: $\sigma(S)=\sum a_iX_i$ is a \emph{weighted} sum of independent Bernoulli
+variables, and that is precisely the class for which the Bernoulli-part-extraction method
+yields local limit theorems with explicit universal constants for non-identically distributed
+lattice summands. Two features of Proposition~\ref{prop:tiltlclt} are absent from the standard
+statements and would have to be supplied: the summands are tilted, and the conclusion must be
+uniform over the extraction window and across the layers $B_d$. The first is harmless, since
+the tilt only changes $p_a$; the second is what check (D) of \S\ref{sec:p3} measures, and it
+found the layer spread to be at most $44\%$. \TODO{this remark records a route, not a result.
+The leads are the Bernoulli-part-extraction literature (Giuliano--Weber and the subsequent
+work on general weighted Bernoulli sums); neither has been read against
+Proposition~\ref{prop:tiltlclt}, and until one has, nothing here may be cited as a proof.}
+\end{remark}
 
 \section{Universality of the rate function}\label{sec:universality}
 
