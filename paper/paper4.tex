@@ -524,14 +524,50 @@ $F_A(\theta)=\prod_{a\in A}|\cos(\pi a\theta)|$. Then almost surely
 the maximum being attained in a shrinking neighbourhood of $\theta=\tfrac14$.
 \end{proposition}
 
-The arithmetic half is Theorem~\ref{thm:modfour} and is proved. The probabilistic half ---
-concentration of $b^{-1}\sum_{a\in A}\log|\cos(\pi a\theta)|$ about its mean, uniformly over a
-$\theta$-net, then Borel--Cantelli --- is a second-moment argument and needs no
-Siegel--Walfisz, no Kumchev and no ineffective constant, which is the point of the section.
-\STATUS{proof skeleton; the arithmetic half proved, the concentration measured}
-\TODO{write the concentration and the net. The unbounded-below tail of $\log|\cos|$ is
-harmless because only a \emph{lower} bound on the sum is needed; truncate at $M$ and take
-$M\to\infty$ after the net.}
+The arithmetic half is Theorem~\ref{thm:modfour}. Here is the rest, in the four steps it
+actually takes; each is elementary, and the point of the section is that none of them needs
+Siegel--Walfisz, Kumchev, or any ineffective constant.
+
+Write $X_m(\theta)=-\log|\cos(\pi m\theta)|\in[0,\infty]$, so that
+$-\log F_A(\theta)=\sum_m\xi_mX_m(\theta)$ with $\xi_m$ the independent indicators of the
+model. Only a \emph{lower} bound on this sum is wanted, which is what makes the argument easy.
+
+\emph{Step 1 (truncate; the unbounded tail is free).} Put $X^{(M)}_m=\min(X_m,M)$. Then
+$\sum\xi_mX_m\ge\sum\xi_mX^{(M)}_m$, so it suffices to bound the truncated sum below, and the
+summands now lie in $[0,M]$. At $\theta=\tfrac14$ truncation is inactive once
+$M>\tfrac12\log2$, since $X_m(\tfrac14)=\tfrac12\log2$ for every odd $m$.
+
+\emph{Step 2 (the mean, and where Theorem~\ref{thm:modfour} enters).} For $\theta=r/q$ the
+values $X_m(\theta)$ over odd $m$ are a permutation of $\{-\log|\cos(\pi j/q)|:j\in R_q\}$
+repeated, so
+$\mathbb{E}\sum_m\xi_mX_m(r/q)=\bigl(-\log M_{\mathrm{odd}}(q)+o(1)\bigr)\mathbb{E}|A|$, and
+Theorem~\ref{thm:modfour} says this is at least $\tfrac12\log2$ per element, with a strict gap
+$\delta(q)>0$ for every $q\ne4$ and $\delta(q)\to\log2$ as $q\to\infty$. \emph{This is the only
+step where arithmetic appears}, and it is the step where the primes and a random odd sequence
+part company. For general $\theta$ one reduces to a nearby rational by Dirichlet
+approximation; the arc geometry is paper~2's and is used verbatim, only the peak-height input
+changing from $M$ to $M_{\mathrm{odd}}$.
+
+\emph{Step 3 (concentration).} The summands are independent and lie in $[0,M]$, so Hoeffding
+gives
+$\Pr\bigl[\sum_m\xi_mX^{(M)}_m<\mathbb{E}-t\bigr]\le\exp(-2t^{2}/(\pi(N)M^{2}))$, and with
+$t=\tfrac12\delta b$ this is $\exp(-c\delta^{2}b/M^{2})$. No second moment of an exponential
+sum is needed --- the randomness is in the \emph{sequence}, not in the phases.
+
+\emph{Step 4 (net, then Borel--Cantelli).} On the region where $X_m<M$ one has
+$|\cos(\pi m\theta)|\ge e^{-M}$, hence
+$|\partial_\theta X^{(M)}_m|=\pi m|\tan(\pi m\theta)|\le\pi Ne^{M}$, so a net of spacing
+$\eta=\varepsilon/(\pi bNe^{M})$ controls $\theta$, and the net has
+$O(bNe^{M}/\varepsilon)$ points. The union bound survives as long as
+$c\delta^{2}b/M^{2}\gg\log N+M$, and $b\asymp N/\log N$ in the model, so any
+$M=M(b)\to\infty$ with $M=o(b^{1/3})$ will do. Summability over $b$ then gives the almost-sure
+statement by Borel--Cantelli.
+\STATUS{proof skeleton --- Theorem~\ref{thm:modfour} proved, Steps 1--4 as above with the
+constants left implicit; measured in the two tables of this section}
+\TODO{write Steps 2--4 out with explicit constants. The only non-routine point is the
+Dirichlet reduction in Step 2, and paper~2's \S major/minor decomposition already contains it;
+what has to be checked is that its arc radii are still admissible when the peak height drops
+from $\sqrt3/2$ to $1/\sqrt2$ --- they should only get easier.}
 
 Measured, at $\theta=r/q$ for $q\le12$ and eight instances at $b\approx190$: the mean of
 $b^{-1}\sum_a-\log|\cos(\pi a/q)|$ agrees with $-\log M_{\mathrm{odd}}(q)$ within the
@@ -571,9 +607,59 @@ like $k^{-2.4}$ --- faster than the $1/k$ law both constants sit on.
 limit, not a proof of one. F45 stands: substituting $s$ for $\lambda$ makes the residual
 three times worse.}
 
-\section{Outlook}\label{sec:outlook}
-\TODO{the algorithmic reading --- local search on structured instances --- which is where
-this programme started. Outlook only; no claims.}
+\section{Where this sits, and the algorithmic reading}\label{sec:outlook}
+
+\subsection{Related work}
+
+Subset sums and number partitioning have a large landscape literature, and it is worth saying
+precisely where the present series does and does not meet it. That literature is
+overwhelmingly about \emph{random instances}: the phase transition and barrier-tree statistics
+of the partitioning landscape, the local-REM description of the near-optimal spectrum, and
+more recently overlap-gap obstructions for local algorithms. Its objects are the energy
+spectrum and the dynamics; its randomness is in the instance; and its answers are laws for a
+typical instance.
+
+Papers 1--3 do something different in kind: they fix the sequence and compute an
+\emph{arithmetic invariant of that sequence}, $\Gamma(A)=\sum_j a_j2^{-j}$, which the ratio
+$\lm/\deg$ converges to for \emph{every} target. Nothing is averaged over instances, and the
+answer is a number one reads off $A$. The present paper's \S\ref{sec:random} is the one place
+where the two meet --- there the sequence is random --- and even there the question is the
+ratio's limit rather than the spectrum's law.
+
+One vocabulary warning, since the words collide. ``Biased Bernoulli measure'' is established
+terminology in the theory of Bernoulli convolutions, where it denotes a self-similar measure
+on $\mathbb{R}$; that is a different object from $P_q$ here, and we do not claim the term.
+Within the subset-sum landscape literature we have not found the biased deformation
+$\Gamma^{(q)}$ of \S\ref{sec:biased}, nor the odd-residue extremal quantity
+$M_{\mathrm{odd}}$ of \S\ref{sec:modfour}, under any name.
+\STATUS{literature pass, not a proof of novelty: absence of evidence over the searches made}
+
+\subsection{The algorithmic reading}
+
+This programme began with local search on subset-sum instances, and the invariant answers a
+question one asks there. If a local-search procedure ends at a uniformly chosen strict local
+minimum, the expected number of attempts before landing on a ground state is $\lm/\deg$, and
+papers 1--3 say that number converges to $\Gamma(A)$ --- \emph{computable from $A$ alone,
+without solving a single instance, and independent of the target}. For the odd numbers it is
+$3$; for the primes, $5.3492\ldots$
+
+Theorem~\ref{thm:fair} then says something with an algorithmic flavour and a proof:
+\emph{no Bernoulli bias helps}. Sampling configurations with a biased coin instead of a fair
+one multiplies the ratio by $\Gamma^{(q)}/\Gamma\ge1$, strictly for $q\ne\tfrac12$. A whole
+natural one-parameter family of restart heuristics therefore cannot beat the uniform one on
+this statistic, and \S\ref{sec:phiq} adds that the biased landscape also acquires a
+\emph{first-order} sensitivity to the target that the fair one does not have --- it is worse
+in two ways at once.
+
+Two caveats, and they are the reason this is an outlook and not a theorem about algorithms.
+A count of local minima is not a distribution over basins of attraction: real local search
+does not terminate uniformly, and the ratio bounds the wrong quantity if the basins are very
+unequal. And nothing here addresses dynamics --- barrier heights, escape times, or the
+behaviour of any particular heuristic. What the invariant does supply is a target-independent
+constant that any such analysis has to be consistent with, and a proved statement that one
+obvious way to try to improve it does not.
+\TODO{if this section is ever to make an algorithmic claim, the missing object is the
+basin-size distribution, not more landscape statistics.}
 
 \section{Honest scope}\label{sec:scope}
 \begin{itemize}
@@ -590,8 +676,12 @@ this programme started. Outlook only; no claims.}
       point prediction confirmed against the naive alternative on $36$ discriminating rows
       (\S\ref{sec:e10}); the random-ensemble floor of \S\ref{sec:random}; the $c_d$
       verdict of \S\ref{sec:inherited}.
-\item \emph{Not yet written}: \S\S\ref{sec:outlook}, the theorem of \S\ref{sec:random},
-      and the passage from $(\mathrm{H}_q)$ to a rigidity statement.
+\item \emph{Proved}: Theorem~\ref{thm:modfour} and Lemma~\ref{lem:moddclosed}, the
+      arithmetic half of \S\ref{sec:random}.
+\item \emph{Proof skeleton}: Proposition~\ref{prop:rate}, whose four steps are written out
+      with the constants left implicit.
+\item \emph{Not yet written}: the passage from $(\mathrm{H}_q)$ to a rigidity statement, and
+      the explicit constants of Steps 2--4 in \S\ref{sec:random}.
 \end{itemize}
 
 \begin{thebibliography}{9}
