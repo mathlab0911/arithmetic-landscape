@@ -2,6 +2,7 @@ def:slope
 def:tilt
 eq:phi
 lem:eta
+lem:etab
 lem:kappa
 lem:six
 prop:alphalb
@@ -19,6 +20,7 @@ rem:sixagain
 rem:tiltslope
 rem:weight
 rem:whatEk
+rem:whereC1
 rem:whyslope
 sec:bridge
 sec:counterexample

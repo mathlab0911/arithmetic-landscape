@@ -230,14 +230,18 @@ $\lambda(n)$ against the exactly computed $\lm/\deg$.
 $x=\frac12-\rho$ & 0.06 & 0.08 & 0.10 & 0.15 & 0.20 & 0.25 & 0.30\\
 \midrule
 odds, $k=220$      & 0.84\% & 0.85\% & 0.85\% & 0.86\% & 0.88\% & 0.92\% & 0.97\%\\
-squares, $k=170$   & 1.66\% & 1.67\% & 1.68\% & 1.70\% & 1.74\% & 1.80\% & 1.89\%\\
 primes, $k=220$    & 0.91\% & 0.92\% & 0.92\% & 0.94\% & 0.96\% & 0.99\% & 1.05\%\\
+$a_i\asymp i^{3/2}$, $k=220$ & 1.05\% & 1.06\% & 1.06\% & 1.08\% & 1.10\% & 1.14\% & 1.20\%\\
+squares, $k=170$   & 1.66\% & 1.67\% & 1.68\% & 1.70\% & 1.74\% & 1.80\% & 1.89\%\\
 \bottomrule
 \end{tabular}
 \caption{Residual $|\,\mathrm{measured}-\Phi(\lambda)\,|$ \textbf{as a fraction of the centred
 signal} $\lm/\deg-[\lm/\deg]_{n=T/2}$. Absolute residuals are $10^{-5}$ to $10^{-6}$; quoting
 them as significant figures of the ratio would be meaningless, since the signal itself lives in
-the fifth and sixth digit.}
+the fifth and sixth digit. The third row is the only ensemble in this paper that was
+\emph{constructed to test a prediction} rather than chosen because it was natural: $\alpha=3/2$
+was built after Remark~\ref{rem:onek} had been fitted on the other three, and its predicted
+constant $16/7$ lies between theirs.}
 \label{tab:one}
 \end{table}
 
@@ -295,10 +299,19 @@ primes & --- & 1.9731 & 2.0251 & 2.0253 & 1.000\\
 \end{center}
 
 \noindent
-at $k=220$. \STATUS{experimentally confirmed, four profiles; \texttt{saddle\_r092},
-\texttt{alpha\_r092}} \TODO{fable: $c_A=c_A'$ is still a conjecture --- the driver is shared,
-the causation is not (substituting $s$ makes the residual worse). State it as a conjecture
-with the table as its evidence.}
+at $k=220$. The two halves of this have different statuses and the difference matters:
+
+\begin{itemize}
+\item $c_A'\to(2\alpha+1)^{2}/(4\alpha+1)$ is \emph{derived} --- the identity above is exact,
+      its sign is forced by $\Lambda'''<0$ for $\rho<\tfrac12$, and the small-tilt step is a
+      Taylor expansion --- and \STATUS{experimentally confirmed on five profiles, one of them
+      out of sample}.
+\item $c_A=c_A'(1+o(1))$ is \STATUS{experimentally confirmed: four profiles, ratios
+      $0.992$--$1.008$, $k=220$}. The exact asymptotic equality, and the mechanism behind it,
+      remain a \textbf{conjecture}. What is established is a shared driver, $S_4/S_2^{2}$, and
+      \emph{not} a causal link: substituting $s$ for $\lambda$ makes the residual three times
+      worse, not smaller.
+\end{itemize}
 \end{remark}
 
 \subsection{The bridge to paper 2}\label{sec:bridge}
@@ -347,7 +360,7 @@ Lemma~\ref{lem:kappa} avoids the issue by never dividing by a quantity that vani
 \end{remark}
 
 \begin{lemma}[the minor-arc input]\label{lem:eta}
-\STATUS{proof skeleton; parts (a) and (c) are quotations, part (b) needs writing}
+\STATUS{(a) elementary, sketched; (b) proved, Lemma~\ref{lem:etab}; (c) quoted from paper 2}
 Let $A=P_k$ and $N=a_k$. Then
 \[
   \operatorname{Re}S_A(\theta)\;\le\;\Bigl(\tfrac12+o(1)\Bigr)b
@@ -359,11 +372,7 @@ Let $A=P_k$ and $N=a_k$. Then
   $\|\theta-a/q\|\ge1/(2N)$; the excluded interval around $0$ is the principal arc, and around
   $\tfrac12$ one has $\operatorname{Re}S_A\approx-b$, the helpful sign. Elementary; no
   Siegel--Walfisz.
-\item[(b)] \emph{$3\le q\le(\log N)^{A_0}$.} Splitting into residue classes and applying
-  Siegel--Walfisz, $S_A(a/q+\beta)=\bigl(\mu(q)/\varphi(q)\bigr)W(\beta)+O(\cdot)$ with
-  $|W|\le b$, whence $\operatorname{Re}S_A/b\le|\mu(q)|/\varphi(q)\le\tfrac12$. Same toolset as
-  paper~2's small-$q$ tier. \TODO{write out; the error term is paper 2's $C_1$, the one
-  ineffective constant, and it enters here in the same way and nowhere else.}
+\item[(b)] \emph{$3\le q\le(\log N)^{A_0}$.} Lemma~\ref{lem:etab} below.
 \item[(c)] \emph{$q>(\log N)^{A_0}$.} This is the case $n=1$ of Step 2 of
   \textup{prop:deepminor} in paper~2, which gives
   $|S_A(\theta)|\ll N(\log N)^{3-A_0/2}+N^{4/5}(\log N)^{3}$, i.e.\
@@ -371,6 +380,49 @@ Let $A=P_k$ and $N=a_k$. Then
   \STATUS{quoted from paper 2, verbatim}
 \end{enumerate}
 \end{lemma}
+
+\begin{lemma}[the small-$q$ ring]\label{lem:etab}
+Let $3\le q\le(\log N)^{A_0}$, $(a,q)=1$, and $\theta=a/q+\beta$ with
+$|\beta|\le1/(q\tau)$, $\tau=N(\log N)^{-A_0}$. Then
+\[
+  S_A(\theta)\;=\;\frac{\mu(q)}{\varphi(q)}\,W(\beta)\;+\;O\!\bigl(N e^{-c\sqrt{\log N}}\bigr),
+  \qquad W(\beta)=\int_2^{N}e(t\beta)\,\frac{dt}{\log t},
+\]
+and $|W(\beta)|\le\operatorname{li}(N)=(1+o(1))b$. Consequently
+$\operatorname{Re}S_A(\theta)\le\bigl(\tfrac12+o(1)\bigr)b$.
+\end{lemma}
+
+\begin{proof}
+Sort the primes $p\le N$ by their residue class. The $\omega(q)=O(\log q)$ primes dividing $q$
+contribute $O(\log q)=o(b)$, so
+\[
+  S_A(\theta)\;=\;\sum_{\substack{r\bmod q\\(r,q)=1}}e\!\Bigl(\frac{ra}{q}\Bigr)
+    \sum_{\substack{p\le N\\p\equiv r\,(q)}}\!\!e(p\beta)\;+\;O(\log q).
+\]
+By Siegel--Walfisz, $\pi(t;q,r)=\operatorname{li}(t)/\varphi(q)+O(te^{-c\sqrt{\log t}})$
+uniformly for $q\le(\log N)^{A_0}$; partial summation against $e(t\beta)$ turns this into
+\[
+  \sum_{\substack{p\le N\\p\equiv r\,(q)}}\!\!e(p\beta)
+  \;=\;\frac{W(\beta)}{\varphi(q)}
+     \;+\;O\!\bigl(Ne^{-c\sqrt{\log N}}(1+|\beta|N)\bigr),
+\]
+and $|\beta|N\le(\log N)^{A_0}/q$, so the error is $O(Ne^{-c\sqrt{\log N}}(\log N)^{A_0})
+=O(Ne^{-c'\sqrt{\log N}})=o(b)$: a fixed power of $\log N$ cannot compete with
+$e^{-c\sqrt{\log N}}$. Summing over $r$ and using the Ramanujan sum
+$\sum_{(r,q)=1}e(ra/q)=c_q(a)=\mu(q)$ for $(a,q)=1$ gives the display. Finally
+$\mu(q)/\varphi(q)$ is real and $\varphi(q)\ge2$ for $q\ge3$, so
+$\operatorname{Re}S_A(\theta)\le\bigl(|\mu(q)|/\varphi(q)\bigr)b(1+o(1))\le
+\bigl(\tfrac12+o(1)\bigr)b$; Lemma~\ref{lem:six} says where the $\tfrac12$ is attained.
+\end{proof}
+
+\begin{remark}[where the ineffectivity is]\label{rem:whereC1}
+The Siegel--Walfisz step is the only inexplicit estimate in the whole of \S\ref{sec:bridge}:
+the constant $c$ above is the one that cannot be computed. It is the same constant that
+paper~2's appendix isolates as $C_1$, entering that paper at one point as well; see
+Remark~\ref{rem:oneconstant}. Every other bound here --- Lemma~\ref{lem:kappa},
+Lemma~\ref{lem:eta}(a), Lemma~\ref{lem:six}, and the quotation in
+Lemma~\ref{lem:eta}(c), which rests on Vaughan's identity --- is effective.
+\end{remark}
 
 \begin{remark}[the principal arc, and that the two regimes overlap]\label{rem:principal}
 Inside $|\theta|<1/(2N)$ Lemma~\ref{lem:eta} says nothing, and it does not have to: there
@@ -495,28 +547,50 @@ orders of magnitude larger than the odd numbers'.
 
 A profile that fails \textup{(H)} outright is available, and on the other side:
 
-\begin{proposition}[no profile below $\alpha=1$]\label{prop:alphalb}
-Let $a_i\asymp c\,i^{\alpha}$ be distinct odd integers with $\alpha<1$. Then
-$c\gg k^{1-\alpha}$, hence $a_1\to\infty$, hence $N_d=0$ for all $d<a_1/2$ and
-\[
-  \sum_{d\ge1}2^{-N_d}\delta_d^{2}\;\ge\;\sum_{d<a_1/2}2d^{2}\;\asymp\;a_1^{3}
-  \;\longrightarrow\;\infty .
-\]
-So \textup{(H)} fails for every $\alpha<1$.
+\begin{proposition}[the $\alpha=1$ threshold]\label{prop:alphalb}
+Let $A=A_k$ consist of $k$ distinct odd integers with $a_i\asymp c\,i^{\alpha}$.
+\begin{enumerate}
+\item[(i)] If $\alpha<1$ then \textup{(H)} fails: $\sum_{d\ge1}2^{-N_d}\delta_d^{2}\to\infty$.
+\item[(ii)] If $\alpha\ge1$ then \textup{(H)} holds, with a bound depending on $\alpha$ and $c$
+      alone.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-The $k$ values $a_1<\dots<a_k$ are distinct odd integers, so $a_k\ge2k-1$; with
-$a_k\asymp ck^{\alpha}$ this forces $c\gg k^{1-\alpha}$. For $d<a_1/2$ no $a_i$ is $\le2d$, so
-$N_d=0$, $\sigma_d=0$ and $\delta_d=d$, and the displayed terms are $2d^2$.
+(i) The $a_i$ are distinct odd integers, so $a_k\ge2k-1$; with $a_k\asymp ck^{\alpha}$ this
+forces $c\gg k^{1-\alpha}$, so $a_1\asymp c\to\infty$. For $d<a_1/2$ no $a_i$ is $\le2d$, hence
+$N_d=0$, $\sigma_d=0$, $\delta_d=d$, and
+\[
+  \sum_{d\ge1}2^{-N_d}\delta_d^{2}\;\ge\;\sum_{d<a_1/2}2d^{2}\;\asymp\;a_1^{3}
+  \;\asymp\;k^{3(1-\alpha)}\;\longrightarrow\;\infty .
+\]
+(ii) For $\alpha\ge1$ one has $a_1=O(1)$ and $N_d=\#\{i:a_i\le2d\}\gg d^{1/\alpha}$, while
+$\delta_d=d+\sigma_d/2\ll d^{1+1/\alpha}$, so the general term is
+$\ll2^{-c'd^{1/\alpha}}d^{2+2/\alpha}$, which is summable: an exponential in a positive power
+of $d$ beats a polynomial. The bound involves $\alpha$ and $c$ and not $k$.
 \end{proof}
 
 \noindent
-Measured on an $\alpha=1/2$ profile, $\sum2^{-N_d}\delta_d^2=4923,\,10245,\,16608,\,24464$ at
-$k=60,100,140,180$ --- growing like $k^{3/2}$, as the proposition predicts.
-\STATUS{experimentally confirmed; \texttt{alpha\_r092}} The hypothesis therefore cuts the
-power profiles at $\alpha=1$ exactly, and the cubes sit inside the admissible range but
-beyond the reach of computation.
+Both halves are visible in the computation. For $\alpha=1/2$ the series reads
+$4923,\,10245,\,16608,\,24464$ at $k=60,100,140,180$, growing like $k^{3/2}$ --- which is
+$a_1^{3}=k^{3(1-\alpha)}$ with $\alpha=1/2$, exactly as (i) predicts. For $\alpha\ge1$ it is
+flat in $k$ to every digit printed:
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+profile & odds & $a_i\asymp i^{3/2}$ & squares & cubes & $\alpha=1/2$\\
+$\alpha$ & 1 & 3/2 & 2 & 3 & 1/2\\
+\midrule
+$\sum_d2^{-N_d}\delta_d^2$ & 69.5 & 266.07 & 6473.4 & $1.112\cdot10^{7}$ & \emph{grows}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+\STATUS{experimentally confirmed, $k=60,\dots,180$; \texttt{alpha\_r092}}
+So \textbf{(H) cuts the power profiles at exactly $\alpha=1$}, and the cubes sit inside the
+admissible range but beyond the reach of computation.
 
 \section{Honest scope}\label{sec:scope}
 
