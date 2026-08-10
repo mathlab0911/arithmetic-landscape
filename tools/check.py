@@ -11,6 +11,7 @@ not only in the ledger.  Each check below names the ledger entry it enforces.
   C4  F40  no \label{} disappears from a paper without being declared
   C5  ---  repository naming convention (README): rNNN, three digits, no suffix
   C6  7.0  ledger entries written but not yet folded into the skill are surfaced, not lost
+  C7  F12  every \Lean{...} the papers cite is a name that exists in the canon
 
 Usage:  python3 tools/check.py            (from the repository root)
 Exit:   0 = all pass, 1 = at least one failure.
@@ -18,6 +19,14 @@ Exit:   0 = all pass, 1 = at least one failure.
 import os
 import re
 import sys
+
+# The notes contain em-dashes; on a Japanese Windows console stdout is cp932 and printing them
+# raises UnicodeEncodeError, so the checker dies on its own output.  (Found r115, running it
+# from PowerShell instead of the sandbox for the first time.)
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+except Exception:
+    pass
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PNP = os.path.join(ROOT, 'lean', 'pnp')
@@ -147,8 +156,47 @@ def c6_pending():
                      + '; '.join(h[3:] for h in heads))
 
 
+# ------------------------------------------------------------------ C7 (F12)
+# "Verify a citation against the actual document" applied to our own canon: a \Lean{name} in a
+# paper is a citation, and a theorem that is renamed or removed leaves the paper claiming a
+# machine check that no longer exists.  This checks the NAME only -- whether the statement is
+# the intended one is F52's job (two-route proofs), and the two axes must not be confused (F54).
+LEAN_NOISE = re.compile(
+    r'^(Classical\.choice|Quot\.sound|propext|sorryAx|sorry|IsStrictLocalMin|name'
+    r'|Theory/.*|\\#.*|lake build|leanprover/.*)$')
+
+
+def c7_lean_citations():
+    thy = os.path.join(PNP, 'Pnp', 'Theory')
+    if not os.path.isdir(thy):
+        notes.append('C7/F12  skipped (no Pnp/Theory)')
+        return
+    canon = set()
+    decl = re.compile(r"^\s*(?:private\s+)?(?:noncomputable\s+)?"
+                      r"(?:theorem|lemma|def|abbrev)\s+([A-Za-z_][A-Za-z0-9_']*)")
+    for f in os.listdir(thy):
+        if f.endswith('.lean'):
+            for line in open(os.path.join(thy, f), encoding='utf-8', errors='replace'):
+                m = decl.match(line)
+                if m:
+                    canon.add(m.group(1))
+    cited = set()
+    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
+        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        for nm in re.findall(r'\\Lean\{([^}]*)\}', src):
+            nm = nm.replace('\\_', '_').strip()
+            if nm and not LEAN_NOISE.match(nm):
+                cited.add(nm)
+    missing = sorted(cited - canon)
+    if missing:
+        fail('C7/F12', 'the papers cite Lean name(s) that are not in Pnp/Theory: '
+                       + ', '.join(missing))
+    notes.append(f'C7/F12  Lean citations checked against the canon: {len(cited)}')
+
+
 if __name__ == '__main__':
-    for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending):
+    for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
+               c7_lean_citations):
         fn()
     for n in notes:
         print('  ok   ' + n)

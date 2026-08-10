@@ -60,6 +60,26 @@ rule      : F41 already says render and look.  The addition is about the GUARDS:
             ASCII art in a proportional serif face is legible but misaligned.)
 ```
 
+## Append to F32 (is the observable the one the hypothesis predicts?) — new instance, r115
+
+```
+claimed   : "the primes at q = 1/2 fail the quadratic test" (spread 15.4, against 1.0 for the
+            odd numbers) -- recorded in the paper as a TODO to re-measure
+actual    : the hypothesis was fine and the RANGE was not.  At q = 1/2 the response is even in
+            the offset x, so dev - dev_0 cannot change sign for the reason under test; but at
+            finite k the vertex sits at x_* != 0 and dev - dev_0 crosses zero at +-x_*
+            (measured x_* ~ 0.03, with the signs symmetric in +-x, as the account predicts).
+            A range containing the crossing makes BOTH ratios pass through zero, so the spread
+            of either is set by how close a grid point landed to x_* -- an accident of the
+            grid.  On x in [0.10, 0.30] the primes give 1.012, the same as everyone else.
+check     : before running a spread/ratio test, scan the NUMERATOR for a sign change inside the
+            intended range.  One cheap scan on both sides of the centre.
+rule      : *** a ratio test must not straddle a zero of its own numerator. ***  F32 says ask
+            whether the observable is the one the hypothesis predicts; this adds: ask whether
+            the RANGE lets that observable answer.  And when it does not, the repair is the
+            range, never the omission of the offending point.
+```
+
 ## F55 — second instance, r114: the control must be on the SEARCH, not on the function
 
 ```

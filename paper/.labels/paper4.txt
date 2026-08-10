@@ -18,6 +18,7 @@ rem:leanmodfour
 rem:measurefree
 rem:notmax
 rem:physics
+rem:range
 rem:renorm
 rem:twoclasses
 sec:biased

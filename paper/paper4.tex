@@ -346,7 +346,7 @@ which is antisymmetric in $q\leftrightarrow1-q$ and vanishes identically at $q=\
 Measured for the odd numbers at $k=80$: $L^{(q)}=-28.634,\,-8.843,\,0,\,+8.843,\,+28.634$ at
 $q=0.3,0.4,0.5,0.6,0.7$, and for the primes $-83.717,\,-23.677,\,0,\,+23.677,\,+83.717$.
 
-The data agree. Over the same range of targets, the spread (max over min) of
+The data agree. Over a range of targets, the spread (max over min) of
 $|\mathrm{dev}_q-\mathrm{dev}_q(0)|$ divided by $\lambda_q$ and by $\lambda_q^2$:
 
 \begin{center}
@@ -354,21 +354,36 @@ $|\mathrm{dev}_q-\mathrm{dev}_q(0)|$ divided by $\lambda_q$ and by $\lambda_q^2$
 \toprule
 profile & $q$ & divided by $\lambda_q$ & divided by $\lambda_q^{2}$\\
 \midrule
-odds & 0.30 & \textbf{1.329} & 9.644\\
-odds & 0.50 & 5.091 & \textbf{1.001}\\
-primes & 0.30 & \textbf{1.284} & 8.858\\
+odds & 0.30 & \textbf{1.055} & 3.778\\
+odds & 0.50 & 3.118 & \textbf{1.002}\\
+primes & 0.30 & \textbf{1.162} & 4.149\\
+primes & 0.50 & 3.104 & \textbf{1.012}\\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \noindent
 So the response is linear in $\lambda$ under bias and quadratic at $q=\tfrac12$, where
-$(\mathrm{dev}-\mathrm{dev}_0)/\lambda^{2}$ is constant to four digits ($19.8186$ to
-$19.8352$ across a fivefold range of the target offset). \STATUS{experimentally confirmed;
-\texttt{e6\_r100}} \TODO{the primes at $q=\tfrac12$ are not a clean test in this range:
-$\mathrm{dev}-\mathrm{dev}_0$ crosses zero inside it, and dropping the single point where it
-is $2.7\cdot10^{-7}$ leaves the quadratic ratio in $[45.06,48.86]$. Re-measure on a target
-range that does not straddle the crossing.}
+$(\mathrm{dev}-\mathrm{dev}_0)/\lambda^{2}$ is constant to three digits --- $19.8221$ to
+$19.8586$ for the odd numbers and $48.8625$ to $49.4422$ for the primes, across a threefold
+range of the target offset.
+
+\begin{remark}[the range is part of the test]\label{rem:range}
+The first measurement used offsets $x\in[0.04,0.20]$ and came out incoherent for the primes at
+$q=\tfrac12$ (a quadratic spread of $15.4$). The reason is worth recording because it is a
+property of ratio tests and not of this problem. At $q=\tfrac12$ the response is \emph{even} in
+$x$, so $\mathrm{dev}-\mathrm{dev}_0$ cannot change sign for the reason under test; at finite
+$k$ the vertex of the parabola sits at some $x_*\ne0$, and $\mathrm{dev}-\mathrm{dev}_0$ crosses
+zero at $\pm x_*$. Measured, $x_*\approx0.03$, with the signs symmetric in $\pm x$ exactly as
+that account predicts. A range containing the crossing makes \emph{both} ratios pass through
+zero, so the spread of either is set by how close a grid point landed to $x_*$ --- an accident
+of the grid. \textbf{A ratio test must not straddle a zero of its own numerator.} The table
+above uses $x\in[0.10,0.30]$, outside $x_*$; the repair is the range, not the omission of the
+offending point.
+\end{remark}
+\STATUS{experimentally confirmed; \texttt{e6\_r100}, \texttt{e6b\_r115}, whose pipeline is
+checked against \texttt{e6\_r100} by reproducing $[19.8186,19.8352]$ on the original range, and
+whose discriminating control at $q=0.3$ still returns \emph{linear} on the new range}
 
 \section{The biased transfer function}\label{sec:phiq}
 

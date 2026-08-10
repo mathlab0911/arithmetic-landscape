@@ -1,0 +1,83 @@
+====================================================================================================
+(A) WHERE IS THE CROSSING?   dev_q(x) - dev_q(0) on both sides of the tilted centre.
+    Derived above: at q = 1/2 the response is even in x, so a sign change can only be
+    the finite-k offset of the vertex.  x is measured as a fraction of q*T.
+====================================================================================================
+
+  odds, k = 80, q = 0.5:  n_q = 3200, dev_q(0) = -1.163014e-04
+             x         n       lambda    dev - dev_0  sign
+        -0.240      3968     0.004515      4.045e-04     +
+        -0.160      3712     0.002966      1.745e-04     +
+        -0.080      3456     0.001471      4.287e-05     +
+        -0.040      3328     0.000734      1.067e-05     +
+        -0.020      3264     0.000367      2.665e-06     +
+        -0.010      3232     0.000183      6.660e-07     +
+         0.010      3168    -0.000183      6.660e-07     +
+         0.020      3136    -0.000367      2.665e-06     +
+         0.040      3072    -0.000734      1.067e-05     +
+         0.080      2944    -0.001471      4.287e-05     +
+         0.160      2688    -0.002966      1.745e-04     +
+         0.240      2432    -0.004515      4.045e-04     +
+      => crossing located at |x| ~ none in range
+
+  primes, k = 80, q = 0.5:  n_q = 7557, dev_q(0) = -4.561816e-05
+             x         n       lambda    dev - dev_0  sign
+        -0.240      9371     0.001780      1.507e-04     +
+        -0.160      8766     0.001168      6.152e-05     +
+        -0.080      8162     0.000580      1.540e-05     +
+        -0.040      7859     0.000289      2.635e-07     +
+        -0.020      7708     0.000144     -2.544e-07     -
+        -0.010      7633     0.000073     -3.489e-06     -
+         0.010      7481    -0.000073     -3.489e-06     -
+         0.020      7406    -0.000144     -2.544e-07     -
+         0.040      7255    -0.000289      2.635e-07     +
+         0.080      6952    -0.000580      1.540e-05     +
+         0.160      6348    -0.001168      6.152e-05     +
+         0.240      5743    -0.001780      1.507e-04     +
+      => crossing located at |x| ~ 0.03
+
+====================================================================================================
+(B) THE RE-MEASUREMENT, on a range that starts well outside the crossing.
+    old range: x = 0.04 .. 0.20   (straddles the crossing for the primes)
+    new range: x = 0.10 .. 0.30   (entirely on one side)
+====================================================================================================
+       ens     q  range  spread /lambda  spread /lambda^2  dropped  verdict
+      odds  0.50    old           5.091             1.001        0  quadratic wins
+      odds  0.50    new           3.118             1.002        0  quadratic wins
+      odds  0.30    old           1.329             9.644        0  LINEAR wins
+      odds  0.30    new           1.055             3.778        0  LINEAR wins
+
+    primes  0.50    old          78.677            15.447        0  quadratic wins
+    primes  0.50    new           3.104             1.012        0  quadratic wins
+    primes  0.30    old           1.284             8.858        0  LINEAR wins
+    primes  0.30    new           1.162             4.149        0  LINEAR wins
+
+  the quadratic ratio itself on the new range (this is the number the paper quotes):
+       ens     q          min          max    spread
+      odds  0.50      19.8221      19.8586    1.0018
+    primes  0.50      48.8625      49.4422    1.0119
+
+====================================================================================================
+(C) POSITIVE CONTROL, ON THE PROCEDURE.  The paper reports, for the odd numbers at
+    q = 1/2 on the OLD range, (dev-dev_0)/lambda^2 in [19.8186, 19.8352].  If this
+    script does not reproduce that, its pipeline is not the paper's and (B) is void.
+====================================================================================================
+  reproduced: [19.8186, 19.8352]   paper: [19.8186, 19.8352]   MATCH
+
+====================================================================================================
+(D) DISCRIMINATING CONTROL IN THE OTHER DIRECTION (F47).  At q = 0.3 the linear term
+    does NOT vanish, so LINEAR must win on the same clean range.  A test that cannot
+    come out the other way is not a test.
+====================================================================================================
+      odds q = 0.30, new range: /lambda spread 1.055, /lambda^2 spread 3.778   -> LINEAR wins
+    primes q = 0.30, new range: /lambda spread 1.162, /lambda^2 spread 4.149   -> LINEAR wins
+
+====================================================================================================
+VERDICT
+====================================================================================================
+  control (C) reproduces the paper                       : YES
+  primes at q = 1/2 on a clean range: quadratic wins      : YES   (3.104 vs 1.012)
+  q = 0.3 still comes out LINEAR on the same range        : YES
+  => THE TODO CLOSES.  On a range that does not straddle the crossing the primes
+     behave exactly as the odd numbers do: the quadratic ratio lies in
+     [48.8625, 49.4422] and the linear one is 3.1 times more spread.
