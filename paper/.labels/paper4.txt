@@ -19,6 +19,7 @@ rem:measurefree
 rem:notmax
 rem:physics
 rem:range
+rem:ratestatus
 rem:renorm
 rem:twoclasses
 sec:biased

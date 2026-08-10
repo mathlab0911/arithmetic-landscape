@@ -107,6 +107,22 @@ X = -1/w  ⟹  ∏_{k<v}(1 + w ζ^k) = 1 - (-1)^v w^v
 v odd  : |1 + w^v| = 2|cos πvt|          v even : |1 - w^v| = 2|sin πvt| = 2|cos π(vt+½)|
 ```
 
+**r116: the reduction is now checked numerically, so only the prime case is at risk.**
+`coset_mult_r116.py` verifies, in product form, that with
+`P_v(t) = ∏_{k<v}|2cos π(t+k/v)|` and `τ_v = ½` for `v` even, `0` for `v` odd:
+
+- the identity `P_v(t) = 2|cos π(v t + τ_v)|` holds for `v ≤ 40` (worst `2e-14`), and a
+  deliberately wrong `τ ≡ 0` is detected — the check is not blind to the constant;
+- **`P_{ab}(t) = ∏_{i<a} P_b(t + i/(ab))`**, the Finset reindexing `k = i + a j`, holds over
+  64 pairs `(a,b)` and 10 shifts (worst `7.8e-14`);
+- the `τ` bookkeeping closes in all four parity cases: `a τ_b + τ_a ≡ τ_{ab} (mod 1)`.
+
+**So the Lean job splits into three, and only the third needs roots of unity:**
+**(1)** `v = 2`, the double-angle formula; **(2)** multiplicativity, a Finset reindexing;
+**(3)** `v` an odd prime. Steps 1 and 2 then give every `v` built from the primes of step 3.
+Do (1) and (2) first: they are elementary, they are now known to be true, and they turn the
+remaining risk into a single classical evaluation.
+
 **Reconnaissance done in r115 — read this before starting, it saves the first hour.**
 
 - `Polynomial.X_pow_sub_one_eq_prod (hpos : 0 < n) (h : IsPrimitiveRoot ζ n) :

@@ -117,6 +117,33 @@ rule      : F55 says the control must be on the search, not the function.  Same 
             what it would do in the failure case you are guarding against.
 ```
 
+## F35 — new instance, r115: a true sentence can license a false inference
+
+```
+claimed   : paper 2's abstract -- "the deep-minor bound ... which is proved here" and "The
+            theorem carries no hypothesis"
+actual    : both true.  But section L5c's own opening says the substitution in step 2 and the
+            excision in step 4 are NOT written to referee standard, prop:deepminor rests on
+            those steps, and thm:t2main rests on the proposition.  An external reviewer read
+            the abstract, read the section, and concluded the paper had no established
+            theorem.  My first reaction was that the reviewer had conflated an open Problem
+            with the main theorem -- i.e. I defended the paper against a reader who had read
+            it more carefully than I had (F50, F18).
+check     : for each judgement word in the abstract, find the place in the body that qualifies
+            it, and ask whether the abstract carries that qualification too.  Here: "no
+            hypothesis" is in the abstract, "two steps not written to referee standard" was
+            only in section 5.
+rule      : F35 says compare the abstract with the body's judgement words.  The sharpening:
+            *** an abstract can state only true things and still license a false inference. ***
+            Check what the reader is ENTITLED TO CONCLUDE, not only whether each sentence is
+            true.  "Carries no hypothesis" and "written out in full" are different claims and
+            the first is routinely read as the second.
+            Corollary for the log: the same drift happened in memory, which had recorded
+            paper 2 as a complete theorem and paper 3 as finished while paper 3's two headline
+            theorems carry STATUS{proof skeleton}.  The papers' status tags were honest
+            throughout; the summaries were not.
+```
+
 ## F55 — a search over a net needs a positive control
 
 ```
