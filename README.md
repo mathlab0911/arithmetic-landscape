@@ -1,15 +1,89 @@
 # Arithmetic Landscape Theory
 
-Research repository for the **gap series** `Γ(A) = Σ_{j=1..k} a_j / 2^j`, an order-sensitive
-arithmetic invariant that governs the local structure of subset-sum landscapes.
+The **gap series** of a finite integer sequence `A = (a₁, …, a_k)` is
 
-**Status:** private while the papers are unpublished. Submission is held until paper 3 is written.
+```
+    Γ(A) = Σ_{j=1..k} a_j · 2^(-j) ∈ ℚ ,
+```
+
+the generating function of `A` evaluated at `x = 1/2`. It is order-sensitive, it is read off `A`
+without solving anything, and — this is the point of the programme — it governs the local
+structure of the subset-sum problem for `A`.
+
+Give the subsets `S ⊆ A` the energy `E(S) = |σ(S) − n|` for a target `n`, with single-element
+flips as moves. Write `lm_A(n)` for the number of strict local minima and `deg_A(n)` for the
+number of ground states. Then `lm_A(n)/deg_A(n) → Γ(A)`, for every target, under a hypothesis
+that can be checked rather than assumed.
+
+A recurring theme: **replace the annealed (independence) approximation standard in the
+statistical-mechanics treatments by an exact identity plus a finite, checkable hypothesis.**
+
+---
+
+## Papers
 
 | | Title | State |
 |---|---|---|
-| Paper 1 | *The gap series of an integer sequence: an arithmetic invariant governing subset-sum landscapes* | 20 pp, frozen, no hypotheses |
-| Paper 2 | *Asymptotic flatness of subset-sum landscapes of primes: the sub-peak spectrum and the constant √3/2* | 30 pp, no hypotheses (ineffective at one point, via Siegel–Walfisz) |
-| Paper 3 | rigidity + the λ² correction law | in progress |
+| 1 | *The gap series of an integer sequence: an arithmetic invariant governing subset-sum landscapes* | 20 pp. Complete. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1)2^(−k)`, the exact stratification, and the modulus-4 obstruction. |
+| 2 | *Asymptotic flatness of subset-sum landscapes of primes: the sub-peak spectrum and the constant √3/2* | 30 pp. Complete, no hypotheses; one constant is ineffective, via Siegel–Walfisz, and the paper says where. |
+| 3 | *The transfer function of subset-sum landscapes* | 14 pp. Complete. The transfer function `Φ`, the tilt, and the `λ²` correction law. |
+| 4 | *Bias, randomness, and an exact coarse-graining identity* | 16 pp. In progress. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below. |
+
+The technical spine of paper 4, and the one result that reaches outside this programme:
+
+```
+    (1/v) Σ_{k<v} X(t + k/v)  =  (1 − 1/v)·log 2  +  (1/v)·X(v·t + τ_v) ,     X(t) = −log|cos πt| ,
+```
+
+exactly, for every `v ≥ 1` and every `t`. Averaging the energy over a coset of index `v` returns
+the same function at `v` times the frequency, plus a constant — so the rational points are the
+*minima* of the coset average, and the step of a minor-arc argument that normally costs a
+quantitative equidistribution estimate costs nothing. Proved twice, by the multiplication
+formula and by Fourier.
+
+---
+
+## The formal development
+
+Everything settled lives in `lean/pnp/Pnp/Theory/` — **13 files, 120 theorems and lemmas**, Lean 4
+with Mathlib (`leanprover/lean4:v4.32.2`).
+
+- No declaration depends on `sorryAx`, or on any axiom beyond Lean's standard `propext`,
+  `Classical.choice` and `Quot.sound`. Each file ends with the `#print axioms` calls that say so.
+- The canon additionally passes an **independent kernel replay** (`lean4checker`, 14 modules),
+  which discards the elaborator and the tactic framework and rebuilds every constant from the
+  imports through the kernel alone. The harness runs three deliberately poisoned modules first
+  and refuses to report a pass unless all three are rejected: `tools/check_lean.ps1`.
+- Formal validity and statement fidelity are treated as **two different questions**. The kernel
+  replay answers the first. For the second, load-bearing statements are proved twice by unrelated
+  routes — an independent kernel cannot tell you a theorem is not vacuously true.
+
+Each formal statement is named in the papers at the point it is used, and `tools/check.py`
+verifies mechanically that every name the papers cite actually exists here.
+
+---
+
+## Reproducing the numbers
+
+Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
+itself — **114 scripts, 172 logs**, all committed. A number with no log is treated as a number
+that does not exist, and `tools/check.py` enforces it:
+
+```
+python3 tools/check.py
+```
+
+| check | what it enforces |
+|---|---|
+| C1 | every experiment script has a stored log next to it |
+| C2 | every number quoted in a report is a substring of some log |
+| C3 | report bookkeeping |
+| C4 | no `\label{}` disappears from a paper unnoticed |
+| C5 | naming convention |
+| C6 | pending methodology notes are surfaced, not lost |
+| C7 | every Lean name the papers cite exists in the canon |
+
+Papers are built with `pdflatex` (`paper/Makefile`). The Lean development builds with `lake build`.
 
 ---
 
@@ -17,69 +91,19 @@ arithmetic invariant that governs the local structure of subset-sum landscapes.
 
 | Path | Contents |
 |---|---|
-| `paper/` | The two papers (LaTeX + built PDF). Built in the sandbox with `pdflatex`. |
-| `lean/pnp/Pnp/Theory/` | The formal development — the canon. 9 files, 99 theorems, `sorry` 0, extra axioms 0. |
-| `lean/pnp/Pnp/Experiments/` | Throwaway Lean experiments. |
-| `lean/pnp/*.py`, `*.log` | Numerical experiments. **Every number in the papers comes from a `.log` here.** |
-| `book/` | Source of the Japanese introductory series (`*.md` + `build.py`). |
-| `reports/` | Model-to-model reports. See below. |
-| `explainer/` | Per-round explanation PDFs for the author (Japanese). |
-| `docs/` | Documents meant to be read by a human or sent outside. |
-| `archive/` | Superseded one-off documents, kept for history. |
-| `入門_第N巻_*.pdf` | The introductory series, built from `book/`. The main human-facing deliverable. |
+| `paper/` | The four papers, LaTeX source and built PDFs, with the figures. |
+| `lean/pnp/Pnp/Theory/` | The formal development — the canon. |
+| `lean/pnp/Pnp/Experiments/` | Throwaway Lean experiments, kept for the record. |
+| `lean/pnp/*.py`, `*.log` | Numerical experiments and their logs. |
+| `tools/` | `check.py` (pre-commit checks) and `check_lean.ps1` (kernel replay). |
+| `references/` | Working notes on the formalisation, including the traps met along the way. |
 
 ---
 
-## Naming convention
+## Author
 
-Everything follows `<kind>_<key>[_<date>].<ext>`, with these fixed rules:
+Kentaro Amauchi — independent researcher, Japan.
+[mathlab0911.github.io](https://mathlab0911.github.io/) · amkn.sub03@gmail.com
 
-- **Round numbers are always `rNNN`, zero-padded to three digits.** `r013`, `r081`. This is what
-  makes directory listings sort correctly; `r13` sorting after `r120` has bitten us.
-- **Dates are always ISO `YYYY-MM-DD`.** Never `0809`, never a letter suffix.
-- **Never disambiguate with a letter.** Two files from the same day get different round numbers,
-  not `...b.pdf` and `...c.pdf`. (The `explainer/` directory was renamed out of exactly that.)
-- **A file that gets replaced rather than accumulated carries no date** — the books, the papers.
-  Git holds their history.
-
-| kind | pattern | example |
-|---|---|---|
-| model-to-model report | `reports/to-<model>/rNNN.md` | `reports/to-opus5/r081.md` |
-| round explainer (JA) | `explainer/解説_rNNN_YYYY-MM-DD.pdf` | `explainer/解説_r064_2026-08-09.pdf` |
-| book volume (JA) | `入門_第N巻_<題>.pdf` | `入門_第2巻_平らになる.pdf` |
-| procedure for the author (JA) | `docs/手順_<主題>.md` | `docs/手順_arXiv投稿_論文1.md` |
-| reply to an external review (JA) | `docs/回答_<相手>_rNNN.md` | `docs/回答_外部評価_r064.md` |
-| material sent outside | `docs/相談_<主題>_YYYY-MM-DD.md` | `docs/相談_補正法則の謎_2026-08-09.md` |
-| experiment / design spec | `lean/pnp/spec_<主題>_rNNN.md` | `lean/pnp/spec_paper3-experiments_r073.md` |
-| experiment script + log | `lean/pnp/<name>_rNNN.py` / `.log` | `lean/pnp/e4d_r082.py` |
-
-## `reports/` — one live file per direction
-
-```
-reports/
-├── to-fable5/          reports opus-5 writes for fable-5
-│   ├── r080.md         ← the live one: exactly one file here
-│   └── archive/        r013.md … r078.md
-└── to-opus5/           reports fable-5 writes for opus-5
-    ├── r081.md         ← the live one
-    └── archive/        r019.md … r079.md
-```
-
-**Rule: when a new report is written, the previous one moves to `archive/` in the same commit.**
-The top of each directory always shows the one document that is currently in play. Nothing is
-deleted.
-
-### One exception, deliberately left alone
-
-Experiment scripts and logs written before round 082 use two-digit round numbers
-(`e4d_r80.py`). They are referenced by name from the archived reports, so renaming them would
-break the trail. **The three-digit rule applies to everything created from round 082 onward.**
-
-## Pre-commit check
-
-```
-python3 tools/check.py
-```
-
-Mechanised failure-ledger entries (F19/F20/F21/F40) plus the naming convention. Exit 1 on
-failure. Add a check here whenever a ledger entry turns out to be mechanically testable.
+Code is Apache-2.0 (compatible with Mathlib); the papers are the author's until publication.
+See `LICENSE`.

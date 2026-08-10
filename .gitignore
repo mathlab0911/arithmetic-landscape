@@ -22,6 +22,17 @@ Thumbs.db
 .DS_Store
 desktop.ini
 
+# Working material, kept on disk but deliberately out of the repository.
+# The repository holds the papers, the formal development and the experiments;
+# everything below is internal process and Japanese-language material for the author.
+reports/
+explainer/
+book/
+paper-ja/
+archive/
+docs/
+入門_*.pdf
+
 # Personal correspondence (contains endorsement code when filled in)
 endorsement_request.md
 lean/pnp/run_checker.ps1
