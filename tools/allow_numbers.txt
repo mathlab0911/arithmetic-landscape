@@ -1,0 +1,8 @@
+# Numbers a report may quote that will never appear in an experiment log, with the reason.
+# One per line, value first, reason after a '#'.  Keep this list short: the default is that a
+# number comes from a log (F19), and an entry here is an admission that it does not.
+#
+# NOTE: write this file WITHOUT a BOM.  PowerShell's `Add-Content -Encoding utf8` prepends one,
+# which makes the first entry read as "﻿0.98134" and silently stop matching.  Found r116.
+0.98134  # e^{1/8}*sqrt3/2, the effective substitute rate.  Derived analytically in paper2.tex,
+         # not measured, so it has no log.

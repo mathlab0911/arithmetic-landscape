@@ -1166,6 +1166,19 @@ $\kappa_d\in[0,1]$ is the explicit trigonometric window factor --- half the
 range of $\cos((\pi/6)(2m-(c_1-c_5))+\psi)$ over $m\in\mathrm{Win}_d$ --- and
 $w_d$ is the window width. In particular $\varepsilon_d(k)\to0$ at the
 geometric rate $\sqrt3/2$ per element.
+
+\emph{Status, in the statement rather than only in the surrounding text.} \textbf{(i)} The
+theorem carries no hypothesis, but its proof is not yet complete as written: two steps of
+Proposition~\ref{prop:deepminor} --- the substitution of the quoted exponential-sum bound in
+step~2 and the excision in step~4 of Section~\ref{sec:l5c} --- are not written to referee
+standard. \textbf{(ii)} It is ineffective at one point, the Siegel--Walfisz constant $C_1$;
+the effective substitute is the weaker rate $e^{1/8}\sqrt3/2=0.98134\ldots$ per element, which
+still gives $\varepsilon_d\to0$. \textbf{(iii)} Of the factors in the display, the peak height
+$(\sqrt3/2)^{b+1}$ and the window factor $\kappa_d\in[0,1]$ are proved, while the amplitude
+correction $K_2$ is derived by Laplace's method and \emph{calibrated numerically}
+(Proposition~\ref{prop:ripple}, to $0.1\%$ for $k\le76$); the conclusion
+$\varepsilon_d\to0$ does not depend on $K_2$ beyond the unconditional bound just quoted, but
+the sharp constant $\sqrt3/2$ does.
 \end{theorem}
 
 \begin{remark}
