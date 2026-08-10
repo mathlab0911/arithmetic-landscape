@@ -49,6 +49,27 @@ formula and by Fourier.
 
 ---
 
+## How this work is produced
+
+I am one person without an institution, and I work with AI language models as tools, under my
+direction. They do the long mechanical work — filling in Lean proofs, running and tabulating
+experiments, drafting sections that I then check. The choice of direction, the design decisions
+and the responsibility for every claim here are mine.
+
+You will find traces of that in the repository rather than a tidied surface: the Lean canon
+files carry Japanese headers naming the session and the round in which each was written, and
+the experiment scripts and specifications do the same. They are left as they are.
+
+Saying this plainly matters, because it is the entire reason the apparatus below exists at the
+level it does. **Work produced this way cannot be trusted on the author's word; it has to be
+checkable, and checkable by someone who does not trust the author.** So every settled theorem
+goes into Lean and is replayed through the kernel by an independent checker that must first
+reject three deliberately poisoned modules; every number quoted in a paper must exist in a
+committed log; every statement must declare its status where it is stated; and ten mechanical
+checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
+every mistake this process has actually made — including the ones a check was built to catch
+only after it had already happened.
+
 ## The formal development
 
 Everything settled lives in `lean/pnp/Pnp/Theory/` — **14 files, 125 theorems and lemmas**, Lean 4
