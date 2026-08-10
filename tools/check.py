@@ -245,9 +245,86 @@ def c8_status_at_statement():
     notes.append('C8/F38  theorem-like statements checked for a declared status: %d' % checked)
 
 
+# ------------------------------------------------------------------ C9 (F59)
+# The README is the first thing an outside reader sees, and it is the artefact nobody
+# remembers to update.  Every count it states is checked here against the repository.
+# Found the hard way: it claimed 13 canon files, 120 theorems, 14 replayed modules, 114
+# scripts and 172 logs when the true numbers were 14, 125, 16, 115 and 182 -- and, worse,
+# described papers 2 and 3 as "Complete" while the papers themselves say two steps are not
+# written to referee standard and two theorems are proof skeletons.  The counts are
+# mechanical, so they are asserted; the prose is not, so it is a standing review item.
+def c9_readme_counts():
+    path = os.path.join(ROOT, 'README.md')
+    if not os.path.exists(path):
+        notes.append('C9/F59  skipped (no README.md)')
+        return
+    src = open(path, encoding='utf-8', errors='replace').read()
+    theory = os.path.join(ROOT, 'lean', 'pnp', 'Pnp', 'Theory')
+    lean_files = sorted(f for f in os.listdir(theory) if f.endswith('.lean')) if os.path.isdir(theory) else []
+    n_thm = 0
+    for f in lean_files:
+        for line in open(os.path.join(theory, f), encoding='utf-8', errors='replace'):
+            if re.match(r'\s*(theorem|lemma)\s', line):
+                n_thm += 1
+    # the replayed set is the import closure of the root module, not the directory
+    proj = os.path.join(ROOT, 'lean', 'pnp')
+    closure, stack = set(), ['Pnp']
+    while stack:
+        m = stack.pop()
+        if m in closure:
+            continue
+        closure.add(m)
+        p = os.path.join(proj, *m.split('.')) + '.lean'
+        if not os.path.exists(p):
+            continue
+        for line in open(p, encoding='utf-8', errors='replace'):
+            g = re.match(r'\s*import\s+(Pnp[\w.]*)', line)
+            if g:
+                stack.append(g.group(1))
+    expdir = os.path.join(ROOT, 'lean', 'pnp')
+    n_py = len([f for f in os.listdir(expdir) if f.endswith('.py')])
+    n_log = len([f for f in os.listdir(expdir) if f.endswith('.log')])
+
+    claims = [
+        (r'\*\*(\d+) files, (\d+) theorems and lemmas\*\*', (len(lean_files), n_thm),
+         'canon files / theorems'),
+        (r'lean4checker\W{0,3},\s*\*{0,2}(\d+) modules', (len(closure),), 'replayed modules'),
+        (r'\*\*(\d+) scripts, (\d+) logs\*\*', (n_py, n_log), 'scripts / logs'),
+    ]
+    bad = []
+    for pat, truth, what in claims:
+        m = re.search(pat, src)
+        if not m:
+            bad.append('%s: the README no longer states this, so it cannot be checked' % what)
+            continue
+        said = tuple(int(g) for g in m.groups())
+        if said != truth:
+            bad.append('%s: README says %s, repository has %s'
+                       % (what, ' / '.join(map(str, said)), ' / '.join(map(str, truth))))
+    # page counts in the papers table, best effort -- pdfinfo may not be present
+    try:
+        import subprocess
+        for n, stem in ((1, 'paper'), (2, 'paper2'), (3, 'paper3'), (4, 'paper4')):
+            pdf = os.path.join(PAPER, stem + '.pdf')
+            row = re.search(r'^\| %d \|.*?\*\*(\d+) pp\.' % n, src, re.M)
+            if not (row and os.path.exists(pdf)):
+                continue
+            out = subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout
+            real = re.search(r'^Pages:\s+(\d+)', out, re.M)
+            if real and int(real.group(1)) != int(row.group(1)):
+                bad.append('paper %d: README says %s pp., PDF has %s pp.'
+                           % (n, row.group(1), real.group(1)))
+    except (OSError, ImportError):
+        pass
+    if bad:
+        fail('C9/F59', 'the README states counts the repository does not support: '
+                       + '; '.join(bad))
+    notes.append('C9/F59  README counts checked against the repository: %d' % len(claims))
+
+
 if __name__ == '__main__':
     for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
-               c7_lean_citations, c8_status_at_statement):
+               c7_lean_citations, c8_status_at_statement, c9_readme_counts):
         fn()
     for n in notes:
         print('  ok   ' + n)

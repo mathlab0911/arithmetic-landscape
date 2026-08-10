@@ -22,12 +22,18 @@ statistical-mechanics treatments by an exact identity plus a finite, checkable h
 
 ## Papers
 
+Each statement in each paper carries an explicit status at the statement — *proved in Lean*,
+*proved*, *derived*, *experimentally confirmed with the range stated*, or *conjecture* — and
+`tools/check.py` (C8) fails the build if a theorem, proposition, lemma or corollary declares
+none. The table below says the same thing at the level of whole papers, and it is meant to be
+read as the least flattering true description of each.
+
 | | Title | State |
 |---|---|---|
-| 1 | *The gap series of an integer sequence: an arithmetic invariant governing subset-sum landscapes* | 20 pp. Complete. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1)2^(−k)`, the exact stratification, and the modulus-4 obstruction. |
-| 2 | *Asymptotic flatness of subset-sum landscapes of primes: the sub-peak spectrum and the constant √3/2* | 30 pp. Complete, no hypotheses; one constant is ineffective, via Siegel–Walfisz, and the paper says where. |
-| 3 | *The transfer function of subset-sum landscapes* | 14 pp. Complete. The transfer function `Φ`, the tilt, and the `λ²` correction law. |
-| 4 | *Bias, randomness, and an exact coarse-graining identity* | 16 pp. In progress. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below. |
+| 1 | *The gap series of an integer sequence: an arithmetic invariant governing subset-sum landscapes* | **20 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1)2^(−k)`, the exact stratification, and the modulus-4 obstruction. |
+| 2 | *Asymptotic flatness of subset-sum landscapes of primes: the sub-peak spectrum and the constant √3/2* | **31 pp. No hypothesis, but not fully written out.** Two steps of the deep-minor-arc proposition — a substitution of a quoted exponential-sum bound, and an excision — are not written to referee standard, and the main theorem says so in its own statement. One constant is ineffective via Siegel–Walfisz; the effective substitute is the weaker rate `e^(1/8)·√3/2 = 0.98134…`, which still gives the conclusion. |
+| 3 | *The transfer function of subset-sum landscapes: rigidity of the gap series off centre* | **14 pp. Its two headline theorems are proof skeletons.** The analytic ingredients are proved; what is missing is the Edgeworth expansion of a classical local-limit computation, and each theorem names that gap in its own statement. The transfer function `Φ` is verified against exact computation on four profiles. |
+| 4 | *Bias, randomness, and an exact coarse-graining identity* | **17 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
 
 The technical spine of paper 4, and the one result that reaches outside this programme:
 
@@ -45,15 +51,21 @@ formula and by Fourier.
 
 ## The formal development
 
-Everything settled lives in `lean/pnp/Pnp/Theory/` — **13 files, 120 theorems and lemmas**, Lean 4
+Everything settled lives in `lean/pnp/Pnp/Theory/` — **14 files, 125 theorems and lemmas**, Lean 4
 with Mathlib (`leanprover/lean4:v4.32.2`).
 
 - No declaration depends on `sorryAx`, or on any axiom beyond Lean's standard `propext`,
-  `Classical.choice` and `Quot.sound`. Each file ends with the `#print axioms` calls that say so.
-- The canon additionally passes an **independent kernel replay** (`lean4checker`, 14 modules),
+  `Classical.choice` and `Quot.sound`. The authority for that is the build's own
+  `depends on axioms` output, not a grep of the source: a keyword search cannot distinguish a
+  `sorry` from the comment saying there is none.
+- The canon additionally passes an **independent kernel replay** (`lean4checker`, **16 modules**),
   which discards the elaborator and the tactic framework and rebuilds every constant from the
   imports through the kernel alone. The harness runs three deliberately poisoned modules first
   and refuses to report a pass unless all three are rejected: `tools/check_lean.ps1`.
+- **The canon is the import closure of the root module, not the contents of a folder.** A file
+  that nothing imports is neither built nor replayed while still sitting in the canon directory
+  looking canonical — that happened here, for several rounds, to a file no paper cited. The
+  harness now computes the closure and exits non-zero if any `Pnp/Theory` file is outside it.
 - Formal validity and statement fidelity are treated as **two different questions**. The kernel
   replay answers the first. For the second, load-bearing statements are proved twice by unrelated
   routes — an independent kernel cannot tell you a theorem is not vacuously true.
@@ -66,7 +78,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **114 scripts, 172 logs**, all committed. A number with no log is treated as a number
+itself — **115 scripts, 182 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```
@@ -82,6 +94,8 @@ python3 tools/check.py
 | C5 | naming convention |
 | C6 | pending methodology notes are surfaced, not lost |
 | C7 | every Lean name the papers cite exists in the canon |
+| C8 | every theorem, proposition, lemma and corollary declares its status at the statement |
+| C9 | every count stated in this README matches the repository |
 
 Papers are built with `pdflatex` (`paper/Makefile`). The Lean development builds with `lake build`.
 
