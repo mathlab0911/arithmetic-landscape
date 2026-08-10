@@ -1011,25 +1011,30 @@ $M_{\mathrm{odd}}$ of \S\ref{sec:modfour}, under any name.
 This programme began with local search on subset-sum instances, and the invariant answers a
 question one asks there. If a local-search procedure ends at a uniformly chosen strict local
 minimum, the expected number of attempts before landing on a ground state is $\lm/\deg$, and
-papers 1--3 say that number converges to $\Gamma(A)$ --- \emph{computable from $A$ alone,
-without solving a single instance, and independent of the target}. For the odd numbers it is
-$3$; for the primes, $5.3492\ldots$
+papers 1--3 predict that this number converges to $\Gamma(A)$ --- \emph{computable from $A$
+alone, without solving a single instance, and independent of the target}. For the odd numbers
+it is $3$; for the primes, $5.3492\ldots$ Two conditions are attached to that sentence and we
+attach them here rather than leaving them in paper~3: the convergence is a
+\emph{proof skeleton} there, not a theorem (paper~3, Theorem~3.1, whose missing ingredient is
+named in its own statement), and the uniformity of the terminal distribution is an assumption
+about the search, not a fact about the landscape.
 
-Theorem~\ref{thm:fair} then says something with an algorithmic flavour and a proof:
-\emph{no Bernoulli bias helps}. Sampling configurations with a biased coin instead of a fair
-one multiplies the ratio by $\Gamma^{(q)}/\Gamma\ge1$, strictly for $q\ne\tfrac12$. A whole
-natural one-parameter family of restart heuristics therefore cannot beat the uniform one on
-this statistic, and \S\ref{sec:phiq} adds that the biased landscape also acquires a
-\emph{first-order} sensitivity to the target that the fair one does not have --- it is worse
-in two ways at once.
+Theorem~\ref{thm:fair} is the part of this subsection that has a proof, and it is a statement
+about \emph{sampling}, not about search dynamics: drawing configurations with a biased coin
+instead of a fair one multiplies the ratio by $\Gamma^{(q)}/\Gamma\ge1$, strictly for
+$q\ne\tfrac12$. So a natural one-parameter family of sampling rules cannot beat the fair coin
+on this statistic --- which is a claim about the statistic, and becomes a claim about a
+restart heuristic only under the uniformity assumption just named.
+Section~\ref{sec:phiq} adds that the biased landscape also acquires a \emph{first-order}
+sensitivity to the target that the fair one does not have.
 
-Two caveats, and they are the reason this is an outlook and not a theorem about algorithms.
-A count of local minima is not a distribution over basins of attraction: real local search
-does not terminate uniformly, and the ratio bounds the wrong quantity if the basins are very
-unequal. And nothing here addresses dynamics --- barrier heights, escape times, or the
-behaviour of any particular heuristic. What the invariant does supply is a target-independent
-constant that any such analysis has to be consistent with, and a proved statement that one
-obvious way to try to improve it does not.
+Behind the uniformity assumption is the reason this is an outlook and not a theorem about
+algorithms: a count of local minima is not a distribution over basins of attraction, and if
+the basins are very unequal the ratio bounds the wrong quantity. Nor does anything here
+address dynamics --- barrier heights, escape times, or the behaviour of any particular
+heuristic. What the invariant supplies is a target-independent constant that any such analysis
+has to be consistent with, together with a proved statement that one obvious way of trying to
+improve that constant does not improve it.
 \TODO{if this section is ever to make an algorithmic claim, the missing object is the
 basin-size distribution, not more landscape statistics.}
 
@@ -1042,10 +1047,17 @@ basin-size distribution, not more landscape statistics.}
       (\texttt{Pnp/Theory/OddPeaks.lean}); and the odd branch of Lemma~\ref{lem:moddclosed}
       itself, by the double-angle route (\texttt{Pnp/Theory/OddProd.lean},
       Remark~\ref{rem:doubleangle}). The canon also passes an independent kernel replay
-      (\texttt{lean4checker}, 14 modules, with a negative control).
-\item \emph{Proved}: Lemma~\ref{lem:termwise}, Theorem~\ref{thm:fair},
-      Corollary~\ref{cor:oddsclosed}; and Remark~\ref{rem:measurefree}'s derivation of
-      Definition~\ref{def:gq} modulo the biased flatness hypothesis, which is not yet stated.
+      (\texttt{lean4checker} replays every constant of the import closure of the root module
+      \texttt{Pnp} from the imports up, with a negative control). Each file named above is
+      inside that closure; a file present in the source tree but outside it is \emph{not}
+      replayed, and the harness now fails if one exists, so this sentence cannot quietly
+      become false.
+\item \emph{Proved}: Lemma~\ref{lem:termwise}, Theorem~\ref{thm:fair} and
+      Corollary~\ref{cor:oddsclosed}; Lemma~\ref{lem:coset} (twice) with
+      Corollaries~\ref{cor:floor} and~\ref{cor:cosetRq}; Theorem~\ref{thm:modfour} and
+      Lemma~\ref{lem:moddclosed}; Lemma~\ref{lem:vone}; and Theorem~\ref{prop:rate}, all
+      constants written out. Also Remark~\ref{rem:measurefree}'s derivation of
+      Definition~\ref{def:gq}, modulo the biased flatness hypothesis, which is not yet stated.
 \item \emph{Experimentally confirmed, with the range stated}: the point prediction
       (\S\ref{sec:e5}, two profiles, five $q$, three $k$), the stratum assignment
       (Remark~\ref{rem:assign}), the linear response under bias (\S\ref{sec:e6}).
@@ -1054,9 +1066,6 @@ basin-size distribution, not more landscape statistics.}
       point prediction confirmed against the naive alternative on $36$ discriminating rows
       (\S\ref{sec:e10}); the random-ensemble floor of \S\ref{sec:random}; the $c_d$
       verdict of \S\ref{sec:inherited}.
-\item \emph{Proved}: Lemma~\ref{lem:coset} (twice) with Corollaries~\ref{cor:floor}
-      and~\ref{cor:cosetRq}; Theorem~\ref{thm:modfour} and Lemma~\ref{lem:moddclosed};
-      Lemma~\ref{lem:vone}; and Theorem~\ref{prop:rate}, all constants written out.
 \item \emph{Interpretation, with nothing deduced from it}: the renormalisation reading of
       Lemma~\ref{lem:coset} (Remark~\ref{rem:renorm}) and the three questions of
       \S\ref{sec:outlook}.

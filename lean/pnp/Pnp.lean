@@ -14,3 +14,7 @@ import Pnp.Theory.ModFour
 import Pnp.Theory.OddPeaks
 import Pnp.Theory.OddProd
 import Pnp.Theory.CosetProd
+-- r117: Cyclotomic had been in Pnp/Theory, recorded as canon, and imported by nothing --
+-- so lake never built it and lean4checker never replayed it.  tools/check_lean.ps1 now
+-- fails (exit 4) if any Pnp/Theory file is outside this closure.
+import Pnp.Theory.Cyclotomic

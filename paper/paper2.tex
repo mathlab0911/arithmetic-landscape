@@ -29,6 +29,12 @@
 \newtheorem{remark}[theorem]{Remark}
 
 \newcommand{\Lean}[1]{\texttt{#1}}
+% r117.  Papers 3 and 4 have carried these two since they were written; paper 2 -- the paper
+% with the most to declare -- had neither, which is the mechanical reason its status notes
+% lived in remarks and abstracts instead of at the statements.  An external review found the
+% symptom; the cause was a missing macro.
+\newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
+\newcommand{\TODO}[1]{\textcolor{red}{[\textbf{TODO} #1]}}
 \DeclareMathOperator{\Main}{Main}
 
 \title{Asymptotic flatness of subset-sum landscapes of primes:\\
@@ -384,6 +390,16 @@ where
   \psi(\nu)=-\frac{\sqrt3}{2}\,\nu\,\frac{\Delta+\Delta_3/S_2}{S_2}.
 \end{equation}
 \end{proposition}
+
+\STATUS{derived, with the remainder \emph{measured} rather than bounded --- said here at the
+display, because the two are easy to confuse. The equality is obtained by Laplace's method at
+the saddle and the derivation is given below; the omitted cumulant contributions are named in
+Remark~\ref{rem:error}; but $E$ is controlled numerically on the tested range
+(Table~\ref{tab:k2}, Remark~\ref{rem:ripplerange}) and \emph{not} by a proved asymptotic
+bound. This is therefore an exact derivation with a numerically controlled remainder, not a
+theorem with a proved error term. Theorem~\ref{thm:t2main} inherits the distinction: its
+conclusion $\varepsilon_d\to0$ does not use $K_2$ beyond the unconditional bound of
+Remark~\ref{rem:whatneeded}, while its sharp constant $\sqrt3/2$ does.}
 
 \begin{proof}[Derivation]
 Laplace's method at the saddle $t^{*}=(L+i\nu)/V_6$ with $L=h'(0)$: the exponent

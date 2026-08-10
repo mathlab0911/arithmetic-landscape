@@ -173,6 +173,108 @@ rule      : F50 says that when a reader misses something the paper contains, tha
             other: do not dismiss a careful reader, and do not defer to an incurious one.
 ```
 
+## F55 — fourth instance, r117: "listed as canon" is not "checked"
+
+```
+claimed   : the canon is N Lean files in Pnp/Theory, all of them replayed through the kernel
+            by tools/check_lean.ps1 with a negative control -- said in the project memory, and
+            said in paper 4's Honest scope section
+actual    : Pnp/Theory/Cyclotomic.lean was imported by NOTHING.  lean4checker replays the
+            import closure of the root module `Pnp`, and `lake build` builds that same closure,
+            so the file was neither built nor replayed -- it simply sat in the canon directory
+            looking canonical.  It had been there for several rounds.  No paper cites it, so no
+            published claim was affected; the bookkeeping was wrong, not the mathematics.
+check     : compute the import closure of the root module and diff it against the directory.
+            Twenty lines, and it names the orphan immediately.  Negative control: delete one
+            import line and confirm the check reports exactly that module.
+rule      : F55's shape again -- the control must be on the property you mean, not a proxy.
+            "The file is in the canon directory" is a proxy for "the kernel replayed it", and
+            the two come apart precisely when someone adds a file and forgets the import, which
+            is the only case you were checking for.  *** A membership list maintained by hand
+            is not a property of the build.  Make the build compute it. ***  check_lean.ps1 now
+            exits 4 if a Pnp/Theory file is outside the closure.
+```
+
+## r117: when a discipline is applied unevenly, look for the missing tool before blaming the habit
+
+```
+claimed   : (external review) papers 3 and 4 label the status of every claim while paper 2
+            leaves its caveats in the abstract and in remarks -- read as a discipline we apply
+            inconsistently, and I accepted that reading and started fixing prose
+actual    : paper 2 had no \STATUS macro.  Papers 3 and 4 define \STATUS and \TODO in their
+            preambles; paper 2 defined neither, so a status tag there was not merely unwritten,
+            it did not compile.  Found only because the first tag I typed threw "Undefined
+            control sequence" -- i.e. the compiler diagnosed the cause after the reviewer had
+            diagnosed the symptom.
+check     : before concluding that an artefact fails to follow a practice, grep the artefacts
+            for the MACHINERY of that practice and compare.  One grep across four files:
+            `def:0 uses:1` for paper 2 against `def:1 uses:33` for papers 3 and 4.
+rule      : an uneven practice across sibling artefacts usually has a mechanical cause, and the
+            mechanical cause is cheaper to find and cheaper to fix than the habit.  Check
+            whether the tool is present in all of them BEFORE writing prose fixes one by one --
+            otherwise you repair instances of a defect whose source keeps producing more.
+```
+
+## r117: a check scoped to "everything" is a check that gets switched off
+
+```
+claimed   : the closure check should require every .lean file under Pnp/ to be reachable from
+            the root -- the natural first statement of the rule
+actual    : Pnp/Experiments holds ten files that are DELIBERATELY outside the closure (scratch
+            work, not claims).  The rule as first written flags all ten, so the check fails on
+            a correct tree, every run, forever.  A check that always fails is a check that is
+            read once and then ignored -- worse than no check, because its presence is taken
+            for coverage.
+check     : run the new check on the CURRENT tree before believing its rule.  If it fails on a
+            state you consider correct, the rule is wrong, not the tree.
+rule      : scope a check to the property you actually mean, and make the exclusion visible
+            rather than silent -- the harness prints "10 file(s) deliberately outside" instead
+            of quietly skipping them, so the exclusion can be audited and cannot grow unnoticed.
+            Related to F32 (is the observable the one the hypothesis predicts?): here the
+            observable was right and the DOMAIN was too large.
+```
+
+## r117: a keyword search cannot tell a thing from the sentence denying it
+
+```
+claimed   : a `sorry` audit over the canon reported FIVE hits, in five different files
+actual    : all five were the line
+              -- Audit trail: no `sorry`, and no axioms beyond Lean's three.
+            i.e. the search reported the DOCUMENTATION OF AN ABSENCE as the presence of the
+            thing.  Had I trusted it, I would have gone looking for five proof holes that do
+            not exist; had the polarity been reversed -- a whitelist search for a required
+            marker -- a comment would have satisfied it and a missing marker would have passed.
+check     : exclude comments, and then ask what the AUTHORITATIVE evidence is.  For `sorry` it
+            is not the source text at all: it is the build's own `depends on axioms` output,
+            which prints [propext, Classical.choice, Quot.sound] per theorem and cannot be
+            written by a comment.  `sorryAx` would appear there.
+rule      : a textual search for a keyword matches every mention of it, including the sentence
+            asserting it is absent -- and files that are careful enough to document the absence
+            are exactly the files that will trip the search.  *** Prefer evidence the artefact
+            cannot produce about itself: a compiler's output over its source, a log over a
+            claim in the log's header. ***  Where a grep is the only option, exclude comments
+            and print the matched LINE, never just the count -- the count alone reads as five
+            defects.
+```
+
+## r117: a claim about your own verification apparatus is a measurement
+
+```
+claimed   : paper 4's Honest scope read "lean4checker, 14 modules, with a negative control"
+actual    : the closure is 15 modules, and the moment I fixed the Cyclotomic import it became
+            16 -- so the corrected number would have gone stale inside the same round that
+            corrected it.  Nothing in check.py covers this: C2/F19 checks numbers in TABLES
+            against experiment logs, and a number in prose about our own infrastructure has no
+            log to be checked against.
+check     : ask what makes the number go stale.  If the answer is "an unrelated file", the
+            number is the wrong thing to publish.
+rule      : prefer a published claim that is invariant under routine work.  Paper 4 now states
+            the PROPERTY -- every file it names is inside the replayed closure, and the harness
+            fails if a canon file is outside it -- and states no count, because the count is a
+            fact about the tree that changes and the property is a fact about the check that
+            does not.  Counting is fine in a report, which is dated; a paper is not dated.
+```
+
 ## F55 — a search over a net needs a positive control
 
 ```

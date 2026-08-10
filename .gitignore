@@ -17,6 +17,14 @@
 paper/*.log
 paper/*.png
 
+# Compiled python bytecode (two .pyc files had been tracked; untracked in r117)
+__pycache__/
+*.pyc
+
+# Transient build logs written by tools run from outside the repo
+lean/pnp/r117_build.log
+lean/pnp/r117_build.err
+
 # OS cruft
 Thumbs.db
 .DS_Store
