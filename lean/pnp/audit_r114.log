@@ -1,0 +1,142 @@
+====================================================================================================
+(A) THE THREE ERROR TERMS, MEASURED ONE AT A TIME (F28).
+    Each column is compared with its OWN claimed bound, not with the total.
+====================================================================================================
+
+  --- N = 8001, Q = 89, M = 5.0371
+       q   a  beta/box    |T0-T1|    |T1-T2|   bd(iii)    |T2-T3|    bd(ii)    |T3-T4|     bd(i)   T4-floor
+       3   1      0.37   1.92e-03   1.71e-04    0.0038   3.96e-05    0.2390   1.96e-04    0.2314   2.28e-01
+       4   1      0.37   2.77e-03   0.00e+00    0.0050   5.57e-04    0.2440   3.46e-05    0.2339   3.39e-01
+       4   3      0.37   2.75e-03   0.00e+00    0.0050   2.93e-04    0.2440   3.46e-05    0.2339   3.39e-01
+       5   1      0.37   2.52e-04   0.00e+00    0.0063   1.08e-04    0.2491   1.71e-04    0.2365   1.35e-01
+       5   3      0.37   1.70e-03   0.00e+00    0.0063   2.92e-04    0.2491   1.71e-04    0.2365   1.35e-01
+       6   1      0.37   8.12e-03   1.72e-04    0.0076   2.86e-04    0.2541   2.19e-04    0.2390   2.28e-01
+       8   1      0.37   6.09e-04   2.22e-16    0.0101   1.55e-04    0.2642   3.64e-05    0.2440   1.67e-01
+       8   3      0.37   2.15e-03   0.00e+00    0.0101   4.90e-04    0.2642   3.64e-05    0.2440   1.67e-01
+       9   1      0.37   2.32e-04   5.47e-05    0.0113   4.60e-04    0.2692   2.34e-04    0.2465   7.33e-02
+      16   1      0.37   4.03e-04   1.11e-16    0.0201   1.32e-04    0.3045   3.43e-06    0.2642   8.15e-02
+      16   3      0.37   2.90e-04   0.00e+00    0.0201   4.42e-04    0.3045   3.43e-06    0.2642   8.15e-02
+      89   1      0.37   1.84e-03   9.29e-05    0.1121   1.52e-03    0.6721   5.34e-07    0.4480   3.65e-03
+      89   3      0.37   3.45e-04   2.10e-04    0.1121   1.94e-04    0.6721   5.34e-07    0.4480   3.65e-03
+
+  --- N = 32001, Q = 178, M = 5.7302
+       q   a  beta/box    |T0-T1|    |T1-T2|   bd(iii)    |T2-T3|    bd(ii)    |T3-T4|     bd(i)   T4-floor
+       3   1      0.37   7.10e-04   4.24e-05    0.0011   3.70e-06    0.1323   3.02e-05    0.1302   2.29e-01
+       4   1      0.37   1.36e-03   1.11e-16    0.0014   1.32e-05    0.1338   1.57e-05    0.1309   3.44e-01
+       4   3      0.37   1.36e-03   2.22e-16    0.0014   6.21e-06    0.1338   1.57e-05    0.1309   3.44e-01
+       5   1      0.37   1.68e-04   0.00e+00    0.0018   4.33e-05    0.1352   3.02e-05    0.1316   1.36e-01
+       5   3      0.37   6.10e-04   0.00e+00    0.0018   1.79e-05    0.1352   3.02e-05    0.1316   1.36e-01
+       6   1      0.37   3.38e-03   1.17e-04    0.0021   1.03e-04    0.1366   1.17e-04    0.1323   2.30e-01
+       8   1      0.37   4.51e-04   1.11e-16    0.0029   6.17e-05    0.1395   6.53e-05    0.1338   1.71e-01
+       8   3      0.37   8.99e-04   0.00e+00    0.0029   6.12e-07    0.1395   6.53e-05    0.1338   1.71e-01
+       9   1      0.37   3.62e-05   9.82e-05    0.0032   8.38e-05    0.1409   4.70e-05    0.1345   7.49e-02
+      16   1      0.37   2.50e-04   1.11e-16    0.0057   5.33e-05    0.1510   2.63e-05    0.1395   8.44e-02
+      16   3      0.37   3.93e-05   0.00e+00    0.0057   1.65e-05    0.1510   2.63e-05    0.1395   8.44e-02
+     178   1      0.37   9.06e-04   3.33e-04    0.0637   8.35e-04    0.3830   2.04e-05    0.2555   5.69e-03
+     178   3      0.37   4.31e-04   5.91e-04    0.0637   2.32e-04    0.3830   2.04e-05    0.2555   5.69e-03
+
+  --- N = 128001, Q = 357, M = 6.4262
+       q   a  beta/box    |T0-T1|    |T1-T2|   bd(iii)    |T2-T3|    bd(ii)    |T3-T4|     bd(i)   T4-floor
+       3   1      0.37   2.83e-04   1.01e-05    0.0003   1.08e-05    0.0730   1.70e-06    0.0724   2.30e-01
+       4   1      0.37   5.76e-04   1.11e-16    0.0004   3.58e-06    0.0734   2.73e-06    0.0726   3.45e-01
+       4   3      0.37   5.76e-04   1.11e-16    0.0004   3.64e-06    0.0734   2.73e-06    0.0726   3.45e-01
+       5   1      0.37   8.60e-05   0.00e+00    0.0005   7.53e-06    0.0738   1.65e-06    0.0728   1.37e-01
+       5   3      0.37   2.25e-04   1.11e-16    0.0005   6.68e-06    0.0738   1.65e-06    0.0728   1.37e-01
+       6   1      0.37   1.41e-03   1.86e-05    0.0006   3.79e-05    0.0742   7.49e-07    0.0730   2.31e-01
+       8   1      0.37   2.21e-04   2.22e-16    0.0008   1.88e-05    0.0750   4.52e-06    0.0734   1.72e-01
+       8   3      0.37   3.53e-04   1.11e-16    0.0008   7.59e-06    0.0750   4.52e-06    0.0734   1.72e-01
+       9   1      0.37   1.36e-05   1.07e-05    0.0009   1.17e-05    0.0754   4.67e-06    0.0736   7.59e-02
+      16   1      0.37   1.20e-04   2.22e-16    0.0016   2.85e-06    0.0782   8.35e-06    0.0750   8.54e-02
+      16   3      0.37   5.87e-05   1.11e-16    0.0016   2.13e-05    0.0782   8.35e-06    0.0750   8.54e-02
+     357   1      0.37   4.64e-04   5.82e-04    0.0358   4.26e-04    0.2152   2.17e-06    0.1435   9.10e-04
+
+  worst measured, over everything above:
+     weight: 0.000e+00   at (N,q,a,beta/box) = None
+        iii: 8.484e-04   at (N,q,a,beta/box) = (8001, 89, 3, 1.0)
+         ii: 1.150e-02   at (N,q,a,beta/box) = (8001, 9, 1, 1.0)
+          i: 1.142e-02   at (N,q,a,beta/box) = (8001, 3, 1, 1.0)
+
+  NO VIOLATION: every error term stays inside its own claimed bound, and the
+  integral of the coset average never falls below the floor.  The marked spot (ii)
+  is the largest of the three in absolute terms -- see the column -- but it is the
+  one with the largest bound too.
+
+====================================================================================================
+(B) IS THE JITTER BOUND THE RIGHT SHAPE?  (my marked spot, pressed harder)
+    Writing the derivation out properly SHARPENS it: the jitter is eps = m_j beta with
+    m_j <= 2v, and the progression step is eta = 2 v beta, so *** eps <= eta exactly ***.
+    The per-class error is then at most eps.V/eta <= V <= 2M(L+1) -- the same shape as
+    error (i), not a separate mechanism -- giving 4qM/N + 4M/(Q+1) in the mean, which is
+    HALF what r113 claimed.  The paper's bound is therefore valid and generous.
+    What must still be true: the jitter vanishes at beta = 0 and grows with |beta|.
+====================================================================================================
+    q =   3:
+       beta/box  L=N|beta|     |T2-T3|   bound 4qM(L+1)/N
+          0.000     0.0000   0.000e+00           0.002149
+          0.125     7.4490   1.888e-05           0.018155
+          0.250    14.8980   8.719e-05           0.034161
+          0.500    29.7961   5.898e-04           0.066173
+          1.000    59.5922   2.177e-03           0.130198
+    q =   8:
+       beta/box  L=N|beta|     |T2-T3|   bound 4qM(L+1)/N
+          0.000     0.0000   0.000e+00           0.005730
+          0.125     2.7934   5.915e-05           0.021736
+          0.250     5.5868   7.595e-05           0.037742
+          0.500    11.1735   9.089e-05           0.069755
+          1.000    22.3471   1.358e-03           0.133779
+    q =  89:
+       beta/box  L=N|beta|     |T2-T3|   bound 4qM(L+1)/N
+          0.000     0.0000   0.000e+00           0.063746
+          0.125     0.2511   3.573e-04           0.079753
+          0.250     0.5022   2.486e-04           0.095759
+          0.500     1.0044   8.086e-07           0.127771
+          1.000     2.0087   0.000e+00           0.191796
+    The measured jitter vanishes at beta = 0 and grows with |beta|, inside a bound that
+    also grows with |beta| -- consistent.  It is not linear in beta: the difference of
+    two oscillating sums is not a smooth function of beta, and the bound is two orders
+    of magnitude loose, so the growth rate carries no information beyond its sign.
+
+====================================================================================================
+(C) ADVERSARIAL SEARCH.  Not a uniform net: hunt directly for a minor theta where the
+    weighted mean falls below (1/2) log 2, using the structure of the claim against it
+    (near-rational points with small v, and the worst beta inside each box).
+====================================================================================================
+    adversarial minimum over 178 moduli x all numerators x 9 offsets:
+      G = 0.346574 at (q,a,beta/box,theta) = (4, 1, np.float64(0.0), np.float64(0.25))
+      (1/2) log 2 = 0.346574     shortfall = -1.110e-16
+    no minor theta beats the floor
+
+====================================================================================================
+(D) END-TO-END ON REAL INSTANCES.  Draw A from the Cramer model, compute
+    max over minor theta of F_A(theta)^(1/b), and ask whether the excess over 1/sqrt2
+    is BOUNDED (a constant factor, as rem:notmax says) or GEOMETRIC (theorem false).
+====================================================================================================
+    *** THE FIRST VERSION OF THIS TEST WAS BROKEN, AND ITS CONTROL DID NOT NOTICE. ***
+    A uniform net of 30001 points has spacing 1.7e-5 while the peak at theta = 1/4 is
+    O(1/N) = 7.8e-6 wide at N = 128001, so the scan stepped over it and reported a
+    MAXIMUM of 0.5690 -- below a value it had itself evaluated.  The control passed
+    anyway, because it checked F_A(1/4) rather than checking that THE SEARCH FINDS 1/4.
+    F55 says a search needs a positive control; the control must be on the search.
+    Repaired: the peaks live at rationals, so evaluate at every a/q with q <= 20 and
+    sweep +-5/N around each, and gate the row on the search recovering theta = 1/4.
+          N      b  max F^(1/b)   - 1/sqrt2  b log(sqrt2 max)    argmax  control
+       2001    322     0.707107   1.221e-15            0.0000   0.25000     True
+       8001   1024     0.707107   1.887e-15            0.0000   0.25000     True
+      32001   3496     0.707107   2.465e-14            0.0000   0.75000     True
+     128001  11804     0.707107  -1.077e-14           -0.0000   0.25000     True
+    CONTROL, correctly placed this time: the search must LOCATE theta = 1/4 and return
+    1/sqrt2 there.  A False invalidates the row rather than refuting the theorem.
+    The theorem predicts the last column stays O(1) while b grows; a column growing
+    linearly in b would mean a geometric excess and would refute thm:rate.
+    SCOPE OF THIS ROW (F01): it shows the maximum does not EXCEED 1/sqrt2 geometrically.
+    It does not reproduce the O(1/b) excess of rem:notmax, whose optimal offset is of
+    order 1/(N sqrt b) and finer than this grid; that remains measured in mq4_r107.
+
+====================================================================================================
+VERDICT
+====================================================================================================
+  (A) three error terms inside their bounds : YES
+  (C) adversarial search found no breach    : YES
+  (D) read the last column: O(1) supports thm:rate, linear-in-b refutes it.
+  This is a self-audit.  It cannot replace the independent read by the other model,
+  and the report says so.

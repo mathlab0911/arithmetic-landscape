@@ -41,6 +41,23 @@ rule      : the extremiser of one factor of a product or ratio is not the extrem
             worst case in range": first find out where the worst case IS.)
 ```
 
+## F55 — second instance, r114: the control must be on the SEARCH, not on the function
+
+```
+claimed   : "positive control passed" on an end-to-end scan for max F_A(theta)^(1/b)
+actual    : the scan reported a MAXIMUM of 0.5690 while having itself evaluated 0.7071 at
+            theta = 1/4 — a maximum below a value it had computed.  The net had spacing
+            1.7e-5 and the peak is O(1/N) = 7.8e-6 wide.
+check     : the control asserted `|F_A(1/4) - 1/sqrt2| < 1e-12`, which is a property of the
+            FUNCTION and is true whatever the net does.  The control that works asserts
+            `|argmax - 1/4| < 3/N`, which is a property of the SEARCH.
+rule      : F55 written one round earlier said "a search needs a control point whose answer is
+            known".  It is not enough for the control point to be evaluated: the control must
+            be the assertion that THE SEARCH RETURNS IT.  Write the control as a statement
+            about the search's output, never about the integrand.  (F37's recursion, again:
+            the round that writes a lesson is the round most likely to violate it.)
+```
+
 ## F55 — a search over a net needs a positive control
 
 ```

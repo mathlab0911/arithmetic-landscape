@@ -768,10 +768,11 @@ period, so for a progression of step $\eta$ over an arc of length $L$,
 $\bigl|\sum_rX^{(M)}-\eta^{-1}\!\int\bigr|\le2M(L+1)$. There are $v$ classes and $\asymp N/2$
 terms in all, so in the mean this costs at most $4qM/N+4M/(Q+1)$, using $v|\beta|\le1/(Q+1)$.
 
-\emph{(ii) Jitter.} Replacing the arc of class $j$ by the common arc costs
-$|m_j\beta|\le2v|\beta|=(2v/N)L$ in translation, and translating a function of variation
-$V\le2M(L+2)$ by $\epsilon$ changes its integral by at most $\epsilon V$; per element this is at
-most $8qM/N+4M/(Q+1)$.
+\emph{(ii) Jitter.} Replacing the arc of class $j$ by the common arc is a translation by
+$\epsilon=m_j\beta$, and $m_j\le2v$ while the progression step is $\eta=2v\beta$, so
+$|\epsilon|\le|\eta|$ \emph{exactly}. Translating by $\epsilon$ changes the integral by at most
+$\epsilon V$, so the per-class error is at most $\epsilon V/\eta\le V\le2M(L+1)$ --- the same
+shape as (i), and not a separate mechanism at all. Per element, $4qM/N+4M/(Q+1)$.
 
 \emph{(iii) Unequal class counts.} They differ by at most $1$, costing $vM$ in the sum, i.e.\
 $2qM/N$ in the mean.
@@ -782,7 +783,7 @@ particular \emph{no case distinction on the length of the sweep} --- which is wh
 route robust in $Q$ where an arc-comparison design is not. Collecting,
 \[
    \frac{\sum_m p_mX^{(M)}_m(\theta)}{\sum_m p_m}\;\ge\;\Bigl(1-\frac1v\Bigr)\log2
-   \;-\;E,\qquad E\;\le\;\frac{14\,qM}{N}+\frac{8M}{Q+1}.
+   \;-\;E,\qquad E\;\le\;\frac{10\,qM}{N}+\frac{8M}{Q+1}.
 \]
 \emph{Both terms are minimised together at $Q=\lfloor\sqrt N\rfloor$, where $E=O(M/\sqrt N)$} ---
 which is why the Dirichlet parameter is $\sqrt N$ and not, as one first writes, $N$. At $Q=N$ the
@@ -800,7 +801,10 @@ condition to check.
 $1.9\cdot10^{-3},5.8\cdot10^{-4},1.7\cdot10^{-4},4.8\cdot10^{-5}$ at
 $N=2001,8001,32001,128001$, and $\mathrm{deficit}\cdot N/(qM)$ is
 $0.3057,0.3140,0.3199$ at $N=8001,32001,128001$ --- constant, i.e.\ the measured deficit has
-exactly the derived shape $qM/N$; \texttt{stab\_r110}, \texttt{rate\_r112}}
+exactly the derived shape $qM/N$. Errors (i), (ii), (iii) are additionally isolated and measured
+\emph{one at a time} against their own bounds, over three sizes, eight moduli and three offsets,
+worst values $1.1\cdot10^{-2}$, $1.2\cdot10^{-2}$ and $8.5\cdot10^{-4}$ against bounds of order
+$10^{-1}$; \texttt{stab\_r110}, \texttt{rate\_r112}, \texttt{audit\_r114}}
 
 \emph{Step $2''$ (the three moduli with $v\le2$, and the major arc).} Corollary~\ref{cor:floor}
 gives $\tfrac12\log2$ at $q=4$ ($v=2$) and nothing at all at $q\in\{1,2\}$ ($v=1$). The last two

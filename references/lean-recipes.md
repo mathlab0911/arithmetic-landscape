@@ -92,6 +92,26 @@ the goal, use `Eq.trans`/`calc`, not `rw`.
 `Finset.prod_mul_distrib` are *not* abstracted, and then `rw [h]` goes the wrong way. Prove the
 lemmas with the full expressions first and `set` at the end, when everything is in place.
 
+### T3b. The route for `lem:coset`, prepared but NOT attempted (r114)
+The general coset identity `∏_{k<v}|cos π(t+k/v)| = 2^{1-v}|cos π(vt+τ_v)|` is now paper 4's §2
+and is **not formalised**; `OddProd.lean` covers only `t = 0`, `v` odd. The double-angle
+bijection does **not** generalise to `t ≠ 0`: it relates `S(2t)` to `S(t)C(t)`, where `S` is the
+sine product, and closing it needs the sine multiplication formula — which is the statement
+itself. So roots of unity are unavoidable here. The shortest paper proof, written out so the
+next session starts warm:
+
+```
+|cos πu| = |1 + e^{2πiu}|/2 ,  w = e^{2πit} ,  ζ = e^{2πi/v}
+∏_{k<v}(X - ζ^k) = X^v - 1                      -- Polynomial.X_pow_sub_one_eq_prod
+X = -1/w  ⟹  ∏_{k<v}(1 + w ζ^k) = 1 - (-1)^v w^v
+v odd  : |1 + w^v| = 2|cos πvt|          v even : |1 - w^v| = 2|sin πvt| = 2|cos π(vt+½)|
+```
+
+Mathlib entry points to try first: `Complex.isPrimitiveRoot_exp`,
+`Polynomial.X_pow_sub_one_eq_prod`, then `Polynomial.eval` at `-1/w` and `Complex.abs` on both
+sides. Budget it as a whole round, not as a tail-end task: the awkward step is moving between
+`Polynomial` evaluation and a bare `Finset.prod` over `ℂ`, and every compile here is ~5 minutes.
+
 ### T4. `try ring` leaves its suggestion in the log
 When `ring` fails inside `try`, the error is swallowed but the *"Try this: ring_nf"* message is
 still printed, which looks like a failure in a log that is meant to be clean. Use `try ring_nf`.
