@@ -41,6 +41,25 @@ rule      : the extremiser of one factor of a product or ratio is not the extrem
             worst case in range": first find out where the worst case IS.)
 ```
 
+## Append to F41 (render the PDF and look at it) — third instance, r115  [ASSERTED in build.py]
+
+```
+claimed   : book/build.py's two guards (unbalanced <div>, literal ** or #) make a successful
+            build trustworthy
+actual    : a ``` fenced block with no 'fenced_code' extension is not an error -- the parser
+            silently emits it as ONE RUN-ON PARAGRAPH.  The diagram in volume 4 chapter 52
+            came out as unreadable prose, the build printed "wrote", both guards passed.
+            *** Volume 3 had shipped with the same defect, unnoticed. ***
+check     : render the page to an image and look at it (F41's own rule, which is what found
+            it), and then assert it: `if '```' in html: abort`.
+rule      : F41 already says render and look.  The addition is about the GUARDS: a guard set
+            catches the failure modes you have already met, so a build that passes its guards
+            is not a build that is correct -- keep rendering.  And every new markdown feature
+            used for the first time is a new failure mode: check that the extension list
+            actually supports it.  (build.py now also sets a monospace family for `pre`;
+            ASCII art in a proportional serif face is legible but misaligned.)
+```
+
 ## F55 — second instance, r114: the control must be on the SEARCH, not on the function
 
 ```

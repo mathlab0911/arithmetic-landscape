@@ -107,10 +107,27 @@ X = -1/w  ⟹  ∏_{k<v}(1 + w ζ^k) = 1 - (-1)^v w^v
 v odd  : |1 + w^v| = 2|cos πvt|          v even : |1 - w^v| = 2|sin πvt| = 2|cos π(vt+½)|
 ```
 
-Mathlib entry points to try first: `Complex.isPrimitiveRoot_exp`,
-`Polynomial.X_pow_sub_one_eq_prod`, then `Polynomial.eval` at `-1/w` and `Complex.abs` on both
-sides. Budget it as a whole round, not as a tail-end task: the awkward step is moving between
-`Polynomial` evaluation and a bare `Finset.prod` over `ℂ`, and every compile here is ~5 minutes.
+**Reconnaissance done in r115 — read this before starting, it saves the first hour.**
+
+- `Polynomial.X_pow_sub_one_eq_prod (hpos : 0 < n) (h : IsPrimitiveRoot ζ n) :
+  X ^ n - 1 = ∏ ζ ∈ nthRootsFinset n (1 : R), (X - C ζ)` exists, in
+  `RingTheory/Polynomial/Cyclotomic/Basic.lean`. **It is indexed by `nthRootsFinset`, not by
+  `Finset.range n` with `ζ ^ i`**, so the first real step is a conversion between the two. That
+  conversion is not a one-liner in the source I could find.
+- `Complex.isPrimitiveRoot_exp` is in `RingTheory/RootsOfUnity/Complex.lean`.
+- **Mathlib has no sine/cosine multiplication formula.** Searched
+  `Analysis/SpecialFunctions/Trigonometric/*` for products over `Finset`: nothing.
+- **The identity is multiplicative in `v`, so only primes are needed.** With
+  `P_v(x) = ∏_{k<v}|2 sin π(x+k/v)|` and `v = ab`, splitting `k = i + a j` gives
+  `{x + k/v} = ⋃_{i<a}{(x + i/v) + j/b}`, hence `P_v(x) = ∏_{i<a} P_b(x + i/v)`, and if
+  `P_b(y) = 2|sin πby|` this is `P_a(bx) = 2|sin πvx|`. The case `v = 2` is the double-angle
+  formula. **So an induction that handles odd primes closes everything** — that is the shape to
+  aim for, and it may well be cheaper than the root-of-unity route.
+- What the paper actually needs is the INEQUALITY `∏_{k<v}|cos π(t+k/v)| ≤ 2^{1-v}`
+  (`cor:floor` in multiplicative form). State it that way, **not** as a bound on
+  `∑ -log|cos|`: Lean's `Real.log 0 = 0` makes the additive form FALSE at a pole (take `v = 2`,
+  `t = 1/2`: the sum reads `0`, the claimed floor is `½log2`). The multiplicative form is true
+  there and is the form the minor-arc argument uses anyway.
 
 ### T4. `try ring` leaves its suggestion in the log
 When `ring` fails inside `try`, the error is swallowed but the *"Try this: ring_nf"* message is
