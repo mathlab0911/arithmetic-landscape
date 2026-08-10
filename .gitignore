@@ -57,3 +57,8 @@ lean/pnp/nanoda*_r111.log
 lean/pnp/r112.log
 lean/pnp/pnp.export
 outgoing/
+
+# Model-to-model design documents and section drafts. Internal working
+# material, kept on disk and deliberately out of the repository (r117).
+lean/pnp/spec_*.md
+lean/pnp/paper2_*.md
