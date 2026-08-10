@@ -97,6 +97,26 @@ rule      : F55 written one round earlier said "a search needs a control point w
             the round that writes a lesson is the round most likely to violate it.)
 ```
 
+## F55 — third instance, r115: "does it exist" is not "is it restored"
+
+```
+claimed   : the six working directories were safely restored after the history rewrite --
+            the restore loop printed "restored" or "already present" for each and I believed it
+actual    : paper-ja held 7 files of 24 and docs held 1 of 5.  The rewrite had deleted the
+            TRACKED files from the working tree while the gitignored build artefacts (.aux,
+            .out, .toc) stayed behind, so the directory still existed -- and my guard was
+            `if (-not (Test-Path $d))`, which therefore skipped exactly the two directories
+            that needed the copy most.
+check     : compare the file COUNT against the backup, per directory, and print both numbers.
+            Three lines, and it names the two bad directories immediately.
+rule      : F55 says the control must be on the search, not the function.  Same shape here:
+            the control must be on the QUANTITY YOU CARE ABOUT, not on a proxy that correlates
+            with it.  "The directory exists" is a proxy for "the directory was restored" and
+            they come apart exactly when a partial deletion has occurred -- which is the only
+            situation in which you were checking.  Whenever a guard short-circuits work, ask
+            what it would do in the failure case you are guarding against.
+```
+
 ## F55 — a search over a net needs a positive control
 
 ```
