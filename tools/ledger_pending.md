@@ -7,6 +7,32 @@ Full text of entries already folded in lives in `tools/ledger_archive.md`.
 
 ---
 
+## r117: "force push" is not "deleted", and the identity in a commit is a published claim
+
+```
+claimed   : after git filter-repo and a force push, the design documents were gone -- every
+            local check agreed: 0 tracked, 0 paths anywhere in history, 404 on main
+actual    : GitHub keeps unreachable objects, and the OLD COMMIT SHA still served the full file.
+            The local checks were all true and all irrelevant: they measured the repository I
+            control, not the one the reader sees. Only deleting and recreating the repository
+            actually removed it. The same thing then happened a second time with commit
+            identity -- the visible history was clean and an orphaned SHA still showed the wrong
+            account.
+check     : fetch the artefact from OUTSIDE, by the route a reader would use, with a positive
+            control alongside it -- an empty response means nothing until a URL you expect to
+            work returns content. Then repeat for an old SHA, not just for the branch tip.
+rule      : *** rewriting history changes what is REACHABLE, not what is STORED. *** For content
+            that must actually be gone from a hosted repository, delete and recreate it; there
+            is no client-side operation that does the job. And check from the outside: a
+            verification run against your own working copy cannot see a hosting layer.
+extra     : the second half of this entry is a plain mistake of mine. I committed with
+            `-c user.email=<the account address from my environment>` instead of the address the
+            repository was configured with, and GitHub attributes commits by email -- so ninety
+            commits were credited to an unrelated account of the author's. **A commit identity
+            is published metadata, not a local setting.** Read `git config user.email` in the
+            repository and use that; never substitute an address from somewhere else.
+```
+
 ## F35 — the summaries are a POPULATION, and they drift together (r117, pre-endorsement sweep)
 
 ```
