@@ -144,6 +144,35 @@ rule      : F35 says compare the abstract with the body's judgement words.  The 
             throughout; the summaries were not.
 ```
 
+## F50 — the other half of the rule (r116): check that the reader read it
+
+```
+claimed   : a second external review (2026-08-10) listing "critical concerns": that the Lean
+            work faces Caratheodory / Fubini-Tonelli / dominated-convergence burdens, that the
+            argument relies on Weyl equidistribution whose rate must be quantified for the
+            family Gamma^(q), that explicit non-asymptotic error bounds are still needed, and
+            that the modulus 4-versus-6 transition might be a truncation artifact.
+actual    : checked against the documents.  The canon contains ZERO measure theory -- P_q is a
+            finite product on the subsets of a finite set and rem:measurefree writes the
+            weighted count out.  Paper 4 says FOUR times, including in the abstract, that no
+            equidistribution input is needed, and names Erdos-Turan and Koksma only to decline
+            them.  The error bound is already explicit and non-asymptotic (E <= 10qM/N +
+            8M/(Q+1)).  The 4-vs-6 transition is thm:modfour, a proved theorem whose
+            maximisation is Lean-verified, framed in the paper as "not an accident of the
+            ensemble".  Gamma^(q) is a measure deformation, not a family of frequencies.
+check     : does the review cite anything that can be checked -- theorem numbers, page
+            references, quoted sentences?  The FIRST review of the same papers cited seven
+            theorem numbers and all seven existed and matched, including one created that day;
+            that is what made it worth acting on.  This one cites none, and its single concrete
+            constant is our RATIO sqrt(3/2) = 1.2247 mistaken for a peak height.
+rule      : F50 says that when a reader misses something the paper contains, that is a
+            presentation defect.  *** The other half: a review's authority comes from evidence
+            that it read the artifact, and that evidence is cheap to check. *** Verify it
+            before editing anything.  Acting on an unread review costs real work and, worse,
+            can talk you out of things you have already proved.  Neither half licenses the
+            other: do not dismiss a careful reader, and do not defer to an incurious one.
+```
+
 ## F55 — a search over a net needs a positive control
 
 ```
