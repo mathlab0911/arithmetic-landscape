@@ -18,6 +18,40 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # The canon is the import closure of the root module, not the contents of a folder.
+      # A file that nothing imports is neither built nor replayed while still sitting in
+      # Pnp/Theory looking canonical -- that happened here for several rounds. Cheap, so
+      # it runs before the build rather than after it.
+      - name: Every Pnp/Theory file must be reachable from the root module
+        working-directory: lean/pnp
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+          canon = sorted('Pnp.Theory.' + f[:-5]
+                         for f in os.listdir(os.path.join('Pnp', 'Theory'))
+                         if f.endswith('.lean'))
+          closure, stack = set(), ['Pnp']
+          while stack:
+              m = stack.pop()
+              if m in closure:
+                  continue
+              closure.add(m)
+              p = m.replace('.', os.sep) + '.lean'
+              if not os.path.exists(p):
+                  continue
+              for line in open(p, encoding='utf-8'):
+                  g = re.match(r'\s*import\s+(Pnp[\w.]*)', line)
+                  if g:
+                      stack.append(g.group(1))
+          orphans = sorted(set(canon) - closure)
+          print('canon files %d, closure %d modules, orphans %d'
+                % (len(canon), len(closure), len(orphans)))
+          for o in orphans:
+              print('::error::%s is in Pnp/Theory but outside the import closure of Pnp, '
+                    'so lake never builds it and lean4checker never replays it' % o)
+          sys.exit(1 if orphans else 0)
+          PY
+
       - uses: leanprover/lean-action@v1
         with:
           lake-package-directory: lean/pnp
