@@ -322,9 +322,34 @@ def c9_readme_counts():
     notes.append('C9/F59  README counts checked against the repository: %d' % len(claims))
 
 
+# ------------------------------------------------------------------ C10 (F39)
+# The one link a stranger will actually click.  paper2.tex pointed at
+# github.com/mathlab0911/arithmetic-landscape -- singular, a 404 -- in a PDF that had already
+# been sent to someone deciding whether the work was serious.  Nothing catches a URL that is
+# merely wrong: it compiles, it renders, and only a reader finds out.
+REPO_URL = 'https://github.com/mathlab0911/arithmetic-landscapes'
+
+def c10_repo_url():
+    bad, seen = [], 0
+    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
+        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        urls = re.findall(r'https?://github\.com/mathlab0911/[A-Za-z0-9_.\-]*', src)
+        if not urls:
+            bad.append('%s cites the repository nowhere -- a reader of it alone cannot find '
+                       'the code or the Lean development' % tex)
+            continue
+        for u in urls:
+            seen += 1
+            if u.rstrip('.') != REPO_URL:
+                bad.append('%s points at %s, not %s' % (tex, u, REPO_URL))
+    if bad:
+        fail('C10/F39', '; '.join(bad))
+    notes.append('C10/F39 repository links in the papers checked: %d' % seen)
+
+
 if __name__ == '__main__':
     for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
-               c7_lean_citations, c8_status_at_statement, c9_readme_counts):
+               c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url):
         fn()
     for n in notes:
         print('  ok   ' + n)
