@@ -61,10 +61,21 @@ $k=18,\dots,76$. Combining these with the deep-minor bound of
 Section~\ref{sec:l5c}, which is proved here, we obtain $\varepsilon_d(k)\to0$
 at a geometric rate of at most $\sqrt3/2$ per element, and hence
 $\mathrm{lm}_P(n)/\deg_P(n)\to\Gamma(P)=5.34920\ldots$ for the odd primes; this
-answers Problem 10.1 of the companion paper. The theorem carries no hypothesis.
-It is, however, ineffective, and at exactly one point: the Siegel--Walfisz
-constant, which Appendix~\ref{sec:constants} isolates as the only ineffective
-constant in the paper. Key steps are formally verified in Lean~4.
+answers Problem 10.1 of the companion paper.
+
+Two things about the status of that theorem, stated here rather than left to be
+discovered. \emph{It carries no hypothesis}: earlier versions assumed the
+deep-minor bound, and it is now Proposition~\ref{prop:deepminor}. But no
+hypothesis is not the same as written out in full, and two steps of that
+proposition are not yet written to referee standard --- the substitution of the
+quoted exponential-sum bound in step~2, and the excision in step~4 of
+Section~\ref{sec:l5c}. Both are flagged where they occur and tracked in
+Section~\ref{sec:remains}; neither is believed to need a new idea, and until
+they are written the theorem should be read as a complete argument with two
+steps still owed to the reader. \emph{It is also ineffective}, at exactly one
+point: the Siegel--Walfisz constant, which Appendix~\ref{sec:constants} isolates
+as the only ineffective constant in the paper. Key steps are formally verified
+in Lean~4.
 \end{abstract}
 
 \section{Introduction}
@@ -1345,6 +1356,19 @@ The remaining work is therefore of three kinds, and none of it requires a new
 idea: writing Section~\ref{sec:l5c} out in full, discharging the $o(1)$
 inventory, and the usual polishing. We state the
 three steps as problems for the record.
+
+\begin{remark}[which of these the main theorem waits on]\label{rem:whichwait}
+Worth separating, because a reader who meets three open problems in a
+circle-method paper will reasonably assume the main theorem is one of their
+hostages. Theorem~\ref{thm:t2main} rests on
+Proposition~\ref{prop:deepminor}, whose steps 2 and 4 are the ones not yet
+written to referee standard; \emph{that} is the debt, and
+Problem~\ref{prob:minor} is where it is recorded. Problems~\ref{prob:main}
+and~\ref{prob:assembly} are a different matter: they ask for an
+\emph{effective} main-arc estimate and the assembly that would follow from it,
+which would sharpen the result and remove the Siegel--Walfisz constant, and
+Theorem~\ref{thm:t2main} does not wait on either.
+\end{remark}
 
 \begin{problem}[Main arc]\label{prob:main}
 Make the local central limit theorem for $r_B$ on the main arc effective, with
