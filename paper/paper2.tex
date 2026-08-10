@@ -311,6 +311,14 @@ Let $B_d$ be the set of primes in $(2d,x]$ and $b=|B_d|$. Then:
 \end{enumerate}
 \end{corollary}
 
+\STATUS{mixed by item, and the mixture is the point. Items \textup{(i)--(iii)} and
+\textup{(vi)} are \emph{exact identities}, proved in place, using no equidistribution
+whatsoever. Items \textup{(iv)--(v)} do use equidistribution, and only for a finite list of
+moduli, for which effective error terms are available --- these are the two items made
+effective in Proposition~\ref{prop:l5a}. A reader who takes the whole corollary as
+equidistribution-dependent will overstate what the paper assumes; one who takes it all as
+exact will understate it.}
+
 \begin{remark}
 Items (i)--(iii) and (vi) are exact identities; only (iv)--(v) use
 equidistribution, and only for a finite list of moduli, for which effective
@@ -444,6 +452,12 @@ $T/2$. Then
   r_B(m)=\frac{2^{b}}{\sqrt{2\pi V_0}}\Bigl(1-\frac{S_4}{4S_2^{2}}+O\bigl((S_4/S_2^{2})^{2}\bigr)\Bigr).
 \]
 \end{proposition}
+
+\STATUS{proved. The derivation below is labelled \emph{Derivation} because it is a Taylor and
+Laplace computation rather than a formal argument, but every term is written out and the
+$O$-constant is explicit; the only step taken as standard is extending the main-arc integral to
+$\mathbb{R}$. Said here because Proposition~\ref{prop:ripple} carries the same label and a
+\emph{different} status --- there the remainder is measured, here it is bounded.}
 
 \begin{proof}[Derivation]
 Write $\log G_B(\theta)=\sum_{a\in B}\log\cos(a\theta/2)
@@ -737,6 +751,12 @@ there is no gap.
 
 \begin{proposition}[Effective form of Corollary~\ref{cor:spectrum}(iv)--(v)]
 \label{prop:l5a}
+\STATUS{proved, conditional on nothing, but quoting an external input: the thresholds in the
+table are \emph{computed} from the published constants of~\cite{BMOR18} and are not measured,
+so they inherit that paper's correctness and nothing of ours. Two things a reader should not
+infer: the table is not a numerical fit, and the range $44<k<k_0(q,\eta)$ where neither direct
+computation nor this proposition applies is not a gap in any asymptotic statement --- see the
+three steps in the remark below.}
 For each $\eta>0$ and each modulus $q$ in the finite list there is an explicit
 $k_0(q,\eta)$ such that $|G_{B_d}(2\pi j/q)|\le(M(q)+\eta)^{b}$ for all
 $k\ge k_0(q,\eta)$. With the constants of~\cite{BMOR18} one may take
@@ -1183,7 +1203,10 @@ range of $\cos((\pi/6)(2m-(c_1-c_5))+\psi)$ over $m\in\mathrm{Win}_d$ --- and
 $w_d$ is the window width. In particular $\varepsilon_d(k)\to0$ at the
 geometric rate $\sqrt3/2$ per element.
 
-\emph{Status, in the statement rather than only in the surrounding text.} \textbf{(i)} The
+\STATUS{no hypothesis, but not fully written out; ineffective at one constant; one factor of
+the display calibrated numerically --- itemised next, in the statement rather than only in the
+surrounding text}
+\textbf{(i)} The
 theorem carries no hypothesis, but its proof is not yet complete as written: two steps of
 Proposition~\ref{prop:deepminor} --- the substitution of the quoted exponential-sum bound in
 step~2 and the excision in step~4 of Section~\ref{sec:l5c} --- are not written to referee
@@ -1278,6 +1301,12 @@ paper and the identity $W_D=\Gamma+(2D+1)2^{-k}$,
 \]
 for the odd primes.
 \end{corollary}
+
+\STATUS{inherits the status of Theorem~\ref{thm:t2main} and adds nothing to it: the bookkeeping
+below is an outline because each of its four steps is proved elsewhere and only the combination
+is assembled here, \emph{not} because a step is missing. This corollary is the sentence a
+reader is most likely to quote, so it should not be quotable without the theorem's caveats
+travelling with it.}
 
 \begin{proof}[Outline]
 The bookkeeping is as follows.

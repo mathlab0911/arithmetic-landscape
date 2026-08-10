@@ -194,9 +194,60 @@ def c7_lean_citations():
     notes.append(f'C7/F12  Lean citations checked against the canon: {len(cited)}')
 
 
+# ------------------------------------------------------------------ C8 (F38)
+# Every theorem-like environment must declare its status somehow.  An external review found
+# prop:ripple stating a Laplace formula with no marking at all, so a reader could not tell a
+# theorem from a calibrated ansatz without re-deriving it.  That was found by a human reading
+# carefully; this is the same question asked mechanically.
+#
+# Four things count as declaring a status, and the list is deliberately generous -- the check
+# is for SILENCE, not for a house style:
+#   * an explicit \STATUS{...} on or beside the statement;
+#   * a \Lean{...} citation (kernel-verified is the strongest status there is);
+#   * a plain \begin{proof} following it (the status is "proved, here");
+#   * being a \begin{conjecture} (the environment names its own status).
+# What fails: no proof at all, or a proof whose optional argument QUALIFIES it -- Derivation,
+# Outline, Sketch.  Those are the author signalling a caveat without saying what it is.
+STATUS_ENVS = ('theorem', 'proposition', 'lemma', 'corollary')
+QUALIFIED = ('derivation', 'outline', 'sketch', 'idea', 'heuristic', 'informal', 'partial')
+
+def c8_status_at_statement():
+    checked, bad = 0, []
+    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
+        lines = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read().split('\n')
+        stack, envs = [], []
+        for i, L in enumerate(lines):
+            for e in STATUS_ENVS + ('conjecture',):
+                if '\\begin{%s}' % e in L:
+                    stack.append((e, i))
+                if '\\end{%s}' % e in L and stack:
+                    e0, i0 = stack.pop()
+                    if e0 in STATUS_ENVS:
+                        envs.append((e0, i0, i))
+        starts = sorted(a for _, a, _ in envs)
+        for e, a, b in envs:
+            checked += 1
+            body = '\n'.join(lines[max(0, a - 3):min(len(lines), b + 4)])
+            nxt = next((s for s in starts if s > b), len(lines))
+            after = '\n'.join(lines[b + 1:nxt])
+            if '\\STATUS' in body or '\\Lean{' in body or '\\Lean{' in after[:400]:
+                continue
+            m = re.search(r'\\begin\{proof\}(?:\[([^\]]*)\])?', after)
+            lab = re.search(r'\\label\{([^}]+)\}', '\n'.join(lines[a:b + 1]))
+            lab = lab.group(1) if lab else 'line %d' % (a + 1)
+            if m is None:
+                bad.append('%s %s (no proof, no \\STATUS, no \\Lean)' % (tex, lab))
+            elif any(q in (m.group(1) or '').lower() for q in QUALIFIED):
+                bad.append('%s %s (proof[%s] without a \\STATUS)' % (tex, lab, m.group(1)))
+    if bad:
+        fail('C8/F38', 'statement(s) whose status a reader cannot determine at the '
+                       'statement: ' + '; '.join(bad))
+    notes.append('C8/F38  theorem-like statements checked for a declared status: %d' % checked)
+
+
 if __name__ == '__main__':
     for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
-               c7_lean_citations):
+               c7_lean_citations, c8_status_at_statement):
         fn()
     for n in notes:
         print('  ok   ' + n)

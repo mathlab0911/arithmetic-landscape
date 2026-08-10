@@ -173,6 +173,31 @@ rule      : F50 says that when a reader misses something the paper contains, tha
             other: do not dismiss a careful reader, and do not defer to an incurious one.
 ```
 
+## r117: a sweep driven by the examples you were handed is not a sweep
+
+```
+claimed   : "the F38 sweep is done" -- after fixing the four places an external review named
+            or implied: thm:t2main, prop:ripple, and paper 3's two headline theorems
+actual    : enumerating the population instead of the examples found that 8 of paper 4's 11
+            theorem-like environments carried no status at the statement, including
+            lem:coset, thm:modfour and thm:rate -- the load-bearing ones.  Paper 2 had 7 more.
+            The statuses existed, correctly, in each paper's Honest scope section at the END,
+            which is exactly the defect the review described and I had just claimed to fix.
+check     : count the population before declaring coverage.  A twenty-line script listing every
+            theorem/proposition/lemma/corollary and whether a status marker sits near it took
+            less time than fixing one of them by hand, and it is now C8 in check.py.
+rule      : *** a reviewer gives you INSTANCES; the fix is for the CLASS. ***  Before reporting
+            a sweep complete, enumerate the set being swept and state its size -- "4 fixed" is
+            not a coverage claim, "4 of 4" and "6 of 68" are.  Corollary: the moment the fix is
+            mechanical enough to script, script it, because the same drift will recur in the
+            next paper written and no reviewer will be reading that one.
+note      : designing C8 took three passes, and each pass was the r117 scoping lesson again --
+            v1 flagged 70/70 (paper 1 has no \STATUS macro and does not need one), v2 still
+            flagged 13 statements in paper 1 whose status is a \Lean{} citation, v3 flagged
+            conjectures, whose environment name IS their status.  A check is not finished when
+            it fires; it is finished when everything it fires on is really a defect.
+```
+
 ## F55 — fourth instance, r117: "listed as canon" is not "checked"
 
 ```

@@ -458,6 +458,13 @@ measure is not flatness: it is a \emph{tilt} of a definite slope, and the slope 
 prediction with no free parameter.
 \end{proposition}
 
+\STATUS{derived and verified, not proved from a hypothesis-free statement: it is a consequence
+of $\Phi^{(q)}$, itself derived by the partition-function argument of \S\ref{sec:phiq} and
+confirmed by three exact internal checks. The first-order coefficient is a point prediction
+with no free parameter, and \S\ref{sec:e10} tests it against the naive alternative on $36$
+discriminating rows --- which is why the two are distinguished here rather than only in
+\S\ref{sec:scope}.}
+
 This is what \S\ref{sec:e6} demanded of the derivation, and it is a sharper demand than it
 looks. The naive guess --- keep paper 3's $\delta_d=d+\sigma_d/2$ and merely split the
 weights --- gives instead $\sum[(1-q)^{N_d}-q^{N_d}]\delta_d$, and the two differ by exactly
@@ -712,6 +719,12 @@ $F_A(\theta)=\prod_{a\in A}|\cos(\pi a\theta)|$. Then almost surely
 Here \emph{minor} means $\|\theta\|\ge1/N$, with $\|\cdot\|$ the distance to the nearest integer;
 Step~$2''$ shows that this radius is large enough, so nothing is left unowned.
 \end{theorem}
+
+\STATUS{proved, with every constant written out. The proof is the four steps below rather
+than a \texttt{proof} environment, so it is worth saying here that it is one: no step is
+deferred, no constant is fitted, and the only external input is the arithmetic half,
+Theorem~\ref{thm:modfour}, which is proved in this paper. See Remark~\ref{rem:ratestatus} for
+what an independent reader should check first.}
 
 The arithmetic half is Theorem~\ref{thm:modfour}. Here is the rest, in the steps it
 takes, with the constants named. Fix the Dirichlet parameter $Q=\lfloor\sqrt N\rfloor$
