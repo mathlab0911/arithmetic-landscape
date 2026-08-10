@@ -183,6 +183,25 @@ for every $t$, with equality exactly when $vt+\tau_v\in\mathbb{Z}$.
 $X\ge0$.
 \end{proof}
 
+\begin{remark}[what is machine-checked in Lemma~\ref{lem:coset}, and what is not]\label{rem:leancoset}
+The identity is \emph{multiplicative in $v$}, and that is what has been formalised. Writing
+$k=i+aj$ and inducting on $b$ splits a product over $\{k<ab\}$ into a double product with no
+bijection and no analysis --- \Lean{prod\_range\_mul\_index}, stated for an arbitrary commutative
+monoid. On top of it, \Lean{cosetId\_one} and \Lean{cosetId\_two} are the base cases ($v=2$ is
+the double-angle formula and needs nothing else), and \Lean{cosetId\_mul} carries the identity
+from $a$ and $b$ to $ab$, including the offset bookkeeping
+$a\tau_b+\tau_a\equiv\tau_{ab}\pmod 1$ in all four parity cases, via
+\Lean{abs\_cos\_add\_int\_mul\_pi}.
+\emph{What is not formalised is the base case at an odd prime}, which is the only place a
+product over roots of unity is needed, and which Mathlib does not supply. So the machine-checked
+statement is: \emph{the identity holds at $1$ and $2$ and is closed under products}, hence holds
+for every $v$ built from the primes at which it is established by hand. The reduction was
+checked numerically before it was formalised, including a deliberately wrong $\tau$ as a
+control.
+\STATUS{Lean-verified (the reduction; not the odd-prime base case);
+\texttt{Pnp/Theory/CosetProd.lean}, \texttt{coset\_mult\_r116}}
+\end{remark}
+
 \begin{remark}[what this says, and in which language]\label{rem:renorm}
 The identity has two readings and they have different statuses; the paper keeps them apart.
 

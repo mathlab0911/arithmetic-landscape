@@ -13,3 +13,4 @@ import Pnp.Theory.TermwiseMin
 import Pnp.Theory.ModFour
 import Pnp.Theory.OddPeaks
 import Pnp.Theory.OddProd
+import Pnp.Theory.CosetProd
