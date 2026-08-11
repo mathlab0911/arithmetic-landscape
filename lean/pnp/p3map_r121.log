@@ -1,9 +1,9 @@
 paper3.tex: 33 environments, all accounted for
-  MOVE  20   into Part III as content
+  MOVE  21   into Part III as content
   CALIB  8   into Part III as calibration material, with range
   OPEN   2   into Part III's "what is missing", as named open problems
   SPLIT  1   part moves as content, part to "what is missing"
-  DROP   2   dropped, with a supersession note
+  DROP   1   dropped, with a supersession note
 
 dest   kind        label               name                                    reason
 MOVE   remark      (unlabelled)        the ratio sees the target only through  exposition attached to material that moves; carries with it
@@ -12,6 +12,7 @@ MOVE   definition  def:tilt            the tilt                                d
 MOVE   lemma       lem:eta             the minor-arc input                     proved/derived; moves as content with that status
 MOVE   lemma       lem:etaa            the two degenerate denominators         proved in place (proof follows the statement); moves as content
 MOVE   lemma       lem:etab            the small-$q$ ring                      proved in place (proof follows the statement); moves as content
+MOVE   lemma       lem:kappa           the bridge                              proved in place (proof follows the statement); moves as content
 MOVE   lemma       lem:six             the extremiser of the additive estimat  proved in place (proof follows the statement); moves as content
 MOVE   proposition prop:alphalb        the $\alpha=1$ threshold                proved in place (proof follows the statement); moves as content
 MOVE   remark      rem:graveyard       approaches that did not work            exposition attached to material that moves; carries with it
@@ -37,5 +38,4 @@ CALIB  remark      rem:tiltslope       the tilt and the slope agree to first   e
 CALIB  remark      rem:whatEk          what the theorem does and does not cla  experimental; moves as calibration material, with its stated range
 OPEN   theorem     thm:rigid           rigidity of the gap series              skeleton; carries into the "what is missing" section as a named open problem, missing ingredient named at the statement
 OPEN   theorem     thm:transfer        transfer                                skeleton; carries into the "what is missing" section as a named open problem, missing ingredient named at the statement
-DROP   lemma       lem:kappa           the bridge                              the multiplicative kappa-transport, refuted at r-graveyard; Part III does not use it and the additive bridge replaces it
-DROP   remark      rem:noKappa         why the bound is additive, and a bound  the record of that refutation; it belongs to the graveyard note, not to Part III as content
+DROP   remark      rem:noKappa         why the bound is additive, and a bound  records the refutation of the MULTIPLICATIVE transport (not of lem:kappa); fable r123 (B) rules that the graveyard note absorbs it in a sentence or two rather than carrying it as content [cited 1x, guarded]

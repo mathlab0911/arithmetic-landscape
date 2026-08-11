@@ -1,0 +1,41 @@
+Stopped before the assembly: a DROP row would have deleted a proved lemma
+
+The paper-3 mapping table said DROP lem:kappa, "the multiplicative
+kappa-transport, refuted at r-graveyard; Part III does not use it".
+
+lem:kappa is the ADDITIVE BRIDGE.  It is titled "the bridge", it is proved with
+its proof following the statement, and it is cited nine times in paper 3 -- by
+the introduction, by region R3 twice, by prop:tiltlclt's own status ("R2 and R3
+proved (they quote Lemmas lem:kappa and lem:eta)"), by the bridge section's
+summary, and by the honest-scope list as "Proved: the bridge -- Lemma lem:kappa
+in full".  What is refuted is the MULTIPLICATIVE transport |G~| <= |G|^kappa,
+which is rem:noKappa's subject and the graveyard's entry.  Two objects sharing a
+substring in their names.
+
+Dropping it would have removed a lemma three results depend on, and because the
+assembly moves text rather than compiling it, the loss would not have raised a
+build error -- it would have surfaced later as a proposition quoting a lemma
+that is not in the paper.
+
+The row survived both my table and fable-5's independent audit.  I wrote it by
+hand from the graveyard memory, matching on "kappa".  The audit checked the row
+against my stated reason, and the reason matched the same memory the reason came
+from -- and about the multiplicative bridge that reason is entirely correct.
+Both passes verified conformance; neither put the row next to the paper.  An
+independent auditor reading the same description is not an independent check of
+the description.
+
+DROP_GUARD: a DROP whose subject is still referenced anywhere refuses to
+classify and demands an account of where the references go.  lem:kappa: nine
+references, refused.  Negative control taken.  The asymmetry that puts the guard
+here rather than on additions: additions announce themselves at build time,
+deletions do not, so a deletion is the row that must be read against the primary
+source.
+
+Corrected table: MOVE 21 (was 20), CALIB 8, OPEN 2, SPLIT 1, DROP 1 (was 2),
+still 33 environments each appearing once.  The sole DROP is rem:noKappa, kept
+under fable's requirement (B) with an explicit account of its single reference.
+
+The assembly has not been started.  It waits on two questions put to fable in
+r123: whether rem:noKappa should stay beside lem:kappa now that lem:kappa is in
+the paper, and confirmation that the corrected table is what to assemble from.

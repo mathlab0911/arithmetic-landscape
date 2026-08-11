@@ -19,10 +19,28 @@ PROOF = re.compile(r'\A\s*\\begin\{proof\}')
 
 # Superseded by Part III, stated here so the reason travels with the row.
 SUPERSEDED = {
- 'lem:kappa':   'the multiplicative kappa-transport, refuted at r-graveyard; Part III does not '
-                'use it and the additive bridge replaces it',
- 'rem:noKappa': 'the record of that refutation; it belongs to the graveyard note, not to '
-                'Part III as content',
+ # r123 correction.  This dict said lem:kappa was "the multiplicative kappa-transport,
+ # refuted" and dropped it.  That is a different object.  lem:kappa IS THE ADDITIVE BRIDGE:
+ # it is proved, it is cited nine times in paper 3 -- by the introduction, by R3, by
+ # prop:tiltlclt's own status, and by the honest-scope list as "proved ... in full" -- and
+ # dropping it would have removed a load-bearing lemma three results depend on.  What is
+ # refuted is the MULTIPLICATIVE transport |G~| <= |G|^kappa, which is the subject of
+ # rem:noKappa and of the graveyard note.  Two objects, one substring.
+ #
+ # The wrong row survived my own table and fable-5's independent audit, because both of us
+ # checked the row against the stated REASON and the graveyard memory, where "the
+ # multiplicative bridge" is indeed recorded as refuted.  Neither checked the reason against
+ # the paper.  Hence DROP_GUARD below.
+ 'rem:noKappa': 'records the refutation of the MULTIPLICATIVE transport (not of lem:kappa); '
+                'fable r123 (B) rules that the graveyard note absorbs it in a sentence or '
+                'two rather than carrying it as content',
+}
+
+# A DROP whose subject is still referred to is almost always a misclassification.  Refuse it
+# unless the row says, in writing, that the references go too.
+DROP_GUARD_OK = {
+ 'rem:noKappa': 'referenced once, from rem:graveyard, which is the note that absorbs it; '
+                'that sentence is rewritten at the move so no dangling reference remains',
 }
 
 # Statuses that carry both a positive and a negative word.  The first version of this script
@@ -84,6 +102,9 @@ def classify(lab, body):
         return 'MOVE', 'proved/derived; moves as content with that status'
     return None, s
 
+def citations(lab):
+    return len(re.findall(r'\\(?:ref|eqref)\{' + re.escape(lab) + r'\}', src))
+
 rows, tail = [], src
 for kind, name, lab, body in ENV.findall(src):
     lab = lab or '(unlabelled)'
@@ -98,7 +119,17 @@ for kind, name, lab, body in ENV.findall(src):
             dest, why = 'MOVE', 'proved in place (proof follows the statement); moves as content'
         else:
             dest, why = 'MOVE', 'exposition attached to material that moves; carries with it'
-    rows.append((dest, kind, lab, (name or '').strip('[]'), why))
+    if dest == 'DROP':
+        n = citations(lab)
+        if n and lab not in DROP_GUARD_OK:
+            raise SystemExit(
+                f'REFUSING TO DROP: {lab} is referred to {n} time(s) in the paper.\n'
+                f'  reason given: {why}\n'
+                f'  A dropped statement that others cite is a misclassification until shown '
+                f'otherwise.\n  Add it to DROP_GUARD_OK with an account of where the '
+                f'references go, or change the row.')
+    rows.append((dest, kind, lab, (name or '').strip('[]'), why,
+                 citations(lab) if dest == 'DROP' else None))
 
 order = {'MOVE': 0, 'SPLIT': 1, 'CALIB': 2, 'OPEN': 3, 'DROP': 4}
 rows.sort(key=lambda r: (order[r[0]], r[2]))
@@ -111,5 +142,6 @@ print(f'  SPLIT {c["SPLIT"]:>2}   part moves as content, part to "what is missin
 print(f'  DROP  {c["DROP"]:>2}   dropped, with a supersession note')
 print()
 print(f'{"dest":<7}{"kind":<12}{"label":<20}{"name":<40}reason')
-for d, k, l, n, w in rows:
-    print(f'{d:<7}{k:<12}{l:<20}{n[:38]:<40}{w}')
+for d, k, l, n, w, c in rows:
+    tag = f' [cited {c}x, guarded]' if c else ''
+    print(f'{d:<7}{k:<12}{l:<20}{n[:38]:<40}{w}{tag}')

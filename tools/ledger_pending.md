@@ -53,6 +53,34 @@ Full text of entries already folded in lives in `tools/ledger_archive.md`.
               in front of
 ```
 
+## r123 — two independent audits passed the same wrong row, for the same reason
+
+```
+  claimed   : the paper-3 mapping table was audited and passed; fable-5's independent
+              count matched the population exactly and every row was checked against
+              the r121 rule.  lem:kappa was to be DROPPED as "the multiplicative
+              kappa-transport, refuted"
+  actual    : lem:kappa IS THE ADDITIVE BRIDGE.  It is proved, it is cited nine times
+              -- by the introduction, by region R3, by prop:tiltlclt's own status, and
+              by the honest-scope list as "proved ... in full" -- and dropping it would
+              have deleted a lemma three results depend on.  What is refuted is the
+              MULTIPLICATIVE transport, which is rem:noKappa's subject.  Two objects,
+              one substring in their names
+  why both   : each audit checked the row against its stated REASON, and the reason
+  missed it : matched the graveyard memory, where the multiplicative bridge is indeed
+              recorded as refuted.  Neither checked the reason against the paper.  An
+              independent auditor reading the same description is not an independent
+              check of the description
+  check     : DROP_GUARD -- a DROP whose subject is still referenced anywhere refuses to
+              classify, and must be given an account of where the references go.
+              lem:kappa: 9 references.  Negative control taken
+  rule      : verification against a description verifies the description.  When a table
+              is the deliverable, at least one pass must go table row -> primary source,
+              and it must be the row that would cost the most to get wrong.  A deletion
+              is that row by default: additions announce themselves at build time,
+              deletions do not
+```
+
 ## r121 — a status label held too long is wrong in both directions
 
 ```
