@@ -1,43 +1,38 @@
-Three checks that read what the other twelve could not see
+A scale that was wrong as printed, three lemmas before the two we had flagged
 
-C13.  Every check was scoped to paper/.  The Japanese editions had never been read by
-any of them, and the constant erratum corrected in English at r118 was still in
-paper2_ja four times, through two months of green runs.  The new check is narrow --
-a decimal literal printed in a translation must occur in its source, because
-translations restate numbers rather than compute them.  Negative control taken.
-Widening C11 to paper-ja found a fifth literal, exempted in the English and not in the
-Japanese though it is the same sentence; exemptions now cross the language boundary,
-since an exemption is a fact about the number.
+Paper 2's honest-scope section names steps 2 and 4 of the deep-minor-arc
+proposition as its debt.  Auditing them found the debt smaller than advertised --
+both are written out -- and a defect next door, in the two lemmas that hand theta
+to them.
 
-C14.  The definition change at r120 left paper 3 defining Gamma by the retired
-enumeration series twice and paper 4 once, with paper 2 and its translation still
-calling it "an order-sensitive invariant" -- which the layer definition makes simply
-false.  Nothing numeric was wrong, so none of the numeric checks could see any of it.
-C14 is a population lock in the spirit of C4's label snapshot: count the sites where
-Gamma appears beside a dyadic sum over the elements and pin the count -- 5 in paper 1,
-5 in its translation, 0 elsewhere -- taken after collapsing whitespace so it does not
-move when a paragraph reflows.
+Two variables live on that circle, the angle theta and the normalised theta/2pi,
+and the argument moved between them without saying so.
 
-And then C14 passed while this README's own headline still defined Gamma by the
-enumeration series and called it order-sensitive.  Same mistake as C13, within the
-hour, immediately after writing the ledger entry about it.  The scope of a check gets
-chosen while thinking about the rule, when the artefacts are not in mind.  So: every
-check now prints what it looked at, and C9 verifies the README's claim about how many
-checks exist against the list that actually runs.
+- lem:cover was stated for |theta - 2pi j/q| <= 1/(q tau), while its proof --
+  Dirichlet applied to alpha_n = n theta / 2pi -- produces a bound on
+  |theta/2pi - j/q|.  As stated the lemma did not follow from its proof.
+- lem:annulus wrote theta = 2pi j/q + t and then split
+  S_B(alpha_n) = sum_r e(n r j/q) sum_{p = r (q)} e(p n t).  That split is the one
+  for theta = 2pi (j/q + t); lem:twist, which it invokes, takes t on the
+  normalised scale.
 
-C15.  A reference to another paper's numbered result is a string LaTeX cannot resolve.
-Paper 2 said "answers Problem 10.1 of the companion paper"; inserting the extremal
-section into paper 1 renumbered it to 11.1 and nothing noticed.  Paper 3's "in the
-style of paper 1 S10 and paper 2 S10" had been wrong since it was written -- those are
-the CV section and the main theorem, not the two status ledgers it meant.  The papers
-now write \Xref{stem}{label}{number} and \Xlab{stem}{label}, resolved against the
-sibling's .aux with the printed number required to match.  All nine resolve.
+Checked rather than argued: scale_r120 evaluates both sides of the residue split
+over the primes below 200 at q=6, j=1, n=3, t=0.0137.  Under 2pi(j/q+t) the sides
+agree to 1.4e-13; under 2pi j/q + t they differ by 8.9.  One reading is an
+identity, the other is not.
 
-The consolidation inventory behind C15 is xref_r120: 90 prose references to a sibling
-paper (paper 2: 14, paper 3: 34, paper 4: 42), 6 label references, 3 numeric.  Paper 1
-has none, which is the right shape for the root.  Also recorded and not fixed: papers 3
-and 4 declare bibliography entries P1, P2, P3 that are never cited, because every
-sibling reference is prose.
+Both lemmas are now on the normalised scale.  The covering lemma's reduction is
+written out -- |theta/2pi - j/q| <= 1/(Q tau) <= 1/(q tau) since q divides Q -- so
+it now loses no constant at all.  Nothing downstream moves: the 2pi is absorbed by
+the O() and by the e^{-c sqrt(log N)} saving, which is why it survived.  Recorded
+in sec:remains as a found-and-closed item, in both editions.
 
-README: the headline now states the layer definition and the extremal bounds; the check
-table reaches C15; fifteen checks, and C9 now checks that number too.
+The point is not the factor.  It is that the defect was three lemmas away from the
+two steps the status ledger had marked as risky.  A ledger records where you know
+you are weak; defects prefer the places you have stopped looking.
+
+Also in this commit: the consolidation inventory (xref_r120) that led here -- 90
+prose references to a sibling paper, 6 label references, 3 numeric, of which two
+were broken, one of them by inserting a section into paper 1 the same afternoon --
+and C15, which resolves \Xref and \Xlab against the sibling's .aux so that
+renumbering fails in the build rather than in a reader's hands.

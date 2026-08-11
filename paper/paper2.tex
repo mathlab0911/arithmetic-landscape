@@ -862,7 +862,7 @@ Section~\ref{sec:l5a} carries a threshold rather than a constant.
 \begin{lemma}[Covering completeness]\label{lem:cover}
 Every $\theta$ satisfies at least one of
 \begin{enumerate}
-\item[(i)] $|\theta-2\pi j/q|\le1/(q\tau)$ for some $q\le Q_2$ and $(j,q)=1$;
+\item[(i)] $|\theta/2\pi-j/q|\le1/(q\tau)$ for some $q\le Q_2$ and $(j,q)=1$;
 \item[(ii)] for every $n\le N_0$ the reduced denominator $q_n$ of $n\theta/2\pi$
       exceeds $(\log N)^{A}$.
 \end{enumerate}
@@ -872,8 +872,10 @@ Every $\theta$ satisfies at least one of
 Suppose (ii) fails: some $n\le N_0$ has $q_n\le(\log N)^{A}$, so
 $|n\theta/2\pi-j'/q_n|\le1/(q_n\tau)$ for some $j'$. Dividing by $n$ exhibits
 $\theta/2\pi$ within $1/(nq_n\tau)$ of $j'/(nq_n)$, and
-$nq_n\le N_0(\log N)^{A}=Q_2$. Reducing the fraction only decreases the
-denominator, which gives (i).
+$nq_n\le N_0(\log N)^{A}=Q_2$. Write $Q=nq_n$ and reduce $j'/Q$ to lowest terms
+$j/q$, so that $q\mid Q$ and $q\le Q\le Q_2$. The fraction is unchanged, so
+$|\theta/2\pi-j/q|\le1/(Q\tau)\le1/(q\tau)$: reducing the denominator only
+weakens the requirement, and (i) holds with no constant lost.
 \end{proof}
 
 \noindent
@@ -1394,10 +1396,24 @@ We set out plainly which parts of this paper are proved and which are not.
       exponent budget displayed. We record the fact rather than deleting the
       heading, because the reader of an earlier version deserves to know what
       changed.
+\item \emph{A scale we had wrong}. Two variables live on this circle: the angle
+      $\theta$ and the normalised $\theta/2\pi$, and the argument moved between
+      them silently. Lemma~\ref{lem:cover} was stated for
+      $|\theta-2\pi j/q|$ while its proof --- Dirichlet applied to
+      $\alpha_n=n\theta/2\pi$ --- produces a bound on $|\theta/2\pi-j/q|$; and
+      Lemma~\ref{lem:annulus} wrote $\theta=2\pi j/q+t$ and then summed
+      $e(pnt)$, which is the split for $\theta=2\pi(j/q+t)$. Both are now
+      written on the normalised scale, where the covering lemma is exact and the
+      residue split is an identity; the discrepancy was a factor $2\pi$, absorbed
+      downstream by the $O(\cdot)$ and by the $e^{-c\sqrt{\log N}}$ saving, so no
+      conclusion changes. \texttt{scale\_r120} confirms that the residue split
+      holds under one reading and fails under the other. We record it because a
+      chain of inequalities that does not hold as printed is a defect whatever
+      it costs.
 \item \emph{A gap we found, and how it was closed}. Lemma~\ref{lem:cover} sorts
       every $\theta$ by \emph{denominator}, but the two mechanisms it hands
       $\theta$ to are matched to different \emph{radii}: the Dirichlet
-      neighbourhood in case~(i) has radius $1/(q\tau)$, while the envelope of
+      neighbourhood in case~(i) has radius $1/(q\tau)$ in $\theta/2\pi$, while the envelope of
       Proposition~\ref{prop:curv} is certified only out to
       $\approx0.45\sqrt k\,\sigma$, smaller by a power of $\log N$. Nothing in
       this paper bounds $|G_B|$ on the annulus between the two. The measurements
@@ -1715,7 +1731,7 @@ bookkeeping entirely.
 \end{remark}
 
 \begin{lemma}[Annulus profile]\label{lem:annulus}
-Let $q\le(\log N)^{A}$, let $\theta=2\pi j/q+t$ with $(j,q)=1$, and let
+Let $q\le(\log N)^{A}$, let $\theta=2\pi(j/q+t)$ with $(j,q)=1$, and let
 $\Phi_q(x)=\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\,\frac{c_q(n)}{\varphi(q)}
 \bigl(\mathrm{Re}\,\widetilde I(nx)-1\bigr)$, where $c_q$ is the Ramanujan sum and
 $\widetilde I$ is the window of Appendix~\ref{sec:window}. Then
@@ -1728,9 +1744,11 @@ between the peak height and the deep-minor bound of Section~\ref{sec:l5c}.
 \end{lemma}
 
 \begin{proof}
-In~\eqref{eq:fourier} write $\theta=2\pi j/q+t$ and split the inner sum by
-residue class, $S_B(n\theta)=\sum_{r\bmod q}e(nrj/q)\sum_{p\equiv
-r}e(pnt)$. The classes with $(r,q)>1$ contain at most $\omega(q)$ primes in
+In~\eqref{eq:fourier} write $\theta=2\pi(j/q+t)$, so that $\alpha_n=n\theta/2\pi
+=nj/q+nt$, and split the inner sum by residue class:
+$S_B(\alpha_n)=\sum_{r\bmod q}e(nrj/q)\sum_{p\equiv r}e(pnt)$. Writing the offset
+inside the $2\pi$ is what puts $t$ on the same scale as the argument of
+Lemma~\ref{lem:twist}; on the other scale every $t$ below would carry a $2\pi$. The classes with $(r,q)>1$ contain at most $\omega(q)$ primes in
 total, so they contribute $O(\omega(q))=O(\log\log N)$. To the remaining
 $\varphi(q)$ classes apply Lemma~\ref{lem:twist}; the errors add to
 $\varphi(q)\cdot O(Ne^{-c\sqrt{\log N}}(\log N)^{A+A'})

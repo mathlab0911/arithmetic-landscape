@@ -1,0 +1,3 @@
+theta = 2*pi*(j/q + t)   [inside]:  |LHS - RHS| = 1.375e-13   IDENTITY
+theta = 2*pi*j/q + t     [outside]:  |LHS - RHS| = 8.938e+00   does NOT hold
+reduction j'/Q -> j/q keeps the bound: 200000/200000 trials, 0 failures
