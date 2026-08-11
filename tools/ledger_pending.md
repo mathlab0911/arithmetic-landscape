@@ -33,6 +33,29 @@ extra     : the second half of this entry is a plain mistake of mine. I committe
             repository and use that; never substitute an address from somewhere else.
 ```
 
+## r118: a directory you create beside a mount is not inside it
+
+```
+claimed   : the r118 experiment scripts were "saved to study-private-lab", safe from the
+            session ending -- I had made the directory with mkdir and written into it, and a
+            listing showed all ten files
+actual    : the sandbox exposes only the mounted folders. `mkdir ../study-private-lab` from
+            inside the mount created a directory in the SANDBOX that merely sits beside the
+            mount point and shares its name with a real folder on the user's machine. The two
+            were different directories with different contents, and everything written to the
+            sandbox one would have vanished when the session ended. Found only because a
+            Windows-side listing showed two of the ten files instead of ten.
+check     : list the directory from BOTH sides before trusting it, or write through a path
+            that is known to be shared. The transfer route that works: sandbox -> the outputs
+            folder (which is genuinely mounted) -> move on the Windows side.
+rule      : *** persistence is a property of the path, not of the write succeeding. *** A
+            successful write and a correct-looking listing prove only that some filesystem
+            accepted the bytes. Before treating a file as saved, confirm it from the side that
+            outlives the session -- the same shape as F55 (the control must be on the property
+            you mean) and the same shape as "force push is not deletion" (a local check cannot
+            see the other side of a boundary).
+```
+
 ## F35 — the summaries are a POPULATION, and they drift together (r117, pre-endorsement sweep)
 
 ```

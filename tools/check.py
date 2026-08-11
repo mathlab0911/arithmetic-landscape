@@ -347,9 +347,55 @@ def c10_repo_url():
     notes.append('C10/F39 repository links in the papers checked: %d' % seen)
 
 
+# ------------------------------------------------------------------ C11 (F18, F25)
+# A named constant quoted in a paper must be a correct truncation or rounding of its true
+# value, at whatever precision the paper chose to write.
+#
+# Found r118, and the mechanism is worth stating because it is not a typo.  Paper 2 quoted
+# the LIMIT as Gamma(P) = 5.34920..., three times including the abstract and the headline
+# corollary.  5.3492078781... is the value at k = 20 -- the finite-size number from paper 1's
+# own example, promoted to the limit.  The true limit is 5.3492879320...  The two agree to
+# four decimals, which is exactly why it survived several careful readings: matching digits
+# do not make two quantities the same (F18), and a value that has not yet converged looks
+# like one that has (F25).
+#
+# Extend the table when a new constant earns a name.  Values are exact enough to check any
+# precision a paper is likely to print.
+CONSTANTS = {
+    # regex-safe leading digits -> (true value as a string, what it is)
+    '5.349': ('5.34928793202265755799135261816805',
+              'Gamma(P), the gap series of the odd primes'),
+    '0.9813': ('0.98134',
+               'e^{1/8} sqrt3/2, the effective substitute rate'),
+    '0.1155': ('0.11552453009332421',
+               'delta = (1/6) log 2'),
+}
+
+def c11_constants():
+    from decimal import Decimal
+    bad, checked = [], 0
+    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
+        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        for prefix, (truth, what) in CONSTANTS.items():
+            for m in re.finditer(re.escape(prefix) + r'\d*', src):
+                lit = m.group(0)
+                checked += 1
+                dp = len(lit.split('.')[1])          # decimals actually printed
+                t = Decimal(truth)
+                trunc = Decimal(int(t * 10 ** dp)) / Decimal(10 ** dp)
+                rnd = Decimal(round(t, dp))
+                if Decimal(lit) not in (trunc, rnd):
+                    bad.append('%s: %s is neither the truncation (%s) nor the rounding (%s) '
+                               'of %s = %s' % (tex, lit, trunc, rnd, what, truth[:len(lit) + 4]))
+    if bad:
+        fail('C11/F18', 'constant(s) quoted at a precision they do not have: ' + '; '.join(bad))
+    notes.append('C11/F18 named constants checked digit by digit: %d occurrence(s)' % checked)
+
+
 if __name__ == '__main__':
     for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
-               c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url):
+               c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
+               c11_constants):
         fn()
     for n in notes:
         print('  ok   ' + n)
