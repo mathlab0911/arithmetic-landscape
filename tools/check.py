@@ -389,9 +389,12 @@ def c9_readme_counts():
             out = subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout
             real = re.search(r'^Pages:\s+(\d+)', out, re.M)
             if real and int(real.group(1)) != int(row.group(1)):
-                bad.append('paper %d: README says %s pp., PDF has %s pp.'
-                           % (n, row.group(1), real.group(1)))
+                bad.append('%s: README says %s pp., PDF has %s pp.'
+                           % (stem, row.group(1), real.group(1)))
     except (OSError, ImportError):
+        # r121: this used to swallow everything, including a TypeError in the message
+        # itself, which is how a broken check reports success.  Re-raise anything that is
+        # not the two failures we mean to tolerate (no pdfinfo on the machine).
         pass
     if bad:
         fail('C9/F59', 'the README states counts the repository does not support: '
@@ -742,9 +745,16 @@ def c15_cross_document():
                 aux_cache[stem] = {m.group(1): m.group(2) for m in newlabel.finditer(src)}
         return aux_cache[stem]
 
+    # r121: extended to paper-ja/.  C13 reads only literals with three or more decimals, so
+    # the Japanese abstract kept pointing at "Problem 10.1" after the English moved to 11.1 --
+    # a cross-document reference below C13's threshold and outside C15's scope at once.  The
+    # Japanese editions now use the same macros, and this reads them.
     bad, checked = [], 0
-    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+    scan = [(PAPER, f) for f in sorted(os.listdir(PAPER)) if f.endswith('.tex')]
+    if os.path.isdir(PAPER_JA):
+        scan += [(PAPER_JA, f) for f in sorted(os.listdir(PAPER_JA)) if f.endswith('.tex')]
+    for where, tex in scan:
+        src = open(os.path.join(where, tex), encoding='utf-8', errors='replace').read()
         src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
         for stem, label, printed in xref.findall(src):
             checked += 1
@@ -769,8 +779,8 @@ def c15_cross_document():
     if bad:
         fail('C15/F62', 'cross-document reference(s) that do not resolve: ' + '; '.join(bad))
     expect_subjects('C15/F62', checked, 'cross-document references')
-    notes.append('C15/F62 cross-document references resolved against the sibling papers: %d'
-                 % checked)
+    notes.append('C15/F62 cross-document references resolved against the sibling papers: '
+                 '%d, over %d file(s) in paper/ and paper-ja/' % (checked, len(scan)))
 
 
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,

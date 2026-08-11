@@ -82,13 +82,15 @@ answers Problem~\Xref{paper}{prob:flatness}{11.1} of Part~I.
 Two things about the status of that theorem, stated here rather than left to be
 discovered. \emph{It carries no hypothesis}: earlier versions assumed the
 deep-minor bound, and it is now Proposition~\ref{prop:deepminor}. But no
-hypothesis is not the same as written out in full, and two steps of that
-proposition are not yet written to referee standard --- the substitution of the
+hypothesis is not the same as written out in full, and until r121 two steps of
+that proposition were not written to referee standard --- the substitution of the
 quoted exponential-sum bound in step~2, and the excision in step~4 of
-Section~\ref{sec:l5c}. Both are flagged where they occur and tracked in
-Section~\ref{sec:remains}; neither is believed to need a new idea, and until
-they are written the theorem should be read as a complete argument with two
-steps still owed to the reader. \emph{It is also ineffective}, at exactly one
+Section~\ref{sec:l5c}. Both are now written out: the quoted estimate is stated
+with its hypotheses as Lemma~\ref{lem:vv}, the three checks the substitution
+needs are made in order, and the summation by parts in the excision is carried
+out rather than indicated. What remains from outside is that one quoted lemma,
+which is ordinary practice and not a debt; Section~\ref{sec:remains} keeps the
+ledger of what is and is not ours. \emph{It is also ineffective}, at exactly one
 point: the Siegel--Walfisz constant, which Appendix~\ref{sec:constants} isolates
 as the only ineffective constant in the paper. Key steps are formally verified
 in Lean~4.
@@ -805,13 +807,19 @@ equidistribution input is needed at all.
 
 \section{The deep minor arcs}\label{sec:l5c}
 
-Most of this section is now proved: the dissection (Lemma~\ref{lem:cover}), the
-counting of bad points (Lemma~\ref{lem:fejer}), the twisted sums
-(Lemma~\ref{lem:twist}), the annulus profile with its closed form and its
-consequence (Lemmas~\ref{lem:annulus}, \ref{lem:closed}, \ref{lem:supnorm}).
-What is not written out to referee standard is the substitution of the quoted
-exponential-sum bound in step~2 and the excision of step~4; we flag those
-explicitly where they occur, and Section~\ref{sec:remains} keeps the ledger.
+This section is proved: the dissection (Lemma~\ref{lem:cover}), the counting of
+bad points (Lemma~\ref{lem:fejer}), the twisted sums (Lemma~\ref{lem:twist}),
+the annulus profile with its closed form and its consequence
+(Lemmas~\ref{lem:annulus}, \ref{lem:closed}, \ref{lem:supnorm}), and the
+deep-minor bound itself (Proposition~\ref{prop:deepminor}).
+
+One estimate is quoted from the literature and not proved here: the
+Vinogradov--Vaughan bound, stated with its hypotheses as Lemma~\ref{lem:vv}.
+Everything the present paper adds to it --- the verification of its hypotheses,
+the passage from all primes up to $N$ to the layer $B_d$, the substitution of
+the two ends of the $q$-range, and the excision of the tail near the zeros of
+the cosine --- is written out below. Section~\ref{sec:remains} keeps the ledger
+of what is quoted and what is ours.
 
 \subsection{The product is a superposition of prime exponential sums}
 
@@ -911,15 +919,17 @@ and split $B=B_{\mathrm{good}}\cup B_{\mathrm{bad}}$, where $p$ is \emph{bad}
 when $\|v_p\|<\delta_0$.
 
 \begin{proposition}[Deep minor arcs]\label{prop:deepminor}
-Let $\theta$ be of type~\textup{(ii)} and let $A>8$. Then
+Let $\theta$ be of type~\textup{(ii)} and let $A>2C+2$, with $C$ the absolute
+constant of Lemma~\ref{lem:vv}. Then
 \[
   \frac1b\log|G_B(\theta)|\;\le\;-\log2\;+\;R(\theta),
   \qquad
   R(\theta)\;\ll\;\delta_0\log\log N+\frac{1}{N_0\delta_0}
-    +(\log N)^{4-A/2}(\log\log N)^{2},
+    +(\log N)^{C+1-A/2}(\log\log N)^{2},
 \]
-uniformly in $\theta$. With $A=11$, $A'=12$ and $\delta_0=1/\log b$ this reads
-$R(\theta)\ll\log\log N/\log N$. In particular
+uniformly in $\theta$. With $A=11$, $A'=12$ and $\delta_0=1/\log b$ --- admissible
+for every $C\le4$, hence for every published form of Lemma~\ref{lem:vv} --- this
+reads $R(\theta)\ll\log\log N/\log N$. In particular
 $|G_B(\theta)|\le\bigl(\tfrac12+o(1)\bigr)^{b}$ on the deep minor arcs.
 \end{proposition}
 
@@ -931,11 +941,11 @@ by} $b$.
 \begin{center}
 \begin{tabular}{@{}llll@{}}
 \toprule
-step & quantity & bound $/b$ & at $A=11$, $\delta_0=1/\log b$\\
+step & quantity & bound $/b$ & at $A=11$, $C=3$, $\delta_0=1/\log b$\\
 \midrule
-2 & $\max_{n\le N_0}|S_B(\alpha_n)|$ & $(\log N)^{4-A/2}$ & $(\log N)^{-3/2}$\\
+2 & $\max_{n\le N_0}|S_B(\alpha_n)|$ & $(\log N)^{C+1-A/2}$ & $(\log N)^{-3/2}$\\
 2 & $H(\theta)=\sum_{n\le N_0}n^{-1}|S_B(\alpha_n)|$
-  & $(\log N)^{4-A/2}\log\log N$ & $(\log N)^{-3/2}\log\log N$\\
+  & $(\log N)^{C+1-A/2}\log\log N$ & $(\log N)^{-3/2}\log\log N$\\
 3 & $|B_{\mathrm{bad}}|$ & $\delta_0+N_0^{-1}+b^{-1}H$ & $(\log N)^{-1}$\\
 4a & $\sum_{p\in B_{\mathrm{bad}}}\log|2\cos\pi u_p|$ & $(\log2)\,b^{-1}|B_{\mathrm{bad}}|$
   & $(\log N)^{-1}$\\
@@ -964,24 +974,79 @@ of~\cite{Ku05} holds; and $q_n\le\tau\le N$. Combining with step~1,
 which is exactly the range on which Vaughan's identity is effective. No other
 range occurs: the tiers below $(\log N)^{A}$ are not lost but are handled in
 \S\ref{sec:vanish} and \S\ref{sec:l5a}, where the cyclotomic constants $M(q)$
-give the bound directly and no exponential sum is needed at all. On this range
-Lemma~3.1 of~\cite{Ku05} --- attributed there to Vaughan, as the sharpest form
-of Vinogradov's 1937 estimate --- gives
+give the bound directly and no exponential sum is needed at all.
+
+The single estimate this paper quotes from outside is the following. We state it
+with its hypotheses, and with the logarithmic exponent carried as a named
+constant rather than a numeral, because the substitution below is the one place
+where the quoted input meets ours and the reader should be able to check the
+join without going to the source for the shape of the statement.
+
+\begin{lemma}[Vinogradov--Vaughan; quoted, not proved here]\label{lem:vv}
+There is an absolute constant $C$ with the following property. Let $\alpha$ be
+real and suppose $a/q$ satisfies $(a,q)=1$, $2\le q\le x$ and
+$|\alpha-a/q|\le q^{-2}$. Then
 \[
-  S_B(\alpha_n)=\sum_{p\in B}e(p\alpha_n)
-  \;\ll\;(\log N)^{3}\bigl(Nq_n^{-1/2}+N^{4/5}+(Nq_n)^{1/2}\bigr).
+  \sum_{p\le x}e(\alpha p)\;\ll\;
+  \bigl(xq^{-1/2}+x^{4/5}+x^{1/2}q^{1/2}\bigr)(\log x)^{C},
 \]
-Insert the two ends of \eqref{eq:qrange}: the first term is
-$\ll N(\log N)^{-A/2}$ by the lower end, and the third is
-$\le(N\cdot N(\log N)^{-A})^{1/2}=N(\log N)^{-A/2}$ by the upper end --- the two
-ends are used in opposite directions, which is why both are needed. Hence,
-uniformly in $n\le N_0$,
+with an absolute implied constant.
+\end{lemma}
+
+\STATUS{quoted. This is Lemma~3.1 of~\cite{Ku05}, attributed there to Vaughan as
+the sharpest form of Vinogradov's 1937 estimate, and it is the only statement in
+this paper taken from the literature without proof. The published forms give
+$C\le4$; the argument below never uses a numerical value of $C$, and the choice
+$A=11$ made at its end is valid for every $C\le4$.}
+
+Three things have to be checked before Lemma~\ref{lem:vv} can be applied to
+$S_B(\alpha_n)$, and we check them in order.
+
+\emph{(2a) The hypothesis holds.} Dirichlet's theorem was applied at parameter
+$\tau$, so $q_n\le\tau$ and $|\alpha_n-a_n/q_n|\le1/(q_n\tau)$. Since
+$q_n\le\tau$ this gives $|\alpha_n-a_n/q_n|\le q_n^{-2}$, which is the
+hypothesis; $(a_n,q_n)=1$ by construction; and
+$2\le(\log N)^{A}<q_n\le N(\log N)^{-A}\le N$ by \eqref{eq:qrange}, so
+$2\le q_n\le x$ with $x=N$. Note that the lower end of \eqref{eq:qrange} is what
+supplies $q_n\ge2$, so the deep-minor tier is exactly the tier on which the
+lemma is available.
+
+\emph{(2b) From $p\le N$ to $p\in B$.} Lemma~\ref{lem:vv} bounds a sum over all
+primes up to $x$, while $S_B$ runs over $B=B_d$, the primes in $(2d,N]$. The two
+differ by the primes at or below $2d$, so
+\[
+  \Bigl|S_B(\alpha_n)-\sum_{p\le N}e(\alpha_n p)\Bigr|
+  \;=\;\Bigl|\sum_{p\le2d}e(\alpha_n p)\Bigr|\;\le\;\pi(2d)\;\le\;2d .
+\]
+In Theorem~\ref{thm:t2main} the layer index $d$ is \emph{fixed} and $k\to\infty$,
+so this is $O_d(1)$: a bounded quantity against $b\to\infty$, contributing
+$O_d(1/b)$ after the division below. It is the only place in this section where
+the implied constant is allowed to depend on $d$, and it may be dropped
+altogether by taking $x=N$ and $B=B_0$ in what follows.
+
+\emph{(2c) The substitution.} Insert the two ends of \eqref{eq:qrange} into
+Lemma~\ref{lem:vv} with $x=N$, $q=q_n$. The first term uses the \emph{lower}
+end, $q_n>(\log N)^{A}$:
+\[
+  Nq_n^{-1/2}\;<\;N(\log N)^{-A/2}.
+\]
+The third uses the \emph{upper} end, $q_n\le N(\log N)^{-A}$:
+\[
+  N^{1/2}q_n^{1/2}\;\le\;\bigl(N\cdot N(\log N)^{-A}\bigr)^{1/2}
+  \;=\;N(\log N)^{-A/2}.
+\]
+The two ends are used in opposite directions, which is why the dissection needs
+both. With (2b) this gives, uniformly in $n\le N_0$,
 \begin{equation}\label{eq:sbbound}
-  |S_B(\alpha_n)|\;\ll\;N(\log N)^{3-A/2}+N^{4/5}(\log N)^{3}.
+  |S_B(\alpha_n)|\;\ll\;N(\log N)^{C-A/2}+N^{4/5}(\log N)^{C}+O_d(1).
 \end{equation}
-Since $b=\pi(N)=(1+o(1))N/\log N$, dividing by $b$ turns \eqref{eq:sbbound} into
-$(\log N)^{4-A/2}+N^{-1/5}(\log N)^{4}\ll(\log N)^{4-A/2}$, the second term
-being negligible. Summing the head with the weights $1/n$,
+Since $b=\pi(N)=(1+o(1))N/\log N$, dividing \eqref{eq:sbbound} by $b$ gives
+\[
+  \frac{|S_B(\alpha_n)|}{b}\;\ll\;(\log N)^{C+1-A/2}+N^{-1/5}(\log N)^{C+1}
+  +O_d(1/b)\;\ll\;(\log N)^{C+1-A/2},
+\]
+the last two terms being negligible against the first for every fixed $C$ and
+$d$. Summing the head with the weights $1/n$,
 \[
   H(\theta):=\sum_{n\le N_0}\frac{|S_B(\alpha_n)|}{n}
   \;\le\;(1+\log N_0)\max_{n\le N_0}|S_B(\alpha_n)|,
@@ -989,12 +1054,18 @@ being negligible. Summing the head with the weights $1/n$,
 \]
 so that
 \begin{equation}\label{eq:head}
-  \frac{H(\theta)}{b}\;\ll\;(\log N)^{4-A/2}\log\log N .
+  \frac{H(\theta)}{b}\;\ll\;(\log N)^{C+1-A/2}\log\log N .
 \end{equation}
-This is $o(1)$ precisely when $A>8$; $A$ is ours to choose and Siegel--Walfisz
-holds for every fixed $A$, so we fix $A=11$ once and for all, giving
-$H(\theta)/b\ll(\log N)^{-3/2}\log\log N$. A log-free version valid on a wider
-range of $q$ is available in~\cite{Sr25}.
+This is $o(1)$ precisely when $A>2C+2$. Now $A$ is ours to choose and
+Siegel--Walfisz holds for every fixed $A$, so we fix
+\[
+  A=11,\qquad A'=12
+\]
+once and for all. This is admissible for every $C\le4$, hence for every value
+the published forms of Lemma~\ref{lem:vv} give; at $C=3$ it yields
+$H(\theta)/b\ll(\log N)^{-3/2}\log\log N$, and at $C=4$ the exponent is
+$-1/2$ instead. Nothing below depends on which. A log-free version of
+Lemma~\ref{lem:vv}, valid on a wider range of $q$, is available in~\cite{Sr25}.
 
 \emph{Step 3: the bad points are few.} Apply Lemma~\ref{lem:fejer} --- the
 one-interval form of the Erd\H{o}s--Tur\'an inequality, proved in the appendix
@@ -1009,7 +1080,7 @@ Bounding $c_n\le1/(\pi n)$ and using \eqref{eq:head},
 \begin{equation}\label{eq:bad}
   \frac{|B_{\mathrm{bad}}|}{b}\;\le\;4\delta_0+\frac4{N_0}
     +\frac4\pi\cdot\frac{H(\theta)}{b}
-  \;\ll\;\delta_0+\frac1{N_0}+(\log N)^{4-A/2}\log\log N .
+  \;\ll\;\delta_0+\frac1{N_0}+(\log N)^{C+1-A/2}\log\log N .
 \end{equation}
 We stress that this removes a dependency rather than adding one: no external
 discrepancy theorem for $\{p\theta\}$ is required. The literature on $\alpha p$
@@ -1034,25 +1105,65 @@ where $T_p$ is the tail of \eqref{eq:fourier} past $N_0$ at the point $u_p$.
 
 \emph{(4a)} $\log|2\cos\pi u|\le\log2$ for every $u$, so this term is at most
 $|B_{\mathrm{bad}}|\log2$, which is $\ll b\,\bigl(\delta_0+N_0^{-1}
-+(\log N)^{4-A/2}\log\log N\bigr)$ by \eqref{eq:bad}.
++(\log N)^{C+1-A/2}\log\log N\bigr)$ by \eqref{eq:bad}.
 
-\emph{(4b)} Put $v=v_p$, so that $\log|2\cos\pi u_p|=\log|2\sin\pi v|
-=-\sum_{n\ge1}\cos(2\pi nv)/n$ and $\|v\|\ge\delta_0$. The Dirichlet kernel
-$D_M(v)=\sum_{n\le M}\cos2\pi nv=\frac{\sin((2M+1)\pi v)}{2\sin\pi v}-\frac12$
-satisfies, using $|\sin\pi v|\ge2\|v\|$,
+\emph{(4b)} This is the excision proper: the tail of \eqref{eq:fourier} past
+$N_0$, at a point kept away from the zeros of the cosine. Put $v=v_p$, so that
+$u_p=v+\tfrac12$ and
 \[
-  |D_M(v)|\;\le\;\frac{1}{4\|v\|}+\frac12\qquad\text{for every }M\ge1 .
+  \log|2\cos\pi u_p|=\log|2\sin\pi v|=-\sum_{n\ge1}\frac{\cos(2\pi nv)}{n},
+  \qquad \|v\|\ge\delta_0 ,
 \]
-Summation by parts against $1/n$ on $(N_0,M]$ gives
-$\bigl|\sum_{N_0<n\le M}\cos(2\pi nv)/n\bigr|\le
-|D_M|/M+|D_{N_0}|/(N_0+1)+\sup_n|D_n|\sum_{n>N_0}\bigl(\tfrac1n-\tfrac1{n+1}\bigr)$,
-and letting $M\to\infty$,
+the last because $p$ is good. Write $T_p=-\sum_{n>N_0}\cos(2\pi nv)/n$ for the
+tail, and note at the outset that the series is only conditionally convergent,
+so the bound must come from cancellation in the partial sums and not from the
+terms.
+
+Those partial sums are the Dirichlet kernel,
+\[
+  D_M(v)=\sum_{n\le M}\cos2\pi nv=\frac{\sin\bigl((2M+1)\pi v\bigr)}{2\sin\pi v}-\frac12 ,
+\]
+and since $|\sin\pi v|\ge2\|v\|$ for every real $v$,
+\begin{equation}\label{eq:dirichlet}
+  |D_M(v)|\;\le\;\frac{1}{4\|v\|}+\frac12\;=:\;\Delta(v)
+  \qquad\text{for every }M\ge0 ,
+\end{equation}
+a bound uniform in $M$. That uniformity is the whole of the excision: it is what
+lets the truncation at $N_0$ cost $O(1/N_0)$ rather than diverging as $v$
+approaches a zero, at the price of the factor $1/\|v\|$, which the choice of
+$\delta_0$ then pays.
+
+Now sum by parts. Put $E_n=\sum_{N_0<m\le n}\cos2\pi mv=D_n-D_{N_0}$, so that
+$|E_n|\le2\Delta(v)$ for every $n$ by \eqref{eq:dirichlet}. Abel summation
+against the weights $1/n$, which decrease, gives for every $M>N_0$
+\[
+  \sum_{N_0<n\le M}\frac{\cos 2\pi nv}{n}
+  =\frac{E_M}{M}+\sum_{n=N_0+1}^{M-1}E_n\Bigl(\frac1n-\frac1{n+1}\Bigr),
+\]
+whence, the weights being positive and telescoping,
+\[
+  \Bigl|\sum_{N_0<n\le M}\frac{\cos 2\pi nv}{n}\Bigr|
+  \;\le\;\frac{2\Delta(v)}{M}
+   +2\Delta(v)\Bigl(\frac1{N_0+1}-\frac1M\Bigr)
+  \;\le\;\frac{2\Delta(v)}{N_0+1}.
+\]
+The bound is uniform in $M$, so letting $M\to\infty$,
 \begin{equation}\label{eq:tailbound}
   |T_p|\;\le\;\frac{2}{N_0+1}\Bigl(\frac1{4\|v_p\|}+\frac12\Bigr)
-  \;\le\;\frac{1}{2N_0\delta_0}+\frac1{N_0}.
+  \;\le\;\frac{1}{2N_0\delta_0}+\frac1{N_0},
 \end{equation}
-Summing over at most $b$ good points, (4b) is at most
+using $\|v_p\|\ge\delta_0$ and $N_0+1>N_0$ in the last step. Summing over at
+most $b$ good points, (4b) is at most
 $b\bigl((2N_0\delta_0)^{-1}+N_0^{-1}\bigr)$.
+
+Two remarks on what this step does and does not need. It needs only an
+\emph{upper} bound on $\sum_p\log|2\cos\pi u_p|$, so the excised points may be
+discarded with the crude $\log|2\cos\pi u|\le\log2$ of (4a); a two-sided bound
+would have to control $\log|2\cos\pi u_p|$ from below near a zero, where it is
+unbounded, and that is a different and harder problem. And it needs no
+smoothing: the non-smoothness of $\log|2\cos|$ at its zeros is confined to the
+$\delta_0$-neighbourhoods removed in step~3, and \eqref{eq:dirichlet} is exact
+outside them.
 
 \emph{(4c)} Write $\sum_{p\in B_{\mathrm{good}}}e(p\alpha_n)
 =S_B(\alpha_n)-\sum_{p\in B_{\mathrm{bad}}}e(p\alpha_n)$ and bound the second
@@ -1066,7 +1177,7 @@ Collecting (4a)--(4c), dividing by $b$, using \eqref{eq:bad} and $\delta_0\le1$
 $1+\log N_0\asymp A'\log\log N$ into the bracket of \eqref{eq:bad}, gives
 \[
   R(\theta)\;\ll\;\delta_0\log\log N+\frac{1}{N_0\delta_0}
-    +(\log N)^{4-A/2}(\log\log N)^{2},
+    +(\log N)^{C+1-A/2}(\log\log N)^{2},
 \]
 which is the stated bound. With $A=11$, $A'=12$ and $\delta_0=1/\log b$ the
 three terms are $\asymp\log\log N/\log N$, $\asymp(\log N)^{1-A'}$ and
@@ -1080,14 +1191,14 @@ that range the two $\delta_0$-terms of Proposition~\ref{prop:deepminor} balance
 at $\delta_0\asymp(N_0\log\log N)^{-1/2}$; the simpler choice
 $\delta_0=N_0^{-1/2}=(\log N)^{-A'/2}$ already sends both of them below the
 exponential-sum term, improving the rate from
-$\log\log N/\log N$ to $(\log N)^{4-A/2}(\log\log N)^{2}$, i.e.\ to
+$\log\log N/\log N$ to $(\log N)^{C+1-A/2}(\log\log N)^{2}$, i.e.\ to
 $(\log N)^{-3/2}(\log\log N)^{2}$ at $A=11$. We keep $\delta_0=1/\log b$ because
 it is the value at which the budget of Remark~\ref{rem:budget} was measured, and
 because the conclusion is the same; a reader who wants the better rate may
 substitute throughout.
 
 The rate is in any case at the mercy of $A$: the exponential-sum term is
-$(\log N)^{4-A/2}$ up to log-logs, so any fixed $J$ is reached by taking
+$(\log N)^{C+1-A/2}$ up to log-logs, so any fixed $J$ is reached by taking
 $A\ge2J+8$. That is free asymptotically but not for free in
 Proposition~\ref{prop:l5a}, whose explicit constants are calibrated to
 $q\le Q_2=(\log N)^{A+A'}$; raising $A$ raises that threshold. Since this
@@ -1106,13 +1217,15 @@ $-b^{-1}\log|G_B(\theta)|-\log2$ was $0.123$ at $b=99$ and $0.024$ at $b=1999$,
 against the $\log\sqrt3=0.549$ that the conclusion needs.
 \end{remark}
 
-\begin{remark}[What this settles about the technique needed]
+\begin{remark}[What this settles about the technique needed]\label{rem:whatneeded2}
 Only a one-sided bound together with an exceptional set of size $o(b)$ is
-required. The precise asymptotic machinery of~\cite{DRZZ25} --- their strange
-and pseudo-differentiable functions --- is therefore not needed here, and we
-cite them for context only. The question was nevertheless the right one: the
+required, and step~4 supplies it with the Dirichlet kernel and one summation by
+parts. The precise asymptotic machinery of~\cite{DRZZ25} --- their strange and
+pseudo-differentiable functions --- is therefore not needed here, and we cite
+them for context only. The question was nevertheless the right one: the
 non-smoothness of $\log|2\cos|$ is exactly where the elementary excision of
-step~4 does its work.
+step~4 does its work, and it is why the bound is one-sided --- below a zero the
+function is unbounded and no amount of excision recovers it.
 \end{remark}
 
 \begin{remark}[An alternative route]
@@ -1216,14 +1329,15 @@ range of $\cos((\pi/6)(2m-(c_1-c_5))+\psi)$ over $m\in\mathrm{Win}_d$ --- and
 $w_d$ is the window width. In particular $\varepsilon_d(k)\to0$ at the
 geometric rate $\sqrt3/2$ per element.
 
-\STATUS{no hypothesis, but not fully written out; ineffective at one constant; one factor of
-the display calibrated numerically --- itemised next, in the statement rather than only in the
-surrounding text}
+\STATUS{no hypothesis; proved, quoting one external estimate; ineffective at one constant;
+one factor of the display calibrated numerically --- itemised next, in the statement rather
+than only in the surrounding text}
 \textbf{(i)} The
-theorem carries no hypothesis, but its proof is not yet complete as written: two steps of
-Proposition~\ref{prop:deepminor} --- the substitution of the quoted exponential-sum bound in
-step~2 and the excision in step~4 of Section~\ref{sec:l5c} --- are not written to referee
-standard. \textbf{(ii)} It is ineffective at one point, the Siegel--Walfisz constant $C_1$;
+theorem carries no hypothesis, and as of r121 its proof is written out. The two steps of
+Proposition~\ref{prop:deepminor} that were previously owed to the reader --- the substitution
+of the quoted exponential-sum bound in step~2 and the excision in step~4 of
+Section~\ref{sec:l5c} --- are now written in full. One estimate is quoted from the literature
+without proof, Lemma~\ref{lem:vv}, and its hypotheses are verified where it is applied. \textbf{(ii)} It is ineffective at one point, the Siegel--Walfisz constant $C_1$;
 the effective substitute is the weaker rate $e^{1/8}\sqrt3/2=0.98134\ldots$ per element, which
 still gives $\varepsilon_d\to0$. \textbf{(iii)} Of the factors in the display, the peak height
 $(\sqrt3/2)^{b+1}$ and the window factor $\kappa_d\in[0,1]$ are proved, while the amplitude
@@ -1236,11 +1350,15 @@ the sharp constant $\sqrt3/2$ does.
 \begin{remark}
 Earlier versions of this paper carried the deep-minor bound as a hypothesis,
 on the ground that Section~\ref{sec:l5c} gave a programme rather than a proof.
-It is now Proposition~\ref{prop:deepminor}, and the theorem above is
-unconditional. What is quoted from outside is a single exponential-sum
-estimate, Lemma~3.1 of~\cite{Ku05}; everything the present paper adds to it is
-written out, with the exponent budget displayed so that the substitution can be
-checked line by line.
+It is now Proposition~\ref{prop:deepminor} and the theorem above is
+unconditional. A later version carried the proposition with two of its steps
+indicated rather than written; those are written out as of r121, in three named
+checks for the substitution --- the hypotheses of Lemma~\ref{lem:vv}, the
+passage from all primes up to $N$ to the layer $B_d$, and the two ends of the
+$q$-range --- and a full summation by parts for the excision. What is quoted
+from outside is one exponential-sum estimate, Lemma~\ref{lem:vv}; everything
+this paper adds to it is written out, with the exponent budget displayed so that
+the substitution can be checked line by line.
 \end{remark}
 
 \begin{remark}[What the conclusion needs, and what it does not]\label{rem:whatneeded}
@@ -1380,7 +1498,15 @@ We set out plainly which parts of this paper are proved and which are not.
       Lemma~\ref{lem:window}, Lemma~\ref{lem:twist}, Lemma~\ref{lem:annulus},
       Lemma~\ref{lem:closed}, Lemma~\ref{lem:supnorm}, Lemma~\ref{lem:l1},
       Lemma~\ref{lem:l1geom}, Lemma~\ref{lem:l1small},
-      Proposition~\ref{prop:supnorm}, Theorem~\ref{thm:p5exact}.
+      Proposition~\ref{prop:supnorm}, Theorem~\ref{thm:p5exact},
+      and, as of r121 with its three checks written out,
+      Proposition~\ref{prop:deepminor}.
+\item \emph{Quoted from the literature, not proved here}: exactly one statement,
+      Lemma~\ref{lem:vv} (Vinogradov--Vaughan, via Lemma~3.1 of~\cite{Ku05}).
+      It is stated with its hypotheses, its hypotheses are verified at the point
+      of use, and the argument is written so that no numerical value of its
+      logarithmic exponent $C$ is needed --- the choice $A=11$ is admissible for
+      every $C\le4$. Nothing else in this paper is taken on trust.
 \item \emph{Derivations verified numerically to stated precision}:
       Proposition~\ref{prop:ripple} ($K_2$ and $\psi$, to $0.1\%$ over
       $k=18,\dots,76$; see Remark~\ref{rem:ripplerange} for why the check stops
@@ -1446,9 +1572,9 @@ three steps as problems for the record.
 Worth separating, because a reader who meets three open problems in a
 circle-method paper will reasonably assume the main theorem is one of their
 hostages. Theorem~\ref{thm:t2main} rests on
-Proposition~\ref{prop:deepminor}, whose steps 2 and 4 are the ones not yet
-written to referee standard; \emph{that} is the debt, and
-Problem~\ref{prob:minor} is where it is recorded. Problems~\ref{prob:main}
+Proposition~\ref{prop:deepminor}, whose steps 2 and 4 were the ones owed to the
+reader; they are written out as of r121, so that debt is discharged and
+Problem~\ref{prob:minor} is reduced accordingly. Problems~\ref{prob:main}
 and~\ref{prob:assembly} are a different matter: they ask for an
 \emph{effective} main-arc estimate and the assembly that would follow from it,
 which would sharpen the result and remove the Siegel--Walfisz constant, and
@@ -1463,14 +1589,19 @@ unexplained $25$--$29\%$ gap in the ripple prediction, and its size is
 $\asymp1/S_2$ rather than exponential in $b$.
 \end{problem}
 
-\begin{problem}[Minor arcs]\label{prob:minor}
-Carry out the programme of Section~\ref{sec:l5c}. The exponential sums are the
-classical ones by~\eqref{eq:fourier}; the non-classical part is the excision
-near the zeros of $\cos$. Dong, Robles, Zaharescu and Zeindler~\cite{DRZZ25}
-handle non-principal major arcs for prime partitions using what they call
-strange and pseudo-differentiable functions, and their treatment of non-smooth
-behaviour looks like the right tool for that excision, although their limit
-($n\to\infty$ with the part set fixed) is not ours.
+\begin{problem}[Minor arcs, what is left of it]\label{prob:minor}
+The programme of Section~\ref{sec:l5c} is carried out; what remains is a
+sharpening, not a gap. Two directions. \emph{(a)} Remove the dependence on
+Lemma~\ref{lem:vv} by proving the exponential-sum bound in the restricted form
+actually needed here --- a one-sided bound, on a single range of $q$, for a set
+of primes rather than all of them --- which is a weaker statement than the
+quoted one. \emph{(b)} Sharpen the excision. Dong, Robles, Zaharescu and
+Zeindler~\cite{DRZZ25} handle non-principal major arcs for prime partitions
+using what they call strange and pseudo-differentiable functions; that machinery
+is not needed for the one-sided bound proved here
+(Remark~\ref{rem:whatneeded2}), but it is the right tool if a two-sided bound
+near the zeros is ever wanted, although their limit ($n\to\infty$ with the part
+set fixed) is not ours.
 \end{problem}
 
 \begin{lemma}[The annulus, resolved]\label{lem:supnorm}
@@ -1932,7 +2063,7 @@ see the boundary between them drawn explicitly rather than inferred.
 \toprule
 symbol & value & fixed at & what forces it\\
 \midrule
-$A$ & $11$ & \S\ref{sec:l5c}, step 2 & $A>8$ from Kumchev's $(\log n)^{3}$;
+$A$ & $11$ & \S\ref{sec:l5c}, step 2 & $A>2C+2$; $C\le4$ so $A=11$ suffices;
   \\ &&& $A>10$ from Vaughan's $(\log N)^{4}$\\
 $A'$ & $A+1=12$ & \S\ref{sec:l5c} & one power of $\log N$ of slack in
   Lemma~\ref{lem:cover}\\

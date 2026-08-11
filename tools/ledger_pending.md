@@ -53,6 +53,41 @@ Full text of entries already folded in lives in `tools/ledger_archive.md`.
               in front of
 ```
 
+## r121 — a status label held too long is wrong in both directions
+
+```
+  claimed   : Part II owed the reader two steps of prop:deepminor, "not written to
+              referee standard" -- carried in the abstract, the section head, the
+              theorem's own status, and the honest-scope list
+  actual    : most of both steps was written.  What was actually missing was three
+              other things: the quoted lemma was never STATED (only cited by number),
+              the passage from all primes up to N to the layer B_d was absent, and the
+              summation by parts in the excision was indicated rather than assembled
+              (its intermediate expression did not follow, though its conclusion did)
+  check     : when a status label survives more than one round, re-derive it from the
+              text rather than carrying it; the label is a claim like any other
+  rule      : a debt label goes stale in both directions.  It over-reports what is
+              missing where work has quietly been done, and it under-reports by naming
+              the wrong thing -- and the second is worse, because it aims the next
+              audit away from the defect
+```
+
+## r121 — two checks, two different reasons, one missed reference
+
+```
+  claimed   : cross-document references were covered (C15) and translation drift was
+              covered (C13)
+  actual    : the Japanese abstract still pointed at "Problem 10.1" after the English
+              moved to 11.1.  C13 reads literals with three or more decimals, and 10.1
+              has one; C15 read paper/ and not paper-ja/.  Each check missed it for its
+              own reason, and between them the artefact had no cover at all
+  check     : the Japanese editions now carry the same \Xref/\Xlab macros and C15 scans
+              both trees
+  rule      : coverage is not the union of what the checks are about, it is the union of
+              what they LOOK AT.  Two checks that between them describe a rule do not
+              between them enforce it
+```
+
 ## r120 — where the defect was, versus where the ledger said to look
 
 Written at r121 after fable-5 caught its absence: the lesson was in the report and not here,

@@ -2,6 +2,7 @@ cor:goal
 cor:p5prob
 cor:spectrum
 eq:bad
+eq:dirichlet
 eq:fourier
 eq:head
 eq:k2
@@ -23,6 +24,7 @@ lem:phivals
 lem:supnorm
 lem:twist
 lem:vanish
+lem:vv
 lem:window
 prob:assembly
 prob:main
@@ -55,6 +57,7 @@ rem:ripplerange
 rem:subproduct
 rem:trivial
 rem:whatneeded
+rem:whatneeded2
 rem:whichwait
 rem:whyN0
 sec:constants

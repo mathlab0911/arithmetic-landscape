@@ -1,0 +1,45 @@
+Part II's debt discharged -- and it was not where the label said it was
+
+The two steps of prop:deepminor that Part II had been owing the reader for
+months -- the substitution of the quoted exponential-sum bound in step 2 and the
+excision in step 4 -- are written out, in both editions.  Opening them found
+most of both steps already written, and three different things missing.
+
+- The quoted estimate was never STATED.  It was cited as "Lemma 3.1 of [Ku05]"
+  and used; a referee cannot check a substitution against a lemma he has to go
+  and fetch.  It is now lem:vv, with its hypotheses and a quoted status.
+- The passage from all primes up to N to the layer B_d was absent.  The quoted
+  bound is over p <= x; S_B runs over the primes in (2d, N].  The difference is
+  pi(2d), which is O_d(1) because thm:t2main fixes d -- and that sentence was
+  nowhere, so the substitution did not close.
+- The summation by parts in the excision was indicated, not assembled.  The
+  printed intermediate does not follow from Abel summation: the partial sums of
+  the tail are E_n = D_n - D_{N_0}, bounded by 2*Delta, not by |D_n|.  The
+  conclusion was right, which is why it survived.  Now written with E_n and the
+  telescoping carried out.
+
+Beyond writing out: the logarithmic exponent of the quoted bound is now a named
+constant C rather than the numeral 3.  Published forms give C <= 4, the argument
+uses no numerical value, the condition becomes A > 2C+2, and A = 11 is
+admissible for every C <= 4.  The choice of A no longer depends on which form of
+the quoted lemma a reader reaches for.
+
+The lesson, and it is the r120 one from the other side: a debt label goes stale
+in BOTH directions.  It over-reports where work has quietly been done, and it
+under-reports by naming the wrong thing.  The second half is the dangerous one --
+for months the label aimed every audit at steps 2 and 4 while the actual holes
+were a missing statement, a missing sentence about d, and a mis-assembled Abel
+summation.  The flag is what stopped anyone looking.
+
+Also: the Japanese abstract still pointed at "Problem 10.1" after the English
+moved to 11.1.  C13 reads literals with three or more decimals and 10.1 has one;
+C15 read paper/ and not paper-ja/.  Each check missed it for its own reason and
+between them the artefact had no cover.  The Japanese editions now carry the
+same \Xref / \Xlab macros and C15 scans both trees -- 13 references over 8
+files.  Coverage is not the union of what the checks are about; it is the union
+of what they look at.
+
+paper2_ja had no \STATUS macro either -- the r117 finding, in the Japanese.
+
+Part II is 33 pp, its Japanese edition 32 pp, both EXIT 0 with zero undefined
+references; check.py C1-C15 pass.
