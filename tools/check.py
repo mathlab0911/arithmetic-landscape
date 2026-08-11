@@ -361,35 +361,86 @@ def c10_repo_url():
 #
 # Extend the table when a new constant earns a name.  Values are exact enough to check any
 # precision a paper is likely to print.
-CONSTANTS = {
-    # regex-safe leading digits -> (true value as a string, what it is)
-    '5.349': ('5.34928793202265755799135261816805',
-              'Gamma(P), the gap series of the odd primes'),
-    '0.9813': ('0.98134',
-               'e^{1/8} sqrt3/2, the effective substitute rate'),
-    '0.1155': ('0.11552453009332421',
-               'delta = (1/6) log 2'),
+#
+# NOTE on how this check finds its subject, because the first version could not.  v1 keyed on
+# the leading digits of the CORRECT value ('0.9813' -> e^{1/8}sqrt3/2) and so was blind to
+# every literal that was wrong in exactly those digits: it passed a paper containing 0.9814,
+# 0.6916, 0.0188 and 0.2136, all of them wrong.  A check keyed on the right answer cannot see
+# a wrong answer (F47: a check invariant under the thing you want to detect is not a check).
+# v2 keys on PROXIMITY: any literal close enough to a known constant to be plausibly meant as
+# that constant must be a correct truncation or rounding of it at its own printed precision.
+#
+# What v2 still cannot see, stated so that nobody mistakes a pass for coverage:
+#   * a literal wrong by more than 1.5 units in its last printed digit -- outside the window,
+#     and at that distance it is more likely to be a different quantity than a misprint.  All
+#     four errors this check was built after were wrong by exactly one unit;
+#   * a constant not in the table below;
+#   * a number that is simply the wrong quantity, correctly printed.  That is C2's job for
+#     reports and nobody's job for the papers.
+CONSTANTS = [
+    ('5.34928793202265755799135261816805', 'Gamma(P), the gap series of the odd primes'),
+    ('0.86602540378443865',                'sqrt3/2'),
+    ('0.74767439061054404',                '5^(1/4)/2'),
+    ('0.70710678118654752',                '1/sqrt2'),
+    ('0.69154377713477389',                '7^(1/6)/2'),
+    ('0.60046847758228043',                '3^(1/6)/2'),
+    ('0.54930614433405485',                'log sqrt3'),
+    ('0.98133534661475161',                'e^(1/8) sqrt3/2, the effective substitute rate'),
+    ('0.01866465338524839',                '1 - e^(1/8) sqrt3/2, the margin'),
+    ('0.11552453009332421',                'delta = (1/6) log 2'),
+    ('0.34657359027997265',                '(1/2) log 2'),
+    ('0.16153297361054683',                'Cl_2(pi/3)/(2 pi)'),
+    ('0.53161420695003699',                'log 2 - Cl_2(pi/3)/(2 pi)'),
+    ('0.37008123334051583',                'log 2 - Cl_2(pi/3)/pi'),
+    ('0.09683458942105355',                '1 - log(pi^2/4)'),
+    ('0.21353467285326670',                '16 delta^2'),
+    ('1.22474487139158905',                'sqrt(3/2)'),
+    ('0.81649658092772603',                'sqrt(2/3)'),
+]
+
+# Literals that pass close to a constant by coincidence and are NOT that constant.  Each needs
+# a reason: the default is that a near-miss IS an error, which is why this check exists.  Do not
+# add an entry to silence a failure you have not understood.
+C11_EXEMPT = {
+    ('paper2.tex', '0.9812'):
+        'a measured ensemble mean of rho/(1-S_4/4S_2^2) at k=12, not e^{1/8}sqrt3/2; it sits in '
+        'a run of four measurements (0.9812, 0.9888, 0.9912, 0.9933) and lands 1.4e-4 away from '
+        'the constant by coincidence',
 }
 
 def c11_constants():
-    from decimal import Decimal
-    bad, checked = [], 0
+    from decimal import Decimal, getcontext
+    getcontext().prec = 40
+    bad, checked, exempt = [], 0, 0
     for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
-        for prefix, (truth, what) in CONSTANTS.items():
-            for m in re.finditer(re.escape(prefix) + r'\d*', src):
+        for ln, line in enumerate(open(os.path.join(PAPER, tex), encoding='utf-8',
+                                       errors='replace'), 1):
+            if line.lstrip().startswith('%'):
+                continue
+            for m in re.finditer(r'(?<![\d.])\d+\.\d{4,}', line):
                 lit = m.group(0)
-                checked += 1
-                dp = len(lit.split('.')[1])          # decimals actually printed
-                t = Decimal(truth)
-                trunc = Decimal(int(t * 10 ** dp)) / Decimal(10 ** dp)
-                rnd = Decimal(round(t, dp))
-                if Decimal(lit) not in (trunc, rnd):
-                    bad.append('%s: %s is neither the truncation (%s) nor the rounding (%s) '
-                               'of %s = %s' % (tex, lit, trunc, rnd, what, truth[:len(lit) + 4]))
+                dp = len(lit.split('.')[1])
+                L = Decimal(lit)
+                for truth, what in CONSTANTS:
+                    t = Decimal(truth)
+                    # close enough that it is plausibly MEANT to be this constant
+                    if abs(L - t) > Decimal(15) / Decimal(10) ** (dp + 1):
+                        continue
+                    if (tex, lit) in C11_EXEMPT:
+                        exempt += 1
+                        continue
+                    checked += 1
+                    scale = Decimal(10) ** dp
+                    trunc = (t * scale).to_integral_value(rounding='ROUND_FLOOR') / scale
+                    rnd = (t * scale).to_integral_value(rounding='ROUND_HALF_UP') / scale
+                    if L not in (trunc, rnd):
+                        bad.append('%s:%d %s is neither the truncation (%s) nor the rounding '
+                                   '(%s) of %s = %s...'
+                                   % (tex, ln, lit, trunc, rnd, what, truth[:dp + 4]))
     if bad:
         fail('C11/F18', 'constant(s) quoted at a precision they do not have: ' + '; '.join(bad))
-    notes.append('C11/F18 named constants checked digit by digit: %d occurrence(s)' % checked)
+    notes.append('C11/F18 constants matched by proximity and checked digit by digit: '
+                 '%d occurrence(s), %d exempted with a recorded reason' % (checked, exempt))
 
 
 if __name__ == '__main__':

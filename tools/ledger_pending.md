@@ -33,6 +33,33 @@ extra     : the second half of this entry is a plain mistake of mine. I committe
             repository and use that; never substitute an address from somewhere else.
 ```
 
+## F47 — new instance, r118: a check keyed on the right answer cannot see a wrong one
+
+```
+claimed   : C11 asserts that every named constant in the papers is correct at the precision it
+            is printed.  Written, tested with two negative controls, shipped, and it passed.
+actual    : it passed a paper containing FOUR wrong constants -- 0.6916 for 7^(1/6)/2 (0.6915),
+            0.9814 and 0.0188 for e^{1/8}sqrt3/2 and its margin (0.9813, 0.0187), 0.2136 for
+            16 delta^2 (0.2135).  v1 keyed each constant on the leading digits of its CORRECT
+            value ('0.9813' -> ...), so a literal wrong in exactly those digits matched no key
+            and was never looked at.  The negative controls passed because I built them by
+            corrupting a literal the check could already see.
+check     : ask what the check keys on, and whether the error you are hunting changes the key.
+            Here the error changes the digits, and the digits were the key.
+rule      : F47 exactly -- *** a check invariant under the thing you want to detect is not a
+            check *** -- but in the form that is easiest to walk into: a check that finds its
+            subject by matching the correct answer can only ever confirm what is already right.
+            Key on something the error does NOT change: the surrounding definition, or (as v2
+            does) mere PROXIMITY, so that a near-miss is caught precisely because it is near.
+            And build the negative control by corrupting the artefact in the way the real world
+            corrupts it, not in the way the check happens to notice.
+note      : v2 traded blindness for false positives -- one measured value lands 1.4e-4 from a
+            constant by coincidence.  That is recorded as an exemption WITH ITS REASON rather
+            than fixed by widening the tolerance, and the exemption is keyed to the literal, so
+            corrupting that same position still fires (verified).  A check that is loosened to
+            stop complaining has been switched off with extra steps.
+```
+
 ## r118: a directory you create beside a mount is not inside it
 
 ```
