@@ -42,6 +42,7 @@ sec:oscillation
 sec:sandwich
 sec:stratification
 sec:symmetry
+sec:terminology
 sec:window
 tab:Q
 tab:cv

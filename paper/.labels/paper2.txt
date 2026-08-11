@@ -74,6 +74,7 @@ sec:num
 sec:p5
 sec:remains
 sec:t2main
+sec:terminology2
 sec:vanish
 sec:window
 tab:central

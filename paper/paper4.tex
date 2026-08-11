@@ -85,7 +85,7 @@ modulus of the minor arcs moves from $6$ to $4$, so that the peak height availab
 odd sequence is $1/\sqrt2$ where the primes have $\sqrt3/2$ --- the primes are the harder
 case. We then prove that the geometric \emph{rate} follows: almost surely the minor-arc maximum
 of $F_A^{1/b}$ tends to $1/\sqrt2$. The proof carries no ineffective constant and needs no
-equidistribution input, because the coarse-graining identity replaces the usual discrepancy
+equidistribution input, because the coset identity replaces the usual discrepancy
 estimate by an equality. Two questions inherited from the transfer-function strand are also settled or sharpened.
 Every claim is tagged with its status, and the numerical work is reproducible from logged
 scripts.
@@ -186,6 +186,37 @@ one local observable. The argument and what each part rests on:
       Lemma~\ref{lem:eta}. See \S\ref{sec:scope}.
 \end{itemize}
 
+\subsection{Terminology}\label{sec:terminology4}
+
+The vocabulary of Part~I is tabulated in its \S1.2 and not repeated. Four terms
+are local to this Part:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{3.3cm}p{9.5cm}@{}}
+\toprule
+term & what it denotes\\
+\midrule
+\emph{window identity} & Part~I's equality between the window series $W_D$ and the gap
+series $\Gamma$ at the last informative $D$; quoted here, not reproved.\\[3pt]
+\emph{coset identity} & the identity for $X(t)=-\log|\cos\pi t|$ displayed in the
+abstract: the average of $X$ over a coset of index $v$ is $X$ at $v$ times the
+frequency, plus a constant.\\[3pt]
+\emph{transfer function} $\Phi$ & the function of one variable through which the
+ratio $\lm_A(n)/r_A(n)$ depends on the target, once the target leaves the centre.\\[3pt]
+\emph{logarithmic slope} $\lambda$ & the local logarithmic derivative of the
+representation count, $\lambda(n)=\log\bigl(r_A(n{+}1)/r_A(n{-}1)\bigr)/2$; the one
+local observable through which the transfer function acts.\\[3pt]
+\emph{the tilt} & the exponential change of measure $P_s$ under which a subset $S$
+has probability proportional to $e^{s\sigma(S)}$; the standard exponential tilt of
+large-deviation theory, applied here subset by subset.\\[3pt]
+\emph{biased invariant} $\Gamma^{(q)}$ & what the gap series of Part~I becomes when
+the uniform measure on subsets is replaced by a Bernoulli$(q)$ product measure.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Notation, and what is inherited}\label{sec:notation}
 
 The definitions are those of Part~I~\cite{P1}, written so that nothing assumes $n=T/2$.
@@ -253,7 +284,7 @@ multiplies the residual of Table~\ref{tab:one} by three, exactly as the $\lambda
 behaviour of $\Phi$ predicts. \STATUS{experimentally confirmed; \texttt{sres\_r088}}
 \end{remark}
 
-\section{An exact coarse-graining identity}\label{sec:coset}
+\section{An exact coset identity}\label{sec:coset}
 
 Parts~I and~II and the transfer-function strand borrowed the vocabulary of statistical physics --- landscape, energy, transfer
 function, tilt --- and used it as a source of the right questions. This section is the first

@@ -1,0 +1,42 @@
+The terminology, counted before it was defended
+
+terms_r128 inventories the vocabulary: 387 occurrences of names this programme
+coined against 166 of the shared vocabulary of additive number theory, a ratio of
+more than two to one, and 22 of 24 coined terms met somewhere before they were
+introduced.  That is the complaint, measured.
+
+Three objects turned out to have two names each, which is the same cost paid
+twice for nothing:
+
+  deg_A(n) and r_A(n)                    -- removed at r126
+  the window series and the window measure
+  the coset identity and the coarse-graining identity
+
+Each is now one name.  The second and third were found by this inventory; the
+first was found by reading the abstract.
+
+Every live paper now carries a short terminology table: Part I glosses the
+vocabulary of the series in eleven rows, Parts II and III add the three and five
+terms local to them and point at Part I for the rest.  The table says, for each
+term, what it denotes in ordinary language and whether it is scaffolding or the
+point -- for the record, two of the eleven are the point and the rest are
+vocabulary for stating them.
+
+C17 keeps the tables complete: a coined term used in a live paper must be glossed
+in a table the reader can find.  paper3.tex is excluded, superseded and labelled
+as such.
+
+C17's own first negative control passed, which meant the check could not fail.
+It searched for the gloss in a "terminology table" region running to the next
+\section, so the region swallowed the rest of the introduction -- including
+Theorem D, whose name is Sandwich -- and deleting the actual table row changed
+nothing.  Narrowing the region to the next sectioning command of any level made
+the control fire, and the now-honest check immediately found three real gaps:
+"window identity" and "window measure" were used and glossed nowhere.
+
+When a check searches a region, the region is part of the check.  Drawn too wide
+it is the same failure as a scope drawn too narrow, and only the negative control
+tells either of them apart from a pass.
+
+Papers 25/34/14/31 pp, Japanese editions 23/32/14, all EXIT 0 with zero undefined
+references; check.py C1-C17 pass.

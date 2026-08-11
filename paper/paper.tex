@@ -266,6 +266,62 @@ Readers who prefer an unambiguous name may read $\Gamma$ as the
 at $x=1/2$.
 \end{remark}
 
+\subsection{Terminology, in one table}\label{sec:terminology}
+
+This programme names a few objects that additive number theory has no name for,
+and borrows a few names from statistical physics for objects it does. A reader
+who meets one of them cold can look it up here; each is defined again where it
+is used.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{3.5cm}p{9.3cm}@{}}
+\toprule
+term & what it denotes, in ordinary language\\
+\midrule
+representation count $r_A(n)$ & $\#\{S\subseteq A:\sigma(S)=n\}$. Standard. Every count
+of this kind in this series carries the letter $r$.\\[3pt]
+truncation $B_d$ & $\{a\in A:a>2d\}$, the set with its elements up to $2d$ removed;
+$I_d$ is the removed part.\\[3pt]
+\emph{gap series} $\Gamma(A)$ & the rational number
+$1+2\sum_{d}2^{-\#\{a\in A:\,a\le2d\}}$, read off $A$ by counting. Equivalently a
+dyadically weighted sum of the gaps of $A$; hence the name.\\[3pt]
+\emph{subset-sum landscape} & the set of subsets of $A$ with the function
+$S\mapsto|\sigma(S)-n|$ and single-element changes as moves. A way of speaking, not an
+object: every statement about it in this paper is restated as a statement about
+representation counts.\\[3pt]
+energy, ground state & $|\sigma(S)-n|$, and a subset with energy $0$. Borrowed from
+statistical physics, where this landscape is the number partitioning problem.\\[3pt]
+\emph{valley}, $\lm_A(n)$ & a subset from which every single-element change increases
+the energy, and the number of them. Equal, as an identity between integers, to a
+weighted sum of representation counts of the truncations
+(Theorem~\ref{thm:stratification}).\\[3pt]
+\emph{window series} $W_D(A)$ & $1+2\sum_{d\le D}2^{-\#\{a\in A:\,a\le2d\}}$, the same sum
+stopped at $D$. Equals $\Gamma$ at the last informative $D$. The
+\emph{window identity} is that equality, Theorem~\ref{thm:window}; earlier versions also
+called $W_D$ the \emph{window measure}, which is the same object.\\[3pt]
+\emph{stratum} & the set of valleys at a fixed distance $d$ from the target. The
+\emph{stratification} is the decomposition of $\lm_A(n)$ into strata.\\[3pt]
+\emph{flatness} $\varepsilon_d$ & the relative oscillation
+$\max|r_{B_d}(m)/r_{B_d}(m')-1|$ of a representation count over a bounded window of
+targets. Small $\varepsilon_d$ is what makes the strata comparable.\\[3pt]
+\emph{ripple} & the periodic oscillation that a sub-peak of $|F_A|$ contributes to the
+representation counts as the target varies. Its size is what $\varepsilon_d$ measures;
+Part~II computes it for the primes.\\[3pt]
+the \emph{sandwich} & the two-sided bound of Theorem~\ref{thm:sandwich}: if
+$\varepsilon_d$ is small then $\lm_A(n)/r_A(n)$ lies within a factor $1+\varepsilon$ of
+$W_D(A)$.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Two of these are the point of the paper and the rest are scaffolding. The gap
+series is a new object; the identity between the valley count and the
+representation counts of the truncations is a new theorem. Everything else is
+vocabulary for stating them.
+
 \subsection{Subset-sum landscapes}
 
 Fix a target $n\in\mathbb{N}$. For $S\subseteq\{1,\dots,k\}$ put
@@ -415,7 +471,7 @@ that the number of local optima in the $1$-bit-flip NPP landscape is strongly
 weights, and proposed an estimator based on $CV$. Their observation is correct
 and we reproduce it (\S\ref{sec:cv}). But $CV$ is a global second moment,
 whereas Theorem~B shows it is $\Gamma$ --- a dyadically weighted sum of gaps,
-dominated by the smallest elements --- that equals the window measure $W_D$.
+dominated by the smallest elements --- that equals the window series $W_D$.
 The two can be decoupled, and when they are, the landscape follows $\Gamma$:
 pairs of sets with \emph{exactly} equal $CV$ but $\Gamma$ a factor $2.1$ apart
 have $\lm/r$ a factor $2.1$ apart, while pairs with exactly equal $\Gamma$
@@ -774,8 +830,8 @@ $k$ they differ, and Definition~\ref{def:gap} is the closer approximant: for the
 odd primes at $k=20$ the layer form lies $1.04\cdot10^{-5}$ from the limit
 against $8.01\cdot10^{-5}$ for the enumeration form, a factor of $7.7$. The
 reason is visible in Theorem~\ref{thm:window}: the enumeration form is the
-window measure with the whole tail $(2D+1)2^{-k}$ still attached, whereas
-Definition~\ref{def:gap} is the window measure at the last informative layer,
+window series with the whole tail $(2D+1)2^{-k}$ still attached, whereas
+Definition~\ref{def:gap} is the window series at the last informative layer,
 with the tail removed exactly.
 \end{remark}
 
@@ -1089,7 +1145,7 @@ $\varepsilon_1$ & $\varepsilon_2$ & $\varepsilon_3$ & $\varepsilon_4$\\
 \bottomrule
 \end{tabular}
 \caption{Exact flatness $\varepsilon_d$ for $A=$ first $k$ odd primes,
-$n=\lfloor T/2\rfloor$. The fifth column is the window measure $W_D$ at the last
+$n=\lfloor T/2\rfloor$. The fifth column is the window series $W_D$ at the last
 informative layer $D=(a_k-1)/2$, which by Theorem~\ref{thm:window} is exactly
 $\Gamma$.}
 \label{tab:flatness}

@@ -53,6 +53,36 @@ Full text of entries already folded in lives in `tools/ledger_archive.md`.
               in front of
 ```
 
+## r128 — F65 (new): coined vocabulary, counted before it was changed
+
+```
+  claimed   : the papers are precise; the terminology is what the subject needs
+  actual    : 387 occurrences of vocabulary this programme coined against 166 of the
+              shared vocabulary -- more than two to one -- and 22 of 24 coined terms
+              were met somewhere before they were introduced.  Three objects had two
+              names each: deg_A(n) / r_A(n); the window series / the window measure;
+              the coset identity / the coarse-graining identity.  Each pair costs a
+              reader the work of discovering they are the same thing
+  check     : C17 -- every coined term used in a live paper must be glossed in a
+              terminology table the reader can find.  Each paper now carries one
+  rule      : a coined name is a cost paid by every reader and a convenience for the
+              author.  Two names for one object is that cost, doubled, for nothing.
+              Count the vocabulary before defending it
+```
+
+```
+  claimed   : C17 works; its first negative control passed
+  actual    : it passed because the check could not fail.  The gloss was searched for
+              in a "terminology table" region that ran to the next \section, so it
+              swallowed the rest of the introduction -- including Theorem D, whose name
+              is Sandwich.  Removing the actual table row changed nothing.  Narrowing
+              the region to the next sectioning command of ANY level made the control
+              fire, and the now-honest check immediately found three real gaps
+  rule      : when a check searches a REGION, the region is part of the check.  A
+              region drawn too wide is the same failure as a scope drawn too narrow,
+              and only the negative control tells them apart from a pass
+```
+
 ## r126 — F64 (new): the disclosure was one artefact away from its reader
 
 The day an endorsement was declined. Two findings, and the second is the larger one.

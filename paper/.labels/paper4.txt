@@ -81,6 +81,7 @@ sec:scope3
 sec:scope4
 sec:strand
 sec:table1
+sec:terminology4
 sec:transfer
 sec:twofailures
 sec:universality

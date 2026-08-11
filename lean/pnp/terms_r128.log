@@ -1,0 +1,50 @@
+=== how much coined vocabulary is there, and is it introduced before it is used? ===
+term                           I    II   (3)   III   first use italicised?
+landscape                     34     7    13    25   I:y II:N (3):N III:N
+flatness                      34     5     2     5   I:y II:N (3):N III:N
+ripple                        16    25     -     1   I:y II:N III:N
+sandwich                      30     1     1     1   I:N II:N (3):N III:N
+gap series                    16     1     5     8   I:N II:y (3):N III:N
+transfer function              -     -     9    15   (3):N III:N
+the tilt                       -     -    11    13   (3):y III:y
+stratification                16     -     4     4   I:N (3):N III:N
+energy                        10     -     -     7   I:N III:N
+sub-peak                       1    12     -     -   I:N II:N
+strata                         9     -     -     4   I:N III:N
+window series                  8     -     -     2   I:y III:N
+subset-sum landscape           5     2     1     2   I:N II:N (3):N III:N
+stratum                        5     -     -     5   I:y III:N
+ground state                   5     1     1     2   I:N II:N (3):N III:N
+window identity                5     -     1     2   I:N (3):N III:y
+valley                         8     -     -     -   I:y
+deep minor arc                 -     7     -     -   II:N
+coset identity                 -     -     -     7   III:N
+logarithmic slope              -     -     2     2   (3):N III:y
+biased invariant               -     -     -     3   III:y
+annulus profile                -     3     -     -   II:y
+window measure                 1     -     -     -   I:y
+
+coined-vocabulary occurrences : 425
+standard-vocabulary occurrences: 176
+ratio coined : standard = 2.41 : 1
+
+=== terms whose FIRST occurrence in a paper is not the definition (N above) ===
+  landscape                  II:N (3):N III:N
+  flatness                   II:N (3):N III:N
+  ripple                     II:N III:N
+  sandwich                   I:N II:N (3):N III:N
+  gap series                 I:N (3):N III:N
+  transfer function          (3):N III:N
+  stratification             I:N (3):N III:N
+  energy                     I:N III:N
+  sub-peak                   I:N II:N
+  strata                     I:N III:N
+  window series              III:N
+  subset-sum landscape       I:N II:N (3):N III:N
+  stratum                    III:N
+  ground state               I:N II:N (3):N III:N
+  window identity            I:N (3):N
+  deep minor arc             II:N
+  coset identity             III:N
+  logarithmic slope          (3):N
+  18 term(s) met before they are introduced, somewhere in the series

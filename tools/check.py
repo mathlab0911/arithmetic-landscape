@@ -21,6 +21,7 @@ not only in the ledger.  Each check below names the ledger entry it enforces.
   C14 F61  the retired enumeration form of Gamma appears only where paper 1 discusses it
   C15 F62  every reference to a sibling paper's numbered result resolves against that paper
   C16 F64  every paper discloses the use of AI tools in the paper itself, not only in the README
+  C17 F65  every coined term used in a live paper is glossed in a terminology table
 
 The scope of a check is part of its claim.  C1-C12 were all written against paper/ and read
 nothing else; the Japanese editions carried a corrected erratum for two months underneath a
@@ -823,10 +824,75 @@ def c16_ai_disclosure():
     notes.append('C16/F64 papers disclosing the use of AI tools in the paper itself: %d' % seen)
 
 
+# ------------------------------------------------------------------ C17 (F65)
+# Every term this programme coined must appear in a terminology table.
+#
+# Written after the endorsement was declined for "extensive use of non-standard
+# terminology".  The inventory at r128 counted 387 occurrences of coined vocabulary against
+# 166 of standard vocabulary -- the papers speak our language more than twice as often as
+# the shared one -- and 22 of 24 coined terms were met somewhere before they were
+# introduced.  Every live paper now carries a short terminology table, and this check keeps
+# it complete: a term used in the body must be glossed in a table the reader can find.
+#
+# paper3.tex is excluded: it is superseded, carries a banner saying so, and is kept only
+# for the record.  What the check cannot see: whether the gloss is any good, and whether a
+# term we consider standard actually is.  The list below is maintained by hand for exactly
+# that reason -- "is this standard in additive number theory" is not a question a regex
+# answers.
+COINED_TERMS = [
+    'gap series', 'subset-sum landscape', 'window series', 'window identity',
+    'window measure', 'stratification', 'stratum', 'strata', 'flatness', 'sandwich',
+    'transfer function', 'the tilt', 'logarithmic slope', 'biased invariant',
+    'coset identity', 'sub-peak', 'annulus profile', 'deep minor arc', 'ground state',
+    'valley', 'ripple', 'landscape', 'energy',
+]
+SUPERSEDED_PAPERS = {'paper3.tex'}
+
+def c17_terminology():
+    # r128, caught by the negative control: the first version searched the raw source, so
+    # \\ref{thm:sandwich} counted as a gloss of "sandwich" and removing the actual table row
+    # changed nothing.  A check a label name can satisfy is not a check.  Label, reference,
+    # citation and typewriter arguments are stripped before searching, from both sides.
+    STRIP = re.compile(r'\\\\(?:ref|eqref|label|cite|texttt|Lean|Xref|Xlab)\\*?\\{[^}]*\\}')
+
+    def tables(src):
+        out = ''
+        for m in re.finditer(r'\\subsection\{Terminology[^}]*\}', src):
+            # End at the next sectioning command of ANY level.  The first version looked
+            # only for \section, so the "table" swallowed the rest of the introduction --
+            # which is exactly why its negative control passed: the region contained
+            # Theorem D, whose name is Sandwich.  A region that wide makes the check
+            # unfalsifiable, and only the negative control said so.
+            nxt = re.search(r'\\(?:sub)*section\{', src[m.end():])
+            j = m.end() + nxt.start() if nxt else len(src)
+            out += src[m.start():j]
+        return out
+    base = STRIP.sub(' ', tables(open(os.path.join(PAPER, 'paper.tex'), encoding='utf-8',
+                                      errors='replace').read()))
+    bad, checked = [], 0
+    for tex in sorted(f for f in os.listdir(PAPER)
+                      if f.endswith('.tex') and f not in SUPERSEDED_PAPERS):
+        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
+        own = STRIP.sub(' ', tables(src))
+        src = STRIP.sub(' ', src)
+        for t in COINED_TERMS:
+            if not re.search(re.escape(t), src, re.I):
+                continue
+            checked += 1
+            if not (re.search(re.escape(t), own, re.I) or re.search(re.escape(t), base, re.I)):
+                bad.append('%s uses %r and no terminology table glosses it' % (tex, t))
+    if bad:
+        fail('C17/F65', 'coined term(s) a reader cannot look up: ' + '; '.join(bad))
+    expect_subjects('C17/F65', checked, 'coined-term uses')
+    notes.append('C17/F65 coined terms used in a live paper, each glossed in a terminology '
+                 'table: %d use(s) of %d term(s)' % (checked, len(COINED_TERMS)))
+
+
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
-          c14_enumeration_form, c15_cross_document, c16_ai_disclosure)
+          c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology)
 
 if __name__ == '__main__':
     for fn in CHECKS:
