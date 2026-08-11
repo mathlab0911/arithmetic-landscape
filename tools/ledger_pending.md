@@ -33,6 +33,31 @@ extra     : the second half of this entry is a plain mistake of mine. I committe
             repository and use that; never substitute an address from somewhere else.
 ```
 
+## F20 — new instance, r118: preparing a check is not performing it
+
+```
+claimed   : the OEIS question is covered.  `oeisseq_r30.py` exists, its header says the point
+            of it -- "if anyone else studies this object these sequences are probably in OEIS;
+            if they are not, that is fairly strong evidence" -- and its log dutifully prints the
+            sequences.  It has sat in the repository for eighty-eight rounds.
+actual    : the log contains the sequences and NO RESULT.  There is no record that anyone ever
+            pasted them into oeis.org.  The script prepares the query; nothing performs it.  So
+            the project has carried an unexamined belief that the prior-art question was closed
+            when the only artefact is the question, neatly typed.
+check     : for any "we checked X" claim, ask which line of which log holds the ANSWER, not the
+            question.  Grep the log for the outcome, not for the setup.
+rule      : F20 says a result with no log does not exist.  The sharpening: *** an artefact that
+            PREPARES a check is not the check, and it is more dangerous than nothing, because it
+            looks like diligence and closes the question in the reader's mind. ***  A script
+            whose output is an input to a human step must say so and must have a place for the
+            human's answer to be recorded, or the step will silently never happen.
+what      : the queries are written out ready to paste in `outgoing/oeis_queries.md`, with what
+            to do for each outcome.  I could not run them: this session cannot reach oeis.org
+            (positive control -- searching the decimal expansion of sqrt2 -- also returned
+            empty, so "not found" would have been a lie).  Paper 1 now says in the text that the
+            gap series has not been looked up as an integer sequence in a way we can point at.
+```
+
 ## F47 — new instance, r118: a check keyed on the right answer cannot see a wrong one
 
 ```
