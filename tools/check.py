@@ -20,6 +20,7 @@ not only in the ledger.  Each check below names the ledger entry it enforces.
   C13 F60  every number in a Japanese edition occurs in its English source
   C14 F61  the retired enumeration form of Gamma appears only where paper 1 discusses it
   C15 F62  every reference to a sibling paper's numbered result resolves against that paper
+  C16 F64  every paper discloses the use of AI tools in the paper itself, not only in the README
 
 The scope of a check is part of its claim.  C1-C12 were all written against paper/ and read
 nothing else; the Japanese editions carried a corrected erratum for two months underneath a
@@ -783,10 +784,40 @@ def c15_cross_document():
                  '%d, over %d file(s) in paper/ and paper-ja/' % (checked, len(scan)))
 
 
+# ------------------------------------------------------------------ C16 (F64)
+# Every paper must disclose, in itself, that AI tools were used.
+#
+# Written the day an endorsement was declined.  The disclosure existed -- prominently, in
+# the README, under "How this work is produced" -- and appeared in **none of the four
+# papers**.  The referee read PDFs.  His mail: "I suspect that AI tools may have been used
+# ... if AI was used, then it has to be acknowledged appropriately."
+#
+# It is the same shape as C13 and C14 and the C9 row labels, and this time it cost
+# something: the thing existed, and not where the reader was.  A disclosure that lives one
+# artefact away from its reader is not a disclosure.  So it is checked, in the artefact,
+# by name.
+AI_SECTION = 'Use of AI tools'
+
+def c16_ai_disclosure():
+    bad, seen = [], 0
+    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
+        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
+        if AI_SECTION in src:
+            seen += 1
+        else:
+            bad.append(tex)
+    if bad:
+        fail('C16/F64', 'paper(s) with no "%s" section, so a reader of the PDF alone is not '
+                        'told: %s' % (AI_SECTION, ', '.join(bad)))
+    expect_subjects('C16/F64', seen, 'papers carrying the disclosure')
+    notes.append('C16/F64 papers disclosing the use of AI tools in the paper itself: %d' % seen)
+
+
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
-          c14_enumeration_form, c15_cross_document)
+          c14_enumeration_form, c15_cross_document, c16_ai_disclosure)
 
 if __name__ == '__main__':
     for fn in CHECKS:

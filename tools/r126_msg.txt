@@ -1,0 +1,49 @@
+The disclosure was one artefact away from its reader, and there was no door
+
+Dirk Zeindler declined the endorsement today.  Not on the mathematics -- he says
+twice that this is not a judgement of it and that there may well be good work
+here -- but because the papers make extensive use of non-standard terminology
+and he could not assess them without more time than an endorsement warrants.
+He also wrote that he suspects AI tools were used and that this has to be
+acknowledged.
+
+He is right about the second point and it was entirely ours.  The disclosure
+existed, prominently, in the README, under a heading written so a reader would
+meet it.  It appeared in NONE of the four papers.  He read PDFs.  That is the
+fourth instance in two days of one shape -- the checks that did not read the
+Japanese editions, the check that did not read the README, the README row labels
+that switched a page check off silently -- and the first that cost anything.  A
+statement that lives one artefact away from its reader has not been made.
+
+Fixed in the artefact the reader holds: every paper now carries a "Use of AI
+tools" section saying what the models did, that the author directs and is
+responsible, and why the verification apparatus exists.  C16 enforces it, with a
+negative control.
+
+The first point is fair too, and the diagnosis is sharper than "the writing is
+poor".  An earlier technical review engaged with this same material in detail --
+Bikelis, Berry-Esseen constants, splitting the error domain -- so the work is
+not unintelligible once you are inside it.  There was no way in.
+
+Two concrete faults, both now repaired in Part I:
+
+- The paper carried two symbols for one object.  deg_A(n), a physics name for
+  the ground-state count, is literally r_A(n), the representation count -- and
+  the same paper already wrote r_{B_d}(m) for exactly that object on a
+  truncation.  \deg is gone from all four papers and both editions; a
+  representation count now always carries the same symbol.
+- The abstract opened by defining our own invariant, before naming a single
+  object the reader already had.  It now opens with r_A(n) and states the main
+  theorem with no landscape vocabulary at all:
+
+      [ r_A(n) + sum_d ( r_{B_d}(n+d) + r_{B_d}(n-d-sigma(I_d)) ) ] / r_A(n)
+          ->  Gamma(A),
+
+  a weighted count of representations by the truncations of A, over the
+  representation count of A, converging to a number read off A by counting.
+  door_r126 verifies the identity on 176 cases.  The landscape reading follows
+  as the source of the question, and a reader who wants none of it is told so
+  explicitly.
+
+Coined vocabulary is a cost paid by every reader and a convenience for the
+author.  Before inventing a name, check whether the object already has one.

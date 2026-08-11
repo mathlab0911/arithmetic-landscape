@@ -53,6 +53,43 @@ Full text of entries already folded in lives in `tools/ledger_archive.md`.
               in front of
 ```
 
+## r126 — F64 (new): the disclosure was one artefact away from its reader
+
+The day an endorsement was declined. Two findings, and the second is the larger one.
+
+```
+  claimed   : the use of AI tools is disclosed, prominently, in the README, under a
+              heading written specifically so a reader would meet it
+  actual    : it appeared in NONE of the four papers.  The referee read PDFs.  His
+              words: "I suspect that AI tools may have been used ... if AI was used,
+              then it has to be acknowledged appropriately"
+  check     : C16 -- every paper must carry a "Use of AI tools" section in itself.
+              Negative control taken
+  rule      : the fourth instance of one shape in two days (C13, C14, the C9 row
+              labels, this) and the first that cost anything.  A statement that lives
+              one artefact away from its reader has not been made.  When something
+              must reach a reader, name the artefact the reader will hold -- not the
+              repository, not the memory, not the report
+```
+
+```
+  claimed   : the papers are hard to assess because the mathematics is deep
+  actual    : the reviewer could not find a door.  Two symbols were carrying one
+              object -- deg_A(n) (a physics name for the ground-state count) and
+              r_{B_d}(m) (the standard name for the same thing on a truncation) --
+              and the abstract opened by defining our own invariant before naming a
+              single object the reader already had.  The main theorem turns out to be
+              statable with no landscape vocabulary at all: a weighted sum of
+              representation counts of the truncations of A, divided by r_A(n),
+              converges to a number read off A.  Verified as an identity on 176 cases
+              (door_r126)
+  rule      : coined vocabulary is a cost paid by every reader and a convenience for
+              the author.  Before inventing a name, check whether the object already
+              has one -- and open with the objects the reader brought, not the ones
+              we brought.  An earlier technical review engaged deeply with this same
+              material, so the work is not unintelligible; there was simply no way in
+```
+
 ## r123 — two independent audits passed the same wrong row, for the same reason
 
 ```

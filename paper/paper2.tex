@@ -76,7 +76,7 @@ for the modulus-$6$ ripple, giving amplitude and phase to within $0.1\%$ over
 $k=18,\dots,76$. Combining these with the deep-minor bound of
 Section~\ref{sec:l5c}, which is proved here, we obtain $\varepsilon_d(k)\to0$
 at a geometric rate of at most $\sqrt3/2$ per element, and hence
-$\mathrm{lm}_P(n)/\deg_P(n)\to\Gamma(P)=5.3492879\ldots$ for the odd primes; this
+$\mathrm{lm}_P(n)/r_P(n)\to\Gamma(P)=5.3492879\ldots$ for the odd primes; this
 answers Problem~\Xref{paper}{prob:flatness}{11.1} of Part~I.
 
 Two things about the status of that theorem, stated here rather than left to be
@@ -635,8 +635,8 @@ Corollary~\ref{cor:spectrum} has not yet become small.
 \subsection{The central density}\label{sec:m2num}
 
 We test Proposition~\ref{prop:central} using only ground-state counts. Write
-$\lambda(B)=\deg(B)\sqrt{2\pi V_0}/2^{b}-1$ for the measured relative deficit,
-where $\deg(B)$ is the number of subsets attaining the minimum of
+$\lambda(B)=r(B)\sqrt{2\pi V_0}/2^{b}-1$ for the measured relative deficit,
+where $r(B)$ is the number of subsets attaining the minimum of
 $|\sum S-\lfloor T/2\rfloor|$. Proposition~\ref{prop:central} predicts
 $\lambda\approx-S_4/(4S_2^{2})$.
 
@@ -644,7 +644,7 @@ $\lambda\approx-S_4/(4S_2^{2})$.
 \centering
 \begin{tabular}{lrrrr}
 \toprule
-$k$ & $\deg$ & measured $\lambda$ & predicted & difference\\
+$k$ & $r$ & measured $\lambda$ & predicted & difference\\
 \midrule
 $16$ & $394$    & $-0.024764$ & $-0.031338$ & $+0.006573$\\
 $18$ & $1290$   & $-0.025573$ & $-0.027754$ & $+0.002181$\\
@@ -661,7 +661,7 @@ within $0.5\%$ for $k\ge18$ and improves to $0.01\%$ at $k=28$.}
 Over an ensemble of $100$ random odd sequences per size (drawn from the same
 range as the primes), the mean absolute difference is $0.0171$ at $k=16$,
 $0.0079$ at $k=18$ and $0.0038$ at $k=20$; the ensemble is noisier than the
-primes because $\deg$ is a small integer subject to arithmetic fluctuation.
+primes because $r$ is a small integer subject to arithmetic fluctuation.
 
 The consequence for Remark~\ref{rem:absolute} is direct. Writing
 $\rho=\mathrm{lm}/(\Gamma\cdot 2^{b}/\sqrt{2\pi V_0})$ for the ratio in the
@@ -1428,7 +1428,7 @@ list it there rather than hide it.
 Combining Theorem~\ref{thm:t2main} with the sandwich theorem of the companion
 paper and the identity $W_D=\Gamma+(2D+1)2^{-k}$,
 \[
-  \frac{\mathrm{lm}_{P}(n)}{\deg_{P}(n)}\longrightarrow\Gamma(P)=5.3492879\ldots
+  \frac{\mathrm{lm}_{P}(n)}{r_{P}(n)}\longrightarrow\Gamma(P)=5.3492879\ldots
 \]
 for the odd primes.
 \end{corollary}
@@ -1699,7 +1699,7 @@ Write $\Phi_q=\prod_{d\mid q}(x^{d}-1)^{\mu(q/d)}$. Exactly $2^{\omega-1}$
 divisors have $\mu(q/d)=+1$ and $2^{\omega-1}$ have $\mu(q/d)=-1$. Each factor
 of the first kind has $\|x^{d}-1\|_1=2$. For the second kind expand
 $(x^{d}-1)^{-1}=-(1+x^{d}+x^{2d}+\cdots)$ and truncate above degree
-$\varphi(q)=\deg\Phi_q$: the truncation has at most $\varphi(q)+1$ terms, all of
+$\varphi(q)=r\Phi_q$: the truncation has at most $\varphi(q)+1$ terms, all of
 modulus~$1$, so its $\ell^{1}$ norm is at most $\varphi(q)+1$. Since
 $\Phi_q$ is a polynomial of degree $\varphi(q)$, its coefficients agree with
 those of the product of the truncations, and $\|\cdot\|_1$ is submultiplicative.
@@ -2389,6 +2389,22 @@ factor $2$ is available at this step. The stated form is the one the argument
 proves, and the conclusion is unaffected in any case, since $J$ is chosen
 after~$\delta$.
 \end{remark}
+
+\section*{Use of AI tools}
+This work was carried out by the author working with AI language models
+(Anthropic's Claude) as tools, under the author's direction. They were used to
+fill in Lean proofs, to run and tabulate the numerical experiments, and to draft
+sections which the author then checked. The choice of problem, the design
+decisions and the responsibility for every claim here are the author's.
+
+Work produced this way cannot reasonably be taken on the author's word, and the
+apparatus described under Data availability exists for that reason: every settled
+theorem is machine-checked in Lean and replayed through the kernel by an
+independent checker that must first reject three deliberately corrupted modules;
+every number quoted in the text is produced by a committed script that writes a
+log beside itself; every theorem, proposition and lemma declares its status
+where it is stated; and a suite of mechanical checks enforces all of this before
+each commit. The repository records, in full, the mistakes this process has made.
 
 \section*{Data availability}
 

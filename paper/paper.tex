@@ -72,27 +72,51 @@ the gap series}
 \maketitle
 
 \begin{abstract}
-For a finite set $A$ of odd positive integers with largest element $M$ we
-introduce the \emph{gap series}
-$\Gamma(A)=1+2\sum_{d=1}^{(M-1)/2}2^{-N_A(d)}\in\mathbb{Q}$, where
-$N_A(d)=\#\{a\in A:a\le2d\}$; equivalently, $\Gamma$ is a dyadically weighted
-sum of the gaps of $A$, dominated by the smallest elements. We show that
-$\Gamma$ governs the combinatorics of subset sums of $A$.
+Let $A$ be a finite set of odd positive integers, $\sigma$ the sum, and
+\[
+  r_A(n)=\#\{S\subseteq A:\sigma(S)=n\}
+\]
+the number of representations of $n$ as a subset sum of $A$. For $d\ge0$ split
+$A$ at $2d$: let $I_d=\{a\in A:a\le2d\}$ be the small elements and
+$B_d=A\setminus I_d$ the rest. This paper is about the quantity
+\[
+  \lm_A(n)\;=\;r_A(n)\;+\;\sum_{d\ge1}
+    \Bigl(r_{B_d}(n+d)+r_{B_d}\bigl(n-d-\sigma(I_d)\bigr)\Bigr),
+\]
+a weighted count of representations by the \emph{truncations} of $A$. The sum is
+finite: every term vanishes once $2d\ge\max A$.
 
-Fix a target $n$, give the subsets $S$ of $A$ the energy $E(S)=|\sigma(S)-n|$,
-where $\sigma$ is the sum, and take single-element flips as moves. Let
-$\lm_A(n)$ be the number of strict local minima and $\deg_A(n)$ the number of
-ground states. We prove a classification theorem for local minima; a window
+We show that the ratio $\lm_A(n)/r_A(n)$ converges, \emph{for every target $n$},
+to a quantity that can be read off $A$ by counting, with no subset sum computed:
+writing $M=\max A$ and $N_A(d)=\#\{a\in A:a\le2d\}$,
+\[
+  \Gamma(A)\;=\;1+2\sum_{d=1}^{(M-1)/2}2^{-N_A(d)}\;\in\;\mathbb{Q},
+\]
+equivalently a dyadically weighted sum of the gaps of $A$, dominated by its
+smallest elements. For the odd primes $\Gamma=5.3492879\ldots$, and the small
+initial gaps --- the twin pairs --- are what make it small.
+
+The quantity $\lm_A(n)$ has a second description, which is where the question
+came from and which the notation records. Give the subsets $S$ the energy
+$|\sigma(S)-n|$ and call two subsets adjacent when they differ in one element;
+then $\lm_A(n)$ counts the $S$ from which every single-element change increases
+the energy, that is, the strict local minima of the subset-sum landscape, and
+$r_A(n)$ counts its ground states. That the two descriptions agree is an
+identity between integers, not an approximation, and it is one of the theorems
+below. A reader who wants no landscape may take the displayed formula as the
+definition and read the rest as a statement about representation counts of
+truncations.
+
+We prove a classification theorem for those local minima; a window
 identity $W_D(A)=\Gamma(A)+(2D+1-M)2^{-k}$ exhibiting $\Gamma$ as the total
 measure of the windows in which a configuration can be a local minimum; sharp
 bounds $3-2^{1-(M-1)/2}\le\Gamma(A)\le M$, with equality on the left exactly for
 $A=\{1,3,\dots,M\}$ and on the right exactly for $A=\{M\}$; and an exact
-stratification of
-$\lm_A(n)$ in which each stratum is a representation count $r_{B_d}$ of a
-truncated subsequence. If those representation counts are \emph{flat} to within
-a factor $1+\varepsilon$ on an explicit window, then
+stratification --- the identity displayed above, proved as an equality of
+integers. If the representation counts $r_{B_d}$ are \emph{flat} to within a
+factor $1+\varepsilon$ on an explicit finite window, then
 \[
-\frac{W_D(A)}{1+\varepsilon}\;\le\;\frac{\lm_A(n)}{\deg_A(n)}\;\le\;(1+\varepsilon)\,W_D(A).
+\frac{W_D(A)}{1+\varepsilon}\;\le\;\frac{\lm_A(n)}{r_A(n)}\;\le\;(1+\varepsilon)\,W_D(A).
 \]
 This replaces the annealed (independence) approximation standard in the
 statistical-mechanics literature by a finite, checkable hypothesis.
@@ -116,7 +140,7 @@ We compute $\varepsilon$ exactly for $k\le32$: for the odd primes it decays
 geometrically at rate $\approx\sqrt3/2$, matching the modulus-$6$ prediction to
 within $1\%$, while for random odd sequences it decays strictly faster. Over
 $100$ random sequences per $k\in\{8,12,16,18,20\}$ we find
-$(\lm/\deg)/\Gamma\to1$ with standard deviation $0.0067$ at $k=20$ and
+$(\lm/r)/\Gamma\to1$ with standard deviation $0.0067$ at $k=20$ and
 $R^2=0.999$. A partial-correlation analysis shows that $\Gamma$ subsumes the
 coefficient of variation of the weights, the statistic previously proposed for
 this role by Alyahya and Rowe.
@@ -250,7 +274,7 @@ adjacent if they differ in a single index. This is the standard $1$-bit-flip
 landscape of the number partitioning problem (NPP); the case
 $n=\sigma(A)/2$ is the balanced partition problem. We study
 \[
-  \deg_A(n)=\#\{S: E(S)=0\},
+  r_A(n)=\#\{S: E(S)=0\},
   \qquad
   \lm_A(n)=\#\{S: E(S)<E(S')\ \text{for all neighbours }S'\}.
 \]
@@ -287,7 +311,7 @@ series, up to a tail term negligible for the sequences of interest
 \begin{theoremC}[Exact stratification; \S\ref{sec:stratification}]
 Without any approximation,
 \[
-  \lm_A(n)\;=\;\deg_A(n)+\sum_{d\ge1}\bigl(\ovr_A(n,d)+\undr_A(n,d)\bigr),
+  \lm_A(n)\;=\;r_A(n)+\sum_{d\ge1}\bigl(\ovr_A(n,d)+\undr_A(n,d)\bigr),
 \]
 where the strata vanish once $2d$ exceeds $\max_i a_i$, and each stratum equals
 a representation count of a truncated subsequence,
@@ -297,7 +321,7 @@ a representation count of a truncated subsequence,
   \undr_A(n,d)=r_{B_d}\bigl(n-d-\sigma(I_d)\bigr),
 \]
 with $I_d=\{i:a_i\le2d\}$ and $B_d=A|_{I_d^{c}}$. Moreover
-$\deg_A(n)=\sum_{J\subseteq I_d}r_{B_d}(n-\sigma(J))$.
+$r_A(n)=\sum_{J\subseteq I_d}r_{B_d}(n-\sigma(J))$.
 \end{theoremC}
 
 \begin{theoremD}[Sandwich; \S\ref{sec:sandwich}]
@@ -305,11 +329,11 @@ Suppose that for every $d\le D$ the representation counts $r_{B_d}$ vary by at
 most a factor $1+\varepsilon$ across the window
 $\{n-\sigma(J):J\subseteq I_d\}\cup\{n+d,\;n-d-\sigma(I_d)\}$. Then
 \[
-  \frac{W_D(A)}{1+\varepsilon}\;\le\;\frac{\lm_A(n)}{\deg_A(n)}\;\le\;(1+\varepsilon)\,W_D(A).
+  \frac{W_D(A)}{1+\varepsilon}\;\le\;\frac{\lm_A(n)}{r_A(n)}\;\le\;(1+\varepsilon)\,W_D(A).
 \]
 \end{theoremD}
 
-Combining Theorems~B and~D, $\lm/\deg$ is pinned to $\Gamma(A)$ with a
+Combining Theorems~B and~D, $\lm/r$ is pinned to $\Gamma(A)$ with a
 multiplicative error controlled by a single, explicitly computable number
 $\varepsilon$.
 
@@ -377,7 +401,7 @@ probabilistic content.
 
 \emph{Exactness.} The annealed approximation is replaced by an identity plus a
 checkable hypothesis. To our knowledge Theorem~C, and the reduction of
-$\lm/\deg$ to the flatness of truncated representation counts, are new. That
+$\lm/r$ to the flatness of truncated representation counts, are new. That
 sentence is a literature pass and not a proof of novelty: it records the absence
 of evidence over the searches we made, and the searches we made are ordinary
 ones. In particular the gap series has not been looked up as an integer sequence
@@ -394,8 +418,8 @@ whereas Theorem~B shows it is $\Gamma$ --- a dyadically weighted sum of gaps,
 dominated by the smallest elements --- that equals the window measure $W_D$.
 The two can be decoupled, and when they are, the landscape follows $\Gamma$:
 pairs of sets with \emph{exactly} equal $CV$ but $\Gamma$ a factor $2.1$ apart
-have $\lm/\deg$ a factor $2.1$ apart, while pairs with exactly equal $\Gamma$
-and $CV$ a factor $1.6$ apart have $\lm/\deg$ within $8\%$
+have $\lm/r$ a factor $2.1$ apart, while pairs with exactly equal $\Gamma$
+and $CV$ a factor $1.6$ apart have $\lm/r$ within $8\%$
 (Table~\ref{tab:twins}). In this precise sense $\Gamma$ subsumes $CV$.
 
 \subsection{Formal verification}
@@ -436,9 +460,15 @@ and $S$ is a \emph{strict local minimum} if $E_n(S)<E_n(\operatorname{flip}(S,i)
 for all $i$. We set
 \[
   \gs_A(n)=\min_S E_n(S),\quad
-  \deg_A(n)=\#\{S:\sigma(S)=n\},\quad
+  r_A(n)=\#\{S:\sigma(S)=n\},\quad
   \lm_A(n)=\#\{S:S\text{ strict local min}\}.
 \]
+The middle one is the representation count of $n$ as a subset sum of $A$; in the
+landscape reading it is the number of ground states, and earlier versions of this
+paper wrote it $\deg_A(n)$ for that reason. We use $r_A$ throughout, so that the
+same kind of object --- a representation count --- always carries the same symbol,
+whether the set is $A$ or one of its truncations $B_d$.
+
 (Lean: \Lean{ndist}, \Lean{subsetSums}, \Lean{gs}, \Lean{energy}, \Lean{flip},
 \Lean{IsStrictLocalMin}, \Lean{lm}, \Lean{degCount}.)
 
@@ -467,7 +497,7 @@ $\gs_A(n)=0$ if and only if $n$ is a sum of a sub-sequence of $A$.
 
 Proposition~\ref{prop:representability} is the translation used throughout: the
 statement ``the landscape has ground energy zero'' is the statement ``$n$ is
-representable'', and $\deg_A(n)$ is the number of representations, denoted
+representable'', and $r_A(n)$ is the number of representations, denoted
 $r_A(n)$ below.
 
 \section{The classification theorem}\label{sec:classification}
@@ -574,7 +604,7 @@ ground level ($d=0$) once, gives the \emph{window series}
 (Lean: \Lean{winCount}, \Lean{windowSum}, \Lean{windowSeries}; the $\Fk$ version
 is \Lean{winCountFin}, \Lean{winSeriesFin}.)
 
-$W_D$ is the annealed prediction for $\lm_A(n)/\deg_A(n)$. Sections
+$W_D$ is the annealed prediction for $\lm_A(n)/r_A(n)$. Sections
 \ref{sec:stratification}--\ref{sec:sandwich} show in what exact sense it is
 correct; the present section evaluates it.
 
@@ -768,7 +798,7 @@ $\ovr_A(n,s-n)$ if $s\ge n$, and $\undr_A(n,n-s)$ if $s<n$.
 \end{lemma}
 
 \begin{lemma}\label{lem:vanishing}
-$\ovr_A(n,0)=\undr_A(n,0)=\deg_A(n)$. If $a_i\le2d$ for all $i$ and $d\ge1$,
+$\ovr_A(n,0)=\undr_A(n,0)=r_A(n)$. If $a_i\le2d$ for all $i$ and $d\ge1$,
 then $\ovr_A(n,d)=\undr_A(n,d)=0$.
 \textup{(Lean: \Lean{overCount\_zero\_eq\_degCount},
 \Lean{underCount\_zero\_eq\_degCount}, \Lean{overCount\_eq\_zero},
@@ -778,7 +808,7 @@ then $\ovr_A(n,d)=\undr_A(n,d)=0$.
 \begin{theorem}[Exact stratification]\label{thm:stratification}
 For $n\le T$ and any $D$ with $a_i\le2D+1$ for all $i$,
 \[
-  \lm_A(n)\;=\;\deg_A(n)\;+\;\sum_{d=1}^{D}\bigl(\ovr_A(n,d)+\undr_A(n,d)\bigr).
+  \lm_A(n)\;=\;r_A(n)\;+\;\sum_{d=1}^{D}\bigl(\ovr_A(n,d)+\undr_A(n,d)\bigr).
 \]
 \textup{(Lean: \Lean{lm\_eq\_sum\_strata} in the sum-indexed form;
 \Lean{lm\_eq\_lmPartial} and \Lean{lm\_eq\_lmPartial\_of\_le} in the
@@ -812,7 +842,7 @@ $S\mapsto S\setminus I$, with inverse $U\mapsto U\cup J$.)}
 \end{theorem}
 
 \begin{corollary}\label{cor:deg-rep}
-$\deg_A(n)=\sum_{J\subseteq I}r_{A|_{I^{c}}}(n-\sigma(J))$ for any $I$.
+$r_A(n)=\sum_{J\subseteq I}r_{A|_{I^{c}}}(n-\sigma(J))$ for any $I$.
 \textup{(Lean: \Lean{degCount\_eq\_sum\_repCount}, combining
 Theorem~\ref{thm:fiber-rep} with \Lean{degCount\_fiberwise}.)}
 \end{corollary}
@@ -829,7 +859,7 @@ $J=\varnothing$ and $J=I_d$ respectively.)}
 
 Combining the above,
 \[
-  \frac{\lm_A(n)}{\deg_A(n)}
+  \frac{\lm_A(n)}{r_A(n)}
   \;=\;1+\sum_{d=1}^{D}
   \frac{r_{B_d}(n+d)+r_{B_d}(n-d-\sigma_d)}
        {\sum_{J\subseteq I_d}r_{B_d}(n-\sigma(J))}.
@@ -885,10 +915,10 @@ $r_{B_d}(m')\le(1+\varepsilon)r_{B_d}(m)$ for all $m,m'\in\mathrm{Win}_d$, where
 
 \begin{theorem}[Sandwich]\label{thm:sandwich}
 Let $a_i>0$ be odd, $n\le T$, and let $D$ satisfy $a_i\le2D+1$ for all $i$.
-Suppose $\deg_A(n)>0$ and $A$ is $\varepsilon$-flat at $(n,d)$ for every
+Suppose $r_A(n)>0$ and $A$ is $\varepsilon$-flat at $(n,d)$ for every
 $1\le d\le D$. Then
 \[
-  \frac{W_D(A)}{1+\varepsilon}\;\le\;\frac{\lm_A(n)}{\deg_A(n)}\;\le\;(1+\varepsilon)\,W_D(A),
+  \frac{W_D(A)}{1+\varepsilon}\;\le\;\frac{\lm_A(n)}{r_A(n)}\;\le\;(1+\varepsilon)\,W_D(A),
 \]
 and by Theorem~\ref{thm:window} the outer terms equal
 $\bigl(\Gamma(A)+(2D+1)2^{-k}\bigr)(1+\varepsilon)^{\mp1}$.
@@ -897,15 +927,15 @@ $\bigl(\Gamma(A)+(2D+1)2^{-k}\bigr)(1+\varepsilon)^{\mp1}$.
 \end{theorem}
 
 \begin{proof}
-Fix $d$. By Corollary~\ref{cor:deg-rep} the denominator $\deg_A(n)$ is the sum
+Fix $d$. By Corollary~\ref{cor:deg-rep} the denominator $r_A(n)$ is the sum
 of the $2^{N(d)}$ numbers $r_{B_d}(n-\sigma(J))$, all of which lie within a
 factor $1+\varepsilon$ of $\ovr_A(n,d)=r_{B_d}(n+d)$ by $\varepsilon$-flatness.
 Lemma~\ref{lem:flat-ratio} gives
 \[
-  \frac{2^{-N(d)}}{1+\varepsilon}\;\le\;\frac{\ovr_A(n,d)}{\deg_A(n)}\;\le\;(1+\varepsilon)\,2^{-N(d)},
+  \frac{2^{-N(d)}}{1+\varepsilon}\;\le\;\frac{\ovr_A(n,d)}{r_A(n)}\;\le\;(1+\varepsilon)\,2^{-N(d)},
 \]
 and the same for $\undr$. Summing over $1\le d\le D$ and adding the $d=0$ term
-$\deg/\deg=1$, then invoking Theorem~\ref{thm:stratification}, gives the result;
+$r/r=1$, then invoking Theorem~\ref{thm:stratification}, gives the result;
 the elementary inequalities $1\le1+\varepsilon$ and $(1+\varepsilon)^{-1}\le1$
 absorb the ground term.
 \end{proof}
@@ -1047,7 +1077,7 @@ Table~\ref{tab:flatness} gives the primes.
 \small
 \begin{tabular}{rrrrrrrrr}
 \toprule
-$k$ & $\deg$ & $\lm$ & $\lm/\deg$ & $\Gamma$ &
+$k$ & $r$ & $\lm$ & $\lm/r$ & $\Gamma$ &
 $\varepsilon_1$ & $\varepsilon_2$ & $\varepsilon_3$ & $\varepsilon_4$\\
 \midrule
 14 & 126 & 628 & 4.9841 & 5.3486 & 0.0328 & 0.3125 & 0.3200 & 0.5833\\
@@ -1133,13 +1163,13 @@ compiled Lean executable enumerating all $2^{k}$ configurations (the full
 $100$-seed sweep over $k\in\{8,12,16,18,20\}$ takes $11.5$\,s); for $k\le24$ we
 used exact dynamic programming over $\mathbb{Z}$ via
 Theorem~\ref{thm:stratification}, cross-validated against the enumeration at
-$k=20$ (both give $\lm=22808$, $\deg=4344$). Random sequences are drawn without
+$k=20$ (both give $\lm=22808$, $r=4344$). Random sequences are drawn without
 replacement from the odd integers in $[3,a_k]$, matching the range of the primes
 of the same length. The target is $n=\lfloor T/2\rfloor$ throughout.
 
-\subsection{$\lm/\deg$ converges to $\Gamma$}
+\subsection{$\lm/r$ converges to $\Gamma$}
 
-Put $Q=(\lm/\deg)/\Gamma$. Theorem~\ref{thm:sandwich} predicts
+Put $Q=(\lm/r)/\Gamma$. Theorem~\ref{thm:sandwich} predicts
 $Q\in[(1+\varepsilon)^{-1},1+\varepsilon]$ up to the negligible tail term.
 Table~\ref{tab:Q} and Figure~\ref{fig:convergence} record the behaviour.
 
@@ -1160,21 +1190,21 @@ $\mathrm{corr}(\Gamma,\lm)$\\
 \bottomrule
 \end{tabular}
 \caption{$Q$ over $100$ random odd sequences per $k$; regression of
-$\lm/\deg$ on $\Gamma$.}
+$\lm/r$ on $\Gamma$.}
 \label{tab:Q}
 \end{table}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.82\textwidth]{fig_convergence.pdf}
-\caption{Convergence of $Q=(\lm/\deg)/W_D$. Error bars are one standard
+\caption{Convergence of $Q=(\lm/r)/W_D$. Error bars are one standard
 deviation over $100$ random sequences; they contract steadily, consistent with
 $\varepsilon\to0$. The primes (blue) oscillate about $1$ rather than converging
 monotonically; see \S\ref{sec:oscillation} and Conjecture~\ref{conj:oscillation}.}
 \label{fig:convergence}
 \end{figure}
 
-The dispersion contracts steadily. Correlation between $\Gamma$ and $\lm/\deg$
+The dispersion contracts steadily. Correlation between $\Gamma$ and $\lm/r$
 reaches $0.9995$ at $k=20$.
 
 \subsection{Primes against random}
@@ -1249,11 +1279,11 @@ $\mathrm{partial}(CV,\lm\mid\Gamma)$\\
 \label{tab:cv}
 \end{table}
 
-For $\lm/\deg$ --- the quantity our theorems actually control --- the separation
+For $\lm/r$ --- the quantity our theorems actually control --- the separation
 is sharper still: at $k=20$,
-$\mathrm{partial}(\Gamma,\lm/\deg\mid CV)=+0.9986$
+$\mathrm{partial}(\Gamma,\lm/r\mid CV)=+0.9986$
 ($p=2.4\times10^{-126}$) while
-$\mathrm{partial}(CV,\lm/\deg\mid\Gamma)=+0.306$.
+$\mathrm{partial}(CV,\lm/r\mid\Gamma)=+0.306$.
 
 For $k\ge12$, conditioning on $CV$ leaves the predictive power of $\Gamma$
 essentially intact, whereas conditioning on $\Gamma$ removes most of that of
@@ -1275,7 +1305,7 @@ them.
 \small
 \begin{tabular}{clcccc}
 \toprule
-$k$ & pair & $CV$ ratio & $\Gamma$ ratio & $\lm/\deg$ ratio\\
+$k$ & pair & $CV$ ratio & $\Gamma$ ratio & $\lm/r$ ratio\\
 \midrule
 12 & $CV$-twins & $1.000000$ & $2.135$ & $2.051$\\
 13 & $CV$-twins & $1.000000$ & $2.070$ & $2.181$\\
@@ -1289,7 +1319,7 @@ $k$ & pair & $CV$ ratio & $\Gamma$ ratio & $\lm/\deg$ ratio\\
 \caption{Holding one statistic fixed. A \emph{$CV$-twin pair} is two sets of $k$
 odd numbers with the same cardinality, sum and sum of squares --- hence exactly
 the same mean, variance and $CV$; a \emph{$\Gamma$-twin pair} is two sets with
-exactly the same gap series. Each $\lm/\deg$ is a median over the $41$ targets
+exactly the same gap series. Each $\lm/r$ is a median over the $41$ targets
 $n$ nearest $\sigma(A)/2$, computed by full enumeration of all $2^{k}$
 configurations. When $CV$ is pinned, the landscape moves with $\Gamma$; when
 $\Gamma$ is pinned, a $60\%$ change in $CV$ moves the landscape by at most
@@ -1302,7 +1332,7 @@ because they agree in $(k,\sum a_i,\sum a_i^2)$ as integers, and $\Gamma$-twins
 agree in $\Gamma$ as rationals. For the $k=14$ $CV$-twins, for instance,
 $\{1,11,31,\dots,103\}$ and $\{29,31,33,\dots,119\}$ both have
 $CV=0.473014\ldots$, while $\Gamma=14.135$ and $31.658$ and the measured
-$\lm/\deg$ are $13.60$ and $31.63$ --- each within $4\%$ of its own $\Gamma$,
+$\lm/r$ are $13.60$ and $31.63$ --- each within $4\%$ of its own $\Gamma$,
 and a factor $2.3$ apart, on data about which $CV$ says the two sets are
 identical. The $\Gamma$-twin rows are the control that could have failed and
 did not.
@@ -1322,7 +1352,7 @@ appears in an identity.
 \begin{problem}[Asymptotic flatness]\label{prob:flatness}
 Show that for the sequences of interest the flatness $\varepsilon_k$ of
 Definition~\ref{def:flat} tends to $0$, so that
-Theorem~\ref{thm:sandwich} yields $\lm_A(n)/\deg_A(n)\to\Gamma(A)$.
+Theorem~\ref{thm:sandwich} yields $\lm_A(n)/r_A(n)\to\Gamma(A)$.
 \end{problem}
 
 For random odd sequences this appears to be within reach of local central limit
@@ -1496,7 +1526,7 @@ $n=\lfloor T/2\rfloor$. Precisely, writing $A_d,\varphi_d$ for the amplitude and
 phase in Conjecture~\ref{conj:ripple} and
 $P_d=\prod_{a\in I_d}(1+e^{-i\pi a/3})$,
 \[
-  \frac{\lm_A(n)}{\deg_A(n)}-W_D(A)\;\approx\;
+  \frac{\lm_A(n)}{r_A(n)}-W_D(A)\;\approx\;
   \sum_{d\ge1}2^{-N(d)}\,\mathrm{Re}\Bigl[A_de^{-i\varphi_d}
   \bigl(e^{i\pi(n+d)/3}+e^{i\pi(n-d-\sigma_d)/3}
         -2e^{i\pi n/3}P_d2^{-N(d)}\bigr)\Bigr].
@@ -1532,6 +1562,22 @@ $\Gamma_x(A)=\sum_j a_jx^{j}$ evaluated at $x=1-\rho$. Develop the corresponding
 theory, including the large-deviation rate function that governs $\lm/2^{k}$
 away from the centre.
 \end{problem}
+
+\section*{Use of AI tools}
+This work was carried out by the author working with AI language models
+(Anthropic's Claude) as tools, under the author's direction. They were used to
+fill in Lean proofs, to run and tabulate the numerical experiments, and to draft
+sections which the author then checked. The choice of problem, the design
+decisions and the responsibility for every claim here are the author's.
+
+Work produced this way cannot reasonably be taken on the author's word, and the
+apparatus described under Data availability exists for that reason: every settled
+theorem is machine-checked in Lean and replayed through the kernel by an
+independent checker that must first reject three deliberately corrupted modules;
+every number quoted in the text is produced by a committed script that writes a
+log beside itself; every theorem, proposition and lemma declares its status
+where it is stated; and a suite of mechanical checks enforces all of this before
+each commit. The repository records, in full, the mistakes this process has made.
 
 \section*{Data availability}
 Every number in this paper is produced by a script that writes a log beside

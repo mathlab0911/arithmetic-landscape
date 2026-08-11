@@ -1,0 +1,6 @@
+identity holds on 176/176 cases, 0 mismatches
+
+So the main theorem reads, with no landscape vocabulary at all:
+  [ r_A(n) + sum_d ( r_{B_d}(n+d) + r_{B_d}(n-d-sigma(I_d)) ) ] / r_A(n)  ->  Gamma(A)
+  A = first 14 odd primes, n = 163:  ratio = 4.9841
+  Gamma(A) = 5.3486

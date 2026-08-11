@@ -84,13 +84,13 @@ with no free parameter, by the profile alone.
 \section{Introduction}\label{sec:intro}
 
 Parts~I and~II~\cite{P1,P2} of this series establish that for the odd primes
-$\lm/\deg\to\Gamma$ \emph{at the centre} of the landscape. Whether $\Gamma$ is an invariant of
+$\lm/r\to\Gamma$ \emph{at the centre} of the landscape. Whether $\Gamma$ is an invariant of
 the landscape or an accident of its most symmetric point is the question this paper answers,
 and the answer turns out to be stronger than rigidity alone: the whole ratio is a function of
 one local observable. The argument and what each part rests on:
 
 \begin{itemize}
-\item Parts~I and~II establish $\lm/\deg\to\Gamma$ \emph{at the centre}
+\item Parts~I and~II establish $\lm/r\to\Gamma$ \emph{at the centre}
       $n=\lfloor T/2\rfloor$: Part~I reduces it to a flatness hypothesis and Part~II
       discharges that hypothesis unconditionally. The obvious question --- whether $\Gamma$ is
       a property of the landscape or of its centre --- is what this paper answers.
@@ -191,7 +191,7 @@ budget, with the explicit constants missing. Until those constants are written, 
 below is conditional on that computation and on nothing else.}
 Let $P=P_k$ be the first $k$ odd primes and let $\rho\in(0,1)$ be fixed. Then
 \[
-  \frac{\lm_P(\lfloor\rho T\rfloor)}{\deg_P(\lfloor\rho T\rfloor)}
+  \frac{\lm_P(\lfloor\rho T\rfloor)}{r_P(\lfloor\rho T\rfloor)}
   \;\xrightarrow[k\to\infty]{}\;\Gamma(P),
 \]
 uniformly for $\rho$ in compact subsets of $(0,1)$. For a general profile $A$ the same holds
@@ -212,7 +212,7 @@ $t_{\min}$ is continuous and positive on $(0,1)$, hence bounded below on compact
 (Remark~\ref{rem:kapparho}).
 
 \STATUS{experimentally confirmed} The evidence the theorem is modelled on. With
-$\mathrm{ratio}(\rho,k)=[\lm/\deg]/\Gamma(P_k)$, the spread over $\rho$ contracts monotonically:
+$\mathrm{ratio}(\rho,k)=[\lm/r]/\Gamma(P_k)$, the spread over $\rho$ contracts monotonically:
 
 \begin{center}
 \begin{tabular}{lcccccc}
@@ -228,7 +228,7 @@ $\max_\rho|\mathrm{ratio}-1|$ & 0.00921 & 0.00276 & 0.00244 & 0.00156 & 0.00109 
 \noindent
 over $\rho\in[0.20,0.50]$, by exact integer computation. Three guards are in force throughout
 this paper's computations and are worth stating once: every reported point satisfies
-$\deg\ge10^{4}$, so that integer granularity cannot masquerade as signal; the dynamic
+$r\ge10^{4}$, so that integer granularity cannot masquerade as signal; the dynamic
 programme was checked against brute-force enumeration over all $2^{k}$ subsets at small $k$;
 and the exact identity $\lm(n)=\lm(T-n)$ is verified at every measured target, which tests the
 stratification and the arithmetic together.
@@ -245,7 +245,7 @@ below is conditional on that computation and on nothing else.}
 Let $A=P_k$ be the first $k$ odd primes, or a general profile satisfying~\textup{(H)}, and let
 $n=\lfloor\rho T\rfloor$ with $\rho\in(0,1)$ fixed. Then
 \begin{equation}\label{eq:phi}
-  \frac{\lm_A(n)}{\deg_A(n)}\;=\;\Phi_k\bigl(\lambda(n)\bigr)\;+\;E_k,
+  \frac{\lm_A(n)}{r_A(n)}\;=\;\Phi_k\bigl(\lambda(n)\bigr)\;+\;E_k,
   \qquad
   \Phi_k(\lambda)=1+\sum_{d\ge1}2^{1-N_d}\,
      e^{-\lambda^{2}s_d/8}\,\cosh(\lambda\delta_d),
@@ -293,7 +293,7 @@ correction never overshoots.
 \subsection{Verification}\label{sec:table1}
 
 \STATUS{experimentally confirmed} Table~\ref{tab:one} evaluates \eqref{eq:phi} at the measured
-$\lambda(n)$ against the exactly computed $\lm/\deg$.
+$\lambda(n)$ against the exactly computed $\lm/r$.
 
 \begin{table}[htbp]
 \centering
@@ -309,7 +309,7 @@ squares, $k=170$   & 1.66\% & 1.67\% & 1.68\% & 1.70\% & 1.74\% & 1.80\% & 1.89\
 \bottomrule
 \end{tabular}
 \caption{Residual $|\,\mathrm{measured}-\Phi(\lambda)\,|$ \textbf{as a fraction of the centred
-signal} $\lm/\deg-[\lm/\deg]_{n=T/2}$. Absolute residuals are $10^{-5}$ to $10^{-6}$; quoting
+signal} $\lm/r-[\lm/r]_{n=T/2}$. Absolute residuals are $10^{-5}$ to $10^{-6}$; quoting
 them as significant figures of the ratio would be meaningless, since the signal itself lives in
 the fifth and sixth digit. The third row is the only ensemble in this paper that was
 \emph{constructed to test a prediction} rather than chosen because it was natural: $\alpha=3/2$
@@ -322,7 +322,7 @@ constant $16/7$ lies between theirs.}
 Against the \emph{uncentred} signal the same residuals read $2\%$ to $300\%$, the large values
 occurring precisely where the signal is smallest. Neither number is wrong; the centred one is
 the one the theorem is about, because $\Phi(0)=\Gamma$ is an identity and the finite-$k$ offset
-$[\lm/\deg]_{n=T/2}-\Gamma$ is a separate quantity of size $10^{-6}$.
+$[\lm/r]_{n=T/2}-\Gamma$ is a separate quantity of size $10^{-6}$.
 We keep this remark because an earlier draft of this programme reported ``agreement to five or
 six significant figures'' for a model that was $12\%$ wrong on the signal: the figures were
 real and the claim was not, because the signal itself lives in those digits.
@@ -785,7 +785,7 @@ summands rather than linearly, and a method calibrated to the latter has nothing
 \section{Universality of the rate function}\label{sec:universality}
 
 \STATUS{experimentally confirmed, $k=16..56$, three reference sequences}
-With $\hat I_A(\rho)=-k^{-1}\log(\deg_A(\lfloor\rho T\rfloor)/2^k)$ and
+With $\hat I_A(\rho)=-k^{-1}\log(r_A(\lfloor\rho T\rfloor)/2^k)$ and
 $D_k=\hat I_P-\hat I_{\mathrm{ref}}$, the difference tends to $0$ for each of three reference
 sequences: the odd numbers, the arithmetic progression $6n+5$, and a random odd sequence of the
 same range. The sign is a property of the reference, not a universal fact --- it is positive
@@ -960,6 +960,22 @@ exponent} reported in an early draft, which was an artefact of the Gaussian slop
 series is bounded for the cubes and unbounded for $\alpha<1$, and the hypothesis follows the
 computation rather than the narrative.
 \end{remark}
+
+\section*{Use of AI tools}
+This work was carried out by the author working with AI language models
+(Anthropic's Claude) as tools, under the author's direction. They were used to
+fill in Lean proofs, to run and tabulate the numerical experiments, and to draft
+sections which the author then checked. The choice of problem, the design
+decisions and the responsibility for every claim here are the author's.
+
+Work produced this way cannot reasonably be taken on the author's word, and the
+apparatus described under Data availability exists for that reason: every settled
+theorem is machine-checked in Lean and replayed through the kernel by an
+independent checker that must first reject three deliberately corrupted modules;
+every number quoted in the text is produced by a committed script that writes a
+log beside itself; every theorem, proposition and lemma declares its status
+where it is stated; and a suite of mechanical checks enforces all of this before
+each commit. The repository records, in full, the mistakes this process has made.
 
 \section*{Data availability}
 Every number in this paper is produced by a script that writes a log beside itself, as in
