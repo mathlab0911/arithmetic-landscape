@@ -41,6 +41,13 @@ PNP = os.path.join(ROOT, 'lean', 'pnp')
 PAPER = os.path.join(ROOT, 'paper')
 LABDIR = os.path.join(PAPER, '.labels')
 ALLOW = os.path.join(ROOT, 'tools', 'allow_numbers.txt')
+PAPER_JA = os.path.join(ROOT, 'paper-ja')
+
+# The Japanese editions and the English sources they translate.  The pairing is irregular
+# (paper1_ja translates paper.tex, not paper1.tex), so it is written out rather than derived.
+JA_PAIRS = [('paper1_ja.tex', 'paper.tex'), ('paper2_ja.tex', 'paper2.tex'),
+            ('paper3_ja.tex', 'paper3.tex'), ('paper4_ja.tex', 'paper4.tex')]
+JA_TO_EN = dict(JA_PAIRS)
 
 fails = []
 notes = []
@@ -430,6 +437,29 @@ CONSTANTS = [
     ('0.81649658092772603',                'sqrt(2/3)'),
 ]
 
+# Banned literals: strings that must not appear in any paper, English or Japanese.
+#
+# Why this exists rather than more entries in CONSTANTS.  r120 changed the definition of Gamma
+# from the enumeration series to the layer form, so the finite-size values moved: at k = 20,
+# Gamma(P_20) = 1402281/262144 = 5.349277496... where the enumeration series gives
+# 5.349207878...  The obvious move was to add both finite values to CONSTANTS as guards.  It
+# was tried and rejected: proximity matching would then attribute the literal 5.3492 -- which
+# occurs legitimately in paper 1's flatness table as Gamma(P_16) = 5.349182 -- to the
+# enumeration value 5.3492078, of which it is also a correct truncation, and pass it for the
+# wrong reason.  A check that passes a correct literal by misidentifying it is not protecting
+# anything, and the next person to read the table would inherit the misattribution.
+#
+# What can be banned safely is a string that is a correct truncation of nothing we still print.
+# 5.34920 is the r118 erratum: the enumeration value at k = 20 quoted as the LIMIT.  Under the
+# current definition nothing in these papers is written to five decimals near there, so the
+# literal has no innocent reading.
+C11_BANNED = {
+    '5.34920': 'the r118 erratum -- the finite-size value at k=20 quoted as the limit '
+               'Gamma(P); the limit is 5.3492879..., and Gamma(P_20) itself is now '
+               '5.3492774... under the layer definition.  It survived in paper2_ja until '
+               'r120 because no check read the Japanese editions (C13).',
+}
+
 # Literals that pass close to a constant by coincidence and are NOT that constant.  Each needs
 # a reason: the default is that a near-miss IS an error, which is why this check exists.  Do not
 # add an entry to silence a failure you have not understood.
@@ -443,12 +473,20 @@ C11_EXEMPT = {
 def c11_constants():
     from decimal import Decimal, getcontext
     getcontext().prec = 40
-    bad, checked, exempt = [], 0, 0
-    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        for ln, line in enumerate(open(os.path.join(PAPER, tex), encoding='utf-8',
+    bad, checked, exempt, banned_seen = [], 0, 0, 0
+    scan = [(PAPER, f) for f in sorted(os.listdir(PAPER)) if f.endswith('.tex')]
+    ja = os.path.join(ROOT, 'paper-ja')
+    if os.path.isdir(ja):
+        scan += [(ja, f) for f in sorted(os.listdir(ja)) if f.endswith('.tex')]
+    for where, tex in scan:
+        for ln, line in enumerate(open(os.path.join(where, tex), encoding='utf-8',
                                        errors='replace'), 1):
             if line.lstrip().startswith('%'):
                 continue
+            for lit, why in C11_BANNED.items():
+                for m in re.finditer(r'(?<![\d.])' + re.escape(lit) + r'(?![\d])', line):
+                    banned_seen += 1
+                    bad.append('%s:%d prints the banned literal %s -- %s' % (tex, ln, lit, why))
             for m in re.finditer(r'(?<![\d.])\d+\.\d{4,}', line):
                 lit = m.group(0)
                 dp = len(lit.split('.')[1])
@@ -458,7 +496,12 @@ def c11_constants():
                     # close enough that it is plausibly MEANT to be this constant
                     if abs(L - t) > Decimal(15) / Decimal(10) ** (dp + 1):
                         continue
-                    if (tex, lit) in C11_EXEMPT:
+                    # An exemption records a fact about the number, not about the language it
+                    # is printed in, so a Japanese edition inherits its source's exemptions.
+                    # Found r120, the first time C11 was allowed to read paper-ja/: the
+                    # measured 0.9812 was exempted in paper2.tex and failed in paper2_ja.tex,
+                    # which is the same sentence.
+                    if (tex, lit) in C11_EXEMPT or (JA_TO_EN.get(tex), lit) in C11_EXEMPT:
                         exempt += 1
                         continue
                     checked += 1
@@ -473,7 +516,9 @@ def c11_constants():
         fail('C11/F18', 'constant(s) quoted at a precision they do not have: ' + '; '.join(bad))
     expect_subjects('C11/F18', checked, 'constant occurrences')
     notes.append('C11/F18 constants matched by proximity and checked digit by digit: '
-                 '%d occurrence(s), %d exempted with a recorded reason' % (checked, exempt))
+                 '%d occurrence(s) over %d file(s) in paper/ and paper-ja/, %d exempted with '
+                 'a recorded reason, %d banned literal(s) enforced'
+                 % (checked, len(scan), exempt, len(C11_BANNED)))
 
 
 # ------------------------------------------------------------------ C12 (F20)
@@ -504,10 +549,61 @@ def c12_cited_scripts():
     notes.append('C12/F20 scripts cited by the papers, present with logs: %d' % len(cited))
 
 
+# ------------------------------------------------------------------ C13 (F60)
+# Every check above scans paper/ and nothing else.  The Japanese editions in paper-ja/ have
+# therefore never been read by any check, and it showed: the constant erratum corrected in
+# the English papers at r118 was still in paper2_ja four times (5.34920 as the LIMIT, 0.6916,
+# 0.0188, 0.9814) when this check was written at r120.  Two months of green runs over an
+# artefact tree the checks could not see.
+#
+# The rule is narrow and mechanical, which is why it works: a decimal literal printed in a
+# translation must occur in its source.  Translations restate numbers, they do not compute
+# them, so a number that appears in only one of the two editions is drift by construction --
+# either the English was corrected and the Japanese was not, or a number was invented.
+#
+# It does NOT check that the surrounding sentence was translated faithfully, and it cannot
+# see a number that is wrong in both editions (that is C11's job).  It also treats a missing
+# Japanese edition as a note, not a failure: paper4 has none yet.
+def c13_translation_drift():
+    num = re.compile(r'(?<![\d.])\d+\.\d{3,}')
+
+    def literals(path):
+        out = {}
+        for ln, line in enumerate(open(path, encoding='utf-8', errors='replace'), 1):
+            if line.lstrip().startswith('%'):
+                continue
+            for m in num.finditer(line):
+                out.setdefault(m.group(0), []).append(ln)
+        return out
+
+    bad, checked, absent = [], 0, []
+    for ja, en in JA_PAIRS:
+        pja, pen = os.path.join(PAPER_JA, ja), os.path.join(PAPER, en)
+        if not os.path.exists(pja):
+            absent.append(ja)
+            continue
+        if not os.path.exists(pen):
+            fail('C13/F60', '%s has no English source %s' % (ja, en))
+            continue
+        J, E = literals(pja), literals(pen)
+        checked += len(J)
+        for lit in sorted(J, key=lambda s: J[s][0]):
+            if lit not in E:
+                bad.append('%s:%s prints %s, which is nowhere in %s'
+                           % (ja, ','.join(map(str, J[lit][:4])), lit, en))
+    if bad:
+        fail('C13/F60', 'the translations have drifted from their sources: ' + '; '.join(bad))
+    expect_subjects('C13/F60', checked, 'literals in the Japanese editions')
+    notes.append('C13/F60 numeric literals in the Japanese editions, each found in its '
+                 'English source: %d%s'
+                 % (checked, ('; no Japanese edition yet for ' + ', '.join(absent))
+                    if absent else ''))
+
+
 if __name__ == '__main__':
     for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
                c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
-               c11_constants, c12_cited_scripts):
+               c11_constants, c12_cited_scripts, c13_translation_drift):
         fn()
     for n in notes:
         print('  ok   ' + n)

@@ -1,0 +1,16 @@
+=== CV-twins: same CV by construction, Gamma free ===
+  k         CV      Gamma    lm/deg   set
+ 12   0.498125    15.4453    15.231   [1, 11, 39, 49, 61, 71, 73, 77, 93, 95, 97, 101]
+ 12   0.498125    32.9697    31.231   [29, 33, 37, 39, 45, 47, 49, 61, 91, 109, 111, 117]
+      -> CV ratio 1.0000 exactly;  Gamma ratio 2.135;  lm/deg ratio 2.051   (41,41 targets)
+ 13   0.456372    18.0742    16.962   [1, 21, 43, 51, 53, 61, 69, 71, 81, 83, 97, 99, 103]
+ 13   0.456372    37.4121    37.000   [35, 37, 39, 43, 45, 49, 53, 55, 57, 79, 111, 113, 117]
+      -> CV ratio 1.0000 exactly;  Gamma ratio 2.070;  lm/deg ratio 2.181   (41,41 targets)
+ 14   0.473014    14.1353    13.604   [1, 11, 31, 47, 57, 69, 75, 77, 79, 83, 89, 95, 99, 103]
+ 14   0.473014    31.6575    31.630   [29, 31, 33, 37, 41, 45, 55, 61, 71, 81, 93, 107, 113, 119]
+      -> CV ratio 1.0000 exactly;  Gamma ratio 2.240;  lm/deg ratio 2.325   (41,41 targets)
+
+=== positive control: Gamma-twins (same Gamma, CV free) ===
+ 12 Gamma=8.4521 fixed;  CV 0.5724 vs 0.9321 (ratio 1.628);  lm/deg 7.950 vs 8.583 (ratio 1.080)
+ 13 Gamma=9.1724 fixed;  CV 0.6006 vs 0.9572 (ratio 1.594);  lm/deg 8.615 vs 8.906 (ratio 1.034)
+ 14 Gamma=9.6689 fixed;  CV 0.5256 vs 0.8410 (ratio 1.600);  lm/deg 9.241 vs 9.673 (ratio 1.047)

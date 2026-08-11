@@ -1,0 +1,28 @@
+=== lake build (full canon) ===
+info: Pnp/Theory/OddPeaks.lean:104:0: 'Pnp.cos_pi_mul_div_six_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/OddPeaks.lean:105:0: 'Pnp.prod_abs_cos_six_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/OddPeaks.lean:106:0: 'Pnp.six_dies_four_survives' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [8669/8672] Replayed Pnp.Theory.OddProd
+info: Pnp/Theory/OddProd.lean:84:4: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Pnp/Theory/OddProd.lean:159:0: 'Pnp.prod_abs_cos_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [8670/8672] Replayed Pnp.Theory.CosetProd
+info: Pnp/Theory/CosetProd.lean:112:4: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Pnp/Theory/CosetProd.lean:177:0: 'Pnp.prod_range_mul_index' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/CosetProd.lean:178:0: 'Pnp.abs_cos_add_int_mul_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/CosetProd.lean:179:0: 'Pnp.cosetId_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/CosetProd.lean:180:0: 'Pnp.cosetId_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Pnp/Theory/CosetProd.lean:181:0: 'Pnp.cosetId_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+✁E[8671/8672] Built Pnp (117s)
+Build completed successfully (8672 jobs).
+
+BUILD_EXIT=0

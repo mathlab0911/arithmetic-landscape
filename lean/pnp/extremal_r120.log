@@ -1,0 +1,13 @@
+Gamma(P_20)          = 1402281/262144 = 5.349277496337891
+  claimed 1402281/262144 : True  262144 = 2^18 : True
+  Enum(P_20)         = 5609051/1048576 = 5.349207878112793
+  difference          = 73/1048576  should equal a_k/2^k = 73/1048576 True
+  limit  ~ 5.349287932022658
+  |Gamma(P_20) - limit| = 1.043568476693299e-05    |Enum(P_20)-limit| = 8.005390986458924e-05
+  ratio                 = 7.671169803657914
+
+M=73, D=36: lower bound 3-2^(1-D) = 3-2^-35 = 2.999999999970896   upper bound = 73
+  Gamma({M}) = 73   Gamma(all odds <= M) = 103079215103/34359738368  = 3-2^-35 ? True
+  log-scale position of the primes in [3, 73] = 0.1812  -> 18.1%
+  strict monotonicity counterexamples in 20000 random trials: 0
+  control, adjoin above the max: Gamma(3,5,7) = 4.5 -> Gamma(3,5,7,9) = 4.75 (increases, as it must)

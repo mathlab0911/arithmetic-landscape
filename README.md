@@ -30,7 +30,7 @@ read as the least flattering true description of each.
 
 | | Title | State |
 |---|---|---|
-| 1 | *The gap series of an integer sequence: an arithmetic invariant governing subset-sum landscapes* | **20 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1)2^(−k)`, the exact stratification, and the modulus-4 obstruction. |
+| 1 | *The gap series of an integer sequence: an arithmetic invariant governing subset-sum landscapes* | **23 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1−M)2^(−k)`, sharp bounds `3 − 2^(1−(M−1)/2) ≤ Γ(A) ≤ M` with both extremal sets characterised, the exact stratification, and the modulus-4 obstruction. **r120 changed the definition of Γ** from the enumeration series `Σ aⱼ2^(−j)` to the layer form `1 + 2Σ_d 2^(−N_A(d))`; the two differ by `a_k2^(−k)` and have the same limit, so every asymptotic statement in papers 2–4 is unaffected. The Japanese edition tracks the change. |
 | 2 | *Asymptotic flatness of subset-sum landscapes of primes: the sub-peak spectrum and the constant √3/2* | **31 pp. No hypothesis, but not fully written out.** Two steps of the deep-minor-arc proposition — a substitution of a quoted exponential-sum bound, and an excision — are not written to referee standard, and the main theorem says so in its own statement. One constant is ineffective via Siegel–Walfisz; the effective substitute is the weaker rate `e^(1/8)·√3/2 = 0.98134…`, which still gives the conclusion. |
 | 3 | *The transfer function of subset-sum landscapes: rigidity of the gap series off centre* | **14 pp. Its two headline theorems are proof skeletons.** The analytic ingredients are proved; what is missing is the Edgeworth expansion of a classical local-limit computation, and each theorem names that gap in its own statement. The transfer function `Φ` is verified against exact computation on four profiles. |
 | 4 | *Bias, randomness, and an exact coarse-graining identity* | **17 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
@@ -72,14 +72,14 @@ only after it had already happened, and the ones where the check itself was the 
 
 ## The formal development
 
-Everything settled lives in `lean/pnp/Pnp/Theory/` — **14 files, 125 theorems and lemmas**, Lean 4
+Everything settled lives in `lean/pnp/Pnp/Theory/` — **15 files, 134 theorems and lemmas**, Lean 4
 with Mathlib (`leanprover/lean4:v4.32.2`).
 
 - No declaration depends on `sorryAx`, or on any axiom beyond Lean's standard `propext`,
   `Classical.choice` and `Quot.sound`. The authority for that is the build's own
   `depends on axioms` output, not a grep of the source: a keyword search cannot distinguish a
   `sorry` from the comment saying there is none.
-- The canon additionally passes an **independent kernel replay** (`lean4checker`, **16 modules**),
+- The canon additionally passes an **independent kernel replay** (`lean4checker`, **17 modules**),
   which discards the elaborator and the tactic framework and rebuilds every constant from the
   imports through the kernel alone. The harness runs three deliberately poisoned modules first
   and refuses to report a pass unless all three are rejected: `tools/check_lean.ps1`.
@@ -99,7 +99,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **116 scripts, 183 logs**, all committed. A number with no log is treated as a number
+itself — **119 scripts, 188 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```

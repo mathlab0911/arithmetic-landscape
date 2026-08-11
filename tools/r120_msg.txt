@@ -1,0 +1,48 @@
+The gap series is now defined by its layers, and a check that had been reading half the papers
+
+Paper 1 defined Gamma by the enumeration series sum a_j 2^-j and called it an
+order-sensitive invariant.  It is now defined by the layer form
+
+    Gamma(A) = 1 + 2 sum_{d=1}^{(M-1)/2} 2^{-N_A(d)},   N_A(d) = #{a in A : a <= 2d},
+
+which is the window measure at the last informative layer.  The two differ by
+a_k 2^-k and have the same limit, so every asymptotic statement in papers 2-4 is
+untouched; a footnote records the change for readers of the earlier version.
+The layer form is manifestly an invariant of the set, it is the better finite
+approximant (1.04e-5 from the limit at k=20 against 8.01e-5, a factor 7.7), and
+it puts the range of Gamma in reach:
+
+- new section: 3 - 2^{1-(M-1)/2} <= Gamma(A) <= M, with equality on the left
+  exactly for {1,3,...,M} and on the right exactly for {M}, plus strict
+  monotonicity under adjoining an element below the maximum.  Six theorems in
+  Pnp/Theory/Extremal.lean, standard axioms only, inside the import closure and
+  through the kernel replay (17 modules).
+
+Two consequences that were not planned.
+
+First, the definition change killed an argument.  Paper 1 explained in three
+places that CV is only a proxy for Gamma because "CV is order-blind and Gamma is
+not".  Under the layer definition Gamma is a set invariant too, so the sentence
+is false.  The honest replacement -- CV is a global second moment, Gamma is
+dominated by the bottom of the set -- is decouplable and therefore testable, so
+it was tested.  Pairs of sets with exactly equal CV (same k, sum, sum of squares)
+and Gamma a factor 2.1-2.2 apart have lm/deg a factor 2.1-2.3 apart; pairs with
+exactly equal Gamma and CV 1.6x apart have lm/deg within 8%.  cvtwin_r120.
+The old argument was safe because it was untestable.
+
+Second, the k=8 experiment rows moved.  The tail a_k 2^-k is 7e-5 at k=20 but 3%
+at k=8, so "negligible" had to be measured rather than asserted.  resweep_r120
+regenerates all 505 instances from the recorded LCG seeds and recomputes; it
+reproduces the recorded values to 5e-7 first.  Only k=8 changed.
+
+C13: every check was scoped to paper/.  The Japanese editions had never been read
+by any of them, and the constant erratum corrected in English at r118 was still
+in paper2_ja four times, through two months of green runs.  The new check is
+narrow -- a decimal literal printed in a translation must occur in its source,
+because translations restate numbers rather than compute them.  Negative control
+taken.  Widening C11 to paper-ja found a fifth literal, exempted in the English
+and not in the Japanese though it is the same sentence; exemptions now cross the
+language boundary, since an exemption is a fact about the number.
+
+README: 15 canon files, 134 theorems, 17 replayed modules, 119 scripts, 188 logs,
+paper 1 at 23 pp.

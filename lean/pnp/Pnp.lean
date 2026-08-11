@@ -18,3 +18,6 @@ import Pnp.Theory.CosetProd
 -- so lake never built it and lean4checker never replayed it.  tools/check_lean.ps1 now
 -- fails (exit 4) if any Pnp/Theory file is outside this closure.
 import Pnp.Theory.Cyclotomic
+-- r120: 極値定理(Γ の値域と両端の一意性・狭義単調性)。
+-- 論文1 §極値値 が引用する。
+import Pnp.Theory.Extremal

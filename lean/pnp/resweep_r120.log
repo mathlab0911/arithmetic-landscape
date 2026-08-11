@@ -1,0 +1,44 @@
+rows in results_landscape_r2.csv: 505
+POSITIVE CONTROL: sums match on all rows; worst |gamma_recomputed - gamma_in_csv| = 4.981e-07  (float32-ish print precision in the CSV)
+
+===== Table 'Q' with Gamma = g_old =====
+  k   mean Q     s.d.   slope a   (s.e.)  intercept      R^2  corr(G,lm)
+  8    1.112   0.4976     1.907    0.275     -4.757  0.32859       0.843
+ 12    1.002   0.0800     1.050    0.038     -0.342  0.88439       0.956
+ 16    0.993   0.0251     1.033    0.014     -0.313  0.98179       0.951
+ 18    0.992   0.0142     1.028    0.007     -0.281  0.99521       0.981
+ 20    0.995   0.0067     1.013    0.003     -0.142  0.99903       0.981
+
+===== Table 'Q' with Gamma = g_new =====
+  k   mean Q     s.d.   slope a   (s.e.)  intercept      R^2  corr(G,lm)
+  8    1.096   0.4917     1.904    0.275     -4.909  0.32850       0.841
+ 12    1.001   0.0800     1.050    0.038     -0.351  0.88440       0.956
+ 16    0.993   0.0251     1.033    0.014     -0.314  0.98179       0.951
+ 18    0.992   0.0142     1.028    0.007     -0.282  0.99521       0.981
+ 20    0.995   0.0067     1.013    0.003     -0.142  0.99903       0.981
+
+===== Table 'cv' (correlations and partials) =====
+  k  corr(CV,lm)  corr(G,lm)  corr(CV,G)  part(G,lm|CV)  part(CV,lm|G)   [Gamma = new]
+  8       -0.874       0.841      -0.926          0.176         -0.466
+ 12       -0.878       0.956      -0.907          0.790         -0.092
+ 16       -0.757       0.951      -0.836          0.887          0.225
+ 18       -0.741       0.981      -0.807          0.967          0.451
+ 20       -0.793       0.981      -0.838          0.952          0.279
+  (old-Gamma column, for comparison)
+  8       -0.874       0.843      -0.927          0.178         -0.461
+ 12       -0.878       0.956      -0.907          0.790         -0.092
+ 16       -0.757       0.951      -0.836          0.887          0.225
+ 18       -0.741       0.981      -0.807          0.967          0.451
+ 20       -0.793       0.981      -0.838          0.952          0.279
+
+===== lm/deg partials at k=20 =====
+  g_old: partial(Gamma, lm/deg | CV) = +0.9986   partial(CV, lm/deg | Gamma) = +0.3062
+  g_new: partial(Gamma, lm/deg | CV) = +0.9986   partial(CV, lm/deg | Gamma) = +0.3062
+
+===== primes: Gamma(P_k) under both definitions =====
+  k          old          new     lm/deg  rand mean new   z(new)
+  8       5.2227       5.3125      5.500         6.2484   -0.754
+ 12       5.3376       5.3477      5.632         7.4321   -1.202
+ 16       5.3483       5.3492      5.426         8.1045   -1.304
+ 18       5.3490       5.3493      5.198         8.2159   -1.087
+ 20       5.3492       5.3493      5.250         8.0915   -1.091

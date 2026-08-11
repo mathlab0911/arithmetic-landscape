@@ -46,6 +46,10 @@
 \newcommand{\ovr}{\mathrm{over}}
 \newcommand{\undr}{\mathrm{under}}
 \newcommand{\Lean}[1]{\texttt{#1}}
+% r120: paper 1 had neither of these while papers 2-4 did, which is the mechanical reason its
+% status notes lived in prose (F56).  Added with the definition change.
+\newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
+\newcommand{\TODO}[1]{\textcolor{red}{[\textbf{TODO} #1]}}
 
 \title{The gap series of an integer sequence:\\
 an arithmetic invariant governing subset-sum landscapes}
@@ -58,16 +62,22 @@ an arithmetic invariant governing subset-sum landscapes}
 \maketitle
 
 \begin{abstract}
-For a finite sequence $A=(a_1,\dots,a_k)$ of positive integers we introduce the
-\emph{gap series} $\Gamma(A)=\sum_{j=1}^{k}a_j2^{-j}\in\mathbb{Q}$, an
-order-sensitive invariant equal to the generating function of $A$ evaluated at
-$x=1/2$. We show that $\Gamma$ governs the combinatorics of subset sums of $A$.
+For a finite set $A$ of odd positive integers with largest element $M$ we
+introduce the \emph{gap series}
+$\Gamma(A)=1+2\sum_{d=1}^{(M-1)/2}2^{-N_A(d)}\in\mathbb{Q}$, where
+$N_A(d)=\#\{a\in A:a\le2d\}$; equivalently, $\Gamma$ is a dyadically weighted
+sum of the gaps of $A$, dominated by the smallest elements. We show that
+$\Gamma$ governs the combinatorics of subset sums of $A$.
 
 Fix a target $n$, give the subsets $S$ of $A$ the energy $E(S)=|\sigma(S)-n|$,
 where $\sigma$ is the sum, and take single-element flips as moves. Let
 $\lm_A(n)$ be the number of strict local minima and $\deg_A(n)$ the number of
 ground states. We prove a classification theorem for local minima; a window
-identity $W_D(A)=\Gamma(A)+(2D+1)2^{-k}$; and an exact stratification of
+identity $W_D(A)=\Gamma(A)+(2D+1-M)2^{-k}$ exhibiting $\Gamma$ as the total
+measure of the windows in which a configuration can be a local minimum; sharp
+bounds $3-2^{1-(M-1)/2}\le\Gamma(A)\le M$, with equality on the left exactly for
+$A=\{1,3,\dots,M\}$ and on the right exactly for $A=\{M\}$; and an exact
+stratification of
 $\lm_A(n)$ in which each stratum is a representation count $r_{B_d}$ of a
 truncated subsequence. If those representation counts are \emph{flat} to within
 a factor $1+\varepsilon$ on an explicit window, then
@@ -124,30 +134,81 @@ local minima, energy landscape, primes, formal verification.
 
 \subsection{The gap series}
 
-Let $A=(a_1,\dots,a_k)$ be a finite sequence of positive integers. Its
-\emph{gap series} is
+Throughout, $A=\{a_1<\dots<a_k\}$ is a finite set of odd positive integers. Write
+$M=a_k$ for its largest element and
 \[
-  \Gamma(A)\;=\;\sum_{j=1}^{k}\frac{a_j}{2^{j}}.
+  N_A(d)\;=\;\#\{i:a_i\le 2d\},\qquad d\ge1,
 \]
+for its counting function: the number of elements at or below $2d$. Since the
+elements are distinct and odd, $N_A(d)\le d$ for every $d$, with equality
+exactly when $A$ contains every odd number below $2d$. This one inequality is
+responsible for most of what follows.
 
-Two elementary remarks fix the character of this quantity.
-
-First, $\Gamma$ is \emph{order-sensitive}. It is not a function of the multiset
-$\{a_1,\dots,a_k\}$: reordering the sequence changes its value. This
-distinguishes $\Gamma$ from the statistics ordinarily attached to a set of
-weights --- mean, variance, coefficient of variation --- all of which are
-order-blind.
-
-Second, writing $a_0=0$ and summing by parts,
+\begin{definition}[gap series]\label{def:gap}
+The \emph{gap series} of $A$ is
 \[
-  \Gamma(A)\;=\;\sum_{j=0}^{k-1}\frac{a_{j+1}-a_j}{2^{j}}\;-\;\frac{a_k}{2^{k}},
+  \Gamma(A)\;=\;1+2\sum_{d=1}^{(M-1)/2}2^{-N_A(d)}\;\in\;\mathbb{Q}.
 \]
-so that for an increasing sequence $\Gamma$ is a dyadically weighted sum of the
-\emph{gaps} of $A$, dominated by the earliest ones. For the odd primes
-$3,5,7,11,\dots$ the small initial gaps --- in particular the twin pairs
-$(3,5)$, $(5,7)$, $(11,13)$, $(17,19)$ --- force $\Gamma$ to be small:
-$\Gamma(3,5,\dots,73)=5609051/1048576\approx5.3492$, against $\approx8.09$ on
-average for a random odd sequence of the same length drawn from the same range.
+\end{definition}
+
+The sum stops at the last index for which the layer $\{a\in A:a>2d\}$ is
+non-empty; beyond it every term is $2^{-k}$ and carries no information about
+$A$. Two rewritings say what the definition is.
+
+\begin{proposition}[gap form]\label{prop:gapform}
+$\displaystyle\Gamma(A)=a_1+\sum_{j=1}^{k-1}(a_{j+1}-a_j)\,2^{-j}.$
+\end{proposition}
+
+\begin{proof}
+$N_A(d)=j$ exactly for $(a_j+1)/2\le d\le(a_{j+1}-1)/2$, which is
+$(a_{j+1}-a_j)/2$ values of $d$, and $N_A(d)=0$ for $d\le(a_1-1)/2$, which is
+$(a_1-1)/2$ values. Collecting equal terms,
+$\Gamma(A)=1+(a_1-1)+\sum_{j=1}^{k-1}(a_{j+1}-a_j)2^{-j}$.
+\end{proof}
+
+\begin{proposition}[enumeration form]\label{prop:enumform}
+$\displaystyle\Gamma(A)=\sum_{j=1}^{k}\frac{a_j}{2^{j}}+\frac{a_k}{2^{k}}.$
+\end{proposition}
+
+\begin{proof}
+Abel summation applied to Proposition~\ref{prop:gapform}.
+\end{proof}
+
+\STATUS{Proposition~\ref{prop:enumform} is Theorem~\ref{thm:window} at
+$D=(M-1)/2$, and is Lean-verified in that form
+(\Lean{windowSeries\_eq\_gapSeries}); Proposition~\ref{prop:gapform} then follows
+from it by the same summation by parts. The bounds of \S\ref{sec:extremal} are
+verified as well.}
+
+Three remarks fix the character of the quantity.
+
+First, \textbf{$\Gamma$ is an invariant of the set.} Definition~\ref{def:gap} never
+mentions an ordering: $N_A$ counts. This is what one wants of a quantity that
+is to describe the subset-sum landscape of $A$, since that landscape depends on
+the multiset alone. It also distinguishes $\Gamma$ from the statistics
+ordinarily attached to a set of weights --- mean, variance, coefficient of
+variation --- not by being order-sensitive, but by being sensitive to
+\emph{where the elements sit} rather than to their spread.
+
+Second, the name is now exact: by Proposition~\ref{prop:gapform}, $\Gamma$ is a
+dyadically weighted sum of the \emph{gaps} of $A$, dominated by the earliest
+ones. For the odd primes $3,5,7,11,\dots$ the small initial gaps --- in
+particular the twin pairs $(3,5)$, $(5,7)$, $(11,13)$, $(17,19)$ --- force
+$\Gamma$ to be small: $\Gamma(3,5,\dots,73)=1402281/262144\approx5.34928$,
+against $\approx8.09$ on average for a random odd sequence of the same length
+drawn from the same range.
+
+Third, by Proposition~\ref{prop:enumform} the enumeration series
+$\sum_ja_j2^{-j}$ --- which does depend on an ordering, and which is how this
+invariant was first written --- agrees with $\Gamma$ up to $a_k2^{-k}$, so the
+two have the same limit along any sequence with $a_k2^{-k}\to0$. The choice
+between them is therefore a choice of finite representative, and
+Definition~\ref{def:gap} is the better one twice over: it is manifestly a set
+invariant, and it is the closer approximant --- for the odd primes at $k=20$ it
+lies $1.04\cdot10^{-5}$ from the limit against $8.01\cdot10^{-5}$ for the
+enumeration form.\footnote{An earlier circulated version of this paper defined
+$\Gamma$ by the enumeration series. The two differ by $a_k2^{-k}$ and have the
+same limit; every asymptotic statement in this series of papers is unaffected.}
 
 The purpose of this paper is to show that this innocuous-looking quantity
 controls a genuinely combinatorial object: the local structure of the
@@ -315,12 +376,14 @@ The closest precursor is Alyahya and Rowe~\cite{AR14}, who observed empirically
 that the number of local optima in the $1$-bit-flip NPP landscape is strongly
 \emph{negatively} correlated with the coefficient of variation $CV$ of the
 weights, and proposed an estimator based on $CV$. Their observation is correct
-and we reproduce it (\S\ref{sec:cv}). But $CV$ is order-blind while $\Gamma$ is
-not, and Theorem~B shows it is $\Gamma$, not $CV$, that equals the window
-measure $W_D$. Partial-correlation analysis on $100$ instances per size confirms
-the theoretical expectation: conditioning on $CV$ leaves the $\Gamma$-correlation
-essentially intact, while conditioning on $\Gamma$ removes almost all of the
-$CV$-correlation. In this precise sense $\Gamma$ subsumes $CV$.
+and we reproduce it (\S\ref{sec:cv}). But $CV$ is a global second moment,
+whereas Theorem~B shows it is $\Gamma$ --- a dyadically weighted sum of gaps,
+dominated by the smallest elements --- that equals the window measure $W_D$.
+The two can be decoupled, and when they are, the landscape follows $\Gamma$:
+pairs of sets with \emph{exactly} equal $CV$ but $\Gamma$ a factor $2.1$ apart
+have $\lm/\deg$ a factor $2.1$ apart, while pairs with exactly equal $\Gamma$
+and $CV$ a factor $1.6$ apart have $\lm/\deg$ within $8\%$
+(Table~\ref{tab:twins}). In this precise sense $\Gamma$ subsumes $CV$.
 
 \subsection{Formal verification}
 
@@ -508,9 +571,15 @@ correct; the present section evaluates it.
 Let $A$ be a non-decreasing sequence of odd positive integers with $a_i\le2D+1$
 for all $i$. Then
 \[
-  W_D(A)\;=\;\Gamma(A)+\frac{2D+1}{2^{k}}.
+  W_D(A)\;=\;\sum_{j=1}^{k}\frac{a_j}{2^{j}}\;+\;\frac{2D+1}{2^{k}}
+        \;=\;\Gamma(A)+\frac{2D+1-a_k}{2^{k}}.
 \]
-\textup{(Lean: \Lean{windowSeries\_eq\_gapSeries}.)}
+In particular $W_D(A)=\Gamma(A)$ at the smallest admissible window,
+$D=(a_k-1)/2$: \emph{the gap series is the window series evaluated at the last
+non-empty layer}, and Definition~\ref{def:gap} is that statement taken as the
+definition. Enlarging $D$ beyond $(a_k-1)/2$ adds empty layers, each
+contributing exactly $2\cdot2^{-k}$, which is the $2D+1-a_k$ above.
+\textup{(Lean: \Lean{windowSeries\_eq\_gapSeries}, in the first form.)}
 \end{theorem}
 
 \begin{proof}
@@ -541,26 +610,131 @@ for an increasing sequence is $D=(a_k-1)/2$, the smallest value for which all
 elements are $\le2D+1$; then $W(A)=\Gamma(A)+a_k2^{-k}$, and for the first
 twenty odd primes the correction is $73/2^{20}\approx6.96\times10^{-5}$.
 
-\subsection{Order matters}\label{sec:order-matters}
+\subsection{Why the enumeration form needs the order}\label{sec:order-matters}
 
-$W_D$ depends only on the multiset underlying $A$, whereas $\Gamma$ depends on
-the order. Theorem~\ref{thm:window} can therefore hold only for one ordering,
-and it is worth exhibiting the failure explicitly.
+Both sides of Theorem~\ref{thm:window} as stated in the second form are
+invariants of the set: $W_D$ counts, and so does $\Gamma$. The
+\emph{enumeration} form $\sum_ja_j2^{-j}$ does not, and the hypothesis that $A$
+be non-decreasing is what the first form of the theorem pays for it. The
+failure is worth exhibiting, because it is also the reason
+Definition~\ref{def:gap} was chosen over the enumeration series.
 
 \begin{example}\label{ex:order}
-Take $A=(5,3)$ and $D=2$. Then $N_A(1)=0$ and $N_A(2)=1$, so
-$W_2(A)=1+2(1+\tfrac12)=4$, while $\Gamma(A)=\tfrac52+\tfrac34=\tfrac{13}4$ and
-$\Gamma(A)+\tfrac{5}{4}=\tfrac92\ne4$. Reordering to $(3,5)$ restores the
-identity: $\Gamma=\tfrac32+\tfrac54=\tfrac{11}4$ and
+Take the sequence $(5,3)$ and $D=2$. The counting function does not see the
+order: $N(1)=0$, $N(2)=1$, so $W_2=1+2(1+\tfrac12)=4$, and the gap series of the
+underlying set $\{3,5\}$ is $\Gamma=1+2(1+\tfrac12)=4$ as well --- here
+$D=(M-1)/2$, so the two agree exactly. The enumeration series does see the
+order: read in the given order it is
+$\tfrac52+\tfrac34=\tfrac{13}4$, and $\tfrac{13}4+\tfrac54=\tfrac92\ne4$; read
+in increasing order it is $\tfrac32+\tfrac54=\tfrac{11}4$, and
 $\tfrac{11}4+\tfrac54=4$. Both computations are \Lean{\#eval}-checked in the
 Lean development.
 \end{example}
 
-We return to this in \S\ref{sec:cv}: it is precisely the order-sensitivity of
-$\Gamma$ that separates it from order-blind statistics such as the coefficient
-of variation, and Example~\ref{ex:order} is the shortest demonstration that no
-order-blind statistic can play the role of $\Gamma$ in
-Theorem~\ref{thm:window}.
+Two consequences. Inside this paper: the sorting hypothesis in
+Theorem~\ref{thm:window} is not removable, so any argument that reaches for the
+enumeration form must carry it. Outside: no order-blind \emph{spread}
+statistic can play the role of $\Gamma$ either, which is the subject of
+\S\ref{sec:cv}. Being an invariant of the set is necessary, and
+Example~\ref{ex:order} shows the enumeration series fails it; \S\ref{sec:cv}
+shows the standard invariants that pass it fail for a different reason.
+
+\section{Extremal values}\label{sec:extremal}
+
+Definition~\ref{def:gap} makes the range of $\Gamma$ visible at once. Fix the
+largest element $M$ and write $D=(M-1)/2$, so that the sum in
+Definition~\ref{def:gap} runs over $1\le d\le D$. Every term $2^{-N_A(d)}$ lies
+between $2^{-d}$ and $1$, the upper bound because $N_A(d)\ge0$ and the lower
+because $N_A(d)\le d$ --- there are only $d$ odd numbers at or below $2d$. The
+two extremes are attained by the two extreme sets.
+
+\begin{theorem}[extremal values]\label{thm:extremal}
+Let $A$ be a finite set of odd positive integers with largest element $M$, and
+put $D=(M-1)/2$. Then
+\[
+  3-2^{\,1-D}\;\le\;\Gamma(A)\;\le\;M .
+\]
+The upper bound is attained if and only if $A=\{M\}$, and the lower bound if and
+only if $A=\{1,3,\dots,M\}$.
+\textup{(Lean: \Lean{windowSeries\_bounds}, \Lean{windowSeries\_eq\_max\_iff},
+\Lean{windowSeries\_min\_iff\_all\_odds}.)}
+\end{theorem}
+
+\begin{proof}
+Since $N_A(d)\ge0$ we have $2^{-N_A(d)}\le1$, so
+$\Gamma(A)\le1+2D=M$; and equality forces $N_A(d)=0$ for every $d\le D$, that
+is, $A$ has no element at or below $2D=M-1$, that is, $A=\{M\}$. Conversely
+$\Gamma(\{M\})=1+2D=M$.
+
+For the lower bound, the odd numbers at or below $2d$ are exactly
+$1,3,\dots,2d-1$, so $N_A(d)\le d$ and $2^{-N_A(d)}\ge2^{-d}$. Summing the
+geometric series,
+\[
+  \Gamma(A)\;\ge\;1+2\sum_{d=1}^{D}2^{-d}\;=\;1+2\bigl(1-2^{-D}\bigr)\;=\;3-2^{\,1-D}.
+\]
+Equality forces $N_A(d)=d$ for every $d\le D$; but $N_A(D)=D$ already suffices,
+since $N_A(D)=D$ says that $A$ contains all $D$ of the odd numbers
+$1,3,\dots,2D-1=M-2$, and then $N_A(d)=d$ holds for every $d\le D$
+automatically. Adjoining $M=\max A$ gives $A\supseteq\{1,3,\dots,M\}$, and $A$
+contains nothing else, being a set of odd numbers bounded by $M$. Conversely
+$N_{\{1,3,\dots,M\}}(d)=d$ for $d\le D$, which gives equality.
+\end{proof}
+
+\begin{remark}
+The lower bound is attained as soon as it is attained in the last layer: a
+single equation, $N_A(D)=D$, pins $A$ completely. Nothing similar is true of
+the upper bound, where all $D$ equations $N_A(d)=0$ are needed --- but they are
+all implied by the last one, $N_A(D)=0$, for the same reason of monotonicity.
+Both extremal characterisations are therefore statements about the top layer
+alone.
+\end{remark}
+
+The mechanism behind the theorem is monotonicity, which is worth isolating,
+since it is what licenses reading $\Gamma$ as a measure of sparsity.
+
+\begin{corollary}[strict monotonicity]\label{cor:monotone}
+Let $A$ be a finite set of odd positive integers with largest element $M$, and
+let $b$ be odd with $b\notin A$ and $b<M$. Then
+\[
+  \Gamma(A\cup\{b\})\;<\;\Gamma(A).
+\]
+\end{corollary}
+
+\begin{proof}
+Adjoining $b$ does not change $M$, so the two sums run over the same range
+$1\le d\le D$. Termwise,
+$N_{A\cup\{b\}}(d)=N_A(d)+\mathbf 1[\,b\le2d\,]\ge N_A(d)$, so every term
+weakly decreases. Since $b$ and $M$ are odd and $b<M$ we have $b\le M-2=2D-1$,
+so the indicator is $1$ at $d=D$ and that term strictly decreases.
+\end{proof}
+
+Thus $\Gamma$ decreases strictly as $A$ fills in, from $M$ at the sparsest set
+$\{M\}$ down to $3-2^{1-D}$ at the densest set $\{1,3,\dots,M\}$; and as
+$M\to\infty$ the lower bound tends to $3$, so
+\[
+  \Gamma(\{1,3,5,\dots\})\;=\;3
+\]
+in the sense that the gap series of the first $D$ odd numbers converges to $3$,
+the odd numbers being the unique minimiser at every finite stage. Against this
+scale, $\Gamma(P_{20})=1402281/262144\approx5.349$ for the first twenty odd
+primes lies near the bottom of the interval $[3-2^{-35},73]$ available to a set
+with $M=73$: on the logarithmic scale of that interval the primes sit at
+$18\%$. This is the sense in which the primes are a \emph{dense} set of weights,
+and the reason their subset-sum landscapes are comparatively smooth.
+
+\begin{remark}[on the two forms]\label{rem:convergence}
+Definition~\ref{def:gap} and the enumeration form
+$\sum_ja_j2^{-j}$ of Proposition~\ref{prop:enumform} differ by $a_k2^{-k}$ and
+converge to the same limit whenever $a_k2^{-k}\to0$, which holds for the primes
+($a_k\sim k\log k$) and for any sequence of subexponential growth. At finite
+$k$ they differ, and Definition~\ref{def:gap} is the closer approximant: for the
+odd primes at $k=20$ the layer form lies $1.04\cdot10^{-5}$ from the limit
+against $8.01\cdot10^{-5}$ for the enumeration form, a factor of $7.7$. The
+reason is visible in Theorem~\ref{thm:window}: the enumeration form is the
+window measure with the whole tail $(2D+1)2^{-k}$ still attached, whereas
+Definition~\ref{def:gap} is the window measure at the last informative layer,
+with the tail removed exactly.
+\end{remark}
 
 \section{Exact stratification}\label{sec:stratification}
 
@@ -860,7 +1034,7 @@ Table~\ref{tab:flatness} gives the primes.
 \small
 \begin{tabular}{rrrrrrrrr}
 \toprule
-$k$ & $\deg$ & $\lm$ & $\lm/\deg$ & $W_D$ &
+$k$ & $\deg$ & $\lm$ & $\lm/\deg$ & $\Gamma$ &
 $\varepsilon_1$ & $\varepsilon_2$ & $\varepsilon_3$ & $\varepsilon_4$\\
 \midrule
 14 & 126 & 628 & 4.9841 & 5.3486 & 0.0328 & 0.3125 & 0.3200 & 0.5833\\
@@ -872,7 +1046,9 @@ $\varepsilon_1$ & $\varepsilon_2$ & $\varepsilon_3$ & $\varepsilon_4$\\
 \bottomrule
 \end{tabular}
 \caption{Exact flatness $\varepsilon_d$ for $A=$ first $k$ odd primes,
-$n=\lfloor T/2\rfloor$.}
+$n=\lfloor T/2\rfloor$. The fifth column is the window measure $W_D$ at the last
+informative layer $D=(a_k-1)/2$, which by Theorem~\ref{thm:window} is exactly
+$\Gamma$.}
 \label{tab:flatness}
 \end{table}
 
@@ -962,7 +1138,7 @@ Table~\ref{tab:Q} and Figure~\ref{fig:convergence} record the behaviour.
 $k$ & mean $Q$ & s.d. & slope $a$ (s.e.) & intercept $b$ & $R^2$ &
 $\mathrm{corr}(\Gamma,\lm)$\\
 \midrule
-8 & 1.112 & 0.498 & 1.907 (0.275) & $-4.757$ & 0.329 & 0.843\\
+8 & 1.096 & 0.492 & 1.904 (0.275) & $-4.909$ & 0.329 & 0.841\\
 12 & 1.002 & 0.080 & 1.050 (0.038) & $-0.342$ & 0.884 & 0.956\\
 16 & 0.993 & 0.025 & 1.033 (0.014) & $-0.313$ & 0.982 & 0.951\\
 18 & 0.992 & 0.014 & 1.028 (0.007) & $-0.281$ & 0.995 & 0.982\\
@@ -1049,7 +1225,7 @@ $\mathrm{corr}(CV,\Gamma)$ &
 $\mathrm{partial}(\Gamma,\lm\mid CV)$ &
 $\mathrm{partial}(CV,\lm\mid\Gamma)$\\
 \midrule
-8 & $-0.874$ & $+0.843$ & $-0.927$ & $+0.178$ & $-0.461$\\
+8 & $-0.874$ & $+0.841$ & $-0.926$ & $+0.176$ & $-0.466$\\
 12 & $-0.878$ & $+0.956$ & $-0.907$ & $+0.790$ & $-0.092$\\
 16 & $-0.757$ & $+0.951$ & $-0.836$ & $+0.887$ & $+0.225$\\
 18 & $-0.741$ & $+0.982$ & $-0.807$ & $+0.967$ & $+0.451$\\
@@ -1072,13 +1248,55 @@ $CV$. We read this as: $CV$ is a proxy for $\Gamma$, useful because the two are
 strongly correlated ($\approx-0.85$) for random sequences, but not the operative
 quantity.
 
-This is what Theorem~\ref{thm:window} predicts. $CV$ is a function of the
-multiset of weights; $\Gamma$ is not. The window measure $W_D$, being a function
-of the multiset, agrees with $\Gamma$ \emph{only for the increasing ordering}
-(Example~\ref{ex:order}). Any order-blind statistic must therefore fail to equal
-$W_D$ in general, and $CV$ can capture $\Gamma$ only to the extent that, for the
-random model in question, order-blind data happen to determine the increasing
-rearrangement's gap series in distribution.
+Correlations on a random model can only ever be suggestive, since the two
+statistics are themselves correlated there ($\approx-0.85$). The clean
+separation is to hold one fixed and vary the other. Both are invariants of the
+set, so this is a question about which \emph{features} of the set each one
+reads: $CV$ is a global second moment, while by Proposition~\ref{prop:gapform}
+$\Gamma$ is a dyadically weighted sum of the gaps, dominated by the bottom of
+the set. The two are therefore decouplable, and Table~\ref{tab:twins} decouples
+them.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{clcccc}
+\toprule
+$k$ & pair & $CV$ ratio & $\Gamma$ ratio & $\lm/\deg$ ratio\\
+\midrule
+12 & $CV$-twins & $1.000000$ & $2.135$ & $2.051$\\
+13 & $CV$-twins & $1.000000$ & $2.070$ & $2.181$\\
+14 & $CV$-twins & $1.000000$ & $2.240$ & $2.325$\\
+\midrule
+12 & $\Gamma$-twins & $1.628$ & $1.000000$ & $1.080$\\
+13 & $\Gamma$-twins & $1.594$ & $1.000000$ & $1.034$\\
+14 & $\Gamma$-twins & $1.600$ & $1.000000$ & $1.047$\\
+\bottomrule
+\end{tabular}
+\caption{Holding one statistic fixed. A \emph{$CV$-twin pair} is two sets of $k$
+odd numbers with the same cardinality, sum and sum of squares --- hence exactly
+the same mean, variance and $CV$; a \emph{$\Gamma$-twin pair} is two sets with
+exactly the same gap series. Each $\lm/\deg$ is a median over the $41$ targets
+$n$ nearest $\sigma(A)/2$, computed by full enumeration of all $2^{k}$
+configurations. When $CV$ is pinned, the landscape moves with $\Gamma$; when
+$\Gamma$ is pinned, a $60\%$ change in $CV$ moves the landscape by at most
+$8\%$.}
+\label{tab:twins}
+\end{table}
+
+The pairs are exact, not approximate: $CV$-twins agree in $CV$ to the last bit
+because they agree in $(k,\sum a_i,\sum a_i^2)$ as integers, and $\Gamma$-twins
+agree in $\Gamma$ as rationals. For the $k=14$ $CV$-twins, for instance,
+$\{1,11,31,\dots,103\}$ and $\{29,31,33,\dots,119\}$ both have
+$CV=0.473014\ldots$, while $\Gamma=14.135$ and $31.658$ and the measured
+$\lm/\deg$ are $13.60$ and $31.63$ --- each within $4\%$ of its own $\Gamma$,
+and a factor $2.3$ apart, on data about which $CV$ says the two sets are
+identical. The $\Gamma$-twin rows are the control that could have failed and
+did not.
+
+This is what Theorem~\ref{thm:window} predicts, and it is the sense in which the
+correlation of \cite{AR14} is real but indirect: $CV$ tracks $\Gamma$ across a
+random model, and only across it.
 
 A concrete illustration: for the primes, $z(CV)$ is
 $+0.85,+1.52,+1.70,+1.51,+1.57$ at $k=8,\dots,20$ --- \emph{positive}, i.e.\ the
@@ -1301,6 +1519,19 @@ $\Gamma_x(A)=\sum_j a_jx^{j}$ evaluated at $x=1-\rho$. Develop the corresponding
 theory, including the large-deviation rate function that governs $\lm/2^{k}$
 away from the centre.
 \end{problem}
+
+\section*{Data availability}
+Every number in this paper is produced by a script that writes a log beside
+itself. In particular \texttt{extremal\_r120} recomputes the constants of
+\S\ref{sec:extremal} as exact rationals and re-tests
+Corollary~\ref{cor:monotone} on $20{,}000$ random sets;
+\texttt{cvtwin\_r120} constructs the twin pairs of Table~\ref{tab:twins} and
+measures their landscapes by full enumeration; and \texttt{resweep\_r120}
+regenerates the $100$-seed instances of \S\ref{sec:experiments} from the
+recorded seeds and recomputes Tables~\ref{tab:Q} and~\ref{tab:cv}, reproducing
+the recorded per-instance values to $5\cdot10^{-7}$ before doing so. The scripts, the logs, the Lean
+development and the checks that enforce all of this are public at
+\url{https://github.com/mathlab0911/arithmetic-landscapes}.
 
 \begin{thebibliography}{XXXX}
 
