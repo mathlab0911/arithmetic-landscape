@@ -53,6 +53,22 @@ Full text of entries already folded in lives in `tools/ledger_archive.md`.
               in front of
 ```
 
+## r120 — where the defect was, versus where the ledger said to look
+
+Written at r121 after fable-5 caught its absence: the lesson was in the report and not here,
+though §7.0 says the entry comes first. The omission is itself the pattern — the entry that
+does not get written is the one whose report section already felt finished.
+
+```
+  claimed   : the risk in Part II was steps 2/4 of prop:deepminor (the tracked debt)
+  actual    : the defect was three lemmas upstream — θ vs θ/2π at the lemma interfaces —
+              in statements carrying no flag at all
+  check     : one variable-convention pass per paper: declare each circle variable once,
+              then verify every lemma is stated and USED on the declared scale
+  rule      : a status ledger biases attention toward known weaknesses; schedule audits
+              of the unflagged interfaces, starting with variable conventions
+```
+
 ## r120 — F61/F62 and the scope lesson repeating within the hour
 
 ```

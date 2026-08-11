@@ -80,5 +80,10 @@ for K, seed in ((12, 21), (13, 22), (14, 23)):
     _, G, (clo, Alo), (chi, Ahi) = best
     assert Gamma(Alo) == Gamma(Ahi)
     rlo, _ = landscape_ratio(Alo); rhi, _ = landscape_ratio(Ahi)
-    print(f"{K:>3} Gamma={float(G):.4f} fixed;  CV {clo:.4f} vs {chi:.4f} "
+    print(f"{K:>3} Gamma={float(G):.4f}={G} fixed;  CV {clo:.4f} vs {chi:.4f} "
           f"(ratio {chi/clo:.3f});  lm/deg {rlo:.3f} vs {rhi:.3f} (ratio {rhi/rlo:.3f})")
+    # r121 (F22): the control instances must be machine-readable too.  The first version
+    # printed the CV-twin sets and only the summary numbers for the Gamma-twins -- so the
+    # pair that could have falsified the claim was the one a reader could not reproduce.
+    print(f"      low  CV: {list(Alo)}")
+    print(f"      high CV: {list(Ahi)}")

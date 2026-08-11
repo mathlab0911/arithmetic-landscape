@@ -31,9 +31,9 @@
 \newcommand{\TODO}[1]{\textcolor{red}{[\textbf{TODO} #1]}}
 \newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
 
-\title{Subset-sum landscapes under deformed and random measures:\\
-the biased invariant $\Gamma^{(q)}$ and unconditional rigidity\\[4pt]
-\normalsize\textsf{(working title)}}
+\title{Arithmetic landscapes III:\\
+deformed measures, random sequences, and the coset identity\\[4pt]
+\normalsize\textsf{(subtitle provisional until the Part-III assembly is complete)}}
 \author{Kentaro Amauchi\thanks{Independent researcher.}}
 \date{\today}
 
@@ -59,7 +59,7 @@ this paper runs on. Replacing the uniform measure by a Bernoulli$(q)$ product me
 series into an explicit family $\Gamma^{(q)}$, and we prove that the fair coin minimises it
 for every sequence, with equality only at $q=\tfrac12$; the argument is termwise and is
 machine-checked in Lean~4. We derive the corresponding transfer function $\Phi^{(q)}$ and
-show that the bias splits paper 3's symmetric pair of strata in the ratio $q:(1-q)$, so that
+show that the bias splits paper 3's~\cite{P3} symmetric pair of strata in the ratio $q:(1-q)$, so that
 the biased landscape responds to a shift of target at first order; the resulting slope is a
 point prediction with no free parameter, and it is confirmed against the natural alternative
 to within $0.4\%$. Replacing the primes by a random odd sequence, we prove that the extremal
@@ -80,7 +80,7 @@ statement of the trilogy is about a specific $A$ under the uniform measure. This
 each of them, one at a time, and the two moves turn out to be worth making for different
 reasons.
 
-\paragraph{Bias.} The classification theorem of paper~1 says which elements lie on which side
+\paragraph{Bias.} The classification theorem of Part~I~\cite{P1} says which elements lie on which side
 of a target. It says nothing about how configurations are weighted, so the entire
 combinatorial layer survives verbatim when the uniform measure is replaced by the
 Bernoulli$(q)$ product measure, and the gap series deforms into an explicit one-parameter
@@ -102,7 +102,7 @@ quantitative equidistribution estimate costs nothing here. Read as physics it is
 step with an exact fixed point; we say so once, in Remark~\ref{rem:renorm}, and deduce nothing
 from the reading.
 
-\paragraph{Randomness.} For a random odd sequence the minor-arc input that cost paper~2 fifty
+\paragraph{Randomness.} For a random odd sequence the minor-arc input that cost Part~II~\cite{P2} fifty
 rounds is replaced by a concentration bound, and \S\ref{sec:random} carries
 \emph{no ineffective constant at all} --- the first such statement in the series. What we did
 not expect is that the random case is also \emph{easier}: the extremal modulus moves from $6$
@@ -110,7 +110,7 @@ to $4$ (Theorem~\ref{thm:modfour}), so the peak height drops from $\sqrt3/2$ to 
 the geometric rate improves in step (Theorem~\ref{prop:rate}). The modulus moves for a
 one-line arithmetic reason --- a set of primes contains at most one element
 $\equiv3\pmod6$, a random odd set contains a third of them --- and the consequence is that
-paper 2's $\sqrt3/2$ is a property of the primes, not a limitation of the method.
+Part~II's $\sqrt3/2$ is a property of the primes, not a limitation of the method.
 \emph{The primes are the hard case.}
 
 \paragraph{A methodological remark that this paper earned twice.} Deformations are not only a
@@ -247,10 +247,10 @@ $q$-tilted centre $n_q=\lfloor qT\rceil$.
 \end{definition}
 
 At $q=\tfrac12$ every bracket is $2\cdot2^{-N_d}$ and $\Gamma^{(1/2)}$ is the window series
-$W_D$ of paper~1, hence $\Gamma(A)+(2D+1)2^{-k}$.
+$W_D$ of Part~I~\cite{P1}, hence $\Gamma(A)+(2D+1)2^{-k}$.
 
 \begin{remark}[why the classification survives the deformation]\label{rem:measurefree}
-Paper~1's classification is measure-free: at error $d$, an overshooting configuration is a
+Part~I's classification is measure-free: at error $d$, an overshooting configuration is a
 strict local minimum exactly when every $a\le2d$ is \emph{excluded}, and an undershooting one
 exactly when every $a\le2d$ is \emph{included}. Under $P_q$ those two events have probability
 $(1-q)^{N_d}$ and $q^{N_d}$, which is Definition~\ref{def:gq}. Writing
@@ -574,7 +574,7 @@ There is one place where the random model is \emph{not} like the primes, and it 
 that matters for the minor arcs. Write
 $h_d(q)=\max_{(r,q)=1}\bigl(\prod_{a\in B_d}|\cos(\pi ra/q)|\bigr)^{1/|B_d|}$.
 Since $|\cos(\pi a/4)|=1/\sqrt2$ for \emph{every} odd $a$, the modulus-$4$ floor
-$h_d(4)=1/\sqrt2$ is deterministic, not merely universal. Paper~2's vanishing lemma kills the
+$h_d(4)=1/\sqrt2$ is deterministic, not merely universal. Part~II~\cite{P2}'s vanishing lemma kills the
 modulus-$2m$ peak ($m$ odd) as soon as $B_d$ contains an element $\equiv3\pmod 6$. A set of
 primes contains exactly one such element, namely $3$, and $3$ leaves $B_d$ at $d\ge2$, so the
 primes keep $h_d(6)=\sqrt3/2$; a random odd sequence contains about $|B_d|/3$ of them and
@@ -584,14 +584,14 @@ $\max_{q\ge3}h_d(q)=1/\sqrt2$ attained at $q=4$, and the primes have $\sqrt3/2$ 
 
 \noindent
 So the random theorem should come out with the geometric rate $1/\sqrt2=0.7071$ per element
-rather than the $\sqrt3/2=0.8660$ of papers 1--2: \emph{the primes are the harder case, and
+rather than the $\sqrt3/2=0.8660$ of Parts~I and~II~\cite{P1,P2}: \emph{the primes are the harder case, and
 the modulus-$6$ ripple is a structural feature of the primes that the random model destroys.}
 
 \subsection{The modulus-4 theorem}\label{sec:modfour}
 
 The observation above is not an accident of the ensemble; it is a theorem about residues, and
-it is the exact counterpart of paper~2's modulus-$6$ theorem for a different equidistribution
-class. Paper~2 averages $|\cos|$ over the \emph{reduced} residues, which is the right class
+it is the exact counterpart of Part~II's modulus-$6$ theorem for a different equidistribution
+class. Part~II averages $|\cos|$ over the \emph{reduced} residues, which is the right class
 for the primes. A random odd sequence is equidistributed over the \emph{odd} residues
 instead, so the relevant quantity is a different one.
 
@@ -694,7 +694,7 @@ branch, and Lemma~\ref{lem:coset} in general, remain proved on paper and checked
 \toprule
  & class of residues & extremal $q$ & rate per element\\
 \midrule
-primes (paper~2) & reduced & $6$ & $\sqrt3/2=0.8660$\\
+primes (Part~II) & reduced & $6$ & $\sqrt3/2=0.8660$\\
 random odd $A$ (here) & odd & $4$ & $1/\sqrt2=0.7071$\\
 \bottomrule
 \end{tabular}
@@ -704,7 +704,7 @@ The two disagree exactly at $q\equiv2\pmod4$: $M(6)=\sqrt3/2$ but
 $M_{\mathrm{odd}}(6)=0$, because $j=3$ is an odd residue mod $6$ and $\cos(\pi/2)=0$. A set
 of primes contains at most one element $\equiv3\pmod 6$, and it leaves $B_d$ at $d\ge2$; a
 random odd sequence contains a positive proportion of them at every $d$. \emph{So the primes
-are the harder case, by a factor $\sqrt{3/2}=1.2247$ in the geometric rate}, and paper~2's
+are the harder case, by a factor $\sqrt{3/2}=1.2247$ in the geometric rate}, and Part~II's
 $\sqrt3/2$ is a feature of the primes rather than a limitation of the method.
 
 Both halves of that comparison are machine-checked. \Lean{abs\_cos\_pi\_mul\_div\_four} gives
@@ -941,7 +941,7 @@ Step~2$'$ are each reduced to a standard estimate --- a Riemann-sum comparison f
 bounded variation, and Abel summation against a monotone weight --- which we state and apply
 in the form we need but do not prove; a referee would be within rights to ask for them in full,
 and doing so would lengthen Step~2$'$ without changing any constant. \emph{No hypothesis is not
-the same as written out in full}, a distinction the companion paper now also makes explicitly
+the same as written out in full}, a distinction Part~II now also makes explicitly
 about its own main theorem, and the two should be read the same way.
 \end{remark}
 
@@ -1106,11 +1106,11 @@ this are public at \url{https://github.com/mathlab0911/arithmetic-landscapes}.
 \bibitem{TenProofs} OpenAI, \emph{Ten advances in mathematics and theoretical computer
 science}, 2026, with Lean~4 certificates at \texttt{github.com/openai/ten-proofs}.
 Cited here only as a precedent for the genre; no mathematical result of that work is used.
-\bibitem{P1} K.~Amauchi, \emph{The gap series of an integer sequence}. Manuscript, 2026.
-\bibitem{P2} K.~Amauchi, \emph{Asymptotic flatness of subset-sum landscapes of primes}.
-Manuscript, 2026.
-\bibitem{P3} K.~Amauchi, \emph{The transfer function of subset-sum landscapes}.
-Manuscript, 2026.
+\bibitem{P1} K.~Amauchi, \emph{Arithmetic landscapes I: the gap series}. Manuscript, 2026.
+\bibitem{P2} K.~Amauchi, \emph{Arithmetic landscapes II: asymptotic flatness of subset-sum
+landscapes of primes}. Manuscript, 2026.
+\bibitem{P3} K.~Amauchi, \emph{The transfer function of subset-sum landscapes}. Manuscript,
+2026. Being absorbed into the present Part; see the note on scope.
 \end{thebibliography}
 
 \end{document}

@@ -1,0 +1,40 @@
+Arithmetic landscapes I, II, III -- and a check that the renaming switched off
+
+The series is named.  Titles for Parts I, II and III; paper 3 keeps its own title
+until it is absorbed.  Of the 90 prose references to a sibling paper, 59 are
+rewritten to "Part N" with a first-use citation per section, and 31 are left as a
+listed residual: 21 point at paper 3, 9 are the collective "papers 1-3", and 1 is
+paper 3's reference to paper 4.  All 31 resist the uniform form for one structural
+reason -- they span the dissolution boundary, and the collective ones stop being
+true of Part III once paper 3 is absorbed, so they need rewriting rather than
+renaming.  xref_r120 re-run: 90 -> 31, matching the list exactly.  Bibliography
+entries retitled; Part II had no sibling entry at all and now has one.  The
+Japanese editions got the same treatment, 50 rewrites and 1 residual, because C13
+reads numbers and would not have seen the divergence.
+
+Changing the README table from "| 1 |" to "| I |" switched off C9's page-count
+check.  The loop keys on the row label and answered a missing row with `continue`,
+so four page counts stopped being verified and the suite still said all checks
+pass.  Third instance today of a check that stopped looking without saying so, and
+the first one caused while holding the lesson.  The lesson is not that the rule is
+easy to forget: `continue` is what you write for a case you have not thought about,
+and it is indistinguishable from a pass.  A missing row now fails by name, and the
+row count goes through expect_subjects.
+
+The paper-3 dissolution mapping table (p3map_r121): all 33 environments, 20 moving
+as content, 8 as calibration material with their ranges, 2 as named open problems,
+2 dropped with supersession notes, and 1 split.  The split is prop:tiltlclt, and
+the script got it wrong twice before it got it right.  It matched the substring
+"proved" without looking for a negative word, and its status extractor used a lazy
+regex that stopped at the first `}` -- which, in a status containing \ref{...}, is
+the reference's own brace.  So it misread the evidence and then guessed on it, and
+produced a plausible table with the hinge row wrong: R1 of prop:tiltlclt is exactly
+the missing ingredient that makes thm:rigid and thm:transfer skeletons.  Mixed
+statuses now refuse to classify and demand a hand entry with a reason; the
+extractor counts braces.
+
+Housekeeping: windowSeries_bounds' docstring claimed a hypothesis the theorem does
+not have; gapSeries in Landscape.lean now records that the canon identifier is the
+enumeration series while the papers' Gamma is the window form; check.py's docstring
+is raw and the SyntaxWarning is gone.  Canon rebuilt and replayed: 8672 jobs
+EXIT 0, negative controls 3/3, closure 16/16, 17 modules PASS in 167.2 s.

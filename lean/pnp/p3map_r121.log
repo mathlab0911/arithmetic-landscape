@@ -1,0 +1,41 @@
+paper3.tex: 33 environments, all accounted for
+  MOVE  20   into Part III as content
+  CALIB  8   into Part III as calibration material, with range
+  OPEN   2   into Part III's "what is missing", as named open problems
+  SPLIT  1   part moves as content, part to "what is missing"
+  DROP   2   dropped, with a supersession note
+
+dest   kind        label               name                                    reason
+MOVE   remark      (unlabelled)        the ratio sees the target only through  exposition attached to material that moves; carries with it
+MOVE   definition  def:slope           local logarithmic slope                 definition; moves with the material that uses it
+MOVE   definition  def:tilt            the tilt                                definition; moves with the material that uses it
+MOVE   lemma       lem:eta             the minor-arc input                     proved/derived; moves as content with that status
+MOVE   lemma       lem:etaa            the two degenerate denominators         proved in place (proof follows the statement); moves as content
+MOVE   lemma       lem:etab            the small-$q$ ring                      proved in place (proof follows the statement); moves as content
+MOVE   lemma       lem:six             the extremiser of the additive estimat  proved in place (proof follows the statement); moves as content
+MOVE   proposition prop:alphalb        the $\alpha=1$ threshold                proved in place (proof follows the statement); moves as content
+MOVE   remark      rem:graveyard       approaches that did not work            exposition attached to material that moves; carries with it
+MOVE   remark      rem:grh             what would make $C_1$ effective         exposition attached to material that moves; carries with it
+MOVE   remark      rem:lam0            $\lambda=0$ recovers Part~I~\cite{P1}   exposition attached to material that moves; carries with it
+MOVE   remark      rem:mushift         the $\mu_d$-shift, and why the layer t  Lean-verified; moves as content with that status
+MOVE   remark      rem:nocover         what part (c) does \emph{not} need      exposition attached to material that moves; carries with it
+MOVE   remark      rem:oneconstant     the single ineffective constant         exposition attached to material that moves; carries with it
+MOVE   remark      rem:random          the primes sit near the random sequenc  exposition attached to material that moves; carries with it
+MOVE   remark      rem:sign            on the sign, and why it took until pap  exposition attached to material that moves; carries with it
+MOVE   remark      rem:signalfraction  why the residual is quoted this way     exposition attached to material that moves; carries with it
+MOVE   remark      rem:weight          each layer is a smaller ensemble        exposition attached to material that moves; carries with it
+MOVE   remark      rem:whereC1         where the ineffectivity is              exposition attached to material that moves; carries with it
+MOVE   remark      rem:whyslope        why the slope and not the offset        exposition attached to material that moves; carries with it
+SPLIT  proposition prop:tiltlclt       tilted LCLT, uniform over the window    R2 and R3 are proved and move as content; R1 is given only to the level of its cumulant budget and is the SAME missing ingredient that thm:rigid and thm:transfer name, so it goes to "what is missing" as one open problem shared by all three
+CALIB  remark      rem:cd              the one factor $\Phi$ omits             experimental; moves as calibration material, with its stated range
+CALIB  remark      rem:closing         why the constants cannot be imported    experimental; moves as calibration material, with its stated range
+CALIB  remark      rem:kapparho        the honest form of the tilt constant    experimental; moves as calibration material, with its stated range
+CALIB  remark      rem:onek            the residual obeys a $1/k$ law          experimental; moves as calibration material, with its stated range
+CALIB  remark      rem:principal       the middle range, and why no constant   experimental; moves as calibration material, with its stated range
+CALIB  remark      rem:sixagain        the same $q=6$, twice                   experimental; moves as calibration material, with its stated range
+CALIB  remark      rem:tiltslope       the tilt and the slope agree to first   experimental; moves as calibration material, with its stated range
+CALIB  remark      rem:whatEk          what the theorem does and does not cla  experimental; moves as calibration material, with its stated range
+OPEN   theorem     thm:rigid           rigidity of the gap series              skeleton; carries into the "what is missing" section as a named open problem, missing ingredient named at the statement
+OPEN   theorem     thm:transfer        transfer                                skeleton; carries into the "what is missing" section as a named open problem, missing ingredient named at the statement
+DROP   lemma       lem:kappa           the bridge                              the multiplicative kappa-transport, refuted at r-graveyard; Part III does not use it and the additive bridge replaces it
+DROP   remark      rem:noKappa         why the bound is additive, and a bound  the record of that refutation; it belongs to the graveyard note, not to Part III as content

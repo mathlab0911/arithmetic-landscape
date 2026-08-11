@@ -109,9 +109,12 @@ theorem le_winCount (hlt : A.Pairwise (· < ·)) {d : Nat}
     _ ≤ ((A.filter (fun a => decide (a ≤ 2 * d))).toFinset).card := Finset.card_le_card hsub
     _ = (A.filter (fun a => decide (a ≤ 2 * d))).length := List.toFinset_card_of_nodup hnd
 
-/-- **極値定理**。相異なる奇数の列 `A` の全要素が `2D+1` 以下なら
+/-- **極値定理**。`A` が相異なる奇数の列であれば、任意の `D` について
     `3 − 2·2^{−D} ≤ windowSeries A D ≤ 1 + 2D`。
-    `D = (max A − 1)/2` と取れば左辺は `3 − 2^{1−D}`、右辺は `max A`。 -/
+    `D = (max A − 1)/2` と取れば左辺は `3 − 2^{1−D}`、右辺は `max A`。
+    r121 訂正: 以前この docstring は「全要素が `2D+1` 以下なら」と書いていたが、
+    定理にその仮定は無い(どちらの評価にも要らない)。**主張が持たない仮定を注記が
+    主張していた**——F35 の縮小版。 -/
 theorem windowSeries_bounds (hlt : A.Pairwise (· < ·)) (hodd : ∀ a ∈ A, a % 2 = 1) (D : Nat) :
     3 - 2 * ((1 : ℚ) / 2) ^ D ≤ windowSeries A D ∧ windowSeries A D ≤ 1 + 2 * D := by
   unfold windowSeries windowSum

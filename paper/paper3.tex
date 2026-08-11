@@ -60,7 +60,7 @@ of the representation count at the target, through an explicit transfer function
 $\Phi(\lambda)=1+\sum_{d\ge1}2^{1-N_d}e^{-\lambda^{2}s_d/8}\cosh(\lambda\delta_d)$
 built from the small elements of $A$ alone; rigidity is the case $\lambda\to0$.
 We prove the analytic ingredients --- an additive bridge carrying the minor-arc estimates of
-the companion paper from the uniform measure to the exponential tilt, the minor-arc input in
+Part~II~\cite{P2} from the uniform measure to the exponential tilt, the minor-arc input in
 the form that bridge needs, and the threshold $\alpha=1$ below which the governing hypothesis
 fails --- and assemble them into a proof skeleton for the two theorems, the remaining gap
 being the Edgeworth constants of a classical local limit computation. The extremal denominator
@@ -72,24 +72,24 @@ with no free parameter, by the profile alone.
 
 \section{Introduction}\label{sec:intro}
 
-Papers~1 and~2 of this series establish that for the odd primes
+Parts~I and~II~\cite{P1,P2} of this series establish that for the odd primes
 $\lm/\deg\to\Gamma$ \emph{at the centre} of the landscape. Whether $\Gamma$ is an invariant of
 the landscape or an accident of its most symmetric point is the question this paper answers,
 and the answer turns out to be stronger than rigidity alone: the whole ratio is a function of
 one local observable. The argument and what each part rests on:
 
 \begin{itemize}
-\item The companion papers establish $\lm/\deg\to\Gamma$ \emph{at the centre}
-      $n=\lfloor T/2\rfloor$: paper~1 reduces it to a flatness hypothesis and paper~2
+\item Parts~I and~II establish $\lm/\deg\to\Gamma$ \emph{at the centre}
+      $n=\lfloor T/2\rfloor$: Part~I reduces it to a flatness hypothesis and Part~II
       discharges that hypothesis unconditionally. The obvious question --- whether $\Gamma$ is
       a property of the landscape or of its centre --- is what this paper answers.
 \item The combinatorial layer (classification, exact stratification, sandwich) was proved
-      \emph{for every target} in paper~1 and is formally verified; nothing there needs redoing.
+      \emph{for every target} in Part~I and is formally verified; nothing there needs redoing.
       \STATUS{Lean-verified}
-\item The minor-arc estimates of paper~2 bound $|G_B(\theta)|$ as a function of $\theta$ only.
+\item The minor-arc estimates of Part~II~\cite{P2} bound $|G_B(\theta)|$ as a function of $\theta$ only.
       They do not refer to the extraction point $m$, which enters
       $r_B(m)=\frac1{2\pi}\int F_B(\theta)e^{-im\theta}d\theta$ only through a phase. They
-      therefore transfer to off-centre targets unchanged. \STATUS{quoted from paper 2}
+      therefore transfer to off-centre targets unchanged. \STATUS{quoted from Part~II}
 \item What is new is the middle, \S\ref{sec:bridge}: an additive bridge
       (Lemma~\ref{lem:kappa}) carrying the minor-arc estimates from the uniform measure to the
       exponential tilt, the minor-arc input in the form the bridge needs
@@ -104,7 +104,7 @@ one local observable. The argument and what each part rests on:
 
 \section{Notation, and what is inherited}\label{sec:notation}
 
-The definitions are those of paper~1, written so that nothing assumes $n=T/2$.
+The definitions are those of Part~I~\cite{P1}, written so that nothing assumes $n=T/2$.
 Fix throughout an increasing sequence $A=(a_1,\dots,a_k)$ of odd positive integers,
 $T=\sigma(A)$, $S_2=\sum a_i^2$, $V=S_2/4$, and a target $n$. Write $\rho=n/T$ and
 $x=\tfrac12-\rho$. For $d\ge1$ put
@@ -258,10 +258,10 @@ statement than rigidity: rigidity says the limit does not move, \eqref{eq:phi} s
 fails to move.
 \end{remark}
 
-\begin{remark}[$\lambda=0$ recovers paper 1]\label{rem:lam0}
+\begin{remark}[$\lambda=0$ recovers Part~I~\cite{P1}]\label{rem:lam0}
 The layer weight $e^{-\lambda^2s_d/8}$ is $1$ at $\lambda=0$, so
 $\Phi(0)=1+\sum_{d\ge1}2^{1-N_d}$, which is the window identity
-$W_D(A)=\Gamma(A)+(2D+1)2^{-k}$ of paper~1 --- already formally verified.
+$W_D(A)=\Gamma(A)+(2D+1)2^{-k}$ of Part~I --- already formally verified.
 Numerically, $\Phi(0)-\Gamma(A)$ is $0$, $-4.7\cdot10^{-14}$ and $-2.7\cdot10^{-15}$ for the
 three sequences of Table~\ref{tab:one}.
 \end{remark}
@@ -401,14 +401,14 @@ law they both sit on. \STATUS{experimentally confirmed, four profiles, $k\le300$
 rate of empirical convergence is evidence about a limit, and the mechanism is still missing.
 \end{remark}
 
-\subsection{The bridge to paper 2}\label{sec:bridge}
+\subsection{The bridge to Part~II}\label{sec:bridge}
 
 Both theorems reduce to the same five parts. \textbf{P1} is the exact combinatorial
-stratification, proved for every target in paper~1 \STATUS{Lean-verified}; \textbf{P3} is a
+stratification, proved for every target in Part~I \STATUS{Lean-verified}; \textbf{P3} is a
 local limit theorem for the tilted ensemble of Definition~\ref{def:tilt}; \textbf{P4} is the
 assembly, in which the odd orders in $\lambda$ cancel by the reflection symmetry
 $\lm(n)=\lm(T-n)$ \STATUS{Lean-verified}; \textbf{P5} is the error budget, which converges
-exactly under~(H). Only \textbf{P2} is new: the minor-arc estimates of paper~2 are proved for
+exactly under~(H). Only \textbf{P2} is new: the minor-arc estimates of Part~II~\cite{P2} are proved for
 the \emph{uniform} measure, and P3 needs them for the tilted one.
 
 Write $\widetilde G_B(\theta)=\prod_{a\in B}\bigl(1-p_a+p_ae(a\theta)\bigr)$ for the tilted
@@ -435,7 +435,7 @@ double-angle formula summed.
 
 \begin{remark}[why the bound is additive, and a bound that is not available]\label{rem:noKappa}
 It is tempting to transfer multiplicatively, as $|\widetilde G_B(\theta)|\le|G_B(\theta)|^{\kappa}$
-with $G_B$ the untilted product, since that would carry every exponent of paper~2 across at
+with $G_B$ the untilted product, since that would carry every exponent of Part~II across at
 once. \textbf{No such $\kappa>0$ exists.} At any $\theta$ with $a\theta\in\tfrac12+\mathbb Z$ for
 some $a\in B$ the untilted factor $\cos(\pi a\theta)$ vanishes, so the right-hand side is $0$,
 while the tilted factor equals $\sqrt{1-t_a}>0$. Equivalently
@@ -447,7 +447,7 @@ Lemma~\ref{lem:kappa} avoids the issue by never dividing by a quantity that vani
 \end{remark}
 
 \begin{lemma}[the minor-arc input]\label{lem:eta}
-\STATUS{(a) proved, Lemma~\ref{lem:etaa}; (b) proved, Lemma~\ref{lem:etab}; (c) quoted from paper 2}
+\STATUS{(a) proved, Lemma~\ref{lem:etaa}; (b) proved, Lemma~\ref{lem:etab}; (c) quoted from Part~II}
 Let $A=P_k$ and $N=a_k$. Then
 \[
   \operatorname{Re}S_A(\theta)\;\le\;\Bigl(\tfrac12+o(1)\Bigr)b
@@ -457,10 +457,10 @@ Let $A=P_k$ and $N=a_k$. Then
 \item[(a)] \emph{$q\in\{1,2\}$.} Lemma~\ref{lem:etaa} below.
 \item[(b)] \emph{$3\le q\le(\log N)^{A_0}$.} Lemma~\ref{lem:etab} below.
 \item[(c)] \emph{$q>(\log N)^{A_0}$.} This is the case $n=1$ of Step 2 of
-  \Xlab{paper2}{prop:deepminor} in paper~2, which gives
+  \Xlab{paper2}{prop:deepminor} in Part~II, which gives
   $|S_A(\theta)|\ll N(\log N)^{3-A_0/2}+N^{4/5}(\log N)^{3}$, i.e.\
   $\operatorname{Re}S_A/b\ll(\log N)^{4-A_0/2}=o(1)$ for $A_0>8$.
-  \STATUS{quoted from paper 2, verbatim}
+  \STATUS{quoted from Part~II, verbatim}
 \end{enumerate}
 \end{lemma}
 
@@ -526,7 +526,7 @@ $\operatorname{Re}S_A(\theta)\le\bigl(|\mu(q)|/\varphi(q)\bigr)b(1+o(1))\le
 The Siegel--Walfisz step in Lemma~\ref{lem:etab} is the only inexplicit estimate in
 \S\ref{sec:bridge} --- Lemmas~\ref{lem:kappa}, \ref{lem:etaa}, \ref{lem:six} and the Vaughan
 quotation in Lemma~\ref{lem:eta}(c) are all effective --- and it is the same constant that
-paper~2 isolates as $C_1$; see Remark~\ref{rem:oneconstant}.
+Part~II isolates as $C_1$; see Remark~\ref{rem:oneconstant}.
 \end{remark}
 
 \begin{remark}[what would make $C_1$ effective]\label{rem:grh}
@@ -558,10 +558,10 @@ profiles. \STATUS{experimentally confirmed; \texttt{gap\_r090}}
 \end{remark}
 
 \begin{remark}[what part (c) does \emph{not} need]\label{rem:nocover}
-Paper~2 must control every harmonic $n\theta$ with $n\le N_0$, and pays for it with a covering
+Part~II must control every harmonic $n\theta$ with $n\le N_0$, and pays for it with a covering
 lemma and the parameter $Q_2=(\log N)^{A_0+A_0'}$. Here only $n=1$ occurs, so the dichotomy in
 Lemma~\ref{lem:eta} is on the single denominator $q_1(\theta)$ and no covering lemma is needed.
-The quotation in (c) is therefore valid on a strictly larger set of $\theta$ than paper~2's
+The quotation in (c) is therefore valid on a strictly larger set of $\theta$ than Part~II's
 type~(ii).
 \end{remark}
 
@@ -578,7 +578,7 @@ and hence $\mu(q)/\varphi(q)\le1/4<1/2$.
 
 \begin{remark}[the same $q=6$, twice]\label{rem:sixagain}
 By Lemma~\ref{lem:eta}(b) the worst point of the additive estimate is therefore $\theta=1/6$,
-with $\operatorname{Re}S_A/b\to\tfrac12=\cos60^\circ$. Paper~2's multiplicative estimate has its
+with $\operatorname{Re}S_A/b\to\tfrac12=\cos60^\circ$. Part~II's multiplicative estimate has its
 worst point at the same $q$: $\sup_qM(q)=M(6)=\sqrt3/2=\cos30^\circ$. \textbf{Same extremiser,
 same cause, two functionals} --- both say that the odd primes lie in $\pm1\pmod6$ and nowhere
 else, read once through $\prod|\cos|$ and once through $\sum\cos$. Measured on the odd primes
@@ -637,7 +637,7 @@ $O(1)$.
 
 Uniformity in $d$: $B_d$ differs from $A$ in $N_d\le N_{D(k)}=(\log k)^{O(1)}$ elements of size
 $\le2D(k)$, so every cumulant shifts by a relative $O(s_{D}/S_2)\to0$ and one $\varepsilon$
-serves all layers. The lattice is of step $1$ and the parity weighting is quoted from paper~2.
+serves all layers. The lattice is of step $1$ and the parity weighting is quoted from Part~II.
 \end{proof}
 
 \begin{remark}[the $\mu_d$-shift, and why the layer term is what it is]\label{rem:mushift}
@@ -894,18 +894,18 @@ admissible range but beyond the reach of computation.
 
 \section{Honest scope}\label{sec:scope}
 
-In the style of paper~1 \S\Xref{paper}{sec:achieved}{7.3} and
-paper~2 \S\Xref{paper2}{sec:remains}{11}, here is what rests on what.
+In the style of Part~I~\cite{P1} \S\Xref{paper}{sec:achieved}{7.3} and
+Part~II~\cite{P2} \S\Xref{paper2}{sec:remains}{11}, here is what rests on what.
 
 \begin{itemize}
-\item \emph{Formally verified}: the combinatorial layer, inherited from paper~1, for every
+\item \emph{Formally verified}: the combinatorial layer, inherited from Part~I, for every
       target.
 \item \emph{Proved}: the bridge of \S\ref{sec:bridge} --- Lemma~\ref{lem:kappa} in full,
-      Lemma~\ref{lem:eta} in all three parts (with (c) quoted verbatim from paper~2's Step~2
+      Lemma~\ref{lem:eta} in all three parts (with (c) quoted verbatim from Part~II's Step~2
       at $n=1$, and the covering apparatus of that paper not needed here, see
       Remark~\ref{rem:nocover}), Lemma~\ref{lem:six}, and Proposition~\ref{prop:alphalb}.
       The minor-arc input is $m$-independent, so it transfers to off-centre targets unchanged;
-      paper~2's ineffectivity through the Siegel--Walfisz constant is inherited at the single
+      Part~II's ineffectivity through the Siegel--Walfisz constant is inherited at the single
       point recorded in Remark~\ref{rem:whereC1}.
 \item \emph{Proof skeleton, with the analytic ingredients in place}:
       Theorems~\ref{thm:rigid} and~\ref{thm:transfer}. Regions R2 and R3 of
@@ -927,19 +927,19 @@ paper~2 \S\Xref{paper2}{sec:remains}{11}, here is what rests on what.
 
 \begin{remark}[the single ineffective constant]\label{rem:oneconstant}
 Precisely: every estimate used here is effective except part~(b) of Lemma~\ref{lem:eta}, whose
-error term is the Siegel--Walfisz error, and paper~2's appendix identifies the same constant
-$C_1$ as the only ineffective one in that paper, entering there at one point as well. Paper~1
+error term is the Siegel--Walfisz error, and Part~II's appendix identifies the same constant
+$C_1$ as the only ineffective one in that paper, entering there at one point as well. Part~I
 is unconditional and effective throughout. \textbf{Ineffective is not conditional}: no
 statement here depends on an unproved hypothesis; what is not available is a numerical
 threshold beyond which the asymptotics take hold.
 \end{remark}
 
 \begin{remark}[approaches that did not work]\label{rem:graveyard}
-As in paper~2 we keep the dead ends, with reasons. \emph{The $\Gamma_x$ family}: the idea that
+As in Part~II we keep the dead ends, with reasons. \emph{The $\Gamma_x$ family}: the idea that
 off-centre targets are described by a family of tilted gap series indexed by $x$. Rejected by
 the data --- rewriting the observed collapse in the exact tilt parameter makes it worse, not
 better. \emph{The multiplicative bridge}: $|\widetilde G_B|\le|G_B|^{\kappa}$, which would have
-carried every exponent of paper~2 across at once. Impossible for the reason in
+carried every exponent of Part~II across at once. Impossible for the reason in
 Remark~\ref{rem:noKappa}, and the underlying inequality runs the other way. \emph{The residual
 as a tilt-versus-slope artefact}: the constants of Remarks~\ref{rem:tiltslope}
 and~\ref{rem:onek} agree to two digits on every profile, but substituting $s$ for $\lambda$
@@ -952,7 +952,7 @@ computation rather than the narrative.
 
 \section*{Data availability}
 Every number in this paper is produced by a script that writes a log beside itself, as in
-papers~1 and~2. The scripts named in the \textsf{[status]} tags ---
+Parts~I and~II~\cite{P1,P2}. The scripts named in the \textsf{[status]} tags ---
 \texttt{table1\_r086}, \texttt{kappa\_r088}, \texttt{tilt\_r088}, \texttt{sres\_r088},
 \texttt{arc\_r088}, \texttt{eta\_r090}, \texttt{gap\_r090}, \texttt{saddle\_r092},
 \texttt{alpha\_r092}, \texttt{t1row\_r094}, \texttt{p3\_r096}, \texttt{phig\_r096},
@@ -961,10 +961,9 @@ and their logs are part of the public artefact, together with the Lean developme
 \url{https://github.com/mathlab0911/arithmetic-landscapes}.
 
 \begin{thebibliography}{9}
-\bibitem{P1} K.~Amauchi, \emph{The gap series of an integer sequence: an arithmetic invariant
-governing subset-sum landscapes}. Manuscript, 2026.
-\bibitem{P2} K.~Amauchi, \emph{Asymptotic flatness of subset-sum landscapes of primes: the
-sub-peak spectrum and the constant $\sqrt3/2$}. Manuscript, 2026.
+\bibitem{P1} K.~Amauchi, \emph{Arithmetic landscapes I: the gap series}. Manuscript, 2026.
+\bibitem{P2} K.~Amauchi, \emph{Arithmetic landscapes II: asymptotic flatness of subset-sum
+landscapes of primes}. Manuscript, 2026.
 \bibitem{GW} R.~Giuliano and M.~Weber, \emph{Approximate local limit theorems with effective
 rate and application to random walks in random scenery}. Bernoulli \textbf{23} (2017),
 3268--3310; arXiv:1412.3980. Cited only for the definition and the applicability condition

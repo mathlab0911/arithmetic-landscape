@@ -37,8 +37,8 @@
 \newcommand{\TODO}[1]{\textcolor{red}{[\textbf{TODO} #1]}}
 \DeclareMathOperator{\Main}{Main}
 
-\title{Asymptotic flatness of subset-sum landscapes of primes:\\
-the sub-peak spectrum and the constant $\sqrt3/2$}
+\title{Arithmetic landscapes II:\\
+asymptotic flatness of subset-sum landscapes of primes}
 \author{Kentaro Amauchi\thanks{Independent researcher.
 \href{mailto:amkn.sub03@gmail.com}{amkn.sub03@gmail.com},
 \url{https://mathlab0911.github.io/}}}
@@ -59,7 +59,7 @@ the sub-peak spectrum and the constant $\sqrt3/2$}
 
 \begin{abstract}
 Let $B$ be a finite set of odd primes and $r_B(m)$ the number of subsets of $B$
-summing to $m$. The companion paper reduces the asymptotic behaviour of the
+summing to $m$. Part~I~\cite{P1} reduces the asymptotic behaviour of the
 subset-sum landscape of $B$ to a single quantity, the \emph{flatness}
 $\varepsilon_d$, which measures the pointwise oscillation of $r_B$ on a bounded
 window. This paper develops the Fourier-side input needed to bound
@@ -77,7 +77,7 @@ $k=18,\dots,76$. Combining these with the deep-minor bound of
 Section~\ref{sec:l5c}, which is proved here, we obtain $\varepsilon_d(k)\to0$
 at a geometric rate of at most $\sqrt3/2$ per element, and hence
 $\mathrm{lm}_P(n)/\deg_P(n)\to\Gamma(P)=5.3492879\ldots$ for the odd primes; this
-answers Problem~\Xref{paper}{prob:flatness}{11.1} of the companion paper.
+answers Problem~\Xref{paper}{prob:flatness}{11.1} of Part~I.
 
 Two things about the status of that theorem, stated here rather than left to be
 discovered. \emph{It carries no hypothesis}: earlier versions assumed the
@@ -105,7 +105,7 @@ $r_B(m)=\#\{S\subseteq B:\sum S=m\}$, $T=\sum B$, and
   \qquad
   r_B(m)=\frac1{2\pi}\int_{0}^{2\pi}F_B(\theta)e^{-im\theta}\,d\theta .
 \]
-The companion paper shows that the ratio of the number of strict local minima to
+Part~I~\cite{P1} shows that the ratio of the number of strict local minima to
 the number of ground states of the subset-sum landscape converges to an explicit
 arithmetic invariant provided the \emph{flatness}
 \[
@@ -141,7 +141,7 @@ two live peaks.
 Section~\ref{sec:l3} derives a second-order formula for the modulus-$6$ ripple,
 with amplitude correction $K_2$ and phase drift $\psi$; Section~\ref{sec:m2}
 treats the main arc and identifies the first correction to the central
-density, resolving an unexplained constant of the companion paper.
+density, resolving an unexplained constant of Part~I.
 Section~\ref{sec:num}
 reports the numerical verification, Section~\ref{sec:l5a} makes the finite list
 of remaining moduli effective, Section~\ref{sec:l5c} treats the deep minor arcs,
@@ -183,7 +183,7 @@ Fontanari~\cite{FF98} compute the fraction of metastable states --- that is,
 $\mathrm{lm}/2^{k}$ --- analytically for uniform random weights; Alyahya and
 Rowe~\cite{AR14} give a formula in terms of the coefficient of variation;
 Stadler, Hordijk and Fontanari~\cite{SHF03} analyse barrier trees. All of these
-average over \emph{random} weights, whereas the companion paper and this one
+average over \emph{random} weights, whereas Part~I and this one
 treat a \emph{specific} sequence and an invariant that reads the positions of its
 elements rather than their spread.
 
@@ -289,7 +289,7 @@ The factor of $F_B$ indexed by $m$ is $1+e^{i\pi}=0$.
 (Lean: \Lean{F\_eq\_zero\_of\_mem} for the product form, \Lean{F\_eq\_zero\_at\_two\_pi\_div}
 for the statement at $\theta=2\pi/q$, \Lean{F\_nat\_eq\_zero\_of\_mem} for integer
 sequences, and \Lean{not\_mem\_of\_F\_ne\_zero} for the contrapositive. The
-special case $q=6$, $m=3$ is \Lean{normSq\_at\_pi} of the companion paper.)
+special case $q=6$, $m=3$ is \Lean{normSq\_at\_pi} of Part~I~\cite{P1}.)
 
 The point of Lemma~\ref{lem:vanish} is its converse for prime sequences: the
 residue class $a\equiv m\pmod{2m}$ consists of odd multiples of $m$, so if $B$
@@ -304,7 +304,7 @@ Let $B_d$ be the set of primes in $(2d,x]$ and $b=|B_d|$. Then:
       $\pm1\pmod 6$ give $|\cos(\pi a/6)|=\sqrt3/2$.
 \item $|G_{B_d}(2\pi/4)|=(1/\sqrt2)^{b}$ \emph{exactly}, for every odd sequence
       whatsoever, since $|\cos(\pi a/4)|=1/\sqrt2$ for all odd $a$. This is the
-      Fourier form of the modulus-$4$ obstruction of the companion paper.
+      Fourier form of the modulus-$4$ obstruction of Part~I.
 \item $|G_{B_d}(2\pi/(2p))|=0$ exactly, for every prime $p$ with $2d<p\le x$.
       The vanishing is \emph{pointwise} and must not be read as the absence of a
       peak: one factor is removed at one point, and the surrounding mass is
@@ -453,7 +453,7 @@ terms, which carry no structural information.
 \section{The main arc and the central density}\label{sec:m2}
 
 The main arc contributes the smooth part of $r_B$. The leading term is the local
-central limit theorem; what matters for the companion paper's absolute formula
+central limit theorem; what matters for Part~I~\cite{P1}'s absolute formula
 is the \emph{first correction} to it.
 
 \begin{proposition}[Central density with first correction]\label{prop:central}
@@ -481,8 +481,8 @@ $\int\theta^{4}e^{-V_0\theta^{2}/2}=3\sqrt{2\pi}V_0^{-5/2}$ gives the stated
 factor $1-\tfrac{S_4}{192}\cdot 3V_0^{-2}=1-\tfrac{S_4}{4S_2^{2}}$.
 \end{proof}
 
-\begin{remark}[The absolute formula of the companion paper]\label{rem:absolute}
-The companion paper predicts the number of strict local minima by
+\begin{remark}[The absolute formula of Part~I]\label{rem:absolute}
+Part~I predicts the number of strict local minima by
 $\mathrm{lm}\approx\Gamma\cdot 2^{b}/\sqrt{2\pi V_0}$, i.e.\ by replacing the
 ground-state count by its Gaussian estimate. The measured ratio of the two sides
 sits systematically below $1$ --- about $0.97$ --- with no explanation offered
@@ -490,7 +490,7 @@ there. Proposition~\ref{prop:central} identifies the deficit as
 $S_4/(4S_2^{2})$, which at $k=20$ equals $0.0246$. Section~\ref{sec:m2num}
 verifies this. We warn against one confusion: the value $0.972$ appearing here
 (the ratio $\mathrm{lm}/\mathrm{pred}$ at $k=20$) is \emph{not} the $0.972$ in
-the companion paper's list of $Q(k)$, which is $Q(18)$. Those are different
+Part~I's list of $Q(k)$, which is $Q(18)$. Those are different
 quantities and the numerical coincidence is accidental: $Q$ is formed with the
 \emph{measured} ground-state count, so it carries no Edgeworth correction, and
 it oscillates about $1$ rather than sitting below it.
@@ -1910,7 +1910,7 @@ $\varepsilon_k\to0$ at a geometric rate.
 \end{problem}
 
 \noindent
-We emphasise one negative result of the companion paper: there is \emph{no}
+We emphasise one negative result of Part~I~\cite{P1}: there is \emph{no}
 window analogue of the modulus-$4$ obstruction. Explicit odd sequences with
 $\varepsilon_2=0$ exist at every size, so no lower bound for $\varepsilon_d$ can
 be extracted from the aggregate residue-class spread. The route to
@@ -2139,10 +2139,10 @@ immaterial. The numerical values of the resulting bound are tabulated in
 Remark~\ref{rem:budget}.
 \end{remark}
 
-\section{Appendix: the companion paper's Problem on random comparison}
+\section{Appendix: Part~I~\cite{P1}'s Problem on random comparison}
 \label{sec:p5}
 
-The companion paper asks whether $\mathrm{lm}_{P_k}/\mathrm{lm}_{R_k}\to0$,
+Part~I asks whether $\mathrm{lm}_{P_k}/\mathrm{lm}_{R_k}\to0$,
 where $P_k$ is the first $k$ odd primes and $R_k$ a random odd sequence of the
 same length drawn from the same range, and reduces this to comparing
 $\Gamma(P_k)$, which converges, with $\mathbb{E}[\Gamma(R_k)]$. The expectation
@@ -2267,6 +2267,11 @@ The scripts, the logs and the Lean development are available at
 \url{https://github.com/mathlab0911/arithmetic-landscapes}.
 
 \begin{thebibliography}{XXXXXX}
+
+\bibitem[P-I]{P1}
+K.~Amauchi,
+\emph{Arithmetic landscapes I: the gap series},
+Manuscript, 2026.
 
 \bibitem[AR14]{AR14}
 K.~Alyahya and J.~E.~Rowe,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""
+r"""
 check.py -- the mechanised half of the failure ledger.
 
 Ledger entries that describe a mechanical, checkable failure belong in the build,
@@ -367,12 +367,24 @@ def c9_readme_counts():
             bad.append('%s: README says %s, repository has %s'
                        % (what, ' / '.join(map(str, said)), ' / '.join(map(str, truth))))
     # page counts in the papers table, best effort -- pdfinfo may not be present
+    # r121: the row labels changed from 1/2/3/4 to the series numbering, and the first version
+    # of this loop answered a missing row with `continue` -- so renaming the table would have
+    # switched the page check off without a word.  A row that cannot be found is now a failure,
+    # and the number of rows checked is counted into the note.
+    ROWS = ((r'I', 'paper'), (r'II', 'paper2'), (r'\(3\)', 'paper3'), (r'III', 'paper4'))
+    rows_seen = 0
     try:
         import subprocess
-        for n, stem in ((1, 'paper'), (2, 'paper2'), (3, 'paper3'), (4, 'paper4')):
+        for n, stem in ROWS:
             pdf = os.path.join(PAPER, stem + '.pdf')
-            row = re.search(r'^\| %d \|.*?\*\*(\d+) pp\.' % n, src, re.M)
-            if not (row and os.path.exists(pdf)):
+            row = re.search(r'^\| %s \|.*?\*\*(\d+) pp\.' % n, src, re.M)
+            if not row:
+                bad.append('the README has no page-count row for %s, so that paper is no '
+                           'longer checked' % stem)
+                continue
+            rows_seen += 1
+            if not os.path.exists(pdf):
+                bad.append('%s.pdf is missing, so its page count cannot be checked' % stem)
                 continue
             out = subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout
             real = re.search(r'^Pages:\s+(\d+)', out, re.M)
@@ -384,7 +396,9 @@ def c9_readme_counts():
     if bad:
         fail('C9/F59', 'the README states counts the repository does not support: '
                        + '; '.join(bad))
-    notes.append('C9/F59  README counts checked against the repository: %d' % len(claims))
+    expect_subjects('C9/F59', rows_seen, 'page-count rows in the README papers table')
+    notes.append('C9/F59  README counts checked against the repository: %d claim(s), '
+                 '%d page-count row(s)' % (len(claims), rows_seen))
 
 
 # ------------------------------------------------------------------ C10 (F39)

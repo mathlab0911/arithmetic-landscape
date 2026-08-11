@@ -11,6 +11,12 @@
       -> CV ratio 1.0000 exactly;  Gamma ratio 2.240;  lm/deg ratio 2.325   (41,41 targets)
 
 === positive control: Gamma-twins (same Gamma, CV free) ===
- 12 Gamma=8.4521 fixed;  CV 0.5724 vs 0.9321 (ratio 1.628);  lm/deg 7.950 vs 8.583 (ratio 1.080)
- 13 Gamma=9.1724 fixed;  CV 0.6006 vs 0.9572 (ratio 1.594);  lm/deg 8.615 vs 8.906 (ratio 1.034)
- 14 Gamma=9.6689 fixed;  CV 0.5256 vs 0.8410 (ratio 1.600);  lm/deg 9.241 vs 9.673 (ratio 1.047)
+ 12 Gamma=8.4521=8655/1024 fixed;  CV 0.5724 vs 0.9321 (ratio 1.628);  lm/deg 7.950 vs 8.583 (ratio 1.080)
+      low  CV: [1, 9, 15, 17, 39, 45, 51, 53, 57, 59, 65, 75]
+      high CV: [5, 7, 13, 15, 19, 25, 27, 35, 47, 103, 117, 119]
+ 13 Gamma=9.1724=18785/2048 fixed;  CV 0.6006 vs 0.9572 (ratio 1.594);  lm/deg 8.615 vs 8.906 (ratio 1.034)
+      low  CV: [1, 3, 21, 31, 47, 53, 55, 75, 83, 85, 91, 93, 115]
+      high CV: [7, 9, 11, 13, 15, 17, 23, 25, 29, 63, 101, 109, 119]
+ 14 Gamma=9.6689=9901/1024 fixed;  CV 0.5256 vs 0.8410 (ratio 1.600);  lm/deg 9.241 vs 9.673 (ratio 1.047)
+      low  CV: [1, 3, 27, 33, 41, 45, 59, 65, 67, 75, 77, 79, 81, 93]
+      high CV: [7, 9, 11, 17, 19, 23, 25, 31, 37, 53, 71, 103, 111, 119]
