@@ -27,6 +27,7 @@ prop:mod6
 prop:representability
 rem:convergence
 rem:no-window-floor
+sec:achieved
 sec:bridge
 sec:classification
 sec:cv

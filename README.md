@@ -1,13 +1,14 @@
 # Arithmetic Landscape Theory
 
-The **gap series** of a finite integer sequence `A = (a₁, …, a_k)` is
+The **gap series** of a finite set `A` of odd positive integers with largest element `M` is
 
 ```
-    Γ(A) = Σ_{j=1..k} a_j · 2^(-j) ∈ ℚ ,
+    Γ(A) = 1 + 2 · Σ_{d=1..(M−1)/2} 2^(−N_A(d)) ∈ ℚ ,     N_A(d) = #{a ∈ A : a ≤ 2d} ,
 ```
 
-the generating function of `A` evaluated at `x = 1/2`. It is order-sensitive, it is read off `A`
-without solving anything, and — this is the point of the programme — it governs the local
+equivalently a dyadically weighted sum of the gaps of `A`, dominated by its smallest elements.
+It is read off `A` without solving anything, it lies between `3 − 2^(1−(M−1)/2)` and `M` with
+both extremes characterised, and — this is the point of the programme — it governs the local
 structure of the subset-sum problem for `A`.
 
 Give the subsets `S ⊆ A` the energy `E(S) = |σ(S) − n|` for a target `n`, with single-element
@@ -65,7 +66,7 @@ level it does. **Work produced this way cannot be trusted on the author's word; 
 checkable, and checkable by someone who does not trust the author.** So every settled theorem
 goes into Lean and is replayed through the kernel by an independent checker that must first
 reject three deliberately poisoned modules; every number quoted in a paper must exist in a
-committed log; every statement must declare its status where it is stated; and twelve mechanical
+committed log; every statement must declare its status where it is stated; and fifteen mechanical
 checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
 every mistake this process has actually made — including the ones a check was built to catch
 only after it had already happened, and the ones where the check itself was the defect.
@@ -99,7 +100,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **119 scripts, 188 logs**, all committed. A number with no log is treated as a number
+itself — **120 scripts, 189 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```
@@ -120,6 +121,9 @@ python3 tools/check.py
 | C10 | every repository link in the papers is the canonical one, and every paper has one |
 | C11 | every named constant is correct at the precision it is printed |
 | C12 | every script the papers cite exists, with its log |
+| C13 | every number in a Japanese edition occurs in its English source |
+| C14 | the retired enumeration form of Γ appears only where paper 1 discusses it |
+| C15 | every reference to a sibling paper's numbered result resolves against that paper |
 
 A check that examined nothing **fails**: silence is good news only if the check spoke.
 

@@ -44,6 +44,16 @@ the sub-peak spectrum and the constant $\sqrt3/2$}
 \url{https://mathlab0911.github.io/}}}
 \date{\today}
 
+% r120: cross-document references, made checkable.
+%   \Xref{<sibling stem>}{<label>}{<number as printed>} -- prints the number
+%   \Xlab{<sibling stem>}{<label>}                      -- prints the label name
+% check.py C15 resolves the label against the sibling's .aux and, for \Xref, requires the
+% printed number to match.  Before this, a reference to another paper's Problem 10.1 was a
+% string nothing could verify -- and inserting one section into paper 1 at r120 silently
+% made it Problem 11.1.
+\newcommand{\Xref}[3]{#3}
+\newcommand{\Xlab}[2]{\textup{\texttt{#2}}}
+
 \begin{document}
 \maketitle
 
@@ -67,7 +77,7 @@ $k=18,\dots,76$. Combining these with the deep-minor bound of
 Section~\ref{sec:l5c}, which is proved here, we obtain $\varepsilon_d(k)\to0$
 at a geometric rate of at most $\sqrt3/2$ per element, and hence
 $\mathrm{lm}_P(n)/\deg_P(n)\to\Gamma(P)=5.3492879\ldots$ for the odd primes; this
-answers Problem 10.1 of the companion paper.
+answers Problem~\Xref{paper}{prob:flatness}{11.1} of the companion paper.
 
 Two things about the status of that theorem, stated here rather than left to be
 discovered. \emph{It carries no hypothesis}: earlier versions assumed the
@@ -174,7 +184,8 @@ $\mathrm{lm}/2^{k}$ --- analytically for uniform random weights; Alyahya and
 Rowe~\cite{AR14} give a formula in terms of the coefficient of variation;
 Stadler, Hordijk and Fontanari~\cite{SHF03} analyse barrier trees. All of these
 average over \emph{random} weights, whereas the companion paper and this one
-treat a \emph{specific} sequence and an order-sensitive invariant.
+treat a \emph{specific} sequence and an invariant that reads the positions of its
+elements rather than their spread.
 
 Finally, the anti-concentration literature (Littlewood--Offord and its inverse
 forms) bounds the \emph{maximum} of $r_B$; what we need is a two-sided bound on

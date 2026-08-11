@@ -53,4 +53,35 @@ Full text of entries already folded in lives in `tools/ledger_archive.md`.
               in front of
 ```
 
+## r120 — F61/F62 and the scope lesson repeating within the hour
+
+```
+  claimed   : C14 written to confine the retired enumeration form of Gamma to paper 1;
+              it passed
+  actual    : it scanned paper/ and paper-ja/, and the README's own headline was still
+              defining Gamma by the enumeration series and calling it order-sensitive.
+              Written by the same hand, in the same hour, immediately after writing the
+              F60 ledger entry about checks scoped to one artefact tree
+  check     : C14 and the C11 ban list now include README.md; every check prints what it
+              looked at; C9 verifies the README's own claim about how many checks exist
+              against the list that actually runs
+  rule      : knowing the rule does not make you apply it.  The scope of a check is chosen
+              while thinking about the RULE, and the artefacts are not in mind at that
+              moment.  So the scope has to be derived from a list of artefacts, not
+              recalled -- and the count has to be printed, so that a missing artefact is
+              visible as a number rather than as an absence
+```
+
+```
+  claimed   : cross-paper references in papers 2-4 were fine; nothing had flagged them
+  actual    : "Problem 10.1 of the companion paper" became 11.1 the moment a section was
+              inserted into paper 1, and "paper 1 §10 and paper 2 §10" had been wrong from
+              the day it was written.  LaTeX cannot resolve a reference into another
+              document, so these are strings, and strings do not fail
+  check     : C15 -- \Xref{stem}{label}{number} and \Xlab{stem}{label}, resolved against
+              the sibling's .aux, with the printed number required to match
+  rule      : a reference that crosses a document boundary loses its checker.  Put the
+              checker back before the boundary is crossed, not after
+```
+
 (previous state: emptied at skill save r118, which folded 6 entries covering r117–r118)

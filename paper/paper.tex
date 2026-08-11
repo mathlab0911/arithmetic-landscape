@@ -58,6 +58,16 @@ an arithmetic invariant governing subset-sum landscapes}
 \url{https://mathlab0911.github.io/}}}
 \date{\today}
 
+% r120: cross-document references, made checkable.
+%   \Xref{<sibling stem>}{<label>}{<number as printed>} -- prints the number
+%   \Xlab{<sibling stem>}{<label>}                      -- prints the label name
+% check.py C15 resolves the label against the sibling's .aux and, for \Xref, requires the
+% printed number to match.  Before this, a reference to another paper's Problem 10.1 was a
+% string nothing could verify -- and inserting one section into paper 1 at r120 silently
+% made it Problem 11.1.
+\newcommand{\Xref}[3]{#3}
+\newcommand{\Xlab}[2]{\textup{\texttt{#2}}}
+
 \begin{document}
 \maketitle
 
@@ -812,7 +822,7 @@ $\undr_A(n,d)=r_{B_d}(n-d-\sigma_d)$.
 $J=\varnothing$ and $J=I_d$ respectively.)}
 \end{corollary}
 
-\subsection{What has been achieved}
+\subsection{What has been achieved}\label{sec:achieved}
 
 Combining the above,
 \[

@@ -1,48 +1,43 @@
-The gap series is now defined by its layers, and a check that had been reading half the papers
+Three checks that read what the other twelve could not see
 
-Paper 1 defined Gamma by the enumeration series sum a_j 2^-j and called it an
-order-sensitive invariant.  It is now defined by the layer form
+C13.  Every check was scoped to paper/.  The Japanese editions had never been read by
+any of them, and the constant erratum corrected in English at r118 was still in
+paper2_ja four times, through two months of green runs.  The new check is narrow --
+a decimal literal printed in a translation must occur in its source, because
+translations restate numbers rather than compute them.  Negative control taken.
+Widening C11 to paper-ja found a fifth literal, exempted in the English and not in the
+Japanese though it is the same sentence; exemptions now cross the language boundary,
+since an exemption is a fact about the number.
 
-    Gamma(A) = 1 + 2 sum_{d=1}^{(M-1)/2} 2^{-N_A(d)},   N_A(d) = #{a in A : a <= 2d},
+C14.  The definition change at r120 left paper 3 defining Gamma by the retired
+enumeration series twice and paper 4 once, with paper 2 and its translation still
+calling it "an order-sensitive invariant" -- which the layer definition makes simply
+false.  Nothing numeric was wrong, so none of the numeric checks could see any of it.
+C14 is a population lock in the spirit of C4's label snapshot: count the sites where
+Gamma appears beside a dyadic sum over the elements and pin the count -- 5 in paper 1,
+5 in its translation, 0 elsewhere -- taken after collapsing whitespace so it does not
+move when a paragraph reflows.
 
-which is the window measure at the last informative layer.  The two differ by
-a_k 2^-k and have the same limit, so every asymptotic statement in papers 2-4 is
-untouched; a footnote records the change for readers of the earlier version.
-The layer form is manifestly an invariant of the set, it is the better finite
-approximant (1.04e-5 from the limit at k=20 against 8.01e-5, a factor 7.7), and
-it puts the range of Gamma in reach:
+And then C14 passed while this README's own headline still defined Gamma by the
+enumeration series and called it order-sensitive.  Same mistake as C13, within the
+hour, immediately after writing the ledger entry about it.  The scope of a check gets
+chosen while thinking about the rule, when the artefacts are not in mind.  So: every
+check now prints what it looked at, and C9 verifies the README's claim about how many
+checks exist against the list that actually runs.
 
-- new section: 3 - 2^{1-(M-1)/2} <= Gamma(A) <= M, with equality on the left
-  exactly for {1,3,...,M} and on the right exactly for {M}, plus strict
-  monotonicity under adjoining an element below the maximum.  Six theorems in
-  Pnp/Theory/Extremal.lean, standard axioms only, inside the import closure and
-  through the kernel replay (17 modules).
+C15.  A reference to another paper's numbered result is a string LaTeX cannot resolve.
+Paper 2 said "answers Problem 10.1 of the companion paper"; inserting the extremal
+section into paper 1 renumbered it to 11.1 and nothing noticed.  Paper 3's "in the
+style of paper 1 S10 and paper 2 S10" had been wrong since it was written -- those are
+the CV section and the main theorem, not the two status ledgers it meant.  The papers
+now write \Xref{stem}{label}{number} and \Xlab{stem}{label}, resolved against the
+sibling's .aux with the printed number required to match.  All nine resolve.
 
-Two consequences that were not planned.
+The consolidation inventory behind C15 is xref_r120: 90 prose references to a sibling
+paper (paper 2: 14, paper 3: 34, paper 4: 42), 6 label references, 3 numeric.  Paper 1
+has none, which is the right shape for the root.  Also recorded and not fixed: papers 3
+and 4 declare bibliography entries P1, P2, P3 that are never cited, because every
+sibling reference is prose.
 
-First, the definition change killed an argument.  Paper 1 explained in three
-places that CV is only a proxy for Gamma because "CV is order-blind and Gamma is
-not".  Under the layer definition Gamma is a set invariant too, so the sentence
-is false.  The honest replacement -- CV is a global second moment, Gamma is
-dominated by the bottom of the set -- is decouplable and therefore testable, so
-it was tested.  Pairs of sets with exactly equal CV (same k, sum, sum of squares)
-and Gamma a factor 2.1-2.2 apart have lm/deg a factor 2.1-2.3 apart; pairs with
-exactly equal Gamma and CV 1.6x apart have lm/deg within 8%.  cvtwin_r120.
-The old argument was safe because it was untestable.
-
-Second, the k=8 experiment rows moved.  The tail a_k 2^-k is 7e-5 at k=20 but 3%
-at k=8, so "negligible" had to be measured rather than asserted.  resweep_r120
-regenerates all 505 instances from the recorded LCG seeds and recomputes; it
-reproduces the recorded values to 5e-7 first.  Only k=8 changed.
-
-C13: every check was scoped to paper/.  The Japanese editions had never been read
-by any of them, and the constant erratum corrected in English at r118 was still
-in paper2_ja four times, through two months of green runs.  The new check is
-narrow -- a decimal literal printed in a translation must occur in its source,
-because translations restate numbers rather than compute them.  Negative control
-taken.  Widening C11 to paper-ja found a fifth literal, exempted in the English
-and not in the Japanese though it is the same sentence; exemptions now cross the
-language boundary, since an exemption is a fact about the number.
-
-README: 15 canon files, 134 theorems, 17 replayed modules, 119 scripts, 188 logs,
-paper 1 at 23 pp.
+README: the headline now states the layer definition and the extremal bounds; the check
+table reaches C15; fifteen checks, and C9 now checks that number too.

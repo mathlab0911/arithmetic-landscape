@@ -37,6 +37,16 @@ the biased invariant $\Gamma^{(q)}$ and unconditional rigidity\\[4pt]
 \author{Kentaro Amauchi\thanks{Independent researcher.}}
 \date{\today}
 
+% r120: cross-document references, made checkable.
+%   \Xref{<sibling stem>}{<label>}{<number as printed>} -- prints the number
+%   \Xlab{<sibling stem>}{<label>}                      -- prints the label name
+% check.py C15 resolves the label against the sibling's .aux and, for \Xref, requires the
+% printed number to match.  Before this, a reference to another paper's Problem 10.1 was a
+% string nothing could verify -- and inserting one section into paper 1 at r120 silently
+% made it Problem 11.1.
+\newcommand{\Xref}[3]{#3}
+\newcommand{\Xlab}[2]{\textup{\texttt{#2}}}
+
 \begin{document}
 \maketitle
 
@@ -417,7 +427,7 @@ there. Splitting the $\cosh$ makes it observable, so we fix it first:
   \;=\;\tfrac14\log\frac{r^{q}_A(n+2)}{r^{q}_A(n-2)}+O(\cdot),
 \]
 positive below the biased centre. This is the convention under which $\lambda\approx s$;
-paper 3's \textup{def:slope} carried the opposite sign and has been corrected, with no
+paper 3's \Xlab{paper3}{def:slope} carried the opposite sign and has been corrected, with no
 numerical consequence there for exactly the reason just given.
 
 \subsection{The derivation}
@@ -427,7 +437,7 @@ $p_a=q e^{-sa}/((1-q)+qe^{-sa})$ and $p_a=q-q(1-q)sa+O(s^2a^2)$. Two consequence
 absent at $q=\tfrac12$:
 \begin{itemize}
 \item the per-element variance is $a^2p_a(1-p_a)=q(1-q)a^2(1+O(sa))$, so the layer weight of
-      paper 3's \textup{rem:mushift} becomes $e^{-\lambda^2q(1-q)s_d/2}$;
+      paper 3's \Xlab{paper3}{rem:mushift} becomes $e^{-\lambda^2q(1-q)s_d/2}$;
 \item removing $I_d$ removes mean $q\sigma_d$, so the two strata no longer sit at $\pm\delta_d$
       about a common centre. They sit at
       \[
@@ -527,7 +537,7 @@ Before the theorem, the floor it has to stand on. Let $A$ be drawn from the Cram
 the odd integers: each odd $m\in[3,N]$ is included independently with probability $2/\log m$,
 and $N$ is fixed by $\mathbb{E}|A|=k$. Nothing is conditioned, so $|A|$ fluctuates from
 instance to instance. That is deliberate: $kR_A(k)$ is the $k$-invariant quantity of paper~3's
-\textup{rem:onek}, so an ensemble of genuinely different sizes tests the $1/k$ law for free.
+\Xlab{paper3}{rem:onek}, so an ensemble of genuinely different sizes tests the $1/k$ law for free.
 Twenty instances at each of two sizes, each through the whole paper-3 pipeline with its own
 $N_d$ and $\sigma_d$:
 
@@ -964,7 +974,7 @@ residual that $c_d$ carries falls like $k^{-2\alpha}$ --- measured exponents $1.
 $2.99$ against predicted $2.00$, ${\approx}2.4$, $3.00$ on the odd numbers, the primes and
 $\alpha=\tfrac32$, with the squares already below the numerical floor. So $\Phi$ as printed
 is right for every larger $k$ and $c_d$ belongs to $E_k$ permanently; paper 3's
-\textup{rem:cd} now says so. \STATUS{experimentally confirmed, four profiles, $k\le300$;
+\Xlab{paper3}{rem:cd} now says so. \STATUS{experimentally confirmed, four profiles, $k\le300$;
 \texttt{e8\_r103}}
 
 \emph{(ii) $c_A=c_A'$ is still open, but sharper.} Carried to $k=300$ the ratio reaches
@@ -1005,7 +1015,8 @@ spectrum and the dynamics; its randomness is in the instance; and its answers ar
 typical instance.
 
 Papers 1--3 do something different in kind: they fix the sequence and compute an
-\emph{arithmetic invariant of that sequence}, $\Gamma(A)=\sum_j a_j2^{-j}$, which the ratio
+\emph{arithmetic invariant of that set}, $\Gamma(A)=1+2\sum_d2^{-\#\{a\in A:\,a\le2d\}}$,
+which the ratio
 $\lm/\deg$ converges to for \emph{every} target. Nothing is averaged over instances, and the
 answer is a number one reads off $A$. The present paper's \S\ref{sec:random} is the one place
 where the two meet --- there the sequence is random --- and even there the question is the
@@ -1028,7 +1039,8 @@ papers 1--3 predict that this number converges to $\Gamma(A)$ --- \emph{computab
 alone, without solving a single instance, and independent of the target}. For the odd numbers
 it is $3$; for the primes, $5.3492\ldots$ Two conditions are attached to that sentence and we
 attach them here rather than leaving them in paper~3: the convergence is a
-\emph{proof skeleton} there, not a theorem (paper~3, Theorem~3.1, whose missing ingredient is
+\emph{proof skeleton} there, not a theorem (paper~3, Theorem~\Xref{paper3}{thm:rigid}{3.1},
+whose missing ingredient is
 named in its own statement), and the uniformity of the terminal distribution is an assumption
 about the search, not a fact about the landscape.
 

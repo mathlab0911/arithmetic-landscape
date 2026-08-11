@@ -36,13 +36,24 @@ rigidity of the gap series off centre}
 \author{Kentaro Amauchi\thanks{Independent researcher.}}
 \date{\today}
 
+% r120: cross-document references, made checkable.
+%   \Xref{<sibling stem>}{<label>}{<number as printed>} -- prints the number
+%   \Xlab{<sibling stem>}{<label>}                      -- prints the label name
+% check.py C15 resolves the label against the sibling's .aux and, for \Xref, requires the
+% printed number to match.  Before this, a reference to another paper's Problem 10.1 was a
+% string nothing could verify -- and inserting one section into paper 1 at r120 silently
+% made it Problem 11.1.
+\newcommand{\Xref}[3]{#3}
+\newcommand{\Xlab}[2]{\textup{\texttt{#2}}}
+
 \begin{document}
 \maketitle
 
 \begin{abstract}
 For a finite set $A$ of odd integers, the number of strict local minima of the subset-sum
 landscape at a target $n$, divided by the number of ground states, is governed at the centre
-$n=\lfloor T/2\rfloor$ by the gap series $\Gamma(A)=\sum_ia_i2^{-i}$. This paper argues that
+$n=\lfloor T/2\rfloor$ by the gap series
+$\Gamma(A)=1+2\sum_{d\ge1}2^{-\#\{a\in A:\,a\le2d\}}$. This paper argues that
 this is a property of the landscape rather than of its centre, and in a sharper form: that the
 ratio is a universal functional of a single local observable, the logarithmic slope $\lambda$
 of the representation count at the target, through an explicit transfer function
@@ -177,7 +188,7 @@ under hypothesis~\textup{(H)} of \S\ref{sec:counterexample}.
 \end{theorem}
 
 \noindent
-$\Gamma(A)=\sum_i a_i2^{-i}$ is therefore an invariant of the landscape and not of its centre.
+$\Gamma(A)$ is therefore an invariant of the landscape and not of its centre.
 Theorem~\ref{thm:rigid} is the case $\lambda\to0$ of Theorem~\ref{thm:transfer}: at fixed $\rho$
 one has $\lambda(n)\asymp x/N\to0$, and $\Phi$ is continuous at $0$ with $\Phi(0)=\Gamma$, so
 \[
@@ -446,7 +457,7 @@ Let $A=P_k$ and $N=a_k$. Then
 \item[(a)] \emph{$q\in\{1,2\}$.} Lemma~\ref{lem:etaa} below.
 \item[(b)] \emph{$3\le q\le(\log N)^{A_0}$.} Lemma~\ref{lem:etab} below.
 \item[(c)] \emph{$q>(\log N)^{A_0}$.} This is the case $n=1$ of Step 2 of
-  \textup{prop:deepminor} in paper~2, which gives
+  \Xlab{paper2}{prop:deepminor} in paper~2, which gives
   $|S_A(\theta)|\ll N(\log N)^{3-A_0/2}+N^{4/5}(\log N)^{3}$, i.e.\
   $\operatorname{Re}S_A/b\ll(\log N)^{4-A_0/2}=o(1)$ for $A_0>8$.
   \STATUS{quoted from paper 2, verbatim}
@@ -883,7 +894,8 @@ admissible range but beyond the reach of computation.
 
 \section{Honest scope}\label{sec:scope}
 
-In the style of paper~1 \S10 and paper~2 \S10, here is what rests on what.
+In the style of paper~1 \S\Xref{paper}{sec:achieved}{7.3} and
+paper~2 \S\Xref{paper2}{sec:remains}{11}, here is what rests on what.
 
 \begin{itemize}
 \item \emph{Formally verified}: the combinatorial layer, inherited from paper~1, for every

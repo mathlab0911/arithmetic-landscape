@@ -17,6 +17,14 @@ not only in the ledger.  Each check below names the ledger entry it enforces.
   C10 F39  every repository link in the papers is the canonical one, and each paper has one
   C11 F18  every named constant is correct at the precision it is printed
   C12 F20  every script the papers cite exists, with its log
+  C13 F60  every number in a Japanese edition occurs in its English source
+  C14 F61  the retired enumeration form of Gamma appears only where paper 1 discusses it
+  C15 F62  every reference to a sibling paper's numbered result resolves against that paper
+
+The scope of a check is part of its claim.  C1-C12 were all written against paper/ and read
+nothing else; the Japanese editions carried a corrected erratum for two months underneath a
+green run, and the README's own headline outlived the definition it described by an afternoon.
+Each check below says what it looked at, and prints the count.
 
 A check that examined nothing FAILS (`expect_subjects`): silence is only good news if the
 check spoke.  Two checks in one afternoon reported a clean bill of health over an empty set.
@@ -328,12 +336,31 @@ def c9_readme_counts():
          'canon files / theorems'),
         (r'lean4checker\W{0,3},\s*\*{0,2}(\d+) modules', (len(closure),), 'replayed modules'),
         (r'\*\*(\d+) scripts, (\d+) logs\*\*', (n_py, n_log), 'scripts / logs'),
+        # r120: the README said "twelve mechanical checks" while fourteen were running, for
+        # the same reason the check table had stopped at C9 at r118 -- a count in prose is
+        # the first thing to go stale.  CHECKS is the list actually run, below.
+        (r'(?:and )?(\w+) mechanical\s*\n?checks enforce', (None,), 'mechanical checks'),
+        (r'\| (C\d+) \| every reference to a sibling', (None,), 'check table reaches C15'),
     ]
+    WORDS = {'ten': 10, 'eleven': 11, 'twelve': 12, 'thirteen': 13, 'fourteen': 14,
+             'fifteen': 15, 'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19,
+             'twenty': 20}
     bad = []
     for pat, truth, what in claims:
         m = re.search(pat, src)
         if not m:
             bad.append('%s: the README no longer states this, so it cannot be checked' % what)
+            continue
+        if what == 'mechanical checks':
+            said_n = WORDS.get(m.group(1).lower())
+            if said_n is None:
+                bad.append('mechanical checks: the README writes %r, which is not a number '
+                           'this check knows' % m.group(1))
+            elif said_n != len(CHECKS):
+                bad.append('mechanical checks: README says %d, %d are run'
+                           % (said_n, len(CHECKS)))
+            continue
+        if what == 'check table reaches C15':
             continue
         said = tuple(int(g) for g in m.groups())
         if said != truth:
@@ -458,6 +485,16 @@ C11_BANNED = {
                'Gamma(P); the limit is 5.3492879..., and Gamma(P_20) itself is now '
                '5.3492774... under the layer definition.  It survived in paper2_ja until '
                'r120 because no check read the Japanese editions (C13).',
+    # Not numbers, but the same mechanism: a string that had one correct reading and no
+    # longer has any.  Under the layer definition Gamma is an invariant of the set, so
+    # calling it order-sensitive is simply false.  Paper 2 and its translation still said
+    # it at r120; the formula cases are C14's job.
+    'order-sensitive invariant':
+        'retired at r120 -- under the layer definition Gamma does not depend on an '
+        'ordering.  Paper 1 may call the ENUMERATION FORM order-dependent; that is a '
+        'different sentence and does not use this phrase.',
+    '順序に敏感な不変量':
+        'the same phrase in the Japanese editions, retired at r120 for the same reason.',
 }
 
 # Literals that pass close to a constant by coincidence and are NOT that constant.  Each needs
@@ -473,11 +510,12 @@ C11_EXEMPT = {
 def c11_constants():
     from decimal import Decimal, getcontext
     getcontext().prec = 40
-    bad, checked, exempt, banned_seen = [], 0, 0, 0
+    bad, banned, checked, exempt = [], [], 0, 0
     scan = [(PAPER, f) for f in sorted(os.listdir(PAPER)) if f.endswith('.tex')]
     ja = os.path.join(ROOT, 'paper-ja')
     if os.path.isdir(ja):
         scan += [(ja, f) for f in sorted(os.listdir(ja)) if f.endswith('.tex')]
+    scan.append((ROOT, 'README.md'))   # r120: the README is prose about the papers too
     for where, tex in scan:
         for ln, line in enumerate(open(os.path.join(where, tex), encoding='utf-8',
                                        errors='replace'), 1):
@@ -485,8 +523,7 @@ def c11_constants():
                 continue
             for lit, why in C11_BANNED.items():
                 for m in re.finditer(r'(?<![\d.])' + re.escape(lit) + r'(?![\d])', line):
-                    banned_seen += 1
-                    bad.append('%s:%d prints the banned literal %s -- %s' % (tex, ln, lit, why))
+                    banned.append('%s:%d prints %r, retired: %s' % (tex, ln, lit, why))
             for m in re.finditer(r'(?<![\d.])\d+\.\d{4,}', line):
                 lit = m.group(0)
                 dp = len(lit.split('.')[1])
@@ -512,6 +549,8 @@ def c11_constants():
                         bad.append('%s:%d %s is neither the truncation (%s) nor the rounding '
                                    '(%s) of %s = %s...'
                                    % (tex, ln, lit, trunc, rnd, what, truth[:dp + 4]))
+    if banned:
+        fail('C11/F18', 'retired literal(s) still in the papers: ' + '; '.join(banned))
     if bad:
         fail('C11/F18', 'constant(s) quoted at a precision they do not have: ' + '; '.join(bad))
     expect_subjects('C11/F18', checked, 'constant occurrences')
@@ -600,10 +639,133 @@ def c13_translation_drift():
                     if absent else ''))
 
 
+# ------------------------------------------------------------------ C14 (F61)
+# The enumeration form of Gamma is paper 1's private business.
+#
+# r120 replaced the definition of Gamma with the layer form.  The old enumeration series
+# sum a_j 2^-j survives in paper 1 on purpose -- as Proposition (enumeration form), as the
+# object of the transition footnote, and in the discussion of why the layer form is the
+# better finite representative.  Everywhere else it is retired.  Three sibling papers were
+# still *defining* Gamma by it (paper3 twice, paper4 once) and two more were calling it
+# order-sensitive in prose; none of the twelve numeric checks could see any of that,
+# because nothing numeric was wrong.
+#
+# So this is a population lock, in the spirit of C4's label snapshot: count the places where
+# Gamma appears next to a dyadic sum over the elements, and pin the count.  A new site
+# anywhere fails until a human looks at it and either fixes it or raises the number with a
+# reason.  The count is taken after stripping comments and collapsing whitespace, so it does
+# not move when a paragraph reflows.
+#
+# What it cannot see: a restatement that spells the sum differently enough to miss the
+# pattern, and a definition restated in words rather than symbols.  The prose cases found at
+# r120 ("order-sensitive invariant", the same in Japanese) are in C11_BANNED instead, where
+# a literal string can be retired outright.
+ENUMFORM_SITES = {
+    'paper.tex': 5,      # prop:enumform; "up to a_k 2^-k"; the footnote; thm:window's second
+    'paper1_ja.tex': 5,  # form; and the enumeration form in the order-matters subsection
+}
+
+def c14_enumeration_form():
+    # r120, second pass: the first version scanned paper/ and paper-ja/ and passed, while the
+    # README's own headline still defined Gamma by the enumeration series and called it
+    # order-sensitive.  Same lesson as C13 within the hour -- the scope is part of the claim.
+    pat = re.compile(r'(?:\\Gamma|\u0393).{0,90}?'
+                     r'(?:a_[ijk] ?2\^\{-|\\frac\{a_[ijk]\}\{2|a_j . 2\^\(-j\))')
+    dirs = [PAPER] + ([PAPER_JA] if os.path.isdir(PAPER_JA) else [])
+    bad, looked = [], 0
+    files = [(w, f) for w in dirs for f in sorted(os.listdir(w)) if f.endswith('.tex')]
+    files.append((ROOT, 'README.md'))
+    for where, tex in files:
+        if True:
+            src = open(os.path.join(where, tex), encoding='utf-8', errors='replace').read()
+            src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
+            n = len(pat.findall(re.sub(r'\s+', ' ', src)))
+            looked += 1
+            want = ENUMFORM_SITES.get(tex, 0)
+            if n != want:
+                bad.append('%s writes the enumeration form of Gamma %d time(s), expected %d'
+                           % (tex, n, want))
+    if bad:
+        fail('C14/F61', 'the retired enumeration form of Gamma has moved: ' + '; '.join(bad)
+                        + '  -- if intended, update ENUMFORM_SITES in tools/check.py with '
+                          'the reason')
+    expect_subjects('C14/F61', looked, 'papers scanned for the enumeration form')
+    notes.append('C14/F61 enumeration form of Gamma confined to paper 1: %d paper(s) scanned, '
+                 '%d permitted site(s)' % (looked, sum(ENUMFORM_SITES.values())))
+
+
+# ------------------------------------------------------------------ C15 (F62)
+# A reference to another paper's numbered result is a string LaTeX cannot resolve.
+#
+# Found by building the consolidation inventory at r120.  Paper 2 said "answers Problem 10.1
+# of the companion paper".  Inserting the extremal section into paper 1 the same afternoon
+# renumbered it to 11.1, and nothing noticed, because a cross-document reference is just
+# text.  A third one -- paper 3 pointing at "paper 1 S10 and paper 2 S10" -- had been wrong
+# since it was written: those numbers are the CV section and the main theorem, not the two
+# status ledgers it meant.
+#
+# The papers now write \Xref{<stem>}{<label>}{<number>} and \Xlab{<stem>}{<label>}, and this
+# resolves both against the sibling's .aux.  \Xref additionally requires the printed number
+# to be what the sibling currently prints, so renumbering fails here instead of in a reader's
+# hands.
+#
+# Precondition: the .aux files must exist, i.e. the papers must have been built.  That is not
+# a weakness to route around -- C9 already reads the PDFs, and a check run against unbuilt
+# papers is checking a guess.  If an .aux is missing this fails and says to build.
+def c15_cross_document():
+    xref = re.compile(r'\\Xref\{([^}]+)\}\{([^}]+)\}\{([^}]+)\}')
+    xlab = re.compile(r'\\Xlab\{([^}]+)\}\{([^}]+)\}')
+    newlabel = re.compile(r'\\newlabel\{([^}]+)\}\{\{([^}]*)\}')
+    aux_cache = {}
+
+    def numbers(stem):
+        if stem not in aux_cache:
+            path = os.path.join(PAPER, stem + '.aux')
+            if not os.path.exists(path):
+                aux_cache[stem] = None
+            else:
+                src = open(path, encoding='utf-8', errors='replace').read()
+                aux_cache[stem] = {m.group(1): m.group(2) for m in newlabel.finditer(src)}
+        return aux_cache[stem]
+
+    bad, checked = [], 0
+    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
+        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
+        for stem, label, printed in xref.findall(src):
+            checked += 1
+            nums = numbers(stem)
+            if nums is None:
+                bad.append('%s points into %s.aux, which does not exist -- build the papers '
+                           '(pdflatex x3) before running this check' % (tex, stem))
+            elif label not in nums:
+                bad.append('%s references %s of %s, which has no such label'
+                           % (tex, label, stem))
+            elif nums[label] != printed:
+                bad.append('%s prints %s for %s of %s, which is now %s'
+                           % (tex, printed, label, stem, nums[label]))
+        for stem, label in xlab.findall(src):
+            checked += 1
+            nums = numbers(stem)
+            if nums is None:
+                bad.append('%s points into %s.aux, which does not exist -- build the papers '
+                           'first' % (tex, stem))
+            elif label not in nums:
+                bad.append('%s names %s of %s, which has no such label' % (tex, label, stem))
+    if bad:
+        fail('C15/F62', 'cross-document reference(s) that do not resolve: ' + '; '.join(bad))
+    expect_subjects('C15/F62', checked, 'cross-document references')
+    notes.append('C15/F62 cross-document references resolved against the sibling papers: %d'
+                 % checked)
+
+
+CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
+          c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
+          c11_constants, c12_cited_scripts, c13_translation_drift,
+          c14_enumeration_form, c15_cross_document)
+
 if __name__ == '__main__':
-    for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
-               c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
-               c11_constants, c12_cited_scripts, c13_translation_drift):
+    for fn in CHECKS:
         fn()
     for n in notes:
         print('  ok   ' + n)
