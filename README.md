@@ -65,10 +65,10 @@ level it does. **Work produced this way cannot be trusted on the author's word; 
 checkable, and checkable by someone who does not trust the author.** So every settled theorem
 goes into Lean and is replayed through the kernel by an independent checker that must first
 reject three deliberately poisoned modules; every number quoted in a paper must exist in a
-committed log; every statement must declare its status where it is stated; and ten mechanical
+committed log; every statement must declare its status where it is stated; and twelve mechanical
 checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
 every mistake this process has actually made — including the ones a check was built to catch
-only after it had already happened.
+only after it had already happened, and the ones where the check itself was the defect.
 
 ## The formal development
 
@@ -99,7 +99,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **115 scripts, 182 logs**, all committed. A number with no log is treated as a number
+itself — **116 scripts, 183 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```
@@ -117,6 +117,11 @@ python3 tools/check.py
 | C7 | every Lean name the papers cite exists in the canon |
 | C8 | every theorem, proposition, lemma and corollary declares its status at the statement |
 | C9 | every count stated in this README matches the repository |
+| C10 | every repository link in the papers is the canonical one, and every paper has one |
+| C11 | every named constant is correct at the precision it is printed |
+| C12 | every script the papers cite exists, with its log |
+
+A check that examined nothing **fails**: silence is good news only if the check spoke.
 
 Papers are built with `pdflatex` (`paper/Makefile`). The Lean development builds with `lake build`.
 
