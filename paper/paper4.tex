@@ -51,13 +51,31 @@ deformed measures, random sequences, and the coset identity\\[4pt]
 \maketitle
 
 \begin{abstract}
-Parts~I and~II~\cite{P1,P2} and the transfer-function strand of the present Part fixed both the sequence and the measure on its subsets. Here we
-move each. Along the way the per-element energy $-\log|\cos\pi t|$ turns out to satisfy an exact
-coarse-graining identity: its average over a coset of index $v$ is the same function at $v$ times
-the frequency, plus $(1-1/v)\log2$. We prove it twice, and it is what the minor-arc argument of
-this paper runs on. Replacing the uniform measure by a Bernoulli$(q)$ product measure deforms the gap
-series into an explicit family $\Gamma^{(q)}$, and we prove that the fair coin minimises it
-for every sequence, with equality only at $q=\tfrac12$; the argument is termwise and is
+For a finite set $A$ of odd positive integers write
+$F_A(z)=\prod_{a\in A}(1+z^{a})$ for the generating polynomial of the subset
+sums, so that $r_A(n)=\#\{S\subseteq A:\sigma(S)=n\}$ is its $n$-th coefficient.
+Everything below concerns $|F_A|$ on the unit circle, where
+$|F_A(e^{i\theta})|=2^{|A|}\prod_{a\in A}|\cos(a\theta/2)|$, and the per-element
+quantity $X(t)=-\log|\cos\pi t|$ that governs it.
+
+Our first result is an identity for $X$ alone, elementary and exact:
+\[
+  \frac1v\sum_{k=0}^{v-1}X\!\Bigl(t+\frac kv\Bigr)
+  \;=\;\Bigl(1-\frac1v\Bigr)\log2\;+\;\frac1v\,X(vt+\tau_v)
+  \qquad\text{for every }v\ge1\text{ and every }t,
+\]
+with $\tau_v\in\{0,\tfrac12\}$ explicit. Averaging $X$ over a coset of index $v$
+returns the same function at $v$ times the frequency, plus a constant. We prove
+it twice, by the multiplication formula and by Fourier, and it is what the
+minor-arc argument of this Part runs on: the step that normally costs a
+quantitative equidistribution estimate costs nothing.
+
+Parts~I and~II~\cite{P1,P2}, and the first half of this Part, fix two things at
+once --- the set $A$, and the uniform measure on its subsets. The rest of this
+Part moves each. Replacing the uniform measure by a Bernoulli$(q)$ product
+measure deforms the gap series of Part~I into an explicit family
+$\Gamma^{(q)}$, and we prove that the fair coin minimises it for every set,
+with equality only at $q=\tfrac12$; the argument is termwise and is
 machine-checked in Lean~4. We derive the corresponding transfer function $\Phi^{(q)}$ and
 show that the bias splits the transfer-function strand's~\cite{P3} symmetric pair of strata in the ratio $q:(1-q)$, so that
 the biased landscape responds to a shift of target at first order; the resulting slope is a

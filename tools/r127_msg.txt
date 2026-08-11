@@ -1,0 +1,39 @@
+Doors for Parts II and III, and the disclosure in both editions
+
+Part II already opened well -- "Let B be a finite set of odd primes and r_B(m)
+the number of subsets summing to m" is the right first sentence.  Its second
+sentence was not: it reduced the question to "the flatness of the subset-sum
+landscape", two coinages in one clause, one of them unglossed.  It now says what
+the quantity is, in the objects already on the table: the relative oscillation
+of a representation count over a bounded window of targets, displayed.
+
+Part III opened with "Parts I and II and the transfer-function strand fixed both
+the sequence and the measure on its subsets", which is meaningless to a reader
+who has not read them, followed by the per-element energy, coarse-graining, the
+gap series, the transfer function and the strata -- six coined terms before any
+recognisable object.  It now opens with the generating polynomial
+F_A(z) = prod (1 + z^a), notes that its n-th coefficient is r_A(n), and states
+the coset identity for X(t) = -log|cos pi t| as the first result:
+
+    (1/v) sum_{k<v} X(t + k/v) = (1 - 1/v) log 2 + (1/v) X(vt + tau_v),
+
+tau_v = 0 for v odd and 1/2 for v even.  That is elementary, exact, checkable in
+a line, and it is the one result here that reaches outside the programme; it
+belongs first.  Verified numerically on 20 000 random (v, t) to 1e-9, and it is
+the identity already proved twice in the text and formalised in Lean.
+
+The programme's own framing -- fixing the set and then moving the measure --
+follows the identity instead of preceding it.
+
+One symbol slip caught in passing: in rewriting Part II's abstract I introduced
+L_P(n) for the weighted sum of representation counts, which is exactly the
+mistake repaired an hour earlier by removing deg_A(n) -- a second symbol for an
+object that already had one.  Reverted to lm_P(n) with a gloss.
+
+The AI disclosure is now in the three Japanese editions as well, and C16 scans
+both trees.  Writing that check for paper/ only would have been the same scope
+mistake in the same hour, for the fifth time.  The shared preamble is excluded by
+name, with the reason: an include is not a paper and has no reader of its own.
+
+Papers 24/34/14/31 pp, Japanese editions 23/32/14, all EXIT 0 with zero undefined
+references; check.py C1-C16 pass.

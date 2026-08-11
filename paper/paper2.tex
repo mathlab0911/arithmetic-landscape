@@ -58,11 +58,16 @@ asymptotic flatness of subset-sum landscapes of primes}
 \maketitle
 
 \begin{abstract}
-Let $B$ be a finite set of odd primes and $r_B(m)$ the number of subsets of $B$
-summing to $m$. Part~I~\cite{P1} reduces the asymptotic behaviour of the
-subset-sum landscape of $B$ to a single quantity, the \emph{flatness}
-$\varepsilon_d$, which measures the pointwise oscillation of $r_B$ on a bounded
-window. This paper develops the Fourier-side input needed to bound
+Let $B$ be a finite set of odd primes and $r_B(m)=\#\{S\subseteq B:\sigma(S)=m\}$
+the number of subsets of $B$ summing to $m$. Part~I~\cite{P1} shows that a
+certain weighted sum of the $r_{B_d}$ over the truncations $B_d=\{a\in B:a>2d\}$,
+divided by $r_B(n)$, converges to a quantity read off $B$ by counting --- and
+that the whole question reduces to one number, the relative oscillation
+\[
+  \varepsilon_d=\max\Bigl|\frac{r_{B_d}(m)}{r_{B_d}(m')}-1\Bigr|
+\]
+of a representation count over a bounded window of targets $m,m'$. This paper
+bounds $\varepsilon_d$ for the primes. This paper develops the Fourier-side input needed to bound
 $\varepsilon_d$: we determine the complete spectrum of sub-peaks of the
 characteristic product $F_B$, we prove that modulus $6$ is the unique maximiser
 of the per-element sub-peak height, and we show that for a truncated set of
@@ -76,7 +81,8 @@ for the modulus-$6$ ripple, giving amplitude and phase to within $0.1\%$ over
 $k=18,\dots,76$. Combining these with the deep-minor bound of
 Section~\ref{sec:l5c}, which is proved here, we obtain $\varepsilon_d(k)\to0$
 at a geometric rate of at most $\sqrt3/2$ per element, and hence
-$\mathrm{lm}_P(n)/r_P(n)\to\Gamma(P)=5.3492879\ldots$ for the odd primes; this
+$\mathrm{lm}_P(n)/r_P(n)\to\Gamma(P)=5.3492879\ldots$ for the odd primes, where
+$\mathrm{lm}_P(n)$ is the weighted sum of representation counts of Part~I; this
 answers Problem~\Xref{paper}{prob:flatness}{11.1} of Part~I.
 
 Two things about the status of that theorem, stated here rather than left to be

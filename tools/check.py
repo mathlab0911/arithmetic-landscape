@@ -797,13 +797,22 @@ def c15_cross_document():
 # artefact away from its reader is not a disclosure.  So it is checked, in the artefact,
 # by name.
 AI_SECTION = 'Use of AI tools'
+AI_SECTION_JA = 'AI ツールの使用について'
 
 def c16_ai_disclosure():
+    # Scoped to both trees from the start.  Writing this check for paper/ only would have
+    # been the same mistake in the same hour, for the fifth time.
     bad, seen = [], 0
-    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+    # A shared preamble is an include, not a paper; it has no reader of its own.
+    NOT_A_PAPER = {'_preamble_ja.tex'}
+    scan = [(PAPER, f) for f in sorted(os.listdir(PAPER)) if f.endswith('.tex')]
+    if os.path.isdir(PAPER_JA):
+        scan += [(PAPER_JA, f) for f in sorted(os.listdir(PAPER_JA))
+                 if f.endswith('.tex') and f not in NOT_A_PAPER]
+    for where, tex in scan:
+        src = open(os.path.join(where, tex), encoding='utf-8', errors='replace').read()
         src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
-        if AI_SECTION in src:
+        if AI_SECTION in src or AI_SECTION_JA in src:
             seen += 1
         else:
             bad.append(tex)
