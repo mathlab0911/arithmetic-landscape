@@ -1,0 +1,26 @@
+=== seam probes ===
+ground-state phrasing left beside r_A      0
+deg survivors                              1
+      paper.tex: …ground states, and earlier versions of this paper wrote it $\deg_A(n)$ for that reason. We use $r_A$ throughou…
+order-sensitive survivors                  2
+      paper.tex: …- mean, variance, coefficient of variation --- not by being order-sensitive, but by being sensitive to \emph{w…
+      paper.tex: …reaches for the enumeration form must carry it. Outside: no order-blind \emph{spread} statistic can play the r…
+two names for the window measure           1
+      paper.tex: …f{thm:window}; earlier versions also called $W_D$ the \emph{window measure}, which is the same object.\\[3pt] …
+coarse-graining survivors                  3
+      paper4.tex: …stant --- so the family $\{X(v\,\cdot\,)\}$ is closed under coarse-graining, exactly, with no error term. That…
+      paper4.tex: …the constant $(1-1/v)\log2$ is the free energy released per coarse-graining step, additive over successive ste…
+      paper4.tex: …hmic reading}\label{sec:outlook}  \subsection{Iterating the coarse-graining}  Lemma~\ref{lem:coset} is used on…
+lm defined only as local minima            0
+abstract still promises deg                0
+total probe hits: 7
+
+=== does each live paper still define what it uses first? ===
+  paper.tex    first use of a representation count at   5619   first gloss at   5597   ok
+  paper2.tex   first use of a representation count at    134   first gloss at    134   ok
+  paper4.tex   first use of a representation count at   6105   first gloss at   7985   check
+
+=== terminology tables: rows, and whether each row is glossed in ordinary language ===
+  paper.tex    11 row(s)
+  paper2.tex   4 row(s)
+  paper4.tex   6 row(s)

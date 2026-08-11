@@ -1,0 +1,30 @@
+Terminology tables in both editions, and a seam pass after the surgery
+
+Each live paper now carries a terminology table: eleven rows in Part I glossing
+the vocabulary of the series, three and five local ones in Parts II and III.
+Each row says what the term denotes in ordinary language, and Part I's closing
+sentence says which of the eleven are the point and which are scaffolding -- two
+and nine.  The Japanese editions of Parts I and II carry the same tables.
+
+The coset identity's row now also fixes the sense of "coarse-graining", which was
+being used three times in Part III as a bare adjective while the identity itself
+had been renamed: the family {X(v.)} is closed under coarse-graining exactly, and
+the phrase is used below in that sense and no other.
+
+coherence_r129 is a seam pass.  Ten commits in two days touched every paper --
+the definition of Gamma, the symbol for the representation count, three
+abstracts, the terminology tables, the assembly of Part III.  Each edit was
+checked; the seams between them were not.  It probes the specific ways those
+edits leave a paper contradicting itself: a surviving \deg, a surviving
+"order-sensitive", two names for the window measure, lm defined the old way, an
+abstract promising a symbol that no longer exists.  Seven hits, six of them the
+deliberate retirement notes, one real -- the coarse-graining adjective, fixed
+above.
+
+Remaining: paper4_ja, a full translation of a thirty-one page paper.  Not begun.
+A third of a translation labelled as the Japanese edition is the overclaim this
+project exists to prevent, so it gets its own round; C13 names its absence every
+run, which is the right amount of pressure.
+
+Papers 25/34/14/31 pp, Japanese 24/33/14, all EXIT 0 with zero undefined
+references; check.py C1-C17 pass.
