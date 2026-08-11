@@ -1,0 +1,42 @@
+Part III assembled: paper 3 dissolved into it, all 33 statements surviving
+
+paper3.tex's body is now inside paper4.tex, ordered so the untilted transfer
+function precedes its biased deformation: notation and what is inherited, the
+coset identity, rigidity, the transfer function, universality, the failing
+profile, then the biased invariant, the biased transfer function, and random
+sequences.  Paper 3's introduction became a subsection, "The transfer-function
+strand"; its honest-scope list became a subsection of Part III's.
+
+Every pass criterion met.  Builds 23/33/14/30 pp, EXIT 0, zero undefined
+references and citations.  check.py C1-C15 pass.  p3map re-run: MOVE 22 /
+CALIB 8 / OPEN 2 / SPLIT 1 / DROP 0, thirty-three environments.  xref prose
+count 90 -> 0.  Label diff: all 47 of paper 3's labels are present in Part III;
+only sec:intro and sec:scope were renamed, both by design.
+
+The missing ingredient is stated once.  A new section, "What is missing, stated
+once", gives it as one problem -- the Edgeworth expansion for prop:tiltlclt in
+region R1, uniform over the window, at the displayed cumulant budget, explicit
+constants absent and the method not -- followed by the list of what waits on it:
+prop:tiltlclt, thm:rigid, thm:transfer.  Closing it completes all three at once.
+All three statuses now read "conditional on Problem R1 and on nothing else", and
+the section says outright that nothing else in the Part depends on it.  Three
+gaps that were three differently worded caveats are one problem with three
+consumers.
+
+The 31 sibling references left as residual at r121 went to zero without a single
+judgement call: every one of them crossed the dissolution boundary, and moving
+the text is the boundary going away.  Twenty-one became internal refs, nine
+collective "papers 1-3" became "Parts I and II and the transfer-function
+strand", one was paper 3's forward reference.  Listing them rather than
+improvising per-site phrasing was worth about a day.
+
+p3map's DROP_GUARD fired once more, on the implementation of fable's own ruling:
+emptying DROP_GUARD_OK let rem:noKappa fall through the classifier's "refuted"
+branch back into DROP, and the guard refused it, correctly, because its one
+reference is live.  The ruling is now a HAND entry with the reasoning written in,
+and HAND outranks the keyword branches.  The guard caught a decision being
+implemented as a deletion rather than as a statement.
+
+paper3.tex is kept on disk with a superseded banner -- what moved, in what
+quantities, where the mapping lives, and cite Part III.  It still builds, so C4,
+C9, C13 and C15 keep their subjects and the check scopes stay stable.

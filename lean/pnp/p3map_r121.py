@@ -19,29 +19,26 @@ PROOF = re.compile(r'\A\s*\\begin\{proof\}')
 
 # Superseded by Part III, stated here so the reason travels with the row.
 SUPERSEDED = {
- # r123 correction.  This dict said lem:kappa was "the multiplicative kappa-transport,
- # refuted" and dropped it.  That is a different object.  lem:kappa IS THE ADDITIVE BRIDGE:
- # it is proved, it is cited nine times in paper 3 -- by the introduction, by R3, by
- # prop:tiltlclt's own status, and by the honest-scope list as "proved ... in full" -- and
- # dropping it would have removed a load-bearing lemma three results depend on.  What is
- # refuted is the MULTIPLICATIVE transport |G~| <= |G|^kappa, which is the subject of
- # rem:noKappa and of the graveyard note.  Two objects, one substring.
+ # r123 correction, r124 ruling.  This dict once said lem:kappa was "the multiplicative
+ # kappa-transport, refuted" and dropped it.  That is a different object.  lem:kappa IS THE
+ # ADDITIVE BRIDGE: proved, cited nine times, named in the honest-scope list as "proved ...
+ # in full".  What is refuted is the MULTIPLICATIVE transport, rem:noKappa's subject.
  #
- # The wrong row survived my own table and fable-5's independent audit, because both of us
- # checked the row against the stated REASON and the graveyard memory, where "the
- # multiplicative bridge" is indeed recorded as refuted.  Neither checked the reason against
- # the paper.  Hence DROP_GUARD below.
- 'rem:noKappa': 'records the refutation of the MULTIPLICATIVE transport (not of lem:kappa); '
-                'fable r123 (B) rules that the graveyard note absorbs it in a sentence or '
-                'two rather than carrying it as content',
+ # ROOT CAUSE (fable r124): the graveyard memory's entry still carried the 2026-08-09 label.
+ # The multiplicative version was designed as `lem:kappa`, refuted, and put in the graveyard;
+ # its additive successor was then `lem:kappa'` and dropped the prime on entering the paper,
+ # inheriting the name.  A dead idea kept pointing at a live label, and both auditors matched
+ # "kappa" against that record.
+ #
+ # fable r124 rules rem:noKappa back into the paper as well: a proved statement accompanied
+ # by the proof that its natural strengthening is false is this project's honesty pattern,
+ # and the paper's own dead-ends passage already cites it.  Nothing is dropped; the guard
+ # below stays armed for any future table.
 }
 
 # A DROP whose subject is still referred to is almost always a misclassification.  Refuse it
 # unless the row says, in writing, that the references go too.
-DROP_GUARD_OK = {
- 'rem:noKappa': 'referenced once, from rem:graveyard, which is the note that absorbs it; '
-                'that sentence is rewritten at the move so no dangling reference remains',
-}
+DROP_GUARD_OK = {}
 
 # Statuses that carry both a positive and a negative word.  The first version of this script
 # matched 'proved' as a substring and sent prop:tiltlclt to MOVE -- but its status reads
@@ -52,6 +49,15 @@ DROP_GUARD_OK = {
 MIXED = re.compile(r'skeleton|not written|missing|budget|conditional|refuted|only to the level')
 POSITIVE = re.compile(r'\bproved\b|\bderived\b|lean-verified')
 HAND = {
+ # r124 (fable's ruling).  The STATUS says "refuted", but what is refuted is the
+ # MULTIPLICATIVE transport the remark is about -- the remark itself is the record of that
+ # refutation, sitting directly after the lemma whose additive form it justifies, and the
+ # paper's own dead-ends passage cites it.  A proved statement accompanied by the proof that
+ # its natural strengthening is false is content, not a graveyard entry.
+ 'rem:noKappa': ('MOVE',
+   'the record of why the bridge is additive: it refutes the MULTIPLICATIVE transport and '
+   'its closing sentence is the design reason for lem:kappa. Moves beside the lemma; the '
+   'dead-ends passage keeps its citation'),
  'prop:tiltlclt': ('SPLIT',
    'R2 and R3 are proved and move as content; R1 is given only to the level of its cumulant '
    'budget and is the SAME missing ingredient that thm:rigid and thm:transfer name, so it '
@@ -82,6 +88,8 @@ def status_text(body):
 def classify(lab, body):
     if lab in SUPERSEDED:
         return 'DROP', SUPERSEDED[lab]
+    if lab in HAND:            # r124: a hand ruling outranks the keyword branches
+        return HAND[lab]
     s = ' '.join(status_text(body).split())
     low = s.lower()
     if POSITIVE.search(low) and MIXED.search(low) and 'proof skeleton' not in low:

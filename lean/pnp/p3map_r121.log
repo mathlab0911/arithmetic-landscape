@@ -1,9 +1,9 @@
 paper3.tex: 33 environments, all accounted for
-  MOVE  21   into Part III as content
+  MOVE  22   into Part III as content
   CALIB  8   into Part III as calibration material, with range
   OPEN   2   into Part III's "what is missing", as named open problems
   SPLIT  1   part moves as content, part to "what is missing"
-  DROP   1   dropped, with a supersession note
+  DROP   0   dropped, with a supersession note
 
 dest   kind        label               name                                    reason
 MOVE   remark      (unlabelled)        the ratio sees the target only through  exposition attached to material that moves; carries with it
@@ -19,6 +19,7 @@ MOVE   remark      rem:graveyard       approaches that did not work            e
 MOVE   remark      rem:grh             what would make $C_1$ effective         exposition attached to material that moves; carries with it
 MOVE   remark      rem:lam0            $\lambda=0$ recovers Part~I~\cite{P1}   exposition attached to material that moves; carries with it
 MOVE   remark      rem:mushift         the $\mu_d$-shift, and why the layer t  Lean-verified; moves as content with that status
+MOVE   remark      rem:noKappa         why the bound is additive, and a bound  the record of why the bridge is additive: it refutes the MULTIPLICATIVE transport and its closing sentence is the design reason for lem:kappa. Moves beside the lemma; the dead-ends passage keeps its citation
 MOVE   remark      rem:nocover         what part (c) does \emph{not} need      exposition attached to material that moves; carries with it
 MOVE   remark      rem:oneconstant     the single ineffective constant         exposition attached to material that moves; carries with it
 MOVE   remark      rem:random          the primes sit near the random sequenc  exposition attached to material that moves; carries with it
@@ -38,4 +39,3 @@ CALIB  remark      rem:tiltslope       the tilt and the slope agree to first   e
 CALIB  remark      rem:whatEk          what the theorem does and does not cla  experimental; moves as calibration material, with its stated range
 OPEN   theorem     thm:rigid           rigidity of the gap series              skeleton; carries into the "what is missing" section as a named open problem, missing ingredient named at the statement
 OPEN   theorem     thm:transfer        transfer                                skeleton; carries into the "what is missing" section as a named open problem, missing ingredient named at the statement
-DROP   remark      rem:noKappa         why the bound is additive, and a bound  records the refutation of the MULTIPLICATIVE transport (not of lem:kappa); fable r123 (B) rules that the graveyard note absorbs it in a sentence or two rather than carrying it as content [cited 1x, guarded]

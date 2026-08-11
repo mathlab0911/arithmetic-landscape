@@ -1,33 +1,19 @@
 === the denominator: prose references to a sibling paper ===
   paper1: 0
-  paper2: 14
-  paper3: 34
-  paper4: 42
-  TOTAL 90   <- every one of these needs rewording for P-I / P-II / P-III
+  paper2: 0
+  paper3: 0
+  paper4: 0
+  TOTAL 0   <- every one of these needs rewording for P-I / P-II / P-III
   by phrase:
-     22  paper~2
-     17  companion paper
-     15  paper 3
-     11  paper~1
-      9  papers 1
-      6  paper~3
-      5  paper 2
-      3  papers~1
-      1  paper 4
-      1  paper 1
 
 === resolvable references, and whether they resolve ===
   paper2  \Xref -> paper:prob:flatness prints 11.1; sibling says 11.1  ok
   paper3  \Xref -> paper:sec:achieved prints 7.3; sibling says 7.3  ok
   paper3  \Xref -> paper2:sec:remains prints 11; sibling says 11  ok
   paper3  \Xlab -> paper2:prop:deepminor = 9.3  ok
-  paper4  \Xref -> paper3:thm:rigid prints 3.1; sibling says 3.1  ok
-  paper4  \Xlab -> paper3:def:slope = 2.1  ok
-  paper4  \Xlab -> paper3:rem:mushift = 4.21  ok
-  paper4  \Xlab -> paper3:rem:onek = 4.7  ok
-  paper4  \Xlab -> paper3:rem:cd = 4.22  ok
-  9 resolve, 0 do not
+  paper4  \Xref -> paper:sec:achieved prints 7.3; sibling says 7.3  ok
+  paper4  \Xref -> paper2:sec:remains prints 11; sibling says 11  ok
+  paper4  \Xlab -> paper2:prop:deepminor = 9.3  ok
+  7 resolve, 0 do not
 
 === bibliography entries for siblings that are never cited ===
-  paper3: P1, P2 declared but never \cite-d -- the sibling is referred to in prose instead
-  paper4: P1, P2, P3 declared but never \cite-d -- the sibling is referred to in prose instead
