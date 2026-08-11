@@ -12,6 +12,14 @@ not only in the ledger.  Each check below names the ledger entry it enforces.
   C5  ---  repository naming convention (README): rNNN, three digits, no suffix
   C6  7.0  ledger entries written but not yet folded into the skill are surfaced, not lost
   C7  F12  every \Lean{...} the papers cite is a name that exists in the canon
+  C8  F38  every theorem-like statement declares its status at the statement
+  C9  F59  every count stated in the README matches the repository
+  C10 F39  every repository link in the papers is the canonical one, and each paper has one
+  C11 F18  every named constant is correct at the precision it is printed
+  C12 F20  every script the papers cite exists, with its log
+
+A check that examined nothing FAILS (`expect_subjects`): silence is only good news if the
+check spoke.  Two checks in one afternoon reported a clean bill of health over an empty set.
 
 Usage:  python3 tools/check.py            (from the repository root)
 Exit:   0 = all pass, 1 = at least one failure.
@@ -42,6 +50,20 @@ def fail(check, msg):
     fails.append(f'{check}: {msg}')
 
 
+def expect_subjects(check, n, what):
+    """A check that examined nothing has not passed; it has failed to find its subject.
+
+    Written r118, after two of them in one afternoon.  C11 v1 keyed on the correct digits of a
+    constant and so never looked at the wrong ones.  A draft of C12 had a regex that matched no
+    script name at all and printed 'all present' over an empty set -- a clean bill of health
+    for a search that never ran.  Silence from a check is only good news if the check spoke.
+    """
+    if n == 0:
+        fail(check, 'examined 0 %s -- the check cannot find its subject, which is a failure '
+                    'of the check and not a pass for the artefact' % what)
+    return n
+
+
 # ------------------------------------------------------------------ C1 (F20)
 def c1_logs():
     missing = []
@@ -52,6 +74,7 @@ def c1_logs():
     if missing:
         fail('C1/F20', 'script without a stored log: ' + ', '.join(missing))
     n = len([f for f in os.listdir(PNP) if re.fullmatch(r'.+_r\d{2,3}\.py', f)])
+    expect_subjects('C1/F20', n, 'experiment scripts')
     notes.append(f'C1/F20  scripts checked for logs: {n}')
 
 
@@ -89,7 +112,13 @@ def c2_numbers():
     if bad:
         fail('C2/F19', f'number(s) in {os.path.basename(rep)} not found in any log '
                        f'(compute it in a script or allow-list it): ' + ', '.join(bad))
-    notes.append(f'C2/F19  table numbers checked against logs: {len(quoted)}')
+    # Zero is legitimate here -- a report whose tables quote no decimals -- but it must SAY so,
+    # because a bare 0 from a check is otherwise indistinguishable from a check that broke.
+    if quoted:
+        notes.append(f'C2/F19  table numbers checked against logs: {len(quoted)}')
+    else:
+        notes.append('C2/F19  0 -- this report quotes no decimal numbers in a table, so the '
+                     'check made no observation (legitimate, but not a pass)')
 
 
 # ------------------------------------------------------------------ C3 (F21)
@@ -191,6 +220,7 @@ def c7_lean_citations():
     if missing:
         fail('C7/F12', 'the papers cite Lean name(s) that are not in Pnp/Theory: '
                        + ', '.join(missing))
+    expect_subjects('C7/F12', len(cited), 'Lean citations in the papers')
     notes.append(f'C7/F12  Lean citations checked against the canon: {len(cited)}')
 
 
@@ -242,6 +272,7 @@ def c8_status_at_statement():
     if bad:
         fail('C8/F38', 'statement(s) whose status a reader cannot determine at the '
                        'statement: ' + '; '.join(bad))
+    expect_subjects('C8/F38', checked, 'theorem-like statements')
     notes.append('C8/F38  theorem-like statements checked for a declared status: %d' % checked)
 
 
@@ -344,6 +375,7 @@ def c10_repo_url():
                 bad.append('%s points at %s, not %s' % (tex, u, REPO_URL))
     if bad:
         fail('C10/F39', '; '.join(bad))
+    expect_subjects('C10/F39', seen, 'repository links')
     notes.append('C10/F39 repository links in the papers checked: %d' % seen)
 
 
@@ -439,14 +471,43 @@ def c11_constants():
                                    % (tex, ln, lit, trunc, rnd, what, truth[:dp + 4]))
     if bad:
         fail('C11/F18', 'constant(s) quoted at a precision they do not have: ' + '; '.join(bad))
+    expect_subjects('C11/F18', checked, 'constant occurrences')
     notes.append('C11/F18 constants matched by proximity and checked digit by digit: '
                  '%d occurrence(s), %d exempted with a recorded reason' % (checked, exempt))
+
+
+# ------------------------------------------------------------------ C12 (F20)
+# The paper side of "a result with no log does not exist".  A Data availability section that
+# names a script is a promise a reader can try to keep; if the script or its log is missing,
+# the promise is empty.  C1 checks that scripts have logs; this checks that the scripts the
+# PAPERS point at are actually there.
+def c12_cited_scripts():
+    pat = re.compile(r'\\texttt\{([A-Za-z0-9]+(?:\\_[A-Za-z0-9]+)+)\}')
+    cited = {}
+    for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
+        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        for m in pat.finditer(src):
+            nm = m.group(1).replace('\\_', '_')
+            if re.search(r'_r\d+$', nm):
+                cited.setdefault(nm, set()).add(tex)
+    expect_subjects('C12/F20', len(cited), 'scripts cited by the papers')
+    bad = []
+    for nm in sorted(cited):
+        where = ', '.join(sorted(cited[nm]))
+        if not os.path.exists(os.path.join(PNP, nm + '.py')):
+            bad.append('%s (cited in %s) has no script' % (nm, where))
+        elif not os.path.exists(os.path.join(PNP, nm + '.log')):
+            bad.append('%s (cited in %s) has a script but no log' % (nm, where))
+    if bad:
+        fail('C12/F20', 'the papers point a reader at evidence that is not there: '
+                        + '; '.join(bad))
+    notes.append('C12/F20 scripts cited by the papers, present with logs: %d' % len(cited))
 
 
 if __name__ == '__main__':
     for fn in (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
                c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
-               c11_constants):
+               c11_constants, c12_cited_scripts):
         fn()
     for n in notes:
         print('  ok   ' + n)

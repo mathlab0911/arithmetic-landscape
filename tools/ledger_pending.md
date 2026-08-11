@@ -33,6 +33,30 @@ extra     : the second half of this entry is a plain mistake of mine. I committe
             repository and use that; never substitute an address from somewhere else.
 ```
 
+## r118: a check that examined nothing has not passed  [ASSERTED in check.py]
+
+```
+claimed   : "25 scripts cited by the papers, all present with logs" -- except the first run of
+            that check printed "0 cited ... all present", and I read the words 'all present'
+            before I read the zero.  The regex required the round suffix twice and matched
+            nothing.  A clean bill of health over an empty set.
+actual    : the papers cite 25 scripts and they are all fine, but the check that said so was,
+            for one run, incapable of saying anything else.  This is the third time in one
+            afternoon: C11 v1 keyed on the correct digits and so never looked at the wrong
+            ones; a broad "unsourced claim" scan flagged 130 lines of which almost none were
+            defects and so could not be acted on either.
+check     : read the COUNT before the verdict.  Every check that reports how many things it
+            examined must fail when that number is zero.
+rule      : *** silence from a check is good news only if the check spoke. ***  Zero subjects
+            is a failure of the check, not a pass for the artefact -- and it is the failure
+            mode a green suite hides best, because nothing looks wrong.  Asserted:
+            `expect_subjects()` in check.py, wired into C1, C7, C8, C10, C11 and C12, with a
+            negative control (break C12's regex, get "examined 0 ... which is a failure of the
+            check and not a pass for the artefact").
+            Corollary for the other direction: a check whose positives are mostly not defects
+            is equally useless, and must be narrowed until they are (F57), or dropped.
+```
+
 ## F20 — new instance, r118: preparing a check is not performing it
 
 ```
