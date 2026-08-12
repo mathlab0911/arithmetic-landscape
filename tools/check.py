@@ -908,41 +908,89 @@ def c17_terminology():
 # retired stems, the disclosure -- because a deep check on a document in another repository
 # would go stale silently, which is the failure it exists to prevent.  If the checkout is
 # not present it says so rather than passing: an unread artefact is not a clean one.
-HOMEPAGE = os.path.join(os.path.dirname(ROOT), 'homepage', 'index.html')
-HOMEPAGE_RETIRED = [
+#
+# Widened the same hour, and the widening is the point.  With the homepage clean I read the
+# rendered repository page in a browser and the README -- which every check here has been
+# reading for rounds -- opened by defining the ratio as lm_A(n)/deg_A(n), the symbol purged
+# from all four papers at r126 precisely because it was a second name for r_A(n).  It also
+# said "papers 2-4" after the series was renamed.  C9 counts the README's numbers and C14
+# guards one formula in it; neither had any opinion about its vocabulary.  A file being
+# inside the tree is not the same as being inside a check.
+LANDING_PAGES = [
+    (os.path.join(os.path.dirname(ROOT), 'homepage', 'index.html'), 'the homepage'),
+    (os.path.join(ROOT, 'README.md'), 'the README'),
+]
+RETIRED_NAMES = [
     ('paper3', 'the retired third paper'),
     ('The transfer function of subset-sum landscapes', 'its retired title'),
     ('The gap series of an integer sequence', 'the pre-series title of Part I'),
     ('four papers', 'the series is three parts'),
+    (r'\bdeg_A\b', 'a second name for r_A(n), purged from the papers at r126'),
+    (r'papers 2[-–]4', 'the parts are numbered I, II, III'),
 ]
 
-def c18_homepage():
-    if not os.path.exists(HOMEPAGE):
-        notes.append('C18/F60 homepage not checked out beside this repository, so the check '
-                     'made no observation (legitimate, but not a pass): %s' % HOMEPAGE)
-        return
-    src = open(HOMEPAGE, encoding='utf-8', errors='replace').read()
-    bad = []
-    for lit, why in C11_BANNED.items():
-        if lit in src:
-            bad.append('the homepage prints %r -- %s' % (lit, why))
-    for stem, why in HOMEPAGE_RETIRED:
-        if re.search(re.escape(stem), src, re.I):
-            bad.append('the homepage still names %r (%s)' % (stem, why))
-    if not re.search(r'Use of AI tools', src, re.I):
-        bad.append('the homepage carries no AI disclosure, while every paper does (F64)')
+# Mention is not claim -- the r123 asymmetry, third appearance.  The README has to be able to
+# say "the manuscript that was paper 3, The transfer function of subset-sum landscapes, was
+# absorbed into Part III"; that sentence is the retirement, not a survival of it.  So a hit is
+# excused when the text around it marks the name as past.  The excused count is printed, never
+# swallowed: an exemption a reader of the output cannot see is an exemption that rots.
+#
+# First draft looked for the marker in a 400-character window, and two of the five negative
+# controls did not fire: a retirement note anywhere in the neighbourhood excused anything in
+# it, including "four papers" reinstated three lines away.  That is C17's region-too-wide
+# failure moved into the exemption, where it is worse, because a too-wide search only misses
+# and a too-wide excuse actively forgives.  The marker must now stand in the same sentence as
+# the name it retires -- close enough that a reader meeting the name also meets the past
+# tense.
+RETIREMENT_MARKER = re.compile(
+    r'was absorbed|were absorbed|retired|no longer|earlier draft|used to be|'
+    r'the manuscript that was|superseded|not in the tree|git history', re.I)
+SENTENCE_END = re.compile(r'[.;!?]\s|\n\s*\n|</p>|</div>|\|')
+
+def _sentence_around(src, start, end):
+    """The smallest run of text containing the match and bounded by sentence ends."""
+    lo = 0
+    for m in SENTENCE_END.finditer(src, 0, start):
+        lo = m.end()
+    m = SENTENCE_END.search(src, end)
+    hi = m.start() if m else len(src)
+    return src[lo:hi]
+
+def c18_landing_pages():
+    bad, seen, excused = [], 0, 0
+    for path, name in LANDING_PAGES:
+        if not os.path.exists(path):
+            notes.append('C18/F60 %s is not checked out beside this repository, so the check '
+                         'made no observation there (legitimate, but not a pass): %s'
+                         % (name, path))
+            continue
+        seen += 1
+        src = open(path, encoding='utf-8', errors='replace').read()
+        for lit, why in C11_BANNED.items():
+            if lit in src:
+                bad.append('%s prints %r -- %s' % (name, lit, why))
+        for pat, why in RETIRED_NAMES:
+            for m in re.finditer(pat, src, re.I):
+                if RETIREMENT_MARKER.search(_sentence_around(src, m.start(), m.end())):
+                    excused += 1
+                    continue
+                bad.append('%s still names %r (%s), and nothing nearby says it is past'
+                           % (name, m.group(0), why))
+        if not re.search(r'Use of AI tools', src, re.I):
+            bad.append('%s carries no AI disclosure, while every paper does (F64)' % name)
     if bad:
         fail('C18/F60', '; '.join(bad))
-    notes.append('C18/F60 homepage checked as a reader-facing artefact: %d banned literal(s), '
-                 '%d retired name(s), and the disclosure' % (len(C11_BANNED),
-                                                             len(HOMEPAGE_RETIRED)))
+    notes.append('C18/F60 landing pages read the way a reader meets them: %d page(s), against '
+                 '%d banned literal(s), %d retired name(s), and the disclosure; %d mention(s) '
+                 'excused as retirement notes'
+                 % (seen, len(C11_BANNED), len(RETIRED_NAMES), excused))
 
 
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
           c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology,
-          c18_homepage)
+          c18_landing_pages)
 
 if __name__ == '__main__':
     for fn in CHECKS:

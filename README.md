@@ -11,10 +11,11 @@ It is read off `A` without solving anything, it lies between `3 − 2^(1−(M−
 both extremes characterised, and — this is the point of the programme — it governs the local
 structure of the subset-sum problem for `A`.
 
+Write `r_A(n) = #{S ⊆ A : σ(S) = n}` for the number of representations of `n` as a subset sum.
 Give the subsets `S ⊆ A` the energy `E(S) = |σ(S) − n|` for a target `n`, with single-element
-flips as moves. Write `lm_A(n)` for the number of strict local minima and `deg_A(n)` for the
-number of ground states. Then `lm_A(n)/deg_A(n) → Γ(A)`, for every target, under a hypothesis
-that can be checked rather than assumed.
+flips as moves; then `r_A(n)` counts the ground states. Write `lm_A(n)` for the number of
+strict local minima. Then `lm_A(n)/r_A(n) → Γ(A)`, for every target, under a hypothesis that
+can be checked rather than assumed.
 
 A recurring theme: **replace the annealed (independence) approximation standard in the
 statistical-mechanics treatments by an exact identity plus a finite, checkable hypothesis.**
@@ -31,7 +32,7 @@ read as the least flattering true description of each.
 
 | | Title | State |
 |---|---|---|
-| I | *Arithmetic landscapes I: the gap series* | **25 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1−M)2^(−k)`, sharp bounds `3 − 2^(1−(M−1)/2) ≤ Γ(A) ≤ M` with both extremal sets characterised, the exact stratification, and the modulus-4 obstruction. **r120 changed the definition of Γ** from the enumeration series `Σ aⱼ2^(−j)` to the layer form `1 + 2Σ_d 2^(−N_A(d))`; the two differ by `a_k2^(−k)` and have the same limit, so every asymptotic statement in papers 2–4 is unaffected. The Japanese edition tracks the change. |
+| I | *Arithmetic landscapes I: the gap series* | **25 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1−M)2^(−k)`, sharp bounds `3 − 2^(1−(M−1)/2) ≤ Γ(A) ≤ M` with both extremal sets characterised, the exact stratification, and the modulus-4 obstruction. **r120 changed the definition of Γ** from the enumeration series `Σ aⱼ2^(−j)` to the layer form `1 + 2Σ_d 2^(−N_A(d))`; the two differ by `a_k2^(−k)` and have the same limit, so every asymptotic statement in Parts II and III is unaffected. The Japanese edition tracks the change. |
 | II | *Arithmetic landscapes II: asymptotic flatness of subset-sum landscapes of primes* | **34 pp. No hypothesis, and now written out.** The two steps of the deep-minor-arc proposition that were previously owed to the reader — the substitution of a quoted exponential-sum bound, and the excision near the zeros of the cosine — are written in full as of r121: the quoted estimate is stated with its hypotheses as its own lemma, the three checks the substitution needs are made in order, and the summation by parts in the excision is carried out. **Exactly one statement is quoted from the literature without proof** (Vinogradov–Vaughan), and the argument is written so that no numerical value of its logarithmic exponent is needed. One constant is ineffective via Siegel–Walfisz; the effective substitute is the weaker rate `e^(1/8)·√3/2 = 0.98134…`, which still gives the conclusion. |
 | III | *Arithmetic landscapes III: deformed measures, random sequences, and the coset identity* | **31 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
 

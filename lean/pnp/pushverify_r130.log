@@ -86,10 +86,55 @@ pushed
   cause is a cache and not the push, and that is a different repair.
 
 
+5. second pass, in a real browser
+---------------------------------
+  The session fetcher would not re-read the bare URL, so this pass used a
+  browser -- which is the reader's route anyway, and the honest way to answer
+  the question item 4 left open.
+
+  https://mathlab0911.github.io/   now serves the rewrite.  The stale read in
+  item 4 was GitHub Pages' rebuild lag, roughly a minute, and not a defect in
+  what was pushed.  The lesson survives the acquittal: for that minute the
+  bare URL served a retracted sentence, and nothing in this repository could
+  have told us.
+
+  https://github.com/mathlab0911/arithmetic-landscapes  rendered, read as a
+  reader reads it -- and reading it that way found three things that every
+  check here had been walking past for rounds, because the README is inside
+  the tree and was therefore assumed to be inside the checks:
+
+    (a) The opening paragraph defined the ratio as lm_A(n)/deg_A(n).  deg_A
+        was purged from all four papers at r126 for being a second name for
+        r_A(n) -- the first of the three duplicate-name pairs the declined
+        endorsement was about.  It survived in the first thing a reader sees.
+        C9 counts the README's numbers; C14 guards one formula in it; neither
+        has any opinion about its vocabulary.
+    (b) "papers 2-4", after the series was renamed to Parts I, II, III.
+    (c) The repository DESCRIPTION -- the one line under the repository name,
+        and the browser tab title -- is still "The gap series of an integer
+        sequence - an arithmetic invariant governing subset-sum landscapes",
+        the pre-series title of Part I.  It is not in any file: it lives in
+        GitHub's settings, so no check in any tree can reach it and no commit
+        can fix it.  Left for Kentaro, flagged in the round report.
+
+  (a) and (b) are fixed and C18 was widened to read the README the same way it
+  reads the homepage -- with the mention-versus-claim distinction from r123,
+  since the README must be able to name paper 3 in order to retire it.
+
+  Two of the five negative controls for that exemption did not fire: a
+  retirement note anywhere within 400 characters excused anything near it,
+  including "four papers" reinstated three lines away.  That is C17's
+  region-too-wide failure moved into the exemption, where it is worse -- a
+  too-wide search only misses, a too-wide excuse forgives.  The marker must
+  now stand in the same sentence as the name it retires.  All five controls
+  fire.
+
+
 what this check could not see
 -----------------------------
-  - Whether the rendered README on github.com looks right; only the raw bytes
-    were fetched.  A rendering defect would survive this.
   - The PDFs.  Only the .tex was fetched, and a reader of the release is more
     likely to open the PDF.
+  - Anything that lives in GitHub's settings rather than in a file: the
+    repository description, the topics, the social preview.  Item 5(c) is one
+    of those, and this whole apparatus is structurally blind to them.
   - Whether the mathematics is correct.  Nothing here is about that.
