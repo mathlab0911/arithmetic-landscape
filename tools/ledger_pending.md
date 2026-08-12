@@ -126,3 +126,29 @@ worse — **did not fire**: removing the term *improved* the sup-norm by 30%. Th
 reporting that the quantity being measured is not the quantity the theory is about. At r133
 an inverted control said the labels were crossed; here a non-firing control said the estimate
 was. Two rounds, two different messages, both from the same instrument.
+
+## r135 — the third control in three rounds, and the third different message (append to F51)
+
+Measuring the constant in `|log f − P₄| ≤ C·pq·|v|⁵` over the phases the tilt produces, the
+first run reported `C` reaching `10^9`, always at the smallest element and `v ≈ 10^{-4}`.
+
+Not a blow-up. At that `v` the quantity being measured is `~10^{-20}`, double precision has
+already lost it, and dividing by `v⁵ = 10^{-20}` amplifies the noise to O(1). This is F51's own
+sentence — *identify the operation that amplifies rounding and restate the comparison without
+it* — walked into while holding the ledger that contains it. Redone at 50 digits: `C ≈ 0.0053`
+to `0.0093`, stable, worst at the **large** elements, exactly where the naive fear said it
+would not be.
+
+**And the sanity check caught a second defect, in the prediction rather than the code.** I
+predicted the `v → 0` limit as `|1 − 12pq + 24(pq)²|/120`; it matched at no `p`. The fifth
+Bernoulli cumulant is `κ₅ = pq(1−2p)(1−12pq)`, and against that the measurement agrees to
+eight digits everywhere. The computation was right and my formula was wrong.
+
+> Three rounds, three controls, three different places: **r133 the harness labels were
+> crossed; r134 the estimate was not the quantity the theory is about; r135 the closed form
+> I was checking against was wrong.** A control does not tell you *what* is broken — it tells
+> you that the two things you thought were the same are not, and which two.
+
+Operational note worth keeping: **put the analytic limit of the ratio in the harness as a
+sanity line, not the ratio alone.** The `C` table by itself looked perfectly reasonable in both
+runs; only the line predicting `|1−2p||1−12pq|/120` separated them.
