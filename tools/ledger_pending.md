@@ -93,3 +93,36 @@ Without it, sections 3 and 4 of `spec_r1_r133.md` would have shipped with an inv
 the out-of-sample prediction in section 4 would have been fitted to the wrong quantity — which
 is the failure mode where a control matters most, because the surrounding numbers all look
 reasonable.
+
+## r134 — a bound that cannot work, and the control that said so (append to F51)
+
+Step 1 of the R1 attack was to bound the fourth-order Taylor error of `log Ĝ` uniformly over
+region R1. Measured against the exact product, that supremum is **≈ 840, and it does not
+decrease with k** (817 / 846 / 843 / 816 at k = 100 / 200 / 300 / 450). No choice of radius
+repairs it: at the radius where the integrand has already fallen to `k^{-10}` it is still
+2.7–9.4.
+
+Meanwhile the Edgeworth expansion predicts the same probabilities to a relative `3·10⁻⁵` at
+k = 64, checked against exact dynamic programming.
+
+Both are true. The integral is dominated by `|θ| ≲ 1/σ`, and the error out at the edge of the
+region is never integrated against anything. Weighting by the density, `∫|Ĝ|E / ∫|Ĝ|` is
+`9·10⁻⁴` at k = 100 and `9·10⁻⁵` at k = 450 — **six to seven orders of magnitude below the
+supremum**, decaying at `k^{-3/2}`, which is *faster* than the leading terms of the budget it
+was supposed to be a remainder for.
+
+> **A sup-norm bound over a region where the integrand is already negligible charges the whole
+> region at its worst point. When the estimate is going into an integral, estimate it under
+> the integral.**
+
+The general form for the ledger: **before bounding, ask what the bound is going to be used
+for.** A quantity that will be integrated against a weight, summed against coefficients, or
+evaluated at one point does not need — and often cannot survive — a uniform bound over the
+region it lives on. The failure is invisible from the estimate itself; it shows up only when
+the uniform bound refuses to decay while the thing it bounds plainly does.
+
+**How it was caught.** The negative control — drop the `K⁽⁴⁾` term and the error must get
+worse — **did not fire**: removing the term *improved* the sup-norm by 30%. That is a control
+reporting that the quantity being measured is not the quantity the theory is about. At r133
+an inverted control said the labels were crossed; here a non-firing control said the estimate
+was. Two rounds, two different messages, both from the same instrument.
