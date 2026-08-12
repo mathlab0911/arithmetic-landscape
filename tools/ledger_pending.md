@@ -253,3 +253,28 @@ of what you have already measured. This is the same rule at the other end — ch
 what the quantity *degenerates to*, because a statistic that collapses to a familiar one in the
 small cases is probably a perturbation of it in the large ones. Γ turned out not to be, but
 only from `k ≥ 5` and only by 0.01–0.04.
+
+## r140 — the index had become a second copy of the thing it indexes (append to F35)
+
+`MEMORY.md` is the index loaded into context at the start of every session: one line per memory
+file, pointing at where the detail lives. It had reached **41 KB, of which a single line was
+19 KB** — the pointer to the research log had accumulated a full summary of every round for
+forty rounds, and was approaching the size at which the file would stop being readable at all.
+
+Every word of it was already in `pnp-progress.md` (367 KB, 133 rounds). Verified before
+deleting, by sampling the specific rounds the line cited and the specific lessons it quoted, and
+confirming each appears in the log, the failure ledger, or the skill. Compacted to 2.4 KB.
+
+> **An index that grows becomes a copy, and a copy of the thing it indexes is worse than no
+> index: it is the artefact most likely to be read and least likely to be maintained.** The
+> shape is F35's — a summary drifting away from what it summarises — but in the other
+> direction: not over-claiming, over-*including*, until the summary is the document.
+
+Operational rule, and it is a size check rather than a judgement call: **the index gets one line
+per entry, and a line that no longer fits on a screen belongs in the file it points at.** Where
+the current position genuinely needs to be in the index — it does, because a cold session reads
+the index first — it gets one sentence naming the state, not a history of how the state was
+reached.
+
+*Caught by the tooling rather than by me: the write hook warned at 19.8 KB against a 24.4 KB
+read limit. Without it the next cold session would have found an index it could not read.*
