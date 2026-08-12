@@ -1,0 +1,95 @@
+post-push external verification (F61) -- r130, 2026-08-12
+=========================================================
+
+The rule this implements: a push that reports success is not the same as a
+reader seeing the new state.  So every URL below was fetched over the public
+internet, by the route a reader would use, after the push -- not inspected in
+the local tree.
+
+pushed
+------
+  arithmetic-landscapes   376e42b..267a14c  main -> main   (12 commits)
+  mathlab0911.github.io   69119c4..03b15fe  main -> main   (1 commit)
+
+
+1. the README renders the new state
+-----------------------------------
+  https://raw.githubusercontent.com/mathlab0911/arithmetic-landscapes/main/README.md
+  200, served.  Confirmed in the served bytes:
+
+    - the papers table has exactly three rows, I / II / III, with the
+      current titles;
+    - the retirement paragraph is present and names p3map_r121 as the mapping
+      and the git history as where the files are;
+    - "eighteen mechanical checks";
+    - the check table ends at C18, with the homepage row;
+    - "127 scripts, 198 logs" -- the count C9 verifies;
+    - Part II is described as "No hypothesis, and now written out", not as
+      owing two steps to the reader.
+
+  One defect found by reading the served bytes rather than the local file:
+  the README began with a UTF-8 BOM.  PowerShell 5.1's Set-Content -Encoding
+  UTF8 writes one, and I used it for the 197 -> 198 edit an hour earlier.
+  GitHub renders it away, so nothing looked wrong anywhere except in the raw
+  view a reader gets when they curl it.  Stripped in the follow-up commit.
+  This is the second time in this project that PowerShell's BOM has ridden
+  into a committed artefact; the first was this round's commit message.
+
+
+2. a paper serves the new title
+-------------------------------
+  https://raw.githubusercontent.com/mathlab0911/arithmetic-landscapes/main/paper/paper4.tex
+  200, 77 521 characters.  Lines 38-42 of the served file:
+
+      \title{Arithmetic landscapes III:\\
+      deformed measures, random sequences, and the coset identity}
+      \author{Kentaro Amauchi\thanks{Independent researcher.
+      \href{mailto:amkn.sub03@gmail.com}{amkn.sub03@gmail.com},
+      \url{https://mathlab0911.github.io/}}}
+
+  The provisional-subtitle note is gone and the author footnote matches
+  Parts I and II.  This doubles as the positive control for item 3: the same
+  directory, fetched the same way, returns content.
+
+
+3. the retired files 404
+------------------------
+  https://raw.githubusercontent.com/mathlab0911/arithmetic-landscapes/main/paper/paper3.tex
+  empty -- not on main.
+
+  The control matters here more than the observation: an empty body is what a
+  broken fetcher returns too.  Item 2 is that control, and it returned 77 kB
+  from the same directory over the same transport in the same minute.
+
+
+4. the homepage
+---------------
+  https://mathlab0911.github.io/index.html
+  200, and it serves the rewrite: r_A(n) first, the layer definition of Gamma,
+  5.3492879..., three parts with current titles and statuses, a Use of AI
+  tools section.
+
+  https://mathlab0911.github.io/
+  ** served the OLD page ** on the first fetch, roughly one minute after the
+  push succeeded and while /index.html was already new: the enumeration
+  definition, "order-sensitive invariant", four papers, 5.34920, no
+  disclosure.  GitHub Pages had not finished rebuilding, or a cache had not
+  expired.
+
+  This is the finding of the round, and it is exactly why this check exists.
+  Two green pushes, a green C18 over the local file, and the URL a reader
+  actually types was still serving the sentence that C11 has banned since
+  r118.  The bare URL is the one in the papers' author footnotes, in the
+  README, and in the email that went to two mathematicians.
+
+  Re-fetch of the bare URL is queued for r131; if it has not caught up, the
+  cause is a cache and not the push, and that is a different repair.
+
+
+what this check could not see
+-----------------------------
+  - Whether the rendered README on github.com looks right; only the raw bytes
+    were fetched.  A rendering defect would survive this.
+  - The PDFs.  Only the .tex was fetched, and a reader of the release is more
+    likely to open the PDF.
+  - Whether the mathematics is correct.  Nothing here is about that.
