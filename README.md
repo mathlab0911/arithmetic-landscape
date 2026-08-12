@@ -1,4 +1,4 @@
-# Arithmetic Landscape Theory
+﻿# Arithmetic Landscape Theory
 
 The **gap series** of a finite set `A` of odd positive integers with largest element `M` is
 
@@ -33,10 +33,15 @@ read as the least flattering true description of each.
 |---|---|---|
 | I | *Arithmetic landscapes I: the gap series* | **25 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1−M)2^(−k)`, sharp bounds `3 − 2^(1−(M−1)/2) ≤ Γ(A) ≤ M` with both extremal sets characterised, the exact stratification, and the modulus-4 obstruction. **r120 changed the definition of Γ** from the enumeration series `Σ aⱼ2^(−j)` to the layer form `1 + 2Σ_d 2^(−N_A(d))`; the two differ by `a_k2^(−k)` and have the same limit, so every asymptotic statement in papers 2–4 is unaffected. The Japanese edition tracks the change. |
 | II | *Arithmetic landscapes II: asymptotic flatness of subset-sum landscapes of primes* | **34 pp. No hypothesis, and now written out.** The two steps of the deep-minor-arc proposition that were previously owed to the reader — the substitution of a quoted exponential-sum bound, and the excision near the zeros of the cosine — are written in full as of r121: the quoted estimate is stated with its hypotheses as its own lemma, the three checks the substitution needs are made in order, and the summation by parts in the excision is carried out. **Exactly one statement is quoted from the literature without proof** (Vinogradov–Vaughan), and the argument is written so that no numerical value of its logarithmic exponent is needed. One constant is ineffective via Siegel–Walfisz; the effective substitute is the weaker rate `e^(1/8)·√3/2 = 0.98134…`, which still gives the conclusion. |
-| (3) | *The transfer function of subset-sum landscapes: rigidity of the gap series off centre* — **absorbed into Part III at r124.** All 33 of its theorem-like statements moved: 22 as content, 8 as calibration material with their ranges, 2 as named open problems, 1 split. Nothing was dropped. The file is kept on disk as the superseded manuscript; the mapping is `lean/pnp/p3map_r121` | **14 pp. Its two headline theorems are proof skeletons.** The analytic ingredients are proved; what is missing is the Edgeworth expansion of a classical local-limit computation, and each theorem names that gap in its own statement. The transfer function `Φ` is verified against exact computation on four profiles. |
 | III | *Arithmetic landscapes III: deformed measures, random sequences, and the coset identity* | **31 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
 
-The technical spine of paper 4, and the one result that reaches outside this programme:
+The manuscript that was paper 3 — *The transfer function of subset-sum landscapes* —
+was absorbed into Part III at r130. All thirty-three of its theorem-like statements
+moved: twenty-two as content with their statuses, eight as calibration material with
+their ranges, two as named open problems, one split. Nothing was dropped, and the
+mapping is `lean/pnp/p3map_r121`. The files are in the git history, not in the tree.
+
+The technical spine of Part III, and the one result that reaches outside this programme:
 
 ```
     (1/v) Σ_{k<v} X(t + k/v)  =  (1 − 1/v)·log 2  +  (1/v)·X(v·t + τ_v) ,     X(t) = −log|cos πt| ,
@@ -68,7 +73,7 @@ level it does. **Work produced this way cannot be trusted on the author's word; 
 checkable, and checkable by someone who does not trust the author.** So every settled theorem
 goes into Lean and is replayed through the kernel by an independent checker that must first
 reject three deliberately poisoned modules; every number quoted in a paper must exist in a
-committed log; every statement must declare its status where it is stated; and seventeen mechanical
+committed log; every statement must declare its status where it is stated; and eighteen mechanical
 checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
 every mistake this process has actually made — including the ones a check was built to catch
 only after it had already happened, and the ones where the check itself was the defect.
@@ -102,7 +107,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **126 scripts, 196 logs**, all committed. A number with no log is treated as a number
+itself — **127 scripts, 198 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```
@@ -128,6 +133,7 @@ python3 tools/check.py
 | C15 | every reference to a sibling paper's numbered result resolves against that paper |
 | C16 | every paper discloses the use of AI tools **in the paper itself**, not only here |
 | C17 | every term this programme coined is glossed in a terminology table the reader can find |
+| C18 | the homepage, in its own repository, carries no retired name, no banned literal, and the same disclosure |
 
 A check that examined nothing **fails**: silence is good news only if the check spoke.
 
@@ -139,7 +145,7 @@ Papers are built with `pdflatex` (`paper/Makefile`). The Lean development builds
 
 | Path | Contents |
 |---|---|
-| `paper/` | The four papers, LaTeX source and built PDFs, with the figures. |
+| `paper/` | The three parts, LaTeX source and built PDFs, with the figures. |
 | `lean/pnp/Pnp/Theory/` | The formal development — the canon. |
 | `lean/pnp/Pnp/Experiments/` | Throwaway Lean experiments, kept for the record. |
 | `lean/pnp/*.py`, `*.log` | Numerical experiments and their logs. |

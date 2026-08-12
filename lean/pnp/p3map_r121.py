@@ -11,7 +11,17 @@ import os, re, collections
 
 PAPER = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), 'paper')
-src = open(os.path.join(PAPER, 'paper3.tex'), encoding='utf-8').read()
+SRC = os.path.join(PAPER, 'paper3.tex')
+if not os.path.exists(SRC):
+    raise SystemExit(
+        'paper3.tex was retired from the tree at r130, after Part III took all 33 of its\n'
+        'statements (MOVE 22 / CALIB 8 / OPEN 2 / SPLIT 1 / DROP 0).  This script produced\n'
+        'the mapping that justified the move; its output is frozen in p3map_r121.log and the\n'
+        'file itself is in the git history.  To re-run it:\n'
+        '    git show 34f8b1a^:paper/paper3.tex > /tmp/paper3.tex\n'
+        'and point PAPER at /tmp.  It is kept, rather than deleted, because the log is\n'
+        'evidence and evidence should say how it was made.')
+src = open(SRC, encoding='utf-8').read()
 src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
 ENV = re.compile(r'\\begin\{(theorem|proposition|lemma|corollary|definition|remark|problem'
                  r'|conjecture)\}(\[[^\]]*\])?\s*(?:\\label\{([^}]+)\})?(.*?)\\end\{\1\}', re.S)

@@ -1,0 +1,10 @@
+(1) reader-facing scan: 8 file(s)
+  -> 0 reader-facing reference(s)
+
+(2) functional: do the tools survive the removal?
+  check.py       exit 0  passes
+  terms_r128     exit 0  passes
+  p3map_r121     exit 1  stops with an explanation
+
+no reader-facing reference survives, and every tool handles the absence.
+the removal is safe.

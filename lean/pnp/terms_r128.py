@@ -11,7 +11,8 @@ import os, re, collections
 
 PAPER = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), 'paper')
-FILES = [('I','paper.tex'), ('II','paper2.tex'), ('(3)','paper3.tex'), ('III','paper4.tex')]
+# r130: paper3.tex retired from the tree; its vocabulary is Part III's now.
+FILES = [('I','paper.tex'), ('II','paper2.tex'), ('III','paper4.tex')]
 
 # Terms this programme coined or repurposed, as opposed to importing.  Listed by hand,
 # because "is this standard in additive number theory" is not a question a regex can answer.

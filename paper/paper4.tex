@@ -32,9 +32,10 @@
 \newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
 
 \title{Arithmetic landscapes III:\\
-deformed measures, random sequences, and the coset identity\\[4pt]
-\normalsize\textsf{(subtitle provisional until the Part-III assembly is complete)}}
-\author{Kentaro Amauchi\thanks{Independent researcher.}}
+deformed measures, random sequences, and the coset identity}
+\author{Kentaro Amauchi\thanks{Independent researcher.
+\href{mailto:amkn.sub03@gmail.com}{amkn.sub03@gmail.com},
+\url{https://mathlab0911.github.io/}}}
 \date{\today}
 
 % r120: cross-document references, made checkable.
@@ -77,7 +78,7 @@ measure deforms the gap series of Part~I into an explicit family
 $\Gamma^{(q)}$, and we prove that the fair coin minimises it for every set,
 with equality only at $q=\tfrac12$; the argument is termwise and is
 machine-checked in Lean~4. We derive the corresponding transfer function $\Phi^{(q)}$ and
-show that the bias splits the transfer-function strand's~\cite{P3} symmetric pair of strata in the ratio $q:(1-q)$, so that
+show that the bias splits the symmetric pair of strata of \S\ref{sec:transfer} in the ratio $q:(1-q)$, so that
 the biased landscape responds to a shift of target at first order; the resulting slope is a
 point prediction with no free parameter, and it is confirmed against the natural alternative
 to within $0.4\%$. Replacing the primes by a random odd sequence, we prove that the extremal
@@ -2107,8 +2108,9 @@ quoted in Remark~\ref{rem:closing}.
 \bibitem{P1} K.~Amauchi, \emph{Arithmetic landscapes I: the gap series}. Manuscript, 2026.
 \bibitem{P2} K.~Amauchi, \emph{Arithmetic landscapes II: asymptotic flatness of subset-sum
 landscapes of primes}. Manuscript, 2026.
-\bibitem{P3} K.~Amauchi, \emph{The transfer function of subset-sum landscapes}. Manuscript,
-2026. Being absorbed into the present Part; see the note on scope.
+% \bibitem{P3} retired at r130: the transfer-function manuscript is this Part now, and a
+% paper does not cite itself.  The material and its statuses are in \S\ref{sec:transfer};
+% the mapping from the old manuscript is lean/pnp/p3map_r121.
 \end{thebibliography}
 
 \end{document}

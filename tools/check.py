@@ -55,8 +55,11 @@ PAPER_JA = os.path.join(ROOT, 'paper-ja')
 
 # The Japanese editions and the English sources they translate.  The pairing is irregular
 # (paper1_ja translates paper.tex, not paper1.tex), so it is written out rather than derived.
+# r130: paper3 / paper3_ja retired from the tree once Part III carried all 33 of their
+# statements.  The scopes of C9, C13, C15 and C17 are updated in the same commit as the
+# removal -- the F60 lesson applied in advance rather than after.
 JA_PAIRS = [('paper1_ja.tex', 'paper.tex'), ('paper2_ja.tex', 'paper2.tex'),
-            ('paper3_ja.tex', 'paper3.tex'), ('paper4_ja.tex', 'paper4.tex')]
+            ('paper4_ja.tex', 'paper4.tex')]
 JA_TO_EN = dict(JA_PAIRS)
 
 fails = []
@@ -373,7 +376,7 @@ def c9_readme_counts():
     # of this loop answered a missing row with `continue` -- so renaming the table would have
     # switched the page check off without a word.  A row that cannot be found is now a failure,
     # and the number of rows checked is counted into the note.
-    ROWS = ((r'I', 'paper'), (r'II', 'paper2'), (r'\(3\)', 'paper3'), (r'III', 'paper4'))
+    ROWS = ((r'I', 'paper'), (r'II', 'paper2'), (r'III', 'paper4'))
     rows_seen = 0
     try:
         import subprocess
@@ -834,8 +837,9 @@ def c16_ai_disclosure():
 # introduced.  Every live paper now carries a short terminology table, and this check keeps
 # it complete: a term used in the body must be glossed in a table the reader can find.
 #
-# paper3.tex is excluded: it is superseded, carries a banner saying so, and is kept only
-# for the record.  What the check cannot see: whether the gloss is any good, and whether a
+# paper3.tex was excluded here while it was superseded but still in the tree; it was
+# retired at r130 and the exclusion list is now empty, kept for the next time.
+# What the check cannot see: whether the gloss is any good, and whether a
 # term we consider standard actually is.  The list below is maintained by hand for exactly
 # that reason -- "is this standard in additive number theory" is not a question a regex
 # answers.
@@ -846,7 +850,7 @@ COINED_TERMS = [
     'coset identity', 'sub-peak', 'annulus profile', 'deep minor arc', 'ground state',
     'valley', 'ripple', 'landscape', 'energy',
 ]
-SUPERSEDED_PAPERS = {'paper3.tex'}
+SUPERSEDED_PAPERS = set()
 
 def c17_terminology():
     # r128, caught by the negative control: the first version searched the raw source, so
@@ -889,10 +893,56 @@ def c17_terminology():
                  'table: %d use(s) of %d term(s)' % (checked, len(COINED_TERMS)))
 
 
+# ------------------------------------------------------------------ C18 (F60, F64)
+# The homepage is a reader-facing artefact of this project that lives in a different
+# repository, so every check written so far walked straight past it.
+#
+# Found at r130, while updating it for the push: the homepage still defined Gamma by the
+# enumeration form, still called it an "order-sensitive invariant", and still printed
+# 5.34920 -- the erratum banned in C11 at r118, and banned there over paper/ and paper-ja/
+# only.  It also carried no AI disclosure and advertised four papers.  That is F60's shape
+# for the third time and F64's for the second: the statement was corrected where the check
+# could see it, and left standing where the reader could.
+#
+# So this check reaches out of the tree.  It is deliberately shallow -- banned literals,
+# retired stems, the disclosure -- because a deep check on a document in another repository
+# would go stale silently, which is the failure it exists to prevent.  If the checkout is
+# not present it says so rather than passing: an unread artefact is not a clean one.
+HOMEPAGE = os.path.join(os.path.dirname(ROOT), 'homepage', 'index.html')
+HOMEPAGE_RETIRED = [
+    ('paper3', 'the retired third paper'),
+    ('The transfer function of subset-sum landscapes', 'its retired title'),
+    ('The gap series of an integer sequence', 'the pre-series title of Part I'),
+    ('four papers', 'the series is three parts'),
+]
+
+def c18_homepage():
+    if not os.path.exists(HOMEPAGE):
+        notes.append('C18/F60 homepage not checked out beside this repository, so the check '
+                     'made no observation (legitimate, but not a pass): %s' % HOMEPAGE)
+        return
+    src = open(HOMEPAGE, encoding='utf-8', errors='replace').read()
+    bad = []
+    for lit, why in C11_BANNED.items():
+        if lit in src:
+            bad.append('the homepage prints %r -- %s' % (lit, why))
+    for stem, why in HOMEPAGE_RETIRED:
+        if re.search(re.escape(stem), src, re.I):
+            bad.append('the homepage still names %r (%s)' % (stem, why))
+    if not re.search(r'Use of AI tools', src, re.I):
+        bad.append('the homepage carries no AI disclosure, while every paper does (F64)')
+    if bad:
+        fail('C18/F60', '; '.join(bad))
+    notes.append('C18/F60 homepage checked as a reader-facing artefact: %d banned literal(s), '
+                 '%d retired name(s), and the disclosure' % (len(C11_BANNED),
+                                                             len(HOMEPAGE_RETIRED)))
+
+
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
-          c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology)
+          c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology,
+          c18_homepage)
 
 if __name__ == '__main__':
     for fn in CHECKS:
