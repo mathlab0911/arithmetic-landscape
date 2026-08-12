@@ -74,7 +74,7 @@ level it does. **Work produced this way cannot be trusted on the author's word; 
 checkable, and checkable by someone who does not trust the author.** So every settled theorem
 goes into Lean and is replayed through the kernel by an independent checker that must first
 reject three deliberately poisoned modules; every number quoted in a paper must exist in a
-committed log; every statement must declare its status where it is stated; and eighteen mechanical
+committed log; every statement must declare its status where it is stated; and nineteen mechanical
 checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
 every mistake this process has actually made — including the ones a check was built to catch
 only after it had already happened, and the ones where the check itself was the defect.
@@ -135,6 +135,7 @@ python3 tools/check.py
 | C16 | every paper discloses the use of AI tools **in the paper itself**, not only here |
 | C17 | every term this programme coined is glossed in a terminology table the reader can find |
 | C18 | the homepage, in its own repository, carries no retired name, no banned literal, and the same disclosure |
+| C19 | every Japanese edition has the same labels, theorem environments and status declarations as its source |
 
 A check that examined nothing **fails**: silence is good news only if the check spoke.
 

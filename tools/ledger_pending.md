@@ -294,3 +294,33 @@ are the same class.
 
 The apparatus is structurally blind to everything that is configuration rather than
 content, and the failure ledger should say so rather than let a green run imply otherwise.
+
+## r131 — a check that reads the artefact but not the property (append to F60)
+
+C13 was written *for* the Japanese editions, and reads them on every run. Translating Part III
+meant measuring the skeleton of the other two against their sources, and the measurement found
+what C13 structurally could not:
+
+- `paper2_ja` was missing **six of its seven status declarations**, including the one on the
+  main theorem, and two whole remarks;
+- `paper1_ja` was missing the `\label` its siblings cross-reference.
+
+Each was content the English gained after the translation was made. C13 compares *numbers*;
+none of the missing material was a number.
+
+> C13 was reading the file. It was not reading the property. "Is the artefact checked" and
+> "is *this* property of it checked" are different questions, and only the second one is ever
+> the one that matters.
+
+C19 compares the skeleton: label set, count of each theorem-like environment, count of
+`\STATUS`. Three negative controls (delete a label, delete a remark, delete a status) all fire.
+
+Corollary worth keeping: a translation that silently drops the status labels is exactly the
+overclaim C8 exists to prevent, made invisible by being in the other language. The Japanese
+editions are what Kentaro reads and approves from, so an unlabelled Japanese theorem is an
+approval given to a claim whose status the approver could not see.
+
+Also found in the same pass, by a scan no check had run: a Hangul character (`검`) inside the
+word 検査 in the AI-disclosure paragraph of **both** existing Japanese editions — one bad
+keystroke, copied when the paragraph was. Fixed; the scan is worth keeping in the toolbox even
+though it is not yet a check.

@@ -986,11 +986,73 @@ def c18_landing_pages():
                  % (seen, len(C11_BANNED), len(RETIRED_NAMES), excused))
 
 
+# ------------------------------------------------------------------ C19 (F60)
+# A Japanese edition must have the same skeleton as the paper it translates.
+#
+# C13 reads the Japanese editions -- it was written for exactly that -- but it only compares
+# NUMBERS.  Written at r131 while translating Part III, when a parity measurement over the
+# other two editions found what C13 could not see: paper2_ja was missing SIX of its seven
+# status labels, including the one on the main theorem, and two whole remarks; paper1_ja was
+# missing the \label the siblings cross-reference.  Every one of those is content the English
+# gained after the translation was made, and nothing propagated it.
+#
+# So a second check over the same files, asking a different question.  C13 asks whether the
+# numbers agree; C19 asks whether anything is missing.  Neither implies the other, and the
+# lesson they encode together is the r130 one: the question is not whether the artefact is
+# checked but whether THIS PROPERTY of it is.
+#
+# What it compares: labels (a missing one is a missing statement, a section, or a
+# cross-reference target), the count of each theorem-like environment, and the count of
+# \STATUS -- because a translation that drops the status labels is exactly the overclaim C8
+# exists to prevent, made invisible by being in the other language.
+PARITY_ENVS = ('theorem', 'proposition', 'lemma', 'corollary', 'definition',
+               'problem', 'conjecture', 'remark')
+
+def _uncommented(path):
+    src = open(path, encoding='utf-8', errors='replace').read()
+    return '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
+
+def c19_translation_parity():
+    bad, checked = [], 0
+    if not os.path.isdir(PAPER_JA):
+        notes.append('C19/F60 no paper-ja/ tree, so the check made no observation '
+                     '(legitimate, but not a pass)')
+        return
+    for ja, en in JA_PAIRS:
+        pja, pen = os.path.join(PAPER_JA, ja), os.path.join(PAPER, en)
+        if not os.path.exists(pja):
+            continue          # C13 already reports the absence; one voice per fact
+        J, E = _uncommented(pja), _uncommented(pen)
+        checked += 1
+        lj = set(re.findall(r'\\label\{([^}]+)\}', J))
+        le = set(re.findall(r'\\label\{([^}]+)\}', E))
+        if le - lj:
+            bad.append('%s is missing %d label(s) its source has, so that much of the paper '
+                       'is not in the translation: %s'
+                       % (ja, len(le - lj), ', '.join(sorted(le - lj)[:8])))
+        for env in PARITY_ENVS:
+            a = len(re.findall(r'\\begin\{%s\}' % env, E))
+            b = len(re.findall(r'\\begin\{%s\}' % env, J))
+            if a != b:
+                bad.append('%s has %d %s environment(s) against %d in %s' % (ja, b, env, a, en))
+        a = len(re.findall(r'\\STATUS\{', E))
+        b = len(re.findall(r'\\STATUS\{', J))
+        if a != b:
+            bad.append('%s declares %d status(es) against %d in %s -- a translation that '
+                       'drops them is the overclaim C8 exists to prevent, in the other '
+                       'language' % (ja, b, a, en))
+    if bad:
+        fail('C19/F60', '; '.join(bad))
+    expect_subjects('C19/F60', checked, 'translation pairs')
+    notes.append('C19/F60 Japanese editions checked for the same skeleton as their source '
+                 '(labels, theorem environments, status declarations): %d pair(s)' % checked)
+
+
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
           c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology,
-          c18_landing_pages)
+          c18_landing_pages, c19_translation_parity)
 
 if __name__ == '__main__':
     for fn in CHECKS:
