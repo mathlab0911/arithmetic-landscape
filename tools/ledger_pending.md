@@ -67,3 +67,29 @@ Fixed by making the comment point at the theorem instead of paraphrasing it — 
 form that cannot go stale in the same way. The naming collision itself is recorded at the
 definition in `Landscape.lean`; renaming the canonical identifier is deferred until there is
 another reason to redo the kernel replay.
+
+## r133 — the negative control fired 240x, in the wrong direction (append to F55)
+
+Checking the Edgeworth form that the R1 attack design rests on, against exact dynamic
+programming. The harness assigned the second-order coefficient twice and the second assignment
+negated it, so the column labelled *true sign* carried the corruption and the column labelled
+*flipped* carried the truth. The control reported the fit **improving by 240× under
+corruption**.
+
+That is how the sign bug was found. The control did not catch a defect in the theory; it caught
+one in the instrument. Both count.
+
+> **A negative control that fires the wrong way is not a failed control. It is a control
+> reporting that the labels are crossed** — and it is the only instrument that can report
+> that, because every other output looks the same either way.
+
+Two operational rules from it. **Write the sign out once, in one assignment**; the bug survived
+reading because the second line looked like a refinement of the first. And **state the
+direction the control must move before running it** — "the fit must get worse" is checkable,
+"the control fires" is not. The corrected harness prints the ratio and the word OK, and 12 of
+12 fire at 21× to 455×.
+
+Without it, sections 3 and 4 of `spec_r1_r133.md` would have shipped with an inverted sign, and
+the out-of-sample prediction in section 4 would have been fitted to the wrong quantity — which
+is the failure mode where a control matters most, because the surrounding numbers all look
+reasonable.
