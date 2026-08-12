@@ -1,0 +1,83 @@
+post-TTL surface sweep (F61) -- r132, 2026-08-12
+=================================================
+
+fable's r132 item 1.  Its own retraction of the round before is the reason this exists: a
+cold fetch of a MUTABLE path served a render from one push earlier, with a defect that had
+already been fixed, and the draft report nearly filed it as live.  So this sweep separates
+the two questions it conflated.
+
+  the immutable revision  answers "is the published state correct?"
+  the mutable path        answers "is that what a reader sees right now?"
+
+Both were green at r131 for the first question.  This sweep is the second one, run after
+the cache windows, in a real browser -- the session fetcher deduplicates within the hour, so
+a re-read of a URL it has already seen returns the first answer and cannot settle anything.
+
+fetched 2026-08-12, 12:50 JST (03:50 UTC), Chrome, no cache bypass, plain navigation.
+
+
+1. https://mathlab0911.github.io/   -- the bare URL
+-----------------------------------------------------
+CAUGHT UP.  This is the surface that served the retracted page for about a minute at r131,
+and the one printed in every author footnote and in the mail that went to two
+mathematicians.  It now serves the rewrite:
+
+  - opens with r_A(n) and the truncations, not with our own invariant;
+  - the layer definition of Gamma, and 5.3492879... (not the banned 5.34920);
+  - three parts, current titles, current statuses, including "MIXED BY SECTION" for III;
+  - the sentence about one named open problem shared by three theorems;
+  - a Use of AI tools section;
+  - "Last updated: 12 August 2026".
+
+No occurrence of the retired vocabulary, of "order-sensitive", or of four papers as a
+present-tense claim.
+
+
+2. https://github.com/mathlab0911/arithmetic-landscapes   -- the rendered README
+--------------------------------------------------------------------------------
+CAUGHT UP.  Rendered, not raw, because that is the page a reader lands on:
+
+  - the opening paragraph defines r_A(n) and writes lm_A(n)/r_A(n) -> Gamma(A);
+    deg_A does not appear anywhere on the page;
+  - "every asymptotic statement in Parts II and III is unaffected" -- not "papers 2-4";
+  - the papers table has exactly three rows, I / II / III;
+  - the retirement paragraph is present, with the p3map pointer and "in the git history,
+    not in the tree";
+  - "nineteen mechanical checks";
+  - the check table runs C1 to C19, with C19 reading "every Japanese edition has the same
+    labels, theorem environments and status declarations as its source";
+  - "127 scripts, 199 logs";
+  - no BOM artefact at the head of the rendered document.
+
+
+3. the About description  -- the class no check can reach
+----------------------------------------------------------
+CAUGHT UP.  It is not in any file, so the evidence is the page title, which GitHub builds
+from it.  Served:
+
+  "mathlab0911/arithmetic-landscapes: Arithmetic landscapes I-III: the gap series Gamma(A),
+   and what it says about the local structure of subset sums.  Papers, a Lean 4
+   formalisation with an independent kernel replay, and every numerical experiment with its
+   log."
+
+The pre-series title of Part I is gone.  fable's r132 asked for this specifically because
+memory recorded the fix and a stale page was the only evidence against it -- which is the
+same confusion the round is about, in the other direction: a stale surface is not evidence
+that a change did not happen, any more than a fresh one is evidence that it did.  The
+immutable check for a setting is that there is none; this is a human-verified item and the
+ledger now says so.
+
+
+verdict
+-------
+Three surfaces, three caught up, roughly twenty-two hours after the push.  Nothing
+outstanding.  The r131 observation stands unchanged as a fact about the window and not
+about the push: for some minutes after a push, the bare URL and the rendered README can
+serve the previous state.
+
+
+what this sweep could not see
+-----------------------------
+  - Any reader's own cache, which is not observable from here at all.
+  - The PDFs as rendered by a viewer; only text surfaces were read.
+  - Whether the mathematics is correct.  Nothing here is about that.

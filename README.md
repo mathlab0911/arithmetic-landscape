@@ -108,7 +108,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **127 scripts, 199 logs**, all committed. A number with no log is treated as a number
+itself — **127 scripts, 202 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```

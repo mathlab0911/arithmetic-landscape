@@ -460,10 +460,18 @@ checkable hypothesis. To our knowledge Theorem~C, and the reduction of
 $\lm/r$ to the flatness of truncated representation counts, are new. That
 sentence is a literature pass and not a proof of novelty: it records the absence
 of evidence over the searches we made, and the searches we made are ordinary
-ones. In particular the gap series has not been looked up as an integer sequence
-in a way we can point at, so if $\Gamma$ or the numerators
-$3,11,29,69,151,\dots$ of $2^{k}\Gamma(P_k)$ are already catalogued, we would be
-glad to be told.
+ones. \STATUS{literature pass, not a proof of novelty: absence of evidence over
+the searches made, at a database of the size and date stated}
+The sequence searches were made and are recorded. On 2026-08-11, against a
+database of $398\,208$ sequences, none of four queries to the OEIS returned a
+match: the numerators $3,11,29,69,151,\dots$ of $2^{k}\Gamma(P_k)$; the digits
+of $\Gamma(P)$; the number of strict local minima of the first $k$ odd primes at
+the central target; and the number of ground states of the same instances. A
+positive control run first --- the decimal digits of $\sqrt2$ --- returned
+\texttt{A002193} at the head of its results, so the route does find a sequence
+that is there. The full record, with the exact query strings and the database
+timestamp, is \texttt{lean/pnp/oeis\_r119.log}. The database grows; if $\Gamma$
+or any of these is catalogued now, we would be glad to be told.
 
 The closest precursor is Alyahya and Rowe~\cite{AR14}, who observed empirically
 that the number of local optima in the $1$-bit-flip NPP landscape is strongly

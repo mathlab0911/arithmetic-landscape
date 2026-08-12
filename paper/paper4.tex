@@ -1595,9 +1595,16 @@ $(1/\sqrt2)^{|A|}>0$.
 
 \subsection{The rate, and what is still missing}\label{sec:rate}
 
+% The label says prop: and the environment is a theorem.  The label is older than the
+% result: this was a proposition until the constants were written out, and the promotion
+% did not rename it.  Left as it is deliberately -- a label rename is a deletion, and
+% deletions do not announce themselves at build time (F52), so renaming an internal name
+% that no reader sees would be churn with a failure mode and no benefit.
 \begin{theorem}[minor-arc rate for random odd sequences]\label{prop:rate}
-Let $A$ be drawn from the Cram\'er model above and let
-$F_A(\theta)=\prod_{a\in A}|\cos(\pi a\theta)|$. Then almost surely
+Let $A=A(N)$ be drawn from the Cram\'er model above and let
+$F_A(\theta)=\prod_{a\in A}|\cos(\pi a\theta)|$. Write $b=|A|$. The running parameter is
+$N$, and $b=b(N)\to\infty$ almost surely; the limit below is along $N\to\infty$. Then almost
+surely
 \[
    \lim_{b\to\infty}\ \max_{\theta\ \mathrm{minor}}\ F_A(\theta)^{1/b}\;=\;\frac1{\sqrt2}.
 \]
@@ -1607,9 +1614,11 @@ Step~$2''$ shows that this radius is large enough, so nothing is left unowned.
 
 \STATUS{proved, with every constant written out. The proof is the four steps below rather
 than a \texttt{proof} environment, so it is worth saying here that it is one: no step is
-deferred, no constant is fitted, and the only external input is the arithmetic half,
-Theorem~\ref{thm:modfour}, which is proved in this paper. See Remark~\ref{rem:ratestatus} for
-what an independent reader should check first.}
+deferred, no constant is fitted, and the only external \emph{input} is the arithmetic half,
+Theorem~\ref{thm:modfour}, which is proved in this paper. That is a statement about inputs
+and not about exposition: three standard estimates are applied in the form we need without
+being proved, and Remark~\ref{rem:ratestatus} names them. The two sentences are compatible
+and are meant to be read together, which is why this one points at the other.}
 
 The arithmetic half is Theorem~\ref{thm:modfour}. Here is the rest, in the steps it
 takes, with the constants named. Fix the Dirichlet parameter $Q=\lfloor\sqrt N\rfloor$

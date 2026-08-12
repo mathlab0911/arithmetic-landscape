@@ -66,6 +66,23 @@ fails = []
 notes = []
 
 
+def _read(path):
+    """Read a whole file and CLOSE it.
+
+    r132: twenty sites did `open(...).read()` and leaked the handle.  Harmless at this scale
+    -- CPython closes them on collection -- but `python3 -W always tools/check.py` printed
+    two hundred and thirty ResourceWarnings, and a tool that cries wolf on its own output
+    trains its reader to skip the warnings that matter.  Everything goes through here now.
+    """
+    with open(path, encoding='utf-8', errors='replace') as fh:
+        return fh.read()
+
+
+def _lines(path):
+    """The lines of a file, newline-stripped, with the handle closed."""
+    return _read(path).split('\n')
+
+
 def fail(check, msg):
     fails.append(f'{check}: {msg}')
 
@@ -112,14 +129,14 @@ def c2_numbers():
         return
     allow = set()
     if os.path.exists(ALLOW):
-        allow = {l.split('#')[0].strip() for l in open(ALLOW, encoding='utf-8')}
+        allow = {l.split('#')[0].strip() for l in _lines(ALLOW)}
         allow.discard('')
     blob = ''
     for f in os.listdir(PNP):
         if f.endswith('.log'):
-            blob += open(os.path.join(PNP, f), encoding='utf-8', errors='replace').read()
+            blob += _read(os.path.join(PNP, f))
     quoted, bad = set(), []
-    for line in open(rep, encoding='utf-8').read().splitlines():
+    for line in _lines(rep):
         if not line.lstrip().startswith('|'):
             continue
         for tok in re.findall(r'\d+\.\d{2,}', line):
@@ -157,11 +174,11 @@ def c4_labels():
     os.makedirs(LABDIR, exist_ok=True)
     for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
         stem = tex[:-4]
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = _read(os.path.join(PAPER, tex))
         now = set(re.findall(r'\\label\{([^}]+)\}', src))
         snap = os.path.join(LABDIR, stem + '.txt')
         if os.path.exists(snap):
-            was = {l.strip() for l in open(snap, encoding='utf-8') if l.strip()}
+            was = {x.strip() for x in _lines(snap) if x.strip()}
             gone = was - now
             if gone:
                 fail('C4/F40', f'{tex}: label(s) removed since the last run: '
@@ -206,7 +223,7 @@ def c6_pending():
                    'nowhere to go, so it will be lost at the next skill save (see the skill, '
                    'section 7.0)')
         return
-    heads = [l.strip() for l in open(p, encoding='utf-8') if l.startswith('## ')]
+    heads = [l.strip() for l in _lines(p) if l.startswith('## ')]
     if heads:
         notes.append('C6      ledger entries PENDING a skill save: '
                      + '; '.join(h[3:] for h in heads))
@@ -235,13 +252,13 @@ def c7_lean_citations():
                       r"(?:theorem|lemma|def|abbrev)\s+([A-Za-z_][A-Za-z0-9_']*)")
     for f in os.listdir(thy):
         if f.endswith('.lean'):
-            for line in open(os.path.join(thy, f), encoding='utf-8', errors='replace'):
+            for line in _lines(os.path.join(thy, f)):
                 m = decl.match(line)
                 if m:
                     canon.add(m.group(1))
     cited = set()
     for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = _read(os.path.join(PAPER, tex))
         for nm in re.findall(r'\\Lean\{([^}]*)\}', src):
             nm = nm.replace('\\_', '_').strip()
             if nm and not LEAN_NOISE.match(nm):
@@ -274,7 +291,7 @@ QUALIFIED = ('derivation', 'outline', 'sketch', 'idea', 'heuristic', 'informal',
 def c8_status_at_statement():
     checked, bad = 0, []
     for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        lines = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read().split('\n')
+        lines = _read(os.path.join(PAPER, tex)).split('\n')
         stack, envs = [], []
         for i, L in enumerate(lines):
             for e in STATUS_ENVS + ('conjecture',):
@@ -319,12 +336,12 @@ def c9_readme_counts():
     if not os.path.exists(path):
         notes.append('C9/F59  skipped (no README.md)')
         return
-    src = open(path, encoding='utf-8', errors='replace').read()
+    src = _read(path)
     theory = os.path.join(ROOT, 'lean', 'pnp', 'Pnp', 'Theory')
     lean_files = sorted(f for f in os.listdir(theory) if f.endswith('.lean')) if os.path.isdir(theory) else []
     n_thm = 0
     for f in lean_files:
-        for line in open(os.path.join(theory, f), encoding='utf-8', errors='replace'):
+        for line in _lines(os.path.join(theory, f)):
             if re.match(r'\s*(theorem|lemma)\s', line):
                 n_thm += 1
     # the replayed set is the import closure of the root module, not the directory
@@ -338,7 +355,7 @@ def c9_readme_counts():
         p = os.path.join(proj, *m.split('.')) + '.lean'
         if not os.path.exists(p):
             continue
-        for line in open(p, encoding='utf-8', errors='replace'):
+        for line in _lines(p):
             g = re.match(r'\s*import\s+(Pnp[\w.]*)', line)
             if g:
                 stack.append(g.group(1))
@@ -429,7 +446,7 @@ REPO_URL = 'https://github.com/mathlab0911/arithmetic-landscapes'
 def c10_repo_url():
     bad, seen = [], 0
     for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = _read(os.path.join(PAPER, tex))
         urls = re.findall(r'https?://github\.com/mathlab0911/[A-Za-z0-9_.\-]*', src)
         if not urls:
             bad.append('%s cites the repository nowhere -- a reader of it alone cannot find '
@@ -549,8 +566,7 @@ def c11_constants():
         scan += [(ja, f) for f in sorted(os.listdir(ja)) if f.endswith('.tex')]
     scan.append((ROOT, 'README.md'))   # r120: the README is prose about the papers too
     for where, tex in scan:
-        for ln, line in enumerate(open(os.path.join(where, tex), encoding='utf-8',
-                                       errors='replace'), 1):
+        for ln, line in enumerate(_lines(os.path.join(where, tex)), 1):
             if line.lstrip().startswith('%'):
                 continue
             for lit, why in C11_BANNED.items():
@@ -601,7 +617,7 @@ def c12_cited_scripts():
     pat = re.compile(r'\\texttt\{([A-Za-z0-9]+(?:\\_[A-Za-z0-9]+)+)\}')
     cited = {}
     for tex in sorted(f for f in os.listdir(PAPER) if f.endswith('.tex')):
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = _read(os.path.join(PAPER, tex))
         for m in pat.finditer(src):
             nm = m.group(1).replace('\\_', '_')
             if re.search(r'_r\d+$', nm):
@@ -640,7 +656,7 @@ def c13_translation_drift():
 
     def literals(path):
         out = {}
-        for ln, line in enumerate(open(path, encoding='utf-8', errors='replace'), 1):
+        for ln, line in enumerate(_lines(path), 1):
             if line.lstrip().startswith('%'):
                 continue
             for m in num.finditer(line):
@@ -709,7 +725,7 @@ def c14_enumeration_form():
     files.append((ROOT, 'README.md'))
     for where, tex in files:
         if True:
-            src = open(os.path.join(where, tex), encoding='utf-8', errors='replace').read()
+            src = _read(os.path.join(where, tex))
             src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
             n = len(pat.findall(re.sub(r'\s+', ' ', src)))
             looked += 1
@@ -756,7 +772,7 @@ def c15_cross_document():
             if not os.path.exists(path):
                 aux_cache[stem] = None
             else:
-                src = open(path, encoding='utf-8', errors='replace').read()
+                src = _read(path)
                 aux_cache[stem] = {m.group(1): m.group(2) for m in newlabel.finditer(src)}
         return aux_cache[stem]
 
@@ -769,7 +785,7 @@ def c15_cross_document():
     if os.path.isdir(PAPER_JA):
         scan += [(PAPER_JA, f) for f in sorted(os.listdir(PAPER_JA)) if f.endswith('.tex')]
     for where, tex in scan:
-        src = open(os.path.join(where, tex), encoding='utf-8', errors='replace').read()
+        src = _read(os.path.join(where, tex))
         src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
         for stem, label, printed in xref.findall(src):
             checked += 1
@@ -824,7 +840,7 @@ def c16_ai_disclosure():
         scan += [(PAPER_JA, f) for f in sorted(os.listdir(PAPER_JA))
                  if f.endswith('.tex') and f not in NOT_A_PAPER]
     for where, tex in scan:
-        src = open(os.path.join(where, tex), encoding='utf-8', errors='replace').read()
+        src = _read(os.path.join(where, tex))
         src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
         if AI_SECTION in src or AI_SECTION_JA in src:
             seen += 1
@@ -881,12 +897,11 @@ def c17_terminology():
             j = m.end() + nxt.start() if nxt else len(src)
             out += src[m.start():j]
         return out
-    base = STRIP.sub(' ', tables(open(os.path.join(PAPER, 'paper.tex'), encoding='utf-8',
-                                      errors='replace').read()))
+    base = STRIP.sub(' ', tables(_read(os.path.join(PAPER, 'paper.tex'))))
     bad, checked = [], 0
     for tex in sorted(f for f in os.listdir(PAPER)
                       if f.endswith('.tex') and f not in SUPERSEDED_PAPERS):
-        src = open(os.path.join(PAPER, tex), encoding='utf-8', errors='replace').read()
+        src = _read(os.path.join(PAPER, tex))
         src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
         own = STRIP.sub(' ', tables(src))
         src = STRIP.sub(' ', src)
@@ -975,7 +990,7 @@ def c18_landing_pages():
                          % (name, path))
             continue
         seen += 1
-        src = open(path, encoding='utf-8', errors='replace').read()
+        src = _read(path)
         for lit, why in C11_BANNED.items():
             if lit in src:
                 bad.append('%s prints %r -- %s' % (name, lit, why))
@@ -1019,7 +1034,7 @@ PARITY_ENVS = ('theorem', 'proposition', 'lemma', 'corollary', 'definition',
                'problem', 'conjecture', 'remark')
 
 def _uncommented(path):
-    src = open(path, encoding='utf-8', errors='replace').read()
+    src = _read(path)
     return '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
 
 def c19_translation_parity():
