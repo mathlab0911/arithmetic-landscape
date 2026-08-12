@@ -229,3 +229,27 @@ The general habit this suggests: **run a new lemma against the cases you already
 before running it against the ones you do not.** The table that produced this had six moduli
 and two profiles, and the value came entirely from the single cell where the answer was
 already known and the lemma disagreed with it.
+
+## r140 — the degenerate case was a theorem, and it nearly closed the lead (append to F30)
+
+Testing whether Γ says anything about numerical semigroups, the first control ruled out the
+obvious confounder: at fixed smallest generator the correlation with the Frobenius number
+survives at 0.65–0.80, null control 0.17.
+
+The second control was the one that mattered. Γ has a closed form,
+`Γ = a₁/2 + a₂/4 + ⋯ + a_{k−1}/2^{k−1} + a_k/2^{k−1}`, and from it:
+**at `k = 2` Γ is exactly the mean, and at `k = 3` with `a₁` fixed it is affine in `a₂+a₃`, so
+it is perfectly correlated with the mean.** Not "approximately" — provably. That is why the
+measured correlations at `k = 3` matched the mean's to four decimals, and it means no amount of
+data at small `k` could ever have shown Γ carrying its own signal.
+
+> **Where a closed form exists, the degenerate cases are theorems rather than data points, and
+> they are the cheapest place to discover that your statistic is something else wearing a
+> different name.** Evaluate the closed form at the smallest cases *before* running the
+> correlation, not after.
+
+F30 already says: before a decisive test, check algebraically that the quantity is independent
+of what you have already measured. This is the same rule at the other end — check algebraically
+what the quantity *degenerates to*, because a statistic that collapses to a familiar one in the
+small cases is probably a perturbation of it in the large ones. Γ turned out not to be, but
+only from `k ≥ 5` and only by 0.01–0.04.
