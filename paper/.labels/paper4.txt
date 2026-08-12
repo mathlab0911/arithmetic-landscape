@@ -30,6 +30,7 @@ prob:R1
 prop:R1done
 prop:alphalb
 prop:rate
+prop:redresidue
 prop:tilted
 prop:tiltlclt
 prop:twopower
@@ -46,6 +47,7 @@ rem:lean22
 rem:leancoset
 rem:leanmodfour
 rem:measurefree
+rem:modfourcorollary
 rem:mushift
 rem:noKappa
 rem:nocover
@@ -63,6 +65,7 @@ rem:sign
 rem:signalfraction
 rem:sixagain
 rem:slack
+rem:surrogate
 rem:threshold
 rem:tiltslope
 rem:twoclasses

@@ -278,3 +278,42 @@ reached.
 
 *Caught by the tooling rather than by me: the write hook warned at 19.8 KB against a 24.4 KB
 read limit. Without it the next cold session would have found an index it could not read.*
+
+---
+
+## r141 — F60, instance six: the translation lags the appendix, and C19 caught it in four days
+
+Appendix A went into `paper4.tex`; `check.py` returned two FAILs and neither was in the appendix:
+
+```
+FAIL C9/F59: README says 34 pp., PDF has 32 pp.
+FAIL C19/F60: paper4_ja.tex is missing 12 label(s) its source has …
+```
+
+C9 fired because the 34-page build lived in `/tmp/aux` and had not been copied back — *the PDF a
+reader downloads is not the PDF I compiled.* C19 fired because the Japanese edition had none of
+the appendix.
+
+> **C19 was built at r131 to catch exactly this and caught it at r141, on its author, ten rounds
+> later.** That is the argument for mechanical checks in one line: the check was not written
+> because I was careless once, it was written because I will be careless again, and the second
+> time I was the one it caught.
+
+The same round also produced the C9 variant worth naming separately: I *fixed* the README to 35
+pp. from the Japanese build, and C9 failed again because the English PDF is 34. The count in the
+README is a count of a specific artefact, and "the paper is 35 pages" was true of a different
+file. **A number is only checkable if it names which file it counts.**
+
+## r142 — the external verification could not see what it was verifying
+
+Post-push, the SHA-pinned raw fetch of `paper4.tex` returned 1,369 lines against 2,378 local, and
+a grep for `Appendix` in the fetched text found nothing. Two readings were available: the push
+did not contain the appendix, or the fetch was truncated. The distinguishing test was cheap —
+`Use of AI tools`, which has been at the end of that file since r116, was also absent — so the
+tail was missing, i.e. the fetch was truncated, not the commit. Verified instead by fetching the
+small new artefact `r1proof_r141.log`, which came back complete.
+
+> **When a verification tool disagrees with the thing it verifies, find a fact you already know
+> and check whether the tool can see *that*.** A tool that cannot see a known fact is not
+> reporting on the unknown one. The cheap version of this is: verify with the smallest artefact
+> that the commit is supposed to contain, not the largest.

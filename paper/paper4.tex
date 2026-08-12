@@ -357,6 +357,43 @@ for every $t$, with equality exactly when $vt+\tau_v\in\mathbb{Z}$.
 $X\ge0$.
 \end{proof}
 
+\begin{remark}[what a surrogate costs, before any equidistribution input]\label{rem:surrogate}
+\STATUS{proved (both inequalities and all three means); the ratios are arithmetic.
+Measured for confirmation only, \texttt{leadc\_r143}.}
+A minor-arc argument for a generating function $\prod_{a\in A}(1+e(a\theta))$ needs a lower bound
+on the deficiency $D(\theta)=\sum_{a\in A}X(a\theta)$, since
+$\bigl|\prod_{a\in A}(1+e(a\theta))\bigr|=2^{|A|}e^{-D(\theta)}$. The standard route replaces $X$
+by a surrogate that a discrepancy estimate can handle. Two are available, and both are valid:
+\[
+  X(t)\ \ge\ \tfrac12\sin^{2}\pi t,\qquad\qquad X(t)\ \ge\ \tfrac{\pi^{2}}{2}\|t\|^{2},
+\]
+the first from $-\log c\ge1-c$ with $c=\cos^{2}\pi t$, the second because
+$-\log\cos u=\tfrac{u^{2}}{2}+\tfrac{u^{4}}{12}+\tfrac{u^{6}}{45}+\cdots$ has only positive
+coefficients on $|u|<\pi/2$. Both are equalities only at $t=0$.
+
+Each surrogate caps the bound it can ever produce at its own mean over the circle, and those
+means are not the same number:
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+mean over the circle of & value & & factor lost\\
+\midrule
+$X(t)$ itself & $\log2$ & $0.69315$ & $1$\\
+$\tfrac12\sin^{2}\pi t$ & $1/4$ & $0.25000$ & $2.773$\\
+$\tfrac{\pi^{2}}{2}\|t\|^{2}$ & $\pi^{2}/24$ & $0.41123$ & $1.686$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+\emph{The loss is in the surrogate, not in the equidistribution input.} Hand the surrogate routes
+their exponential sum and their discrepancy exactly --- no Weyl, no Koksma, no error term --- and
+they still stop at $\tfrac14|A|$ and $\tfrac{\pi^{2}}{24}|A|$ where
+Proposition~\ref{prop:redresidue} gives $|A|\log2$. The reason is visible in the two displays:
+$X$ has a logarithmic singularity at the half-integers and a bounded convex surrogate does not,
+and that singularity is where the mass of the average sits. Since the bound enters an exponent,
+a factor $2.77$ in the constant is a factor $2.77$ in the exponent.
+\end{remark}
+
 \begin{remark}[what is machine-checked in Lemma~\ref{lem:coset}, and what is not]\label{rem:leancoset}
 The identity is \emph{multiplicative in $v$}, and that is what has been formalised. Writing
 $k=i+aj$ and inducting on $b$ splits a product over $\{k<ab\}$ into a double product with no
@@ -1588,6 +1625,73 @@ unit, so $q=1$. If $m=2$ every odd residue is a unit, so $q$ has no odd prime fa
 Conversely, for $q=2^{k}$ the units are exactly the odd residues.
 \end{proof}
 
+\begin{proposition}[the reduced residues, evaluated]\label{prop:redresidue}
+\STATUS{proved; the proof is below and uses only Lemma~\ref{lem:coset} and M\"obius inversion.
+\textbf{Awaiting independent verification}, per the convention of this project.
+Checked against direct enumeration on $26$ moduli to $10^{-12}$, with two controls that fire;
+\texttt{leadc\_r143}.}
+Write $v=2^{j}w$ with $w$ odd, and suppose $v\not\equiv2\pmod4$. Then
+\[
+  \frac1{\varphi(v)}\sum_{r\in(\mathbb{Z}/v)^{*}}X\Bigl(\frac rv\Bigr)
+  \;=\;\log2\cdot\Bigl(1-\frac{2\,[w=1]}{2^{j}\varphi(w)}\Bigr)
+  \;=\;\begin{cases}
+    \bigl(1-2^{1-j}\bigr)\log2, & v=2^{j}\ (j\ge2),\\[2pt]
+    \log2 \text{ exactly}, & \text{otherwise, including every odd }v>1.
+  \end{cases}
+\]
+For $v\equiv2\pmod4$ the residue $w$ is a unit only when $w=1$, and $X(w/v)=X(1/2)=+\infty$: the
+product $\prod(1+e(a\theta))$ vanishes there rather than being merely small.
+\end{proposition}
+
+\begin{proof}
+Put $t=0$ in Lemma~\ref{lem:coset} with $v=n$ odd: $\tau_n=0$ and $X(0)=0$, so
+$G(n):=\sum_{k\bmod n}X(k/n)=(n-1)\log2$.
+
+For $n$ even the odd residues mod $n$ are the coset $\tfrac1n+\tfrac2n\mathbb{Z}/n$, i.e.\ a coset
+of the subgroup of order $n/2$; applying Lemma~\ref{lem:coset} with $v=n/2$ and $t=1/n$ gives
+\[
+  O(n):=\sum_{\substack{s<n\\ s\ \mathrm{odd}}}X\Bigl(\frac sn\Bigr)
+  =\frac n2\Bigl[\Bigl(1-\frac2n\Bigr)\log2+\frac2n X\bigl(\tfrac12+\tau_{n/2}\bigr)\Bigr]
+  =\frac{n-2}{2}\log2 \quad (4\mid n),
+\]
+since $n/2$ even makes $\tau_{n/2}=\tfrac12$ and $X(1)=0$; for $n\equiv2\pmod4$ one has
+$\tau_{n/2}=0$ and $X(\tfrac12)=+\infty$, which is the excluded case.
+
+Now let $j\ge2$. A residue is a unit mod $v$ iff it is odd and prime to $w$, and writing $r=ds$
+with $d\mid w$ (so $d$ odd, and $r$ odd iff $s$ odd),
+\[
+  \sum_{r\in(\mathbb{Z}/v)^{*}}X\Bigl(\frac rv\Bigr)=\sum_{d\mid w}\mu(d)\,O\Bigl(\frac vd\Bigr)
+  =\frac{\log2}{2}\Bigl[v\sum_{d\mid w}\frac{\mu(d)}{d}-2\sum_{d\mid w}\mu(d)\Bigr]
+  =\frac{\log2}{2}\bigl[2^{j}\varphi(w)-2\,[w=1]\bigr],
+\]
+every term being finite because $4\mid v/d$. Dividing by $\varphi(v)=2^{j-1}\varphi(w)$ gives the
+formula. For $j=0$ the same inversion run against $G$ instead of $O$ gives
+$\sum_{r\in(\mathbb{Z}/v)^{*}}X(r/v)=\log2\,[\varphi(v)-[v=1]]$, hence exactly $\log2$ on average
+for $v>1$. For $j=1$ the term $d=w$ is $O(2)=X(\tfrac12)=+\infty$ and the inversion is
+$\infty-\infty$; that is not a technicality but the vanishing case again.\qed
+\end{proof}
+
+\begin{remark}[Theorem~\ref{thm:modfour} is the case $w=1$]\label{rem:modfourcorollary}
+Read Proposition~\ref{prop:redresidue} as a statement about how much a minor arc can save. For a
+set whose residues equidistribute over $(\mathbb{Z}/v)^{*}$ --- the primes, by Dirichlet --- the
+deficiency at $\theta=h/v$ is $|A|\log2$ per element, i.e.\ the \emph{full} circle mean, at every
+$v$ except the powers of two; and at $v=2^{j}$ it is $(1-2^{1-j})\log2$, minimised at $v=4$ where
+it is $\tfrac12\log2$. Since the bound sits in an exponent, that reads
+\[
+  \Bigl|\prod_{a\in A}(1+e(a\theta))\Bigr|\ \le\ 2^{|A|}e^{-|A|\log2}=1
+  \quad\text{in general},\qquad
+  \le\ 2^{|A|}e^{-|A|(\log2)/2}=\bigl(\sqrt2\bigr)^{|A|}
+  \quad\text{at }v=4,
+\]
+so the rate per element is $1/\sqrt2$ at $v=4$ and $1$ elsewhere. \emph{That is
+Theorem~\ref{thm:modfour}}, and the proposition says in addition that the obstruction occurs at
+the powers of two \emph{and nowhere else} --- which is Proposition~\ref{prop:twopower}, reached
+here from an exact evaluation rather than from the group-theoretic characterisation. Two
+independent routes to one classification.
+\STATUS{derived from Proposition~\ref{prop:redresidue}; adds no claim, and is included because
+the two theorems were proved separately and it is worth recording that they are one fact.}
+\end{remark}
+
 \begin{remark}[why the two extremal moduli differ, in one line]\label{rem:whytwo}
 Lemma~\ref{lem:coset} averages over an \emph{additive} coset. The residues available to an odd
 sequence are an additive coset for every $q$ --- all residues for $q$ odd, the odd residues for
@@ -1607,7 +1711,9 @@ Hence:
 \end{itemize}
 So Theorem~\ref{thm:modfour} and Part~II's modulus-$6$ theorem are not two coincidences but one
 fact about $q$, and the smallest $q$ at which the two classes part company is $6$.
-\STATUS{derived from Proposition~\ref{prop:twopower}; both endpoints are proved --- here and in
+\STATUS{derived from Propositions~\ref{prop:twopower} and~\ref{prop:redresidue}; the three
+bullets are exactly the three cases of the latter, which is where the third one ($q$ odd, value
+$\log2$) is now proved rather than asserted. Both endpoints are proved --- here and in
 Part~II~\cite{P2} --- so this remark reorganises rather than adds. Measured: at $q=4$ and $q=8$
 the odd primes below $4\cdot10^{4}$ sit on the floor to five decimals, and at $q=6$ and $q=10$
 they fall below it while the odd numbers rise far above; \texttt{tool\_coset\_r138}.}
