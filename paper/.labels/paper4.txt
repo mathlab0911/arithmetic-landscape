@@ -61,6 +61,7 @@ rem:random
 rem:range
 rem:ratestatus
 rem:renorm
+rem:shift
 rem:sign
 rem:signalfraction
 rem:sixagain

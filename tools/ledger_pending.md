@@ -317,3 +317,76 @@ small new artefact `r1proof_r141.log`, which came back complete.
 > and check whether the tool can see *that*.** A tool that cannot see a known fact is not
 > reporting on the unknown one. The cheap version of this is: verify with the smallest artefact
 > that the commit is supposed to contain, not the largest.
+
+---
+
+## r143 — the floor belongs to the orbit's subgroup, not to the ambient modulus
+
+Applying the coset floor to A = odd numbers at even denominators v, I used the
+average over the full group Z/v, i.e. `(1−1/v)log 2`. For A odd and v even the orbit
+`{a h mod v}` is entirely odd — a coset of the index-2 subgroup — so the floor is the
+one belonging to *that* subgroup, `(1−2/v)log 2`. The control fired on six rows.
+
+The signature is worth recording because it identifies the error without any thought:
+
+```
+   v = 8   truth 0.51986   claimed 0.60650  ← which is the CORRECT floor at v = 16
+   v = 16  truth 0.60650   claimed 0.64983  ← which is the CORRECT floor at v = 32
+```
+
+> **A floor that is systematically one step down a ladder is a floor computed in a
+> group one step too big.** The claimed value was never a random overshoot; it was
+> always exactly the right answer to the wrong question, and that is what made the
+> diagnosis a minute's work rather than an afternoon's.
+
+This is prop:twopower speaking a third time (after the q=6 failure and the
+classification itself), and it is the same shape as F60 in a different medium: the
+object exists, and it is not where the argument is looking.
+
+**Operational rule:** when a lemma's hypothesis is *"the residues form a coset of a
+subgroup"*, the conclusion's constant is a function of that subgroup's order. Read
+the order off the orbit — `len(numpy.unique(...))` — never off the modulus.
+
+*What the chase produced.* The primes were loose against the corrected floor at small
+odd v, because they avoid 0 mod v and are therefore unbalanced over the coset. That
+is not a defect of the primes: being unbalanced *away* from the minimum makes their
+energy larger. Following it gave the exact evaluation over the reduced residues
+(prop:redresidue), which subsumes thm:modfour and re-derives prop:twopower.
+
+> **A loose bound in a case you expected to be tight is a question, not a defect.**
+> Twice now the interesting statement has come from asking why the floor was slack
+> rather than from trying to tighten it.
+
+---
+
+## r143b — the literature pass found the claim was fine and the *next* sentence was not
+
+`rem:surrogate` asserts that the standard minor-arc route for these generating
+functions goes through a Weyl-sum bound. F12/F14 say check that against a document,
+so I did: the partitions-into-prime-powers minor-arc lemma bounds the generating
+function by quoting an exponential-sum estimate for `Σ_p e(j p^k α)`, exactly the
+surrogate route, and saves a power of `log X`. The claim survives.
+
+What did not survive was a sentence of mine two lines further on. Reading the paper's
+minor arc — a *neighbourhood* of a rational — against `prop:redresidue`, which
+evaluates at the rational itself, exposed a gap I had not flagged:
+
+> `cor:floor` makes a single coset's floor uniform in the shift. The reduced residues
+> are a **Möbius-signed** combination of cosets, and a signed combination of lower
+> bounds is not a lower bound.
+
+Measured, it is a trichotomy: uniform and provable at `v = 2^j` (one coset), uniform
+but unproved at `4 | v` with odd part > 1, and **false** at odd `v` — at `v = 3` the
+average drops from `log 2` to `½log 2` at `t = 1/3`, because the shift carries a
+reduced residue onto 0 where `X` vanishes. `rem:shift` now states all three.
+
+> **Reading the literature is not only for attribution.** The document did not
+> correct my citation; it corrected my *reading of my own result*, by putting the
+> result next to the shape of argument that would consume it. A claim looks different
+> when you place it where it would actually be used.
+
+*Timing note, and it is the uncomfortable part: the gap was found ten minutes after
+the push, not before it. The check suite has no test for "is this evaluation also a
+bound", and could not have — the defect was in the prose around a correct theorem.
+What caught it was doing the literature pass I had already listed as a task and had
+not yet done.*

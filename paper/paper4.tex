@@ -1671,6 +1671,30 @@ for $v>1$. For $j=1$ the term $d=w$ is $O(2)=X(\tfrac12)=+\infty$ and the invers
 $\infty-\infty$; that is not a technicality but the vanishing case again.\qed
 \end{proof}
 
+\begin{remark}[the evaluation is at the rational, and only sometimes near it]\label{rem:shift}
+\STATUS{the $v=2^{j}$ case is proved (single coset, so
+Corollary~\ref{cor:floor} applies); the $4\mid v$ case with odd part $>1$ is
+\textbf{measured only}; the odd case is settled negatively by an explicit
+counterexample. \texttt{leadc\_r143}.}
+Proposition~\ref{prop:redresidue} evaluates the average at $t=0$. A minor arc is a
+\emph{neighbourhood} of a rational, so the question is whether the value is also a floor for
+$\sum_{r}X(t+r/v)/\varphi(v)$. For a single coset the answer is yes and it is
+Corollary~\ref{cor:floor}. For the reduced residues it is not automatic, because the M\"obius
+inversion combines cosets \emph{with signs}, and a signed combination of lower bounds is not a
+lower bound. Measured, the trichotomy is:
+\begin{itemize}
+\item $v=2^{j}$: uniform, and proved --- the reduced residues are one coset
+      (Proposition~\ref{prop:twopower}), so Corollary~\ref{cor:floor} applies unchanged.
+\item $4\mid v$ with odd part $>1$: $t=0$ was the minimum in every case tested
+      ($v=12,20,60$), \emph{and we have no proof}.
+\item $v$ odd: \textbf{false}. At $v=3$ the average falls from $\log2$ to $\tfrac12\log2$ at
+      $t=\tfrac13$, because the shift carries a reduced residue onto $0$, where $X$ vanishes.
+\end{itemize}
+So the reading in Remark~\ref{rem:modfourcorollary} is exact at $\theta=h/v$ and, at odd $v$, is
+not by itself an estimate on the arc around it. We state this rather than leave it for a reader
+to discover: the proposition is an evaluation, and only the powers of two turn it into a bound.
+\end{remark}
+
 \begin{remark}[Theorem~\ref{thm:modfour} is the case $w=1$]\label{rem:modfourcorollary}
 Read Proposition~\ref{prop:redresidue} as a statement about how much a minor arc can save. For a
 set whose residues equidistribute over $(\mathbb{Z}/v)^{*}$ --- the primes, by Dirichlet --- the
