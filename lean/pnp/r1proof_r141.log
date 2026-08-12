@@ -1,0 +1,17 @@
+(1) the singularity is at distance >= pi:  q + p e^t = 0 needs Im t = pi mod 2pi
+    min over p in (0,1/2] of |log(q/p) + i pi| = 3.141595   at p = 0.499   (pi = 3.141593)
+    OK: never closer than pi
+
+(2) lower bound on |q + p e^t| for |t| = 2 and p <= 1/2:  claim  >= q |sin 2| = 0.90930 q
+    violations: 0      tightest ratio val/claim = 1.000000
+
+(3) M_2 = max_{|t|=2} |K(t)| for p <= 1/2:  claim  <= 2 + pi = 5.14159
+    measured max = 1.433781   at p = 0.500    claim 5.14159    OK
+
+(4) the conclusion:  |g(v) - P4(v)| <= 0.32135 |v|^5  for |v| <= 1, p <= 1/2
+    proved constant           = 0.32135
+    measured max of the ratio = 0.00114   at p = 0.307, v = 1.00
+    slack (proved / measured) = 281.65    OK: the proof covers the truth
+
+    for reference, the measured form with the pq factor extracted:
+      max |g-P4|/(pq|v|^5) = 0.00822   (S2b measured 0.0093 over the applied range)

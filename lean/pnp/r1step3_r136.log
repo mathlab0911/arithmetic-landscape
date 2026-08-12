@@ -1,0 +1,36 @@
+eps*(Z) against the true relative error of the Gaussian, exact DP over the window.
+   profile     k     x    z_max true |rel err|          eps*    ratio
+      odds    32  0.06   2.1264    5.4522e-02    3.5263e-01     6.47  bounds
+      odds    48  0.06   1.2704    3.0047e-02    9.5469e-02     3.18  bounds
+      odds    64  0.06   0.9019    1.8695e-02    4.8708e-02     2.61  bounds
+      odds    80  0.06   0.6453    1.2877e-02    2.9276e-02     2.27  bounds
+
+      odds    32  0.20   2.3691    3.3654e-01    1.1068e+00     3.29  bounds
+      odds    48  0.20   1.4153    7.8261e-02    2.5640e-01     3.28  bounds
+      odds    64  0.20   1.0050    6.4206e-02    1.2902e-01     2.01  bounds
+      odds    80  0.20   0.7190    4.5343e-02    7.6288e-02     1.68  bounds
+
+    primes    32  0.06   2.5550    1.6984e-01    6.2175e-01     3.66  bounds
+    primes    48  0.06   1.2667    3.3223e-02    1.0625e-01     3.20  bounds
+    primes    64  0.06   0.8515    1.8753e-02    5.0579e-02     2.70  bounds
+    primes    80  0.06   0.5789    1.3912e-02    2.9847e-02     2.15  bounds
+
+    primes    32  0.20   2.8629    7.9212e-01    2.2804e+00     2.88  bounds
+    primes    48  0.20   1.4189    8.5666e-02    2.8530e-01     3.33  bounds
+    primes    64  0.20   0.9526    6.7461e-02    1.3181e-01     1.95  bounds
+    primes    80  0.20   0.6480    4.4347e-02    7.5402e-02     1.70  bounds
+
+failures: 0
+
+and how eps* scales once z_max has fallen below 1
+   profile     k    z_max          eps*     k*eps*
+      odds   100   0.4618    1.8719e-02     1.8719
+      odds   200   0.1929    6.2207e-03     1.2441
+      odds   300   0.1136    3.4462e-03     1.0338
+      odds   450   0.0618    1.9242e-03     0.8659
+
+    primes   100   0.4323    1.9742e-02     1.9742
+    primes   200   0.1454    6.0543e-03     1.2109
+    primes   300   0.0796    3.3540e-03     1.0062
+    primes   450   0.0435    1.9211e-03     0.8645
+

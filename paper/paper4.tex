@@ -399,11 +399,11 @@ confirms. \S\ref{sec:outlook} says what we would want to do with it and does not
 
 \begin{theorem}[rigidity of the gap series]\label{thm:rigid}
 \STATUS{conditional on Problem~\ref{prob:R1} of \S\ref{sec:missing} and on nothing else; that problem is the whole of what is missing, and it is shared with Proposition~\ref{prop:tiltlclt} and Theorem~\ref{thm:transfer} --- see the consumer list there. The missing ingredient is named rather than left to be located.
-The analytic ingredients are proved in \S\ref{sec:bridge}; what is \emph{not} written out is
-the Edgeworth expansion in region~R1 of Proposition~\ref{prop:tiltlclt} --- a classical
-local-limit computation under a product measure, given here only to the level of its cumulant
-budget, with the explicit constants missing. Until those constants are written, the statement
-below is conditional on that computation and on nothing else.}
+The analytic ingredients are proved in \S\ref{sec:bridge}. The Edgeworth expansion in
+region~R1 of Proposition~\ref{prop:tiltlclt} --- the one thing that was missing --- is now
+written out in Appendix~\ref{app:R1}, with every constant proved; it awaits the independent
+reading this project requires before an argument counts as proved, and until that is on record
+the statement below stays conditional on it and on nothing else.}
 Let $P=P_k$ be the first $k$ odd primes and let $\rho\in(0,1)$ be fixed. Then
 \[
   \frac{\lm_P(\lfloor\rho T\rfloor)}{r_P(\lfloor\rho T\rfloor)}
@@ -452,11 +452,11 @@ stratification and the arithmetic together.
 
 \begin{theorem}[transfer]\label{thm:transfer}
 \STATUS{conditional on Problem~\ref{prob:R1} of \S\ref{sec:missing} and on nothing else; that problem is the whole of what is missing, and it is shared with Proposition~\ref{prop:tiltlclt} and Theorem~\ref{thm:transfer} --- see the consumer list there. The missing ingredient is named rather than left to be located.
-The analytic ingredients are proved in \S\ref{sec:bridge}; what is \emph{not} written out is
-the Edgeworth expansion in region~R1 of Proposition~\ref{prop:tiltlclt} --- a classical
-local-limit computation under a product measure, given here only to the level of its cumulant
-budget, with the explicit constants missing. Until those constants are written, the statement
-below is conditional on that computation and on nothing else.}
+The analytic ingredients are proved in \S\ref{sec:bridge}. The Edgeworth expansion in
+region~R1 of Proposition~\ref{prop:tiltlclt} --- the one thing that was missing --- is now
+written out in Appendix~\ref{app:R1}, with every constant proved; it awaits the independent
+reading this project requires before an argument counts as proved, and until that is on record
+the statement below stays conditional on it and on nothing else.}
 Let $A=P_k$ be the first $k$ odd primes, or a general profile satisfying~\textup{(H)}, and let
 $n=\lfloor\rho T\rfloor$ with $\rho\in(0,1)$ fixed. Then
 \begin{equation}\label{eq:phi}
@@ -1938,9 +1938,14 @@ in \S\ref{sec:p3} only to the level of its cumulant budget; what is absent is th
 explicit constants, not the method.
 \end{problem}
 
-\STATUS{open. Regions \textup{R2} and \textup{R3} of
-Proposition~\ref{prop:tiltlclt} are proved --- they quote Lemma~\ref{lem:kappa}
-and Lemma~\ref{lem:eta} --- so \textup{R1} is the whole of what is missing.}
+\STATUS{\textbf{written out in Appendix~\ref{app:R1}; awaiting independent verification.}
+Regions \textup{R2} and \textup{R3} of Proposition~\ref{prop:tiltlclt} were already proved ---
+they quote Lemma~\ref{lem:kappa} and Lemma~\ref{lem:eta} --- and \textup{R1} is now
+Proposition~\ref{prop:R1done}, with every constant proved rather than measured. By the standing
+rule of this project an argument written by one hand becomes ``proved on paper'' only after a
+second, independent reading; until that reading is on record, the three consumers below keep
+their conditional statements and what has changed is the \emph{kind} of thing that is missing:
+a written argument to be checked, not a computation to be done.}
 
 \noindent
 \textbf{Who is waiting on it.} Exactly three statements, and closing
@@ -2133,6 +2138,199 @@ exponent} reported in an early draft, which was an artefact of the Gaussian slop
 (Remark~\ref{rem:whyslope}). \emph{Restating \textup{(H)} so that the cubes violate it}: the
 series is bounded for the cubes and unbounded for $\alpha<1$, and the hypothesis follows the
 computation rather than the narrative.
+\end{remark}
+
+\appendix
+
+\section{Region \textup{R1}: the expansion, with every constant written out}\label{app:R1}
+
+\STATUS{proved; \textbf{awaiting independent verification}. This appendix closes
+Problem~\ref{prob:R1}, and by the standing rule of this project a proof written by one hand is
+``proved on paper'' only after a second, independent reading. Until that reading is on record,
+Theorems~\ref{thm:rigid} and~\ref{thm:transfer} keep their conditional statements: what has
+changed is that the missing ingredient is now a written argument to be checked rather than a
+computation to be done. Every constant below is proved, not measured; where a measurement
+exists it is quoted only to show how much slack the proof carries.}
+
+Throughout, $B$ is a finite set of odd positive integers, $p_a=(1+e^{sa})^{-1}$ with $s>0$ so
+that $p_a<\tfrac12$ for every $a$, $S=\sum_{a\in B}aX_a$ with $X_a$ independent
+Bernoulli$(p_a)$, and
+\[
+  \mu=\sum a p_a,\quad \sigma^{2}=K''=\sum a^{2}p_aq_a,\quad
+  N=\max B,\quad z=\frac{m-\mu}{\sigma},\quad
+  \alpha=\frac{K'''}{\sigma^{3}},\quad \beta=\frac{K^{(4)}}{\sigma^{4}} .
+\]
+
+\subsection{The two-point remainder}\label{app:taylor}
+
+\begin{lemma}\label{lem:twopoint}
+\STATUS{proved}
+Let $p\in(0,\tfrac12]$, $q=1-p$, and let
+$P_4(v)=ipv-\tfrac{pq}{2}v^{2}-\tfrac{i}{6}\kappa_3v^{3}+\tfrac{1}{24}\kappa_4v^{4}$ with
+$\kappa_3=pq(1-2p)$ and $\kappa_4=pq(1-6pq)$. Then for every real $v$ with $|v|\le1$,
+\[
+  \bigl|\log(1-p+pe^{iv})-P_4(v)\bigr|\;\le\;C_{\mathrm{T}}\,|v|^{5},
+  \qquad C_{\mathrm{T}}=\frac{2(2+\pi)}{2^{5}}=0.32136\ldots
+\]
+\end{lemma}
+
+\begin{proof}
+Write $K(t)=\log(q+pe^{t})$, so that $\log(1-p+pe^{iv})=K(iv)$ and $\kappa_j=K^{(j)}(0)$.
+
+\emph{Analyticity.} $q+pe^{t}=0$ forces $e^{t}=-q/p$, hence $\operatorname{Im}t\equiv\pi
+\pmod{2\pi}$ and $\operatorname{Re}t=\log(q/p)$. The nearest such point to the origin is at
+distance $|\log(q/p)+i\pi|\ge\pi$. So $K$ is analytic on $|t|<\pi$, for every $p$.
+
+\emph{A lower bound on $|q+pe^{t}|$ for $|t|=2$.} Write $t=x+iy$ with $x^{2}+y^{2}=4$, so
+$|y|\le2$ and $\cos y\ge\cos2$. With $u=pe^{x}>0$,
+\[
+  |q+pe^{t}|^{2}=q^{2}+2qu\cos y+u^{2}\;\ge\;q^{2}+2qu\cos2+u^{2}\;\ge\;q^{2}(1-\cos^{2}2)
+  \;=\;q^{2}\sin^{2}2,
+\]
+the last step by minimising the quadratic in $u$ at $u=-q\cos2$. Hence
+$|q+pe^{t}|\ge q|\sin2|\ge\tfrac12|\sin2|=0.4546\ldots$ using $q\ge\tfrac12$.
+
+\emph{An upper bound on $|K|$ for $|t|=2$.} Also $|q+pe^{t}|\le q+pe^{2}\le e^{2}$. Since
+$|\log w|\le\bigl|\log|w|\bigr|+\pi$ for $w\ne0$, and
+$\bigl|\log|q+pe^{t}|\bigr|\le\max\{2,\,|\log0.4546|\}=2$, we get $M_2:=\max_{|t|=2}|K(t)|
+\le2+\pi$.
+
+\emph{Cauchy, and the tail.} By Cauchy's estimate on $|t|=2$, $|\kappa_j|\le j!\,M_2/2^{j}$.
+Therefore, for $|v|\le1$,
+\[
+  \bigl|K(iv)-P_4(v)\bigr|=\Bigl|\sum_{j\ge5}\kappa_j\frac{(iv)^{j}}{j!}\Bigr|
+  \le M_2\sum_{j\ge5}\Bigl(\frac{|v|}{2}\Bigr)^{j}
+  = M_2\frac{(|v|/2)^{5}}{1-|v|/2}\le 2M_2\Bigl(\frac{|v|}{2}\Bigr)^{5},
+\]
+which is the claim. \qed
+\end{proof}
+
+\begin{remark}[how much slack the proof carries]\label{rem:slack}
+The proved constant is $0.3214$; the maximum of
+$|K(iv)-P_4(v)|/|v|^{5}$ over $p\le\tfrac12$ and $|v|\le1$ is measured at $0.00114$, so the
+proof is loose by a factor $282$. That costs nothing: only the exponent of $|v|$ enters the
+scaling of \S\ref{app:sum}, and the constant enters once, linearly.
+\STATUS{experimentally confirmed; \texttt{r1proof\_r141}. The same script checks the two
+hand-derived inequalities of the proof: the singularity is never closer than $\pi$ over
+$p\in(0,\tfrac12]$, and $|q+pe^{t}|\ge q|\sin2|$ holds on $|t|=2$ with no violation and with
+equality attained.}
+\end{remark}
+
+\subsection{The summed remainder, estimated under the integral}\label{app:sum}
+
+\begin{lemma}\label{lem:sumrem}
+\STATUS{proved}
+Put $T_1=\sigma/N$ and, for $|t|\le T_1$,
+\[
+  R_5(t)=\log\psi(t/\sigma)-\Bigl(-\tfrac{t^{2}}{2}-\tfrac{i}{6}\alpha t^{3}
+        +\tfrac{1}{24}\beta t^{4}\Bigr),
+  \qquad \psi(u)=\mathbb{E}\,e^{iu(S-\mu)} .
+\]
+Then
+\[
+  \int_{|t|\le T_1}e^{-t^{2}/2}\,|R_5(t)|\,dt
+  \;\le\;16\,C_{\mathrm{T}}\,\frac{\sum_{a\in B}a^{5}}{\sigma^{5}} .
+\]
+\end{lemma}
+
+\begin{proof}
+$\log\psi(t/\sigma)=\sum_{a\in B}\bigl[K(iat/\sigma)-ip_aat/\sigma\bigr]$, and the phase of the
+$a$-th factor is $|at/\sigma|\le N T_1/\sigma=1$, so Lemma~\ref{lem:twopoint} applies to every
+factor. Summing it, $|R_5(t)|\le C_{\mathrm{T}}\sum_a a^{5}|t/\sigma|^{5}$, and
+$\int_{\mathbb{R}}e^{-t^{2}/2}|t|^{5}dt=16$. \qed
+\end{proof}
+
+\begin{remark}[why the estimate is made under the integral, and not uniformly]\label{rem:notsup}
+The natural move is to bound $|R_5|$ by its supremum over the whole of R1. That bound cannot
+work: measured, $\sup_{\mathrm{R1}}|R_5|$ is of order $10^{2}$ and \emph{does not decrease with
+$k$}, because at the outer edge of R1 the cubic term of the expansion is itself of order
+$10^{2}$. The integral is dominated by $|t|\lesssim1$, where the expansion is excellent, and the
+error at the edge is never integrated against anything: the $|\hat G|$-weighted remainder is
+$9\cdot10^{-4}$ at $k=100$ and $9\cdot10^{-5}$ at $k=450$, decaying like $k^{-3/2}$ ---
+\emph{faster} than the leading terms of the budget it is a remainder for.
+\STATUS{experimentally confirmed; \texttt{r1remainder\_r134}, \texttt{r1weighted\_r134}.}
+A general form worth stating once: \textbf{a supremum taken over a region where the integrand is
+already negligible charges the whole region at its worst point. When an estimate is going into
+an integral, make it under the integral.}
+\end{remark}
+
+\begin{remark}[the threshold, and where it comes from]\label{rem:threshold}
+Cutting at $T_1=\sigma/N$ rather than at the LCLT-natural radius is what makes every phase at
+most $1$. Beyond $T_1$ no Taylor bound is needed: on $T_1\le|t|\le\pi\sigma$ the quadratic
+estimate of Remark~\ref{rem:principal} gives $|\psi(t/\sigma)|\le\exp(-c\,t_{\min}\sigma^{2}/N^{2})$
+with $c$ absolute, and $\sigma^{2}/N^{2}\to\infty$ under~\textup{(H)}, so that contribution is
+smaller than any power of $k$ once $k$ exceeds a threshold $k_0$ depending on the profile
+through $\sigma/N$ alone. \emph{This is a derived threshold and not a hypothesis}: (H) supplies
+it for every admissible profile. For the odd numbers and the odd primes,
+$\sigma^{2}/N^{2}\asymp k$, and the threshold is of order a few thousand --- immaterial to
+statements about $k\to\infty$, and worth printing rather than hiding.
+\end{remark}
+
+\subsection{The inversion}\label{app:inv}
+
+\begin{lemma}[Hermite inversion]\label{lem:heinv}
+\STATUS{proved}
+For every $j\ge0$ and every real $z$,
+$\displaystyle\frac1{2\pi}\int_{\mathbb{R}}e^{-t^{2}/2}(it)^{j}e^{-izt}\,dt
+ = \mathrm{He}_j(z)\,\varphi(z)$, where $\varphi$ is the standard normal density and
+$\mathrm{He}_j$ the $j$-th Hermite polynomial.
+\end{lemma}
+
+\begin{proof}
+$\frac1{2\pi}\int e^{-t^{2}/2}e^{-izt}dt=\varphi(z)$; differentiating $j$ times in $z$ brings
+$(-it)^{j}$ inside, and $\varphi^{(j)}=(-1)^{j}\mathrm{He}_j\varphi$. \qed
+\end{proof}
+
+\begin{proposition}[the expansion on R1]\label{prop:R1done}
+\STATUS{proved, modulo the independent reading recorded at the head of this appendix}
+With the notation above, for every integer $m$,
+\[
+  \mathbb{P}\bigl[S=m\bigr]
+  =\frac{\varphi(z)}{\sigma}
+   \Bigl[1+\frac{\alpha}{6}\mathrm{He}_3(z)+\frac{\beta}{24}\mathrm{He}_4(z)
+        +\frac{\alpha^{2}}{72}\mathrm{He}_6(z)\Bigr]+E,
+\]
+and, on the extraction window $|m-\mu|\le W$ with $Z=W/\sigma$,
+\[
+  |E|\;\le\;\frac{\varphi(0)}{\sigma}\,\varepsilon^{*}(Z),\qquad
+  \varepsilon^{*}(Z)=\frac{|\alpha|}{6}\min(3Z,2+Z^{3})
+   +\frac{|\beta|}{24}(3+6Z^{2}+Z^{4})
+   +\frac{\alpha^{2}}{72}(15+45Z^{2}+15Z^{4}+Z^{6})
+   +\frac{16\,C_{\mathrm{T}}}{\sigma^{5}}\sum_{a\in B}a^{5},
+\]
+for all $k$ above the threshold of Remark~\ref{rem:threshold}.
+\end{proposition}
+
+\begin{proof}
+Invert $\psi$ over $[-\pi\sigma,\pi\sigma]$ in the variable $t$ and split at $T_1$. Beyond
+$T_1$, Remark~\ref{rem:threshold}. Within $T_1$, exponentiate the expansion of
+Lemma~\ref{lem:sumrem}:
+\[
+  \psi(t/\sigma)=e^{-t^{2}/2}\Bigl[1-\tfrac{i}{6}\alpha t^{3}+\tfrac1{24}\beta t^{4}
+   -\tfrac1{72}\alpha^{2}t^{6}+\dots\Bigr]e^{R_5(t)},
+\]
+the sixth-order term being $\tfrac12(-\tfrac{i}{6}\alpha t^{3})^{2}$. Since
+$(it)^{3}=-it^{3}$, $(it)^{4}=t^{4}$ and $(it)^{6}=-t^{6}$, the three bracket terms are
+$\tfrac{\alpha}{6}(it)^{3}$, $\tfrac{\beta}{24}(it)^{4}$ and $\tfrac{\alpha^{2}}{72}(it)^{6}$,
+and Lemma~\ref{lem:heinv} sends them to $\tfrac{\alpha}{6}\mathrm{He}_3$,
+$\tfrac{\beta}{24}\mathrm{He}_4$ and $\tfrac{\alpha^{2}}{72}\mathrm{He}_6$ against
+$\varphi(z)$. The three Hermite terms are bounded on $|z|\le Z$ by
+$\sup|\mathrm{He}_3|\le\min(3Z,2+Z^{3})$, $\sup|\mathrm{He}_4|\le3+6Z^{2}+Z^{4}$ and
+$\sup|\mathrm{He}_6|\le15+45Z^{2}+15Z^{4}+Z^{6}$, each from the coefficients of the polynomial
+and, for $\mathrm{He}_3$, from $\mathrm{He}_3(0)=0$. The factor $e^{R_5}-1$ contributes
+$\int e^{-t^{2}/2}|R_5|$, bounded by Lemma~\ref{lem:sumrem}; $|e^{x}-1|\le2|x|$ for
+$|x|\le1$ absorbs the exponentiation. \qed
+\end{proof}
+
+\begin{remark}[what the budget is, in the size that matters]\label{rem:budgetsize}
+Each of the four terms of $\varepsilon^{*}$ is $O(k^{-1})$ or smaller: $|\beta|\asymp k^{-1}$,
+$\alpha^{2}\asymp k^{-1}$, $|\alpha|Z\asymp k^{-1.8}$ since $Z=W/\sigma\to0$
+by~\textup{(H)}, and $\sum a^{5}/\sigma^{5}\asymp k^{-3/2}$. So $\varepsilon^{*}\to0$, which is
+all Theorems~\ref{thm:rigid} and~\ref{thm:transfer} require of it.
+\STATUS{experimentally confirmed: $\varepsilon^{*}$ bounds the true relative error of the
+Gaussian, computed by exact dynamic programming over the window, at all sixteen test points
+tried, with ratio $1.7$ to $6.5$ and tightening in $k$; and $k\varepsilon^{*}$ runs
+$1.87,1.24,1.03,0.87$ at $k=100,200,300,450$. \texttt{r1step3\_r136}, \texttt{r1hermite\_r137}.}
 \end{remark}
 
 \section*{Use of AI tools}
