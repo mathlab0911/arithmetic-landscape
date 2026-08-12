@@ -231,3 +231,66 @@ does not get written is the one whose report section already felt finished.
 ```
 
 (previous state: emptied at skill save r118, which folded 6 entries covering r117–r118)
+
+---
+
+## r130 — a reader-facing artefact is a scope (append to F60)
+
+The homepage carried, on the day it was read: the enumeration definition of Gamma (retired
+r120), "order-sensitive invariant" (a C11 banned string since r120), `5.34920` (a C11
+banned literal since r118), four papers with paper 3's old title, and no AI disclosure.
+Every one had been corrected where a check could see it. C11 had been banning that number
+for twelve rounds, over `paper/` and `paper-ja/` only.
+
+Then, with the homepage clean, the README — a file every check here has read for rounds —
+was found to define the ratio as `lm_A(n)/deg_A(n)`, the symbol purged from all four papers
+at r126 for being a second name for `r_A(n)`. C9 counts its numbers; C14 guards one formula
+in it. Neither has an opinion about its vocabulary.
+
+**Being inside the tree is not the same as being inside a check.** C13 was the scope lesson
+across artefact trees; this is the same lesson *within* one, and it is harder to see,
+because the file is demonstrably being read. When a correction is made, the question is not
+"is the artefact checked" but "is *this property of it* checked".
+
+C18 reads both landing pages: banned literals, retired names, the disclosure.
+
+## r130 — the push was green and the reader saw the old page (append to F61)
+
+Both pushes reported success. `/index.html` served the rewrite; the bare URL — the one in
+every author footnote and in the mail sent to two mathematicians — served the old page,
+with the banned literal on it, for about a minute while GitHub Pages rebuilt.
+
+**A push that reports success is not the same as a reader seeing the new state.** The
+post-push fetch over the public internet is not ceremony; it is the only step that observes
+the thing we actually care about. It found this on its first run.
+
+Corollary for the fetch itself: the session fetcher deduplicates, so a re-read of the same
+URL returns the first answer. Use a real browser for the confirming read.
+
+## r130 — a too-wide exemption forgives, where a too-wide search only misses (append to F47,
+## beside the C17 coda)
+
+The README must be able to name paper 3 in order to retire it, so C18 excuses a retired
+name when the text marks it as past. First draft: a retirement marker anywhere within 400
+characters. **Two of five negative controls did not fire** — `four papers` reinstated three
+lines from the retirement paragraph was forgiven.
+
+This is C17's region-too-wide failure moved from the search into the exemption, and the
+exemption is the dangerous direction:
+
+> A region drawn too wide in a search only misses. A region drawn too wide in an exemption
+> actively forgives.
+
+The marker must stand in the same sentence as the name. Five of five fire. The excused
+count is printed on every run: an exemption a reader of the output cannot see is an
+exemption that rots.
+
+## r130 — the blind spot no tree can cover (append to F60)
+
+The GitHub repository *description* — the line under the repository name, and the browser
+tab title — is the pre-series title of Part I. It is in GitHub's settings, not in a file.
+No check in any tree can reach it and no commit can fix it. Topics and the social preview
+are the same class.
+
+The apparatus is structurally blind to everything that is configuration rather than
+content, and the failure ledger should say so rather than let a green run imply otherwise.
