@@ -1,0 +1,56 @@
+is (Z/q)^* an additive coset of a subgroup of Z/q ?
+     q phi(q) (Z/q)^*                    coset?     note
+     2      1 [1]                        yes, m=2   
+     3      2 [1, 2]                     NO         <-- smallest failure
+     4      2 [1, 3]                     yes, m=2   
+     5      4 [1, 2, 3, 4]               NO         
+     6      2 [1, 5]                     NO         
+     7      6 [1, 2, 3, 4, 5, 6]         NO         
+     8      4 [1, 3, 5, 7]               yes, m=2   
+     9      6 [1, 2, 4, 5, 7, 8]         NO         
+    10      4 [1, 3, 7, 9]               NO         
+    11     10 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] NO         
+    12      4 [1, 5, 7, 11]              NO         
+    13     12 [1, 2, 3, 4, 5, 6, 7, 8, ...] NO         
+    14      6 [1, 3, 5, 9, 11, 13]       NO         
+    15      8 [1, 2, 4, 7, 8, 11, 13, 14] NO         
+    16      8 [1, 3, 5, 7, 9, 11, 13, 15] yes, m=2   
+    17     16 [1, 2, 3, 4, 5, 6, 7, 8, ...] NO         
+    18      6 [1, 5, 7, 11, 13, 17]      NO         
+    19     18 [1, 2, 3, 4, 5, 6, 7, 8, ...] NO         
+    20      8 [1, 3, 7, 9, 11, 13, 17, 19] NO         
+    21     12 [1, 2, 4, 5, 8, 10, 11, 13, ...] NO         
+    22     10 [1, 3, 5, 7, 9, 13, 15, 17, 19, 21] NO         
+    23     22 [1, 2, 3, 4, 5, 6, 7, 8, ...] NO         
+    24      8 [1, 5, 7, 11, 13, 17, 19, 23] NO         
+    25     20 [1, 2, 3, 4, 6, 7, 8, 9, ...] NO         
+    26     12 [1, 3, 5, 7, 9, 11, 15, 17, ...] NO         
+    27     18 [1, 2, 4, 5, 7, 8, 10, 11, ...] NO         
+    28     12 [1, 3, 5, 9, 11, 13, 15, 17, ...] NO         
+    29     28 [1, 2, 3, 4, 5, 6, 7, 8, ...] NO         
+    30      8 [1, 7, 11, 13, 17, 19, 23, 29] NO         
+    31     30 [1, 2, 3, 4, 5, 6, 7, 8, ...] NO         
+    32     16 [1, 3, 5, 7, 9, 11, 13, 15, ...] yes, m=2   
+
+  smallest q where the reduced residues are NOT an additive coset: 3
+
+what that predicts, against the paper's two theorems
+  q=4 : reduced = odd residues = additive coset  -> the floor applies
+        M_odd(4) = 1/sqrt(2) = 0.707107   and this is the extremal modulus for a
+        random odd sequence (thm:modfour, proved).
+  q=6 : reduced = {1,5}, NOT an additive coset  -> the floor does not apply
+        M(6) = sqrt(3)/2 = 0.866025  survives, and this is the extremal modulus for
+        the primes (Part II, proved).  M_odd(6) = 0 because the odd residue 3 is
+        present for an odd sequence and cos(pi/2) = 0 -- the vanishing lemma.
+
+direct check: the coset average at q, for odd numbers versus primes
+     q        floor     odds avg   primes avg   coset?
+     3      0.46210      0.46208      0.69298       NO  
+     4      0.34657      0.34657      0.34657      yes  
+     5      0.55452      0.55453      0.69562       NO  
+     6      0.46210      2.76282      0.14571       NO  primes below the floor
+     7      0.59413      0.59413      0.69591       NO  
+     8      0.51986      0.51988      0.52217      yes  
+     9      0.61613      0.61613      0.69359       NO  
+    10      0.55452      1.83272      0.29394       NO  primes below the floor
+    12      0.57762      0.57761      0.69542       NO  

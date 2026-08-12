@@ -24,6 +24,7 @@ prop:alphalb
 prop:rate
 prop:tilted
 prop:tiltlclt
+prop:twopower
 rem:assign
 rem:cd
 rem:closing
@@ -57,6 +58,7 @@ rem:weight
 rem:whatEk
 rem:whereC1
 rem:whyslope
+rem:whytwo
 sec:biased
 sec:biasedH
 sec:bridge

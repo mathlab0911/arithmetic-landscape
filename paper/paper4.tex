@@ -66,9 +66,14 @@ Our first result is an identity for $X$ alone, elementary and exact:
   \qquad\text{for every }v\ge1\text{ and every }t,
 \]
 with $\tau_v\in\{0,\tfrac12\}$ explicit. Averaging $X$ over a coset of index $v$
-returns the same function at $v$ times the frequency, plus a constant. We prove
-it twice, by the multiplication formula and by Fourier, and it is what the
-minor-arc argument of this Part runs on: the step that normally costs a
+returns the same function at $v$ times the frequency, plus a constant.
+\emph{The identity is classical}: it is the Kubert distribution relation for
+$\log|2\sin\pi t|$~\cite{KL}, transported to the cosine by $t\mapsto t+\tfrac12$,
+and we prove it twice --- by the multiplication formula, which is how the
+classical relation is proved, and by Fourier. What is new here is the use.
+Because $X\ge0$, the rational points are the \emph{minima} of the coset average
+and not merely convenient sample points, and that turns the relation into a
+uniform lower bound: the step of a minor-arc argument that normally costs a
 quantitative equidistribution estimate costs nothing.
 
 Parts~I and~II~\cite{P1,P2}, and the first half of this Part, fix two things at
@@ -203,9 +208,12 @@ term & what it denotes\\
 series $\Gamma$ at the last informative $D$; quoted here, not reproved.\\[3pt]
 \emph{coset identity} & the identity for $X(t)=-\log|\cos\pi t|$ displayed in the
 abstract: the average of $X$ over a coset of index $v$ is $X$ at $v$ times the
-frequency, plus a constant. Equivalently, the family $\{X(v\,\cdot\,)\}$ is closed under
-\emph{coarse-graining} --- averaging over a coset --- exactly, with no error term; that
-phrase is used below in this sense and in no other.\\[3pt]
+frequency, plus a constant. \textbf{This is the classical Kubert distribution
+relation}~\cite{KL} for $\log|2\sin\pi t|$, shifted by $\tfrac12$; we use the
+descriptive name because the shifted form is what every statement below needs, and
+not to suggest the relation is ours. Equivalently, the family $\{X(v\,\cdot\,)\}$ is
+closed under \emph{coarse-graining} --- averaging over a coset --- exactly, with no
+error term; that phrase is used below in this sense and in no other.\\[3pt]
 \emph{transfer function} $\Phi$ & the function of one variable through which the
 ratio $\lm_A(n)/r_A(n)$ depends on the target, once the target leaves the centre.\\[3pt]
 \emph{logarithmic slope} $\lambda$ & the local logarithmic derivative of the
@@ -301,7 +309,10 @@ Throughout write
 \]
 the per-element energy of Parts~I and~II and the transfer-function strand at phase $t$.
 
-\begin{lemma}[coset identity]\label{lem:coset}
+\begin{lemma}[coset identity; the Kubert distribution relation, shifted]\label{lem:coset}
+\STATUS{classical. This is the distribution relation for $\log|2\sin\pi t|$~\cite{KL} with
+$t\mapsto t+\tfrac12$; we claim no part of it. What this Part contributes is
+Corollary~\ref{cor:floor} and the use made of it in \S\ref{sec:rate}.}
 For every integer $v\ge1$ and every real $t$,
 \[
    \frac1v\sum_{k=0}^{v-1}X\Bigl(t+\frac kv\Bigr)
@@ -1563,6 +1574,45 @@ branch, and Lemma~\ref{lem:coset} in general, remain proved on paper and checked
 \texttt{Pnp/Theory/ModFour.lean}, \texttt{Pnp/Theory/OddProd.lean}}
 \end{remark}
 
+\begin{proposition}[which residue classes the distribution relation reaches]\label{prop:twopower}
+\STATUS{proved; two lines. Verified for $q\le32$ by direct enumeration,
+\texttt{tool\_coset\_r138}.}
+$(\mathbb{Z}/q)^{*}$ is an additive coset of a subgroup of $\mathbb{Z}/q$ if and only if $q$
+is a power of $2$, in which case it is the set of odd residues.
+\end{proposition}
+
+\begin{proof}
+Suppose $(\mathbb{Z}/q)^{*}=r+m\mathbb{Z}/q$. Every element of that set is $\equiv r\pmod m$;
+both $1$ and $-1$ are units, so $1\equiv-1\pmod m$ and $m\mid2$. If $m=1$ every residue is a
+unit, so $q=1$. If $m=2$ every odd residue is a unit, so $q$ has no odd prime factor.
+Conversely, for $q=2^{k}$ the units are exactly the odd residues.
+\end{proof}
+
+\begin{remark}[why the two extremal moduli differ, in one line]\label{rem:whytwo}
+Lemma~\ref{lem:coset} averages over an \emph{additive} coset. The residues available to an odd
+sequence are an additive coset for every $q$ --- all residues for $q$ odd, the odd residues for
+$q$ even --- so the floor of Corollary~\ref{cor:floor} always applies to it. The residues
+available to a set of primes are the \emph{reduced} residues, and by
+Proposition~\ref{prop:twopower} those are an additive coset exactly when $q$ is a power of $2$.
+Hence:
+\begin{itemize}
+\item \emph{$q=2^{k}$}: the two classes coincide, the floor applies to the primes as well, and
+      the value is pinned at $2^{1/v-1}$ with $v=2^{k-1}$ --- maximal at $q=4$, giving
+      $1/\sqrt2$.
+\item \emph{$q=2m$, $m$ odd $>1$}: the odd residues contain $j=m$, where $\cos(\pi m/q)=0$, and
+      the reduced residues do not. An odd sequence therefore meets the zero and a set of primes
+      misses it. That is the modulus-$6$ peak.
+\item \emph{$q$ odd}: the reduced residues are everything but $0$, and the primes sit at the
+      full-circle mean $\log2$.
+\end{itemize}
+So Theorem~\ref{thm:modfour} and Part~II's modulus-$6$ theorem are not two coincidences but one
+fact about $q$, and the smallest $q$ at which the two classes part company is $6$.
+\STATUS{derived from Proposition~\ref{prop:twopower}; both endpoints are proved --- here and in
+Part~II~\cite{P2} --- so this remark reorganises rather than adds. Measured: at $q=4$ and $q=8$
+the odd primes below $4\cdot10^{4}$ sit on the floor to five decimals, and at $q=6$ and $q=10$
+they fall below it while the odd numbers rise far above; \texttt{tool\_coset\_r138}.}
+\end{remark}
+
 \begin{remark}[the two classes, side by side]\label{rem:twoclasses}
 \begin{center}
 \begin{tabular}{lccc}
@@ -2114,6 +2164,11 @@ Cited here only as a precedent for the genre; no mathematical result of that wor
 rate and application to random walks in random scenery}. Bernoulli \textbf{23} (2017),
 3268--3310; arXiv:1412.3980. Cited only for the definition and the applicability condition
 quoted in Remark~\ref{rem:closing}.
+\bibitem{KL} D.~S.~Kubert and S.~Lang, \emph{Modular units}. Grundlehren der mathematischen
+Wissenschaften \textbf{244}, Springer, 1981; and D.~S.~Kubert, \emph{The universal ordinary
+distribution}. Bull.\ Soc.\ Math.\ France \textbf{107} (1979), 179--202. Cited for the
+distribution relation $\sum_{k<v}\log|2\sin\pi(t+k/v)|=\log|2\sin\pi vt|$, of which
+Lemma~\ref{lem:coset} is the half-shifted form.
 \bibitem{P1} K.~Amauchi, \emph{Arithmetic landscapes I: the gap series}. Manuscript, 2026.
 \bibitem{P2} K.~Amauchi, \emph{Arithmetic landscapes II: asymptotic flatness of subset-sum
 landscapes of primes}. Manuscript, 2026.

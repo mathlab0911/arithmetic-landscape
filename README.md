@@ -34,7 +34,7 @@ read as the least flattering true description of each.
 |---|---|---|
 | I | *Arithmetic landscapes I: the gap series* | **25 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1−M)2^(−k)`, sharp bounds `3 − 2^(1−(M−1)/2) ≤ Γ(A) ≤ M` with both extremal sets characterised, the exact stratification, and the modulus-4 obstruction. **r120 changed the definition of Γ** from the enumeration series `Σ aⱼ2^(−j)` to the layer form `1 + 2Σ_d 2^(−N_A(d))`; the two differ by `a_k2^(−k)` and have the same limit, so every asymptotic statement in Parts II and III is unaffected. The Japanese edition tracks the change. |
 | II | *Arithmetic landscapes II: asymptotic flatness of subset-sum landscapes of primes* | **34 pp. No hypothesis, and now written out.** The two steps of the deep-minor-arc proposition that were previously owed to the reader — the substitution of a quoted exponential-sum bound, and the excision near the zeros of the cosine — are written in full as of r121: the quoted estimate is stated with its hypotheses as its own lemma, the three checks the substitution needs are made in order, and the summation by parts in the excision is carried out. **Exactly one statement is quoted from the literature without proof** (Vinogradov–Vaughan), and the argument is written so that no numerical value of its logarithmic exponent is needed. One constant is ineffective via Siegel–Walfisz; the effective substitute is the weaker rate `e^(1/8)·√3/2 = 0.98134…`, which still gives the conclusion. |
-| III | *Arithmetic landscapes III: deformed measures, random sequences, and the coset identity* | **31 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
+| III | *Arithmetic landscapes III: deformed measures, random sequences, and the coset identity* | **32 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
 
 The manuscript that was paper 3 — *The transfer function of subset-sum landscapes* —
 was absorbed into Part III at r130. All thirty-three of its theorem-like statements
@@ -42,17 +42,23 @@ moved: twenty-two as content with their statuses, eight as calibration material 
 their ranges, two as named open problems, one split. Nothing was dropped, and the
 mapping is `lean/pnp/p3map_r121`. The files are in the git history, not in the tree.
 
-The technical spine of Part III, and the one result that reaches outside this programme:
+The technical spine of Part III:
 
 ```
     (1/v) Σ_{k<v} X(t + k/v)  =  (1 − 1/v)·log 2  +  (1/v)·X(v·t + τ_v) ,     X(t) = −log|cos πt| ,
 ```
 
-exactly, for every `v ≥ 1` and every `t`. Averaging the energy over a coset of index `v` returns
-the same function at `v` times the frequency, plus a constant — so the rational points are the
-*minima* of the coset average, and the step of a minor-arc argument that normally costs a
-quantitative equidistribution estimate costs nothing. Proved twice, by the multiplication
-formula and by Fourier.
+exactly, for every `v ≥ 1` and every `t`. **The identity is classical** — it is the Kubert
+distribution relation for `log|2 sin πt|`, transported to the cosine by `t ↦ t + ½`, and we
+claim no part of it; we prove it twice, by the multiplication formula (which is how the
+classical relation is proved) and by Fourier.
+
+What is ours is the use. Because `X ≥ 0`, the rational points are the *minima* of the coset
+average and not merely convenient sample points, so the relation becomes a uniform lower bound
+and the step of a minor-arc argument that normally costs a quantitative equidistribution
+estimate costs nothing. Measured against the classical route: at every rational with small
+denominator the Koksma bound is *negative* — the points are not equidistributed there — while
+this floor is exact. The two are complementary rather than competing.
 
 ---
 
@@ -108,7 +114,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **127 scripts, 202 logs**, all committed. A number with no log is treated as a number
+itself — **128 scripts, 203 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```
