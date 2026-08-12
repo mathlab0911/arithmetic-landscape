@@ -196,13 +196,23 @@ def c5_naming():
 
 
 def c6_pending():
+    # r131: this used to print nothing when the file was empty, which is exactly the silence
+    # F60 forbids -- "no pending entries" and "the check did not run" looked identical, and the
+    # first thing that happens after a skill save is that the file is empty.  It now always
+    # speaks, and says which of the two it is.
     p = os.path.join(ROOT, 'tools', 'ledger_pending.md')
     if not os.path.exists(p):
+        fail('C6', 'tools/ledger_pending.md does not exist; an entry written mid-round has '
+                   'nowhere to go, so it will be lost at the next skill save (see the skill, '
+                   'section 7.0)')
         return
     heads = [l.strip() for l in open(p, encoding='utf-8') if l.startswith('## ')]
     if heads:
         notes.append('C6      ledger entries PENDING a skill save: '
                      + '; '.join(h[3:] for h in heads))
+    else:
+        notes.append('C6      ledger entries pending a skill save: none -- the file exists and '
+                     'is empty, which is the state just after a save, not a check that skipped')
 
 
 # ------------------------------------------------------------------ C7 (F12)
