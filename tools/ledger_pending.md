@@ -179,3 +179,28 @@ driver. **The same quantity appearing a third time, not a new mechanism.**
 Corollary for the graveyard: **when an open question is answered, delete the question and
 record the answer.** This one — *is `c_A` the second Edgeworth coefficient* — had survived
 since r088 and would have been rediscovered a fourth time.
+
+## r137 — we did not name the family our own lemma belongs to (append to F15)
+
+Part III's coset identity is the **Kubert distribution relation** for `log|2 sin πt|`, shifted
+by a half. Derived, and verified numerically to `1e-37` over `v ≤ 40`. The distribution relation
+is the defining relation of the Kubert–Lang theory, underlying cyclotomic units and the
+Kronecker limit formula — a number theorist recognises it in one line.
+
+Nothing is wrong with the mathematics: our first proof *is* the multiplication formula, which is
+how the classical relation is proved. What is wrong is that we advertised it as *"the one result
+that reaches outside this programme"* without saying that it reaches outside because **it is**
+outside.
+
+> F15 says: search whether the quantity you invented already has a name. We named the object and
+> not its **family**. A result can be correctly attributed at the level of the proof and
+> unattributed at the level of the literature, and only the second one is what a reader checks.
+
+The cost is not a lost claim — the use is still ours, and `cor:floor` as a substitute for
+Erdős–Turán is the thing worth advertising. The cost is credibility: a reader who knows the
+relation and sees us not name it will distrust the rest of the section, and that reader is
+exactly the audience.
+
+**Operational rule**: when a lemma is proved by a classical mechanism (a multiplication formula,
+a reflection formula, a functional equation), search for the *relation's* name, not only for the
+statement's. The proof technique is the pointer to the family.
