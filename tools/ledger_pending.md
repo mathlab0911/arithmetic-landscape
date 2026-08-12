@@ -204,3 +204,28 @@ exactly the audience.
 **Operational rule**: when a lemma is proved by a classical mechanism (a multiplication formula,
 a reflection formula, a functional equation), search for the *relation's* name, not only for the
 statement's. The proof technique is the pointer to the family.
+
+## r138 — the hypothesis failed in exactly one place, and that place was the theorem
+
+Testing the distribution-relation floor as a stand-alone tool, it failed at one cell of the
+table: the primes at `q = 6`, true average 0.1457 against a floor of 0.4621.
+
+Not a bug. The lemma's hypothesis is that the residues cover an **additive** coset, and the
+primes' residues mod 6 are `{1,5}` — a multiplicative subgroup that is not an additive coset.
+The failure is the modulus-6 phenomenon, which Part II spends a section on.
+
+Chasing why gave a two-line proposition: **`(Z/q)^*` is an additive coset of a subgroup of
+`Z/q` if and only if `q` is a power of 2.** (Both `1` and `−1` are units, so the modulus of the
+coset divides 2; modulus 2 forces every odd residue to be a unit.) That single fact explains
+why the extremal modulus is 4 for a random odd sequence and 6 for the primes — two theorems the
+papers prove separately.
+
+> **When a lemma's hypothesis fails on real data, check whether the failure is a known
+> phenomenon before treating it as an error.** A hypothesis that fails exactly where the
+> subject is exceptional is not a defective hypothesis; it is a hypothesis that has located
+> the exception. Ours found the one modulus the whole of Part II is about.
+
+The general habit this suggests: **run a new lemma against the cases you already understand
+before running it against the ones you do not.** The table that produced this had six moduli
+and two profiles, and the value came entirely from the single cell where the answer was
+already known and the lemma disagreed with it.
