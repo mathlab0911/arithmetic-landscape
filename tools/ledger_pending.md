@@ -152,3 +152,30 @@ eight digits everywhere. The computation was right and my formula was wrong.
 Operational note worth keeping: **put the analytic limit of the ratio in the harness as a
 sanity line, not the ratio alone.** The `C` table by itself looked perfectly reasonable in both
 runs; only the line predicting `|1−2p||1−12pq|/120` separated them.
+
+## r136 — the hypothesis died, and its claim ceiling was the diagnostic (append to F45)
+
+At r133 an out-of-sample prediction held to +0.72%: the residual constant `c_A` matched the
+first-order Edgeworth coefficient across four profiles. The claim was capped at the time —
+*"the profile dependence agrees to 0.7–2.4% and the x dependence does not"* — because the
+x-dependence disagreed and there was no reason for it to.
+
+At r136 the mechanism was checked by exact integer dynamic programming and **it does not
+exist**: the Edgeworth corrections cancel between numerator and denominator, because the layer
+`B_d` differs from the whole set only in its `N_d` smallest elements. The measured difference
+is two to three orders below the factor that actually explains the residual, which the paper
+already names.
+
+The agreement was real and its cause was mundane: `K₄/(8σ⁴)` is proportional to `S₄/S₂²` with
+a constant universal to 0.6% across profiles, and `S₄/S₂²` was already recorded as the shared
+driver. **The same quantity appearing a third time, not a new mechanism.**
+
+> **The part worth keeping is that the ceiling was the diagnostic.** The x-dependence
+> disagreement was written down as a limitation three rounds before the explanation was known,
+> and it was exactly the fingerprint of the true cause — a driver shared at leading order and
+> not beyond it. A hedge written honestly is not padding; it is where the next finding comes
+> from.
+
+Corollary for the graveyard: **when an open question is answered, delete the question and
+record the answer.** This one — *is `c_A` the second Edgeworth coefficient* — had survived
+since r088 and would have been rediscovered a fourth time.
