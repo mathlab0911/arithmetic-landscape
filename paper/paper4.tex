@@ -2438,6 +2438,47 @@ A proof either way would sharpen Remark~\ref{rem:annealed} into the statement th
 statistical-mechanics reader actually wants --- \emph{the annealed count is exact, full stop,
 and here is what the hypothesis buys} --- or produce the first profile where the annealed count
 is provably wrong, which would be worth more.
+
+\medskip
+\noindent
+\textbf{A candidate witness, found after the problem was posed.}
+Remark~\ref{rem:correctionH} says where to look: $Q(0)/\sigma^{2}$ must be forced up, and that
+needs a family growing faster than any power. Take $a_i=2^{i}+1$ --- odd, distinct, and not
+super-increasing beyond $i=3$, so the subset sums genuinely overlap. Then $\Gamma=k+2$ grows
+linearly and the computed ratio does not follow it:
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+$k$ & 8 & 10 & 12 & 14 & 16 & 18\\
+\midrule
+$\Gamma$ & $10$ & $12$ & $14$ & $16$ & $18$ & $20$\\
+$\mathrm{lm}/r$ at the centre & $7.18$ & $7.45$ & $7.73$ & $7.33$ & $6.92$ & $7.08$\\
+ratio & $0.718$ & $0.621$ & $0.552$ & $0.458$ & $0.385$ & $\mathbf{0.354}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+$\mathrm{lm}/r$ stays near $7$ while $\Gamma$ grows, and $a_i=2^{i}-1$ behaves the same
+($0.713,0.583,0.473,0.379$ at $k=8,11,14,17$). The dynamic programme agrees with brute-force
+enumeration of all $2^{k}$ subsets at $k=8,10,12$ with no disagreement, and the window occupancy
+is printed, so neither a coding error nor the support trap of \S\ref{sec:missing} accounts for
+it. Note also that $Q(0)/\sigma^{2}\approx0.07$ here while the shortfall is $65\%$: \emph{the
+first-order correction does not explain this failure either}, so these families lie outside the
+regime Proposition~\ref{prop:correction} describes.
+
+\noindent
+\textbf{What we therefore believe, as a conjecture and not as a result:}
+\begin{center}
+\emph{some hypothesis is necessary --- $\mathrm{lm}_A(n)/r_A(n)\to\Gamma(A)$ appears to be false
+for geometric families --- so the open problem is to find the sharp condition, of which
+\textup{(H)} is a sufficient but not a necessary form.}
+\end{center}
+\noindent
+It is a conjecture because $k\le18$ is a range and not a limit. Recording it here rather than
+asserting it anywhere is the third of the three outs the standing rule allows.
+\STATUS{the witness is \textbf{measured}, exactly and with a brute-force control, over
+$6\le k\le18$ in two families; the failure of the limit is \textbf{conjectured} and lives in this
+problem's open register. \texttt{geom\_r154}, \texttt{geomctl\_r154}.}
 \end{problem}
 
 

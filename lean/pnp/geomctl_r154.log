@@ -1,0 +1,20 @@
+CONTROL 1: brute force against the DP, same family
+  k=  8: 6 targets with r>0, 0 disagreements
+  k= 10: 7 targets with r>0, 0 disagreements
+  k= 12: 6 targets with r>0, 0 disagreements
+
+CONTROL 2: other targets and a second family
+
+  a_i = 2^i + 1
+      k     Gamma        z=0      z=0.5        z=1      z=1.5  z=0 / Gamma
+      8   10.0000     7.1818    11.4000     8.2857     7.8500       0.7182
+     11   13.0000     7.5909    14.8571    13.7500    10.0000       0.5839
+     14   16.0000     7.3333    18.8500    13.2727    14.0476       0.4583
+     17   19.0000     7.0000    19.3810    17.7000    19.7500       0.3684
+
+  a_i = 2^i - 1
+      k     Gamma        z=0      z=0.5        z=1      z=1.5  z=0 / Gamma
+      8    8.0000     5.7000     8.5455     6.7000     5.7619       0.7125
+     11   11.0000     6.4118    13.5000    11.3810     8.5263       0.5829
+     14   14.0000     6.6250    16.8000    13.6667    12.8421       0.4732
+     17   17.0000     6.4375    18.3500    14.4091    15.7273       0.3787
