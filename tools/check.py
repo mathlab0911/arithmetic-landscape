@@ -1106,7 +1106,7 @@ QUARANTINED = re.compile(
     r'定理はそれを必要としない|使っていない', re.I)
 
 def _status_blocks(src):
-    """yield (start, text) for each \STATUS{...}, brace-matched"""
+    r"""yield (start, text) for each \STATUS{...}, brace-matched"""
     for m in re.finditer(r'\\STATUS\{', src):
         i = m.end(); depth = 1
         while i < len(src) and depth:

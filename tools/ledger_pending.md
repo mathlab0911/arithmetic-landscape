@@ -425,3 +425,37 @@ which gives `Q(v,t) = 2^[w=1] ∏_{d|w} |cos(π(v/2d)t)|^{μ(d)}` and answers BO
 directions at once — uniform iff `w = 1`, i.e. iff `v` is a power of two, which is
 `prop:twopower` for the fourth time. **The failed guess forced an exact computation
 that a successful measurement would have left undone.***
+
+---
+
+## r145 — C20, and the rule it encodes
+
+Kentaro's ruling after r144: **a claim of the form "measured but unproved" blocks the
+push.** Now mechanical, as C20.
+
+The rule has three outs, not two. Prove it, disprove it, **or move it to the open
+register** — a `problem` environment, or a status that calls it a conjecture or an
+open question. Naming a thing open is not a loophole; it is the third honest outcome,
+and it relocates the claim to where a reader looks for what is missing. What is banned
+is the fourth thing: a statement asserted in the paper's own voice whose only support
+is a scan.
+
+Five negative controls, all five fire, including the exact r143 defect and its Japanese
+form. One carve-out was needed and it is instructive:
+
+> **"not proved *here*" means proved elsewhere, in the literature — the opposite of
+> "not proved". The adverb carries the whole distinction, and a checker that cannot
+> read the adverb will fail the paper for its own honesty.**
+
+The first draft fired on `prop:rate`'s Japanese status, which says three standard
+estimates are stated and applied but not proved here. That is a citation, not a gap.
+Note the shape: **the check fired on the Japanese and not on the English, and the
+asymmetry was the symptom** — the two languages phrase the same benign fact
+differently, so a marker set tuned on one language mistakes the other for a defect.
+C19 exists because translations drift; C20 shows they also *differ*, legitimately, and
+a bilingual check needs a benign list per language and not a translated one.
+
+*Same round, worth one line: C20 immediately bit its author. The `Γ^(q)` zero results
+of door 2 — a measured `2π` and an unidentified `6.5652` — are exactly the shape the
+rule bans, so they went into a working note and not into Part III. **A rule that has
+not yet cost you anything has not yet been tested.***
