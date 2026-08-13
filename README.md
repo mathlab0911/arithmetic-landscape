@@ -31,7 +31,7 @@ exactly, the annealed prediction is approached even where (H) fails, and what ch
 — the fitted exponent drops from about `k^(−3)` to about `k^(−1)`. So the accessible evidence says
 (H) governs the rate rather than the truth. **`prop:correction` then explains it rather than fitting it**: the relative error is `Q(0)/σ²` to first order, where `Q(0)` is the quantity Part III
 already tabulated for a different purpose. (H) asks `Q(0) = O(1)`; the limit needs only
-`Q(0) = o(σ²)`, and for power profiles the ratio is `k^(−3α)`, so every `α > 0` works. The annealed approximation is in constant use in the statistical mechanics of
+`Q(0) = o(σ²)`, and for power profiles the ratio is `k^(−3α)`, so every `α > 0` works. At a general target the correction carries a factor `1 − z²` with `z = (n−μ)/σ`, so **the ratio sits below `Γ` inside one standard deviation and above it outside, crossing exactly at `|n − μ| = σ`** — a sign, at a stated place, with no constant to fit, and the cheapest way to falsify the expansion. The annealed approximation is in constant use in the statistical mechanics of
 disordered systems and is almost never controlled; this is one `NP`-complete ground-state problem
 where it is provably right, together with the condition that delimits it.
 
@@ -129,7 +129,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **143 scripts, 218 logs**, all committed. A number with no log is treated as a number
+itself — **144 scripts, 219 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```

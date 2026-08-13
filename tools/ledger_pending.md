@@ -643,3 +643,34 @@ about — makes the anomaly vanish.
 > **When a family produces a spectacular result, check the support before checking the
 > theory.** The diagnostic that would have caught it immediately is now printed in the log
 > as a column: how many targets in the window are non-empty.
+
+---
+
+## r151 — the first prediction this programme has made that it did not already know
+
+Extending the layer expansion to a general target gives a factor `1 − z²`, `z = (n−μ)/σ`:
+
+```
+   lm/r = Γ·(1 − (1 − z²)·Q(0)/σ²) + o(σ⁻²)
+```
+
+so the ratio sits **below** `Γ` inside one standard deviation and **above** it outside,
+crossing at `|n − μ| = σ`. Measured, odds at `k = 90`: deviation `+8.2e−5` at `z = 0`,
+`+1.7e−5` at `z = 0.9`, `+2.3e−6` at `z = 1`, `−1.5e−5` at `z = 1.1`. Three families, eight
+values of `z`, ratio measured/predicted in `[0.87, 1.10]` away from the crossing.
+
+> **Every previous check in this project has verified something we already believed.** This
+> one was different in kind: the factor came out of the algebra, nobody had looked at the
+> off-centre ratio, and the sign change is at a place the theory names in advance. A check
+> that can only confirm is a weaker instrument than one that could have embarrassed us.
+
+Worth keeping as the template: **the cheapest falsification is a sign at a stated place,
+because it has no constant to fit.** If the expansion is wrong, `z = 1` is where it shows,
+and a reader can test it in an afternoon without trusting any of our constants.
+
+*Also worth noticing about the sequence r147 → r151.* The reframing came first (the theorem
+is an annealed-exactness theorem), then the question it made audible (is (H) about the
+phenomenon?), then the quantity that answers it (`Q(0)`, already on the page), then the
+generalisation that makes a new prediction. **None of it needed a new technique** — the
+local limit theorem was there from Part II. What changed each time was which question got
+asked, and every one of those questions came from outside the derivation.

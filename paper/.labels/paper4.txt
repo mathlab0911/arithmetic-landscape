@@ -4,6 +4,7 @@ app:sum
 app:taylor
 cor:classnumber
 cor:cosetRq
+cor:crossing
 cor:floor
 cor:oddsclosed
 cor:vanish
@@ -36,6 +37,7 @@ prop:chardecomp
 prop:correction
 prop:rate
 prop:redresidue
+prop:targetdep
 prop:tilted
 prop:tiltlclt
 prop:twopower
@@ -46,6 +48,7 @@ rem:cd
 rem:classnumber
 rem:closing
 rem:correctionH
+rem:crossing
 rem:doubleangle
 rem:graveyard
 rem:grh
