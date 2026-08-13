@@ -740,3 +740,34 @@ negative result.
 and it killed a conjecture I would otherwise have written into the paper as a pattern.* The
 paper now states the first-order form and says explicitly that it should not be extrapolated,
 with the numbers that show why.
+
+---
+
+## r154 — the formula that settled half the problem told us where to break the other half
+
+`rem:correctionH` settled the power profiles affirmatively. The same formula says where
+failure must live: `Q(0)/σ²` has to be forced up, which needs growth faster than any power.
+Looking exactly there produced the witness — `a_i = 2^i + 1`, where `Γ = k + 2` grows and
+`lm/r` stays near 7, ratio falling 0.72 → 0.35 over `8 ≤ k ≤ 18`.
+
+> **A correction term is a map of its own failure.** Once you know the size of the first
+> error term you know which direction makes it large, and that is a much cheaper search than
+> guessing families. Two rounds earlier the same formula was only an accuracy statement.
+
+Controls, because this project has been wrong at exactly this kind of moment: brute-force
+enumeration of all `2^k` subsets at `k = 8, 10, 12` agreeing with the DP exactly; window
+occupancy printed; and the observation that `Q(0)/σ² ≈ 0.07` against a `65%` shortfall,
+which says the first-order term does *not* explain the failure and the family is outside the
+expansion's regime. **Three controls, and the third is the one that stops the result being
+over-read** — it would have been easy to present this as "the correction predicts the
+failure", which is false.
+
+**Performance, and it is the same lesson as r152 wearing a different coat.** The naive loop
+runs over every offset `d ≤ (max A − 1)/2`, exponential in `k` for these families; two
+timeouts before I looked. `N_d` is constant on blocks, so within a block the layer is a
+*sliding sum* of tail counts — one prefix sum per block.
+
+> **A quantity indexed by something that changes only `k` times should be computed `k`
+> times.** r152 said it about rebuilding sets; this says it about iterating offsets. The
+> general form is: *find the coarsest index on which the summand is constant, and loop on
+> that.*
