@@ -1671,28 +1671,50 @@ for $v>1$. For $j=1$ the term $d=w$ is $O(2)=X(\tfrac12)=+\infty$ and the invers
 $\infty-\infty$; that is not a technicality but the vanishing case again.\qed
 \end{proof}
 
-\begin{remark}[the evaluation is at the rational, and only sometimes near it]\label{rem:shift}
-\STATUS{the $v=2^{j}$ case is proved (single coset, so
-Corollary~\ref{cor:floor} applies); the $4\mid v$ case with odd part $>1$ is
-\textbf{measured only}; the odd case is settled negatively by an explicit
-counterexample. \texttt{leadc\_r143}.}
-Proposition~\ref{prop:redresidue} evaluates the average at $t=0$. A minor arc is a
-\emph{neighbourhood} of a rational, so the question is whether the value is also a floor for
-$\sum_{r}X(t+r/v)/\varphi(v)$. For a single coset the answer is yes and it is
-Corollary~\ref{cor:floor}. For the reduced residues it is not automatic, because the M\"obius
-inversion combines cosets \emph{with signs}, and a signed combination of lower bounds is not a
-lower bound. Measured, the trichotomy is:
+\begin{remark}[the evaluation is a bound exactly at the powers of two]\label{rem:shift}
+\STATUS{proved, both directions, from the product form of Lemma~\ref{lem:coset}; the failure is
+witnessed by an explicit counterexample. The closed form below was checked against direct
+computation at $35$ points, \texttt{shift\_r144}. \emph{This remark replaces a weaker and partly
+wrong statement of the same thing; see the note at its end.}}
+Proposition~\ref{prop:redresidue} evaluates the average at $t=0$, and a minor arc is a
+\emph{neighbourhood} of a rational, so one must ask whether the value is also a floor for
+$\varphi(v)^{-1}\sum_{r}X(t+r/v)$. Exponentiating Lemma~\ref{lem:coset} answers it. For
+$4\mid n$ the odd residues are the coset $\tfrac1n+\tfrac2n\mathbb{Z}$ of order $n/2$, so
+\[
+  O(n,t):=\prod_{\substack{s<n\\ s\ \mathrm{odd}}}\bigl|2\cos\pi(t+\tfrac sn)\bigr|
+        = 2\bigl|\cos(\pi\tfrac n2 t)\bigr|,
+\]
+and M\"obius over the odd part of $v=2^{j}w$ with $j\ge2$ gives, every $v/d$ again divisible
+by $4$,
+\[
+  Q(v,t):=\prod_{r\in(\mathbb{Z}/v)^{*}}\bigl|2\cos\pi(t+\tfrac rv)\bigr|
+  \;=\;2^{[w=1]}\prod_{d\mid w}\bigl|\cos(\pi\tfrac{v}{2d}t)\bigr|^{\mu(d)} .
+\]
+The average is bounded below by its value at $t=0$ exactly when $Q(v,t)\le Q(v,0)$, and the
+product reads off both cases:
 \begin{itemize}
-\item $v=2^{j}$: uniform, and proved --- the reduced residues are one coset
-      (Proposition~\ref{prop:twopower}), so Corollary~\ref{cor:floor} applies unchanged.
-\item $4\mid v$ with odd part $>1$: $t=0$ was the minimum in every case tested
-      ($v=12,20,60$), \emph{and we have no proof}.
-\item $v$ odd: \textbf{false}. At $v=3$ the average falls from $\log2$ to $\tfrac12\log2$ at
-      $t=\tfrac13$, because the shift carries a reduced residue onto $0$, where $X$ vanishes.
+\item \emph{$w=1$, i.e.\ $v=2^{j}$}: $Q=2|\cos(\pi\tfrac v2t)|\le2=Q(v,0)$. \textbf{Uniform, and
+      proved} --- as it must be, since the reduced residues are then one coset and
+      Corollary~\ref{cor:floor} already covers it.
+\item \emph{$w>1$}: $Q$ is a \emph{ratio}, the divisors with $\mu(d)=-1$ sitting in the
+      denominator, and a ratio of cosines is not bounded by $1$. For $w=3$ it is
+      $|\cos3u|/|\cos u|=|4\cos^{2}u-3|$, which exceeds $1$ whenever $\cos^{2}u<\tfrac12$.
+      \textbf{The bound fails.} At $v=12$, $t=\tfrac15$ the average is $0.4525$ against
+      $\log2=0.6931$ at $t=0$: it falls by $0.2406$.
 \end{itemize}
-So the reading in Remark~\ref{rem:modfourcorollary} is exact at $\theta=h/v$ and, at odd $v$, is
-not by itself an estimate on the arc around it. We state this rather than leave it for a reader
-to discover: the proposition is an evaluation, and only the powers of two turn it into a bound.
+So the evaluation becomes a bound on the surrounding arc \emph{if and only if $v$ is a power of
+two} --- which is Proposition~\ref{prop:twopower} once more, and the reason is the same one:
+that is exactly when the reduced residues are a coset. Read together with
+Remark~\ref{rem:modfourcorollary}: at $\theta=h/v$ the deficiency is $|A|\log2$ for every $v$
+outside the powers of two, and at none of those $v$ does that survive a shift.
+
+\emph{Note on how this remark got here.} Its first version reported the $4\mid v$, $w>1$ case as
+\emph{measured uniform}, on a scan of $t$ over $[0,1/v]$. That interval is the period of the
+\emph{full-group} average, where $t\mapsto t+1/v$ permutes $\{k/v\}$; it is not a period of the
+reduced-residue average, because $t\mapsto t+1/v$ carries $r/v$ to $(r+1)/v$ and the units are
+not closed under $+1$. The scan was therefore blind to the region containing the counterexample.
+We record it because the error is invisible in the output --- a shorter scan returns a number,
+not a warning.
 \end{remark}
 
 \begin{remark}[Theorem~\ref{thm:modfour} is the case $w=1$]\label{rem:modfourcorollary}
@@ -1707,8 +1729,9 @@ it is $\tfrac12\log2$. Since the bound sits in an exponent, that reads
   \le\ 2^{|A|}e^{-|A|(\log2)/2}=\bigl(\sqrt2\bigr)^{|A|}
   \quad\text{at }v=4,
 \]
-so the rate per element is $1/\sqrt2$ at $v=4$ and $1$ elsewhere. \emph{That is
-Theorem~\ref{thm:modfour}}, and the proposition says in addition that the obstruction occurs at
+so the rate per element is $1/\sqrt2$ at $v=4$ and $1$ elsewhere --- \emph{at the rational
+point itself}, which by Remark~\ref{rem:shift} is all one may say outside the powers of two.
+\emph{That is Theorem~\ref{thm:modfour}}, and the proposition says in addition that the obstruction occurs at
 the powers of two \emph{and nowhere else} --- which is Proposition~\ref{prop:twopower}, reached
 here from an exact evaluation rather than from the group-theoretic characterisation. Two
 independent routes to one classification.

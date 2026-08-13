@@ -390,3 +390,38 @@ the push, not before it. The check suite has no test for "is this evaluation als
 bound", and could not have — the defect was in the prose around a correct theorem.
 What caught it was doing the literature pass I had already listed as a task and had
 not yet done.*
+
+---
+
+## r144 — the same remark, wrong twice, and the second time the measurement was the liar
+
+`rem:shift` said the `4 | v`, odd part > 1 case was *measured uniform*. It is **false**,
+and the counterexample is not exotic: at `v = 12`, `t = 1/5` the reduced-residue
+average is `0.4525` against `log 2 = 0.6931` at `t = 0`.
+
+The measurement scanned `t` over `[0, 1/v]`.
+
+> **`1/v` is the period of the *full-group* average — `t ↦ t + 1/v` permutes
+> `{k/v : k mod v}`. It is not a period of the reduced-residue average, because
+> `t ↦ t + 1/v` carries `r/v` to `(r+1)/v` and the units are not closed under `+1`.
+> The symmetry used to shrink the search belonged to a different object.**
+
+The scan was blind to the region containing the counterexample, and returned a number
+rather than a warning. That is the whole danger: **a search restricted by a symmetry
+the object does not have does not fail — it succeeds, on a subset.**
+
+Related to F51 (a computation right at the wrong precision) and to the r134 sup-norm
+episode (an estimate right about the wrong quantity); the family is *the computation
+is correct and is about something else*. What is new here is the mechanism: the error
+entered through an **optimisation**, not through the model. Nobody writes down a
+restricted domain as a modelling assumption; you write it down to save time.
+
+**Operational rule:** before restricting a search by periodicity, name the group action
+that realises the period and check the object is invariant under it. Two lines. Cheaper
+than a correction that ships.
+
+*What redeemed the round: settling it properly needed the product form of `lem:coset`,
+which gives `Q(v,t) = 2^[w=1] ∏_{d|w} |cos(π(v/2d)t)|^{μ(d)}` and answers BOTH
+directions at once — uniform iff `w = 1`, i.e. iff `v` is a power of two, which is
+`prop:twopower` for the fourth time. **The failed guess forced an exact computation
+that a successful measurement would have left undone.***

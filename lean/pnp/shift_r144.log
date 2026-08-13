@@ -1,0 +1,97 @@
+====================================================================================
+1.  the scan that produced the wrong answer, and the scan that corrects it
+====================================================================================
+      v    at t=0  min over [0,1/v]  min over [0,1]    argmin                verdict
+      4  0.346574          0.346574        0.346574   0.50000                uniform
+      8  0.519860          0.519860        0.519860   0.75000                uniform
+     16  0.606504          0.606504        0.606504   0.62500                uniform
+     32  0.649825          0.649825        0.649825   0.37500                uniform
+     12  0.693147          0.693147        0.418494   0.25000        SHORT SCAN LIED
+     20  0.693147          0.693147        0.491967   0.75000        SHORT SCAN LIED
+     28  0.693147          0.693147        0.530988   0.25000        SHORT SCAN LIED
+     60  0.693147          0.693147        0.582064   0.06730        SHORT SCAN LIED
+      3  0.693147          0.346574        0.143841   0.50000      fails, both scans
+      5  0.693147          0.640163        0.290788   0.50000      fails, both scans
+      9  0.693147          0.577623        0.510045   0.50000      fails, both scans
+     15  0.693147          0.582774        0.470980   0.13460      fails, both scans
+
+  the short scan assumed period 1/v.  That is the period of the FULL-GROUP
+  average -- t -> t + 1/v permutes {k/v : k mod v}.  It is NOT a period of the
+  reduced-residue average, because t -> t + 1/v carries r/v to (r+1)/v and the
+  units are not closed under +1.  The symmetry used to shrink the search
+  belonged to a different object.
+
+====================================================================================
+2.  the closed form, checked, and the explicit counterexample
+====================================================================================
+      v        t     Q direct     Q closed    abs err
+      4     0.00     2.000000     2.000000   0.00e+00
+      4     0.07     1.809654     1.809654   2.22e-16
+      4     0.20     0.618034     0.618034   1.11e-16
+      4     0.33     0.963507     0.963507   1.11e-16
+      4     0.41     1.688656     1.688656   2.22e-16
+      8     0.00     2.000000     2.000000   0.00e+00
+      8     0.07     1.274848     1.274848   4.44e-16
+      8     0.20     1.618034     1.618034   1.78e-15
+      8     0.33     1.071654     1.071654   0.00e+00
+      8     0.41     0.851559     0.851559   2.22e-16
+     16     0.00     2.000000     2.000000   8.88e-16
+     16     0.07     0.374763     0.374763   1.11e-16
+     16     0.20     0.618034     0.618034   4.55e-15
+     16     0.33     0.851559     0.851559   3.33e-16
+     16     0.41     1.274848     1.274848   4.44e-16
+     12     0.00     1.000000     1.000000   0.00e+00
+     12     0.07     0.274848     0.274848   7.77e-16
+     12     0.20     2.618034     2.618034   4.44e-16
+     12     0.33     2.071654     2.071654   2.22e-15
+     12     0.41     0.148441     0.148441   5.55e-17
+     20     0.00     1.000000     1.000000   1.33e-15
+     20     0.07     0.649611     0.649611   9.99e-16
+     20     0.20     3.236068     3.236068   4.44e-15
+     20     0.33     1.220095     1.220095   2.44e-15
+     20     0.41     1.126407     1.126407   6.66e-16
+     60     0.00     1.000000     1.000000   2.44e-15
+     60     0.07     5.887014     5.887014   2.66e-15
+     60     0.20     0.381966     0.381966   2.78e-16
+     60     0.33     0.781035     0.781035   3.55e-15
+     60     0.41     4.163488     4.163488   1.78e-15
+     84     0.00     1.000000     1.000000   1.55e-15
+     84     0.07     3.580996     3.580996   1.38e-14
+     84     0.20     0.145898     0.145898   3.50e-15
+     84     0.33     1.186462     1.186462   3.55e-15
+     84     0.41     7.582662     7.582662   4.17e-14
+  mismatches: 0
+
+  COUNTEREXAMPLE  v = 12, t = 0.2
+    reduced residues r/v      : [np.float64(0.0833), np.float64(0.4167), np.float64(0.5833), np.float64(0.9167)]
+    t + r/v                   : [np.float64(0.2833), np.float64(0.6167), np.float64(0.7833), np.float64(1.1167)]
+    X at those points         : [np.float64(0.4631), np.float64(1.0262), np.float64(0.2521), np.float64(0.0687)]
+    average                   : 0.452541
+    value at t = 0            : 0.693147  ( = log 2 )
+    so the average FALLS by     0.240606
+    and w = 3 predicts it: Q = |cos 3u|/|cos u| = |4cos^2 u - 3| > 1 for
+    cos^2 u < 1/2, with u = pi (v/6) t = pi*0.4000
+
+====================================================================================
+3.  so the trichotomy is a DICHOTOMY, and it is prop:twopower again
+====================================================================================
+  the evaluation of prop:redresidue is a BOUND on the surrounding arc
+  if and only if v is a power of two -- i.e. exactly when the reduced
+  residues form a coset.  For every other v the average falls under a shift.
+      v  power of 2  min over [0,1]  value at 0   bound?
+      4        True        0.346574    0.346574     True
+      8        True        0.519860    0.519860     True
+     16        True        0.606504    0.606504     True
+     32        True        0.649825    0.649825     True
+     64        True        0.671486    0.671486     True
+      3       False        0.143841    0.693147    False
+      5       False        0.290788    0.693147    False
+      7       False        0.368829    0.693147    False
+      9       False        0.510045    0.693147    False
+     12       False        0.418494    0.693147    False
+     15       False        0.470980    0.693147    False
+     20       False        0.491967    0.693147    False
+     21       False        0.524201    0.693147    False
+     28       False        0.530988    0.693147    False
+     60       False        0.582064    0.693147    False
+     84       False        0.608674    0.693147    False
