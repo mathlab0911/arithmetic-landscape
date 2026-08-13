@@ -2220,6 +2220,46 @@ three times worse.}
 
 \section{What is missing, stated once}\label{sec:missing}
 
+\begin{problem}[is \textup{(H)} necessary, or does it only set the rate?]\label{prob:hrate}
+\STATUS{\textbf{open}, and stated here rather than asserted anywhere: the evidence below is
+measured, not proved, and by the standing rule of this project a measured claim goes into the
+open register or nowhere. \texttt{breaks\_r148}.}
+Theorem~\ref{thm:transfer} concludes under \textup{(H)}, and
+Proposition~\ref{prop:alphalb} cuts the power profiles at $\alpha=1$. What is not known is
+whether the \emph{conclusion} fails when \textup{(H)} does. Computed exactly --- no sampling ---
+by the classification of Remark~\ref{rem:annealed}, with $\mathrm{lm}_A(n)/r_A(n)$ averaged over
+$41$ targets at the centre:
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+profile & \textup{(H)} & relative error at $k=90$ & fitted $p$ in $C k^{-p}$\\
+\midrule
+odd numbers ($\alpha=1$)        & holds & $8\cdot10^{-5}$ & $2.89$\\
+$a_i\asymp i^{3/2}$             & holds & $1\cdot10^{-5}$ & $3.82$\\
+$a_i\asymp 4\sqrt{ki}$ ($\alpha=\tfrac12$) & \textbf{fails} & $5.5\cdot10^{-4}$ & $\mathbf{0.98}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+Over $20\le k\le90$ the annealed prediction is approached in \emph{all three} cases, including
+the one where \textup{(H)} fails; what changes is the exponent, from about $k^{-3}$ to about
+$k^{-1}$. \emph{So the accessible evidence says \textup{(H)} governs the rate rather than the
+truth.} We do not conclude from that: $k\le90$ is small, the profile family is one family, and a
+convergence that is merely slow is indistinguishable at this range from one that stalls at a
+different limit. The question is therefore posed and not answered:
+
+\begin{center}
+\emph{does $\mathrm{lm}_A(n)/r_A(n)\to\Gamma(A)$ hold for every family of distinct odd integers,
+with \textup{(H)} controlling only the rate?}
+\end{center}
+
+A proof either way would sharpen Remark~\ref{rem:annealed} into the statement the
+statistical-mechanics reader actually wants --- \emph{the annealed count is exact, full stop,
+and here is what the hypothesis buys} --- or produce the first profile where the annealed count
+is provably wrong, which would be worth more.
+\end{problem}
+
+
 Three statements of this Part are conditional, and they are conditional on the
 \emph{same} thing. Rather than attach a differently worded caveat to each, we
 state the missing ingredient once, here, and let each consumer point at it.

@@ -1,0 +1,34 @@
+============================================================================================
+relative error of the annealed prediction, averaged over 41 central targets
+============================================================================================
+    profile    (H)    k   a_1      Gamma   mean lm/r    rel err  k*relerr
+       odds  holds   20     1    3.00000     2.98125    0.00625     0.125
+       odds  holds   30     1    3.00000     2.99387    0.00204     0.061
+       odds  holds   40     1    3.00000     2.99731    0.00090     0.036
+       odds  holds   55     1    3.00000     2.99894    0.00035     0.019
+       odds  holds   70     1    3.00000     2.99948    0.00017     0.012
+       odds  holds   90     1    3.00000     2.99975    0.00008     0.007
+
+     sqrt32  holds   20     1    3.37792     3.36267    0.00451     0.090
+     sqrt32  holds   30     1    3.37793     3.37443    0.00104     0.031
+     sqrt32  holds   40     1    3.37793     3.37676    0.00035     0.014
+     sqrt32  holds   55     1    3.37793     3.37759    0.00010     0.006
+     sqrt32  holds   70     1    3.37793     3.37780    0.00004     0.003
+     sqrt32  holds   90     1    3.37793     3.37788    0.00001     0.001
+
+    alpha12  FAILS   20    17   23.55127    23.59451    0.00184     0.037
+    alpha12  FAILS   30    21   28.87369    28.76988    0.00360     0.108
+    alpha12  FAILS   40    25   33.65806    33.56636    0.00272     0.109
+    alpha12  FAILS   55    29   39.35350    39.29681    0.00144     0.079
+    alpha12  FAILS   70    33   44.65088    44.61098    0.00089     0.063
+    alpha12  FAILS   90    37   50.34537    50.31783    0.00055     0.049
+
+============================================================================================
+fitted decay exponents:  rel err ~ C k^{-p}
+============================================================================================
+       odds  (H)  holds   exponent p =  2.89
+     sqrt32  (H)  holds   exponent p =  3.82
+    alpha12  (H)  FAILS   exponent p =  0.98
+
+  (H) holding or failing does not decide WHETHER the annealed prediction is
+  correct over this range -- it decides HOW FAST the true ratio reaches it.

@@ -1133,11 +1133,19 @@ def c20_measured_only():
             bad.append('%s line %d: a status rests on measurement alone (%r) without '
                        'naming the statement as open. Prove it, disprove it, or move it '
                        'to the open register' % (base, line, m.group(0)))
-        for m in re.finditer(r'measured,\s*not\s+proved|測定であって証明ではない', src):
+        # the prose half must not re-scan STATUS blocks: those are governed by the
+        # loop above, which has its own (and different) exemptions.  Scanning them
+        # twice under two rule sets made the check fail an honest open problem whose
+        # status said, correctly, that its evidence is measured and therefore goes to
+        # the open register.  One voice per fact, here too.
+        prose = src
+        for start, block in _status_blocks(src):
+            prose = prose.replace(block, ' ' * len(block), 1)
+        for m in re.finditer(r'measured,\s*not\s+proved|測定であって証明ではな', prose):
             n_prose += 1
-            if QUARANTINED.search(_sentence_around(src, m.start(), m.end())):
+            if QUARANTINED.search(_sentence_around(prose, m.start(), m.end())):
                 continue
-            line = src[:m.start()].count('\n') + 1
+            line = prose[:m.start()].count('\n') + 1
             bad.append('%s line %d: prose asserts something is measured and not proved '
                        'without saying in the same sentence that nothing depends on it'
                        % (base, line))

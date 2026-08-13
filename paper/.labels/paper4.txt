@@ -29,6 +29,7 @@ lem:termwise
 lem:twopoint
 lem:vone
 prob:R1
+prob:hrate
 prop:R1done
 prop:alphalb
 prop:chardecomp

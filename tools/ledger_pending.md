@@ -497,3 +497,39 @@ domain). Here: right computation, wrong *representative*.
 
 *The result survived both: 18/18 primes give a positive integer equal to the known class
 number, including `h(229) = 3`.*
+
+---
+
+## r147 — we had our own theorem's meaning backwards, and it took an outsider's question
+
+Kentaro asked whether there is anything here the mathematical community can use. The
+answer turned out to be sitting inside the main theorem, stated the wrong way round.
+
+The README said the recurring theme was **replacing** the annealed approximation with an
+exact identity. Three lines of arithmetic from Part I's own classification show that
+
+> **`Γ` IS the annealed prediction.** Offset `d` forbids exactly `N_A(d)` elements; the
+> independence heuristic gives `2^(−N_A(d))` per layer; sum and you get
+> `1 + 2Σ 2^(−N_A(d)) = Γ(A)`, on the nose.
+
+So the theorem is not *we avoided the heuristic*. It is *the heuristic is asymptotically
+exact here, and (H) says when*. Annealed-exactness results are rare and wanted; the
+version we were printing was the same fact phrased so that nobody outside would notice.
+
+> **A result can be correctly proved, correctly stated, and pointed the wrong way.** No
+> check catches this: every number was right, every status was honest, C1–C20 pass on
+> both wordings. What was wrong was which sentence went in front.
+
+The trigger is worth recording too. **It was not a check, a control, or a review — it was
+being asked "is this useful to anyone?" by someone outside the derivation.** Two rounds
+running, the thing that improved the mathematics was a question about audience: r146's
+literature pass, and this. *Add to the round loop: at least once per programme, state the
+main theorem the way the reader who does not care about your method would want it.*
+
+**Also r147, and it is the third instance of one lesson.** `log|2cos πt| = (T₂−1)log|2 sin πt|`
+by the double-angle formula, so the factor `1 − χ(2)` in `prop:chardecomp` is the
+eigenvalue of `1 − T₂` and the proposition is Dirichlet's classical evaluation
+transported. Coset identity → Kubert. Class number → Kubert–Sinnott. Character
+decomposition → Dirichlet plus trigonometry. **Three for three.** The standing posture is
+now explicit in `rem:doubleangle`: assume classical, name the transport, keep only the
+landing.
