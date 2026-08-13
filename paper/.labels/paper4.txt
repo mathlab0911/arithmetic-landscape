@@ -69,6 +69,7 @@ rem:notsup
 rem:oneconstant
 rem:onek
 rem:physics
+rem:primescrossing
 rem:principal
 rem:random
 rem:range

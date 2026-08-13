@@ -674,3 +674,40 @@ phenomenon?), then the quantity that answers it (`Q(0)`, already on the page), t
 generalisation that makes a new prediction. **None of it needed a new technique** — the
 local limit theorem was there from Part II. What changed each time was which question got
 asked, and every one of those questions came from outside the derivation.
+
+---
+
+## r152 — the primes are the harder case to prove and the easier case to approximate
+
+Applied the `z`-dependence where Part II's theorem is unconditional. The crossing at one
+standard deviation appears exactly as predicted for the odd primes, ratio measured/predicted
+in `[0.94, 1.00]` at `k = 90`, window fully occupied throughout.
+
+Two constants, and the first is exact rather than measured. For the odd numbers
+`N_d = d`, `L_d = d²`, `s_d = d(4d²−1)/3`, `δ_d = d + d²/2`, and the series sums in closed
+form:
+
+```
+   Σ_{d≥1} 2^(−d)(δ_d² − s_d/4) = 61      exactly,     so   Q(0) = 61/3
+```
+
+with `σ² = k(4k²−1)/12`, giving relative error `61/k³` at the centre. For the odd primes
+`Q(0) = 50.4369…`.
+
+Then the comparison, which is the finding:
+
+> `Q(0)` is only 2.5× larger for the primes, but `σ²` is far larger at the same `k`
+> (`p_k ~ k log k` against `2k`), so **the annealed prediction is more accurate for the
+> primes than for the odd numbers**, by a factor growing like `(log k)²/4` — measured, 1.80
+> at `k = 40` and 4.74 at `k = 520`.
+
+**The primes are the harder case to prove and the easier case to approximate, and both
+follow from the same fact: their elements are bigger.** Big elements are what make the
+exponential sums hard and what make the variance large; difficulty of proof and quality of
+approximation are pulled in opposite directions by one cause.
+
+*Method note.* The first run of this timed out: the tails `A_{>2d}` were rebuilt from
+scratch for every threshold, `O(k)` full DPs. Building them once per distinct threshold
+turned three minutes of nothing into thirty seconds of answer. **A quantity indexed by a
+shrinking set should be computed by shrinking the set, not by rebuilding it** — obvious
+after the fact, and the timeout was the only thing that made me look.
