@@ -1073,11 +1073,86 @@ def c19_translation_parity():
                  '(labels, theorem environments, status declarations): %d pair(s)' % checked)
 
 
+# --- C20 -------------------------------------------------------------------
+# Kentaro's ruling, r144: a claim of the form "measured but unproved" blocks the
+# push.  Twice in one round a defect lived in exactly that gap -- prose that read
+# as established, resting on a scan.  Neither was reachable by any other check,
+# because the theorem was correct and the reading was not.  The gap is nameable in
+# advance, so it is now named.
+#
+# The rule: a statement may not be SUPPORTED by measurement alone.  To pass, either
+# prove it, disprove it, or move it into the open register -- a problem environment,
+# or a status that calls it a conjecture or an open question.  Naming it as open is
+# not a loophole; it is the third honest outcome, and it puts the claim where the
+# reader looks for what is missing.
+MEASURED_ONLY = re.compile(
+    r'measured\s+only|measured,\s*not\s+proved|no\s+proof|we\s+have\s+no\s+proof|'
+    r'unproved|not\s+yet\s+proved|測定のみ|測定上|証明はない|証明していない|未証明',
+    re.I)
+# "measured for confirmation only" is the opposite claim: the statement is proved
+# and the measurement merely agrees.  So is a literature quotation.
+# "not proved HERE" means proved elsewhere, in the literature -- the opposite of
+# "not proved".  The adverb carries the whole distinction, so the check must read it.
+MEASURED_BENIGN = re.compile(
+    r'confirmation\s+only|for\s+confirmation|quoted[^.]{0,60}not\s+proved|'
+    r'not\s+proved\s+here|stated[^.]{0,60}not\s+proved|'
+    r'確認のための測定|文献|引用|標準的な(?:評価|補題|定理)|本稿では証明していない', re.I)
+# the open register: saying so plainly is the third way out
+OPEN_REGISTER = re.compile(
+    r'\bconjecture\b|\bopen\b|\bwe do not know\b|予想|未解決|開いたまま', re.I)
+# a measured claim quarantined in prose: the paper says it is not load-bearing
+QUARANTINED = re.compile(
+    r'does not need it|is not used|nothing (?:here )?depends on|not load-bearing|'
+    r'定理はそれを必要としない|使っていない', re.I)
+
+def _status_blocks(src):
+    """yield (start, text) for each \STATUS{...}, brace-matched"""
+    for m in re.finditer(r'\\STATUS\{', src):
+        i = m.end(); depth = 1
+        while i < len(src) and depth:
+            if src[i] == '{': depth += 1
+            elif src[i] == '}': depth -= 1
+            i += 1
+        yield m.start(), src[m.end():i-1]
+
+def c20_measured_only():
+    bad, n_status, n_prose = [], 0, 0
+    paths = [os.path.join(PAPER, en) for _, en in JA_PAIRS] + \
+            [os.path.join(PAPER_JA, ja) for ja, _ in JA_PAIRS]
+    for path in paths:
+        if not os.path.exists(path):
+            continue
+        src = _uncommented(path); base = os.path.basename(path)
+        for start, block in _status_blocks(src):
+            n_status += 1
+            m = MEASURED_ONLY.search(block)
+            if not m: continue
+            if MEASURED_BENIGN.search(block): continue
+            if OPEN_REGISTER.search(block):   continue
+            line = src[:start].count('\n') + 1
+            bad.append('%s line %d: a status rests on measurement alone (%r) without '
+                       'naming the statement as open. Prove it, disprove it, or move it '
+                       'to the open register' % (base, line, m.group(0)))
+        for m in re.finditer(r'measured,\s*not\s+proved|測定であって証明ではない', src):
+            n_prose += 1
+            if QUARANTINED.search(_sentence_around(src, m.start(), m.end())):
+                continue
+            line = src[:m.start()].count('\n') + 1
+            bad.append('%s line %d: prose asserts something is measured and not proved '
+                       'without saying in the same sentence that nothing depends on it'
+                       % (base, line))
+    if bad:
+        fail('C20/F66', '; '.join(bad))
+    expect_subjects('C20/F66', n_status, 'status declarations')
+    notes.append('C20/F66 no statement rests on measurement alone: %d status(es) and '
+                 '%d prose claim(s) read' % (n_status, n_prose))
+
+
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
           c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology,
-          c18_landing_pages, c19_translation_parity)
+          c18_landing_pages, c19_translation_parity, c20_measured_only)
 
 if __name__ == '__main__':
     for fn in CHECKS:

@@ -34,7 +34,7 @@ read as the least flattering true description of each.
 |---|---|---|
 | I | *Arithmetic landscapes I: the gap series* | **25 pp. Complete**, and its structural part is verified in Lean. Classification of local minima, the window identity `W_D(A) = Γ(A) + (2D+1−M)2^(−k)`, sharp bounds `3 − 2^(1−(M−1)/2) ≤ Γ(A) ≤ M` with both extremal sets characterised, the exact stratification, and the modulus-4 obstruction. **r120 changed the definition of Γ** from the enumeration series `Σ aⱼ2^(−j)` to the layer form `1 + 2Σ_d 2^(−N_A(d))`; the two differ by `a_k2^(−k)` and have the same limit, so every asymptotic statement in Parts II and III is unaffected. The Japanese edition tracks the change. |
 | II | *Arithmetic landscapes II: asymptotic flatness of subset-sum landscapes of primes* | **34 pp. No hypothesis, and now written out.** The two steps of the deep-minor-arc proposition that were previously owed to the reader — the substitution of a quoted exponential-sum bound, and the excision near the zeros of the cosine — are written in full as of r121: the quoted estimate is stated with its hypotheses as its own lemma, the three checks the substitution needs are made in order, and the summation by parts in the excision is carried out. **Exactly one statement is quoted from the literature without proof** (Vinogradov–Vaughan), and the argument is written so that no numerical value of its logarithmic exponent is needed. One constant is ineffective via Siegel–Walfisz; the effective substitute is the weaker rate `e^(1/8)·√3/2 = 0.98134…`, which still gives the conclusion. |
-| III | *Arithmetic landscapes III: deformed measures, random sequences, and the coset identity* | **36 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. **Appendix A writes out region R1 with every constant proved**, so the one open problem the three conditional theorems shared is now a written argument awaiting the second, independent reading this project requires rather than a computation to be done. **The reduced residues are now evaluated exactly** (`prop:redresidue`): the mean of `−log|cos πt|` over `(Z/v)*` is `log 2` for every `v` except the powers of two, where it is `(1 − 2^(1−j))log 2` — which makes the modulus-4 theorem the case `w = 1` and recovers the powers-of-two classification from an exact evaluation instead of a group-theoretic one. It is an evaluation at the rational and becomes a bound on the surrounding arc **exactly at the powers of two** — `rem:shift` proves both directions from the product form of the identity, and exhibits the failure at `v = 12`. That is the same 2-adic boundary a third time. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
+| III | *Arithmetic landscapes III: deformed measures, random sequences, and the coset identity* | **37 pp. Draft**, mixed by section, and §8 (*Honest scope*) itemises which is which. **Appendix A writes out region R1 with every constant proved**, so the one open problem the three conditional theorems shared is now a written argument awaiting the second, independent reading this project requires rather than a computation to be done. **The reduced residues are now evaluated exactly** (`prop:redresidue`): the mean of `−log|cos πt|` over `(Z/v)*` is `log 2` for every `v` except the powers of two, where it is `(1 − 2^(1−j))log 2` — which makes the modulus-4 theorem the case `w = 1` and recovers the powers-of-two classification from an exact evaluation instead of a group-theoretic one. It is an evaluation at the rational and becomes a bound on the surrounding arc **exactly at the powers of two** — `rem:shift` proves both directions from the product form of the identity, and exhibits the failure at `v = 12`. That is the same 2-adic boundary a third time. **And the fourth**: `prop:chardecomp` decomposes the coset energy over `(Z/v)*` into characters, and the trivial component is exactly `log 2` with no error while every other component is `−τ(χ̄)(1−χ(2))L(1,χ)` — a Dirichlet `L`-value. The factor `1 − χ(2)` kills the component whenever 2 lies in the kernel of χ, so it is again the prime 2 deciding what can be seen. One consequence is clean enough to state on its own: **for every prime `p ≡ 1 (mod 8)`, `Σ_a (a/p) log|cos(πa/p)| = 0` exactly.** Another is structural: the main term of the deficiency carries no error at all and every error is a character twist, which is precisely where Part II's one ineffective constant lives. The Bernoulli(q) deformation `Γ^(q)`, the modulus-4 theorem, the minor-arc rate `1/√2` for random odd sequences, and the identity below — that one is proved, twice. |
 
 The manuscript that was paper 3 — *The transfer function of subset-sum landscapes* —
 was absorbed into Part III at r130. All thirty-three of its theorem-like statements
@@ -80,7 +80,7 @@ level it does. **Work produced this way cannot be trusted on the author's word; 
 checkable, and checkable by someone who does not trust the author.** So every settled theorem
 goes into Lean and is replayed through the kernel by an independent checker that must first
 reject three deliberately poisoned modules; every number quoted in a paper must exist in a
-committed log; every statement must declare its status where it is stated; and nineteen mechanical
+committed log; every statement must declare its status where it is stated; and twenty mechanical
 checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
 every mistake this process has actually made — including the ones a check was built to catch
 only after it had already happened, and the ones where the check itself was the defect.
@@ -114,7 +114,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **136 scripts, 211 logs**, all committed. A number with no log is treated as a number
+itself — **137 scripts, 212 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```
@@ -142,6 +142,7 @@ python3 tools/check.py
 | C17 | every term this programme coined is glossed in a terminology table the reader can find |
 | C18 | the homepage, in its own repository, carries no retired name, no banned literal, and the same disclosure |
 | C19 | every Japanese edition has the same labels, theorem environments and status declarations as its source |
+| C20 | no statement rests on measurement alone: prove it, disprove it, or name it as open |
 
 A check that examined nothing **fails**: silence is good news only if the check spoke.
 

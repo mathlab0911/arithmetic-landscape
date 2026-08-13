@@ -1671,6 +1671,85 @@ for $v>1$. For $j=1$ the term $d=w$ is $O(2)=X(\tfrac12)=+\infty$ and the invers
 $\infty-\infty$; that is not a technicality but the vanishing case again.\qed
 \end{proof}
 
+\begin{proposition}[the character decomposition; the other components are $L$-values]\label{prop:chardecomp}
+\STATUS{proved; the proof is three classical ingredients and a finite interchange.
+\textbf{Awaiting independent verification.} Checked to $10^{-39}$ on the even primitive
+characters of eight moduli, with the parity control and the vanishing control both firing;
+\texttt{lval\_r145}.}
+Let $f\ge3$ and let $\chi$ be a primitive Dirichlet character mod $f$, with Gauss sum
+$\tau(\chi)=\sum_{a}\chi(a)e(a/f)$. Then
+\[
+  \sum_{a\in(\mathbb{Z}/f)^{*}}\overline{\chi}(a)\,X\Bigl(\frac af\Bigr)
+  =\begin{cases}
+     \varphi(f)\cdot\bigl(\text{the value of Proposition~\ref{prop:redresidue}}\bigr), & \chi=\chi_{0},\\[2pt]
+     0, & \chi \text{ odd},\\[2pt]
+     -\,\tau(\overline{\chi})\,\bigl(1-\chi(2)\bigr)\,L(1,\chi), & \chi \text{ even, }\chi\ne\chi_{0}.
+   \end{cases}
+\]
+\end{proposition}
+
+\begin{proof}
+$X$ is even, so pairing $a$ with $f-a$ kills every odd character. For $\chi$ even and
+nontrivial, start from the Fourier series
+$\log|2\cos\pi t|=\sum_{n\ge1}(-1)^{n+1}\cos(2\pi nt)/n$, valid for $t\notin\tfrac12+\mathbb{Z}$,
+which holds at every $a/f$ with $f\ge3$. The sum over $a$ is \emph{finite}, so it may be taken
+inside term by term. For primitive $\chi$,
+$\sum_{a}\overline{\chi}(a)e(na/f)=\chi(n)\tau(\overline{\chi})$, and its real part is the same
+because $\chi$ is even. Hence, the $\log2$ in $X=-\log|2\cos\pi t|+\log2$ dying against
+$\sum_a\overline{\chi}(a)=0$,
+\[
+  \sum_{a}\overline{\chi}(a)X\Bigl(\frac af\Bigr)
+  =-\tau(\overline{\chi})\sum_{n\ge1}\frac{(-1)^{n+1}\chi(n)}{n}
+  =-\tau(\overline{\chi})\bigl(1-\chi(2)\bigr)L(1,\chi),
+\]
+the last step being $\sum_n(-1)^{n+1}\chi(n)/n=L(1,\chi)-2\sum_{n\ \mathrm{even}}\chi(n)/n
+=(1-\chi(2))L(1,\chi)$.\qed
+\end{proof}
+
+\begin{corollary}[a vanishing sum at $p\equiv1\pmod 8$]\label{cor:vanish}
+\STATUS{proved, as the case $\chi=\bigl(\tfrac{\cdot}{p}\bigr)$ of
+Proposition~\ref{prop:chardecomp}. Verified to $10^{-40}$ for all $p<200$ with $p\equiv1\pmod4$;
+the $p\equiv5\pmod8$ half is the control and is nonzero in every case.
+\texttt{lval\_r145}.}
+For every prime $p\equiv1\pmod 8$,
+$\displaystyle\sum_{a=1}^{p-1}\Bigl(\frac ap\Bigr)\log\bigl|\cos\tfrac{\pi a}{p}\bigr|=0$,
+exactly. For $p\equiv5\pmod8$ the same sum is $-2\tau(\chi)L(1,\chi)\ne0$.
+\end{corollary}
+
+\begin{proof}
+For $p\equiv1\pmod4$ the Legendre symbol is even, and it is $\pm1$-valued, so
+$\chi=\overline\chi$. The factor $1-\chi(2)$ is $1-\bigl(\tfrac2p\bigr)$, which vanishes exactly
+when $p\equiv\pm1\pmod8$; combined with $p\equiv1\pmod4$ that is $p\equiv1\pmod8$. For
+$p\equiv5\pmod8$ one has $\bigl(\tfrac2p\bigr)=-1$ and the factor is $2$.\qed
+\end{proof}
+
+\begin{remark}[where this puts the programme's one ineffective constant]\label{rem:ineffective}
+Proposition~\ref{prop:chardecomp} says the coset energy has a complete spectral decomposition
+over $(\mathbb{Z}/v)^{*}$ in which \emph{the trivial component is exactly $\log2$ with no error
+term at all}, and every other component is a Dirichlet $L$-value at $s=1$ times a Gauss sum.
+For a set $A$ the deficiency at $\theta=h/v$ is therefore
+\[
+  D\Bigl(\frac hv\Bigr)=\frac{|A|}{\varphi(v)}\sum_{r}X\Bigl(\frac rv\Bigr)
+  \;+\;\frac1{\varphi(v)}\sum_{\chi\ne\chi_{0}}\overline{\chi}\text{-twisted count of }A
+       \cdot\Bigl(-\tau(\overline{\chi})(1-\chi(2))L(1,\chi)\Bigr),
+\]
+so \emph{the main term is exact and all of the error is carried by characters}. When $A$ is a
+set of primes the twisted counts are the objects Siegel--Walfisz controls, and Part~II's single
+ineffective constant~\cite{P2} enters exactly there and nowhere else. That is a statement about
+the location of the ineffectivity, not a removal of it; what it buys is a route --- under GRH the
+twisted counts are explicit, and so is the constant.
+
+The factor $1-\chi(2)$ deserves its own line. It kills the component whenever $2$ lies in the
+kernel of $\chi$, so the prime $2$ governs which characters can see the energy at all. This is
+the fourth face of the same fact: Proposition~\ref{prop:twopower} (which residues form a coset),
+Theorem~\ref{thm:modfour} (the rate $1/\sqrt2$), Remark~\ref{rem:shift} (when the evaluation is a
+bound), and now the character group. \emph{The obstruction of this theory is $2$-adic, and it has
+now been met from four independent directions.}
+\STATUS{derived from Proposition~\ref{prop:chardecomp}; the decomposition is proved, the reading
+of where the ineffectivity sits is a reading and is labelled as such. Nothing here is claimed to
+remove an ineffective constant.}
+\end{remark}
+
 \begin{remark}[the evaluation is a bound exactly at the powers of two]\label{rem:shift}
 \STATUS{proved, both directions, from the product form of Lemma~\ref{lem:coset}; the failure is
 witnessed by an explicit counterexample. The closed form below was checked against direct

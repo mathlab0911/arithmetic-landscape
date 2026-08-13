@@ -5,6 +5,7 @@ app:taylor
 cor:cosetRq
 cor:floor
 cor:oddsclosed
+cor:vanish
 def:gq
 def:modd
 def:slope
@@ -29,6 +30,7 @@ lem:vone
 prob:R1
 prop:R1done
 prop:alphalb
+prop:chardecomp
 prop:rate
 prop:redresidue
 prop:tilted
@@ -41,6 +43,7 @@ rem:closing
 rem:doubleangle
 rem:graveyard
 rem:grh
+rem:ineffective
 rem:kapparho
 rem:lam0
 rem:lean22

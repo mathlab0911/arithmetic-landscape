@@ -1,0 +1,63 @@
+==============================================================================================
+the character decomposition of the coset energy
+     f  chi  even  prim           chi(2)               measured              predicted       err
+     5    2   yes   yes (-1.0 - 1.40704e-41j) (-1.9248473 + 1.140021e-40j) (-1.9248473 + 1.2566321e-40j)   7.0e-41
+     8    3   yes   yes              0.0 (-1.7627472 + 2.4802583e-41j) (-1.7627472 + 5.7731983e-42j)   5.0e-41
+    12    3   yes   yes              0.0 (-2.6339158 + 3.7060287e-41j) (-2.6339158 + 1.8340333e-42j)   5.8e-41
+    13    2   yes   yes (0.5 + 0.866025j) (-0.63226068 + 2.9761804j) (-0.63226068 + 2.9761804j)   1.1e-40
+    13    4   yes   yes (-0.5 + 0.866025j) (-0.96016357 + 3.9317533j) (-0.96016357 + 3.9317533j)   3.6e-40
+    13    6   yes   yes (-1.0 - 1.40704e-41j) (-4.7790529 + 1.6699323e-40j) (-4.7790529 - 1.6679305e-42j)   1.9e-40
+    13    8   yes   yes (-0.5 - 0.866025j) (-0.96016357 - 3.9317533j) (-0.96016357 - 3.9317533j)   7.2e-40
+    13   10   yes   yes (0.5 - 0.866025j) (-0.63226068 - 2.9761804j) (-0.63226068 - 2.9761804j)   1.2e-39
+
+  8 even primitive nontrivial characters, worst error 1.17e-39
+==========================================================================
+quadratic characters: p = 1 mod 8 must vanish, p = 5 mod 8 must not
+      p  p mod 8  (2/p)       sum (a/p) log|cos(pi a/p)|      verdict
+      5        5     -1                    1.92484730024      nonzero
+     13        5     -1                    4.77905286915      nonzero
+     17        1      1                1.83752573819e-50     vanishes
+     29        5     -1                    6.58892458548      nonzero
+     37        5     -1                    9.96711941058      nonzero
+     41        1      1               -1.24659416557e-50     vanishes
+     53        5     -1                     7.8628818866      nonzero
+     61        5     -1                    14.6568738435      nonzero
+     73        1      1                1.69214195464e-50     vanishes
+     89        1      1               -3.80294744395e-51     vanishes
+     97        1      1               -1.16434922805e-49     vanishes
+    101        5     -1                    11.9928918012      nonzero
+    109        5     -1                     22.258140347      nonzero
+    113        1      1                3.33781069086e-49     vanishes
+    137        1      1                9.66097427705e-50     vanishes
+    149        5     -1                    16.4445700035      nonzero
+    157        5     -1                    21.4452568259      nonzero
+    173        5     -1                    10.2832587124      nonzero
+    181        5     -1                    28.6958356278      nonzero
+    193        1      1               -1.21877679262e-49     vanishes
+    197        5     -1                    13.3339103475      nonzero
+
+  disagreements with the prediction: 0
+
+==========================================================================
+control: the same sum for p = 3 mod 4, where the symbol is ODD
+X is even, so every odd character must give 0 regardless of chi(2)
+if this does NOT vanish, the parity argument is wrong
+  p=   7  (2/p)=+1  sum = 3.340955888e-51
+  p=  11  (2/p)=-1  sum = -1.236153678e-50
+  p=  19  (2/p)=-1  sum = -2.238440445e-50
+  p=  23  (2/p)=+1  sum = 1.929402025e-50
+  p=  31  (2/p)=+1  sum = 3.320074913e-50
+  p=  43  (2/p)=-1  sum = 4.042556624e-50
+  p=  47  (2/p)=+1  sum = 8.199958607e-50
+  p=  59  (2/p)=-1  sum = -5.145333079e-50
+
+==========================================================================
+and the trivial character reproduces prop:redresidue
+  f=   5  mean      0.69314718056   prop:redresidue      0.69314718056   err 1.3e-51
+  f=   7  mean      0.69314718056   prop:redresidue      0.69314718056   err 0.0e+00
+  f=   9  mean      0.69314718056   prop:redresidue      0.69314718056   err 0.0e+00
+  f=  12  mean      0.69314718056   prop:redresidue      0.69314718056   err 1.3e-51
+  f=  16  mean      0.60650378299   prop:redresidue      0.60650378299   err 0.0e+00
+  f=  20  mean      0.69314718056   prop:redresidue      0.69314718056   err 1.3e-51
+  f=   4  mean      0.34657359028   prop:redresidue      0.34657359028   err 6.7e-52
+  f=   8  mean      0.51986038542   prop:redresidue      0.51986038542   err 0.0e+00
