@@ -64,6 +64,7 @@ rem:modfourcorollary
 rem:mushift
 rem:noKappa
 rem:nocover
+rem:nohigher
 rem:notmax
 rem:notsup
 rem:oneconstant

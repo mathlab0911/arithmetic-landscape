@@ -711,3 +711,32 @@ scratch for every threshold, `O(k)` full DPs. Building them once per distinct th
 turned three minutes of nothing into thirty seconds of answer. **A quantity indexed by a
 shrinking set should be computed by shrinking the set, not by rebuilding it** — obvious
 after the fact, and the timeout was the only thing that made me look.
+
+---
+
+## r153 — the pattern was real for one term and not for two
+
+`1 − z² = −He₂(z)`, and the same Hermite family organises Appendix A's Edgeworth expansion.
+The obvious guess: the next term is a multiple of `He₄` at order `σ⁻⁴`. **It is not.** The
+residual's ratio to `He₄(z)` varies 44–68% across `z` and its mean does not settle with `k`
+(5.4e3, 9.9e3, 1.4e4 at k = 24, 30, 36).
+
+> **Two data points make a pattern and three test it.** One Hermite polynomial appearing
+> where Hermite polynomials already live is not evidence of an expansion; it is one term
+> that happens to be quadratic. I went looking for the second term expecting confirmation,
+> which is the wrong expectation to hold while designing a test.
+
+The obstruction, once looked for, is in our own budget. The local limit theorem carries
+corrections of relative size `β ≍ k⁻¹` and `α² ≍ k⁻¹`, **far larger** than the
+layer-geometry term `Q(0)/σ² ≍ k⁻³`. They do not show up in the measured ratio because they
+cancel between `lm` and `r` — the cancellation Step 4 found back in r136 and recorded as a
+negative result.
+
+> **A term that survives a cancellation of much larger terms has no reason to be structured
+> like the terms that cancelled.** The first order looked Hermite because it is quadratic and
+> everything quadratic in `z` looks like `He₂`. That is the whole of the coincidence.
+
+*Worth noting how cheap the falsification was: one script, three sizes, seven values of `z`,
+and it killed a conjecture I would otherwise have written into the paper as a pattern.* The
+paper now states the first-order form and says explicitly that it should not be extrapolated,
+with the numbers that show why.

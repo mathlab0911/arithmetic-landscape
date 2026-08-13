@@ -2270,6 +2270,34 @@ the annealed value inside one standard deviation of the centre and above it outs
 $|n-\mu|=\sigma$.}
 \end{corollary}
 
+\begin{remark}[the first-order term is Hermite; the expansion is not]\label{rem:nohigher}
+\STATUS{the identification $1-z^{2}=-\mathrm{He}_2(z)$ is algebra. The failure of the natural
+second-order guess is \emph{measured}, and is recorded as a caution and not as a claim: nothing
+in this paper depends on it. \texttt{hermite\_r153}.}
+Proposition~\ref{prop:targetdep} can be written
+\[
+  \frac{\mathrm{lm}_A(n)}{r_A(n)}
+  =\Gamma(A)\Bigl(1+\mathrm{He}_2(z)\frac{Q(0)}{\sigma^{2}}\Bigr)+o(\sigma^{-2}),
+  \qquad \mathrm{He}_2(z)=z^{2}-1,
+\]
+and the same Hermite polynomials organise the Edgeworth expansion of Appendix~\ref{app:R1}. The
+natural guess is therefore that the next term is a multiple of $\mathrm{He}_4$ at order
+$\sigma^{-4}$. \emph{It is not.} Removing the $\mathrm{He}_2$ term and rescaling by $\sigma^{4}$
+leaves a residual whose ratio to $\mathrm{He}_4(z)$ varies by $44$--$68\%$ across $z$ and whose
+mean does not settle with $k$ (about $5.4\cdot10^{3}$, $9.9\cdot10^{3}$, $1.4\cdot10^{4}$ at
+$k=24,30,36$). The guess is wrong and we say so rather than leaving the pattern to be extrapolated.
+
+The obstruction is visible in Appendix~\ref{app:R1}'s own budget, and it is worth naming because
+it explains why the \emph{first} order works so well. The local limit theorem carries its own
+corrections of relative size $\beta=K^{(4)}/\sigma^{4}\asymp k^{-1}$ and
+$\alpha^{2}\asymp k^{-1}$, both \emph{far larger} than the layer-geometry term
+$Q(0)/\sigma^{2}\asymp k^{-3}$. They do not appear in the measured ratio because they cancel
+between $\mathrm{lm}$ and $r$ --- which is precisely the cancellation
+\S\ref{sec:missing}'s Step~4 analysis found. So the expansion is not in powers of $\sigma^{-2}$
+alone; the surviving $\sigma^{-2}$ term is what is left after a cancellation of much larger ones,
+and there is no reason for the residue of that cancellation to be a single Hermite polynomial.
+\end{remark}
+
 \begin{remark}[the primes, where the theorem is unconditional]\label{rem:primescrossing}
 \STATUS{the crossing is derived from Proposition~\ref{prop:targetdep} and measured on the odd
 primes at $k=40,65,90$, window fully occupied at every point; away from the crossing the ratio of
