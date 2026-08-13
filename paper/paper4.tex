@@ -2220,6 +2220,53 @@ three times worse.}
 
 \section{What is missing, stated once}\label{sec:missing}
 
+\begin{proposition}[the first correction to the annealed prediction]\label{prop:correction}
+\STATUS{derived, from the same local limit theorem the rest of the paper uses --- so it inherits
+Appendix~\ref{app:R1}'s standing and no more. Verified against exact dynamic programming on three
+profile families: the ratio of measured to predicted relative error is $0.98$ at $k=90$ in all
+three, including the family for which \textup{(H)} fails. \texttt{correction\_r150}.}
+At the centre $n=T/2$, write $L_d=\sum_{a\le2d}a$, $s_d=\sum_{a\le2d}a^{2}$,
+$\delta_d=d+L_d/2$ and $\sigma_d^{2}=\sigma^{2}-s_d/4$. Applying the local limit theorem to
+$B_d=\{a\in A:a>2d\}$ layer by layer gives
+\[
+  \frac{\mathrm{lm}_A(n)}{r_A(n)}
+  =1+2\sum_{d\ge1}2^{-N_A(d)}\frac{\sigma}{\sigma_d}
+     \exp\Bigl(-\frac{\delta_d^{2}}{2\sigma_d^{2}}\Bigr),
+\]
+both signs of the offset contributing the same $\delta_d$ at the centre. Expanding to first order
+in $\sigma^{-2}$,
+\[
+  \frac{\mathrm{lm}_A(n)}{r_A(n)}=\Gamma(A)\Bigl(1-\frac{Q(0)}{\sigma^{2}}\Bigr)+o(\sigma^{-2}),
+  \qquad Q(0)=\frac1{\Gamma(A)}\sum_{d\ge1}2^{-N_A(d)}\bigl(\delta_d^{2}-\tfrac{s_d}{4}\bigr).
+\]
+\end{proposition}
+
+\begin{remark}[what the correction says about \textup{(H)}]\label{rem:correctionH}
+$Q(0)$ is not a new quantity: it is the one already tabulated in \S\ref{sec:counterexample}
+($20.3$ for the odd numbers, $50.4$ for the primes, $916$ for the squares, $3.8\cdot10^{5}$ for
+the cubes). So the table that was there to show \emph{how far out of reach} a profile is turns
+out to be, up to $\sigma^{-2}$, the error itself.
+
+Three consequences, and the third is the point.
+\begin{enumerate}
+\item \emph{The rate is explained rather than fitted.} For the odd numbers $Q(0)\to20.33$ and
+      $\sigma^{2}\asymp k^{3}/3$, so the relative error is $\asymp61k^{-3}$; for
+      $a_i\asymp i^{3/2}$ the variance grows like $k^{4}$ and the error like $k^{-4}$. Both match
+      the measurement.
+\item \emph{\textup{(H)} is boundedness of the numerator, and the conclusion needs less.} What the
+      limit requires is only $Q(0)=o(\sigma^{2})$. \textup{(H)} asks $Q(0)=O(1)$, which is
+      strictly stronger.
+\item \emph{For power profiles the weaker condition always holds.} Distinctness forces
+      $a_i\asymp k^{1-\alpha}i^{\alpha}$, hence $\sigma^{2}\asymp k^{3}$ for \emph{every}
+      $\alpha$, while $Q(0)\asymp k^{3(1-\alpha)}$; the ratio is $k^{-3\alpha}\to0$ for every
+      $\alpha>0$. So Problem~\ref{prob:hrate} is answered affirmatively for that family \emph{by
+      the correction formula} rather than by extrapolation.
+\end{enumerate}
+\STATUS{derived from Proposition~\ref{prop:correction}; item 3 is a computation with the profile
+$a_i\asymp k^{1-\alpha}i^{\alpha}$ and inherits that proposition's standing. It does \emph{not}
+settle Problem~\ref{prob:hrate} in general --- only for clean power profiles.}
+\end{remark}
+
 \begin{remark}[where this sits beside the rigorous work on number partitioning]\label{rem:localrem}
 \STATUS{a positioning statement, not a result. The papers named are cited from their
 abstracts and titles; we have not worked through them, and say so rather than implying we have.}
@@ -2270,7 +2317,7 @@ profile & \textup{(H)} & relative error at $k=90$ & fitted $p$ in $C k^{-p}$\\
 \midrule
 odd numbers ($\alpha=1$)        & holds & $8\cdot10^{-5}$ & $2.89$\\
 $a_i\asymp i^{3/2}$             & holds & $1\cdot10^{-5}$ & $3.82$\\
-$a_i\asymp 4\sqrt{ki}$ ($\alpha=\tfrac12$) & \textbf{fails} & $5.5\cdot10^{-4}$ & $\mathbf{0.98}$\\
+$a_i\asymp 4\sqrt{ki}$ ($\alpha=\tfrac12$) & \textbf{fails} & $5.5\cdot10^{-4}$ & $\mathbf{1.7}$\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -2278,7 +2325,12 @@ $a_i\asymp 4\sqrt{ki}$ ($\alpha=\tfrac12$) & \textbf{fails} & $5.5\cdot10^{-4}$ 
 Over $20\le k\le90$ the annealed prediction is approached in \emph{all three} cases, including
 the one where \textup{(H)} fails; what changes is the exponent, from about $k^{-3}$ to about
 $k^{-1}$. \emph{So the accessible evidence says \textup{(H)} governs the rate rather than the
-truth.} We do not conclude from that: $k\le90$ is small, the profile family is one family, and a
+truth} --- and Proposition~\ref{prop:correction}, found after this problem was posed,
+\emph{predicts} the exponent as $3\alpha$ instead of fitting it, which settles the clean power
+profiles (Remark~\ref{rem:correctionH}) and leaves this problem standing for everything else.
+\emph{The exponent quoted above for $\alpha=\tfrac12$ was first reported as $0.98$; that fit was
+contaminated by the smallest size, where the measured error changes sign, and over the remaining
+sizes it is about $1.7$ against a predicted $1.5$.} We do not conclude in general: $k\le90$ is small, the profile family is one family, and a
 convergence that is merely slow is indistinguishable at this range from one that stalls at a
 different limit. The question is therefore posed and not answered:
 

@@ -33,6 +33,7 @@ prob:hrate
 prop:R1done
 prop:alphalb
 prop:chardecomp
+prop:correction
 prop:rate
 prop:redresidue
 prop:tilted
@@ -44,6 +45,7 @@ rem:budgetsize
 rem:cd
 rem:classnumber
 rem:closing
+rem:correctionH
 rem:doubleangle
 rem:graveyard
 rem:grh

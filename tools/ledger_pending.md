@@ -605,3 +605,41 @@ silently, and handed every status back to the stricter prose rule.
 
 Controls now seven: five defects fire, and two escapes are proved still open — the
 open-register escape and a benign phrase split across a line break.
+
+---
+
+## r150 — the correction term was already in the paper, tabulated for the opposite reason
+
+Applying the local limit theorem layer by layer at the centre gives, to first order,
+
+```
+   lm/r = Γ(A)·(1 − Q(0)/σ²),      Q(0) = Γ⁻¹ Σ_d 2^(−N_d)(δ_d² − s_d/4)
+```
+
+and `Q(0)` is **the quantity §counterexample already tabulates** — 20.3 for the odds, 50.4
+for the primes, 916 for the squares, 3.8e5 for the cubes. It was put there to show *how far
+out of reach* a profile is. It is, up to `σ⁻²`, **the error itself**.
+
+> **A quantity computed to argue that something is hopeless can be the thing that measures
+> it.** We had the correction term in a table for two years' worth of rounds and read it as
+> a difficulty index. The reframing of r147 is what made it legible: once the theorem is
+> "the annealed count is exact", the obvious next question is *how exact*, and the answer
+> was already printed.
+
+Verified against exact DP: measured/predicted → 0.98 on three families at `k = 90`,
+including the one where (H) fails. It also **corrects r148's own fitted exponent**: `0.98`
+for `α = 1/2` was contaminated by the smallest size, where the measured error changes sign;
+the honest fit is `1.7` and the *predicted* value is `3α = 1.5`.
+
+**And a measurement bug that nearly became a discovery.** The translated block
+`{2m+1, …, 2m+2k−1}` returned a relative error of `−3.7` — lm/r nearly five times `Γ` —
+which for ten minutes looked like the counterexample the open problem was asking for. It
+was not. Every subset sum of that family clusters near multiples of `2m`, so a window of 41
+consecutive targets is mostly **empty**, and the unweighted mean of ratios over the
+survivors averages an atypical subset. Switching to the `r`-weighted statistic
+`Σlm(n)/Σr(n)` — the ratio at a typical *ground state*, which is also what the theorem is
+about — makes the anomaly vanish.
+
+> **When a family produces a spectacular result, check the support before checking the
+> theory.** The diagnostic that would have caught it immediately is now printed in the log
+> as a column: how many targets in the window are non-empty.
