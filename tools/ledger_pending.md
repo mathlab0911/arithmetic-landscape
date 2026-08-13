@@ -459,3 +459,41 @@ a bilingual check needs a benign list per language and not a translated one.
 of door 2 — a measured `2π` and an unidentified `6.5652` — are exactly the shape the
 rule bans, so they went into a working note and not into Part III. **A rule that has
 not yet cost you anything has not yet been tested.***
+
+---
+
+## r146 — the same function, wrong twice, and the ratios told me both times
+
+Door 1b: compose `prop:chardecomp` with Dirichlet's class number formula and check that
+`S(p)/(4 log ε_p)` comes out a positive integer. Two harness bugs, both in the routine
+computing the fundamental unit, and in both cases **the wrongness was legible in the
+answer**.
+
+**First:** every ratio came out `1/6` or `1/2`. Ratios that clean are never a broken
+theorem — `1.618^6 = 17.944` and `12.083² = 146.0` identified it in one line: the
+continued-fraction routine was returning a *power* of the unit, and the denominators
+`6` and `2` were the exponents.
+
+**Second:** after the rewrite, seventeen primes gave the known class number and `p = 5`
+gave `1/2`. Same shape, smaller: the Pell search tried `x² − py² = +4` before `−4`, and
+at `p = 5` both solve at `y = 1`, so it returned `(3+√5)/2 = ε²` instead of
+`(1+√5)/2 = ε`.
+
+> **A search for the least element must enumerate in the order of the thing being
+> minimised.** Mine enumerated `y` outermost — correct — and then took the first `s`
+> that worked, which is not a minimisation at all. The bug only shows where both signs
+> solve at the same `y`, which is why it survived seventeen primes and died at the
+> smallest one.
+
+The general form, and it is the reason this is worth a ledger entry rather than a fix:
+
+> **When a wrong answer is a clean function of the right one — a power, a small rational
+> multiple, a constant factor — the discrepancy names the bug.** `1/6` is not noise; it
+> is a receipt saying *you cubed and squared something*. Look at the shape of the error
+> before looking at the code.
+
+Related to F51 (right computation, wrong precision) and r144 (right computation, wrong
+domain). Here: right computation, wrong *representative*.
+
+*The result survived both: 18/18 primes give a positive integer equal to the known class
+number, including `h(229) = 3`.*

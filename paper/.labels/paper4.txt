@@ -2,6 +2,7 @@ app:R1
 app:inv
 app:sum
 app:taylor
+cor:classnumber
 cor:cosetRq
 cor:floor
 cor:oddsclosed
@@ -39,6 +40,7 @@ prop:twopower
 rem:assign
 rem:budgetsize
 rem:cd
+rem:classnumber
 rem:closing
 rem:doubleangle
 rem:graveyard

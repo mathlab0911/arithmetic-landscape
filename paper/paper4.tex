@@ -1723,6 +1723,58 @@ when $p\equiv\pm1\pmod8$; combined with $p\equiv1\pmod4$ that is $p\equiv1\pmod8
 $p\equiv5\pmod8$ one has $\bigl(\tfrac2p\bigr)=-1$ and the factor is $2$.\qed
 \end{proof}
 
+\begin{corollary}[a class number formula for the coset energy]\label{cor:classnumber}
+\STATUS{proved, as Proposition~\ref{prop:chardecomp} composed with Dirichlet's class number
+formula. \textbf{Awaiting independent verification.} Verified for all eighteen primes
+$p\equiv5\pmod8$ below $320$: the ratio is a positive integer in every case and equals the known
+class number in every case, including $h(229)=3$. The fundamental unit is computed independently,
+by solving $x^{2}-py^{2}=\pm4$, with no $L$-function anywhere in that half of the check.
+\texttt{class\_r146}.}
+Let $p\equiv1\pmod4$ be prime, let $h(p)$ be the class number of the real quadratic field
+$\mathbb{Q}(\sqrt p)$ and $\varepsilon_p>1$ its fundamental unit. Then
+\[
+  \sum_{a=1}^{p-1}\Bigl(\frac ap\Bigr)\log\Bigl|\cos\frac{\pi a}{p}\Bigr|
+  =\begin{cases}
+     0, & p\equiv1\pmod8,\\[2pt]
+     4\,h(p)\,\log\varepsilon_p, & p\equiv5\pmod8.
+   \end{cases}
+\]
+\end{corollary}
+
+\begin{proof}
+For $p\equiv1\pmod4$ the Legendre symbol is an even primitive real character with
+$\tau(\chi)=\sqrt p$, so Proposition~\ref{prop:chardecomp} gives the sum as
+$\bigl(1-\bigl(\tfrac2p\bigr)\bigr)\sqrt p\,L(1,\chi)$. The factor is $0$ when
+$\bigl(\tfrac2p\bigr)=1$, i.e.\ $p\equiv1\pmod 8$, and $2$ otherwise. Dirichlet's class number
+formula for the real quadratic field of discriminant $p$ reads
+$L(1,\chi)=2h(p)\log\varepsilon_p/\sqrt p$, and the two square roots cancel.\qed
+\end{proof}
+
+\begin{remark}[what that sentence says]\label{rem:classnumber}
+The left-hand side is a sum of logarithms of cosines at rational points --- the same energy
+$X$ that Lemma~\ref{lem:coset} governs and that \S\ref{sec:random} sums over a set of integers.
+The right-hand side is the class number of a real quadratic field times its regulator.
+\emph{Nothing on the left knows it is supposed to be four times an integer times a regulator},
+which is why the integrality is worth reporting as a check and not merely as a consequence.
+
+We claim no novelty for the ingredients: the character decomposition is elementary Fourier
+analysis and the class number formula is Dirichlet's. What is worth recording is that the
+programme's energy function, arrived at from a subset-sum landscape, evaluates against quadratic
+characters to a class number --- and that the vanishing half of the statement is exactly the
+condition that $2$ splits.
+
+The classical neighbourhood is named for the reader's benefit and ours. $X$ is an element of the
+universal ordinary distribution~\cite{KL}, the object whose $\{\pm1\}$-cohomology Kubert and
+Sinnott computed and from which Sinnott's index formula relates the cyclotomic units to the class
+number. \emph{An identity carrying a class number out of that theory is the expected kind of
+output, not a surprising one.} We have not been able to consult those papers directly and so do
+not claim to know whether Corollary~\ref{cor:classnumber} appears there in this form; the honest
+statement is that it is the sort of thing that may.
+\STATUS{a reading of Corollary~\ref{cor:classnumber}; adds no claim. The novelty question is left
+open deliberately: this is the kind of identity that may well be classical, and
+\S\ref{sec:scope} says so rather than implying otherwise.}
+\end{remark}
+
 \begin{remark}[where this puts the programme's one ineffective constant]\label{rem:ineffective}
 Proposition~\ref{prop:chardecomp} says the coset energy has a complete spectral decomposition
 over $(\mathbb{Z}/v)^{*}$ in which \emph{the trivial component is exactly $\log2$ with no error
