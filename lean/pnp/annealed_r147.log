@@ -1,0 +1,24 @@
+==============================================================================
+(1) log|2 cos pi t| = log|2 sin 2 pi t| - log|2 sin pi t| ?
+==============================================================================
+  max |lhs - rhs| over 200001 points, poles excluded: 1.776e-15
+  so X = -log|cos pi t| = log 2 - (T_2 - 1) log|2 sin|, with T_2 f(t) = f(2t).
+  On the chi-component T_2 has eigenvalue chi(2) (a -> 2a permutes the units),
+  so (1 - T_2) contributes exactly the factor (1 - chi(2)) of prop:chardecomp.
+  CONCLUSION: prop:chardecomp is Dirichlet's classical evaluation of
+  sum chi(a) log|2 sin(pi a/f)| transported by the double-angle formula.
+
+==============================================================================
+(2) is Gamma the annealed prediction for lm/r ?
+==============================================================================
+                           A     layer form   annealed derivation  equal?
+                  odds <= 21   2.9980468750          2.9980468750    True
+            odd primes <= 31   5.3398437500          5.3398437500    True
+               {3,5,7,11,13}   5.1250000000          5.1250000000    True
+                 {1,9,25,49}  12.0000000000         12.0000000000    True
+                 odds <= 101   3.0000000000          3.0000000000    True
+
+  and the local-minimum condition itself, checked by brute force:
+  S is a strict local min  <=>  (every a in S has a > 2D) and (every a not in S
+  has a > -2D),  D = sigma(S) - n
+    1952 (set, target) pairs, 0 disagreements

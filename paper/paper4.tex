@@ -1688,6 +1688,21 @@ $\tau(\chi)=\sum_{a}\chi(a)e(a/f)$. Then
 \]
 \end{proposition}
 
+\begin{remark}[the factor $1-\chi(2)$, explained, and the attribution that follows]\label{rem:doubleangle}
+\STATUS{proved; $\log|2\sin2\pi t|=\log|2\sin\pi t|+\log|2\cos\pi t|$ is the double-angle formula.
+Checked to $2\cdot10^{-15}$ at $2\cdot10^{5}$ points, \texttt{annealed\_r147}.}
+Writing $T_2f(t)=f(2t)$, the double-angle formula says
+$\log|2\cos\pi t|=(T_2-1)\log|2\sin\pi t|$, so $X=\log2-(T_2-1)\log|2\sin\pi t|$. On the
+$\chi$-component $T_2$ acts by $\chi(2)$, since $a\mapsto2a$ permutes the units; hence the factor
+$1-\chi(2)$ in Proposition~\ref{prop:chardecomp} \emph{is} the eigenvalue of $1-T_2$, and nothing
+else. \textbf{The proposition is therefore Dirichlet's classical evaluation of
+$\sum_a\chi(a)\log|2\sin(\pi a/f)|$ transported by the double-angle formula}, exactly as
+Lemma~\ref{lem:coset} is the classical distribution relation transported the same way. We claim
+no part of the evaluation; what we record is where it lands. The proof below is written out
+because it is short and because a reader should be able to see the transport rather than take it
+on trust.
+\end{remark}
+
 \begin{proof}
 $X$ is even, so pairing $a$ with $f-a$ kills every odd character. For $\chi$ even and
 nontrivial, start from the Fourier series
@@ -2253,6 +2268,41 @@ rate are independent of it, as is every entry of \S\ref{sec:scope} not listed
 above.
 
 \section{Where this sits, and the algorithmic reading}\label{sec:outlook}
+
+\begin{remark}[what the main theorem says to someone who works on disordered systems]\label{rem:annealed}
+\STATUS{proved; the derivation is three lines from the classification of local minima in
+Part~I~\cite{P1} and is given in full here. The equivalence used in the first line was
+additionally checked by brute force on $1952$ (set, target) pairs, and the identification of the
+two expressions for $\Gamma$ on five families; \texttt{annealed\_r147}.}
+The classification says: $S$ is a strict local minimum for the target $n$ if and only if, writing
+$D=\sigma(S)-n$, every $a\in S$ satisfies $a>2D$ and every $a\notin S$ satisfies $a>-2D$. For a
+fixed offset $D=d>0$ that condition is simply $S\subseteq\{a\in A: a>2d\}$, and the number of
+elements it forbids is exactly $N_A(d)=\#\{a\in A: a\le 2d\}$.
+
+Now apply the \emph{annealed} --- that is, independence --- heuristic: pretend the number of
+subsets of a subfamily $B\subseteq A$ hitting a prescribed target is proportional to $2^{|B|}$.
+Then the layer at offset $d$ contributes a fraction $2^{-N_A(d)}$ of the ground-state count, the
+offsets $\pm d$ pair up, and $d=0$ contributes $1$. Summing,
+\[
+  \frac{\mathrm{lm}_A(n)}{r_A(n)}\ \approx\ 1+2\sum_{d\ge1}2^{-N_A(d)}\ =\ \Gamma(A).
+\]
+\emph{So $\Gamma$ is not merely computed by an argument that avoids the annealed approximation:
+$\Gamma$ \textbf{is} the annealed prediction.} What Theorem~\ref{thm:transfer} and Part~II
+establish is therefore
+\begin{center}
+\emph{the annealed count of metastable states is asymptotically exact for this model,}
+\end{center}
+under a hypothesis \textup{(H)} that is checked rather than assumed, with
+\S\ref{sec:counterexample} exhibiting a profile where it fails. That is the sentence we would
+offer to the statistical mechanics of disordered systems, where the annealed approximation is in
+constant use and is almost never controlled: here is a model with an $\mathsf{NP}$-complete
+ground-state problem in which it is provably right, together with the condition that delimits it
+and an explicit case that violates the condition.
+
+Two honest limits. The statement is about the \emph{ratio} and not about each layer separately;
+and it is one model, so it is evidence about a heuristic rather than a theorem about it.
+\end{remark}
+
 
 \subsection{Iterating the coarse-graining}
 

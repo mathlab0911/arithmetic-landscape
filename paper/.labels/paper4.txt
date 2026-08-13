@@ -37,6 +37,7 @@ prop:redresidue
 prop:tilted
 prop:tiltlclt
 prop:twopower
+rem:annealed
 rem:assign
 rem:budgetsize
 rem:cd
