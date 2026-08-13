@@ -533,3 +533,75 @@ transported. Coset identity → Kubert. Class number → Kubert–Sinnott. Chara
 decomposition → Dirichlet plus trigonometry. **Three for three.** The standing posture is
 now explicit in `rem:doubleangle`: assume classical, name the transport, keep only the
 landing.
+
+---
+
+## r148 — the question three papers never asked, and a check that fired on honesty
+
+**The gap.** Three papers prove the conclusion *under* (H), and `prop:alphalb` cuts the
+power profiles at `α = 1`. **Nowhere did we ask whether the conclusion fails when (H)
+does.** It took r147's reframing — the theorem is an annealed-exactness theorem — to make
+the question audible, because it is the first thing a physicist asks and not a thing a
+prover asks.
+
+> **A hypothesis you have proved things under for months is invisible.** You check whether
+> it holds; you stop asking what it is *for*. The question "is this hypothesis about the
+> phenomenon or about my proof?" has to be scheduled, because nothing in the work raises it.
+
+Measured: over `20 ≤ k ≤ 90` the annealed prediction is approached even where (H) fails —
+the fitted exponent drops from `k^(−2.89)` to `k^(−0.98)`. So (H) looks like a *rate*
+condition. Stated as `prob:hrate`, not asserted; C20's third out.
+
+**The methodology bit.** The first attempt used a single central target and produced
+`0.93, 1.16, 0.94, 1.02, 1.01` — a sequence that would have supported any story. At one
+target the parity and lattice effects are larger than the effect being measured.
+Averaging over 41 targets turned noise into a clean exponent.
+
+> **Before fitting a trend, check that one sample point is not noisier than the whole
+> trend.** The tell was that the sequence was not monotone in either direction.
+
+**And C20 fired on this commit's own honest text**, which is the more interesting failure.
+`prob:hrate`'s status says its evidence is *measured, not proved* and then says it
+therefore goes to the open register — precisely the escape the rule provides. The check's
+prose half was re-scanning STATUS blocks the status half had already cleared, under a
+stricter rule set.
+
+> **Two rule sets over one string is a bug, not a belt and braces.** The stricter one wins
+> silently, and what it convicts is whichever text was most explicit about its own
+> limits — that is, the most honest text in the file. Fixed by stripping statuses before
+> the prose scan: *one voice per fact*, which is the project's rule everywhere else.
+
+Controls rerun, and one was added for the escape itself: five defects fire, and a status
+that names its claim open stays silent. **A check with an escape hatch needs a control
+proving the hatch still opens**, not only controls proving the door is shut.
+
+---
+
+## r149 — a bilingual check cannot match on text it has not unwrapped
+
+C20 convicted `prop:schur`'s Japanese status, whose exempting phrase was
+`確認のための測定` — *measurement for confirmation only* — split as `確認のための\n測定のみ`.
+
+> **Japanese has no inter-word spaces, so a hard line break falls wherever the
+> typesetter put it, in the middle of a phrase.** An English marker survives `\s+`
+> because English breaks at spaces. Its Japanese counterpart does not survive at all.
+> A bilingual check must **unwrap before matching**: drop the newline when both
+> neighbours are non-ASCII, turn it into a space otherwise.
+
+This is the second time in two rounds that C20 convicted the most honest text in the
+file — first because two rule sets fought over one string, now because one of them could
+not read a line-wrapped exemption. Both times the false positive landed on a status that
+was *more* explicit about its own limits than its neighbours. **A checker's false
+positives are not uniformly distributed: they concentrate on the text that says the most.**
+
+**And the fix bred its own bug, immediately.** Unwrapping the status blocks broke the
+prose half, which had been blanking statuses with `prose.replace(block, ...)` — the
+unwrapped block no longer occurs verbatim in the source, `replace` found nothing, failed
+silently, and handed every status back to the stricter prose rule.
+
+> **A `replace` that finds nothing does not raise.** Where the intent is "remove this
+> region", address it by span and not by content — content-based removal is a lookup that
+> can miss, and missing looks exactly like success.
+
+Controls now seven: five defects fire, and two escapes are proved still open — the
+open-register escape and a benign phrase split across a line break.

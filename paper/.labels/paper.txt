@@ -25,8 +25,10 @@ prop:gapform
 prop:gs-min
 prop:mod6
 prop:representability
+prop:schur
 rem:convergence
 rem:no-window-floor
+rem:schur
 sec:achieved
 sec:bridge
 sec:classification

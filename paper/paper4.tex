@@ -2220,6 +2220,40 @@ three times worse.}
 
 \section{What is missing, stated once}\label{sec:missing}
 
+\begin{remark}[where this sits beside the rigorous work on number partitioning]\label{rem:localrem}
+\STATUS{a positioning statement, not a result. The papers named are cited from their
+abstracts and titles; we have not worked through them, and say so rather than implying we have.}
+Subset-sum at the centre is the number partitioning problem, and that problem has a rigorous
+literature this programme should be read against. Borgs, Chayes and Pittel established the phase
+transition and finite-size scaling for random integer partitioning; Bauke, Franz and Mertens
+conjectured that the local energy statistics near a target are those of a random energy model,
+and Borgs, Chayes, Mertens and Nair proved that local REM conjecture, in two parts, with a
+threshold beyond which it fails.
+
+The relation to Remark~\ref{rem:annealed} is one of complement rather than overlap, and the
+difference is worth stating precisely because it is the whole of our claim to novelty here:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & local REM & this series\\
+\midrule
+instance & \emph{random}, and the statement is distributional & \emph{deterministic}, e.g.\ the odd primes\\
+observable & the spacings of the energy spectrum & the count of metastable states\\
+output & convergence to a Poisson process & an \emph{exact constant} $\Gamma(A)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+Both are annealed-type statements and both come with a threshold --- theirs on the energy scale,
+ours the hypothesis \textup{(H)} of Problem~\ref{prob:hrate}. Neither implies the other as far as
+we can see: a Poisson limit for the spectrum of a random instance says nothing about the ratio of
+metastable to ground states of one fixed instance, and our constant says nothing about spacings.
+\emph{What we would want from a reader who knows that literature is whether the deterministic,
+exact-constant statement is new there, or whether it is a known corollary we have arrived at
+sideways.} Given that the last three identities in this paper turned out to be classical
+transports, the prior should not be generous.
+\end{remark}
+
 \begin{problem}[is \textup{(H)} necessary, or does it only set the rate?]\label{prob:hrate}
 \STATUS{\textbf{open}, and stated here rather than asserted anywhere: the evidence below is
 measured, not proved, and by the standing rule of this project a measured claim goes into the

@@ -1,0 +1,29 @@
+====================================================================================
+Schur test: A majorizes B (same sum, A more spread) -- compare Gamma
+====================================================================================
+  4000 comparable pairs (same sum, one majorizes the other)
+    Gamma larger on the MORE SPREAD set : 0
+    Gamma larger on the MORE EQUAL set  : 3792
+    equal                                : 208
+
+  consistent with SCHUR-CONCAVE over this sample
+
+====================================================================================
+the weaker property that the closed form suggests: monotone in each element
+====================================================================================
+  raising one element by 2: 3627 trials, 0 decreases of Gamma
+  (Gamma is nondecreasing in every element -- consistent with the closed form,
+   whose weights are all positive.)
+
+====================================================================================
+and it is PROVABLE: the closed form is an ordered weighted average with
+non-increasing weights, which is exactly the Schur-Ostrowski condition
+====================================================================================
+  layer form vs weighted form: 3000 sets, 0 disagreements
+  weights for k = 7: [0.5, 0.25, 0.125, 0.0625, 0.03125, 0.01562, 0.01562]
+  non-increasing: True
+
+  Schur-Ostrowski: a symmetric phi is Schur-CONCAVE iff
+      (a_i - a_j)(d phi/d a_i - d phi/d a_j) <= 0.
+  Here d Gamma/d a_i = w_i with a sorted ASCENDING and w non-increasing, so
+  a_i > a_j forces i > j forces w_i <= w_j, and the product is <= 0.  Done.

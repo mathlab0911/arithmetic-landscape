@@ -1,0 +1,10 @@
+  1. FIRED   [ok]  status: measured only, no proof, not called open  (must fire)
+  2. FIRED   [ok]  status: the Japanese form  (must fire)
+  3. FIRED   [ok]  status: 'unproved' buried in reassurance  (must fire)
+  4. FIRED   [ok]  PROSE outside any status, unquarantined  (must fire)
+  5. FIRED   [ok]  the quarantine phrase removed from an existing line  (must fire)
+  6. silent  [ok]  status that names it open -- must NOT fire  (must stay silent)
+  7. silent  [ok]  benign phrase SPLIT ACROSS A LINE BREAK -- must NOT fire  (must stay silent)
+
+  5/5 defects fire: True;  escapes stay silent: True
+  restored and clean: True

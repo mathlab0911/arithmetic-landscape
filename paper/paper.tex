@@ -200,6 +200,47 @@ $(a_1-1)/2$ values. Collecting equal terms,
 $\Gamma(A)=1+(a_1-1)+\sum_{j=1}^{k-1}(a_{j+1}-a_j)2^{-j}$.
 \end{proof}
 
+\begin{proposition}[$\Gamma$ is Schur-concave]\label{prop:schur}
+\STATUS{proved; the proof is Abel summation followed by the Schur--Ostrowski criterion.
+Measured for confirmation only: over $4000$ majorization-comparable pairs of sets of distinct
+odd integers, $\Gamma$ was larger on the more equal set in every case that was not a tie;
+\texttt{schur\_r149}.}
+Regard $\Gamma$ as a function of the multiset. If $A$ majorizes $B$ --- same sum, $A$ the more
+spread out --- then $\Gamma(A)\le\Gamma(B)$.
+\end{proposition}
+
+\begin{proof}
+Abel summation applied to Proposition~\ref{prop:gapform} gives
+$\Gamma(A)=\sum_{j=1}^{k}w_ja_j$ with $a_1<\dots<a_k$ and
+\[
+  (w_1,\dots,w_k)=\bigl(\tfrac12,\tfrac14,\dots,2^{-(k-1)},2^{-(k-1)}\bigr),
+\]
+positive and \emph{non-increasing}. So $\Gamma$ is an ordered weighted average taken along the
+ascending order. It is symmetric as a function of the multiset, and on the open region where
+the entries are distinct $\partial\Gamma/\partial a_i=w_i$; if $a_i>a_j$ then $i>j$, hence
+$w_i\le w_j$ and $(a_i-a_j)(\partial_i\Gamma-\partial_j\Gamma)\le0$. That is the
+Schur--Ostrowski condition for Schur-concavity, and $\Gamma$ is continuous, so it holds on the
+closure.\qed
+\end{proof}
+
+\begin{remark}[what Schur-concavity buys, and what it explains]\label{rem:schur}
+Two things, one technical and one conceptual.
+
+\emph{Technical.} $\Gamma$ now sits inside the Hardy--Littlewood--P\'olya framework, so
+Karamata's inequality and the standard majorization toolkit apply to it without further work.
+Any statement of the form ``$\Gamma$ is extremal on the most/least spread set with a given sum''
+is a corollary rather than a computation.
+
+\emph{Conceptual.} Schur-concavity says exactly that \emph{$\Gamma$ rewards equality and
+punishes spread}. That is the precise version of the informal description used throughout this
+series --- that $\Gamma$ is a \emph{bottom} statistic, decided by the smallest elements --- and
+it is why $\Gamma$ separates sets that a second moment cannot: variance is Schur-\emph{convex},
+so it moves the other way. The two are not competing measures of the same thing; they have
+opposite monotonicity under the same partial order.
+\STATUS{derived from Proposition~\ref{prop:schur}; the remark about variance is the standard
+fact that $\sum(a_i-\bar a)^2$ is Schur-convex.}
+\end{remark}
+
 \begin{proposition}[enumeration form]\label{prop:enumform}
 $\displaystyle\Gamma(A)=\sum_{j=1}^{k}\frac{a_j}{2^{j}}+\frac{a_k}{2^{k}}.$
 \end{proposition}

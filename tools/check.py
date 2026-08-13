@@ -1105,6 +1105,27 @@ QUARANTINED = re.compile(
     r'does not need it|is not used|nothing (?:here )?depends on|not load-bearing|'
     r'定理はそれを必要としない|使っていない', re.I)
 
+def _unwrap(text):
+    """Join the hard line breaks inside a block before matching.
+
+    Japanese has no inter-word spaces, so a line break falls wherever the
+    typesetter put it -- in the middle of a phrase.  A marker like
+    'confirmation only' survives \\s+ in English; its Japanese counterpart does
+    not survive at all, because the newline sits between two characters that
+    belong to the same word.  C20 duly convicted an honest status whose
+    exempting phrase was split across two lines.  Normalise first: drop the
+    newline when both neighbours are non-ASCII, otherwise turn it into a space.
+    """
+    out = []
+    for i, ch in enumerate(text):
+        if ch != '\n':
+            out.append(ch); continue
+        prev = text[i-1] if i else ' '
+        nxt = text[i+1] if i+1 < len(text) else ' '
+        out.append('' if (ord(prev) > 127 and ord(nxt) > 127) else ' ')
+    return ''.join(out)
+
+
 def _status_blocks(src):
     r"""yield (start, text) for each \STATUS{...}, brace-matched"""
     for m in re.finditer(r'\\STATUS\{', src):
@@ -1113,7 +1134,7 @@ def _status_blocks(src):
             if src[i] == '{': depth += 1
             elif src[i] == '}': depth -= 1
             i += 1
-        yield m.start(), src[m.end():i-1]
+        yield m.start(), m.end(), i-1, _unwrap(src[m.end():i-1])
 
 def c20_measured_only():
     bad, n_status, n_prose = [], 0, 0
@@ -1123,7 +1144,7 @@ def c20_measured_only():
         if not os.path.exists(path):
             continue
         src = _uncommented(path); base = os.path.basename(path)
-        for start, block in _status_blocks(src):
+        for start, b0, b1, block in _status_blocks(src):
             n_status += 1
             m = MEASURED_ONLY.search(block)
             if not m: continue
@@ -1138,9 +1159,15 @@ def c20_measured_only():
         # twice under two rule sets made the check fail an honest open problem whose
         # status said, correctly, that its evidence is measured and therefore goes to
         # the open register.  One voice per fact, here too.
-        prose = src
-        for start, block in _status_blocks(src):
-            prose = prose.replace(block, ' ' * len(block), 1)
+        # blank the statuses BY SPAN, not by string replace: the blocks are
+        # unwrapped before matching, so they no longer occur verbatim in src, and a
+        # replace() that silently finds nothing would hand every status back to the
+        # stricter prose rule -- which is the bug this separation exists to prevent.
+        prose = list(src)
+        for _s, b0, b1, _blk in _status_blocks(src):
+            for q in range(b0, b1):
+                if prose[q] != '\n': prose[q] = ' '
+        prose = ''.join(prose)
         for m in re.finditer(r'measured,\s*not\s+proved|測定であって証明ではな', prose):
             n_prose += 1
             if QUARANTINED.search(_sentence_around(prose, m.start(), m.end())):

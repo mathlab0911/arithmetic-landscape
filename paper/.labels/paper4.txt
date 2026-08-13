@@ -53,6 +53,7 @@ rem:lam0
 rem:lean22
 rem:leancoset
 rem:leanmodfour
+rem:localrem
 rem:measurefree
 rem:modfourcorollary
 rem:mushift
