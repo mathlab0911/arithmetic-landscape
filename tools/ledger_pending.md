@@ -98,3 +98,27 @@ about 1.8 *because `lm/r` is larger exactly where `r` is larger*.
 > **When two people measure "the same" quantity and disagree by a factor, the first suspect is
 > not arithmetic but the weight.** Name the population and the weighting in the sentence that
 > reports the number, every time.
+
+## r166 — a repair that compiled, checked, and was wrong
+
+Landing R-b left the display reading `eps*(Z) = eps*(Z) = ...` — the left-hand side written
+twice. It survived **xelatex with zero errors and all twenty checks C1–C20**, because a repeated
+`X =` is valid mathematics and no checker reads for sense. It was found only when the statement
+was read back in order to quote it in the outgoing report.
+
+> **A green suite is evidence about the classes of defect the suite was built to catch, and
+> about nothing else.** Twenty checks and a typesetter all passed a malformed display, because
+> every one of them is a machine and the defect was semantic.
+
+Two consequences, and the second is the one that matters:
+
+1. **The find was a side effect of quoting.** Nothing in the process was pointed at this; the
+   report simply required reading the statement aloud, and that was enough. *Writing a claim out
+   for someone else is a check, and it is currently the only unmechanised one we have.*
+2. This is the **second independent argument** for fable's prescribed referee pass — the first
+   was the adverb in `prop:targetdep` (r164), also invisible to every check, also caught by
+   reading. Two defects of the same kind in one round, from two different causes, is a rate, not
+   a coincidence. **Institutionalise the pass.**
+
+Filed next to F38 rather than inside it: F38 is about statuses that overclaim, this is about a
+statement that no status could have saved.

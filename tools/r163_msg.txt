@@ -1,53 +1,54 @@
-fable-5's audit landed: the three repairs, the wording, and the prob:hrate split
+fable-5's audit carried out: the three repairs, the wording, the hrate split, and the report
 
-All of instruction 1 in one wave, plus the reconciliation instruction 2 asked for first.
+All of instruction 1 in one wave, plus the reconciliation instruction 2 asked for first, plus
+the outgoing report that hands the restated prop:R1done back for the short re-read (r161
+archived).
 
 R-a. The unstated WLOG is now a paragraph at the head of the appendix: complementation gives
 lm(n) = lm(T-n) and r(n) = r(T-n), proved in Part I and Lean-verified, so rho <= 1/2 and
 s >= 0 may be assumed; s = 0 is covered because lem:twopoint is stated for every p in (0,1/2]
-rather than for p < 1/2. Both consumer theorems cite it. True, one sentence, and it had never
-been written.
+rather than for p < 1/2. Both consumer theorems cite it. True, one sentence, never written.
 
 R-b, route (i) as recommended. prop:R1done is restated in the Gaussian-relative form
 P[S=m] = (phi(z)/sigma)(1+theta), |theta| <= eps*(Z) -- the form rem:budgetsize and both
 consumer theorems actually use. The Hermite terms move from the statement to a description of
-where the budget goes, and eps* now carries an explicit eps_hi term for the higher
-exponentiation classes (alpha*beta t^7, beta^2 t^8, alpha^3 t^9), with
+where the budget goes, and eps* now carries an explicit eps_hi for the higher exponentiation
+classes (alpha*beta t^7, beta^2 t^8, alpha^3 t^9), with
 eps_hi = O(|alpha||beta| + beta^2 + |alpha|^3) = O(k^-3/2) uniformly on the window. No
-conclusion moves; the banner "every constant written out" now holds literally. It also
-removes the ambiguity fable named, where E was defined after the bracket while eps* bounded
-the bracket's own sups.
+conclusion moves; the banner "every constant written out" now holds literally, and the
+ambiguity fable named -- E defined after the bracket while eps* bounded the bracket's own sups
+-- is gone with the bracket.
 
-R-c. Half a sentence on why the principal branch is legitimate: q + p e^t meets the cut only
-where Im t = pi mod 2pi, which cannot happen on |t| <= 2, so |Im K| < pi is rigorous rather
-than a convention. Marked as the one step where a reader is entitled to pause.
+R-c. Half a sentence on the branch: q + p e^t meets the cut only where Im t = pi mod 2pi,
+impossible on |t| <= 2, so |Im K| < pi is rigorous rather than a convention.
 
 The adverb. "Then, exactly," becomes "the layer prediction evaluates, with no further
-approximation, to". The display was exact within the layer model and the left side as printed
-was the true ratio; the STATUS said derived and was honest, and the sentence above it was not.
-A status is a label on a statement and a label cannot fix a verb.
+approximation, to". The STATUS said derived and was honest; the sentence above it was not. A
+status is a label on a statement and a label cannot fix a verb.
 
-prob:hrate is split. (hrate-a), the convergent regime -- does the limit hold without (H) for
-every family with limsup Gamma < infinity -- is the real question, open, no witness either
-way, and everything the correction formula settles lies inside it. (hrate-b), the divergent
-regime, registers as BOUNDED and deliberately not as equal to a fixed truncation.
+prob:hrate split. (hrate-a), the convergent regime, is the real question and is open with no
+witness either way; everything the correction formula settles lies inside it. (hrate-b), the
+divergent regime, registers as BOUNDED and deliberately not as a fixed truncation.
 
-Which brings the reconciliation, and it changes one of fable's readings. 7 against 4 was never
-a window difference: the r-weighted sum lm / sum r is the ratio at a typical GROUND STATE and
-runs 6.9 to 7.7; the median of lm/r over representable targets is the ratio at a typical
-TARGET and runs 4 to 5. They differ by about 1.8 because in this family lm/r is larger exactly
-where r is larger, so weighting by r is not neutral. Both are bounded, which is all (hrate-b)
-asserts.
+The reconciliation, which revises one of fable's readings. 7 against 4 was never a window
+difference: sum lm / sum r is the ratio at a typical GROUND STATE and runs 6.9 to 7.7; the
+median of lm/r over representable targets is the ratio at a typical TARGET and runs 4 to 5.
+They differ by about 1.8 because lm/r is larger exactly where r is larger, so weighting by r is
+not neutral. And the plateau does not survive its range: fable read 4.000 flat at k = 10,12,14
+as D_eff = 2 exactly, but at k = 16..20 the median runs 4.0, 5.0, 4.5, 4.0, 5.0 and D_eff moves
+between 2 and 4. Three points inside a range are not a range.
 
-But the plateau does not survive its range. fable measured 4.000 flat at k = 10, 12, 14 and
-read it as D_eff = 2 exactly. At k = 16..20 the median runs 4.0, 5.0, 4.5, 4.0, 5.0 and the
-implied D_eff moves between 2 and 4. The effective-depth reading describes k <= 16 and is not
-a fixed truncation. Three points inside a range are not a range.
+And a defect of mine, in the repair itself. Landing R-b left the display reading
+eps*(Z) = eps*(Z) = ..., the left-hand side written twice. It compiled with zero errors and
+passed all twenty checks, because a repeated X = is valid mathematics and no checker reads for
+sense. It was caught only by reading the statement back in order to quote it in the report. A
+green suite is evidence about the classes of defect the suite was built to catch and about
+nothing else -- and this is the second defect this round invisible to every check and caught by
+reading, after the adverb. Two of a kind in one round is a rate, not a coincidence, and it is
+now the standing argument for institutionalising fable's referee pass.
 
-fverify_r163_reconcile.py/.log is committed. fable's own fverify_r162a_regime is NOT on this
-machine -- it exists only in that session -- so it could not be absorbed; the reconciliation
-is an independent reimplementation rather than a check of that file.
+fverify_r163_reconcile.py/.log committed. fable's own fverify_r162a_regime is NOT on this
+machine -- it exists only in that session -- so the reconciliation is an independent
+reimplementation rather than a check of that file.
 
-Papers 43 pp both editions, C1-C20 pass. Ledger gains three entries: the head's dead
-hypothesis filed with its outcome, the adverb as the smallest F38 instance, and the plateau.
-"""
+Papers 43 pp both editions, C1-C20 pass. Ledger gains four entries.
