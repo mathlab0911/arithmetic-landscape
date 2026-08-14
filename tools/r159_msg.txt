@@ -1,0 +1,39 @@
+Ledger: three blocks folded into the skill, and the cadence rule seated beside C20
+
+r156-r158 folded. Three blocks, and none of them became a new entry by default -- two went
+into existing ones, which is what the standing rule asks for.
+
+F70, the C20 entry, now carries its sibling, exactly where fable-5 asked it to sit: THE
+ROUND'S OWN LITERATURE PASS COMPLETES BEFORE THE ROUND'S PUSH. C20 closes the gap between
+measured and proved; the cadence rule closes the gap between cited and checked. They are one
+defect at two stages -- a claim released while one of its own supports is still outstanding,
+and in both cases the support was one I had already listed and postponed. Not mechanisable
+as it stands, so it lives as a precondition on the push.
+
+F69 gains its second instance, and the pair is now the entry rather than the incident. A
+bilingual check must normalise before matching: an exemption phrase split across a line
+break (Japanese has no inter-word spaces, so the break falls mid-phrase and \s+ cannot save
+it), and git's \345\205\245 escaping of non-ASCII filenames, which a whitelist guard read as
+a path outside the whitelist. Set the normalisation on every run, not once at creation --
+a setting applied only at setup is one a fresh clone will not have.
+
+F77 is new, and it is the one worth reading twice. When a request means "show less", ask
+which part of what is shown is load-bearing: a display case that shows only conclusions is a
+weaker artefact than one that shows the working, even though it looks stronger. Then the
+mechanics: separate by structure rather than convention (the workshop has no origin; its git
+directory is outside the tree), put the friction on the dangerous side, and the .gitignore
+precedence that made the first attempt stage zero files while saying nothing -- F60's shape,
+one command from being believed.
+
+Also into the skill proper: section 2 gains the rule that ratification belongs inside the
+returning model's own audit rather than being granted from the doorway, which is F52 with
+the roles reversed and is what fable-5 did; section 3 gains "rewrite the accreted report
+self-contained once it passes a page or two"; section 4 gains "when he asks whether
+something is done, lead with the verdict and the evidence, not the reasoning"; section 9
+gains "pass long text as a FILE, not as an argument" after a multi-line -Message was split
+across the parameter list; and section 12 is rewritten for the three repositories.
+
+Case text in ledger_archive.md, now 106 KB. Pending reset; C6 reports the empty state as an
+empty state.
+
+C1-C20 pass.
