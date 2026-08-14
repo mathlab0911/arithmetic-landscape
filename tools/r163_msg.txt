@@ -1,0 +1,53 @@
+fable-5's audit landed: the three repairs, the wording, and the prob:hrate split
+
+All of instruction 1 in one wave, plus the reconciliation instruction 2 asked for first.
+
+R-a. The unstated WLOG is now a paragraph at the head of the appendix: complementation gives
+lm(n) = lm(T-n) and r(n) = r(T-n), proved in Part I and Lean-verified, so rho <= 1/2 and
+s >= 0 may be assumed; s = 0 is covered because lem:twopoint is stated for every p in (0,1/2]
+rather than for p < 1/2. Both consumer theorems cite it. True, one sentence, and it had never
+been written.
+
+R-b, route (i) as recommended. prop:R1done is restated in the Gaussian-relative form
+P[S=m] = (phi(z)/sigma)(1+theta), |theta| <= eps*(Z) -- the form rem:budgetsize and both
+consumer theorems actually use. The Hermite terms move from the statement to a description of
+where the budget goes, and eps* now carries an explicit eps_hi term for the higher
+exponentiation classes (alpha*beta t^7, beta^2 t^8, alpha^3 t^9), with
+eps_hi = O(|alpha||beta| + beta^2 + |alpha|^3) = O(k^-3/2) uniformly on the window. No
+conclusion moves; the banner "every constant written out" now holds literally. It also
+removes the ambiguity fable named, where E was defined after the bracket while eps* bounded
+the bracket's own sups.
+
+R-c. Half a sentence on why the principal branch is legitimate: q + p e^t meets the cut only
+where Im t = pi mod 2pi, which cannot happen on |t| <= 2, so |Im K| < pi is rigorous rather
+than a convention. Marked as the one step where a reader is entitled to pause.
+
+The adverb. "Then, exactly," becomes "the layer prediction evaluates, with no further
+approximation, to". The display was exact within the layer model and the left side as printed
+was the true ratio; the STATUS said derived and was honest, and the sentence above it was not.
+A status is a label on a statement and a label cannot fix a verb.
+
+prob:hrate is split. (hrate-a), the convergent regime -- does the limit hold without (H) for
+every family with limsup Gamma < infinity -- is the real question, open, no witness either
+way, and everything the correction formula settles lies inside it. (hrate-b), the divergent
+regime, registers as BOUNDED and deliberately not as equal to a fixed truncation.
+
+Which brings the reconciliation, and it changes one of fable's readings. 7 against 4 was never
+a window difference: the r-weighted sum lm / sum r is the ratio at a typical GROUND STATE and
+runs 6.9 to 7.7; the median of lm/r over representable targets is the ratio at a typical
+TARGET and runs 4 to 5. They differ by about 1.8 because in this family lm/r is larger exactly
+where r is larger, so weighting by r is not neutral. Both are bounded, which is all (hrate-b)
+asserts.
+
+But the plateau does not survive its range. fable measured 4.000 flat at k = 10, 12, 14 and
+read it as D_eff = 2 exactly. At k = 16..20 the median runs 4.0, 5.0, 4.5, 4.0, 5.0 and the
+implied D_eff moves between 2 and 4. The effective-depth reading describes k <= 16 and is not
+a fixed truncation. Three points inside a range are not a range.
+
+fverify_r163_reconcile.py/.log is committed. fable's own fverify_r162a_regime is NOT on this
+machine -- it exists only in that session -- so it could not be absorbed; the reconciliation
+is an independent reimplementation rather than a check of that file.
+
+Papers 43 pp both editions, C1-C20 pass. Ledger gains three entries: the head's dead
+hypothesis filed with its outcome, the adverb as the smallest F38 instance, and the plateau.
+"""

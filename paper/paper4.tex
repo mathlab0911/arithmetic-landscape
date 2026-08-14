@@ -2245,7 +2245,8 @@ in $\sigma^{-2}$,
 \STATUS{derived, by the same layer expansion as Proposition~\ref{prop:correction} and inheriting
 its standing. Verified on three profile families at eight values of $z$: away from the crossing
 the ratio of measured to predicted deviation lies in $[0.87,1.10]$. \texttt{target\_r151}.}
-Let $z=(n-\mu)/\sigma$. Then, exactly,
+Let $z=(n-\mu)/\sigma$. Then \emph{the layer prediction evaluates, with no further
+approximation, to}
 \[
   \frac{\mathrm{lm}_A(n)}{r_A(n)}
   =1+2\sum_{d\ge1}2^{-N_A(d)}\frac{\sigma}{\sigma_d}
@@ -2467,12 +2468,31 @@ first-order correction does not explain this failure either}, so these families 
 regime Proposition~\ref{prop:correction} describes.
 
 \noindent
-\textbf{What we therefore believe, as a conjecture and not as a result:}
-\begin{center}
-\emph{some hypothesis is necessary --- $\mathrm{lm}_A(n)/r_A(n)\to\Gamma(A)$ appears to be false
-for geometric families --- so the open problem is to find the sharp condition, of which
-\textup{(H)} is a sufficient but not a necessary form.}
-\end{center}
+\textbf{The problem therefore splits in two, and only the first is the question we were asking.}
+
+\emph{\textup{(hrate-a)} --- the convergent regime, and the real open problem.} Does
+$\mathrm{lm}_A(n)/r_A(n)\to\Gamma(A)$ hold, without \textup{(H)}, for every family with
+$\limsup_k\Gamma(A_k)<\infty$? \textbf{Open, with no witness either way.} Everything the
+correction formula settles (Remark~\ref{rem:correctionH}) lies inside this regime, and the
+geometric witness lies outside it.
+
+\emph{\textup{(hrate-b)} --- the divergent regime.} For $a_i=2^{i}+1$ the annealed series
+\emph{itself} diverges: $N_A(d)\approx\log_2 d$, so the layer weights are $\approx1/d$ and the
+partial sums grow like $\Gamma(D)=3+\log_2 D$. The measured ratio stays bounded while
+$\Gamma=k+2$ grows, and over $10\le k\le16$ it sits at $\Gamma(D)$ for an effective depth
+$D_{\mathrm{eff}}=2$ --- only the first two layers ever fire, because the deeper truncation
+targets are not representable. \emph{Conjecturally the ratio stays bounded in this regime;} we
+do \textbf{not} claim it equals a fixed truncation, because extending to $k\le20$ moves the
+implied $D_{\mathrm{eff}}$ between $2$ and $4$ (median $4.0,5.0,4.5,4.0,5.0$ at
+$k=16,\dots,20$), and a plateau seen on $k\le14$ alone is a plateau seen on too short a range.
+
+\emph{A note on which number is being conjectured about, because two are in circulation.} The
+$r$-weighted value $\sum_n\mathrm{lm}(n)/\sum_n r(n)$ --- the ratio at a typical \emph{ground
+state} --- runs $6.9$ to $7.7$; the median of $\mathrm{lm}(n)/r(n)$ over representable targets
+--- the ratio at a typical \emph{target} --- runs $4$ to $5$. Both are bounded, which is all
+\textup{(hrate-b)} asserts, and they differ by a factor near $1.8$ because in this family
+$\mathrm{lm}/r$ is larger exactly where $r$ is larger, so weighting by $r$ is not a neutral
+choice. \texttt{fverify\_r163\_reconcile}.
 \noindent
 It is a conjecture because $k\le18$ is a range and not a limit. Recording it here rather than
 asserting it anywhere is the third of the three outs the standing rule allows.
@@ -2748,6 +2768,16 @@ changed is that the missing ingredient is now a written argument to be checked r
 computation to be done. Every constant below is proved, not measured; where a measurement
 exists it is quoted only to show how much slack the proof carries.}
 
+\medskip
+\noindent
+\textbf{The reduction to $s>0$, stated once (R-a).} Theorem~\ref{thm:rigid} is about
+$\rho\in(0,1)$ and this appendix works at $s>0$, that is, below the centre. The two are the
+same statement: the complementation $S\mapsto A\setminus S$ gives
+$\mathrm{lm}_A(n)=\mathrm{lm}_A(T-n)$ and $r_A(n)=r_A(T-n)$ --- proved in Part~I~\cite{P1} and
+verified in Lean --- so we may assume $\rho\le\tfrac12$ throughout, hence $s\ge0$; and
+$s=0$ is covered because Lemma~\ref{lem:twopoint} is stated for every $p\in(0,\tfrac12]$
+rather than for $p<\tfrac12$. Both consumer theorems cite this paragraph.
+
 Throughout, $B$ is a finite set of odd positive integers, $p_a=(1+e^{sa})^{-1}$ with $s>0$ so
 that $p_a<\tfrac12$ for every $a$, $S=\sum_{a\in B}aX_a$ with $X_a$ independent
 Bernoulli$(p_a)$, and
@@ -2776,6 +2806,11 @@ Write $K(t)=\log(q+pe^{t})$, so that $\log(1-p+pe^{iv})=K(iv)$ and $\kappa_j=K^{
 \emph{Analyticity.} $q+pe^{t}=0$ forces $e^{t}=-q/p$, hence $\operatorname{Im}t\equiv\pi
 \pmod{2\pi}$ and $\operatorname{Re}t=\log(q/p)$. The nearest such point to the origin is at
 distance $|\log(q/p)+i\pi|\ge\pi$. So $K$ is analytic on $|t|<\pi$, for every $p$.
+\emph{And the branch is the principal one throughout (R-c):} $q+pe^{t}$ meets the cut
+$(-\infty,0]$ only where $\operatorname{Im}(pe^{t})=0$ with $q+pe^{t}\le0$, which again forces
+$\operatorname{Im}t\equiv\pi\pmod{2\pi}$ and so cannot happen on $|t|\le2$. Hence $\log$ is the
+principal logarithm on the whole disc used below and $|\operatorname{Im}K|<\pi$ is rigorous
+rather than a convention --- the one step where a reader is entitled to pause.
 
 \emph{A lower bound on $|q+pe^{t}|$ for $|t|=2$.} Write $t=x+iy$ with $x^{2}+y^{2}=4$, so
 $|y|\le2$ and $\cos y\ge\cos2$. With $u=pe^{x}>0$,
@@ -2879,22 +2914,32 @@ $(-it)^{j}$ inside, and $\varphi^{(j)}=(-1)^{j}\mathrm{He}_j\varphi$. \qed
 
 \begin{proposition}[the expansion on R1]\label{prop:R1done}
 \STATUS{proved, modulo the independent reading recorded at the head of this appendix}
-With the notation above, for every integer $m$,
+With the notation above, on the extraction window $|m-\mu|\le W$ with $Z=W/\sigma$, and for
+all $k$ above the threshold of Remark~\ref{rem:threshold},
 \[
-  \mathbb{P}\bigl[S=m\bigr]
-  =\frac{\varphi(z)}{\sigma}
-   \Bigl[1+\frac{\alpha}{6}\mathrm{He}_3(z)+\frac{\beta}{24}\mathrm{He}_4(z)
-        +\frac{\alpha^{2}}{72}\mathrm{He}_6(z)\Bigr]+E,
+  \mathbb{P}\bigl[S=m\bigr]=\frac{\varphi(z)}{\sigma}\,\bigl(1+\theta\bigr),
+  \qquad |\theta|\le\varepsilon^{*}(Z),
 \]
-and, on the extraction window $|m-\mu|\le W$ with $Z=W/\sigma$,
+\emph{the Gaussian-relative form}, which is what Remark~\ref{rem:budgetsize} and both consumer
+theorems actually use. The Hermite terms are then not part of the statement but a description
+of where the budget goes: the leading behaviour of $\theta$ is
+$\tfrac{\alpha}{6}\mathrm{He}_3(z)+\tfrac{\beta}{24}\mathrm{He}_4(z)
++\tfrac{\alpha^{2}}{72}\mathrm{He}_6(z)$, and $\varepsilon^{*}$ bounds that leading part
+\emph{together with every higher term of the exponentiation} --- the $\alpha\beta t^{7}$,
+$\beta^{2}t^{8}$ and $\alpha^{3}t^{9}$ classes included, which are of the $k^{-3/2}$ class
+against the budget's $k^{-1}$ and were not visible in the earlier bracketed form. Explicitly,
 \[
-  |E|\;\le\;\frac{\varphi(0)}{\sigma}\,\varepsilon^{*}(Z),\qquad
+  \varepsilon^{*}(Z)=
   \varepsilon^{*}(Z)=\frac{|\alpha|}{6}\min(3Z,2+Z^{3})
    +\frac{|\beta|}{24}(3+6Z^{2}+Z^{4})
    +\frac{\alpha^{2}}{72}(15+45Z^{2}+15Z^{4}+Z^{6})
-   +\frac{16\,C_{\mathrm{T}}}{\sigma^{5}}\sum_{a\in B}a^{5},
+   +\frac{16\,C_{\mathrm{T}}}{\sigma^{5}}\sum_{a\in B}a^{5}
+   +\frac{2\,\varepsilon_{\mathrm{hi}}(Z)}{\varphi(0)},
 \]
-for all $k$ above the threshold of Remark~\ref{rem:threshold}.
+where $\varepsilon_{\mathrm{hi}}$ collects the higher exponentiation classes and satisfies
+$\varepsilon_{\mathrm{hi}}=O(|\alpha||\beta|+\beta^{2}+|\alpha|^{3})=O(k^{-3/2})$ uniformly on
+the window, so it changes no conclusion and is written because the banner of this appendix is
+that every constant is on the page.
 \end{proposition}
 
 \begin{proof}
