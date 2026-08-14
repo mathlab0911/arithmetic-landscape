@@ -1,0 +1,11 @@
+=== negative control: modules that MUST fail ===
+  ok Lean4CheckerTests.AddFalse rejected (exit 1)
+  ok Lean4CheckerTests.ReplaceAxiom rejected (exit 1)
+  ok Lean4CheckerTests.AddFalseConstructor rejected (exit 1)
+=== closure check: every CANON file must be reachable from the root module ===
+  (not canon, deliberately outside the closure: 10 file(s) under Pnp/Experiments)
+  ok all 16 source files are in the closure of Pnp
+=== canon: Pnp ===
+Searching for modules matching: [Pnp]
+Found 17 modules to check
+PASS -- every constant of the canon replayed through the kernel (179.8 s)

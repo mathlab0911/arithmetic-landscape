@@ -1,0 +1,27 @@
+Canon replayed through the kernel: PASS, with the negative controls firing first
+
+Periodic confirmation rather than a response to a change. Nothing in the canon moved this
+session; two days of heavy work happened on the papers around it, and the point of running
+the replay now is that "we did not touch it" is a claim like any other.
+
+  three poisoned modules rejected                     exit 1 each
+  all 16 canon source files inside the closure of Pnp
+  ten Pnp/Experiments files deliberately outside it
+  17 modules, every constant replayed by the kernel   PASS, 179.8 s
+
+The negative controls run first and the harness refuses to report a pass unless all three
+are rejected, which is the only reason the PASS on the line below them means anything.
+
+One line for the ledger, and it is about me rather than about the canon. The first attempt
+launched the replay with powershell -Command, whose wrapper ate the $log variable and threw
+CommandNotFoundException on a path. Section 9 of the skill has said "pass PowerShell work as
+a script file, not -Command" since r116, and one round earlier this same session it gained
+the sibling "pass long text as a file, not as an argument" after a multi-line commit message
+was split across the parameter list.
+
+A rule that exists and is not reached for is not yet a habit. The ledger's value is in the
+reflex and not in the text; when the text is right and the hand does it anyway, the entry to
+make is not a new rule but a note that this one has to be the default form. Write the script
+file first, every time.
+
+README counts corrected to 148 scripts / 224 logs. C1-C20 pass.
