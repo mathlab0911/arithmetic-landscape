@@ -31,3 +31,18 @@ sibling *pass long text as a file, not as an argument*.
 > is not a new rule but a note that this one needs to be the default form. **Write the script
 > file first, every time — there is no case where `-Command` with a variable is the right tool
 > here.**
+
+## r161 — a default message that was true once
+
+The workshop backup script hardcoded its commit message. The first commit said *"the working
+documents, in a repository for the first time"*, which was true. The second run reused it over
+three changed files, and asserted the same thing, which was not.
+
+> **A hardcoded message is a claim, and a claim written once into a tool keeps being made after
+> it stops being true.** Nobody re-reads a default. Make it a parameter, and let the default be
+> something that cannot go stale — here, a count computed at commit time.
+
+Small, and the reason it is in the ledger at all: this project's whole discipline is that a
+sentence in a permanent record has to be true, and a commit message is a permanent record. The
+same shape as F35 (summaries drift) with the drift built into the tool rather than into a
+habit.

@@ -17,7 +17,7 @@
 # direction is closed by the same rule that made the problem.
 #
 # Run with -Commit to actually commit and push; without it, this is a dry run.
-param([switch]$Commit)
+param([switch]$Commit, [string]$Message)
 
 $ErrorActionPreference = 'Continue'
 $TREE = 'C:\Users\amake\Claude\Projects\study'
@@ -110,28 +110,16 @@ if (-not $Commit) {
 Write-Output ""
 Write-Output "=== committing on an orphan branch ==="
 $m = Join-Path $env:TEMP 'workshop.txt'
-$body = @"
-Workshop: the working documents, in a repository for the first time
-
-reports/, book/, paper-ja/, docs/, outgoing/ and the design documents are excluded from the
-research repository on purpose -- the specs because twenty-four of them were once found
-inside the PUBLIC repository and had to be removed from its history, the Japanese editions
-and the book because they are drafts. The consequence nobody had priced: three complete
-Japanese editions, more than a hundred round reports and every design document existed on
-exactly one disk, with no copy anywhere.
-
-Held in an orphan branch of the private repository, tracked by a git directory that lives
-OUTSIDE the working tree and has no origin remote. The separation is structural, not
-conventional: the public remote is not reachable from here at all.
-
-One thing had to be learned to build it. A .gitignore lives in the working tree, so both
-repositories read it, and .gitignore outranks GIT_DIR/info/exclude -- a whitelist there
-cannot re-admit what .gitignore excludes. So this repository adds its paths explicitly, by
-name, with --force. That leaves the failure mode pointing the safe way: a careless add -A
-here adds nothing at all, because the research repository's ignore rules block every one of
-these files. The rule that caused the difficulty is the one that closes the dangerous
-direction.
-"@
+# The first commit's message described a first commit. Every later run reused it, so the
+# second commit asserted "for the first time" about three changed files -- a false sentence
+# in a permanent record, written by a default. A hardcoded message is a claim that stops
+# being true; make it a parameter with a neutral default.
+if ($Message) {
+    $body = $Message
+} else {
+    $n = @(& git --git-dir=$GD --work-tree=$TREE diff --cached --name-only).Count
+    $body = "Workshop: $n file(s) updated`n`nThe working documents that the research repository ignores: reports, book, paper-ja,`ndocs, outgoing and the design documents. Orphan branch of the private repository, tracked`nby a git directory outside the working tree with no origin remote."
+}
 [System.IO.File]::WriteAllText($m, $body, (New-Object System.Text.UTF8Encoding $false))
 & git --git-dir=$GD --work-tree=$TREE commit -q -F $m
 Remove-Item -Force $m
