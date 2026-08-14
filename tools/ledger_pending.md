@@ -75,3 +75,43 @@ dirty tree or a red suite, then prints exactly which commits and files would bec
 `lean/pnp/spec_*.md`. Backing those up into the private remote is a **separate** decision, and
 the thing to build first is the guarantee that they cannot reach the public one — one tree with
 one ignore file cannot express "tracked here, not there".
+
+---
+
+## r158 — the workshop repository, and the two things that fought back
+
+The working documents — `reports/`, `book/`, `paper-ja/`, `docs/`, `outgoing/` and the design
+documents — now live in an orphan branch of the private repository, tracked by a git directory
+at `study-workshop.git` that sits **outside** the working tree and has **no `origin` remote**.
+203 files that until today existed on exactly one disk.
+
+> **Separation by structure, not by convention.** The public remote is not reachable from the
+> workshop repository at all; and the research repository cannot track the workshop's git
+> directory because it is not in the tree. Neither side needs anyone to remember a rule.
+
+**The thing that fought back first, and it is a genuine piece of git.** A `.gitignore` lives in
+the **working tree**, so *both* repositories read it, and `.gitignore` outranks
+`$GIT_DIR/info/exclude`. A whitelist written in `info/exclude` therefore cannot re-admit what
+`.gitignore` excludes — the first attempt staged **zero** files and said nothing about why.
+
+> **An empty measurement that reports success is the r150 shape again**, and it appeared here
+> within one command of being trusted. The fix is not to argue with the precedence: add the
+> whitelist **by name, with `--force`**. That leaves the failure mode pointing the safe way —
+> a careless `git add -A` in the workshop adds *nothing*, because the research repository's
+> ignore rules block every one of these files. **The rule that caused the difficulty is the one
+> that closes the dangerous direction.**
+
+**The thing that fought back second was our own guard, and it fired correctly.** The whitelist
+check refused the commit because git had escaped the Japanese filenames as
+`"book/\345\205\245..."`, which does not match `book/*`. Not a leak — a checker reading its own
+escaping as a violation.
+
+> **Second time this week that a checker written in English-shaped assumptions misread
+> Japanese** (F69 was a line-wrapped exemption phrase). The setting is `core.quotepath false`,
+> and it is applied on **every run** rather than at creation, because a setting applied only at
+> setup is a setting a fresh clone will not have.
+
+**Verified from outside, with a positive control** (F61): the public repository has one branch,
+`main`, and zero files under any protected path; its raw URL for a report returns nothing while
+`tools/allow_numbers.txt` returns content. The private repository shows `main` and `workshop`,
+and the workshop branch shows exactly the six directories.

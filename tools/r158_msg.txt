@@ -1,0 +1,42 @@
+The workshop repository: 203 working documents that existed on one disk
+
+reports/, book/, paper-ja/, docs/, outgoing/ and the design documents now live in an orphan
+branch of the private repository, tracked by a git directory at study-workshop.git that sits
+OUTSIDE the working tree and has no origin remote.
+
+Separation by structure rather than convention. The public remote is not reachable from the
+workshop repository at all, and the research repository cannot track the workshop's git
+directory because it is not in the tree. Neither side depends on anyone remembering a rule.
+
+Two things fought back, and both are worth the ledger.
+
+A .gitignore lives in the WORKING TREE, so both repositories read it, and .gitignore
+outranks GIT_DIR/info/exclude. A whitelist written in info/exclude therefore cannot re-admit
+what .gitignore excludes: the first attempt staged ZERO files and said nothing about why --
+the r150 shape, an empty measurement that reads as success, within one command of being
+believed. The fix is not to argue with the precedence but to add the whitelist by name with
+--force, and it leaves the failure mode pointing the safe way: a careless add -A in the
+workshop adds nothing, because the research repository's ignore rules block every one of
+these files. The rule that caused the difficulty is the one that closes the dangerous
+direction.
+
+Then our own guard refused the commit, correctly. Git had escaped the Japanese filenames as
+book/\345\205\245..., which does not match book/*. Not a leak: a checker reading its own
+escaping as a violation. Second time this week that a checker written in English-shaped
+assumptions misread Japanese. core.quotepath false, applied on every run rather than at
+creation, because a setting applied only at setup is one a fresh clone will not have.
+
+Verified from outside with a positive control. Public: one branch, main; zero files under
+any protected path; the raw URL for a report returns nothing while allow_numbers.txt returns
+content. Private: main and workshop, with the six directories on workshop.
+
+Three scripts added: workshop_setup.ps1 (three guards, dry run by default),
+workshop_verify.ps1, and the debug pass that found the .gitignore precedence.
+
+And a fourth lesson, from this commit itself: a long multi-line -Message argument was split
+by PowerShell across the parameter list and landed in -Paths, so the commit failed with
+"pathspec 'does' did not match any files". Pass round messages as a FILE. The skill already
+says to pass PowerShell work as a script file rather than -Command for the same reason; this
+is the same defect one level down, in the arguments.
+
+C1-C20 pass.
