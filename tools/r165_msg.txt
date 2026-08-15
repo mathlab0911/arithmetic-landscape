@@ -1,0 +1,51 @@
+F-1 and F-2 landed; and the third ingredient of the F-2 recipe does not work
+
+fable-5's r164 asked for two mechanical fixes with the arithmetic supplied. Both are in, the
+dominance check is green at all sixteen points, both editions build, C1-C20 pass. One part of
+the recipe had to be replaced, and that is the substance of this commit.
+
+F-1, accepted verbatim. The absolute-to-relative conversion now carries e^{Z^2/2} once,
+explicitly, via route (i): eps* = [three Hermite sups] + sqrt(2pi) e^{Z^2/2} rho, with rho an
+absolute bound at the scale of sigma*P. fable's two thresholds are confirmed to the digit: the
+old 2/phi(0) was valid only for Z <= 1.1774 and the old bare 16 C_T S5/sigma^5 only for
+Z <= 0.6720. Both were eventually true and neither was stated. The price is printed too: at the
+sixteen test points Z reaches 2.86, so the assembled bound is looser than the old
+conditionally-valid form by one to two orders of magnitude, dominance ratio 68 to 997 where it
+read 1.7 to 6.5. Loose where the theorems assert nothing, correct everywhere.
+
+F-2, two ingredients of three. The four Gaussian moments verify to thirteen digits and the cube
+split (a+b)^3 <= 4(a^3+b^3) is tight at a=b. rho now carries five closed-form constants and no
+O(.): e(2+pi)/pi, 1/3pi, 105/(1152 sqrt(2pi)), 32e/(27pi), 385e/(768 sqrt(2pi)). The first is
+16 e C_T/pi collapsed, since C_T = (2+pi)/16.
+
+The third ingredient fails. fable proposed bounding e^{|X|} by e after restricting k so that
+|X| <= 1 on the whole of |t| <= T_1. But |X(T_1)| <= |alpha|T_1^3/6 + |beta|T_1^4/24 and
+|alpha|T_1^3 ~ k^{-1/2} k^{3/2} = k, so the condition holds for SMALL k and is lost for large --
+a threshold in k pushes the wrong way. Measured, |X(T_1)| runs 0.13, 0.26, 0.51, 1.02 at
+k = 32, 64, 128, 256, doubling as k doubles.
+
+And the reason was already in the appendix one subsection earlier. rem:notsup says a supremum
+over a region where the integrand is already negligible charges the whole region at its worst
+point. We wrote that about R_5 and were about to do it to X. A lesson written into a remark is
+not yet installed in the hands.
+
+The repair: cut at T* = min{T_1, (3/|alpha|)^{1/3}, (12/|beta|)^{1/4},
+(sigma^5/(C_T S5))^{1/5}}, the largest radius on which |X| <= 1 and |R_5| <= 1 are both
+guaranteed by bounds already proved; under (H) the alpha term binds and T* ~ k^{1/6}. Outside
+T*, no Taylor bound is needed: (1-cos v)/v^2 decreases on (0,pi), so |psi(t/sigma)| <=
+exp(-(1-cos 1) t^2) on all of |t| <= T_1, and the outer contribution is exp(-c k^{1/3}) --
+the same beyond-all-orders bucket rem:threshold already prints. Put the cut where the
+hypotheses are true, not where the window happens to end.
+
+Stated honestly in the STATUS: the sixteen points test the five explicit constants and NOT
+rho_infty, which is still 0.066 at k = 256. Sixteen points, no failures is a true sentence that
+can carry a false impression.
+
+Also fixed here: an edit script searched for a raw-string "\qed\n\end{proof}", where \n is a
+backslash and an n rather than a newline. find returned -1, the slice t[j+4:] became t[3:], and
+the file was written as its own prefix followed by a near-complete copy of itself. It was caught
+in seconds because the build reported 87 pages and 26 errors, which is the whole argument for
+building before believing. Restored from HEAD and redone with the terminator asserted.
+
+Paper III 45 pp (EN), 44 pp (JA). Ledger gains two entries. r163 archived, r165 is the live
+outgoing report.

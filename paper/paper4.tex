@@ -2925,52 +2925,141 @@ theorems actually use. The Hermite terms are then not part of the statement but 
 of where the budget goes: the leading behaviour of $\theta$ is
 $\tfrac{\alpha}{6}\mathrm{He}_3(z)+\tfrac{\beta}{24}\mathrm{He}_4(z)
 +\tfrac{\alpha^{2}}{72}\mathrm{He}_6(z)$, and $\varepsilon^{*}$ bounds that leading part
-\emph{together with every higher term of the exponentiation} --- the $\alpha\beta t^{7}$,
-$\beta^{2}t^{8}$ and $\alpha^{3}t^{9}$ classes included, which are of the $k^{-3/2}$ class
-against the budget's $k^{-1}$ and were not visible in the earlier bracketed form. Explicitly,
+together with \emph{every} higher term of the exponentiation. Explicitly, writing
+$S_5=\sum_{a\in B}a^{5}$,
 \[
   \varepsilon^{*}(Z)=\frac{|\alpha|}{6}\min(3Z,2+Z^{3})
    +\frac{|\beta|}{24}(3+6Z^{2}+Z^{4})
    +\frac{\alpha^{2}}{72}(15+45Z^{2}+15Z^{4}+Z^{6})
-   +\frac{16\,C_{\mathrm{T}}}{\sigma^{5}}\sum_{a\in B}a^{5}
-   +\frac{2\,\varepsilon_{\mathrm{hi}}(Z)}{\varphi(0)},
+   +\sqrt{2\pi}\,e^{Z^{2}/2}\,\rho ,
 \]
-where $\varepsilon_{\mathrm{hi}}$ collects the higher exponentiation classes and satisfies
-$\varepsilon_{\mathrm{hi}}=O(|\alpha||\beta|+\beta^{2}+|\alpha|^{3})=O(k^{-3/2})$ uniformly on
-the window, so it changes no conclusion and is written because the banner of this appendix is
-that every constant is on the page.
+\[
+  \rho=\frac{e(2+\pi)}{\pi}\cdot\frac{S_5}{\sigma^{5}}
+      +\frac{1}{3\pi}|\alpha||\beta|
+      +\frac{105}{1152\sqrt{2\pi}}\beta^{2}
+      +\frac{32e}{27\pi}|\alpha|^{3}
+      +\frac{385e}{768\sqrt{2\pi}}|\beta|^{3}
+      +\rho_{\infty}
+\]
+\[
+  \;=\;4.4488\,\frac{S_5}{\sigma^{5}}+0.1061\,|\alpha||\beta|+0.03636\,\beta^{2}
+      +1.0255\,|\alpha|^{3}+0.5436\,|\beta|^{3}+\rho_{\infty},
+\]
+where $\rho$ is an \emph{absolute} bound on the residual at the scale of $\sigma\mathbb{P}$ and
+$\rho_{\infty}$ is the contribution of $|t|\ge T_{*}$, smaller than any power of $k$ above the
+threshold of Remark~\ref{rem:threshold} --- the same bucket, and the same device, that remark
+already prints for the region beyond $T_1$.
+
+\medskip\noindent
+\textbf{Two features of this display are there because a first version of it was wrong, and
+both are worth naming.} First, \textbf{the conversion from an absolute residual to a relative
+one costs the factor $e^{Z^{2}/2}$, and that factor is not a constant}: the relative size of an
+absolute residual $\rho$ is $\rho\sigma/\varphi(z)$, whose supremum on $|z|\le Z$ is
+$\rho\sigma\sqrt{2\pi}\,e^{Z^{2}/2}$. Under~\textup{(H)}, $Z\to0$ and the factor tends to $1$,
+so nothing downstream moves --- but an earlier form of this proposition carried the constants
+$2/\varphi(0)$ and a bare $16C_{\mathrm{T}}S_5/\sigma^{5}$ in its place, and those are valid
+only for $Z\le\sqrt{2\log2}=1.1774$ and $Z\le\sqrt{\log(\pi/2)}=0.6720$ respectively. Both
+restrictions hold eventually and neither was stated. \emph{A bound that becomes true only in
+the limit, printed without its condition, is a bound whose reader cannot tell which one they
+have.} Second, $\rho$ carries no $O(\cdot)$: an $O$ is not a constant, and the banner of this
+appendix admits no exceptions.
+\STATUS{the five constants of $\rho$ are proved below; the four Gaussian moments, the cube
+split, the quadratic estimate and the two validity thresholds quoted here are additionally
+verified numerically, and the assembled $\varepsilon^{*}$ is checked against the true relative
+error by exact dynamic programming at sixteen $(\text{profile},k,x)$ points with no failure.
+\texttt{r1lift\_r164}.}
 \end{proposition}
 
 \begin{proof}
-Invert $\psi$ over $[-\pi\sigma,\pi\sigma]$ in the variable $t$ and split at $T_1$. Beyond
-$T_1$, Remark~\ref{rem:threshold}. Within $T_1$, exponentiate the expansion of
-Lemma~\ref{lem:sumrem}:
+Invert $\psi$ over $[-\pi\sigma,\pi\sigma]$ in the variable $t$, so that
+$\mathbb{P}[S=m]=\frac1{2\pi\sigma}\int\psi(t/\sigma)e^{-izt}\,dt$. Within $T_1$ every phase
+$|at/\sigma|$ is at most $1$, so with
 \[
-  \psi(t/\sigma)=e^{-t^{2}/2}\Bigl[1-\tfrac{i}{6}\alpha t^{3}+\tfrac1{24}\beta t^{4}
-   -\tfrac1{72}\alpha^{2}t^{6}+\dots\Bigr]e^{R_5(t)},
+  X(t)=-\tfrac{i}{6}\alpha t^{3}+\tfrac1{24}\beta t^{4},\qquad
+  Q(t)=1+X(t)-\tfrac1{72}\alpha^{2}t^{6},
 \]
-the sixth-order term being $\tfrac12(-\tfrac{i}{6}\alpha t^{3})^{2}$. Since
-$(it)^{3}=-it^{3}$, $(it)^{4}=t^{4}$ and $(it)^{6}=-t^{6}$, the three bracket terms are
-$\tfrac{\alpha}{6}(it)^{3}$, $\tfrac{\beta}{24}(it)^{4}$ and $\tfrac{\alpha^{2}}{72}(it)^{6}$,
-and Lemma~\ref{lem:heinv} sends them to $\tfrac{\alpha}{6}\mathrm{He}_3$,
-$\tfrac{\beta}{24}\mathrm{He}_4$ and $\tfrac{\alpha^{2}}{72}\mathrm{He}_6$ against
-$\varphi(z)$. The three Hermite terms are bounded on $|z|\le Z$ by
+Lemma~\ref{lem:sumrem} gives $\psi(t/\sigma)=e^{-t^{2}/2}e^{X(t)+R_5(t)}$, and $Q$ is what
+Lemma~\ref{lem:heinv} sends to the three Hermite terms, since $(it)^{3}=-it^{3}$,
+$(it)^{4}=t^{4}$ and $(it)^{6}=-t^{6}$. Those three are bounded on $|z|\le Z$ by
 $\sup|\mathrm{He}_3|\le\min(3Z,2+Z^{3})$, $\sup|\mathrm{He}_4|\le3+6Z^{2}+Z^{4}$ and
 $\sup|\mathrm{He}_6|\le15+45Z^{2}+15Z^{4}+Z^{6}$, each from the coefficients of the polynomial
-and, for $\mathrm{He}_3$, from $\mathrm{He}_3(0)=0$. The factor $e^{R_5}-1$ contributes
-$\int e^{-t^{2}/2}|R_5|$, bounded by Lemma~\ref{lem:sumrem}; $|e^{x}-1|\le2|x|$ for
-$|x|\le1$ absorbs the exponentiation. \qed
+and, for $\mathrm{He}_3$, from $\mathrm{He}_3(0)=0$.
+
+\medskip\noindent
+\emph{Where the Taylor bounds are cut, and why not at $T_1$.} Put
+\[
+  T_{*}=\min\Bigl\{T_1,\;(3/|\alpha|)^{1/3},\;(12/|\beta|)^{1/4},\;
+        \bigl(\sigma^{5}/(C_{\mathrm{T}}S_5)\bigr)^{1/5}\Bigr\},
+\]
+the largest radius on which $|X|\le1$ and $|R_5|\le1$ are both guaranteed by bounds already
+proved. \textbf{The natural move --- keep $T_1$ and secure $|X|\le1$ by a threshold in $k$ ---
+is not available, and fails in the direction opposite to the one a threshold repairs:}
+$|X(T_1)|\le|\alpha|T_1^{3}/6+|\beta|T_1^{4}/24$ and $|\alpha|T_1^{3}\asymp
+k^{-1/2}\cdot k^{3/2}=k$, so that condition holds for \emph{small} $k$ and is lost for large.
+This is Remark~\ref{rem:notsup}'s lesson one subsection later and in a sharper form: on
+$[T_{*},T_1]$ the integrand is already negligible, and a Taylor bound evaluated at the far edge
+charges the whole window at a point that never contributes. Under~\textup{(H)},
+$|\alpha|\asymp k^{-1/2}$ gives $T_{*}\asymp k^{1/6}\to\infty$.
+\STATUS{measured: $|X(T_1)|$ runs $0.13,0.26,0.51,1.02$ at $k=32,64,128,256$ for the odd
+numbers --- doubling as $k$ doubles --- while $T_{*}/k^{1/6}$ stays within a factor $1.4$ over
+the same range. \texttt{r1lift\_r164}.}
+
+\medskip\noindent
+\emph{Inside $T_{*}$.} There $|X|\le1$ and $|R_5|\le1$, so $|e^{X}|\le e$ and
+$|e^{R_5}-1|\le2|R_5|$, whence
+\[
+  \bigl|e^{X+R_5}-Q\bigr|\;\le\;
+  \underbrace{2e|R_5|}_{\text{Lemma~\ref{lem:sumrem}}}
+  \;+\;\underbrace{\tfrac{e}{6}|X|^{3}}_{|e^{x}-1-x-\frac{x^{2}}{2}|\le\frac{|x|^{3}e^{|x|}}{6}}
+  \;+\;\underbrace{\tfrac{|\alpha||\beta|}{144}|t|^{7}+\tfrac{\beta^{2}}{1152}t^{8}}_{
+     \text{the unkept part of }X^{2}/2},
+\]
+the last bracket because $X^{2}/2=-\tfrac{\alpha^{2}}{72}t^{6}
+-\tfrac{i}{144}\alpha\beta t^{7}+\tfrac{\beta^{2}}{1152}t^{8}$ and only its first term is in
+$Q$. Extend every integral to $\mathbb{R}$, which dominates, and use
+$\int e^{-t^{2}/2}|t|^{5}dt=16$, $\int|t|^{7}=96$, $\int t^{8}=105\sqrt{2\pi}$,
+$\int|t|^{9}=768$ and $\int t^{12}=10395\sqrt{2\pi}$ --- the odd ones being $2\cdot2^{m}m!$ and
+the even ones $(2m-1)!!\sqrt{2\pi}$ --- together with $(a+b)^{3}\le4(a^{3}+b^{3})$ applied to
+$|X|^{3}$. Division by $2\pi$ gives the five constants of $\rho$ exactly as displayed:
+$16eC_{\mathrm{T}}/\pi=e(2+\pi)/\pi$; then $96/(144\cdot2\pi)=1/(3\pi)$; then
+$105\sqrt{2\pi}/(1152\cdot2\pi)=105/(1152\sqrt{2\pi})$; then
+$(e/6)\cdot4\cdot768/(216\cdot2\pi)=32e/(27\pi)$; then
+$(e/6)\cdot4\cdot10395\sqrt{2\pi}/(13824\cdot2\pi)=385e/(768\sqrt{2\pi})$.
+
+\medskip\noindent
+\emph{Outside $T_{*}$.} For $|v|\le1$, $1-\cos v\ge(1-\cos1)v^{2}$ because $(1-\cos v)/v^{2}$
+decreases on $(0,\pi)$; hence $|q_a+p_ae^{iv}|^{2}=1-2p_aq_a(1-\cos v)
+\le e^{-2p_aq_a(1-\cos1)v^{2}}$, and multiplying over $a\in B$ at $v=at/\sigma$ gives
+$|\psi(t/\sigma)|\le e^{-(1-\cos1)t^{2}}$ on the whole of $|t|\le T_1$, with
+$1-\cos1=0.4597$. So the contribution of $T_{*}\le|t|\le T_1$ --- from $\psi$ and from the
+Gaussian--polynomial comparison alike --- and the extension of the Hermite integrals from
+$T_{*}$ to $\mathbb{R}$ are each bounded by $e^{-(1-\cos1)T_{*}^{2}}$ times a constant, which
+by $T_{*}\asymp k^{1/6}$ is $e^{-ck^{1/3}}$: smaller than any power of $k$. That, with the
+region beyond $T_1$, is $\rho_{\infty}$, and it is exactly the class of term
+Remark~\ref{rem:threshold} already prints. \qed
 \end{proof}
 
 \begin{remark}[what the budget is, in the size that matters]\label{rem:budgetsize}
-Each of the four terms of $\varepsilon^{*}$ is $O(k^{-1})$ or smaller: $|\beta|\asymp k^{-1}$,
+Every term of $\varepsilon^{*}$ is $O(k^{-1})$ or smaller: $|\beta|\asymp k^{-1}$,
 $\alpha^{2}\asymp k^{-1}$, $|\alpha|Z\asymp k^{-1.8}$ since $Z=W/\sigma\to0$
-by~\textup{(H)}, and $\sum a^{5}/\sigma^{5}\asymp k^{-3/2}$. So $\varepsilon^{*}\to0$, which is
-all Theorems~\ref{thm:rigid} and~\ref{thm:transfer} require of it.
+by~\textup{(H)}, $S_5/\sigma^{5}\asymp k^{-3/2}$, and the five terms of $\rho$ fall in the
+classes $k^{-3/2}$, $k^{-3/2}$, $k^{-2}$, $k^{-3/2}$, $k^{-3}$. The conversion factor
+$\sqrt{2\pi}e^{Z^{2}/2}$ tends to $\sqrt{2\pi}$ because $Z\to0$, so it is bounded and does not
+disturb the rates. Hence $\varepsilon^{*}\to0$, which is all Theorems~\ref{thm:rigid}
+and~\ref{thm:transfer} require of it. \emph{The price of stating the conversion honestly is
+paid at small $k$, where $Z$ is not small:} at the sixteen test points $Z$ reaches $2.86$ and
+$e^{Z^{2}/2}$ reaches $60$, so the assembled bound is looser than the earlier, conditionally
+valid form by one to two orders of magnitude. It is loose in the region where the theorems say
+nothing, and it is correct everywhere.
 \STATUS{experimentally confirmed: $\varepsilon^{*}$ bounds the true relative error of the
 Gaussian, computed by exact dynamic programming over the window, at all sixteen test points
-tried, with ratio $1.7$ to $6.5$ and tightening in $k$; and $k\varepsilon^{*}$ runs
-$1.87,1.24,1.03,0.87$ at $k=100,200,300,450$. \texttt{r1step3\_r136}, \texttt{r1hermite\_r137}.}
+tried, with ratio $68$ to $997$; and $k\varepsilon^{*}$ decreases along $k=100,200,300,450$, so
+$\varepsilon^{*}$ decays at least as fast as $k^{-1}$. \texttt{r1lift\_r164}; the earlier,
+conditionally valid form is \texttt{r1step3\_r136}, \texttt{r1hermite\_r137}, where the ratio
+was $1.7$ to $6.5$. \emph{The check covers the five explicit constants of $\rho$ and not
+$\rho_{\infty}$, which is an asymptotic statement of the same kind as
+Remark~\ref{rem:threshold} and is not numerically small at the $k$ reachable by exact
+enumeration.}}
 \end{remark}
 
 \section*{Use of AI tools}

@@ -122,3 +122,49 @@ Two consequences, and the second is the one that matters:
 
 Filed next to F38 rather than inside it: F38 is about statuses that overclaim, this is about a
 statement that no status could have saved.
+
+## r167 — the warning we wrote, and then walked into
+
+`rem:notsup` says: *a supremum taken over a region where the integrand is already negligible
+charges the whole region at its worst point; when an estimate is going into an integral, make it
+under the integral.* It was written about `R₅`.
+
+One subsection later, the recipe for `ε_hi` proposed bounding `e^{|X|}` by `e` after securing
+`|X| ≤ 1` on the whole of `|t| ≤ T₁`. The same mistake, on `X` instead of `R₅` — and worse,
+because it does not merely lose sharpness: `|α|T₁³ ≍ k`, so the condition **holds for small `k`
+and fails for large**, and the proposed fix — a threshold in `k` — pushes the wrong way.
+Measured, `|X(T₁)|` runs `0.13, 0.26, 0.51, 1.02` at `k = 32, 64, 128, 256`.
+
+> **A lesson written into a remark is not yet installed in the hands.** Between stating a rule
+> and being unable to break it there is a distance, and this project keeps measuring it: the
+> replay rule that existed and was not reached for; the cadence rule that had to be moved
+> *inside* F70 to be obeyed. **A rule lives where it is reached for, not where it is written.**
+
+Second, on how it was caught. **It was not caught by the person who wrote the recipe or by the
+person who received it — it was caught by carrying it out.** The head's arithmetic was right in
+two ingredients out of three, and the third failed only on contact with the actual size of `T₁`.
+
+> **Design cannot check itself against magnitudes it has not computed.** The division of labour
+> works because the hands hold numbers the head does not — which is a reason to execute
+> faithfully *and* to report back when the execution refuses, rather than quietly patching.
+
+The repair, kept because the shape recurs: cut at `T*` where the hypotheses are actually
+guaranteed, and let a crude but unconditional estimate (`|ψ| ≤ e^{−(1−cos1)t²}`) carry the rest
+into the beyond-all-orders bucket. **Put the cut where the hypotheses are true, not where the
+window happens to end.**
+
+## r168 — the price of correctness, printed rather than hidden
+
+Landing F-1 loosened the budget by one to two orders of magnitude at the test points — the
+dominance ratio went from `1.7`–`6.5` to `68`–`997` — because `e^{Z²/2}` reaches 60 at the small
+`k` where exact enumeration is possible. The temptation is to report the old numbers, or to pick
+test points where `Z` is small.
+
+> **When a correction makes a bound uglier, the ugliness is information about where the old bound
+> was borrowing.** Print the new ratio next to the old and say which region absorbed the loss —
+> here, the region where the theorems assert nothing.
+
+Also recorded: the dominance check covers the five explicit constants and **not** `ρ_∞`, which is
+beyond-all-orders as `k → ∞` and is still `0.066` at `k = 256`. A green check on part of a bound
+must name the part. **"Sixteen points, no failures" is a true sentence that can carry a false
+impression, and the STATUS line is where that gets fixed.**
