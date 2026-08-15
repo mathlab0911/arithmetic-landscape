@@ -206,3 +206,52 @@ found adequate for that role. **Both halves are printed.**
 
 This is the failure ledger's rule applied to a values statement rather than to a proof, and it
 came from the same place: the reader cannot audit an absence they were never shown.
+
+## r171 — a licence line written for a state that had ended
+
+`LICENSE` said the manuscripts were "all rights reserved pending publication. On arXiv
+submission this will be replaced by the licence selected there." Perfectly sensible when
+written. But depositing the manuscripts in Zenodo *is* publishing them, and the sentence
+described a future that had quietly become the present while the file went on describing a
+past.
+
+> **A conditional written into a permanent file keeps asserting its condition after the
+> condition has changed.** It is the same defect as a hardcoded commit message that says "for
+> the first time" on the second run, and the same as a status that was honest when written.
+> **Anything that says "pending X" needs a person who will notice when X happens, because the
+> file will not notice.**
+
+Two further rules came out of settling it:
+
+- **An irrevocable grant is not covered by a general delegation.** Kentaro had said "full
+  authority", and the sensible reading of that still stopped short of granting a worldwide,
+  perpetual, non-revocable licence on his behalf. It was surfaced and decided explicitly.
+  *The scope of an authorisation is bounded by what the person could plausibly have been
+  imagining when they gave it.*
+- **The right licence question is which future it closes.** CC BY closes almost nothing: arXiv
+  accepts it, the grant is non-exclusive, and journals requiring transfer can still be
+  approached. That, and not preference, is what made it the answer.
+
+## r172 — a DOI looks like an imprimatur, so the caveat travels with the badge
+
+A DOI certifies that a version exists and will not change. To almost every reader it *looks*
+like it certifies more than that. Three manuscripts with three explicitly conditional theorems
+and no peer review now sit behind an identifier that resembles the identifiers on refereed
+papers.
+
+The response was not to delay the deposit but to make the record carry its own disclaimer in
+the three places a reader actually meets it: the Zenodo description, under its own heading
+(*What this is not*), positioned third of four so that anyone reading far enough to cite it has
+passed through it; the GitHub release notes, same heading; and the README, in bold, **directly
+under the badge**.
+
+> **Put the caveat where the claim gets copied.** A qualification in the body of a document
+> does not travel; a badge does. If the artefact that spreads is one line long, the honest
+> version of it is also one line long, and it has to be that line.
+
+And the sentence itself was chosen to be shorter than the temptation to explain it:
+**a DOI makes a version permanent; it does not make it true.**
+
+Related: this is `rem:notsup`'s shape moved from mathematics to metadata. There, an estimate was
+being made where nobody would read it. Here, a caveat was nearly being made where nobody would
+read it.

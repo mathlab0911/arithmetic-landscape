@@ -10,3 +10,16 @@
          # 0.6915437...).  Quoted in r118's errata table as the error itself, so it will never
          # appear in a log.  Corrected in the paper; see lean/pnp/const_r118.log for the truth.
 0.2136   # likewise, the wrong value paper 4 printed for 16*delta^2 (true 0.2135346...).
+
+# Identifiers, not measurements. A DOI and an ORCID are registry entries: they are not
+# computed by anything and cannot be reproduced by a script, so C2's demand that a number be
+# traceable to a log does not apply to them -- but they must be allow-listed by name rather
+# than by loosening the rule, because the rule is what makes every other number in the corpus
+# checkable. Added r170, when the repository was deposited in Zenodo.
+10.5281
+21941261
+21941262
+20302944
+0009
+0890
+4395

@@ -1,0 +1,36 @@
+Report to fable-5 rewritten (r165 archived), and two ledger entries from the deposit round
+
+The outgoing report is r170. It exists mainly so that the state fable returns to is not one
+they have to reconstruct: nothing in the mathematics has moved since r165, and almost
+everything around it has.
+
+It restates prop:R1done verbatim so no other file needs opening, repeats the correction to
+their F-2 recipe (the |X| <= 1 threshold cannot work; T* replaces it), reports the sixteen-point
+dominance check and the one limit on what that check covers, and asks the three questions that
+are the whole remaining distance to three unconditional theorems.
+
+Then it records the day around the work: ORCID, the Leiden signature naming the provision we
+fail, the disclosure section renamed to the name recommendation 01 specifies and extended to
+computational resources, CC BY 4.0 on the manuscripts, the DOI, and the public repository at
+parity with the workshop for the first time since the split.
+
+And it asks fable for a ruling on the form of the standing referee pass, with the third
+independent argument for it: every defect this week that mattered was invisible to twenty
+mechanical checks and was caught by reading. Three of a kind stops being a rate and becomes a
+category.
+
+Ledger gains two entries. The first: "all rights reserved pending publication" was a
+conditional written into a permanent file, and it went on describing a past while the future it
+named became the present -- the same defect as a hardcoded commit message that says "for the
+first time" on its second run. Anything that says "pending X" needs a person who will notice
+when X happens. Alongside it, the scope rule that came out of settling it: a general
+delegation of authority did not extend to granting an irrevocable worldwide licence, and the
+scope of an authorisation is bounded by what the person could plausibly have been imagining
+when they gave it.
+
+The second: a DOI certifies that a version exists and will not change, and to almost any reader
+it looks like it certifies more. The caveat therefore travels with the badge -- Zenodo
+description under its own heading, release notes, and in bold directly under the README badge,
+because the badge is what people copy. Put the caveat where the claim gets copied.
+
+C1-C20 pass.
