@@ -1,0 +1,19 @@
+DOI 10.5281/zenodo.21941261, and the badge that carries its caveat with it
+
+The repository is deposited in Zenodo and has a DOI. The concept DOI above always resolves to
+the latest version; release v1.0.0 (commit ad4964c) has its own, 10.5281/zenodo.21941262. The
+record is registered with DataCite, carries the author's ORCID, and is now the single work on
+that ORCID record.
+
+The README badge is deliberately not just a badge. Underneath it sits one line saying the
+manuscripts are CC BY 4.0, the code Apache-2.0, and -- in bold -- that none of this is
+peer-reviewed and every statement carries its own status where it is stated. A DOI looks like
+an imprimatur to a reader who has not thought about it, and this one is not: it certifies that
+a version exists and is permanent, not that it is right. The caveat travels with the badge
+because the badge is what people copy.
+
+The same sentence is in the Zenodo description, under its own heading, as the third of four
+paragraphs -- after what the mathematics says and what is in the deposit, before the tool and
+computational resource disclosure. Anyone who reads far enough to cite this will have read it.
+
+C1-C20 pass.

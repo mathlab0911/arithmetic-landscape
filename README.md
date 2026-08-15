@@ -1,5 +1,9 @@
 # Arithmetic Landscape Theory
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21941261.svg)](https://doi.org/10.5281/zenodo.21941261) &nbsp; ORCID [0009-0000-0890-4395](https://orcid.org/0009-0000-0890-4395)
+
+*Archived release `v1.0.0` (2026-08-15). The DOI above resolves to the latest version; each release also gets its own. Manuscripts CC BY 4.0, code Apache-2.0. **Not peer-reviewed** — every statement carries its own status where it is stated.*
+
 The **gap series** of a finite set `A` of odd positive integers with largest element `M` is
 
 ```
