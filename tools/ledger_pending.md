@@ -365,3 +365,28 @@ C1–C20, because none of them are the paper.
 
 Caught by reading the published record back, which is F61 (*read it back the way a reader would*)
 earning its keep for the second time this week.
+
+## r178 — four identical attempts, and the decision to hand over
+
+The Zenodo metadata correction was attempted four times through browser automation. Each time
+the form accepted the edit and the publish did not commit; each time the failure was silent, and
+each time the next attempt was the same attempt. The fix took Kentaro one click.
+
+> **Repeating an action that failed for reasons you cannot see is not persistence, it is a loop
+> with a person waiting at the end of it.** The second identical attempt is diagnosis; the
+> fourth is denial. When the cost of asking is one sentence and the cost of another attempt is
+> another silent failure, ask.
+
+Two specifics worth keeping:
+
+- **The correct handover is not "please fix this"; it is "the state is here, the button is
+  there, this is what it will ask you, and this is what it will not change."** The screen was
+  left open at the exact place, with the confirmation dialog's wording quoted in advance so that
+  the warning about files --- which did not apply --- would not stop him.
+- **Verify through the interface that cannot lie.** The record page had been serving a cached
+  copy for the whole episode and would have shown the old text after a successful publish too.
+  The check that settled it was the REST API. **When an interface has a cache, a green screen is
+  not evidence; ask the layer underneath.**
+
+Filed beside F61 (*read it back the way a reader would*): F61 says read the published artefact,
+and this adds **read it from the place where nothing is cached**.

@@ -1,0 +1,21 @@
+The Zenodo record corrected, and the entry about how long it took to ask
+
+The published v1.1.0 record now says what is true: as of v1.1.0 the three headline results of
+Part III are unconditional, the surviving assumptions are named where they are used, and the
+independent reading arrived in three parts with no single reading covering the appendix as a
+whole. Verified through the REST API rather than the record page, which had been serving a
+cached copy throughout and would have shown the old text after a successful publish too.
+
+The ledger entry is not about Zenodo. The correction was attempted four times through browser
+automation; each time the form took the edit and the publish did not commit, silently. The
+second identical attempt is diagnosis and the fourth is denial, and there was a person waiting
+at the end of the loop the whole time. It took him one click.
+
+Two specifics kept: the correct handover is not "please fix this" but "the state is here, the
+button is there, this is what it will ask you, and this is what it will not change" -- the
+confirmation dialog warns about files, which did not apply, and saying so in advance is part of
+handing over rather than delegating. And: when an interface has a cache, a green screen is not
+evidence; ask the layer underneath. Filed beside F61, which says read the published artefact
+back the way a reader would, and now adds: read it from the place where nothing is cached.
+
+C1-C20 pass.
