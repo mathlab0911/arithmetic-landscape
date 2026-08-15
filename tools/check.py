@@ -826,8 +826,17 @@ def c15_cross_document():
 # something: the thing existed, and not where the reader was.  A disclosure that lives one
 # artefact away from its reader is not a disclosure.  So it is checked, in the artefact,
 # by name.
-AI_SECTION = 'Use of AI tools'
-AI_SECTION_JA = 'AI ツールの使用について'
+# r166: the section was renamed to the name the Leiden Declaration asks for
+# ("Tool and computational resource disclosure", individual recommendation 01), and this check
+# went red on the same commit -- correctly, by its own second clause: it could not find its
+# subject, and it refused to read that as a pass.  Both names are accepted now, because the
+# older one is still the name on any copy already in circulation, and a check that recognises
+# only the current wording cannot audit the past.
+AI_SECTION = 'Tool and computational resource disclosure'
+AI_SECTION_ALT = 'Use of AI tools'
+AI_SECTION_JA = '道具と計算資源の開示'
+AI_SECTION_JA_ALT = 'AI ツールの使用について'
+AI_SECTION_ANY = r'(?:Tool and computational resource disclosure|Use of AI tools|道具と計算資源の開示|AI ツールの使用について)'
 
 def c16_ai_disclosure():
     # Scoped to both trees from the start.  Writing this check for paper/ only would have
@@ -842,7 +851,7 @@ def c16_ai_disclosure():
     for where, tex in scan:
         src = _read(os.path.join(where, tex))
         src = '\n'.join(l for l in src.split('\n') if not l.lstrip().startswith('%'))
-        if AI_SECTION in src or AI_SECTION_JA in src:
+        if re.search(AI_SECTION_ANY, src):
             seen += 1
         else:
             bad.append(tex)
@@ -1001,7 +1010,7 @@ def c18_landing_pages():
                     continue
                 bad.append('%s still names %r (%s), and nothing nearby says it is past'
                            % (name, m.group(0), why))
-        if not re.search(r'Use of AI tools', src, re.I):
+        if not re.search(AI_SECTION_ANY, src, re.I):
             bad.append('%s carries no AI disclosure, while every paper does (F64)' % name)
     if bad:
         fail('C18/F60', '; '.join(bad))

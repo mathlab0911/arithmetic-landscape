@@ -1,0 +1,42 @@
+Leiden Declaration: ORCID, the disclosure section renamed and extended, and one provision we fail
+
+The author now has an ORCID iD (0009-0000-0890-4395), required to sign the Leiden Declaration
+on Artificial Intelligence and Mathematics (June 2026, DOI:10.5281/zenodo.20302944). It is in
+the author footnote of all six papers, English and Japanese.
+
+The disclosure section is renamed to the name the Declaration's individual recommendation 01
+actually specifies -- "Tool and computational resource disclosure" -- and extended from tools
+alone to tools AND computational resources, in all six papers:
+
+  Tools. Claude opus-5 and fable-5; Lean 4 toolchain leanprover/lean4:v4.32.2 with Mathlib;
+  lean4checker for the kernel replay; XeLaTeX; Python 3 with nothing beyond the standard
+  library.
+
+  Computational resources. One personal computer. No cluster, no accelerator, no compute
+  grant. The longest single computation in Part III is a three-minute kernel replay of the
+  whole Lean development.
+
+  Responsibility and attribution, per recommendations 04, 05 and 06, including the standing
+  commitment to say so in the text where attribution is not possible.
+
+And recommendation 10, which asks whether smaller, non-proprietary, less energy-intensive
+systems would suffice, is answered with the half we fail: the verification and the experiments
+are small enough for anyone's laptop, the language models are commercial, proprietary and
+energy-intensive, and no smaller system was found adequate for that role. Compliance with the
+provisions you meet quietly implies compliance with the ones you do not, so the provision we
+fail is named by number in the same section.
+
+C16 went red on the rename, and its second clause is why this commit is not a silent
+regression: it reported not only that six papers lacked the section, but that it had examined
+zero papers carrying the disclosure -- "the check cannot find its subject, which is a failure
+of the check and not a pass for the artefact." A naive C16 would have iterated over an empty
+set and passed on the exact commit that removed what it protects. It now accepts four names,
+old and new, in both languages, rather than swapping one string for another: a check that
+recognises only the current wording cannot audit the past, and copies already in circulation
+carry the old name.
+
+Also fixed: \XeLaTeX is not defined without metalogo, so it is Xe\LaTeX{} now. Caught by the
+build, in the same pass that revealed the earlier /tmp builds had been dropping the figures --
+paper I and II are 26 and 35 pp with the figures present, not 25 and 34; README corrected.
+
+Papers 26/35/45 pp (EN) and 25/34/45 pp (JA). C1-C20 pass. Ledger gains two entries.

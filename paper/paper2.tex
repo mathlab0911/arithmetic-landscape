@@ -41,7 +41,7 @@
 asymptotic flatness of subset-sum landscapes of primes}
 \author{Kentaro Amauchi\thanks{Independent researcher.
 \href{mailto:amkn.sub03@gmail.com}{amkn.sub03@gmail.com},
-\url{https://mathlab0911.github.io/}}}
+\url{https://mathlab0911.github.io/}, ORCID \url{https://orcid.org/0009-0000-0890-4395}}}
 \date{\today}
 
 % r120: cross-document references, made checkable.
@@ -2423,21 +2423,41 @@ proves, and the conclusion is unaffected in any case, since $J$ is chosen
 after~$\delta$.
 \end{remark}
 
-\section*{Use of AI tools}
-This work was carried out by the author working with AI language models
-(Anthropic's Claude) as tools, under the author's direction. They were used to
-fill in Lean proofs, to run and tabulate the numerical experiments, and to draft
-sections which the author then checked. The choice of problem, the design
-decisions and the responsibility for every claim here are the author's.
+\section*{Tool and computational resource disclosure}
+This section follows recommendation~01 for individual mathematicians of the
+\emph{Leiden Declaration on Artificial Intelligence and Mathematics} (June 2026,
+\texttt{DOI:10.5281/zenodo.20302944}), which the author has signed.
 
-Work produced this way cannot reasonably be taken on the author's word, and the
-apparatus described under Data availability exists for that reason: every settled
-theorem is machine-checked in Lean and replayed through the kernel by an
-independent checker that must first reject three deliberately corrupted modules;
-every number quoted in the text is produced by a committed script that writes a
-log beside itself; every theorem, proposition and lemma declares its status
-where it is stated; and a suite of mechanical checks enforces all of this before
-each commit. The repository records, in full, the mistakes this process has made.
+\emph{Tools.} This work was carried out by the author working with AI language models
+(Anthropic's Claude, models \texttt{opus-5} and \texttt{fable-5}) as tools, under the
+author's direction. They were used to fill in Lean proofs, to run and tabulate the numerical
+experiments, and to draft sections which the author then checked. Formal verification uses
+Lean~4 (toolchain \texttt{leanprover/lean4:v4.32.2}) with Mathlib, and the kernel replay uses
+\texttt{lean4checker}. Typesetting uses Xe\LaTeX{}; the numerical work uses Python~3 with no
+libraries beyond the standard one.
+
+\emph{Computational resources.} All of it runs on a single personal computer. No cluster, no
+accelerator, and no compute grant were used; the longest single computation in this Part is a
+kernel replay of the whole Lean development, which takes about three minutes. This is recorded
+because recommendation~10 of the Declaration asks whether smaller systems suffice, and here the
+honest answer is mixed: the verification and the experiments are small enough for anyone's
+laptop, while the language models are commercial, proprietary and energy-intensive, and the
+author found no smaller system adequate for that role.
+
+\emph{Responsibility and attribution.} The choice of problem, the design decisions, the
+completeness of the citations, and the responsibility for every claim here are the author's
+alone; credit belongs to no automated system. Where the author has been unable to attribute an
+idea satisfactorily, the text says so.
+
+\emph{Why the apparatus exists.} Work produced this way cannot reasonably be taken on the
+author's word, and the apparatus described under Data availability exists for that reason:
+every settled theorem is machine-checked in Lean and replayed through the kernel by an
+independent checker that must first reject three deliberately corrupted modules; every number
+quoted in the text is produced by a committed script that writes a log beside itself; every
+theorem, proposition and lemma declares its status where it is stated; and a suite of
+mechanical checks enforces all of this before each commit. The repository records, in full, the
+mistakes this process has made --- which is the part the author would argue for hardest, since
+those failures are precisely the ones no machine check can see.
 
 \section*{Data availability}
 

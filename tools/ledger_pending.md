@@ -168,3 +168,41 @@ Also recorded: the dominance check covers the five explicit constants and **not*
 beyond-all-orders as `k → ∞` and is still `0.066` at `k = 256`. A green check on part of a bound
 must name the part. **"Sixteen points, no failures" is a true sentence that can carry a false
 impression, and the STATUS line is where that gets fixed.**
+
+## r169 — a check that went red on a rename, and was right to
+
+The disclosure section was renamed to the name the Leiden Declaration asks for
+(*Tool and computational resource disclosure*, individual recommendation 01). C16 immediately
+failed with two lines: the six papers no longer carry the section it looks for, **and** it
+"examined 0 papers carrying the disclosure — the check cannot find its subject, which is a
+failure of the check and not a pass for the artefact."
+
+The second line is the one that earned its keep. A naive version of C16 would have found zero
+papers to examine, iterated over nothing, appended nothing to `bad`, and **passed** — reporting
+green on the exact commit that removed the thing it exists to protect.
+
+> **The dangerous failure of a checker is not the false alarm; it is the empty scan.** Every
+> check that iterates over a discovered set needs a companion assertion that the set is not
+> empty, and it needs to say so in the same breath as its verdict.
+
+Fixed by accepting four names, old and new, in both languages — deliberately not by replacing
+one string with another:
+
+> **A check that recognises only the current wording cannot audit the past.** Copies already in
+> circulation carry the old name; a rename is not a retroactive edit of what other people hold.
+
+## r170 — the disclosure now names what it does not do
+
+Recommendation 10 of the Declaration asks whether smaller, non-proprietary, less
+energy-intensive systems would suffice. For this project the honest answer splits: the Lean
+verification and every numerical experiment run on one personal computer with no cluster and no
+accelerator — the longest computation in Part III is a three-minute kernel replay — while the
+language models are commercial, proprietary and energy-intensive, and no smaller system was
+found adequate for that role. **Both halves are printed.**
+
+> **Compliance with the provisions you meet quietly implies compliance with the ones you do
+> not.** A disclosure that lists only its successes is doing the thing disclosure exists to
+> prevent. Name the provision you fail, by number, in the same section.
+
+This is the failure ledger's rule applied to a values statement rather than to a proof, and it
+came from the same place: the reader cannot audit an absence they were never shown.
