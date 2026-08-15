@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: "Arithmetic landscapes: manuscripts, Lean development and verification apparatus"
+message: "If you use this work, please cite it using the metadata from this file."
+type: software
+authors:
+  - family-names: Amauchi
+    given-names: Kentaro
+    orcid: "https://orcid.org/0009-0000-0890-4395"
+    affiliation: "Independent researcher"
+repository-code: "https://github.com/mathlab0911/arithmetic-landscapes"
+url: "https://mathlab0911.github.io/"
+abstract: >-
+  A research repository in number theory. Three manuscripts study the subset-sum landscape of a
+  finite set of odd integers: the ratio of strict local minima to ground states converges to a
+  rational invariant read off the set by counting, and that invariant is the annealed
+  (independence) prediction itself, so the main theorem says the annealed count of metastable
+  states is asymptotically exact. A lower bound that would normally cost a quantitative
+  equidistribution estimate is obtained instead from the Kubert distribution relation as an
+  exact equality. The repository contains the manuscripts, a Lean 4 development of the settled
+  results with an independent kernel-replay checker, the scripts and logs behind every number
+  quoted in the text, and a full record of the mistakes the process has made. The manuscripts
+  are not peer-reviewed; every theorem, proposition and lemma declares its status where it is
+  stated.
+keywords:
+  - number theory
+  - additive combinatorics
+  - subset sum
+  - local minima
+  - Kubert distribution relation
+  - Lean 4
+  - formal verification
+  - disordered systems
+license: Apache-2.0

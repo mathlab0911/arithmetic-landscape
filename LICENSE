@@ -18,5 +18,17 @@ can be contributed upstream without a licence change.)
 
 PAPER (everything under paper/, and the Markdown drafts)
 --------------------------------------------------------
-Copyright 2026 Kentaro Amauchi. All rights reserved pending publication.
-On arXiv submission this will be replaced by the licence selected there.
+Copyright 2026 Kentaro Amauchi.
+Licensed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0):
+
+    https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt this material for any purpose, including commercially, provided you
+give appropriate credit, link to the licence, and indicate if changes were made.
+
+(CC BY 4.0 replaces the earlier "all rights reserved pending publication" on 2026-08-15, when
+the repository was deposited in Zenodo and given a DOI. The choice is deliberate and it is
+irrevocable: recommendation 03 of the Leiden Declaration asks for adherence to open science,
+and a manuscript that a reader may not redistribute is not open. It leaves every later route
+open -- arXiv accepts CC BY, and journals that require a transfer of copyright can still be
+approached, since the licence granted here is non-exclusive.)

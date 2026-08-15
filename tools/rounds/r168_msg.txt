@@ -1,0 +1,31 @@
+Zenodo deposit: CC BY 4.0 on the manuscripts, and the metadata a DOI will carry
+
+The repository is being deposited in Zenodo to obtain a DOI, so three things had to be decided
+rather than deferred.
+
+The manuscripts move from "all rights reserved pending publication" to CC BY 4.0. That earlier
+line was written for a pre-arXiv state that no longer describes the situation: depositing the
+manuscripts IS publishing them, and recommendation 03 of the Leiden Declaration asks for
+adherence to open science, which a manuscript nobody may redistribute does not meet. The choice
+is irrevocable and was made by Kentaro explicitly rather than assumed. It closes nothing: arXiv
+accepts CC BY, and the licence granted is non-exclusive, so a journal requiring transfer can
+still be approached. Code stays Apache-2.0, matching Mathlib so that any lemma of general
+interest can go upstream without a licence change.
+
+.zenodo.json and CITATION.cff are added so the DOI carries correct metadata from the first
+release rather than being patched afterwards: the ORCID, the affiliation "Independent
+researcher", the keywords, and a citation of the Leiden Declaration's own DOI as a related
+identifier.
+
+The description is written to be read by someone who has never heard of this project, and it
+says three things in order: what the mathematics claims, what is in the deposit, and what this
+is not. The third paragraph is the one that matters -- none of it is peer-reviewed, three
+results of Part III are still explicitly conditional, and every statement carries its own
+status where it is stated. A DOI makes a version permanent; it does not make it true, and the
+record should not be able to be mistaken for a claim that it does.
+
+upload_type is "software" and not "preprint". What is archived is a zip of a repository
+containing manuscripts, a Lean development, scripts and logs. Calling that a preprint would be
+a category error, and this project spends most of its effort not making category errors.
+
+C1-C20 pass.
