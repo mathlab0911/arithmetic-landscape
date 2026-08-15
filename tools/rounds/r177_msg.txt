@@ -1,0 +1,27 @@
+v1.1.0 released, and the sentence it made false
+
+The public repository is at parity, the tag v1.1.0 is pushed, the GitHub release is out, and
+Zenodo has minted the version DOI 10.5281/zenodo.21941956 for it. The concept DOI
+10.5281/zenodo.21941261 now resolves to the version in which the three headline results of
+Part III are unconditional.
+
+And .zenodo.json still said "three results of Part III are still explicitly conditional" --
+true when written at v1.0.0, false at exactly the release whose subject is that they are not,
+and attached to a permanent identifier because the metadata file describes the deposit and
+nobody re-reads a file that already passed.
+
+This is the r171 ledger entry recurring inside the same day. We wrote "anything that says
+'pending X' needs a person who will notice when X happens, because the file will not notice"
+about a licence line, and then walked into it in a JSON field. Writing the rule down did not
+install it. What was missing is a trigger, and the trigger is now written into the ledger as
+the question that must be answered before a tag is pushed: WHAT DID THIS RELEASE MAKE FALSE?
+Every artefact that describes the work in prose -- .zenodo.json, CITATION.cff, the README, the
+homepage, the previous version's release notes -- can carry a superseded claim, and none of
+them are checked by C1-C20, because none of them are the paper.
+
+Fixed here in .zenodo.json, so every future release carries the corrected text. The published
+v1.1.0 record's own description is corrected in a saved draft on Zenodo; the metadata publish
+has not gone through yet and is the one thing outstanding.
+
+Caught by reading the published record back, which is F61 earning its keep for the second time
+this week. C1-C20 pass.

@@ -340,3 +340,28 @@ Two consequences kept:
 - **State the convention where the count is made.** "Exactly three" was defensible under
   "statement = numbered environment", but the sentence justifying it was about *damage*, and
   damage does not respect environments.
+
+## r177 — the same defect, four hours later, in the metadata
+
+`.zenodo.json` carried the sentence *"three results of Part III are still explicitly
+conditional."* True when written at v1.0.0. **False by v1.1.0 — which is the release whose whole
+subject is that they are not** — and it went out attached to a permanent identifier, because the
+metadata file describes the deposit and nobody re-reads a file that already passed.
+
+This is r171's entry recurring inside the same day: *a conditional written into a permanent file
+keeps asserting its condition after the condition has changed*. We wrote that rule about a
+licence line and then walked into it in a JSON field.
+
+> **Writing the rule down did not install it.** What was missing is not knowledge, it is a
+> trigger: nothing in the release procedure asked *"which sentences did this release make
+> false?"* — and a release whose purpose is to change a claim is precisely the moment when
+> something, somewhere, still asserts the old one.
+
+**Added to the release procedure, as the question that must be answered before the tag is
+pushed:** *what did this release make false?* Every artefact that describes the work in prose —
+`.zenodo.json`, `CITATION.cff`, the README, the homepage, the release notes of the previous
+version — is a place where a superseded claim can survive, and none of them are checked by
+C1–C20, because none of them are the paper.
+
+Caught by reading the published record back, which is F61 (*read it back the way a reader would*)
+earning its keep for the second time this week.
