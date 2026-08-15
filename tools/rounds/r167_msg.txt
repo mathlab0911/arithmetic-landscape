@@ -1,0 +1,13 @@
+Tidy the display case: one-round scripts moved to tools/rounds/
+
+Sixteen disposable artefacts -- the PowerShell used once to seed a remote or replay the kernel,
+and the message files handed to git commit -F -- were sitting beside the standing apparatus in
+tools/. They are kept rather than deleted, because a commit message that was drafted, edited
+and then used is part of the record of how a claim reached the repository, and the ledger
+cites some of them by name. But a reader opening tools/ should see the six things that run
+every round, not the sixteen that ran once.
+
+tools/ now holds: check.py, check_lean.ps1, push_round.ps1, publish_public.ps1,
+workshop_setup.ps1, workshop_verify.ps1, the two ledgers, and allow_numbers.txt.
+
+C1-C20 pass.
