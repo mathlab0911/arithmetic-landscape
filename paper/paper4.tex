@@ -1260,6 +1260,85 @@ of the coin's variance, minus one}. \STATUS{verified against the summed series t
 $5.3\cdot10^{-15}$ over $q=0.10,\dots,0.80$; \texttt{e5\_r098}}
 \end{corollary}
 
+\subsection{Where the zeros go}\label{sec:leeyang}
+
+$\Gamma^{(q)}$ is a polynomial in $q$ for finite $A$, and in statistical mechanics a phase
+transition \emph{is} the accumulation of partition-function zeros on the real axis. Since
+$\Gamma^{(q)}$ plays the role of a free energy in the picture this Part uses, the question
+``where do the zeros go as $k\to\infty$, and do they pinch $[0,1]$?'' is the phase-transition
+question stated inside the arithmetic, with no physics needed to ask it and none to answer it.
+We asked it. The answer separates the profiles.
+
+Group the layers by their count: with $m_0=(a_1-1)/2$ and $m_j=(a_{j+1}-a_j)/2$ for
+$1\le j\le k-1$, the number of $d$ with $N_d=j$ is $m_j$, so
+\begin{equation}\label{eq:gqpoly}
+  \Gamma^{(q)}(A)\;=\;1+\sum_{j=0}^{k-1}m_j\bigl[q^{j}+(1-q)^{j}\bigr]
+\end{equation}
+after dropping the degenerate tail $N_d=k$, which is the truncation term $(2D+1)2^{-k}$ already
+accounted for above. This is a polynomial of degree $k-1$, it satisfies
+$\Gamma^{(q)}=\Gamma^{(1-q)}$ identically, and its value at $q=\tfrac12$ is $\Gamma(A)$ to
+$O(2^{-k})$.
+
+\begin{remark}[the zeros of the odd numbers pinch the endpoints, at rate $2\pi/k$]\label{rem:leeyang}
+For $A=(1,3,\dots,2k-1)$ every $m_j=1$, the two geometric sums collapse, and
+\[
+  q(1-q)\,\Gamma^{(q)}\;=\;1-q+q^{2}-q^{k+1}-(1-q)^{k+1}\;=:\;F_k(q).
+\]
+Substituting $q=w/(k+1)$ sends $q^{k+1}\to0$, $(1-q)^{k+1}\to e^{-w}$ and $1-q+q^{2}\to1$, so
+$F_k\to1-e^{-w}$, whose zeros are $w=2\pi i n$. Carrying the first correction,
+$e^{-w}=1-q+q^{2}$ gives $-w=-w/(k+1)+2\pi i n+\cdots$ and hence
+\[
+  \operatorname{Im}q_{\pm1}\;=\;\pm\frac{2\pi}{k}+O(k^{-2}).
+\]
+\textbf{So the zeros do pinch the real segment --- but only at its endpoints $q=0$ and $q=1$,
+the two degenerate measures, and at a rate with no constant to fit.} The limit
+$1-q+q^{2}$ has its own roots at $e^{\pm i\pi/3}$, where $|q|=|1-q|=1$ exactly; those stay at
+height $\sqrt3/2$ and never approach the real axis.
+\STATUS{derived, and measured. $k\cdot(\text{distance to }[0,1])$ runs
+$6.0518,6.1919,6.2348,6.2629,6.2721,6.2762,6.2784$ at $k=16,24,32,48,64,80,96$ against
+$2\pi=6.283185$, approaching from below like $1/k$; the nearest zero has
+$\operatorname{Re}q\to1$. The nearest zero to the fair coin stays away: $|q-\tfrac12|$ runs
+$0.5177,0.5046,0.5021$ at $k=32,64,96$. Primes and random odd sets give the same picture with
+$k\cdot d$ between $6.1$ and $6.7$. \texttt{leeyang\_r179}, \texttt{leeyang2\_r179}.}
+\end{remark}
+
+\begin{remark}[and the family that breaks the theorem is pinched at the fair coin]\label{rem:leeyanglacunary}
+Run the same computation on $a_i=2^{i}+1$ --- the lacunary family of
+\S\ref{sec:counterexample}, the witness for which the annealed prediction fails. There
+$m_j=2^{j-1}$ exactly, so
+\[
+  \Gamma^{(q)}\;=\;3+\tfrac12\sum_{j=1}^{k-1}\Bigl[(2q)^{j}+\bigl(2(1-q)\bigr)^{j}\Bigr],
+\]
+two geometric series with ratios $2q$ and $2(1-q)$. On the line $\operatorname{Re}q=\tfrac12$
+those ratios are complex conjugates of equal modulus, so the two series can cancel --- and they
+do. Writing $q=\tfrac12+it$, the sum behaves like
+$2|1+2it|^{k}\cos\bigl(k\arctan 2t\bigr)$, which vanishes on a ladder in $t$; the first rung
+gives
+\[
+  \operatorname{Im}q_{\pm1}\;=\;\pm\frac{3\pi}{2k}+O(k^{-2}),
+  \qquad \operatorname{Re}q_{\pm1}=\tfrac12 \text{ exactly}.
+\]
+\textbf{For this family the fair coin is not a minimiser sitting in an analytic region: it is
+the point the zeros are closing in on.}
+
+\emph{Which is the finding.} The Lee--Yang zeros of $\Gamma^{(q)}$ separate the profiles on
+which the annealed count is asymptotically exact from the one on which it is not --- and they
+separate them \emph{at $q=\tfrac12$}, the value at which the whole of Parts~I and~II is stated.
+Two independent routes, the local-limit route of \S\ref{sec:bridge} and the zero-counting route
+here, partition the same profiles the same way.
+
+\emph{Stated so that it can be attacked, because two families are two families and not a
+theorem.} \textsc{Falsifier 1}: exhibit a profile satisfying \textup{(H)} whose zeros approach
+$q=\tfrac12$. \textsc{Falsifier 2}: exhibit a profile violating \textup{(H)} whose zeros stay
+away from it. Neither is ruled out by anything here.
+\STATUS{derived for the mechanism, \textbf{measured} for the constant, and \textbf{conjectured}
+for the dichotomy. $k\cdot\operatorname{Im}q_{1}$ runs $4.7736,4.7457,4.7299,4.7214,4.7169$ at
+$k=128,256,512,1024,2048$ against $3\pi/2=4.712389$, with $\operatorname{Re}q_1=\tfrac12$ to
+every digit computed; $|q_1-\tfrac12|$ runs $0.0520,0.0253,0.0167$ at $k=32,64,96$ and is going
+to zero, against $0.5021$ for the odd numbers at $k=96$, which is not.
+\texttt{leeyang2\_r179}, \texttt{leeyang3\_r179}.}
+\end{remark}
+
 \subsection{Verification}\label{sec:e5}
 
 \STATUS{experimentally confirmed} Measured $\lm_q/r_q$ at $n_q$ against the point

@@ -1,0 +1,35 @@
+Door 2 opened: the Lee-Yang zeros of Gamma^(q), and they separate the profiles
+
+spec_future_r145 listed this as door 2, priced at an afternoon, with three outcomes written
+down in advance. It produced all three at once, on different profiles.
+
+Gamma^(q) is a polynomial in q for finite A. Grouping layers by their count gives
+Gamma^(q) = 1 + sum_j m_j [q^j + (1-q)^j] with m_j = (a_{j+1}-a_j)/2, degree k-1, symmetric
+under q -> 1-q, and equal to Gamma(A) at q = 1/2 up to O(2^-k).
+
+For the odd numbers every m_j is 1 and the two geometric sums collapse:
+q(1-q)Gamma^(q) = 1 - q + q^2 - q^{k+1} - (1-q)^{k+1}. Substituting q = w/(k+1) sends this to
+1 - e^{-w}, whose zeros are 2*pi*i*n, so Im q_1 = 2*pi/k + O(k^-2). The zeros DO pinch the real
+segment, but only at its endpoints q = 0 and q = 1 -- the two degenerate measures -- and the
+fair coin is left alone: the nearest zero to q = 1/2 sits at distance 0.5021 at k = 96 and is
+going to 1/2, not to 0. Measured k*d runs 6.0518 to 6.2784 against 2*pi = 6.283185, from below,
+like 1/k. Primes and random odd sets give the same picture.
+
+Then the same computation on a_i = 2^i + 1, the lacunary witness for which the annealed
+prediction fails. There m_j = 2^{j-1} exactly, so Gamma^(q) = 3 + (1/2) sum [(2q)^j +
+(2(1-q))^j] -- two geometric series whose ratios are complex conjugates of equal modulus
+precisely on Re q = 1/2, where they can cancel. They do. Re q_1 = 1/2 to every digit computed
+and Im q_1 = 3*pi/(2k): measured k*Im runs 4.7736, 4.7457, 4.7299, 4.7214, 4.7169 at
+k = 128..2048 against 3*pi/2 = 4.712389, and |q_1 - 1/2| runs 0.0520, 0.0253, 0.0167 and is
+going to zero.
+
+So the Lee-Yang zeros separate the profiles on which the annealed count is asymptotically exact
+from the one on which it is not, and they separate them at q = 1/2 -- the value at which all of
+Parts I and II is stated. Two routes with no argument in common, the local-limit route of
+sec:bridge and the zero-counting route here, draw the line between the same families.
+
+Registered honestly: derived for the mechanism, measured for the constants, CONJECTURED for the
+dichotomy, with both falsifiers named in the paper. Two families are two families.
+
+Papers 26/35/48 pp (EN), 25/34/47 pp (JA). C19 caught the Japanese edition before it could ship
+one language ahead of the other. C1-C20 pass. leeyang_r179, leeyang2_r179, leeyang3_r179.

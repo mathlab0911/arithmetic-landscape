@@ -12,6 +12,7 @@ def:gq
 def:modd
 def:slope
 def:tilt
+eq:gqpoly
 eq:layerterm
 eq:mushift
 eq:nodent
@@ -58,6 +59,8 @@ rem:lam0
 rem:lean22
 rem:leancoset
 rem:leanmodfour
+rem:leeyang
+rem:leeyanglacunary
 rem:localrem
 rem:measurefree
 rem:modfourcorollary
@@ -100,6 +103,7 @@ sec:e5
 sec:e6
 sec:inherited
 sec:intro
+sec:leeyang
 sec:missing
 sec:modfour
 sec:notation

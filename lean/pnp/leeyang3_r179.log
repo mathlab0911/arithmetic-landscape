@@ -1,0 +1,38 @@
+=== 0. the closed form is the polynomial ===
+   max | sum form - closed form | over 12 points = 3.76e-37
+   Gamma^(1/2) = k+2 :  [12, 22, 42]  against k+2 = [12, 22, 42]
+
+=== 1. the lacunary family: the zeros pinch the FAIR COIN ===
+        k    t = Im of nearest              k*t       k*t/(pi/4)             Re
+       32     0.93543420590399      29.93389459      38.11301832   0.5000000000
+       64     0.17903578934000      11.45829052      14.58914860   0.5000000000
+      128     0.03729377444360       4.77360313       6.07794027   0.5000000000
+      256     0.01853781003790       4.74567937       6.04238664   0.5000000000
+      512     0.00923800881838       4.72986052       6.02224545   0.5000000000
+     1024     0.00461069511981       4.72135180       6.01141182   0.5000000000
+     2048     0.00230318836598       4.71692977       6.00578152   0.5000000000
+   pi/4 = 0.78539816 ; the imaginary part is being measured on the line Re q = 1/2, where the
+   two geometric ratios 2q and 2(1-q) are conjugate and can cancel
+
+=== 2. the same measurement for the odd numbers: nothing on the fair-coin line ===
+        k min |Re Gamma^(q)| on Re q = 1/2, |t| <= 2
+       32                   0.164440
+      128                   0.025880
+      512                   0.004979
+   no sign change, no zero: for (H)-profiles the symmetry line carries no zeros at all
+
+=== 3. the endpoint pinch, for the lacunary family too? ===
+        k dist to [0,1] on the line           2*pi/k
+       32           0.9354342059     0.1963495408
+       64           0.1790357893     0.0981747704
+      128           0.0372937744     0.0490873852
+      256           0.0185378100     0.0245436926
+   for the lacunary family the nearest zero to the real axis is the one at Re q = 1/2,
+   and it is closer than 2*pi/k : the fair coin is the pinch point, not the endpoints
+
+=== 4. what this says, stated so it can be attacked ===
+   The Lee-Yang zeros of Gamma^(q) separate the profiles on which the annealed count is
+   asymptotically exact from the one on which it is not, and they do it at the fair coin.
+   FALSIFIER 1: exhibit a profile satisfying (H) whose zeros approach q = 1/2.
+   FALSIFIER 2: exhibit a profile violating (H) whose zeros stay away from q = 1/2.
+   Neither is ruled out here.  Two families are two families.

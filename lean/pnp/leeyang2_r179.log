@@ -1,0 +1,66 @@
+=== 1. the rate: k * (distance to [0,1]) against 2*pi, odd numbers ===
+       k      dist to [0,1]         k*dist     k*dist/2pi     Re of it
+      16     0.378240227616       6.051844       0.963181     0.914650
+      24     0.257994025628       6.191857       0.985465     0.963109
+      32     0.194836401104       6.234765       0.992294     0.979588
+      48     0.130477300259       6.262910       0.996773     0.991089
+      64     0.098001855468       6.272119       0.998239     0.995034
+      80     0.078452878605       6.276230       0.998893     0.996840
+      96     0.065400144645       6.278414       0.999241     0.997814
+   2*pi = 6.283185 ; the approach is from below and the gap closes like 1/k
+
+=== 2. is the rate universal across profiles? ===
+      profile      k           k*dist     k*dist/2pi           Re
+         odds     32         6.234765       0.992294     0.979588
+         odds     64         6.272119       0.998239     0.995034
+         odds     96         6.278414       0.999241     0.997814
+       primes     32         6.121032       0.974192     0.036362
+       primes     64         6.529775       1.039246     0.986620
+       primes     96         6.613737       1.052609     0.992534
+       rand-7     32         6.400380       1.018652     0.072173
+       rand-7     64         7.527521       1.198042     0.997386
+       rand-7     96         6.433811       1.023973     0.992881
+      rand-11     32         6.641751       1.057068     1.034313
+      rand-11     64         6.655360       1.059233     1.010320
+      rand-11     96         6.700872       1.066477     0.992678
+    geometric     32         1.664802       0.264962     0.500000
+    geometric     64         1.618859       0.257649     0.500000
+    geometric     96         1.603070       0.255137     0.500000
+   the mechanism counts elements; it does not read them
+
+=== 3. the fair coin: no zero approaches it ===
+      profile      k      min |z - 1/2|   min over (0,1)
+         odds     32       0.5176543967       3.00000000
+         odds     64       0.5046417828       3.00000000
+         odds     96       0.5020919026       3.00000000
+       primes     32       0.5015462470       5.34928793
+       primes     64       0.4972006464       5.34928793
+       primes     96       0.4973287735       5.34928793
+    geometric     32       0.0520250691      34.00000000
+    geometric     64       0.0252946762      66.00000000
+    geometric     96       0.0166986496      98.00000000
+   Gamma^(q) is real and >= 3 on (0,1) by thm:fair, so no real zero is possible at all;
+   the column above says the complex zeros do not approach q = 1/2 either
+
+=== 4. the other accumulation point: the primitive sixth roots of unity ===
+       k   min |z - e^{i pi/3}|            |z|          |1-z|
+      24         0.044789385711     1.03903012     1.03903012
+      48         0.022098798362     1.01919802     1.01919802
+      72         0.014668831827     1.01273014     1.01273014
+      96         0.010978017832     1.00952216     1.00952216
+   1 - q + q^2 vanishes exactly where |q| = |1-q| = 1, on the boundary of both discs,
+   which is why the k-dependent terms never become negligible there
+
+=== 5. the ten zeros nearest the real axis, odd numbers, k = 96 ===
+               Re               Im          |q|        |1-q|
+      0.997814323     -0.065400145     0.999955     0.065437
+      0.997814323     +0.065400145     0.999955     0.065437
+      0.002185677     -0.065400145     0.065437     0.999955
+      0.002185677     +0.065400145     0.065437     0.999955
+      0.991266708     -0.130502236     0.999820     0.130794
+      0.008733292     -0.130502236     0.130794     0.999820
+      0.008733292     +0.130502236     0.130794     0.999820
+      0.991266708     +0.130502236     0.999820     0.130794
+      0.980385350     -0.195009012     0.999592     0.195993
+      0.019614650     -0.195009012     0.195993     0.999592
+   they come in conjugate pairs and in q <-> 1-q pairs, as the symmetry requires

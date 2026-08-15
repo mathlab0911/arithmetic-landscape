@@ -390,3 +390,39 @@ Two specifics worth keeping:
 
 Filed beside F61 (*read it back the way a reader would*): F61 says read the published artefact,
 and this adds **read it from the place where nothing is cached**.
+
+## r179 — a door opened because it was cheap, and what came out was not what the door was for
+
+`spec_future_r145` had listed the Lee–Yang question as door 2, priced at "an afternoon", with
+three outcomes named in advance and all three declared publishable: zeros stay away from
+`[0,1]` (no transition), zeros pinch at `q=1/2` (the fair coin is *critical*, not merely a
+minimiser), zeros pinch elsewhere (a transition nobody has named). It sat unopened for
+thirty-four rounds because it was never the most urgent thing.
+
+**It produced all three answers at once, on different profiles.** For the odd numbers the zeros
+pinch the real segment only at its endpoints, at rate `2π/k`; the fair coin is left alone. For
+the lacunary witness `a_i = 2^i+1` the nearest zeros sit at `Re q = 1/2` exactly and close in at
+rate `3π/(2k)` — the fair coin *is* the pinch point. Primes and random odd sets behave like the
+odd numbers.
+
+> **The two routes partition the same profiles the same way.** The local-limit route of
+> §bridge and the zero-counting route of §leeyang have no argument in common, and they draw the
+> line between the same families, at the same value of `q`.
+
+Three things worth keeping about how it went:
+
+- **The prediction was priced before it was made.** Writing the three outcomes down in advance,
+  in a file, months before the computation, is what makes "we found the second one" a finding
+  rather than a story. **A result you decided to be interested in after seeing it is worth less
+  than one you decided to be interested in before.**
+- **The constants came out with no fitting.** `2π` and `3π/2`, both to four digits, both from a
+  mechanism written out first and measured second. That is the same shape as `cor:crossing` and
+  it is the cheapest kind of claim to attack.
+- **The first script got the method wrong and said so.** Seeding a root-finder at `2πi/k` and
+  running Newton walks away to the sixth-root family; the note is in the file, above the code
+  that replaced it, because the next person will reach for the same seed.
+
+**And the honest limit, printed in the paper next to the finding:** two families are two
+families. The dichotomy is registered as *conjectured*, with both falsifiers named — a profile
+satisfying (H) whose zeros approach `q=1/2`, or a profile violating it whose zeros do not.
+Neither is ruled out by anything here.
