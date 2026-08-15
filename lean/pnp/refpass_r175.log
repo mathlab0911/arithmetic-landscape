@@ -1,0 +1,60 @@
+# Referee pass — round r175, 13 units, fresh context (a reader with no prior knowledge of the
+# project, given the three jobs of tools/referee_pass.md and nothing else).
+#
+# stem — round — verdict
+refpass  r175  U01 thm:rigid STATUS               word:second
+refpass  r175  U02 thm:transfer STATUS            word:nothing
+refpass  r175  U03 prop:tiltlclt STATUS           clear
+refpass  r175  U04 prob:R1 section preamble       clear
+refpass  r175  U05 prob:R1 STATUS                 word:paper
+refpass  r175  U06 prob:R1 consumer list          word:Exactly
+refpass  r175  U07 app:R1 head STATUS             clear
+refpass  r175  U08 prop:R1done STATUS             word:line-by-line
+refpass  r175  U09 honest-scope bullet            word:could
+refpass  r175  U10 algorithmic reading            word:no
+refpass  r175  U11 README Part III row            word:theorems
+refpass  r175  U12 referee_pass: the form         no-falsifier
+refpass  r175  U13 referee_pass: non-equivalence  word:two
+#
+# clear 3 / 13. Ten flags, of which the reader insisted on three:
+#
+# (1) ONE READING OR TWO.  Six units described the same evidence incompatibly -- "the second,
+#     independent reading" (U01,U02,U05,U11) vs "in two parts" (U07) vs "took two of them"
+#     (U13) -- and no single reading had covered the appendix in its present form, because
+#     r162 read the lemmas and r171 read the RESTATED proposition.  ACTED ON: one formula
+#     everywhere, "delivered in three parts, each covering the text as it then stood"
+#     (r162 lemmas, r164 the repairs landed against them, r171 the restated proposition with
+#     T* and the constants), plus an explicit sentence in the appendix head that NO SINGLE
+#     READING HAS COVERED THE APPENDIX AS A WHOLE and that a reader wanting the stronger
+#     statement is entitled to know it has not been supplied.  U13's "two of them" corrected
+#     to one reading delivered piecewise, with a new clause forbidding inflation of the count.
+#
+# (2) "CONDITIONAL ON NOTHING" (U02) SAT IN THE SAME PAPER AS "ONE CONDITION IS ATTACHED TO
+#     THAT SENTENCE" (U10).  The theorem is unconditional as mathematics; its algorithmic
+#     interpretation is not; and the STATUS block is where a reader stops.  Same shape as the
+#     historical defect: an absolute claim at the point of maximum visibility with its
+#     qualification stored elsewhere.  ACTED ON: both consumer STATUS blocks now say the
+#     theorem is conditional on nothing AND point at the assumption the algorithmic reading
+#     carries.
+#
+# (3) "EXACTLY THREE" (U06) contradicted by U10's own history, and the README (U11) then
+#     compressed the three into "three headline THEOREMS" when one is a proposition.
+#     ACTED ON: "exactly three numbered statements -- and, transitively through thm:rigid, one
+#     unnumbered sentence", with the convention stated where the count is made, since the
+#     justification beneath it is about damage and damage does not respect environments.
+#     README now reads "three headline results ... two theorems and a proposition".
+#
+# Also acted on: U05 (the two grades named as one rung, quotation marks explained as
+# paper-vs-Lean and not a weaker grade); U08 (grain aligned with U07, no line-by-line claim
+# hoisted over material read at another grain); U09 (the impossibility scoped to the named
+# source and the remark's status upgraded from "records" to "proves"); U10 (the universal
+# "no amount of work" replaced by what is actually supported, with "we have no impossibility
+# proof and claim none"); U12 (the aphorism relabelled a design assumption with the
+# observation that would refute it, and "always fresh context" given its cost -- when fresh
+# context is unavailable the pass is not run and is not recorded as run).
+#
+# The pass was run by an agent with no prior context, per tools/referee_pass.md.  It found in
+# one session three defects that twenty mechanical checks, a typesetter and two authors had
+# passed over, and every one of them was a claim about our own evidence rather than about the
+# mathematics.  Note for the record: the strongest finding (1) is one the author could not
+# have made, having written both descriptions and believed them consistent.

@@ -26,6 +26,11 @@ A statement is a theorem, proposition, lemma, remark, problem or STATUS block. A
 paragraph. "Fresh context" means the reader has not just written the thing, and has not been
 reading around it — a new session, or a model that has not seen the surrounding work.
 
+**When fresh context is not available, the pass is not run and is not recorded as run.** A pass
+by the author over their own sentences is worth doing and is worth nothing as evidence; log it,
+if at all, as `self` and never as a verdict. The word *always* above is doing real work, and
+this is what it costs.
+
 ## What the reader is asked to do — three things, and nothing else
 
 1. **Restate the claim in your own words.** Not paraphrase the sentence: state what would have
@@ -39,8 +44,13 @@ reading around it — a new session, or a model that has not seen the surroundin
    pending, still, now.*
 
 Nothing else. The pass is not a proof check, not a style review, and not an invitation to
-suggest improvements. **A reader given three jobs does three jobs; a reader given a general
-brief writes an essay.**
+suggest improvements.
+
+*The design assumption behind the restriction, stated as an assumption because that is what it
+is:* **a reader given three jobs does three jobs; a reader given a general brief writes an
+essay.** We have not measured this. If a pass comes back as an essay, or if the three jobs miss
+a defect that a general brief would have caught, the assumption is wrong and the form should
+change.
 
 ## Rules of the pass
 
@@ -57,7 +67,10 @@ brief writes an essay.**
 
 ## What it does not do
 
-It does not replace the second independent reading that turns a written argument into a proof —
-that is a different and heavier thing, and `prob:R1` took two of them (r162, r171). The referee
-pass is cheap and frequent; the independent reading is expensive and rare. **Do not let the
-cheap one be quoted as if it were the expensive one.**
+It does not replace the independent reading that turns a written argument into a proof — that is
+a different and heavier thing, and for `prob:R1` it arrived in three parts (r162, r164, r171),
+which is **one** reading delivered piecewise and not three readings. The referee pass is cheap
+and frequent; the independent reading is expensive and rare. **Do not let the cheap one be
+quoted as if it were the expensive one** — and do not let a reading delivered in parts be
+counted as several. Inflating the count of the expensive instrument is the same defect as
+substituting the cheap one for it.

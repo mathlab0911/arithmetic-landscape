@@ -301,3 +301,42 @@ went.
 The one condition that survives in the algorithmic reading is deliberately left loud: **the
 uniformity of the terminal distribution is an assumption about the search, not a fact about the
 landscape, and no amount of further work on the landscape will remove it.**
+
+## r175 — the first referee pass, and what it caught
+
+Thirteen units, fresh context, the three jobs and nothing else. **Three came back `clear`.**
+Ten carried flags, and the reader insisted on three findings — every one of them a claim about
+*our own evidence*, not about the mathematics:
+
+1. **"The second, independent reading"** appeared in four places, **"in two parts"** in a fifth,
+   and **"took two of them"** in a sixth — three incompatible descriptions of one event. Worse:
+   r162 read the lemmas and r171 read the *restated* proposition, so **no single reading had ever
+   covered the appendix in its present form.**
+2. **"This statement is conditional on nothing"** sat in the same paper as **"One condition is
+   attached to that sentence."** Both true — the theorem is unconditional as mathematics, its
+   algorithmic interpretation is not — and the absolute one lived in the STATUS block, which is
+   where readers stop.
+3. **"Exactly three statements"** was contradicted by our own account of what the algorithmic
+   reading had to say before the lift; and the README then compressed the three into *"three
+   headline theorems"* when one of them is a proposition.
+
+> **We had been counting our own verification and got the count wrong in three different ways in
+> one document.** The failure mode is specific and it is not sloppiness: each phrase was written
+> in a different round, each was accurate to what its author was looking at, and consistency
+> across them is a property no author checks because no author reads them together.
+
+And the finding that justifies the whole procedure:
+
+> **The strongest of the three is one the author could not have made.** Having written both
+> descriptions and believed them consistent, the author cannot see that they are not. This is
+> not a matter of effort. **A fresh reader is not a more careful version of the author; it is a
+> different instrument, and it measures something the author has no access to.**
+
+Two consequences kept:
+
+- **An absolute claim belongs where its qualification is**, or it belongs nowhere. "Conditional
+  on nothing" at the point of maximum visibility, with the surviving assumption stored a section
+  away, is the adverb defect with the roles enlarged.
+- **State the convention where the count is made.** "Exactly three" was defensible under
+  "statement = numbered environment", but the sentence justifying it was about *damage*, and
+  damage does not respect environments.

@@ -1,0 +1,51 @@
+The first referee pass, and the three things it caught about our own evidence
+
+Thirteen units through the procedure written yesterday: the statements changed by the lift,
+read in a fresh context by a reader given the three jobs and nothing else. Three came back
+clear. Ten carried flags, three of which the reader insisted on, and every one of the three is
+a claim about our own verification rather than about the mathematics.
+
+One. "The second, independent reading" appeared in four places, "in two parts" in a fifth, and
+"took two of them" in a sixth -- three incompatible descriptions of one event, in one
+document. And worse than the inconsistency: r162 read the three lemmas, r171 read the RESTATED
+proposition, so no single reading had ever covered the appendix in its present form. Now one
+formula everywhere -- an independent reading delivered in three parts, each covering the text
+as it then stood: the lemmas (r162), the repairs landed against them (r164), the restated
+proposition with the T* construction and all five constants (r171). And the appendix head now
+says outright that NO SINGLE READING HAS COVERED THE APPENDIX AS A WHOLE, and that a reader who
+wants the stronger statement is entitled to know it has not been supplied. referee_pass.md
+gains the matching clause: a reading delivered in parts is one reading, and inflating the count
+of the expensive instrument is the same defect as substituting the cheap one for it.
+
+Two. "This statement is conditional on nothing" sat in the same paper as "One condition is
+attached to that sentence." Both true -- the theorem is unconditional as mathematics, its
+algorithmic interpretation is not -- but the absolute one lived in the STATUS block, which is
+where readers stop, and its qualification lived a section away. That is the adverb defect with
+the roles enlarged. Both consumer STATUS blocks now carry the pointer.
+
+Three. "Exactly three statements" was contradicted by our own account of what the algorithmic
+reading had to say before the lift, and the README then compressed the three into "three
+headline theorems" when one of them is a proposition. The count now says "exactly three
+numbered statements -- and, transitively through thm:rigid, one unnumbered sentence", with the
+convention stated where the count is made, because the justification beneath it is about damage
+and damage does not respect environments. README reads "three headline results ... two theorems
+and a proposition".
+
+Also acted on: the two grades ("proved" and "proved on paper") named as one rung, with the
+quotation marks explained as paper-versus-Lean rather than a weaker grade; the line-by-line
+claim no longer hoisted over material read at another grain; the impossibility in rem:closing
+scoped to the source it is proved against; "no amount of work on the landscape will remove it"
+replaced by what is actually supported, ending "we have no impossibility proof and claim none";
+and in referee_pass.md the aphorism about three jobs relabelled a design assumption with the
+observation that would refute it, plus the cost of the word "always" -- when fresh context is
+unavailable the pass is not run and is not recorded as run.
+
+The entry that matters is in the ledger. We had been counting our own verification and got the
+count wrong in three different ways in one document, and it was not sloppiness: each phrase was
+accurate to what its author was looking at, and consistency across them is a property no author
+checks because no author reads them together. The strongest finding is one the author could not
+have made. A fresh reader is not a more careful version of the author; it is a different
+instrument, and it measures something the author has no access to.
+
+Log: lean/pnp/refpass_r175.log, in the same form as a measurement. Part III is 46 pp (EN),
+45 pp (JA). C1-C20 pass.
