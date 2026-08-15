@@ -255,3 +255,49 @@ And the sentence itself was chosen to be shorter than the temptation to explain 
 Related: this is `rem:notsup`'s shape moved from mathematics to metadata. There, an estimate was
 being made where nobody would read it. Here, a caveat was nearly being made where nobody would
 read it.
+
+## r173 — the head's recipe was wrong and said so, in its own words
+
+fable-5's r164 prescribed forcing `|X| ≤ 1` across the whole of `|t| ≤ T₁` by a threshold in
+`k`. It cannot be done: `|α|T₁³ ≍ k`, so the condition holds for small `k` and dies as `k`
+grows — the threshold pushes the wrong way. The hands measured it (`|X(T₁)|` = 0.13, 0.26,
+0.51, 1.02 at `k` = 32, 64, 128, 256), reported that the instruction could not be carried out,
+and built the `T*` cut instead. In r171 the head verified the replacement, confirmed each of
+its four radii delivers the inequality it is named for, and wrote: *"your repair is not a patch
+on my recipe; it is the correct construction my recipe should have been. Ledger it with my name
+on it."*
+
+> **Design cannot check itself against magnitudes it has not computed.** The division of labour
+> earns its keep exactly here: the hands hold numbers the head does not. Which is a reason to
+> execute faithfully **and** to report back when the execution refuses, rather than quietly
+> patching — a silent patch would have left the ledger with no record that the specification
+> had been wrong.
+
+And the shape of the whole exchange is worth keeping: **head verifies hands, hands correct
+head, head verifies the correction and accepts it.** Three passes of correction over a single
+proposition, in both directions. That is what "solid" cost.
+
+## r174 — the lift, and what was kept rather than deleted
+
+`prob:R1` closed on 2026-08-15 (r171). `prop:tiltlclt` unconditional; `thm:rigid` and
+`thm:transfer` theorems with no conditional clause. The independent reading is on record in two
+parts: the three lemmas line by line in r162, the restated proposition with the `T*`
+construction and all five explicit constants in r171 — each constant re-derived from scratch,
+all five exact down to the reductions (`16eC_T/π = e(2+π)/π`, `41580/82944 = 385/768`).
+
+Thirty rounds from the appendix being written (r141) to the theorems being unconditional.
+
+**Nothing was deleted in the sweep.** `prob:R1` stays in the paper, restated as *CLOSED* with
+what closed it. The honest-scope entry records that it read "proof skeleton" until r171. The
+algorithmic reading says one condition remains where there used to be two, and names which one
+went.
+
+> **A status that improves is still a status change, and a reader who cannot see the old one
+> cannot audit the new one.** Deleting the problem would leave a paper that had never been
+> missing anything, which is a different and worse paper — and it would make the strongest thing
+> we can say about the result invisible: that we knew exactly what it rested on, said so in
+> advance, and then supplied it.
+
+The one condition that survives in the algorithmic reading is deliberately left loud: **the
+uniformity of the terminal distribution is an assumption about the search, not a fact about the
+landscape, and no amount of further work on the landscape will remove it.**

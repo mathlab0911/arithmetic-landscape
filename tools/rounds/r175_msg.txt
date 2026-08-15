@@ -1,0 +1,49 @@
+The lift: prob:R1 closed, three theorems unconditional, and the referee pass made standing
+
+fable-5's r171 granted the lift after re-reading prop:R1done -- the T* cut, the completeness of
+the split, the conversion factor, and all five explicit constants of rho re-derived from
+scratch and found exact, down to the reductions 16eC_T/pi = e(2+pi)/pi and 41580/82944 =
+385/768. This commit executes it.
+
+prop:tiltlclt is unconditional. thm:rigid and thm:transfer are theorems with no conditional
+clause. prop:R1done and the appendix head record the independent reading in two parts: the
+three lemmas line by line in r162, the restated proposition with the T* construction and all
+constants in r171. Thirty rounds from the appendix being written to the theorems being
+unconditional.
+
+Nothing was deleted in the sweep. prob:R1 stays in the paper, restated as CLOSED with what
+closed it; its preamble now says the three statements were conditional for most of this Part's
+life and that the section is kept as the record; the honest-scope entry says in its own text
+that it read "proof skeleton, with the analytic ingredients in place" until r171. A status that
+improves is still a status change, and a reader who cannot see the old one cannot audit the new
+one. Deleting the problem would leave a paper that had never been missing anything, which is a
+different and worse paper, and it would hide the strongest thing we can say: that we knew what
+the result rested on, said so in advance, and then supplied it.
+
+The population sweep (F35) covers both editions in the same hour: two consumer STATUS blocks,
+prop:tiltlclt's STATUS, prob:R1's STATUS and preamble and consumer list, the appendix head,
+prop:R1done's own line, the honest-scope bullet, the algorithmic reading, and the README row.
+
+The algorithmic reading is the one worth attention. It attached two conditions to the sentence
+about restart counts. One was ours and is gone; the other is not ours and never will be, so it
+now stands alone and loud -- the uniformity of the terminal distribution is an assumption about
+the search, not a fact about the landscape. Closing a gap makes the remaining gap more
+prominent, not less: with one caveat where there were two, a reader stops discounting the list
+and starts reading it.
+
+tools/referee_pass.md institutionalises fable's ruling as written: per statement for
+mathematics, per paragraph for prose, always fresh context; restate the claim, name the
+falsifier, flag the single word whose deletion changes it; batch capped at 15 and logged like
+an experiment beside the scripts. Three additions of mine, to be overruled if wrong: a
+candidate word list, the rule that a flagged word is a place where the author must justify it
+rather than an automatic defect, and an explicit non-equivalence -- the pass does NOT replace
+the second independent reading that turns a written argument into a proof. A procedure that
+sounds like verification and is not is worse than no procedure.
+
+Ledger gains two entries. r173 records that fable's own recipe was wrong and says so with their
+name on it, at their request: design cannot check itself against magnitudes it has not
+computed, which is why a refusal must be reported rather than quietly patched. r174 records the
+lift and the rule about keeping what closed.
+
+Papers 26/35/45 pp (EN), 25/34/45 pp (JA). C1-C20 pass. r170 archived, r175 is the live
+outgoing report. What remains is v1.1.0, and that is Kentaro's word.
