@@ -1,0 +1,29 @@
+==================================================================================
+audit2_r198 -- ALL zeros of the odd-number Gamma^(q), exactly
+==================================================================================
+
+Gamma^(q)_k = 1 + sum_{j=1}^{k-1}[q^j+(1-q)^j] is a polynomial; polyroots finds every zero,
+so 'no zero here' is a statement about the whole set and not about where we looked (F60).
+
+    k  true deg     |q| nearest 0    k*|Im q|   dist to 1/2
+   16        14       0.387750322   6.0518436   0.561248783
+   24        22       0.260618264   6.1918566    0.53012325
+   32        30       0.195902691   6.2347648   0.517654397
+   48        46       0.130781255   6.2629104   0.508126424
+   64        62      0.0981275791   6.2721187   0.504641783
+
+[A2] endpoint rate.  paper claims 2*pi/k = 6.28318531/k
+   k= 16  k*|Im q_1| =    6.05184364   /2pi =  0.9631808   /pi =   1.926362
+   k= 24  k*|Im q_1| =    6.19185662   /2pi =  0.9854646   /pi =   1.970929
+   k= 32  k*|Im q_1| =    6.23476484   /2pi =  0.9922936   /pi =   1.984587
+   k= 48  k*|Im q_1| =    6.26291041   /2pi =  0.9967732   /pi =   1.993546
+   k= 64  k*|Im q_1| =    6.27211875   /2pi =  0.9982387   /pi =   1.996477
+   -> the ratio that goes to 1 identifies the rate; the other must not.
+
+[A3] prop:nopinch: |q-1/2| < 1/6 = 0.16666667 must be zero-free, uniformly in k
+   k= 16  nearest zero to 1/2 =  0.5612487833   ok   conservative by 3.3675
+   k= 24  nearest zero to 1/2 =  0.5301232499   ok   conservative by 3.1807
+   k= 32  nearest zero to 1/2 =  0.5176543967   ok   conservative by 3.1059
+   k= 48  nearest zero to 1/2 =  0.5081264237   ok   conservative by 3.0488
+   k= 64  nearest zero to 1/2 =  0.5046417828   ok   conservative by 3.0279
+   paper: 'measured distance 0.5046 at k=64; proof conservative by a factor 3.03'

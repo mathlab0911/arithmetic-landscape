@@ -684,3 +684,52 @@ But note where it had reached:
 > celebrate the insight.** F35 says the summaries drift together because they are written from
 > the same draft. **So does the record of your own reasoning.** The place a wrong idea is stated
 > most confidently is the entry congratulating you for having it.
+
+## r198 — the audit the two errors earned, and the one thing it could not settle
+
+Two errors in two rounds, both in the Lee–Yang section, both found **by accident while doing
+something else**. F35 says that is evidence about the neighbours, so every quantitative claim in
+the section was re-derived by an independent route. **Three of five passed and reproduced the
+published digits; one is a constant; one did not reproduce, and the reason is not an error.**
+
+| claim | verdict |
+|---|---|
+| `cor:oddsclosed` — `Γ^(q) → 1/(q(1−q)) − 1` | **confirmed**, `4.4e-31` at four points |
+| `rem:leeyang` — endpoint rate `2π/k` | **confirmed**: `k·\|Im q_1\|/2π` = 0.963, 0.985, 0.992, 0.997, 0.998 |
+| `prop:nopinch` — `\|q−½\|<1/6` zero-free; 0.5046 at k=64; factor 3.03 | **confirmed exactly**: 0.5046417828, 3.0279 |
+| `rem:qcrit` — `2^{1/3} = 1.259921` | confirmed |
+| `rem:pinchformula` — the k=70 table, six digits | **not reproduced to six digits**; see below |
+
+**The endpoint check is worth its own line, because it corroborates r195 from outside.** The
+endpoints measure `2π/k` and the fair coin measures `π/k`. That factor of two is precisely the
+corrected fingerprint — *a single section behaves like `e^{ikθ}`, a conjugate sum like `sin(kθ)`,
+whose zeros are twice as dense.* **A correction that also explains a number measured three
+remarks earlier is worth more than one that only fixes its own sentence.**
+
+**And a method note that changed how the audit was run.** `Γ^(q)_k` is a polynomial, so
+`polyroots` returns **every** zero. That converts "no zero in this disc" from a claim about where
+we scanned into a claim about the whole set (F60). It also exposed a structural fact nobody had
+written down: for even `k` the leading coefficient **vanishes**, because `q^{k-1}` and
+`(1-q)^{k-1}` cancel — the true degree is `k-2`. *A crash in the root-finder was the first
+mention of a symmetry that had been in the object all along.*
+
+**What did not reproduce, stated without resolving it.** The k=70 table's measured row differs
+from an exact-root recomputation in the 4th–5th decimal at all seven values of `c` (largest gap
+`3.0e-4` at `c=2.00`), with **mixed signs**, so it is not a convention offset. Two facts bear on it
+and they point in different directions:
+
+- At `c=1.80` **my own method is unstable at 30 digits** (`0.0703492` vs `0.0705434` at 40 and 60
+  digits): the degree-69 polynomial has coefficients spanning `1.8^69 ≈ 10^16` and the roots are
+  ill-conditioned. So the quantity is genuinely hard, and neither number is obviously the right one.
+- The convention is ambiguous: the layer family has `m_0 = c^0 = 1`, but the text calls `c = 1`
+  *"the odd numbers"*, which have `m_0 = 0`. Those are different profiles.
+
+> **Two numbers that disagree in the fifth digit are not a dispute about the fifth digit; they are
+> a dispute about the method, and one of the methods has to be shown to converge before either
+> number means anything.** I have shown mine converges at five of seven points and *not* at the
+> sixth, which is the honest place to stop.
+
+**So this is recorded, not fixed.** Changing published digits on the strength of a method that is
+unstable at one of the seven points would be substituting my precision problem for theirs.
+**rule** : **Print numbers at the precision at which two independent methods agree, and say which
+two.** Six digits from one scan is a claim about the scan, not about the quantity.

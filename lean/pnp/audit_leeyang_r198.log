@@ -1,0 +1,21 @@
+====================================================================================
+audit_leeyang_r198
+====================================================================================
+
+[A1] cor:oddsclosed : Gamma^(q)_k -> 1/(q(1-q)) - 1 ?
+   q=           0.5   limit=                 3.0   k=400 value=                 3.0
+   q=           0.3   limit=         3.761904762   k=400 value=         3.761904762
+   q=  (0.5 + 0.1j)   limit=(2.846153846 + 0.0j)   k=400 value=(2.846153846 + 0.0j)
+   q=  (0.4 - 0.2j)   limit=        (2.5 + 0.5j)   k=400 value=        (2.5 + 0.5j)
+   worst |difference| = 4.4099e-31   closed form confirmed
+   and at q=1/2: 1/(1/4)-1 = 3 = Gamma(odds).  measured 3.0
+
+[A2] rem:leeyang : endpoint pinch rate.  Must be 2*pi/k, NOT pi/k.
+        k             first zero q_1 near 0    k*|Im q_1|   2pi=6.2831853
+Traceback (most recent call last):
+  File "/sessions/friendly-laughing-cerf/mnt/outputs/lab/audit_leeyang_r198.py", line 55, in <module>
+    r = mp.findroot(lambda q: endpoint_eq(q,k), mp.mpc(0, 2*mp.pi/k))
+  File "/usr/local/lib/python3.10/dist-packages/mpmath/calculus/optimization.py", line 985, in findroot
+    raise ValueError('Could not find root within given tolerance. '
+ValueError: Could not find root within given tolerance. (0.718048686337853112937793790156501439 > 1.92592994438723585305597794258492732e-34)
+Try another starting point or tweak arguments.

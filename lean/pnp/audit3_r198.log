@@ -1,0 +1,25 @@
+======================================================================================
+audit3_r198 -- rem:pinchformula, k=70 table, every root found (F60: not a scan)
+======================================================================================
+
+     c   predicted 1/c-1/2     recomputed   published    ratio  verdict
+  1.00                 0.5      0.5040006    0.503895    1.008  *** DIFFERS ***
+  1.10           0.4090909       0.413479    0.413403  1.01073  *** DIFFERS ***
+  1.25                 0.3      0.3051605    0.305147   1.0172  *** DIFFERS ***
+  1.40           0.2142857      0.2205786    0.220690  1.02937  *** DIFFERS ***
+  1.60               0.125      0.1339247    0.133982   1.0714  *** DIFFERS ***
+  1.80          0.05555556     0.07054341    0.070741  1.26978  *** DIFFERS ***
+  2.00                 0.0     0.02260567    0.022306       --  *** DIFFERS ***
+
+  rows differing from the published table: 7 of 7
+  [A5] rem:qcrit constant 2^(1/3) = 1.25992105  (paper prints 1.259921)
+stability of the recomputed distance (is MY number the precision-limited one?)
+  c=1.80  dps30=0.0703492128  dps40=0.07054341264  dps60=0.07054341264
+          spread = 0.0001942
+  c=2.00  dps30=0.02260567401  dps40=0.02260567401  dps60=0.02260567401
+          spread = 3.762e-35
+  c=1.00  dps30=0.5040006141  dps40=0.5040006141  dps60=0.5040006141
+          spread = 2.057e-32
+
+-> if the spread is ~1e-20 and the gap to the published value is ~1e-4,
+   the published digits 5-6 are not supported by the published method.
