@@ -36,6 +36,7 @@ prop:R1done
 prop:alphalb
 prop:chardecomp
 prop:correction
+prop:nopinch
 prop:rate
 prop:redresidue
 prop:targetdep
@@ -68,6 +69,7 @@ rem:mushift
 rem:noKappa
 rem:nocover
 rem:nohigher
+rem:nopinchreading
 rem:notmax
 rem:notsup
 rem:oneconstant

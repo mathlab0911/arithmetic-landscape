@@ -1339,6 +1339,68 @@ to zero, against $0.5021$ for the odd numbers at $k=96$, which is not.
 \texttt{leeyang2\_r179}, \texttt{leeyang3\_r179}.}
 \end{remark}
 
+\begin{proposition}[the fair coin is not pinched when the layer weights decay geometrically]
+\label{prop:nopinch}
+\STATUS{proved. The numerical companion checks the disc at $576$ points on four profiles with no
+failure, and reports the proved radius beside the measured one; \texttt{leeyang4\_r182}.}
+Write
+\[
+  g_1(x)\;=\;\sum_{j\ge1}j\,m_j\,2^{-j}x^{\,j-1},
+\]
+and suppose $g_1$ converges at some $x_0>1$. Then for every $r>0$ with $1+2r\le x_0$ and
+\[
+  4r\,g_1(1+2r)\;<\;\Gamma(A),
+\]
+the disc $|q-\tfrac12|<r$ contains no zero of $\Gamma^{(q)}$ --- \textbf{and the bound is uniform
+in $k$}, because $g_1$ and the lower bound for $\Gamma$ are.
+\end{proposition}
+
+\begin{proof}
+For $|q-\tfrac12|=r$ both $|q|$ and $|1-q|$ are at most $\tfrac12+r$, and
+\[
+  \bigl|q^{j}-2^{-j}\bigr|
+  =\Bigl|q-\tfrac12\Bigr|\Bigl|\sum_{i<j}q^{i}2^{-(j-1-i)}\Bigr|
+  \le r\,j\bigl(\tfrac12+r\bigr)^{j-1}
+  = 2r\,j\,2^{-j}(1+2r)^{j-1},
+\]
+and the same for $(1-q)^{j}$. Summing against $m_j$ and using $\Gamma^{(1/2)}=\Gamma(A)$,
+\[
+  \bigl|\Gamma^{(q)}-\Gamma(A)\bigr|\;\le\;4r\,g_1(1+2r)\;<\;\Gamma(A),
+\]
+so $\Gamma^{(q)}\ne0$ on that circle and, the left side being increasing in $r$, inside it.
+Finally $m_j\ge1$ for $1\le j\le k-1$ because consecutive odd integers differ by at least $2$,
+so $\Gamma(A)\ge1+2\sum_{j=1}^{k-1}2^{-j}=3-2^{2-k}$: \emph{the odd numbers are the densest
+admissible profile and they minimise the invariant.} \qed
+\end{proof}
+
+\begin{remark}[what the criterion is, and what it is not]\label{rem:nopinchreading}
+Everything turns on the radius of convergence $R$ of $g(x)=\sum_j m_j2^{-j}x^{j}$. Since
+$g(1)=(\Gamma(A)-1)/2$, \textbf{$R\ge1$ says exactly that $\Gamma$ is finite, and $R>1$ says the
+strictly stronger thing that the layer weights decay \emph{geometrically}}. Proposition
+\ref{prop:nopinch} needs the stronger one, and it is satisfied by every profile in this paper
+except the lacunary family: measured over the top half of the layers at $k=60$, the quantity
+$(m_j2^{-j})^{1/j}$ is $0.5000$ for the odd numbers, $0.5250$ for the primes, $0.5543$ for a
+random odd set and $0.5600$ for $a_i\asymp i^{2}$, against $0.9883$ for $a_i=2^{i}+1$.
+
+For the odd numbers $g_1(x)=2/(2-x)^{2}$ exactly, the condition becomes $12r^{2}-20r+3>0$, and
+\textbf{the proved radius is $r=\tfrac16$}. The measured distance from the fair coin to the
+nearest zero is $0.5046$ at $k=64$, so the proof is conservative by a factor $3.03$.
+
+\emph{The unexpected part, and the reason this is more than an exclusion certificate.} The same
+ratio appears everywhere, including where the hypothesis fails: proved against measured is
+$3.03$ for the odd numbers, $2.81$ for the primes, $1.65$ for a random odd set, $3.97$ for
+$a_i\asymp i^{2}$ --- and $3.10$ for the lacunary family, where the proved radius is not uniform
+but shrinks like $1/k$ ($0.00816$ at $k=64$) exactly as the measured distance does
+($0.02530$). \textbf{So $g_1$ does not merely certify an empty disc; it tracks where the nearest
+zero actually is, on both sides of the dichotomy.}
+
+\emph{What is still not proved, stated plainly.} The converse. $R=1$ removes the obstruction to
+a zero near $q=\tfrac12$; it does not produce one. Remark~\ref{rem:leeyanglacunary} exhibits one
+family where a zero does appear, and one family is one family.
+\STATUS{the proposition is proved; the tracking observation is \textbf{measured} on five
+profiles; the converse is \textbf{open}. \texttt{leeyang4\_r182}.}
+\end{remark}
+
 \subsection{Verification}\label{sec:e5}
 
 \STATUS{experimentally confirmed} Measured $\lm_q/r_q$ at $n_q$ against the point

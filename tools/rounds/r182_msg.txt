@@ -1,0 +1,36 @@
+The easy half of the dichotomy, proved: g_1 controls the disc around the fair coin
+
+r180 handed fable-5 the question of what decides, for general m_j, whether the two geometric
+series can cancel on Re q = 1/2. It is a question about one series, and the easy half is two
+lines.
+
+With g(x) = sum_j m_j 2^{-j} x^j, note g(1) = (Gamma(A)-1)/2 -- so the radius of convergence
+being at least 1 says exactly that Gamma is finite, and being greater than 1 says the strictly
+stronger thing that the layer weights decay geometrically. On |q - 1/2| = r both |q| and |1-q|
+are at most (1/2)(1+2r), so comparing Gamma^(q) to Gamma(A) rather than to zero gives
+
+  |Gamma^(q) - Gamma(A)| <= 4r g_1(1+2r),   g_1(x) = sum_j j m_j 2^{-j} x^{j-1},
+
+and any r with 4r g_1(1+2r) < Gamma(A) gives a disc free of zeros, UNIFORMLY IN k. For the odd
+numbers g_1(x) = 2/(2-x)^2 exactly, the condition is 12r^2 - 20r + 3 > 0, and the proved radius
+is r = 1/6. Free from the same proof: Gamma(A) >= 3 - 2^{2-k}, because consecutive odd integers
+differ by at least 2 so m_j >= 1 -- the odd numbers are the densest admissible profile and they
+minimise the invariant.
+
+The conjecture was about zeros and the answer was about a generating function. The zeros were
+never the object; they are a shadow of sum_j m_j 2^{-j} x^j, which is the object this series has
+been about since Part I. When a new phenomenon appears, ask which of your existing quantities it
+is a shadow of before inventing a quantity for it.
+
+And the part that was not looked for. Proved against measured is 3.03 for the odd numbers, 2.81
+for the primes, 1.65 for a random odd set, 3.97 for a_i ~ i^2 -- and 3.10 for the lacunary
+family, where the hypothesis fails, the radius is not uniform at all, and both the proved radius
+and the measured distance shrink like 1/k (0.00816 against 0.02530 at k = 64). A sufficient
+condition that stays proportional to the answer where it is not sufficient is telling you it was
+never really a sufficient condition; it was the mechanism. That is evidence about where to look
+for the converse -- at g_1, not at the zeros.
+
+Registered: proposition proved, the proportionality measured on five profiles, the converse
+open. Numerical companion checks the disc at 576 points on four profiles with no failure.
+
+Part III 49 pp (EN), 47 pp (JA). C1-C20 pass. leeyang4_r182.

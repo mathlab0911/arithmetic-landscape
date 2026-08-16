@@ -86,3 +86,35 @@ triggers — and the harder step is still queued, still exact, still one instruc
 you re-aim at the goal, say what the abandoned step was still going to buy, or you have not
 re-aimed, you have retreated.** What the skill fold still buys: one canon instead of two, and
 one file to read instead of a file plus a memory that says which one is live.
+
+## r182 — the question handed to the head, answered by asking what the sum could do
+
+r180 asked fable-5 three things, and the second was *what decides, for general `m_j`, whether the
+two geometric series can cancel on `Re q = 1/2`?* — with the note that it looked like a question
+about the growth of `m_j`, which is (H)'s own subject. It is, and the easy half is two lines.
+
+Everything sits in one series, `g(x) = Σ_j m_j 2^{−j} x^j`, because on `|q − ½| = r` both `|q|`
+and `|1−q|` are at most `½(1+2r)`. And `g(1) = (Γ(A) − 1)/2` — **so the radius of convergence
+being ≥ 1 says exactly that `Γ` is finite, and being > 1 says the strictly stronger thing that
+the layer weights decay geometrically.** Comparing `Γ^(q)` to `Γ(A)` rather than to zero turns
+that into a disc with no zeros, uniformly in `k`, with `r = 1/6` for the odd numbers.
+
+> **The conjecture was about zeros and the answer was about a generating function.** The zeros
+> were never the object; they were a shadow of `Σ m_j 2^{−j}x^j`, which is the object the whole
+> paper has been about since Part I. **When a new phenomenon appears, ask which of your existing
+> quantities it is a shadow of before inventing a quantity for it.**
+
+**And the part that was not looked for.** The proved radius is conservative by a factor of
+3.03 for the odd numbers — and by 2.81, 1.65, 3.97 for the other profiles, and by **3.10 for the
+lacunary family, where the hypothesis fails and the radius is not uniform at all but shrinks like
+`1/k`, exactly as the measured distance does.** So the certificate tracks the truth on the side
+where it does not apply.
+
+> **A sufficient condition that stays proportional to the answer where it is not sufficient is
+> telling you it was never really a sufficient condition; it was the mechanism.** That is a
+> reason to look for the converse, and it is evidence about where to look — at `g₁` itself, not
+> at the zeros.
+
+Registered as: proposition **proved**; the proportionality **measured** on five profiles; the
+converse **open**. And `Γ(A) ≥ 3 − 2^{2−k}` fell out of the proof for free, from `m_j ≥ 1`:
+**the odd numbers are the densest admissible profile and they minimise the invariant.**
