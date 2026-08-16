@@ -1,0 +1,49 @@
+The ledger folded: nineteen entries archived, the distillation written exactly
+
+Rounds r160-r180 are in ledger_archive.md, unedited, under a header naming what the period
+covers: the lift of prob:R1 and the three theorems becoming unconditional, the Leiden signature
+and the ORCID, the first DOI and the v1.1.0 release, the first referee pass, and door 2.
+ledger_pending.md is empty again, with the standing rule restated at its head -- write the case
+the hour it happens in the words that were true at the time, and distil only when folding,
+because the distillation is a different act from the record and doing both at once produces
+neither.
+
+tools/skill_delta_r181.md is the distillation, written so it can be applied verbatim:
+
+  F78  the dangerous failure of a checker is the empty scan, not the false alarm; and a check
+       repaired after a rename must accept the old names, because one that recognises only the
+       current wording cannot audit the past.
+  F79  anything that says "pending X" needs a person who will notice when X happens, because the
+       file will not -- twice in one day, the second time hours after writing the rule about the
+       first. The release procedure now asks: what did this release make false?
+  F80  a fresh reader is not a more careful version of the author; it is a different instrument,
+       and it measures something the author has no access to. All three referee-pass findings
+       were claims about our own evidence rather than about the mathematics.
+  F81  an identifier looks like an imprimatur; put the caveat where the claim gets copied. A DOI
+       makes a version permanent; it does not make it true.
+  F82  the second identical attempt is diagnosis, the fourth is denial; and when an interface has
+       a cache, a green screen is not evidence -- ask the layer underneath.
+
+Plus strengthenings: F26/F27 gains "a plateau is a claim about a range, and three points inside
+one are not a range" and the rule that when two people disagree by a factor the first suspect is
+the weight; F35 gains fable's constitutional ruling that a reader who cannot see the old status
+cannot audit the new one; F38 gains "a status is a label on a statement, and a label cannot fix a
+verb"; F60 gains the rename as its seventh instance and the observation that writing a claim out
+for someone else is a check, and the only unmechanised one we have; F70 gains "when a correction
+makes a bound uglier, the ugliness is information about where the old bound was borrowing".
+
+And three for the division of labour: design cannot check itself against magnitudes it has not
+computed; execute faithfully and report back when the execution refuses; the scope of an
+authorisation is bounded by what the person could plausibly have been imagining when they gave
+it.
+
+SKILL.md itself is NOT rewritten in this commit, and r181 in the ledger says why. save_skill
+replaces the file whole, so updating it means reproducing 55 KB by hand, and a silent
+transcription error there would corrupt the one document this project uses to remember why it
+does things -- invisibly, because that file has no checker, no build, and nothing that would
+fail. The instrument that records how we avoid mistakes is itself unchecked. So the write was
+split: the permanent record made safe first, the delta written exactly, and the unverifiable
+write left for a session with room to read it back and diff it. That is F82 applied to ourselves
+rather than to a button.
+
+C1-C20 pass.
