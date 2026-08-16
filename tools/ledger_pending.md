@@ -590,3 +590,50 @@ Two details worth keeping.
 `git add --dry-run` emits two — and assert that no surviving line still matches the verb pattern.
 **rule** : **A parser written from one observed output is a parser for one case.** Ask what else
 the command says, not only what it said the day you looked.
+
+## r196 — the prediction was wrong, and the way it was wrong was the answer
+
+**claimed** : at `R = 1` with `Σ w_j < ∞` the fair coin is **not** pinched. Reasoning: at the scale
+`θ = x/k` the factor `ρ^j = (1+4t²)^{j/2} → 1` uniformly for `j ≤ k`, so
+`Σ_{j<k} w_j cos(jx/k) → Σ w_j > 0` by dominated convergence — no dip, no zero. That would have
+answered `prob:converse` **NO** and replaced the criterion `R = 1` by "`Γ` diverges".
+
+**actual**  : it **is** pinched. `dist = |q_1−½|` runs `0.760, 0.420, 0.303, 0.201, 0.148` at
+`k = 16…256`. The argument was not false — at `θ ~ x/k` there really is no dip. **It was answered
+at one scale and asserted at all of them.** The zeros live at a different scale, and finding
+which one is the result:
+
+> Term `j` carries `ρ^j ≈ e^{2jt²}`. With `w_j ~ j^{−s}` the tail term `j = k` has size
+> `k^{−s}e^{2kt²}`, which becomes `O(1)` **exactly when `2kt² = s log k`**, so
+> **`t_1 ~ √(s log k / 2k)`.**
+
+Measured against that, with **no fitted constant**: `s = 2` gives ratios
+`1.277, 1.187, 1.034, 1.005, 0.996` at `k = 32…512`; `s = 3` gives `…, 1.008`; `s = 4` gives
+`…, 1.039`. The cross-check `t_1(s=4)/t_1(s=2) = 1.475` against `√2 = 1.414` is high by 4.3%,
+which is exactly the amount by which the `s=4` family has not yet reached its own asymptote
+(`1.039/0.996 = 1.043`) — *the discrepancy is accounted for by the other measurement rather than
+excused*. Control: `2^i−1` keeps `k·t_1 → π/2` (`1.570816` at `k = 512`) and does not follow the
+law at all.
+
+**So `prob:converse` is answered in two halves.** *Do the zeros approach `½` at `R = 1`?* **Yes,
+always.** *At rate `π/2k`?* **No — the tail sets the rate, not the fact:**
+
+| regime | | rate |
+|---|---|---|
+| `Σ w_j = ∞` (`Γ` divergent) | the two boundary families | `π/(2k)` |
+| `w_j ~ j^{−s}` (`Γ` convergent) | new family C | `√(s log k / 2k)` |
+
+**check** : before concluding "no zeros", scan `t` over a range wide enough that the *amplification*
+`ρ^k = (1+4t²)^{k/2}` reaches `O(1)` against the tail weight — i.e. include `t ~ √(log k / k)`, not
+only `t ~ 1/k`. Assert the scanned range against that quantity in the code.
+
+**rule** : **A limit computed along one scaling is a statement about that scaling.** When the
+answer is "the quantity tends to something positive, so there is no zero", the missing sentence is
+*"…at this scale"* — and the next question is which scale makes the neglected factor `O(1)`.
+*(F32's second clause — does the RANGE let the observable answer — applied to an analytical limit
+rather than to a numerical scan, where it is easier to miss because no grid makes the range
+visible.)*
+
+> **The wrong prediction was load-bearing: it named the scale that does not work, which is what
+> made the scale that does work findable in one step.** A prediction that fails by naming its own
+> blind spot is worth more than a vague one that survives.
