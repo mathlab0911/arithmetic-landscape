@@ -79,7 +79,22 @@ if ($Commit) {
     $staged = @()
     foreach ($p in $PATHS) { $staged += @(& git --git-dir=$GD --work-tree=$TREE add --dry-run --force -- $p 2>&1) }
     foreach ($g in $GLOBS) { $staged += @(& git --git-dir=$GD --work-tree=$TREE add --dry-run --force -- $g 2>&1) }
-    $staged = $staged | ForEach-Object { $_ -replace "^add '","" -replace "'$","" }
+    # `git add --dry-run` announces two verbs, not one: `add '<path>'` and `remove '<path>'`.
+    # This line handled only `add`, so a deletion arrived at GUARD 3 still carrying its verb,
+    # failed the whitelist as the literal path "remove 'reports/to-fable5/r193.md", and refused
+    # a legitimate push. That is F52 exactly -- additions announce themselves and deletions do
+    # not -- reproduced inside the tool written to enforce it. Strip both verbs, and PRINT the
+    # removals rather than folding them silently into the count: a deletion is the row that
+    # costs most to get wrong, so it must be the row the operator actually sees.
+    $removals = @($staged | Where-Object { $_ -match "^remove '" } |
+                 ForEach-Object { $_ -replace "^remove '","" -replace "'$","" })
+    $staged = $staged | ForEach-Object { $_ -replace "^(add|remove) '","" -replace "'$","" }
+    if ($removals.Count -gt 0) {
+        Write-Output ("--- REMOVALS in this push: " + $removals.Count + " ---")
+        $removals | ForEach-Object { Write-Output ("  - " + $_) }
+    } else {
+        Write-Output "--- REMOVALS in this push: none ---"
+    }
 }
 
 Write-Output "--- by top-level directory ---"

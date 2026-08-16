@@ -556,3 +556,37 @@ bold directly under the README badge**. It was in neither the README nor the dep
 **check** : for any guard of the form "this field is absent", assert on an anchored pattern and
 print the line that matched; and never let a guard's verdict retract a directly observed fact
 without the guard itself being tested.
+
+## r195 — the tool written to enforce F52 contained F52
+
+`workshop_setup.ps1` refused a legitimate push, naming one path outside the whitelist:
+
+```
+  remove 'reports/to-fable5/r193.md
+```
+
+That is not a path. `git add --dry-run` announces **two** verbs — `add '<path>'` and
+`remove '<path>'` — and the parser stripped only the first. So every addition arrived at the
+whitelist guard as a clean path and **every deletion arrived still wearing its verb**, failed the
+match, and refused the push.
+
+> **F52's own sentence is: *additions announce themselves at build time and deletions do not*.
+> The tool built to act on that rule was written for the case that announces itself.** A rule you
+> can quote is not a rule you have applied; the application is a separate act, in a different
+> place, and it is the place that has to be checked.
+
+Two details worth keeping.
+
+- **The guard failed safe, and that is why this is a small entry rather than a large one.** The
+  friction was deliberately put on the dangerous side (F77), so a parser bug cost a refused push
+  instead of an unnoticed publication. *A tool that fails toward refusal converts its own bugs into
+  delays; one that fails toward acceptance converts them into artefacts.*
+- **The repair prints the removals rather than only admitting them.** Stripping the verb alone
+  would have fixed the refusal and left deletions folded silently into a count — the same blind
+  spot one layer down. So the fix is `-replace "^(add|remove) '"` **plus** an explicit
+  `REMOVALS in this push:` block, listing them by name, or saying `none`.
+
+**check** : when parsing a tool's human-readable output, enumerate *every* verb it can emit —
+`git add --dry-run` emits two — and assert that no surviving line still matches the verb pattern.
+**rule** : **A parser written from one observed output is a parser for one case.** Ask what else
+the command says, not only what it said the day you looked.
