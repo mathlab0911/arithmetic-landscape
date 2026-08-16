@@ -371,12 +371,13 @@ def c9_readme_counts():
         # r120: the README said "twelve mechanical checks" while fourteen were running, for
         # the same reason the check table had stopped at C9 at r118 -- a count in prose is
         # the first thing to go stale.  CHECKS is the list actually run, below.
-        (r'(?:and )?(\w+) mechanical\s*\n?checks enforce', (None,), 'mechanical checks'),
+        (r'(?:and )?([\w-]+) mechanical\s*\n?checks enforce', (None,), 'mechanical checks'),
         (r'\| (C\d+) \| every reference to a sibling', (None,), 'check table reaches C15'),
     ]
     WORDS = {'ten': 10, 'eleven': 11, 'twelve': 12, 'thirteen': 13, 'fourteen': 14,
              'fifteen': 15, 'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19,
-             'twenty': 20}
+             'twenty': 20, 'twenty-one': 21, 'twenty-two': 22, 'twenty-three': 23,
+             'twenty-four': 24, 'twenty-five': 25}
     bad = []
     for pat, truth, what in claims:
         m = re.search(pat, src)
@@ -1192,11 +1193,62 @@ def c20_measured_only():
                  '%d prose claim(s) read' % (n_status, n_prose))
 
 
+# ---------------------------------------------------------------- C21 / F83
+# A file of GitHub two-factor RECOVERY CODES was found sitting untracked in the
+# repository root, one `git add -A` away from a PUBLIC push.  It had been uploaded
+# to a session and landed in the working tree.  It was never committed -- verified
+# with `git log --all -- "*recovery*"` -- but that was luck, not a property of the
+# system, and this project's rule is that a near miss becomes an assertion.
+#
+# The check refuses on NAME, over the whole tree including untracked files, because
+# the one thing that must never happen is reading the contents to decide.  It cannot
+# see a secret that is named innocently -- so it prints what it scanned (F60) and says
+# in its own note that it is a net with a known mesh size, not a guarantee.
+
+SECRET_NAME = re.compile(
+    r'(recovery[-_ ]?code|\bid_rsa\b|\.pem$|\.ppk$|\.p12$|\.pfx$|\.keystore$'
+    r'|\bcredentials?\b|\bsecret(s)?\b|\bpassword(s)?\b|\bpasswd\b'
+    r'|\btoken(s)?\b|\bapi[-_ ]?key\b|\bendorsement\b|^\.env$|\.env\.)',
+    re.I)
+# Named exceptions: our own prose ABOUT secrets is not a secret.  Each one is listed
+# rather than pattern-matched away, so the list itself can be audited.
+SECRET_OK = {
+    'tools/check.py',
+    'tools/ledger_pending.md', 'tools/ledger_archive.md',
+    'README.md',
+}
+
+def c21_no_secret_files():
+    """No file whose NAME says it holds credentials may sit inside the tree."""
+    n = 0
+    bad = []
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in ('.git', '__pycache__', '.lake')]
+        for fn in filenames:
+            full = os.path.join(dirpath, fn)
+            rel = os.path.relpath(full, ROOT).replace('\\', '/')
+            n += 1
+            if rel in SECRET_OK:
+                continue
+            if SECRET_NAME.search(fn) or SECRET_NAME.search(rel):
+                bad.append(rel)
+    if bad:
+        fail('C21/F83', 'file(s) whose name says they hold credentials are inside the '
+                        'repository tree, tracked or not: %s -- move them out of the tree '
+                        '(a password manager, not a folder), do not commit, do not read'
+                        % '; '.join(sorted(bad)))
+    expect_subjects('C21/F83', n, 'files in the tree')
+    notes.append('C21/F83 files scanned by NAME for credential-shaped names: %d, %d named '
+                 'exception(s). This is a net with a known mesh: it cannot see a secret '
+                 'that is innocently named, and it never reads contents to decide.' % (n, len(SECRET_OK)))
+
+
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
           c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology,
-          c18_landing_pages, c19_translation_parity, c20_measured_only)
+          c18_landing_pages, c19_translation_parity, c20_measured_only,
+          c21_no_secret_files)
 
 if __name__ == '__main__':
     for fn in CHECKS:

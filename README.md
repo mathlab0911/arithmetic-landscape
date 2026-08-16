@@ -101,7 +101,7 @@ level it does. **Work produced this way cannot be trusted on the author's word; 
 checkable, and checkable by someone who does not trust the author.** So every settled theorem
 goes into Lean and is replayed through the kernel by an independent checker that must first
 reject three deliberately poisoned modules; every number quoted in a paper must exist in a
-committed log; every statement must declare its status where it is stated; and twenty mechanical
+committed log; every statement must declare its status where it is stated; and twenty-one mechanical
 checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
 every mistake this process has actually made — including the ones a check was built to catch
 only after it had already happened, and the ones where the check itself was the defect.

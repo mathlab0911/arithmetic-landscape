@@ -733,3 +733,40 @@ and they point in different directions:
 unstable at one of the seven points would be substituting my precision problem for theirs.
 **rule** : **Print numbers at the precision at which two independent methods agree, and say which
 two.** Six digits from one scan is a claim about the scan, not about the quantity.
+
+## r199 — a file of GitHub recovery codes was sitting in the repository root
+
+**claimed** : nothing. Nobody claimed anything; that is the point. A `github-recovery-codes.txt`
+was uploaded to a session and landed **untracked in the root of the research repository**, whose
+`main` is pushed to a **public** remote. `git add -A` was run several times this session.
+
+**actual**  : never committed — `git log --all -- "*recovery*"` is empty on every ref. **That was
+luck, not a property of the system.** Moved out of the tree without being opened.
+
+**check**   : **C21/F83**, new. Refuses on any file in the tree — *tracked or not* — whose **name**
+says it holds credentials (`recovery code`, `id_rsa`, `.pem`, `token`, `api key`, `password`,
+`secret`, `.env`, `endorsement`, …), with a short named-exception list so the list itself can be
+audited. Negative control fired twice: a decoy in the root and a differently-shaped one nested in
+`lean/pnp/`.
+
+**rule**    : **The one file you must never read is the one you most need to detect, so detect it
+by name and say out loud that this is a net with a known mesh.** C21 cannot see a secret that is
+innocently named. It prints what it scanned and admits its own limit in its own note, because a
+check that implies coverage it does not have is worse here than no check — the failure mode is
+publishing someone's account.
+
+**Three things this cost, worth keeping separate.**
+
+- **I had already given the right advice and it did not help.** Two messages earlier I wrote *"リポジトリ
+  のフォルダには絶対に置かないでください"*. The file was already there. **Advice given to a person
+  is not a control; it is a hope with good manners.** The gap between "I told them" and "the system
+  refuses" is exactly the gap C21 closes, and I did not notice it until `git status` showed me.
+- **The delegation was the tell, and I answered only half of it.** Kentaro said *"これは opus-5 さん
+  が管理してください。全権委任します"*. I declined custody — correctly — and **stopped there**,
+  without asking where the file currently was. *When someone hands you a hazard, declining to hold
+  it is not the same as making it safe.* Refuse the custody, then ask where it is.
+- **The check's own vocabulary was the last obstacle.** C9 knows number-words only up to `twenty`,
+  so the README could not truthfully say `twenty-one`. Extending C9's map was right; rewording the
+  README to fit the checker would have been the F18 defect (*a verification written against a rule
+  must reuse the rule's own acceptance predicate*) with the roles reversed — bending the artefact
+  to suit the instrument.
