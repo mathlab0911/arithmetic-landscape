@@ -32,3 +32,28 @@ fail quietly is the one that waits for room to fail loudly.
 
 **Open item, and it should not sit long:** apply `skill_delta_r181.md`, then diff the saved skill
 against the source before believing it.
+
+## r182 — following the rule on the day it was written, when it was inconvenient
+
+The r181 write was attempted. It stopped at the point where the 67 KB file could not be brought
+into context without crowding out the room needed to emit it back — and stopping there was the
+decision, not the failure.
+
+> **A rule adopted the same week is a rule that has not yet cost anything.** F82 was written
+> about a button and someone else's click; the first time it applied to us it asked us to abandon
+> a task the person had asked for twice, with the work 95% done and the temptation to push
+> through at its highest. **The test of a rule is whether it holds the first time obeying it is
+> expensive.**
+
+What made stopping cheap rather than costly is that the round front-loaded the recoverable parts:
+the archive fold is complete, the distillation is exact and separate, the patch was applied
+mechanically rather than by hand, both versions are committed, and `APPLY.md` reduces the
+remaining work to one instruction with a checksum to verify against.
+
+> **Make the recovery cheap before making the write.** Then the decision to stop costs a session
+> boundary instead of a document.
+
+And one honest note on the count. Two methods were tried, not one attempt repeated: the bash read
+hit an output cap, which is information about the channel and not about the file. **A different
+method is diagnosis; the same method again is denial.** The line between them is what F82 is
+actually about, and it is thinner than the entry makes it sound.
