@@ -1251,7 +1251,9 @@ be, since complementing every configuration exchanges $q$ with $1-q$ and $n$ wit
 \end{remark}
 
 \begin{corollary}[closed form for the odd numbers]\label{cor:oddsclosed}
-For $A=(1,3,\dots,2k-1)$ one has $N_d=d$ for $d\le k$, so in the limit $k\to\infty$
+\emph{A corollary of Proposition~\ref{prop:gqgen}}: for $A=(1,3,\dots,2k-1)$ every $m_j$ is $1$,
+so $G(z)=z/(2-z)$ and $1+G(2q)+G(2-2q)$ is the display below. Directly: $N_d=d$ for $d\le k$, so
+in the limit $k\to\infty$
 \[
   \Gamma^{(q)}=1+\frac{q}{1-q}+\frac{1-q}{q}=\frac{1}{q(1-q)}-1\;\ge\;3,
 \]
@@ -1404,11 +1406,19 @@ profiles; the converse is \textbf{open}. \texttt{leeyang4\_r182}.}
 \begin{proposition}[the invariant is a generating function evaluated twice]\label{prop:gqgen}
 \STATUS{proved; the identity is checked to $10^{-30}$ at twelve points on four profiles,
 \texttt{leeyang5\_r183}.}
-With $w_j=m_j2^{-j}$ and $G(z)=\sum_{j\ge0}w_jz^{j}$,
+Let $G=G_A$ be the generating function of the layer weights introduced in
+Part~I~\cite{P1}, Proposition~\Xref{paper}{prop:gengamma}{1.3}: with $m_0=(a_1-1)/2$ and
+$m_j=(a_{j+1}-a_j)/2$,
 \[
-  \Gamma^{(q)}(A)\;=\;1+G(2q)+G(2-2q),
+  G(z)=\sum_{j\ge0}m_j2^{-j}z^{\,j},
+  \qquad\text{so that}\qquad \Gamma(A)=1+2G(1).
 \]
-identically. Consequently, writing $R$ for the radius of convergence of $G$:
+Then, identically,
+\[
+  \Gamma^{(q)}(A)\;=\;1+G(2q)+G(2-2q).
+\]
+\textbf{The deformation does not introduce a new object; it reads the same generating function
+at two points instead of one.} Consequently, writing $R$ for the radius of convergence of $G$:
 \begin{enumerate}
 \item $G(1)=\bigl(\Gamma(A)-1\bigr)/2$, so \textbf{$R\ge1$ is exactly the statement that
       $\Gamma(A)$ is finite};
@@ -1420,9 +1430,9 @@ identically. Consequently, writing $R$ for the radius of convergence of $G$:
 \end{proposition}
 
 \begin{proof}
-$m_jq^{j}=m_j2^{-j}(2q)^{j}=w_j(2q)^{j}$ and likewise for $1-q$; sum. Then $G(1)$ is
-$\sum_jm_j2^{-j}$, which is $(\Gamma(A)-1)/2$ by evaluating the definition at $q=\tfrac12$. The
-lens and the distance are the domain of convergence of the two evaluations. \qed
+$m_jq^{j}=m_j2^{-j}(2q)^{j}$ and likewise for $1-q$; sum over $j$ and use
+Definition~\ref{def:gq}. Item~1 is Part~I's proposition evaluated at $z=1$; the lens and the
+distance are the domain of convergence of the two evaluations. \qed
 \end{proof}
 
 \begin{remark}[the dichotomy, as a formula]\label{rem:pinchformula}
@@ -1481,10 +1491,33 @@ $k\to\infty$, at rate $(2n+1)\pi/2k$ with $n$ determined by the profile's first 
 non-vanishing of the limit of $G$ on its circle of convergence. Hurwitz's theorem gives
 non-accumulation inside the lens on compact subsets; accumulation \emph{on} the boundary needs
 that non-vanishing, and it is a statement about $G$ alone.
+\emph{The classical half, transported.} For a single power series this is
+\textbf{Jentzsch's theorem} (1914): if the radius of convergence is finite and positive, then
+\emph{every} point of the circle of convergence is a limit point of the zeros of the sections,
+with Szeg\H{o}'s refinement giving the angular equidistribution of a subsequence. Applied to
+$G$, it says that the zeros of the sections $G_k$ accumulate at every point of $|z|=R$ --- and
+when $R=1$ the point $z=1$ is such a point, which is $q=\tfrac12$ under $z=2q$. \emph{So the
+accumulation of the zeros of each summand at the fair coin is classical.}
+
+\textbf{What is not classical, stated sharply, is that the sum inherits it.} Our object is
+$1+G_k(2q)+G_k(2-2q)$: two sections under affine substitutions, plus a constant, and adding
+functions can cancel zeros. We found no result covering sums of sections, and the missing
+ingredient is exactly that --- \emph{does a sum of two sections, under substitutions that make
+them complex conjugates on a line, inherit boundary accumulation?}
+
+\emph{And the measured ladder is the fingerprint of the sum, not of a section.} Sections of a
+single geometric series have zeros at angular spacing $2\pi/k$; ours sit at
+$(2n+1)\pi/2k$ --- spacing $\pi/k$, offset by half of it. That is what
+$\cos(k\theta)$ does and what $e^{ik\theta}$ does not, so \textbf{the half-integer ladder is
+precisely the part of the phenomenon that the single-section theory does not describe.}
 \STATUS{conjectured, with the mechanism identified as the ladder and not the family: two
 profiles, two integers $n$, one ladder. $k\cdot\operatorname{Im}q_1$ measures $3\pi/2$ for
 $a_i=2^{i}+1$ and rises towards $\pi/2$ for layer gaps $2\cdot2^{j}$.
-\texttt{leeyang2\_r179}, \texttt{leeyang5\_r183}.}
+\texttt{leeyang2\_r179}, \texttt{leeyang5\_r183}. \textbf{Literature pass completed} (r191):
+Jentzsch's theorem and the Jentzsch--Szeg\H{o} refinements cover the sections themselves and have
+been extended to Dirichlet, Kapteyn and Neumann series, to analytic curves and to ultrametric
+fields; \emph{no source was found covering sums of sections}, so the transport is half and the
+remaining half is the statement displayed above.}
 \end{problem}
 
 \begin{remark}[the correction has a smaller domain than the invariant it corrects]\label{rem:qcrit}

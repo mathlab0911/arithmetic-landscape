@@ -200,6 +200,49 @@ $(a_1-1)/2$ values. Collecting equal terms,
 $\Gamma(A)=1+(a_1-1)+\sum_{j=1}^{k-1}(a_{j+1}-a_j)2^{-j}$.
 \end{proof}
 
+\begin{proposition}[$\Gamma$ is the value at $1$ of a generating function]\label{prop:gengamma}
+\STATUS{proved; the identity is Proposition~\ref{prop:gapform} regrouped, and it is checked
+numerically to $10^{-30}$ at twelve points on four profiles in Part~III's
+\texttt{leeyang5\_r183}.}
+Write $m_0=(a_1-1)/2$ and $m_j=(a_{j+1}-a_j)/2$ for $1\le j\le k-1$ --- the number of $d$ at
+which $N_A(d)=j$ --- and set
+\[
+  G_A(z)\;=\;\sum_{j\ge0}m_j\,2^{-j}z^{\,j}.
+\]
+Then
+\[
+  \Gamma(A)\;=\;1+2\,G_A(1).
+\]
+\end{proposition}
+
+\begin{proof}
+Each $d$ with $N_A(d)=j$ contributes $2^{-j}$ to the sum of
+Definition~\ref{def:gap}, and there are $m_j$ of them. \qed
+\end{proof}
+
+\begin{remark}[why this is stated separately, and what it buys]\label{rem:gengamma}
+The identity is trivial and the observation is not: \textbf{$\Gamma$ is a number we had only
+ever evaluated at one point of a function we had not noticed we had.} Two consequences follow at
+once, and a third is developed in Part~III.
+
+\emph{First, a dichotomy that the value at $1$ cannot see.} Let $R$ be the radius of convergence
+of $G_A$ in the limit $k\to\infty$. Since $G_A(1)=(\Gamma(A)-1)/2$, the statement $R\ge1$ is
+\emph{exactly} the statement that $\Gamma$ is finite --- while $R>1$ is the strictly stronger
+statement that the layer weights $m_j2^{-j}$ decay \emph{geometrically}. The two are
+indistinguishable at $q=\tfrac12$, where both say only that a sum converges.
+
+\emph{Second, the odd numbers in closed form.} There $m_j=1$ for $1\le j\le k-1$ and $m_0=0$, so
+$G_A(z)=\sum_{j\ge1}(z/2)^{j}=z/(2-z)$ for $|z|<2$, and $R=2$.
+
+\emph{Third, in Part~III.} Deforming the measure replaces the evaluation point: the biased
+invariant is $1+G_A(2q)+G_A(2-2q)$, so the whole one-parameter family is $G_A$ read at two
+places instead of one, and the analytic structure of $G_A$ --- its radius, its behaviour on the
+circle --- becomes a statement about the landscape. \emph{A quantity evaluated at a single point
+is a function one has not noticed one has}, and this proposition is where that is recorded.
+\STATUS{the identity is proved; the consequences drawn here are proved; the use made of them for
+the deformed measure is Part~III's and carries its own statuses.}
+\end{remark}
+
 \begin{proposition}[$\Gamma$ is Schur-concave]\label{prop:schur}
 \STATUS{proved; the proof is Abel summation followed by the Schur--Ostrowski criterion.
 Measured for confirmation only: over $4000$ majorization-comparable pairs of sets of distinct

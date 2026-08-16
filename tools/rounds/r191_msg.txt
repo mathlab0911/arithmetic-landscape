@@ -1,0 +1,45 @@
+Part I gains the generating function; the Jentzsch pass transports half, and the ladder is the
+other half's fingerprint
+
+Ruling 3 executed, and doing it showed the split was not the one either of us had written.
+Gamma^(q) is a Part III object, so the deformed identity cannot live in Part I. What belongs
+there is the sentence underneath it: Gamma(A) = 1 + 2 G_A(1) with G_A(z) = sum_j m_j 2^{-j} z^j,
+i.e. Gamma is the value at one point of a generating function -- with the two consequences that
+follow at once (R >= 1 is exactly "Gamma is finite", strictly weaker than R > 1; and
+G = z/(2-z), R = 2 for the odd numbers). Part III now cites it by \Xref and states only its own
+new content: the deformation reads the same generating function at two points instead of one.
+cor:oddsclosed is a corollary of it where it stands. The right home for a result is where its
+smallest true statement lives, not where it was discovered.
+
+C15 fired on the same commit that created the cross-reference: 1.2 printed for a proposition the
+insertion had made 1.3.
+
+Lean costing, honestly: not two lines. prop:gengamma is prop:gapform regrouped, and the
+regrouping is the interval count #{d : N_A(d) = j} = (a_{j+1}-a_j)/2, which is prop:gapform's own
+proof and is not in the Lean development -- the formalised part is the classification. So the
+cost is: formalise prop:gapform first (a Finset interval-counting lemma over Q, tens of lines, no
+new ideas), after which prop:gengamma is genuinely two lines. Costed, not started.
+
+The literature pass, run before any proof attempt as required, returned a half. Transported:
+Jentzsch's theorem (1914) -- every point of the circle of convergence is a limit point of the
+zeros of the sections -- with Szego's angular refinement and extensions to Dirichlet, Kapteyn and
+Neumann series, analytic curves and ultrametric fields. Applied to G, when R = 1 the point z = 1
+is on the circle and z = 2q sends it to q = 1/2, so the accumulation of the zeros of each section
+at the fair coin is classical. Not transported: our object is 1 + G_k(2q) + G_k(2-2q), two
+sections under affine substitutions plus a constant, and adding functions can cancel zeros. No
+source covering sums of sections was found. The missing ingredient is now one sentence and it is
+in prob:converse at the statement.
+
+And the part that was not expected. Sections of a single geometric series have zeros at angular
+spacing 2pi/k; ours sit at (2n+1)pi/2k -- spacing pi/k, offset by half. That is what cos(k theta)
+does and what e^{ik theta} does not, so the half-integer ladder is precisely the part the
+single-section theory does not describe. The number that did not fit the classical picture was
+the one pointing at what was new; it had been in the log for four rounds labelled as a rate, and
+the literature pass is what turned it into a signature.
+
+A half-transport is the most useful of the three outcomes, because it converts a conjecture into
+a named gap: we now know which sentence is missing and that it is about power series rather than
+about landscapes.
+
+Part I 26 pp both editions, Part III 51/50 pp. C1-C20 pass. r189 archived, r191 is the live
+outgoing report.

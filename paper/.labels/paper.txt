@@ -22,11 +22,13 @@ prop:bridge
 prop:character
 prop:enumform
 prop:gapform
+prop:gengamma
 prop:gs-min
 prop:mod6
 prop:representability
 prop:schur
 rem:convergence
+rem:gengamma
 rem:no-window-floor
 rem:schur
 sec:achieved

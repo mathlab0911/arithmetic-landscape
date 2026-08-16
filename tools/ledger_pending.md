@@ -314,3 +314,43 @@ measurement when a human is compressing for readability. **A check that fires re
 same author for the same act is telling you about a process, not about an accident** — and the
 right response is to change the process, which here means: no number reaches a report except by
 copy from a log.
+
+## r191 — the wave, and a literature pass that transported half
+
+**`prop:gqgen` landed in Part I** as fable-5's Ruling 3 specified, but not in the form either of
+us first wrote. What belongs in Part I is not the deformed identity — `Γ^(q)` is a Part III
+object — but the sentence underneath it: **`Γ` is the value at `1` of a generating function
+`G_A(z) = Σ_j m_j 2^{−j} z^j`.** Part I gets that, with the two consequences that follow at once
+(`R ≥ 1 ⟺ Γ finite`; `G = z/(2−z)` for the odd numbers); Part III cites it and adds the only new
+content, which is that the deformation *reads the same function at two points instead of one*.
+`cor:oddsclosed` is now a corollary of it.
+
+> **The right home for a result is where its smallest true statement lives, not where it was
+> discovered.** The discovery was about the deformation; the statement is about `Γ`.
+
+C15 caught the cross-reference printing `1.2` for a proposition that had become `1.3` — the check
+doing exactly the job it exists for, on the same commit that created the reference.
+
+**The literature pass, run before any proof attempt as instructed, returned a half.**
+
+- **Transported:** *Jentzsch's theorem* (1914) — every point of the circle of convergence is a
+  limit point of the zeros of the sections; Szegő's refinement gives angular equidistribution
+  along a subsequence; extensions exist to Dirichlet, Kapteyn and Neumann series, analytic
+  curves, ultrametric fields. Applied to `G`, the accumulation of the zeros of **each section**
+  at `q = ½` when `R = 1` is classical.
+- **Not transported:** our object is `1 + G_k(2q) + G_k(2−2q)` — two sections under affine
+  substitutions plus a constant — and **adding functions can cancel zeros**. No source covering
+  sums of sections was found.
+
+> **A half-transport is the most useful of the three outcomes, because it converts a conjecture
+> into a named gap.** We now know which sentence is missing and that it is about power series
+> rather than about landscapes.
+
+**And the measured ladder turned out to be the fingerprint of the missing half.** Sections of a
+single geometric series have zeros at angular spacing `2π/k`. Ours sit at `(2n+1)π/2k` — spacing
+`π/k`, offset by half. **That is what `cos(kθ)` does and what `e^{ikθ}` does not**, so the
+half-integer ladder is precisely the part the single-section theory does not describe.
+
+> **The number that did not fit the classical picture was the one pointing at what was new.** It
+> had been sitting in the log for four rounds, labelled as a rate; the literature pass is what
+> made it a signature.
