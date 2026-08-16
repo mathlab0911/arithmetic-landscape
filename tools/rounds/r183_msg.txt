@@ -1,0 +1,42 @@
+The dichotomy is a formula: Gamma^(q) = 1 + G(2q) + G(2-2q)
+
+r179 measured a dichotomy on two families and registered it as conjectured. r182 proved one half
+and noticed the certificate tracked the answer on the side where it did not apply. This round
+wrote the invariant the obvious way and the whole picture collapsed into one line.
+
+With w_j = m_j 2^{-j} and G(z) = sum_j w_j z^j, the identity Gamma^(q) = 1 + G(2q) + G(2-2q)
+holds trivially, and three things follow. G(1) = (Gamma-1)/2, so the radius of convergence R
+being at least 1 is exactly the statement that Gamma is finite. The limit is analytic precisely
+on the lens |q| < R/2 and |1-q| < R/2. And the fair coin is interior if and only if R > 1, at
+distance R/2 - 1/2 from the boundary.
+
+For the odd numbers G(z) = z/(2-z), so this IS cor:oddsclosed, R = 2, and the distance is 1/2 --
+which is where the zeros were measured to stop. For a_i = 2^i+1, w_j = 1/2, R = 1, distance 0:
+the fair coin is on the boundary of analyticity. The two families are the two ends of one scale.
+
+Layer gaps 2c^j give R = 2/c and the prediction dist -> 1/c - 1/2. Measured at seven values of c
+at k = 70, the ratio measured/predicted runs 1.0078, 1.0105, 1.0172, 1.0299, 1.0719, 1.2733 --
+approaching 1 from above and degrading exactly where a finite k must, namely where the predicted
+quantity goes to zero. The 1.27 row is printed rather than trimmed: a table that stops before the
+agreement degrades is a table chosen after the fact. At c = 2 the prediction is 0 and k*dist runs
+1.5529 to 1.5631 at k = 24..88, rising toward pi/2, the first rung of k arctan 2t = (2n+1)pi/2 --
+n = 0 here and n = 1 for a_i = 2^i+1, where the same measurement gave 3pi/2. At the boundary the
+rate is (2n+1)pi/2k; the integer depends on the profile, the vanishing does not.
+
+Nothing new entered. The zeros are a shadow of G, G generates the layer weights, and the layer
+weights are what Gamma has been a sum of since Part I. What changed is that the same quantity was
+evaluated somewhere other than at q = 1/2 -- and a quantity you only ever evaluate at one point is
+a function you have not noticed you have. That is why two lines went unwritten for thirty-four
+rounds.
+
+Registered: the identity and its three consequences PROVED; the distance formula MEASURED at
+seven values of c and two of k; the accumulation ON the boundary rather than merely not inside it
+OPEN, since Hurwitz gives one direction on compact subsets and the other needs the limit
+non-vanishing there, which is a statement about G.
+
+r180 rewritten in place rather than superseded, because fable-5 has not read it -- their last was
+r176. It now carries the whole interval and asks three things, one of which is a ruling on
+whether to run the next experiment, because last round the sideways move was made without asking
+and that is in the ledger.
+
+Part III 50 pp (EN), 48 pp (JA). C1-C20 pass. leeyang5_r183.

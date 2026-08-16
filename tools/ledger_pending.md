@@ -118,3 +118,41 @@ where it does not apply.
 Registered as: proposition **proved**; the proportionality **measured** on five profiles; the
 converse **open**. And `Γ(A) ≥ 3 − 2^{2−k}` fell out of the proof for free, from `m_j ≥ 1`:
 **the odd numbers are the densest admissible profile and they minimise the invariant.**
+
+## r183 — the two families were one scale, and the scale had been in the paper since Part I
+
+r179 measured a dichotomy on two families and registered it as conjectured. r182 proved one half
+and noticed the certificate tracked the answer on the side where it did not apply. r183 wrote
+`Γ^(q)` the obvious way — `1 + G(2q) + G(2−2q)` with `G(z) = Σ m_j 2^{−j} z^j` — and the whole
+picture collapsed into one line: **the limit is analytic exactly on `|q| < R/2 ∩ |1−q| < R/2`,
+and the fair coin is interior iff `R > 1`.** Since `G(1) = (Γ−1)/2`, that condition is *`Γ` is
+finite* with one bit to spare.
+
+The two families are the two ends of `c ∈ [1,2]`, layer gaps `2c^j`, and the distance from the
+fair coin to the nearest zero goes to `1/c − 1/2` — measured at seven values of `c` with ratios
+`1.008, 1.011, 1.017, 1.030, 1.072, 1.273`, approaching 1 from above and degrading exactly where
+a finite `k` must degrade, namely where the predicted quantity is going to zero.
+
+> **Two examples looked like a dichotomy because we had not written the object in the form where
+> it has a parameter.** The zeros were a shadow of `G`; `G` is the generating function of the
+> layer weights; the layer weights are what `Γ` has been a sum of since Part I. **Nothing new
+> entered. What changed is that the same quantity was evaluated somewhere other than at `q = ½`.**
+
+Three things to keep about the shape of the round:
+
+- **The upgrade path was conjecture → half a proof → identity, and each step came from asking a
+  smaller question than the last.** *What decides cancellation?* was smaller than *is the
+  dichotomy true?*, and *what is `Γ^(q)` in closed form?* was smaller again. **When a conjecture
+  resists, look for the smaller question whose answer it would follow from — not the bigger
+  framework it might fit into.**
+- **The identity was two lines and had been available from the first day `Γ^(q)` was defined.**
+  It was not found for thirty-four rounds because nobody needed it: the invariant was only ever
+  evaluated at the fair coin, where `G(1)` is a number and not a function. **A quantity you only
+  ever evaluate at one point is a function you have not noticed you have.**
+- **The measured law is stated with its failure mode showing.** The ratio column is printed
+  *including* the row where it reaches 1.27, because a table that stops before the agreement
+  degrades is a table chosen after the fact.
+
+Registered: identity and its three consequences **proved**; the distance formula **measured**;
+the accumulation *on* the boundary **open** — Hurwitz gives one direction on compact subsets, the
+other needs non-vanishing of the limit, which is a statement about `G` and is not proved here.

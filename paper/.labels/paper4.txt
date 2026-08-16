@@ -36,6 +36,7 @@ prop:R1done
 prop:alphalb
 prop:chardecomp
 prop:correction
+prop:gqgen
 prop:nopinch
 prop:rate
 prop:redresidue
@@ -75,6 +76,7 @@ rem:notsup
 rem:oneconstant
 rem:onek
 rem:physics
+rem:pinchformula
 rem:primescrossing
 rem:principal
 rem:random

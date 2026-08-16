@@ -1,0 +1,43 @@
+=== 1. the rewriting is exact: Gamma^(q) = 1 + G(2q) + G(2-2q) ===
+   max discrepancy over 12 points, 4 profiles : 3.16e-30
+   and for the odd numbers G(z) = z/(2-z) gives 1/(q(1-q)) - 1, which is cor:oddsclosed:
+     q = 0.30 :  series 3.7619026396   closed form 3.7619047619
+     q = 0.42 :  series 3.1050903112   closed form 3.1050903120
+
+=== 2. the formula: dist(1/2, nearest zero) -> 1/c - 1/2 ===
+        c  R = 2/c      predicted         k = 40         k = 70  k=70/pred
+     1.00   2.0000       0.500000       0.511547       0.503895     1.0078
+     1.10   1.8182       0.409091       0.421775       0.413403     1.0105
+     1.25   1.6000       0.300000       0.315042       0.305147     1.0172
+     1.40   1.4286       0.214286       0.232873       0.220690     1.0299
+     1.60   1.2500       0.125000       0.149501       0.133982     1.0719
+     1.80   1.1111       0.055556       0.091584       0.070741     1.2733
+     2.00   1.0000       0.000000       0.038917       0.022306   pred = 0
+   at c = 2 the prediction is exactly 0 and the measurement must go to 0 with k
+
+=== 3. c = 2 is the boundary: the distance goes to zero, and how fast ===
+        k      dist to 1/2       k * dist
+       24     0.0647024909       1.552860
+       40     0.0389170165       1.556681
+       56     0.0278506532       1.559637
+       72     0.0216894306       1.561639
+       88     0.0177619471       1.563051
+   compare rem:leeyanglacunary: Im q_1 = 3*pi/(2k), so k*dist -> 3*pi/2 = 4.712389
+
+=== 4. the named profiles, against the same formula ===
+        profile      k   1/R measured      predicted measured dist
+           odds     70       0.500000       0.500000     0.503895
+         primes     70       0.520310       0.460965     0.496799
+      geometric     70       0.990005       0.005048     0.023069
+   1/R read off a finite tail converges slowly from above, so the predicted column is
+   an underestimate at these k; the odd numbers and the primes both have R = 2 exactly
+
+=== 5. what the rewriting proves, and what it does not ===
+   PROVED  : Gamma^(q) = 1 + G(2q) + G(2-2q) identically, so the limit is analytic exactly
+             on |q| < R/2 and |1-q| < R/2, and the fair coin is interior iff R > 1.
+             R >= 1 is equivalent to Gamma(A) < infinity, since G(1) = (Gamma-1)/2.
+   MEASURED: dist(1/2, nearest zero) -> 1/c - 1/2 on the interpolating family.
+   OPEN    : that the zeros accumulate ON the boundary rather than merely not inside it.
+             Hurwitz gives one direction on compact subsets of the analytic region; the
+             other needs the limit to be non-vanishing there, which for these profiles is
+             a statement about G and is not proved here.

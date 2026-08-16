@@ -1401,6 +1401,79 @@ family where a zero does appear, and one family is one family.
 profiles; the converse is \textbf{open}. \texttt{leeyang4\_r182}.}
 \end{remark}
 
+\begin{proposition}[the invariant is a generating function evaluated twice]\label{prop:gqgen}
+\STATUS{proved; the identity is checked to $10^{-30}$ at twelve points on four profiles,
+\texttt{leeyang5\_r183}.}
+With $w_j=m_j2^{-j}$ and $G(z)=\sum_{j\ge0}w_jz^{j}$,
+\[
+  \Gamma^{(q)}(A)\;=\;1+G(2q)+G(2-2q),
+\]
+identically. Consequently, writing $R$ for the radius of convergence of $G$:
+\begin{enumerate}
+\item $G(1)=\bigl(\Gamma(A)-1\bigr)/2$, so \textbf{$R\ge1$ is exactly the statement that
+      $\Gamma(A)$ is finite};
+\item the limit of $\Gamma^{(q)}$ is analytic precisely on the lens
+      $|q|<R/2$ \emph{and} $|1-q|<R/2$;
+\item \textbf{the fair coin $q=\tfrac12$ lies in the interior of that lens if and only if
+      $R>1$}, at distance $R/2-\tfrac12$ from its boundary.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$m_jq^{j}=m_j2^{-j}(2q)^{j}=w_j(2q)^{j}$ and likewise for $1-q$; sum. Then $G(1)$ is
+$\sum_jm_j2^{-j}$, which is $(\Gamma(A)-1)/2$ by evaluating the definition at $q=\tfrac12$. The
+lens and the distance are the domain of convergence of the two evaluations. \qed
+\end{proof}
+
+\begin{remark}[the dichotomy, as a formula]\label{rem:pinchformula}
+For the odd numbers $w_j=2^{-j}$, so $G(z)=z/(2-z)$ and
+$\Gamma^{(q)}=1+\frac{q}{1-q}+\frac{1-q}{q}=\frac{1}{q(1-q)}-1$: Corollary~\ref{cor:oddsclosed}
+is Proposition~\ref{prop:gqgen} for that profile. There $R=2$ and the fair coin sits at distance
+$\tfrac12$ from the boundary --- which is where the zeros were measured to stop. For
+$a_i=2^{i}+1$ we have $w_j=\tfrac12$, $R=1$, and the distance is $0$: \textbf{the fair coin is
+\emph{on} the boundary of analyticity.} That is Remark~\ref{rem:leeyanglacunary}'s pinch, and it
+is no longer a second family --- it is the endpoint of a single scale.
+
+So the dichotomy should be a formula, and it is one. Build the interpolating profile with layer
+gaps $a_{j+1}-a_j=2c^{j}$, so $m_j=c^{j}$, $w_j=(c/2)^{j}$, $R=2/c$, and the prediction is
+\[
+  \operatorname{dist}\Bigl(\tfrac12,\ \text{nearest zero of }\Gamma^{(q)}\Bigr)\;\longrightarrow\;
+  \frac1c-\frac12 ,
+\]
+which is $\tfrac12$ at $c=1$ (the odd numbers) and $0$ at $c=2$ (the lacunary family), with no
+constant to fit.
+
+\begin{center}
+\begin{tabular}{lrrrrrrr}
+\hline
+$c$ & $1.00$ & $1.10$ & $1.25$ & $1.40$ & $1.60$ & $1.80$ & $2.00$\\
+predicted $1/c-1/2$ & $0.500000$ & $0.409091$ & $0.300000$ & $0.214286$ & $0.125000$ & $0.055556$ & $0$\\
+measured, $k=70$ & $0.503895$ & $0.413403$ & $0.305147$ & $0.220690$ & $0.133982$ & $0.070741$ & $0.022306$\\
+ratio & $1.0078$ & $1.0105$ & $1.0172$ & $1.0299$ & $1.0719$ & $1.2733$ & --- \\
+\hline
+\end{tabular}
+\end{center}
+
+The ratio approaches $1$ from above and degrades gracefully as $c\to2$, which is what a finite
+$k$ must do when the quantity being predicted is going to zero. \emph{At $c=2$ the predicted
+value is exactly $0$ and the measurement follows it down}: $k\cdot\operatorname{dist}$ runs
+$1.552860,1.556681,1.559637,1.561639,1.563051$ at $k=24,40,56,72,88$, rising towards $\pi/2$ ---
+the first rung of the ladder $k\arctan2t=(2n+1)\pi/2$, with $n=0$ here and $n=1$ for
+$a_i=2^{i}+1$, where the same measurement gave $3\pi/2$. \textbf{At the boundary the rate is
+$(2n+1)\pi/2k$ and the integer depends on the profile; the vanishing does not.}
+
+\emph{What this settles and what it does not.} Proposition~\ref{prop:gqgen} is an identity and
+its three consequences are immediate, so \emph{the fair coin is interior exactly when $R>1$} is
+proved, and Proposition~\ref{prop:nopinch} is the quantitative form of one direction. The
+formula above is \textbf{measured}. What is open is that the zeros accumulate \emph{on} the
+boundary rather than merely failing to enter: Hurwitz's theorem gives one direction on compact
+subsets of the analytic region, and the other needs the limit to be non-vanishing there, which
+is a statement about $G$ and is not proved here.
+\STATUS{the identity and its consequences are \textbf{proved}; the distance formula is
+\textbf{measured} at seven values of $c$ and two values of $k$; the accumulation is
+\textbf{open}. \texttt{leeyang5\_r183}.}
+\end{remark}
+
 \subsection{Verification}\label{sec:e5}
 
 \STATUS{experimentally confirmed} Measured $\lm_q/r_q$ at $n_q$ against the point
