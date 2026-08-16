@@ -1474,6 +1474,47 @@ is a statement about $G$ and is not proved here.
 \textbf{open}. \texttt{leeyang5\_r183}.}
 \end{remark}
 
+\begin{problem}[does $R=1$ force the pinch?]\label{prob:converse}
+For admissible profiles with $R=1$, do the zeros of $\Gamma^{(q)}$ approach $q=\tfrac12$ as
+$k\to\infty$, at rate $(2n+1)\pi/2k$ with $n$ determined by the profile's first resonance?
+\emph{The missing ingredient is named rather than left to be located:} what is absent is the
+non-vanishing of the limit of $G$ on its circle of convergence. Hurwitz's theorem gives
+non-accumulation inside the lens on compact subsets; accumulation \emph{on} the boundary needs
+that non-vanishing, and it is a statement about $G$ alone.
+\STATUS{conjectured, with the mechanism identified as the ladder and not the family: two
+profiles, two integers $n$, one ladder. $k\cdot\operatorname{Im}q_1$ measures $3\pi/2$ for
+$a_i=2^{i}+1$ and rises towards $\pi/2$ for layer gaps $2\cdot2^{j}$.
+\texttt{leeyang2\_r179}, \texttt{leeyang5\_r183}.}
+\end{problem}
+
+\begin{remark}[the correction has a smaller domain than the invariant it corrects]\label{rem:qcrit}
+Along the same family, $\Gamma$ converges for every $c<2$ --- that is $R>1$ --- but its first
+correction does not. In $Q(0)=\Gamma^{-1}\sum_d2^{-N_d}(\delta_d^{2}-s_d/4)$ the layer count
+satisfies $N_d\sim\log_c d$, so $2^{-N_d}\sim d^{-\log2/\log c}$ and the terms grow like
+$d^{\,2-\log2/\log c}$. That is summable exactly when $\log2/\log c>3$, so
+\[
+  Q(0)\ \text{exists}\iff c<2^{1/3}=1.259921\ldots
+\]
+\textbf{There is therefore a window $2^{1/3}<c<2$ in which the annealed prediction is finite and
+its first correction is not.} The measurement agrees: $Q(0)$ settles to $20.07,20.30,20.33$ at
+$k=16,20,24$ for the odd numbers --- converging to $61/3$, which is
+Proposition~\ref{prop:correction}'s exact value and an independent check of the computation ---
+while between $k=20$ and $k=24$ the same quantity multiplies by
+$1.359,3.695,17.502,68.871,212.436$ at $c=1.25,1.40,1.60,1.80,2.00$.
+
+\emph{Why this is recorded here rather than as an aside.} It was found while trying to decide
+whether the zeros of \S\ref{sec:leeyang} see the \emph{rate} of the annealed limit or only its
+existence. The natural test compares the measured error against $\Gamma\,Q(0)/\sigma^{2}$, and
+\textbf{that comparison is unavailable exactly where the question is interesting}: the null
+quantity ceases to exist at $c=2^{1/3}$, below the whole region where the zero-distance
+$1/c-\tfrac12$ has moved appreciably. \emph{An experiment whose control evaporates before the
+signal appears is not a weak experiment; it is a different question.}
+\STATUS{the criterion $c<2^{1/3}$ is \textbf{derived} from the growth of $N_d$ and
+\textbf{measured} at seven values of $c$; the recovery of $61/3$ is an independent check of
+Proposition~\ref{prop:correction}. The consequence for \S\ref{sec:leeyang} is that the rate
+question is \textbf{open by a different route than the one attempted}. \texttt{hrate\_c\_r185}.}
+\end{remark}
+
 \subsection{Verification}\label{sec:e5}
 
 \STATUS{experimentally confirmed} Measured $\lm_q/r_q$ at $n_q$ against the point

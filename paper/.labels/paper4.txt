@@ -31,6 +31,7 @@ lem:termwise
 lem:twopoint
 lem:vone
 prob:R1
+prob:converse
 prob:hrate
 prop:R1done
 prop:alphalb
@@ -79,6 +80,7 @@ rem:physics
 rem:pinchformula
 rem:primescrossing
 rem:principal
+rem:qcrit
 rem:random
 rem:range
 rem:ratestatus

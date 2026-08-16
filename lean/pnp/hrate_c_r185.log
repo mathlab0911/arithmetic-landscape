@@ -1,0 +1,95 @@
+=== PHASE A (confound first, F30): does the null even exist along the family? ===
+   Q(0) sums 2^{-N_d}(delta_d^2 - s_d/4) over d.  For layer gaps 2c^j the terms grow like
+   d^(2 - log2/log c), so the sum converges only below c = 2^(1/3) = 1.259921.
+
+        c   2 - log2/log c                       the Q(0) sum
+     1.00             -inf                         convergent
+     1.10          -5.2725                         convergent
+     1.25          -1.1063                         convergent
+     1.40          -0.0600   DIVERGENT: there is no null here
+     1.60           0.5252   DIVERGENT: there is no null here
+     1.80           0.8208   DIVERGENT: there is no null here
+     2.00           1.0000   DIVERGENT: there is no null here
+
+   CORRECTION, made before any of this was reported.  The first version of this check cut
+   the d-sum at a fixed 4000 and 16000 and reported that Q(0) moved by a factor 53 even at
+   c = 1, where the analysis says it converges.  The analysis was right and the check was
+   wrong: N_d saturates at k once 2d exceeds the largest element, after which the terms
+   are 2^{-k} d^2 and grow -- an artefact of an arbitrary cap, not of the profile.  The
+   canonical cut is the last d with N_d < k, i.e. d < a_k/2, and the honest convergence
+   test is in k, not in the cap.
+
+        c       Q(0), k=16       Q(0), k=20       Q(0), k=24    k=24/k=20
+     1.00     2.007436e+01     2.029726e+01     2.032893e+01        1.002
+     1.10     5.347567e+01     5.735362e+01     5.846227e+01        1.019
+     1.25     5.124752e+02     7.975838e+02     1.084105e+03        1.359
+     1.40     8.312516e+03     3.284089e+04     1.213325e+05        3.695
+     1.60     3.785164e+05     6.611813e+06     1.157211e+08       17.502
+     1.80     1.724430e+07     1.155382e+09     7.957251e+10       68.871
+     2.00     5.076571e+08     1.033673e+11     2.195895e+13      212.436
+   settling in k means the limit exists; growing in k means it does not.
+   for the odd numbers the limit is Q(0) = 61/3 = 20.333333 (prop:correction).
+
+=== PHASE B: the region where a comparison is possible at all ===
+   c values with a finite null : [1.0, 1.1, 1.25]
+   c values Reading 3 is about : [1.4, 1.6, 1.8, 2.0]
+
+        c dist = 1/c-1/2           1/dist
+     1.00       0.500000           2.0000
+     1.10       0.409091           2.4444
+     1.25       0.300000           3.3333
+     1.40       0.214286           4.6667
+     1.60       0.125000           8.0000
+     1.80       0.055556          18.0000
+     2.00       0.000000         infinity
+
+=== PHASE C (F20): the stopping rule, decided before any lm/r is computed ===
+   (i) The null is undefined for c > 1.2599, which is below the whole region where
+       Reading 3 predicts a visible effect (dist < 0.3 needs c > 1.25).
+   (ii) Feasibility of exact lm/r: cost ~ (number of layers) x (subset-sum table).
+        c     k    T = sum a_i   layers to scan
+     1.00    16      2.560e+02        1.600e+01
+     1.00    20      4.000e+02        2.000e+01
+     1.00    24      5.760e+02        2.400e+01
+     1.10    16      4.360e+02        3.500e+01
+     1.10    20      8.180e+02        5.700e+01
+     1.10    24      1.418e+03        8.800e+01
+     1.25    16      1.236e+03        1.380e+02
+     1.25    20      3.250e+03        3.430e+02
+     1.25    24      8.216e+03        8.430e+02
+     1.40    16      3.712e+03        5.430e+02
+     1.40    20      1.453e+04        2.091e+03
+     1.40    24      5.613e+04        8.035e+03
+     1.60    16      1.635e+04        3.074e+03
+     1.60    20      1.074e+05        2.015e+04
+     1.60    24      7.042e+05        1.320e+05
+     1.80    16      6.823e+04        1.518e+04
+     1.80    20      7.170e+05        1.594e+05
+     1.80    24      7.528e+06        1.673e+06
+     2.00    16      2.621e+05        6.554e+04
+     2.00    20      4.194e+06        1.049e+06
+     2.00    24      6.711e+07        1.678e+07
+
+   VERDICT: the experiment as designed CANNOT separate the hypotheses.  The comparison
+   requires a finite Q(0); Q(0) diverges above c = 2^(1/3) = 1.2599; and below that the
+   predicted zero-distance has barely moved (1/c - 1/2 is 0.3000 at c = 1.25 against 0.5000
+   at c = 1).  There is no c at which the null exists AND Reading 3 predicts a large
+   effect.  Per F20 this is prep, not measurement, and the run below is reported as a
+   consistency check of the null on its own domain -- NOT as a test of Reading 3.
+
+--- MEASUREMENT BEGINS ---
+
+=== PHASE D: the null, checked on the domain where it exists ===
+        c     k           lm/r          Gamma              e      null pred     e/null
+     1.00    14     3.00970874     2.99975586   9.952878e-03   6.464168e-02     0.1540
+     1.00    18     2.98438855     2.99998474   1.559619e-02   3.125042e-02     0.4991
+     1.00    22     2.98756002     2.99999905   1.243903e-02   1.718440e-02     0.7239
+     1.10    14     3.31034483     3.12817383   1.821710e-01   5.917456e-02     3.0785
+     1.10    18     3.16666667     3.12913513   3.753153e-02   2.116166e-02     1.7736
+     1.10    22     3.13536379     3.12922382   6.139967e-03   7.895797e-03     0.7776
+     1.25    14     3.17857143     4.25585938   1.077288e+00   8.389574e-02    12.8408
+     1.25    18     4.04827586     4.26214600   2.138701e-01   2.182781e-02     9.7981
+     1.25    22     4.16852679     4.26310539   9.457861e-02   5.062493e-03    18.6822
+
+   This column tests prop:correction on the c-family.  It says nothing about Reading 3,
+   for the reason Phase C gives, and it is not to be quoted as if it did.

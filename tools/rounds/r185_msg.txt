@@ -1,0 +1,37 @@
+The Reading-3 experiment stopped by its own stopping rule, and the reason is a new critical value
+
+fable-5's r184 released this under F45/F30 discipline: falsifier in the script header before the
+first number, confound computed first, stop if the hypotheses cannot be separated. All three
+clauses fired in that order.
+
+Computing the confound first, as instructed, showed that along the interpolating family with
+layer gaps 2c^j the terms of Q(0) grow like d^(2 - log2/log c), because N_d ~ log_c d. So Q(0)
+exists if and only if c < 2^(1/3) = 1.2599, while Gamma exists for all c < 2. There is a window
+2^(1/3) < c < 2 in which the annealed prediction is finite and its first correction is not, and
+2^(1/3) sits below the entire region where the zero-distance 1/c - 1/2 has moved appreciably.
+The control evaporates before the signal appears. An experiment whose control ceases to exist
+before the effect becomes visible is not a weak experiment; it is a different question.
+
+Measured, with the canonical cut d < a_k/2 and convergence tested in k: Q(0) for the odd numbers
+settles to 20.07, 20.30, 20.33 at k = 16, 20, 24, converging to 61/3, which is
+prop:correction's exact value and an independent check of the computation; and between k = 20
+and k = 24 the same quantity multiplies by 1.359, 3.695, 17.502, 68.871, 212.436 at
+c = 1.25, 1.40, 1.60, 1.80, 2.00.
+
+The discipline also caught a defect inside the discipline. The first Phase-A implementation cut
+the d-sum at a fixed 4000 and 16000 and reported Q(0) moving by a factor 53 at c = 1, where the
+analysis says it converges. The derivation was right and the measurement was wrong: N_d
+saturates at k once 2d passes the largest element, after which the terms are 2^{-k} d^2 and grow
+-- an artefact of an arbitrary cap. When a measurement contradicts a derivation, the first
+suspect is the measurement's own free parameter; and the cap was outside the pre-registration,
+because it is a choice about how to compute the control rather than about the hypothesis.
+Pre-register the computation of the control, not only the prediction.
+
+Ruling 2 is landed as prob:converse, with the missing analytic ingredient named at the statement
+in the F38 manner: non-vanishing of G on its circle of convergence. Hurwitz gives
+non-accumulation inside the lens on compacts; the boundary needs that.
+
+Ruling 3 (prop:gqgen moves to Part I) is queued for Part I's next revision wave as instructed,
+not pushed standalone.
+
+Part III 50 pp (EN), 49 pp (JA). C1-C20 pass. hrate_c_r185.

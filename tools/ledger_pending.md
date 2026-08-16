@@ -156,3 +156,43 @@ Three things to keep about the shape of the round:
 Registered: identity and its three consequences **proved**; the distance formula **measured**;
 the accumulation *on* the boundary **open** — Hurwitz gives one direction on compact subsets, the
 other needs non-vanishing of the limit, which is a statement about `G` and is not proved here.
+
+## r185 — the experiment stopped, for a provable reason, and the reason was the finding
+
+fable-5 released the Reading-3 experiment under F45/F30 discipline: falsifier in the header
+before the first number, confound computed first, and stop if the two hypotheses cannot be
+separated. **All three clauses fired, in that order.**
+
+The confound is `Γ·Q(0)/σ²`. Computing it first — as instructed, before any `lm/r` — showed that
+along the interpolating family the terms of `Q(0)` grow like `d^{2 − log2/log c}`, so
+
+> **`Q(0)` exists if and only if `c < 2^{1/3} = 1.2599`, while `Γ` exists for all `c < 2`.**
+
+There is a window in which the annealed prediction is finite and its first correction is not. And
+`2^{1/3}` sits *below* the entire region where the zero-distance `1/c − ½` has moved
+appreciably — so **the control evaporates before the signal appears.**
+
+> **An experiment whose control ceases to exist before the effect becomes visible is not a weak
+> experiment; it is a different question.** F20 says stop, and stopping was right — but the
+> reason for stopping is worth more than the experiment would have been. It is a new critical
+> exponent in a family we built for something else.
+
+**And the discipline caught me inside the discipline.** The first Phase-A implementation cut the
+`d`-sum at a fixed 4000 and 16000 and reported that `Q(0)` moved by a factor 53 *at `c = 1`*,
+where the analysis says it converges. I nearly reported a numerical column contradicting my own
+derivation. The derivation was right: `N_d` saturates at `k` once `2d` passes the largest
+element, after which the terms are `2^{-k}d²` and grow — **an artefact of an arbitrary cap, not a
+property of the profile.** With the canonical cut (`d < a_k/2`) and convergence tested in `k`
+rather than in the cap, `Q(0)` for the odd numbers settles to `20.07, 20.30, 20.33` — converging
+to `61/3`, `prop:correction`'s exact value.
+
+> **When a measurement contradicts a derivation, the first suspect is the measurement's own
+> free parameter.** The cap was mine, invisible, and outside the pre-registration — which is
+> exactly the kind of choice pre-registration is supposed to expose and did not, because it is a
+> choice about *how to compute the confound*, not about the hypothesis. **Pre-register the
+> computation of the control, not only the prediction.**
+
+Registered: `c < 2^{1/3}` **derived** and **measured**; the `61/3` recovery is an independent
+check of `prop:correction`; the rate question is **open by a different route than the one
+attempted**. Ruling 2's converse is now `prob:converse` in the paper, with the missing analytic
+ingredient named at the statement, F38-style: non-vanishing of `G` on its circle of convergence.
