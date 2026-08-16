@@ -1,0 +1,19 @@
+=== is e*(2/c)^k bounded, or drifting?  measured, not asserted ===
+   drift of log(e*(2/c)^k) per unit k : +0.0993  +- 0.1319   (residual spread 2.37 over 18)
+   consistent with zero : YES
+   total drift across the range        : factor 6.0
+   total scatter across the range      : factor 22.1
+
+   the drift is 3.7 times smaller than the scatter, so a trend of this size cannot be
+   distinguished from none at this resolution.
+
+=== the same statement as a rate ===
+   fitted decay rate of e   : 0.2574 +- 0.1319
+   predicted log(2/c)       : 0.3567
+   difference               : +0.0993  = 0.75 standard uncertainties
+
+   VERDICT: the layer law is CONSISTENT with the measurement and is not confirmed to any
+   precision worth quoting.  The falsifier -- systematic drift that does not flatten --
+   did not fire, and at 0.75 sigma separation it could not have fired for a wrong law
+   much closer than a factor two either.  Resolution gained: from "no rate measurable"
+   (r187) to a rate with an uncertainty of 51% of itself.

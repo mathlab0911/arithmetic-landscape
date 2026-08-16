@@ -1,0 +1,39 @@
+=== VALIDATION RUNG: int64 instrument against big integers, identical or nothing ===
+       k              T        lm (bigint)         lm (int64)  identical
+      10            432                 18                 18        yes
+      12            910                 38                 38        yes
+      14           1854                 84                 84        yes
+      16           3712                158                158        yes
+      18           7364                340                340        yes
+      20          14530                676                676        yes
+      22          28582               1378               1378        yes
+      24          56128               2788               2788        yes
+      26         110122               5738               5738        yes
+      28         215956              11656              11656        yes
+   r values too: True
+   passed: the instrument reproduces the reference exactly, so it may be used.
+
+=== (C-2) THE REACHABLE RANGE, before any fit ===
+   criterion, registered above: fit only k with e/Gamma < 0.1; at least six such points
+   spanning a factor 2 in the predicted e.
+
+       k              T     mem GB             lm/r        Gamma_k        e/Gamma    e*(2/c)^k
+      28         215956       0.00       5.25992780     5.37134618       0.020743   2.4222e+03
+      30         423396       0.01       5.27812223     5.37150257       0.017384   4.1430e+03
+      32         829978       0.01       5.38629834     5.37157921       0.002740   1.3327e+03
+      34        1626882       0.02       5.31929449     5.37161676       0.009741   9.6684e+03
+      36        3188814       0.05       5.33308754     5.37163516       0.007176   1.4537e+04
+      38        6250204       0.09       5.36680147     5.37164417       0.000902   3.7270e+03
+      40       12250528       0.18       5.37293134     5.37164859       0.000239   2.0147e+03
+      42       24011164       0.36       5.37300217     5.37165076       0.000252   4.3318e+03
+      44       47062008       0.70       5.37446371     5.37165182       0.000523   1.8394e+04
+      46       92241660       1.37       5.36944210     5.37165234       0.000411   2.9507e+04
+
+=== the criterion, applied ===
+   points with e/Gamma < 0.1 : 10  (need six)
+   span in e over those points : factor 86.86  (need 2)
+
+   (C-1) fitted rate 0.2574  +- 0.1319 (residual spread 2.37 over a k-range of 18)
+         against log(2/c) = 0.3567
+         e*(2/c)^k over the fitted range: 2.422e+03 4.143e+03 1.333e+03 9.668e+03 1.454e+04 3.727e+03 2.015e+03 4.332e+03 1.839e+04 2.951e+04
+         bounded over the range means the layer law survives this round.

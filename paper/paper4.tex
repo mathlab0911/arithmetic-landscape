@@ -1524,10 +1524,18 @@ $0.8645,0.8679,0.8610,0.8564,0.8542$ at $k=12,16,20,24,28$ for $c=1.6$ --- flat 
 $3.3199,4.1888,4.6201,4.8066,4.8787$ for $c=1.4$, still converging. At $c=1.8$ it is
 $0.3132,0.2794,0.2587,0.2465,0.2390$ and has not settled by $k=28$, so the law is confirmed
 where it is confirmed and not beyond. \emph{Whether the measured error $|\mathrm{lm}/r-\Gamma|$
-tracks $\rho_k$ is a separate question and is not answered}: at every $k$ for which
-$\mathrm{lm}/r$ is exactly computable, $|\mathrm{lm}/r-\Gamma|/\Gamma$ is still $O(1)$ at
-$c=1.6$ and only begins to fall at $c=1.4$, and a fitted decay rate carries a residual spread of
-$3.2$ in $\log$, which is larger than the effect. \texttt{window\_r187}, \texttt{window2\_r187}.}
+tracks $\rho_k$ is a separate question, and it is answered only to a factor.} At $c=1.6$ the
+relative error is still $O(1)$ at every $k$ for which $\mathrm{lm}/r$ is exactly computable, so
+nothing is measurable there. At $c=1.4$, with an exact \texttt{int64} enumeration validated
+against a big-integer reference on ten values of $k$ --- \emph{identical integers, not close
+ones} --- the relative error falls to $2.4\cdot10^{-4}$ by $k=40$ and the decay rate of
+$|\mathrm{lm}/r-\Gamma|$ measures $0.2574\pm0.1319$ against $\log(2/c)=0.3567$, a separation of
+$0.75$ standard uncertainties. Equivalently the drift of $e\,(2/c)^{k}$ is $+0.0993\pm0.1319$
+per unit $k$: \emph{consistent with zero}, with a total drift of a factor $6.0$ against a
+scatter of $22.1$. \textbf{So the layer law is consistent with the measurement and is not
+confirmed to any precision worth quoting}, and a wrong law within a factor two of it would not
+have been distinguished. \texttt{window\_r187}, \texttt{window2\_r187}, \texttt{window3\_r189},
+\texttt{window3b\_r189}.}
 
 \STATUS{the criterion $c<2^{1/3}$ is \textbf{derived} from the growth of $N_d$ and
 \textbf{measured} at seven values of $c$; the recovery of $61/3$ is an independent check of

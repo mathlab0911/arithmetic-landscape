@@ -1,0 +1,39 @@
+The instrument round: int64 exact enumeration to k = 46, and a verdict of "consistent"
+
+fable-5's r188 Ruling D found the way past the gap r187 named, by noticing what sparsity means:
+in the window the representation counts themselves are small, so exact arithmetic needs no big
+integers and the binding constraint is table memory rather than integer size. Overflow is ruled
+out by a bound asserted in code -- every table entry counts subsets of at most k elements, so
+every entry is at most 2^k, and int64 holds 2^63.
+
+The validation rung came first, as instructed, and it earned its place: ten values of k, the new
+instrument reproducing the big-integer reference as identical integers, not close ones. Nothing
+downstream would have been believed had it failed.
+
+Reached k = 46 against the previous 28. The registered C-2 criterion opened: ten points with
+e/Gamma < 0.1 spanning a factor 87 in e, against the required six and factor two. The relative
+error falls to 2.4e-4 by k = 40.
+
+The verdict is a third kind of answer. The decay rate of |lm/r - Gamma| measures 0.2574 +- 0.1319
+against the predicted log(2/c) = 0.3567 -- a separation of 0.75 standard uncertainties. The same
+statement as a drift: e*(2/c)^k drifts by +0.0993 +- 0.1319 per unit k, consistent with zero,
+total drift a factor 6.0 against a scatter of 22.1. So the layer law is CONSISTENT with the
+measurement and is NOT confirmed to any precision worth quoting; a wrong law within a factor two
+would not have been distinguished. Saying what a measurement could not have distinguished is
+part of reporting what it did.
+
+And a reporting defect caught inside the round. The first script ended with "bounded over the
+range means the layer law survives this round" -- a definition that a reader takes as a verdict,
+with the script never saying whether the quantity is bounded. A conditional whose antecedent is
+never evaluated is an assertion with deniability. Fixed by computing the drift and printing it
+with its uncertainty instead of asserting the criterion.
+
+The resolution gained is itself the reportable quantity: r187 said "no rate measurable", r189
+says 0.2574 +- 0.1319. An experiment that moves a bound is a result even when it does not move a
+verdict, and the honest headline is the uncertainty rather than the central value.
+
+Per Ruling D's stop rule the thread parks unless the analytic route is taken up: the k-dependent
+form of prop:correction for profiles with sigma/N asymptotically constant, where Appendix A's
+LCLT does not start. The gap keeps its name and gains a size.
+
+Part III 51 pp (EN), 49 pp (JA). C1-C20 pass. window3_r189, window3b_r189.

@@ -253,3 +253,64 @@ computation says `0.8645`.**
 
 Small, and it landed in the same round as a fit that agreed by accident. **Both are the same
 failure at different scales: a number that looked right because of how it was written down.**
+
+## r189 — the instrument worked, and the verdict was "consistent", which is a third answer
+
+fable-5's Ruling D found the way past r187's named gap by noticing what sparsity means: **in the
+window the representation counts are small**, so exact arithmetic needs no big integers and the
+binding constraint is table memory, not integer size. Vectorised `int64` reached `k = 46` against
+`k = 28`, with overflow ruled out by a bound (`every entry ≤ 2^k`, `int64` holds `2^63`) asserted
+in code rather than hoped for.
+
+**The validation rung came first and it earned its place.** Ten values of `k`, identical
+integers against the big-integer reference — *the same numbers, not close ones*. Had it failed,
+nothing downstream would have been believed.
+
+**And the result is a third kind of answer.** Not confirmed, not falsified: the decay rate
+measures `0.2574 ± 0.1319` against a predicted `0.3567` — **0.75 standard uncertainties, and the
+drift of `e·(2/c)^k` is `+0.0993 ± 0.1319`, consistent with zero.**
+
+> **"Consistent with" is not "confirms", and the difference is the whole discipline.** A
+> measurement whose uncertainty is 51% of itself would have failed to distinguish the predicted
+> law from any law within a factor two of it. **Saying what a measurement could NOT have
+> distinguished is part of reporting what it did.**
+
+Two things to keep about how it was reported:
+
+- **The first script ended with the sentence *"bounded over the range means the layer law
+  survives this round"* — a definition that a reader takes as a verdict, with the script never
+  saying whether the quantity is bounded.** The adverb class wearing a conditional. Fixed by
+  *computing* the drift and printing it with its uncertainty instead of asserting a criterion.
+  **A conditional whose antecedent is never evaluated is an assertion with deniability.**
+- **The resolution gained is itself the reportable quantity**: `r187` said *no rate measurable*;
+  `r189` says *`0.2574 ± 0.1319`*. **An experiment that moves a bound is a result even when it
+  does not move a verdict**, and the honest headline is the uncertainty, not the central value.
+
+Registered: layer law **consistent, not confirmed**; the falsifier did not fire and could not
+have fired for a law within a factor two; per Ruling D's stop rule this thread now parks unless
+the analytic route (the `k`-dependent form of `prop:correction` for profiles with `σ/N ≍ const`)
+is taken up. **The gap keeps its name and gains a size.**
+
+### r189, addendum — three rounds, three transcription catches, one cause
+
+C2 refused r189 over `0.0072`, where the log says `0.007176`. That is the third round running in
+which the same check caught the same act: r187 had `0.8646` for `0.8645` and twelve figures
+quoted at a precision no log carried; r189 has a whole table retyped one significant figure short
+of its source.
+
+> **It keeps happening for a reason and the reason is not carelessness: it is that tables are
+> built for the reader and logs are written for the record, and rounding is the act of turning
+> one into the other.** Every time a number is made easier to read it is made new, and the new
+> one has no provenance.
+
+The fix is not "be careful". It is: **quote the log's digits verbatim, and if a table needs
+rounder numbers, round them in the script so the rounded form is itself logged** — which is what
+`figures_r187` did after the second catch and what should have been done again here without
+being told.
+
+**And the deeper reading, worth more than the rule.** Three catches in three rounds by the same
+check is not three near-misses; it is a measurement of the rate at which prose drifts from
+measurement when a human is compressing for readability. **A check that fires repeatedly on the
+same author for the same act is telling you about a process, not about an accident** — and the
+right response is to change the process, which here means: no number reaches a report except by
+copy from a log.
