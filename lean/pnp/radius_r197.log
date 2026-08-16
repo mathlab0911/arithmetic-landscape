@@ -1,0 +1,29 @@
+====================================================================================
+radius_r197 -- R >= 1 does NOT decide whether Gamma is finite
+====================================================================================
+
+family                          k   w_k^(1/k)  (R = 1/limsup)   Gamma_k = 1+2*sum w
+a_i = 2^i+1                    64                0.9890579681                  66.0
+a_i = 2^i+1                   128                0.9945570152                 130.0
+a_i = 2^i+1                   256                0.9972854668                 258.0
+a_i = 2^i+1                   512                0.9986444672                 514.0
+a_i = 2^i+1                  1024                0.9993226663                1026.0
+
+family C  w_j~(j+1)^-2         64                0.8763164277           5.201144599
+family C  w_j~(j+1)^-2        128                0.9264363589           5.216587607
+family C  w_j~(j+1)^-2        256                0.9574406082           5.224354469
+family C  w_j~(j+1)^-2        512                0.9758795195           5.228249293
+family C  w_j~(j+1)^-2       1024                0.9865401405           5.230199559
+
+VERDICT at k = 1024
+  2^i+1   : w_k^(1/k) = 0.99932267  -> R = 1 ;  Gamma_k = 1026.0  (= k+2 = 1026, DIVERGES)
+  family C: w_k^(1/k) = 0.98654014  -> R = 1 ;  Gamma_k = 5.2301996  (CONVERGES)
+
+  both have R = 1 : True
+  Gamma splits    : True
+  => 'R >= 1 is exactly the statement that Gamma is finite' is REFUTED
+
+  The true statement:  R > 1  =>  Gamma finite;   Gamma finite  =>  R >= 1;
+                       R = 1  =>  undecided, and BOTH cases occur.
+  Note the surviving direction is the one prop:nopinch actually uses (R > 1),
+  so the proposition's own consequence (item 3, fair coin interior iff R>1) is untouched.

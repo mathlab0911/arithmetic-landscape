@@ -1404,8 +1404,13 @@ admissible profile and they minimise the invariant.} \qed
 
 \begin{remark}[what the criterion is, and what it is not]\label{rem:nopinchreading}
 Everything turns on the radius of convergence $R$ of $g(x)=\sum_j m_j2^{-j}x^{j}$. Since
-$g(1)=(\Gamma(A)-1)/2$, \textbf{$R\ge1$ says exactly that $\Gamma$ is finite, and $R>1$ says the
-strictly stronger thing that the layer weights decay \emph{geometrically}}. Proposition
+$g(1)=(\Gamma(A)-1)/2$, \textbf{$R>1$ says that $\Gamma$ is finite \emph{and} that the layer
+weights decay geometrically, while $R\ge1$ is only necessary}: the radius says nothing about the
+boundary point $z=1$, and at $R=1$ the invariant may do either. Both cases occur, and the pair is
+the sharpest thing in this section --- $a_i=2^{i}+1$ has $R=1$ with $\Gamma_k=k+2\to\infty$,
+while the profile $m_j=\bigl\lfloor2^{j}(j+1)^{-2}\bigr\rceil$ has $R=1$ with
+$\Gamma_k\to5.230199559$. \emph{Which of the two holds is exactly what sets the rate at which the
+zeros close in} (Remark~\ref{rem:leeyanglacunary}). Proposition
 \ref{prop:nopinch} needs the stronger one, and it is satisfied by every profile in this paper
 except the lacunary family: measured over the top half of the layers at $k=60$, the quantity
 $(m_j2^{-j})^{1/j}$ is $0.5000$ for the odd numbers, $0.5250$ for the primes, $0.5543$ for a
@@ -1447,8 +1452,9 @@ Then, identically,
 \textbf{The deformation does not introduce a new object; it reads the same generating function
 at two points instead of one.} Consequently, writing $R$ for the radius of convergence of $G$:
 \begin{enumerate}
-\item $G(1)=\bigl(\Gamma(A)-1\bigr)/2$, so \textbf{$R\ge1$ is exactly the statement that
-      $\Gamma(A)$ is finite};
+\item $G(1)=\bigl(\Gamma(A)-1\bigr)/2$, so \textbf{$\Gamma(A)$ is finite exactly when $G$
+      converges at $z=1$}: $R>1$ forces that and $R<1$ forbids it, but \textbf{$R=1$ decides
+      nothing} --- see Remark~\ref{rem:nopinchreading} for a profile of each kind;
 \item the limit of $\Gamma^{(q)}$ is analytic precisely on the lens
       $|q|<R/2$ \emph{and} $|1-q|<R/2$;
 \item \textbf{the fair coin $q=\tfrac12$ lies in the interior of that lens if and only if

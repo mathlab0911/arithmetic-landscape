@@ -637,3 +637,50 @@ visible.)*
 > **The wrong prediction was load-bearing: it named the scale that does not work, which is what
 > made the scale that does work findable in one step.** A prediction that fails by naming its own
 > blind spot is worth more than a vague one that survives.
+
+## r197 — a second error, in a proposition marked proved, and it was the boundary case
+
+**claimed** : `prop:gqgen` item 1, and `rem:nopinchreading` in bold: *"`R ≥ 1` is exactly the
+statement that `Γ(A)` is finite."* Carried `STATUS{proved}`, and shipped in `v1.1.0`.
+
+**actual**  : the radius of convergence says nothing about the boundary point. `R > 1` forces
+`G(1) < ∞`; `R < 1` forbids it; **`R = 1` decides nothing.** Both cases occur, among profiles the
+paper already uses: `a_i = 2^i+1` has `R = 1` and `Γ_k = k+2 → ∞`; `m_j = round(2^j(j+1)^{−2})`
+has `R = 1` and `Γ_k → 5.230199559`.
+
+**check**   : one pair, both members on the boundary, the property splitting. `radius_r197`.
+
+**rule**    : **F04, at full strength: a claim of the form `x ≥ a ⟺ P` is three claims, and the
+one at `x = a` is the one nobody checks.** The strict inequality is where the proof lives, the
+strict reverse is where the counterexample lives, and equality is where the sentence gets written
+without either.
+
+**Three things worth keeping about how it was found.**
+
+- **It was found by the correction, not by a check.** r195 fixed the `cos`/`sin` error two hours
+  earlier, r196 built a family with `R = 1` and `Γ` finite *to test something else entirely*, and
+  that family was already a counterexample to a sentence three sections away. **A new example is a
+  test of every claim the paper makes about the class it belongs to, and nothing prompts you to
+  run those tests.**
+- **I flagged it and declined to rule on it, and that was right, but I should still have measured
+  it.** I wrote to the head: *"I would rather you looked than have me decide it two hours after
+  finding the last one."* Deciding and measuring are different acts. **Handing over a judgement
+  does not hand over the obligation to establish the fact**; a flag with a measurement attached is
+  worth more than a flag, and costs one script.
+- **`STATUS{proved}` covered it.** The proof reads *"Item 1 is Part I's proposition evaluated at
+  `z = 1`"* — and Part I's statement is about a **finite** profile, where `Γ` is a finite sum and
+  always finite. The limit statement is a different claim and the citation does not reach it.
+  **A status inherited through a citation is only as strong as the quantifier the citation
+  carries.** (F14's shape — never use a limit-type theorem as a pointwise bound — run backwards:
+  here a finite-`k` identity was used as a statement about the limit.)
+
+**Postscript to r197, and it is the uncomfortable half.** The false equivalence is *also in this
+ledger*, asserted as a finding, at the r182 entry: *"the radius of convergence being ≥ 1 says
+exactly that `Γ` is finite."* It is left standing there, because the ledger records what was
+believed at the time and editing that would destroy the only record of how long the belief ran.
+But note where it had reached:
+
+> **the paper, the Japanese edition, the ledger — and the ledger entry was the one written to
+> celebrate the insight.** F35 says the summaries drift together because they are written from
+> the same draft. **So does the record of your own reasoning.** The place a wrong idea is stated
+> most confidently is the entry congratulating you for having it.
