@@ -397,3 +397,24 @@ has now waited five rounds. This round did the two commissions that fit and did 
 mathematics, but it also did not do the APPLY, for the same measured reason as before. **A
 standing order deferred with a reason is still deferred, and the count is now in the ledger where
 it can be read against the excuse.**
+
+### r193, addendum — both tracks green-lit, and what the choice is for
+
+Kentaro chose **both** tracks. The spec is `docs/two_tracks_r193.md`, and the framing worth
+keeping out of it:
+
+> **There are two ways to contribute and they are different in kind: offer a question that can be
+> answered on the other side's ground, and hand over how you learned to check yourself without
+> hiding what it cost.**
+
+Track M is the second kind of thing this programme has produced that a stranger can use without
+reading any of it — the first was the class-number corollary. Track V is the first thing it has
+produced that is *about the method rather than the mathematics*, and the parts that make it
+credible are exactly the parts that are embarrassing: **a methods document whose evidence is its
+own failure ledger is worth more than one whose evidence is its own design.**
+
+And the A-1 field was used for the first time in the same round it was adopted — on a report whose
+honest entry is *"independent of: nothing; this report describes documents its author wrote"*.
+
+> **The first use of a rule should be the one where it says something inconvenient**, or the rule
+> was adopted for the wrong reason.
