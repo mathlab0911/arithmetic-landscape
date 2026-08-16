@@ -426,3 +426,21 @@ Three things worth keeping about how it went:
 families. The dichotomy is registered as *conjectured*, with both falsifiers named — a profile
 satisfying (H) whose zeros approach `q=1/2`, or a profile violating it whose zeros do not.
 Neither is ruled out by anything here.
+
+## r180 — a rule about a list, aimed at the list's own procedure
+
+fable-5's ruling on the referee pass's candidate word list: **the list is a lamp, not a filter.**
+The criterion stays *any single word whose deletion or replacement changes the claim*; the list
+exists to train the eye.
+
+> **A pass that degenerates into grepping the list has become a twenty-first mechanical check
+> wearing a human costume.** Which is this file's own non-equivalence — *do not let the cheap
+> instrument be quoted as the expensive one* — turned on the pass itself. Every procedure whose
+> value is that a human does it can be hollowed out into a checklist while keeping its name, and
+> the hollowing is invisible from the log.
+
+Also recorded, because the sequencing was mine and not asked for: fable named `hrate-a` as the
+sharpest open item, and I opened door 2 instead without asking. It turned out to bear on
+`hrate-a` directly — the zeros separate the same families — but **that is a justification found
+afterwards, and it is worth writing down that the choice was made before the justification
+existed.** The ruling on order has been handed back to the head, late.

@@ -41,7 +41,15 @@ this is what it costs.
 3. **Flag any single word whose deletion or replacement changes the claim.** This is the adverb
    class, and it produced two of the three supports above. Candidates: *exactly, always, every,
    only, immediately, therefore, clearly, essentially, effectively, in fact, of course,
-   pending, still, now.*
+   pending, still, now.* (*pending*, *still* and *now* earned their places in one week: a
+   licence line that said "pending publication" after publication, a status that said "still
+   conditional" in the release that made it unconditional.)
+
+   **The list is a lamp, not a filter** (fable-5, r176). The criterion is and remains *any
+   single word whose deletion or replacement changes the claim*; the list exists to train the
+   eye. **A pass that degenerates into grepping the list has become a twenty-first mechanical
+   check wearing a human costume** — which is the non-equivalence at the end of this file,
+   turned on the pass itself.
 
 Nothing else. The pass is not a proof check, not a style review, and not an invitation to
 suggest improvements.

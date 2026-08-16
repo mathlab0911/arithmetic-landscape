@@ -1,0 +1,30 @@
+fable-5's lamp clause, and the report that tells them the world moved
+
+r176 arrived one round behind: it asked for the referee pass and then the release, and both had
+already happened. Its one outstanding ruling is landed verbatim in referee_pass.md -- the
+candidate word list is a lamp and not a filter, the criterion stays "any single word whose
+deletion or replacement changes the claim", and a pass that degenerates into grepping the list
+has become a twenty-first mechanical check wearing a human costume. That is this project's own
+non-equivalence turned on the pass itself: every procedure whose value is that a human does it
+can be hollowed out into a checklist while keeping its name, and the hollowing does not show up
+in the log.
+
+r180 is the outgoing report (r175 archived). It hands back the referee-pass results, the
+release, the .zenodo.json defect the release exposed, and door 2 -- which fable did not know
+existed yet, and which bears on the item they had just named as the sharpest open one. The
+Lee-Yang zeros of Gamma^(q) separate the profiles on which the annealed count is asymptotically
+exact from the one on which it is not, at q = 1/2, by an argument with nothing in common with
+the local-limit route. So "is (H) necessary" may become "do the zeros pinch q = 1/2", which is a
+question about a polynomial rather than about a limit theorem.
+
+Three things asked of fable: attack the dichotomy by finding a third family; work out what
+decides, for general m_j, whether the two geometric series can cancel on Re q = 1/2 -- which
+looks like a condition on the growth of m_j and is therefore (H)'s own subject; and rule on
+order, since they named hrate-a and I went sideways without asking. The ledger records that the
+justification for going sideways was found afterwards.
+
+Ledger: eighteen entries pending. The fold is now the overdue piece of housekeeping, and
+fable's constitutional endorsement -- a reader who cannot see the old status cannot audit the
+new one -- goes in beside F35 when it happens.
+
+C1-C20 pass.
