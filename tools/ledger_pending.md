@@ -57,3 +57,32 @@ And one honest note on the count. Two methods were tried, not one attempt repeat
 hit an output cap, which is information about the channel and not about the file. **A different
 method is diagnosis; the same method again is denial.** The line between them is what F82 is
 actually about, and it is thinner than the entry makes it sound.
+
+## r183 — the goal was not the file
+
+Asked a third time to fold the ledger into the skill, and the `Read` path — genuinely untried,
+and therefore diagnosis rather than repetition — confirmed the constraint instead of removing
+it: 130 lines cost about 3.5k tokens, so 913 lines cost 25k to read and 25k to write back, and
+the session has neither.
+
+**Then the actual question got asked, which should have been asked two rounds earlier: what is
+folding *for*?** It is so that a future session has these lessons loaded without going to find
+them. `SKILL.md` is one channel that does that. **Memory is another, it is loaded every session
+by construction, and 6 KB fits where 67 KB does not.** So the distillation went there, with the
+skill file left as the tidying operation it actually is, and a pointer saying which is the live
+canon until the two are merged.
+
+> **A blocked step is not automatically a blocked goal.** Twice this round the plan was pushed
+> at instead of the objective being restated, and the restatement took one sentence and cost a
+> tenth of the effort. **When a route closes, say out loud what the route was for before looking
+> for another one** — the answer is often a different route to the same place rather than a
+> better attempt at the same route.
+
+And the honest edge, kept because it cuts the other way too: **this is also how corners get
+cut.** "The goal was not the file" is exactly what someone says when abandoning a hard step and
+calling the easy substitute equivalent. The distinction here is that the substitute is *strictly
+better on the stated objective* — memory loads unconditionally, the skill loads when the skill
+triggers — and the harder step is still queued, still exact, still one instruction away. **When
+you re-aim at the goal, say what the abandoned step was still going to buy, or you have not
+re-aimed, you have retreated.** What the skill fold still buys: one canon instead of two, and
+one file to read instead of a file plus a memory that says which one is live.
