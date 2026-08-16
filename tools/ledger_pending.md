@@ -354,3 +354,46 @@ half-integer ladder is precisely the part the single-section theory does not des
 > **The number that did not fit the classical picture was the one pointing at what was new.** It
 > had been sitting in the log for four rounds, labelled as a rate; the literature pass is what
 > made it a signature.
+
+## r193 — a governance document that had to say where the mapping fails
+
+Kentaro commissioned the three-layer model (deterministic orchestrator / non-participating
+auditor / mutually-evaluating agents); fable-5 designed the mapping; `references/governance.md`
+writes it up. The mapping is real — C1–C20 plus the status vocabulary plus the report protocol
+*are* a deterministic orchestrator, the referee pass *is* a non-participating auditor, the
+head/hands cross-verification *is* mutual evaluation.
+
+> **A model adopted wholesale is a model nobody checked against the thing it describes.** The
+> value of the exercise was not the adoption; it was being forced to write the two places where
+> the mapping is imperfect: our orchestrator is deterministic about *form* and silent about
+> *sense*, and our auditor is invoked rather than standing. Both are weaker than the model, and
+> both are now stated instead of glossed.
+
+Two provisions adopted (**A-1** evidence-path declaration, **A-2** status-transition table), two
+declined with reasons, one **priced rather than declined** — continuous auditing costs one
+fresh-context session per round, and saying that is more honest than either adopting or refusing
+it.
+
+The declines are the part worth keeping:
+
+> **A numeric score is a currency, and a currency invites optimisation of the currency.** The
+> currency here is a named artefact and a named falsifier — *"this dies if the ratio at k = 40
+> exceeds 2"* — which can be spent by someone who distrusts us. **We have already paid for our
+> opinions; a score would let us mint more without paying.**
+
+> **Role rotation would rotate away the asymmetry that makes correction possible.** The split is
+> not fairness, it is a division of instruments: the head holds design, the hands hold
+> magnitudes, and *design cannot check itself against magnitudes it has not computed*.
+
+And A-2's shape, which came out of the exercise rather than from the model:
+
+> **Raising a status requires the other party; lowering it does not.** Guard the expensive
+> direction. *Lowering a status needs no permission, only a reason.*
+
+**Also recorded: the standing order that was not obeyed this round.** fable-5's r192 opens by
+making the skill APPLY the first item of the next session, before any mathematics, with the
+pending entries folded in the same sitting — *overdue housekeeping is how good systems rot*. It
+has now waited five rounds. This round did the two commissions that fit and did not start the
+mathematics, but it also did not do the APPLY, for the same measured reason as before. **A
+standing order deferred with a reason is still deferred, and the count is now in the ledger where
+it can be read against the excuse.**

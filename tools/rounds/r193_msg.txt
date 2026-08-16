@@ -1,0 +1,36 @@
+governance.md: the three-layer model mapped honestly, two provisions adopted, two declined, one
+priced
+
+Kentaro commissioned the mapping and fable-5 designed it; references/governance.md writes it up.
+The identification is real -- C1-C20 plus the status vocabulary plus the report protocol are a
+deterministic orchestrator, the referee pass is a non-participating auditor, the head/hands
+cross-verification is mutual evaluation -- and the document spends its length on the two places
+where it fails instead. Our orchestrator is deterministic about form and silent about sense,
+which is the hole the referee pass exists to cover after eps*(Z) = eps*(Z) passed all twenty
+checks. Our auditor is invoked rather than standing, which is cheaper and weaker, and is stated
+rather than glossed.
+
+Adopted: A-1, the evidence-path declaration -- every verification names the artefacts it touched
+and declares independence from the author's description of them, as a required report field. It
+mechanises the lem:kappa lesson (approving a description is not approving the thing) and it makes
+the r175 defect impossible to write: three incompatible descriptions of one independent reading
+could not survive a field that asks which text each reading covered.
+
+Adopted: A-2, the status-transition table -- each edge names its mover and its evidence class,
+with two deliberate asymmetries. Raising a status requires the other party; lowering does not.
+Every edge is reversible and every reversal is recorded, which is why prob:R1 stays in the paper
+restated as CLOSED.
+
+Declined: JSON scoring, because a numeric score is a currency and a currency invites optimisation
+of the currency -- the currency here is a named artefact and a named falsifier, which can be
+spent by someone who distrusts us. Declined: role rotation, because the split is a division of
+instruments and rotating it would rotate away the asymmetry that makes correction possible.
+Priced rather than declined: continuous auditing, at roughly one fresh-context session per round.
+
+And recorded in the ledger: fable-5's r192 makes the skill APPLY the first item of the next
+session, before any mathematics. It has waited five rounds. This round did the commissions that
+fit and did not start the approved mathematics, and it did not do the APPLY either, for the same
+measured reason as before. A standing order deferred with a reason is still deferred, and the
+count is now in the ledger where it can be read against the excuse.
+
+C1-C20 pass.
