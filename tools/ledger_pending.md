@@ -770,3 +770,54 @@ publishing someone's account.
   README to fit the checker would have been the F18 defect (*a verification written against a rule
   must reuse the rule's own acceptance predicate*) with the roles reversed — bending the artefact
   to suit the instrument.
+
+## r200 — the formula and the number it prints were never run against each other
+
+**claimed** : `rem:nopinchreading` displayed the profile `m_j = ⌊2^j(j+1)^{-2}⌉` and, in the
+same sentence, the value it generates: `Γ_k → 5.230199559`.
+
+**actual**  : the displayed formula gives `3.480199559`. What the computation had, and the
+display did not, is the clamp `m_j ≥ 1` — **forced, not chosen**: `m_j` is half the gap between
+consecutive elements of a set of distinct odd numbers, so it is a positive integer, and the
+unclamped expression does not define a profile at all. The formula and its own output had sat
+side by side through `v1.1.0`, `v1.1.1`, and the r198 audit sweep that was commissioned precisely
+to brute-force this section.
+
+**check**   : reimplement the *displayed* formula literally and require it to reproduce the
+paper's own printed constant **before** any new measurement from it counts.
+
+**rule**    : **A formula and the number it is supposed to produce, printed in the same sentence,
+are not a check on each other — they are two artefacts with one author, and the author computed
+one of them and typed the other.** The only check is to run the formula.
+> A condition that is *forced by the object* is the one most likely to be missing from the
+> display, because the author knows it cannot be otherwise and therefore never says it.
+
+That is the class: implicit admissibility conditions — positive multiplicities, integer gaps,
+non-empty supports — live in the code and die on the way to the page. **They are invisible to
+every check we own**, because each check compares the paper against the paper.
+
+## r200 — every falsifier for the new law passed on a run whose instrument was broken
+
+**claimed** : the r200 script was a faithful independent reimplementation of the definitions, so
+its pre-registered falsifiers would decide the two-regime rate law.
+
+**actual**  : its weight vectors ran `j = 0 … k` where a set of `k` elements has `k` weights,
+`j = 0 … k−1`. **On that run, falsifiers F1, F2 and F3 — all three of the ones that test the
+hypothesis — passed.** The law's ratios still went to 1, the `√s` cross-check still landed, the
+control still failed the law in the right direction. What fired were the two *instrument*
+controls, F4a and F4b: reproduce a constant the paper already prints, and reproduce a closed form
+the paper already proves. Both missed, and between them they localised one defect in this file
+and one in the paper.
+
+**check**   : pre-register at least one falsifier that tests **the apparatus against an exact
+answer already known**, not the hypothesis.
+
+**rule**    : **A pre-registration that only tests the hypothesis cannot tell you the apparatus is
+broken — and an apparatus that is broken and still confirms your hypothesis is the worst outcome
+the experiment can produce, because nothing about it looks wrong.** Every pre-registration gets an
+instrument control on a known exact value, and the instrument control is the one that must pass
+first.
+
+This sharpens F45 (*write the falsifier into the script before running it*) with the thing F45
+does not say: **which falsifier**. Three of five green, verdict FAIL, and the FAIL was the useful
+part — the run that fired was worth more than the run that would have passed.

@@ -83,6 +83,7 @@ rem:principal
 rem:qcrit
 rem:random
 rem:range
+rem:rateregimes
 rem:ratestatus
 rem:renorm
 rem:shift

@@ -1408,9 +1408,14 @@ $g(1)=(\Gamma(A)-1)/2$, \textbf{$R>1$ says that $\Gamma$ is finite \emph{and} th
 weights decay geometrically, while $R\ge1$ is only necessary}: the radius says nothing about the
 boundary point $z=1$, and at $R=1$ the invariant may do either. Both cases occur, and the pair is
 the sharpest thing in this section --- $a_i=2^{i}+1$ has $R=1$ with $\Gamma_k=k+2\to\infty$,
-while the profile $m_j=\bigl\lfloor2^{j}(j+1)^{-2}\bigr\rceil$ has $R=1$ with
-$\Gamma_k\to5.230199559$. \emph{Which of the two holds is exactly what sets the rate at which the
-zeros close in} (Remark~\ref{rem:leeyanglacunary}). Proposition
+while the profile $m_j=\max\bigl(1,\lfloor2^{j}(j+1)^{-2}\rceil\bigr)$ --- \textbf{family C} ---
+has $R=1$ with $\Gamma_k\to5.230199559$. \emph{The clamp at $1$ is forced and is not a fitted
+parameter}: $m_j$ is half the gap between consecutive elements of a set of distinct odd numbers,
+so it is a positive integer, and the unclamped expression is not a profile at all. It is also
+not a cosmetic difference --- without the clamp the same expression gives
+$\Gamma_k\to3.480199559$, and this correction is r200's, against a formula that shipped in
+\texttt{v1.1.1} without it. \emph{Which of the two cases holds is exactly what sets the rate at
+which the zeros close in} (Remark~\ref{rem:rateregimes}). Proposition
 \ref{prop:nopinch} needs the stronger one, and it is satisfied by every profile in this paper
 except the lacunary family: measured over the top half of the layers at $k=60$, the quantity
 $(m_j2^{-j})^{1/j}$ is $0.5000$ for the odd numbers, $0.5250$ for the primes, $0.5543$ for a
@@ -1504,7 +1509,15 @@ $1.552860,1.556681,1.559637,1.561639,1.563051$ at $k=24,40,56,72,88$, rising tow
 the first rung $n=1$ of the ladder $k\arctan2t=n\pi$. \emph{The lacunary family gives the same
 constant}: for $a_i=2^{i}+1$, $k\cdot\operatorname{Im}q_1$ runs $1.5951, 1.583, 1.5769, 1.5739$ at
 $k=128,256,512,1024$, also rising to $\pi/2$. \textbf{At the boundary the rate is $\pi/2k$ for
-every profile measured --- one ladder, one first rung, no profile-dependent integer.}
+every profile in this remark --- one ladder, one first rung, no profile-dependent integer.}
+
+\emph{The scope of that sentence is load-bearing, and an earlier version of it did not carry
+one.} Every profile above has $\Gamma$ divergent at $c=2$; the layer family is built so that it
+does. Remark~\ref{rem:rateregimes} exhibits $R=1$ profiles with $\Gamma$ \emph{convergent}, and
+their rate is not $\pi/2k$ but $\sqrt{s\log k/2k}$, larger by a factor $\asymp\sqrt{k\log k}$.
+\textbf{So the constant $\pi/2$ belongs to the divergent regime and not to $R=1$}, and the
+formula displayed here predicts \emph{where} the zeros stop, not \emph{how fast} they arrive
+when they do not stop.
 
 \emph{What this settles and what it does not.} Proposition~\ref{prop:gqgen} is an identity and
 its three consequences are immediate, so \emph{the fair coin is interior exactly when $R>1$} is
@@ -1515,13 +1528,93 @@ subsets of the analytic region, and the other needs the limit to be non-vanishin
 is a statement about $G$ and is not proved here.
 \STATUS{the identity and its consequences are \textbf{proved}; the distance formula is
 \textbf{measured} at seven values of $c$ and two values of $k$; the accumulation is
-\textbf{open}. \texttt{leeyang5\_r183}.}
+\textbf{open}; the rate $\pi/2k$ is \textbf{measured}, and \textbf{only on profiles with
+$\Gamma$ divergent} --- see Remark~\ref{rem:rateregimes} for the other regime, which was
+measured after this remark was written and which contradicts the unqualified reading of it.
+\texttt{leeyang5\_r183}, \texttt{rate\_r200}.}
+\end{remark}
+
+\begin{remark}[the rate is not universal: two regimes at $R=1$]\label{rem:rateregimes}
+$R=1$ decides that the fair coin sits \emph{on} the boundary of analyticity. It does not decide
+how fast the zeros reach it, and the two halves of the pair in
+Remark~\ref{rem:nopinchreading} --- both with $R=1$ --- fall on opposite sides of that question.
+
+\emph{The mechanism is one line.} On the critical line
+$\Gamma^{(q)}_k=1+2\sum_j w_j\rho^{\,j}\cos(j\theta)$ with $w_j=m_j2^{-j}$,
+$\rho=\sqrt{1+4t^{2}}$ and $\theta=\arctan2t$, so $\rho^{\,j}=e^{2jt^{2}(1+O(t^{2}))}$ and the
+last term carries $w_k e^{2kt^{2}}$.
+\begin{itemize}
+\item If $w_j\to w>0$ --- equivalently $\Gamma$ divergent --- the growth factor is irrelevant at
+      $t\asymp1/k$ and the zero is produced by the \emph{phase} alone, at $k\theta=\pi$. That is
+      the ladder of Remark~\ref{rem:leeyanglacunary} and the rate is $\pi/2k$.
+\item If $w_j\asymp(j+1)^{-s}$ with $s>1$ --- $\Gamma$ convergent --- the phase cannot do it:
+      at $\theta=x/k$ every $\rho^{\,j}\to1$ for $j\le k$, so
+      $\sum_j w_j\cos(jx/k)\to\sum_j w_j>0$ and there is no dip at that scale. What produces the
+      zero is instead the growth $\rho^{\,j}$ overcoming the decay $w_j$, and
+      $k^{-s}e^{2kt^{2}}$ is $O(1)$ \emph{exactly} when $2kt^{2}=s\log k$.
+\end{itemize}
+Hence the dichotomy inside the boundary case:
+\[
+  \Gamma\text{ divergent:}\quad t_1\sim\frac{\pi}{2k},
+  \qquad\qquad
+  \Gamma\text{ convergent},\ w_j\asymp(j+1)^{-s}:\quad t_1\sim\sqrt{\frac{s\log k}{2k}} .
+\]
+\textbf{The second is larger by a factor $\asymp\sqrt{k\log k}$: the pinch is slower, and it is
+slower in a way that reads off the exponent $s$.} There is no constant to fit in either.
+
+\emph{Measured against family C}, $m_j=\max\bigl(1,\lfloor2^{j}(j+1)^{-s}\rceil\bigr)$, whose
+$\Gamma$ converges for every $s>1$ (to $5.2282493$, $5.0054793$, $5.0000879$ at $s=2,3,4$ and
+$k=512$), as measured $t_1$ divided by the predicted $\sqrt{s\log k/2k}$:
+\begin{center}
+\begin{tabular}{lrrrrr}
+\hline
+$k$ & $32$ & $64$ & $128$ & $256$ & $512$\\
+\hline
+$s=2$ & $1.276794$ & $1.187405$ & $1.034218$ & $1.004723$ & $0.9962483$\\
+$s=3$ & $1.521603$ & $1.199195$ & $1.073958$ & $1.04068$ & $1.008387$\\
+$s=4$ & $1.354838$ & $1.263709$ & $1.153411$ & $1.044587$ & $1.039257$\\
+\hline
+\end{tabular}
+\end{center}
+
+\emph{The $\sqrt{s}$, tested with no $k$ in it.} At fixed $k=512$ the ratio
+$t_1(s{=}4)/t_1(s{=}2)$ is $1.475266$ against the predicted $\sqrt2=1.414214$, high by
+$4.3\%$. \textbf{That excess is accounted for rather than excused}: $1.475266/\sqrt2=1.04317$,
+and the amount by which the $s=4$ column still lags the $s=2$ column at $k=512$ is
+$1.039257/0.9962483=1.04317$ --- the same number. The residual in the $s$-test is the residual
+already visible in the $k$-test, not a second discrepancy.
+
+\emph{Control, and it is the one that makes this two regimes and not one.} For $a_i=2^{i}-1$,
+where $\Gamma_k=k$ diverges, $k\cdot t_1$ runs $1.5720592, 1.5711118, 1.5708752, 1.570816$ at
+$k=64,128,256,512$ against $\pi/2=1.5707963$, while $t_1$ divided by $\sqrt{2\log k/2k}$ runs
+$0.0963586, 0.0630435, 0.0416931, 0.0277943$ --- \textbf{going to zero, not to a constant}. A
+control that also obeyed the law would have shown one regime; this one fails it in the predicted
+direction and at the predicted size.
+
+\emph{What this does to Problem~\ref{prob:converse}, said plainly rather than quietly.} That
+problem was posed asking whether $R=1$ forces the pinch \emph{at rate $\pi/2k$}. The rate clause
+is answered \textbf{no}, by family C, and the problem below has been restated without it. The
+question of whether $R=1$ forces a pinch \emph{at all} is untouched and remains open --- but it
+is now supported by five profiles instead of two, and by two different rates, which is better
+evidence for it than one repeated rate would have been.
+\STATUS{the mechanism is \textbf{derived} (asymptotically, not to the standard of the identities
+in this section); the two rates are \textbf{measured} with no fitted constant, at three exponents
+and five sizes, with a control that fails the law; the general two-regime law is
+\textbf{conjectured}, and the dividing line is conjectured to be $\sum_j w_j<\infty$ rather than
+anything finer. \texttt{rate\_r200}, whose four pre-registered falsifiers are printed in the log;
+the two instrument controls among them fired on the first run and caught both an index error here
+and the missing clamp in Remark~\ref{rem:nopinchreading}.}
 \end{remark}
 
 \begin{problem}[does $R=1$ force the pinch?]\label{prob:converse}
 For admissible profiles with $R=1$, do the zeros of $\Gamma^{(q)}$ approach $q=\tfrac12$ as
-$k\to\infty$, at rate $\pi/2k$ --- that is, does the first rung of the ladder
-$\theta_n=n\pi/k$ always exist and always descend at that rate?
+$k\to\infty$ --- that is, does a first rung always exist?
+\emph{As first posed, this problem also asked whether that rung always descends at rate
+$\pi/2k$. It does not, and the clause is withdrawn here rather than dropped silently}
+(Remark~\ref{rem:rateregimes}): the rate is $\pi/2k$ when $\Gamma$ diverges and
+$\sqrt{s\log k/2k}$ when $w_j\asymp(j+1)^{-s}$. \textbf{What is open is the existence of the
+pinch, not its speed}, and the two known speeds are evidence for the existence rather than
+against it.
 \emph{The missing ingredient is named rather than left to be located:} what is absent is the
 non-vanishing of the limit of $G$ on its circle of convergence. Hurwitz's theorem gives
 non-accumulation inside the lens on compact subsets; accumulation \emph{on} the boundary needs
@@ -1542,15 +1635,19 @@ them complex conjugates on a line, inherit boundary accumulation?}
 
 \emph{And the measured ladder is the fingerprint of the sum, not of a section.} Sections of a
 single geometric series have zeros at angular spacing $2\pi/k$; ours sit at
-$\theta_n=n\pi/k$ on the ray $z=1+2it$ --- \emph{twice as densely}. That is what
+$\theta_n=n\pi/k$ on the ray $z=1+2it$ --- \emph{twice as densely}. \emph{This comparison is
+about the divergent regime, where a ladder is what there is}; in the convergent regime the zeros
+are not a ladder at all, which is Remark~\ref{rem:rateregimes}'s point restated. That is what
 $\sin(k\theta)$ does and what $e^{ik\theta}-1$ does not, and the doubling is the signature of the
 \emph{sum}: taking the real part of a section folds $e^{ik\theta}$ into $\sin(k\theta)$, whose
 zeros are twice as dense. \textbf{So the doubled ladder is precisely the part of the phenomenon
 that the single-section theory does not describe.}
 \STATUS{\textbf{proved} for $a_i=2^{i}-1$, where the zero set on the line is exactly
 $q=\tfrac12+\tfrac{i}{2}\tan(n\pi/k)$; \textbf{measured} for the other two boundary profiles,
-whose $k\theta_n/\pi$ approach $1,2,3,4,5,6$ with error $O(k^{-1})$; \textbf{conjectured} in
-general. All near-$\tfrac12$ zeros were confirmed to lie \emph{on} the line by an argument-principle
+whose $k\theta_n/\pi$ approach $1,2,3,4,5,6$ with error $O(k^{-1})$, and for family C at three
+exponents (Remark~\ref{rem:rateregimes}), so five profiles in all; the withdrawn rate clause is
+\textbf{disproved} by family C; the existence question is \textbf{conjectured} in general and
+remains the open half. All near-$\tfrac12$ zeros were confirmed to lie \emph{on} the line by an argument-principle
 count on $|q-\tfrac12|=r$ for $r$ up to $0.25$, which matched twice the number of on-line sign
 changes in every case.
 \texttt{leeyang6\_r194}, \texttt{leeyang7\_r194}, \texttt{leeyang8b\_r194}. \textbf{Literature pass completed} (r191):
