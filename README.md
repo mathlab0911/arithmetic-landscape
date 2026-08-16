@@ -2,7 +2,9 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21941261.svg)](https://doi.org/10.5281/zenodo.21941261) &nbsp; ORCID [0009-0000-0890-4395](https://orcid.org/0009-0000-0890-4395)
 
-*Archived release `v1.0.0` (2026-08-15). The DOI above resolves to the latest version; each release also gets its own. Manuscripts CC BY 4.0, code Apache-2.0. **Not peer-reviewed** — every statement carries its own status where it is stated.*
+*Archived release `v1.1.1` (2026-08-16). The DOI above resolves to the latest version; each release also gets its own. Manuscripts CC BY 4.0, code Apache-2.0. **Not peer-reviewed** — every statement carries its own status where it is stated.*
+
+**A DOI makes a version permanent; it does not make it true.** `v1.1.1` exists because `v1.1.0` carried three false sentences about the Lee–Yang ladder of Part III; the erratum is in the paper, at the statement, and in the release notes.
 
 The **gap series** of a finite set `A` of odd positive integers with largest element `M` is
 
@@ -133,7 +135,7 @@ verifies mechanically that every name the papers cite actually exists here.
 ## Reproducing the numbers
 
 Every number that appears in a paper comes from a script in `lean/pnp/` that writes a log beside
-itself — **161 scripts, 238 logs**, all committed. A number with no log is treated as a number
+itself — **165 scripts, 242 logs**, all committed. A number with no log is treated as a number
 that does not exist, and `tools/check.py` enforces it:
 
 ```

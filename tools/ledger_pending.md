@@ -1,7 +1,10 @@
 # Ledger — pending
 
 Case text for lessons bought since the last fold into the skill. **Empty means the skill is
-current.** Folded through **r180** at r181.
+current.** Folded through **r180** at r181; **the r181 distillation was applied to the live skill
+at r194 and verified byte-identical** (67240 bytes, 913 lines, md5 `2b35e1bdd08c669892224eb1917e6846`,
+`F01`–`F82` present). Entries below r181 are therefore **still pending** — they are the r182–r193
+material and need their own fold.
 
 *The standing rule (skill §7.0): a lesson is bought when it cost something. Write the case here
 the hour it happens, in the words that were true at the time; distil it into the skill only when
@@ -418,3 +421,138 @@ honest entry is *"independent of: nothing; this report describes documents its a
 
 > **The first use of a rule should be the one where it says something inconvenient**, or the rule
 > was adopted for the wrong reason.
+
+## r194 — the skill save, on the sixth attempt, and what actually blocked it
+
+**claimed** : "the 67 KB write does not fit alongside anything else" — offered five rounds running
+as the reason the standing order was not obeyed.
+**actual**  : true as stated, and **it was never tested as a claim about the whole turn.** Each of
+the five deferrals was a turn that already had other work in it; the write fits when it is the
+*only* thing in the turn. Read the file in two halves (`sed -n '1,300p'`, `sed -n '301,913p'` —
+each under the tool's output cap, and neither carrying the line-number prefixes that `Read` adds
+and that would have to be stripped by hand), then emit once, then diff. Nothing else.
+**check**   : `md5sum` of the saved `SKILL.md` against the source, plus a loop asserting `F01`–`F82`
+each occur. Both green: identical, 82 of 82.
+**rule**    : **A cost that is only ever measured against a turn that already has work in it is not
+a measurement of the cost.** When a standing order is deferred more than twice for the same
+resource reason, the next attempt gets the resource to itself before the reason is repeated again.
+*(F82's sibling: the second identical attempt is diagnosis, the fourth is denial — and this is the
+form denial takes when the excuse is quantitative and never re-measured.)*
+
+**A second finding, from the verification of the verification.** Three spot-check greps ran beside
+the diff; one — for *"diff the saved result against the source before believing it"* — printed
+nothing, and the content was nevertheless correct. The phrase is **split across a line break at
+column 96**. That is exactly F69's shape, one level up: *the check on the checker was defeated by
+the same line-wrapping that has now defeated a check three times in this project.* The diff was
+authoritative and the grep was decoration, which is the only reason it did not read as a failure.
+
+> **A spot check that runs beside an exact comparison is decoration, and decoration that can fail
+> silently will eventually be read as evidence.** Either make it exact, or delete it.
+
+## r194 — the ladder was wrong in a released paper, and the error is one quarter turn of phase
+
+**claimed** : `rem:leeyanglacunary` (Part III, in `v1.1.0`, DOI 10.5281/zenodo.21941956): on
+`Re q = ½` the sum *"behaves like `2|1+2it|^k cos(k arctan 2t)`"*, vanishing on the ladder
+`k arctan 2t = (2n+1)π/2`, first rung `Im q_{±1} = ±3π/(2k) + O(k^{-2})`; and in
+`prob:converse` and the fingerprint paragraph, the ladder `(2n+1)π/2k` — *"spacing `π/k`, offset
+by half of it… what `cos(kθ)` does and `e^{ikθ}` does not"* — billed in `two_tracks_r193.md` as
+the note's most quotable content.
+
+**actual**  : the oscillator is **`sin`, not `cos`**, and the ladder is **`θ_n = nπ/k` for every
+integer `n ≥ 1`**, not the odd ones. With `z = 1+2it`, `z−1 = 2it`, `S_k = (z^k−z)/(2it)`, and
+`ρ sin θ = Im z = 2t`,
+
+>  `Re S_k = ρ^k sin(kθ)/(2t) − 1`,  so  `Γ^(q)_k = 2 + ρ^k sin(kθ)/(2t)`  for `a_i = 2^i+1`.
+
+For `a_i = 2^i−1` (same `w_j = ½`, but `w_0 = 0`) it is exactly `ρ^k sin(kθ)/(2t)`, so the zero
+set is **exactly** `{ q = ½ + (i/2)·tan(nπ/k) }` — verified at six rungs and three `k`, deviation
+of `kθ_n/π` from `n` at most **1.6e-29**. The corrected first-rung rate is `π/(2k)`:
+`k·Im q_1` measures `1.5951, 1.5830, 1.5769, 1.5739` at `k = 128,256,512,1024` against
+`π/2 = 1.570796`. The paper's own claimed location `t = 3π/(2k)` is **not a zero at all** —
+`Γ^(q)` there measures `2.326, 2.137, 2.063, 2.030`, converging to the constant 2.
+
+**Where `cos` came from, and this is the transferable part.** `z^j + conj(z)^j = 2ρ^j cos(jθ)`
+is true termwise, and the geometric sum was replaced by its largest term. That is a
+**modulus-level approximation**, and it silently discards the factor `1/(z−1)` whose argument is
+exactly `−π/2`.
+
+> **Approximating a sum by its largest term keeps the modulus and throws away a phase. Here the
+> discarded phase was a quarter turn, and a quarter turn moves a ladder by half a rung — which is
+> precisely the difference between `cos` and `sin`, and precisely the "offset by half" that was
+> then written up as the discovery.** *The wrong answer was a clean function of the right one
+> (F66), and it named its own bug: an offset of exactly half a rung is what a factor of `i` looks
+> like.*
+
+**And a second, independent defect in the same STATUS line.** The two measured series quoted
+there are **two different zeros**:
+
+| quoted as | measured values | what it actually is |
+|---|---|---|
+| `\|q_1−½\|` = 0.0520, 0.0253, 0.0167 (k=32,64,96) | reproduced exactly | **rung 1** |
+| `k·Im q_1` = 4.7736, 4.7457, 4.7299 (k=128,256,512) | reproduced to every printed digit | **rung 3** |
+
+Both numbers are *correct measurements of real zeros*. Neither is wrong. They are the first and
+the third rung, reported in one line under one symbol `q_1`, and the agreement of the second with
+`3π/2 = 4.7124` is what confirmed the `cos` reading. **The search had been aimed at where `cos`
+predicted a zero, found a genuine one there, and the hit was read as confirmation.**
+
+> **A prediction that names a location will be confirmed by any zero near that location, and a
+> dense ladder has one near everywhere.** Before reading a hit as confirmation, count the zeros
+> *below* it — an index is a claim (F49), and `q_1` must be the first, not the first one looked at.
+
+**check**   : (i) transcribe the paper's own displayed formula literally and compare with the
+closed form — agreed to 2.8e-29 at 25 points, so this is not a transcription dispute;
+(ii) scan for sign changes from `t = 0` upward and **number them**, rather than searching near a
+predicted value; (iii) argument principle on `|q−½| = r` for `r` up to 0.25 to confirm no zeros
+lie off the line (counts matched `2 × (on-line changes)` in every case, so the design assumption
+of Track M holds); (iv) negative control — the odds, where `prop:nopinch` proves `|q−½| < 1/6`
+zero-free: measured winding `2.3e-32` at `k = 16..128`. `reports/lab/leeyang{6,7,8b}_r194`.
+
+**rule**    : **When a closed form exists, do not characterise it by its largest term.** Sum it,
+or say explicitly which factor is being dropped and what its argument is. *(F03's cousin: the
+worst case of one factor is not the worst case of the whole — here, the modulus of one factor is
+not the phase of the whole.)*
+**And number your zeros from the origin, not from your prediction.**
+
+**What survives, and it is stronger.** The pinch is real; `Re q = ½` is exact; the dichotomy
+against `prop:nopinch` is untouched and its control is clean. And the corrected statement is not a
+weaker version of the old one — it is a **closed-form zero set, elementary and exact**, which is
+Track M's rung 2 arriving in the same sitting as rung 1.
+
+## r195 — the F79 sweep found four stale artefacts, and my own guard lied to me twice
+
+**The sweep itself.** Asking *"what did this release make false?"* before the tag, over every
+artefact that describes the work in prose, returned four hits and none of them was the paper:
+`.zenodo.json` said Part III was **45 pp.** (it is 51) and still said `v1.1.0`; `README.md` had
+said *"Archived release `v1.0.0`"* **through the entire life of `v1.1.0`**; `CITATION.cff` carried
+**no `version`, no `date-released` and no `doi`**; and `docs/two_tracks_r193.md` was still
+advertising the refuted ladder as "the note's most quotable content".
+
+> **The artefacts that describe the work are the ones no check reads, and they go stale in the
+> same week the work changes.** F79 predicted exactly this and the sweep is the only reason the
+> release would not have carried three of them again.
+
+**And the F81 caveat was not where the ledger says it was put.** *"A DOI makes a version
+permanent; it does not make it true"* was adopted at r180 with the instruction that it go **in
+bold directly under the README badge**. It was in neither the README nor the deposit.
+
+> **A rule recorded as applied is not a rule applied. The ledger records the decision; only the
+> artefact records the act.** Check the artefact, not the entry that says you checked it.
+
+**The two guard failures, which are the transferable part.**
+
+1. I wrote `assert 'version:' not in c` to refuse to add a duplicate field to `CITATION.cff`. It
+   fired — on the substring inside **`cff-version: 1.2.0`**, which is the *format's* version and
+   not the work's. The guard was a **substring match on a keyed name** (F47: key on something the
+   error does not change; F69: match on line starts, not on substrings). Repaired to `(?m)^version:`.
+2. **Worse: I believed it.** Having just written "CITATION.cff had no version field at all" — which
+   was **true** — I retracted it because my own guard contradicted me.
+
+> **A false guard costs more than the work it blocked: it also spends the credibility of the true
+> statement it contradicted.** When a check disagrees with something you just measured, test the
+> check against a fact you already know (F58) *before* withdrawing the measurement. I did the
+> withdrawal first and the test second, in that order, in public.
+
+**check** : for any guard of the form "this field is absent", assert on an anchored pattern and
+print the line that matched; and never let a guard's verdict retract a directly observed fact
+without the guard itself being tested.

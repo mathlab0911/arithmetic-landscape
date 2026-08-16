@@ -1,0 +1,57 @@
+====================================================================================
+leeyang7_r194 -- the ladder, over many rungs.   theta = arctan(2t),  test k*theta/pi
+====================================================================================
+
+------------------------------------------------------------------------------------
+family: 2^i-1     (w0=0, w=1/2)  EXACT case
+  k=  32  tmax=  0.33409  rungs found: 6
+        k*theta_n/pi = 1.0, 2.0, 3.0, 4.0, 5.0, 6.0
+        |dev from nearest integer| max = 6.999e-30   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.5   (recorded law predicted these)
+  k=  64  tmax=  0.15167  rungs found: 6
+        k*theta_n/pi = 1.0, 2.0, 3.0, 4.0, 5.0, 6.0
+        |dev from nearest integer| max = 1.578e-29   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.5   (recorded law predicted these)
+  k= 128  tmax= 0.074168  rungs found: 5
+        k*theta_n/pi = 1.0, 2.0, 3.0, 4.0, 5.0
+        |dev from nearest integer| max = 2.536e-29   nearest ints = [1, 2, 3, 4, 5]
+        |dev from nearest HALF-odd|    = 0.5   (recorded law predicted these)
+
+------------------------------------------------------------------------------------
+family: 2^i+1     (w0=1, w=1/2)
+  k=  32  tmax=  0.33409  rungs found: 6
+        k*theta_n/pi = 1.05604588, 1.9309631, 3.04607364, 3.97859087, 5.00605092, 5.99883906
+        |dev from nearest integer| max = 0.06904   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.431   (recorded law predicted these)
+  k=  64  tmax=  0.15167  rungs found: 6
+        k*theta_n/pi = 1.02971997, 1.95423062, 3.04693447, 3.96283446, 5.02247206, 5.98834612
+        |dev from nearest integer| max = 0.04693   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.4531   (recorded law predicted these)
+  k= 128  tmax= 0.074168  rungs found: 6
+        k*theta_n/pi = 1.01525426, 1.97341402, 3.0333533, 3.96606938, 5.02975439, 5.97636222
+        |dev from nearest integer| max = 0.03393   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.4661   (recorded law predicted these)
+
+------------------------------------------------------------------------------------
+family: layer c=2 (w=1)
+  k=  32  tmax=  0.33409  rungs found: 6
+        k*theta_n/pi = 1.01356195, 1.98294513, 3.01172484, 3.99473872, 5.00152257, 5.99971024
+        |dev from nearest integer| max = 0.01705   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.4829   (recorded law predicted these)
+  k=  64  tmax=  0.15167  rungs found: 6
+        k*theta_n/pi = 1.00728356, 1.98851393, 3.01174973, 3.9908222, 5.00566877, 5.99710685
+        |dev from nearest integer| max = 0.01175   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.4883   (recorded law predicted these)
+  k= 128  tmax= 0.074168  rungs found: 6
+        k*theta_n/pi = 1.00377243, 1.99331408, 3.00830342, 3.99154422, 5.00745959, 5.99412655
+        |dev from nearest integer| max = 0.008456   nearest ints = [1, 2, 3, 4, 5, 6]
+        |dev from nearest HALF-odd|    = 0.4915   (recorded law predicted these)
+
+------------------------------------------------------------------------------------
+[Q4] where do off-line zeros begin?  disc count vs 2*(on-line sign changes), k=64
+  r=  0.03125  on-line(t>0):   1   disc total:   2   all on line
+  r=   0.0625  on-line(t>0):   2   disc total:   4   all on line
+  r=    0.125  on-line(t>0):   4   disc total:   8   all on line
+  r=     0.25  on-line(t>0):   9   disc total:  18   all on line
+
+done.

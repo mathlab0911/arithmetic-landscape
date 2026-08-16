@@ -31,3 +31,6 @@ keywords:
   - formal verification
   - disordered systems
 license: Apache-2.0
+version: "v1.1.1"
+date-released: "2026-08-16"
+doi: "10.5281/zenodo.21941261"

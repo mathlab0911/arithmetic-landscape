@@ -1,0 +1,58 @@
+================================================================================
+leeyang6_r194 -- Track M rung 1: are the near-1/2 zeros ON the critical line?
+================================================================================
+
+[P1] Re S_k = rho^k sin(k theta)/(2t) - 1  vs direct sum, 25 (k,t) points
+     worst relative discrepancy : 1.4791e-29
+     F-1 (>1e-25) : not fired
+
+--------------------------------------------------------------------------------
+family: odds       R=2 CONTROL
+  k= 16 r=   0.25  on-line sign changes(t>0):  0  arg-principle in disc: 5.505122022e-32 ->  0   MATCH
+  k= 32 r=  0.125  on-line sign changes(t>0):  0  arg-principle in disc: 1.246008965e-32 ->  0   MATCH
+  k= 64 r= 0.0625  on-line sign changes(t>0):  0  arg-principle in disc:  3.015403e-33 ->  0   MATCH
+
+--------------------------------------------------------------------------------
+family: 2^i+1      R=1
+  k= 16 r=   0.25  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =   0.109429443491  k*t/pi =  0.5573195792   ladder (2n+1)/2 = 0.5
+       t_1 =   0.198030549443  k*t/pi =   1.008561306   ladder (2n+1)/2 = 1.5
+  k= 32 r=  0.125  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =  0.0520250691041  k*t/pi =  0.5299230024   ladder (2n+1)/2 = 0.5
+       t_1 =  0.0959379488544  k*t/pi =  0.9772159226   ladder (2n+1)/2 = 1.5
+  k= 64 r= 0.0625  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =   0.025294676185  k*t/pi =  0.5152989118   ladder (2n+1)/2 = 0.5
+       t_1 =  0.0481117040938  k*t/pi =  0.9801235875   ladder (2n+1)/2 = 1.5
+
+--------------------------------------------------------------------------------
+family: 2^i-1      R=1
+  k= 16 r=   0.25  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =  0.0994561836898  k*t/pi =  0.5065261842   ladder (2n+1)/2 = 0.5
+       t_1 =   0.207106781187  k*t/pi =   1.054786175   ladder (2n+1)/2 = 1.5
+  k= 32 r=  0.125  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =  0.0492457016786  k*t/pi =  0.5016125983   ladder (2n+1)/2 = 0.5
+       t_1 =  0.0994561836898  k*t/pi =   1.013052368   ladder (2n+1)/2 = 1.5
+  k= 64 r= 0.0625  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =  0.0245634248847  k*t/pi =  0.5004019827   ladder (2n+1)/2 = 0.5
+       t_1 =  0.0492457016786  k*t/pi =   1.003225197   ladder (2n+1)/2 = 1.5
+
+--------------------------------------------------------------------------------
+family: layer c=2  R=1
+  k= 16 r=   0.25  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =   0.101850626129  k*t/pi =  0.5187209794   ladder (2n+1)/2 = 0.5
+       t_1 =   0.204942658989  k*t/pi =   1.043764391   ladder (2n+1)/2 = 1.5
+  k= 32 r=  0.125  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =  0.0499179685724  k*t/pi =  0.5084602526   ladder (2n+1)/2 = 0.5
+       t_1 =  0.0985861699789  k*t/pi =   1.004190481   ladder (2n+1)/2 = 1.5
+  k= 64 r= 0.0625  on-line sign changes(t>0):  2  arg-principle in disc:           4.0 ->  4   MATCH
+       t_0 =  0.0247426248663  k*t/pi =  0.5040526147   ladder (2n+1)/2 = 0.5
+       t_1 =  0.0489610723173  k*t/pi =  0.9974267748   ladder (2n+1)/2 = 1.5
+
+--------------------------------------------------------------------------------
+[P4] negative control: odds, prop:nopinch says |q-1/2| < 1/6 is zero-free
+  k= 16  zeros in |q-1/2|<1/6 :  2.262127e-32   ok (zero-free)
+  k= 32  zeros in |q-1/2|<1/6 : 2.3019747e-32   ok (zero-free)
+  k= 64  zeros in |q-1/2|<1/6 : 2.3019747e-32   ok (zero-free)
+  k=128  zeros in |q-1/2|<1/6 : 2.3019747e-32   ok (zero-free)
+
+done.

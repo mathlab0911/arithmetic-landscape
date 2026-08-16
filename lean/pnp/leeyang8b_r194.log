@@ -1,0 +1,42 @@
+======================================================================================
+leeyang8b_r194 -- paper4 rem:leeyanglacunary  vs  r194 algebra   (a_i = 2^i+1)
+======================================================================================
+
+[X-4] literal paper formula vs r194 closed form
+      worst relative discrepancy over 25 points : 2.7877e-29
+      X-4 (>1e-25) : not fired (forms agree)
+
+[X-1] is the paper's claimed FIRST-rung location t = 3pi/(2k) a zero?
+   k=  128  t=3pi/2k= 0.036815539  Gamma^(q)=     2.325885   NOT a zero
+   k=  256  t=3pi/2k= 0.018407769  Gamma^(q)=    2.1374425   NOT a zero
+   k=  512  t=3pi/2k=0.0092038847  Gamma^(q)=    2.0630564   NOT a zero
+   k= 1024  t=3pi/2k=0.0046019424  Gamma^(q)=     2.030195   NOT a zero
+
+[X-2 / X-3] the actual ladder: first three on-line zeros
+        k  rung              t_n        k*t_n  k*theta_n/pi   note
+      128     1     0.0124616235   1.59508781    1.01525426   paper's |q_1-1/2| is this one
+      128     2    0.02423638888   3.10225778    1.97341402   
+      128     3    0.03729377444   4.77360313     3.0333533   <== paper's k*Im q_1 = 4.77 is THIS one
+      256     1   0.006183616021    1.5830057    1.00772135   paper's |q_1-1/2| is this one
+      256     2    0.01218599321   3.11961426    1.98561504   
+      256     3    0.01853781004   4.74567937    3.01981015   <== paper's k*Im q_1 = 4.77 is THIS one
+      512     1    0.00307991545   1.57691671    1.00388366   paper's |q_1-1/2| is this one
+      512     2   0.006113242285   3.12998005    1.99250791   
+      512     3   0.009238008818   4.72986052    3.01078017   <== paper's k*Im q_1 = 4.77 is THIS one
+     1024     1    0.00153697306   1.57386041     1.0019475   paper's |q_1-1/2| is this one
+     1024     2   0.003062132742   3.13562393    1.99617523   
+     1024     3    0.00461069512    4.7213518    3.00562072   <== paper's k*Im q_1 = 4.77 is THIS one
+
+   reference:  pi/2 = 1.570796327    3pi/2 = 4.71238898
+
+[paper's own |q_1-1/2| numbers, recomputed]
+   k=  32  first zero =  0.052025069   paper reports 0.0520   MATCH
+   k=  64  first zero =  0.025294676   paper reports 0.0253   MATCH
+   k=  96  first zero =   0.01669865   paper reports 0.0167   MATCH
+
+[paper's k*Im q_1 series, recomputed AT RUNG 3]
+   k=  128  rung3 k*t =   4.77360313   paper reports 4.7736 as k*Im q_1   MATCH
+   k=  256  rung3 k*t =   4.74567937   paper reports 4.7457 as k*Im q_1   MATCH
+   k=  512  rung3 k*t =   4.72986052   paper reports 4.7299 as k*Im q_1   MATCH
+
+done.

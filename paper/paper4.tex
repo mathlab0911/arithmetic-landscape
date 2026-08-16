@@ -1313,12 +1313,25 @@ $m_j=2^{j-1}$ exactly, so
 \]
 two geometric series with ratios $2q$ and $2(1-q)$. On the line $\operatorname{Re}q=\tfrac12$
 those ratios are complex conjugates of equal modulus, so the two series can cancel --- and they
-do. Writing $q=\tfrac12+it$, the sum behaves like
-$2|1+2it|^{k}\cos\bigl(k\arctan 2t\bigr)$, which vanishes on a ladder in $t$; the first rung
-gives
+do. Write $q=\tfrac12+it$, $z=2q=1+2it$, $\rho=|z|=\sqrt{1+4t^{2}}$ and
+$\theta=\arg z=\arctan 2t$. Then $z-1=2it$, so $\sum_{j=1}^{k-1}z^{j}=(z^{k}-z)/(2it)$, and
+since $\rho\sin\theta=\operatorname{Im}z=2t$ this gives, \emph{with no approximation},
 \[
-  \operatorname{Im}q_{\pm1}\;=\;\pm\frac{3\pi}{2k}+O(k^{-2}),
+  \Gamma^{(q)}\;=\;2+\frac{\rho^{k}\sin (k\theta)}{2t}
+  \qquad\text{on }\operatorname{Re}q=\tfrac12 .
+\]
+The zeros are the solutions of $\sin (k\theta)=-4t\rho^{-k}$, whose right-hand side is
+$O(k^{-1})$ at the first rungs, so they sit at $\theta_{n}=(n\pi/k)(1+O(k^{-1}))$ for
+\emph{every} integer $n\ge1$, and
+\[
+  \operatorname{Im}q_{\pm1}\;=\;\pm\frac{\pi}{2k}+O(k^{-2}),
   \qquad \operatorname{Re}q_{\pm1}=\tfrac12 \text{ exactly}.
+\]
+\emph{The companion family $a_i=2^{i}-1$ carries the same weights with $w_{0}=0$, so there the
+constant $2$ is absent, $\Gamma^{(q)}=\rho^{k}\sin (k\theta)/2t$ is an identity, and the zero set
+on the line is exact:}
+\[
+  q\;=\;\tfrac12+\tfrac{i}{2}\tan\bigl(n\pi/k\bigr),\qquad n=1,2,\dots
 \]
 \textbf{For this family the fair coin is not a minimiser sitting in an analytic region: it is
 the point the zeros are closing in on.}
@@ -1333,12 +1346,26 @@ here, partition the same profiles the same way.
 theorem.} \textsc{Falsifier 1}: exhibit a profile satisfying \textup{(H)} whose zeros approach
 $q=\tfrac12$. \textsc{Falsifier 2}: exhibit a profile violating \textup{(H)} whose zeros stay
 away from it. Neither is ruled out by anything here.
-\STATUS{derived for the mechanism, \textbf{measured} for the constant, and \textbf{conjectured}
-for the dichotomy. $k\cdot\operatorname{Im}q_{1}$ runs $4.7736,4.7457,4.7299,4.7214,4.7169$ at
-$k=128,256,512,1024,2048$ against $3\pi/2=4.712389$, with $\operatorname{Re}q_1=\tfrac12$ to
-every digit computed; $|q_1-\tfrac12|$ runs $0.0520,0.0253,0.0167$ at $k=32,64,96$ and is going
-to zero, against $0.5021$ for the odd numbers at $k=96$, which is not.
-\texttt{leeyang2\_r179}, \texttt{leeyang3\_r179}.}
+\STATUS{\textbf{proved} for the displayed identity and for the exact zero set of $a_i=2^{i}-1$;
+\textbf{measured} for the rate constant of $a_i=2^{i}+1$; \textbf{conjectured} for the dichotomy.
+$k\cdot\operatorname{Im}q_{1}$ runs $1.5951, 1.583, 1.5769, 1.5739$ at $k=128,256,512,1024$
+against $\pi/2=1.5707963$, with $\operatorname{Re}q_1=\tfrac12$ to every digit computed;
+$|q_1-\tfrac12|$ runs $0.052, 0.0253, 0.0167$ at $k=32,64,96$ and is going to zero, against the
+odd numbers, for which Proposition~\ref{prop:nopinch} \emph{proves} the disc $|q-\tfrac12|<1/6$
+zero-free and the measured winding number there is $2.3\times10^{-32}$.
+\texttt{leeyang7\_r194}, \texttt{leeyang8b\_r194}, \texttt{figures\_r194}.
+ \;--- \textbf{Erratum against v1.1.0.} That version stated this remark with
+$\cos(k\arctan2t)$ in place of $\sin$, the first-rung rate $3\pi/2k$ in place of $\pi/2k$, and a
+ladder of odd multiples $(2n+1)\pi/2k$ in place of $n\pi/k$. \emph{The error was to replace the
+geometric sum by its largest term}: that keeps the modulus and discards the factor $1/(z-1)$,
+whose argument is exactly $-\pi/2$, and a quarter turn of phase moves a ladder by half a rung.
+The point $t=3\pi/2k$ is not a zero at all; $\Gamma^{(q)}$ there measures $2.325885, 2.1374425,
+2.0630564, 2.030195$ at $k=128,256,512,1024$, converging to the constant $2$. The two measured
+series quoted in that version, $|q_1-\tfrac12|=0.0520,0.0253,0.0167$ and
+$k\cdot\operatorname{Im}q_1=4.7736,4.7457,4.7299$, are both correct measurements of genuine
+zeros --- \emph{of the first and the third rung respectively}, reported under one symbol. The
+agreement of the second with $3\pi/2$ was read as confirmation because the search had been aimed
+where $\cos$ predicted a zero and found a real one there.}
 \end{remark}
 
 \begin{proposition}[the fair coin is not pinched when the layer weights decay geometrically]
@@ -1468,9 +1495,10 @@ The ratio approaches $1$ from above and degrades gracefully as $c\to2$, which is
 $k$ must do when the quantity being predicted is going to zero. \emph{At $c=2$ the predicted
 value is exactly $0$ and the measurement follows it down}: $k\cdot\operatorname{dist}$ runs
 $1.552860,1.556681,1.559637,1.561639,1.563051$ at $k=24,40,56,72,88$, rising towards $\pi/2$ ---
-the first rung of the ladder $k\arctan2t=(2n+1)\pi/2$, with $n=0$ here and $n=1$ for
-$a_i=2^{i}+1$, where the same measurement gave $3\pi/2$. \textbf{At the boundary the rate is
-$(2n+1)\pi/2k$ and the integer depends on the profile; the vanishing does not.}
+the first rung $n=1$ of the ladder $k\arctan2t=n\pi$. \emph{The lacunary family gives the same
+constant}: for $a_i=2^{i}+1$, $k\cdot\operatorname{Im}q_1$ runs $1.5951, 1.583, 1.5769, 1.5739$ at
+$k=128,256,512,1024$, also rising to $\pi/2$. \textbf{At the boundary the rate is $\pi/2k$ for
+every profile measured --- one ladder, one first rung, no profile-dependent integer.}
 
 \emph{What this settles and what it does not.} Proposition~\ref{prop:gqgen} is an identity and
 its three consequences are immediate, so \emph{the fair coin is interior exactly when $R>1$} is
@@ -1486,7 +1514,8 @@ is a statement about $G$ and is not proved here.
 
 \begin{problem}[does $R=1$ force the pinch?]\label{prob:converse}
 For admissible profiles with $R=1$, do the zeros of $\Gamma^{(q)}$ approach $q=\tfrac12$ as
-$k\to\infty$, at rate $(2n+1)\pi/2k$ with $n$ determined by the profile's first resonance?
+$k\to\infty$, at rate $\pi/2k$ --- that is, does the first rung of the ladder
+$\theta_n=n\pi/k$ always exist and always descend at that rate?
 \emph{The missing ingredient is named rather than left to be located:} what is absent is the
 non-vanishing of the limit of $G$ on its circle of convergence. Hurwitz's theorem gives
 non-accumulation inside the lens on compact subsets; accumulation \emph{on} the boundary needs
@@ -1507,13 +1536,18 @@ them complex conjugates on a line, inherit boundary accumulation?}
 
 \emph{And the measured ladder is the fingerprint of the sum, not of a section.} Sections of a
 single geometric series have zeros at angular spacing $2\pi/k$; ours sit at
-$(2n+1)\pi/2k$ --- spacing $\pi/k$, offset by half of it. That is what
-$\cos(k\theta)$ does and what $e^{ik\theta}$ does not, so \textbf{the half-integer ladder is
-precisely the part of the phenomenon that the single-section theory does not describe.}
-\STATUS{conjectured, with the mechanism identified as the ladder and not the family: two
-profiles, two integers $n$, one ladder. $k\cdot\operatorname{Im}q_1$ measures $3\pi/2$ for
-$a_i=2^{i}+1$ and rises towards $\pi/2$ for layer gaps $2\cdot2^{j}$.
-\texttt{leeyang2\_r179}, \texttt{leeyang5\_r183}. \textbf{Literature pass completed} (r191):
+$\theta_n=n\pi/k$ on the ray $z=1+2it$ --- \emph{twice as densely}. That is what
+$\sin(k\theta)$ does and what $e^{ik\theta}-1$ does not, and the doubling is the signature of the
+\emph{sum}: taking the real part of a section folds $e^{ik\theta}$ into $\sin(k\theta)$, whose
+zeros are twice as dense. \textbf{So the doubled ladder is precisely the part of the phenomenon
+that the single-section theory does not describe.}
+\STATUS{\textbf{proved} for $a_i=2^{i}-1$, where the zero set on the line is exactly
+$q=\tfrac12+\tfrac{i}{2}\tan(n\pi/k)$; \textbf{measured} for the other two boundary profiles,
+whose $k\theta_n/\pi$ approach $1,2,3,4,5,6$ with error $O(k^{-1})$; \textbf{conjectured} in
+general. All near-$\tfrac12$ zeros were confirmed to lie \emph{on} the line by an argument-principle
+count on $|q-\tfrac12|=r$ for $r$ up to $0.25$, which matched twice the number of on-line sign
+changes in every case.
+\texttt{leeyang6\_r194}, \texttt{leeyang7\_r194}, \texttt{leeyang8b\_r194}. \textbf{Literature pass completed} (r191):
 Jentzsch's theorem and the Jentzsch--Szeg\H{o} refinements cover the sections themselves and have
 been extended to Dirichlet, Kapteyn and Neumann series, to analytic curves and to ultrametric
 fields; \emph{no source was found covering sums of sections}, so the transport is half and the

@@ -1,0 +1,18 @@
+QUOTED FORMS for paper4 rem:leeyanglacunary  (a_i = 2^i+1 unless noted)
+
+k*Im q_1 at k=128,256,512,1024, to 4 dp as quoted:
+   1.5951, 1.583, 1.5769, 1.5739
+   full: 1.59508780804, 1.58300570149, 1.5769167102, 1.57386041354
+   pi/2 = 1.5707963
+
+|q_1 - 1/2| at k=32,64,96, to 4 dp as quoted:
+   0.052, 0.0253, 0.0167
+   full: 0.0520250691041, 0.025294676185, 0.0166986495922
+
+a_i = 2^i-1 : k*theta_n/pi for n=1..6, deviation from n
+   k=  32  n=1..6   max |dev| = 6.477e-25
+   k=  64  n=1..6   max |dev| = 1.577e-24
+   k= 128  n=1..6   max |dev| = 3.153e-24
+
+odd numbers control, |q_1 - 1/2| at k=96 (paper quotes 0.5021):
+   prop:nopinch proves the disc |q-1/2| < 1/6 zero-free; winding measured 2.3e-32.
