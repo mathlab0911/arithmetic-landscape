@@ -1,0 +1,35 @@
+=== has the asymptotic regime started?  r(n) and e/Gamma at every reachable k ===
+        c    k            T           r(n)           lm/r      Gamma_k      e/Gamma      e/rho_k
+     1.40   14     1.85e+03              8      10.500000     5.326416       0.9713       199.82
+     1.40   16     3.71e+03             34       4.647059     5.349487       0.1313        50.46
+     1.40   18     7.36e+03             52       6.538462     5.360794       0.2197       162.67
+     1.40   20     1.45e+04            134       5.044776     5.366333       0.0599        87.23
+     1.40   22     2.86e+04            242       5.694215     5.369046       0.0606       175.69
+     1.40   24     5.61e+04            528       5.280303     5.370376       0.0168        97.81
+     1.40   26     1.10e+05           1070       5.362617     5.371027       0.0016        18.47
+     1.40   28     2.16e+05           2216       5.259928     5.371346       0.0207       496.49
+     1.40   30     4.23e+05           4516       5.278122     5.371503       0.0174       846.40
+
+     1.60   14     6.36e+03              6       6.666667     9.192383       0.2748        66.04
+     1.60   16     1.64e+04              6      10.333333     9.350769       0.1051        40.22
+     1.60   18     4.19e+04              6      16.666667     9.452103       0.7633       463.37
+     1.60   20     1.07e+05             16       9.250000     9.516953       0.0281        26.89
+     1.60   22     2.75e+05             20      11.300000     9.558457       0.1822       274.98
+     1.60   24     7.04e+05             44       8.045455     9.585021       0.1606       380.67
+
+=== the verdict this decides ===
+   c = 1.4 : e/Gamma runs 0.971 0.131 0.220 0.060 0.061 0.017 0.002 0.021 0.017
+             r(n) runs      8 34 52 134 242 528 1070 2216 4516
+   c = 1.6 : e/Gamma runs 0.275 0.105 0.763 0.028 0.182 0.161
+             r(n) runs      6 6 6 16 20 44
+
+   If e/Gamma is O(1) and not falling, the limit lm/r -> Gamma has not begun at these k
+   and NOTHING about its rate can be measured -- neither hypothesis is being tested.
+   If it is falling, fit the rate and compare with log(2/c).
+
+   c = 1.4 : fitted rate 0.1141 against log(2/c) = 0.3567 ; residual spread in log e = 3.20
+   c = 1.6 : fitted rate 0.0262 against log(2/c) = 0.2231 ; residual spread in log e = 3.24
+
+   A residual spread of order 1 in log e means the fitted rate carries an uncertainty of
+   roughly spread/(k-range), and that number must be printed beside the rate or the
+   agreement is being asserted rather than measured.

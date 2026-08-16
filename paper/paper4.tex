@@ -1509,6 +1509,26 @@ existence. The natural test compares the measured error against $\Gamma\,Q(0)/\s
 quantity ceases to exist at $c=2^{1/3}$, below the whole region where the zero-distance
 $1/c-\tfrac12$ has moved appreciably. \emph{An experiment whose control evaporates before the
 signal appears is not a weak experiment; it is a different question.}
+\medskip
+\noindent
+\textbf{The constant dies; the running correction does not.} Truncating at the canonical cut
+$d<a_k/2\asymp c^{k}$ gives $Q_k\asymp(c^{k})^{3-\lambda}=c^{3k}2^{-k}$ with
+$\lambda=\log2/\log c$, and $\sigma_k^{2}\asymp c^{2k}$, so
+\[
+  \rho_k(c)\;=\;\frac{Q_k}{\sigma_k^{2}}\;\asymp\;\Bigl(\frac{c}{2}\Bigr)^{k}
+\]
+throughout $c<2$: \emph{in the window the first correction survives as a quantity with its own
+exponential scale, neither a constant over $\sigma^{2}$ nor absent.}
+\STATUS{derived by fable-5 and \textbf{checked here before use}: $\rho_k(2/c)^{k}$ measures
+$0.8645,0.8679,0.8610,0.8564,0.8542$ at $k=12,16,20,24,28$ for $c=1.6$ --- flat --- and
+$3.3199,4.1888,4.6201,4.8066,4.8787$ for $c=1.4$, still converging. At $c=1.8$ it is
+$0.3132,0.2794,0.2587,0.2465,0.2390$ and has not settled by $k=28$, so the law is confirmed
+where it is confirmed and not beyond. \emph{Whether the measured error $|\mathrm{lm}/r-\Gamma|$
+tracks $\rho_k$ is a separate question and is not answered}: at every $k$ for which
+$\mathrm{lm}/r$ is exactly computable, $|\mathrm{lm}/r-\Gamma|/\Gamma$ is still $O(1)$ at
+$c=1.6$ and only begins to fall at $c=1.4$, and a fitted decay rate carries a residual spread of
+$3.2$ in $\log$, which is larger than the effect. \texttt{window\_r187}, \texttt{window2\_r187}.}
+
 \STATUS{the criterion $c<2^{1/3}$ is \textbf{derived} from the growth of $N_d$ and
 \textbf{measured} at seven values of $c$; the recovery of $61/3$ is an independent check of
 Proposition~\ref{prop:correction}. The consequence for \S\ref{sec:leeyang} is that the rate

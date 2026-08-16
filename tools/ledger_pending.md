@@ -196,3 +196,60 @@ Registered: `c < 2^{1/3}` **derived** and **measured**; the `61/3` recovery is a
 check of `prop:correction`; the rate question is **open by a different route than the one
 attempted**. Ruling 2's converse is now `prob:converse` in the paper, with the missing analytic
 ingredient named at the statement, F38-style: non-vanishing of `G` on its circle of convergence.
+
+## r187 — the first fit agreed with the prediction, and the agreement was noise
+
+fable-5's r186 derived `ρ_k = Q_k/σ² ≍ (c/2)^k` and released the window experiment with the
+discriminator stated: *the layer mechanism gives an exponential decay whose rate moves with `c`
+as `log(2/c)`; the zeros give a `k`-independent constant and cannot.*
+
+**The control law checks out.** `ρ_k(2/c)^k` is flat at `c = 1.6` (`0.8646…0.8542` over
+`k = 12…28`), converging at `c = 1.4`, and still drifting at `c = 1.8` — confirmed where
+confirmed, not beyond.
+
+**And then the signal.** The first run took four `k` values per `c` and fitted decay rates of
+`0.391` and `0.237` against `log(2/1.4) = 0.357` and `log(2/1.6) = 0.223`. **Ratios 1.096 and
+1.064.** I had a confirmation.
+
+Pushing to every reachable `k` — nine points at `c = 1.4`, six at `c = 1.6` — the same fits give
+**`0.114` and `0.026`**, with a residual spread of `3.2` in `log e`. Over a `k`-range of 8 that is
+an uncertainty of roughly `±0.4`, **larger than either predicted value.**
+
+> **The agreement was an artefact of stopping at four points.** Not a wrong calculation, not a
+> bug: a fit over a range too short to see its own scatter, reported as a ratio to three decimal
+> places. **A ratio quoted to three decimals from four noisy points is a claim about precision
+> that the data cannot support, and the decimals are what make it persuasive.**
+
+This is F27 (*extend the range until the hypotheses are distinguishable*) firing on its author,
+one round after that same author wrote *"a plateau is a claim about a range, and three points
+inside one are not a range"* into the ledger. **The second time a rule catches you is not a
+failure of the rule; it is the rule working on someone who already believed it.**
+
+Two operational consequences:
+
+- **Print the residual spread beside every fitted rate**, always. A rate without its scatter is
+  an assertion wearing a number. The script now does; it should have from the start.
+- **The reachable range must be established before the fit, not after.** At `c = 1.6`,
+  `e/Γ` is still `O(1)` at every computable `k` — `0.275, 0.105, 0.763, 0.028, 0.182, 0.161` —
+  so the limit has not begun and **no rate exists to measure.** Checking that costs one column
+  and would have prevented the whole episode.
+
+**Verdict as registered:** fable-5's control law **confirmed** on `c ∈ {1.4, 1.6}`. The
+discriminating measurement **does not resolve**, and neither hypothesis is tested. The
+pre-registered falsifier did not fire, and that is not evidence either way — an experiment that
+cannot resolve cannot exonerate.
+
+### r187, addendum — and the check caught the digit
+
+C2 refused the report because twelve of its numbers were not in any log: I had quoted them at
+four decimals from scientific notation printed at seven. Fixing that properly — a small script
+that prints exactly the figures the prose quotes, so paper and report cannot drift from the
+measurement or from each other — then exposed a thirteenth: **I had written `0.8646` where the
+computation says `0.8645`.**
+
+> **A number retyped at a different precision is a new number, and nobody checks it against the
+> old one.** The defence is not care; it is to print the quoted form itself, once, in a log, and
+> quote from there.
+
+Small, and it landed in the same round as a fit that agreed by accident. **Both are the same
+failure at different scales: a number that looked right because of how it was written down.**

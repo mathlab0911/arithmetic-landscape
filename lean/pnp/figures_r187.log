@@ -1,0 +1,10 @@
+rho_k*(2/c)^k, to four decimals, as quoted:
+   c = 1.4 : 3.3199, 4.1888, 4.6201, 4.8066, 4.8787
+   c = 1.6 : 0.8645, 0.8679, 0.8610, 0.8564, 0.8542
+   c = 1.8 : 0.3132, 0.2794, 0.2587, 0.2465, 0.2390
+
+fitted decay rates, to four decimals, as quoted:
+   four-point fit  : c = 1.4 -> 0.3909 ; c = 1.6 -> 0.2374   (window_r187)
+   full-range fit  : c = 1.4 -> 0.1141 ; c = 1.6 -> 0.0262   (window2_r187)
+   log(2/c)        : c = 1.4 -> 0.3567 ; c = 1.6 -> 0.2231
+   the four-point fit is the one that agreed and the one that was noise
