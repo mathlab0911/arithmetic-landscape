@@ -165,6 +165,7 @@ python3 tools/check.py
 | C18 | the homepage, in its own repository, carries no retired name, no banned literal, and the same disclosure |
 | C19 | every Japanese edition has the same labels, theorem environments and status declarations as its source |
 | C20 | no statement rests on measurement alone: prove it, disprove it, or name it as open |
+| C21 | no file in the tree has a name that says it holds credentials — and the check announces its own limit, since it cannot see a secret that is innocently named |
 
 A check that examined nothing **fails**: silence is good news only if the check spoke.
 
