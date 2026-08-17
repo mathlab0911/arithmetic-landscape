@@ -103,3 +103,32 @@ evidence and are not; the count "three families" was a count of *computations*, 
 *The consolation, and it is the honest half:* the merge does not weaken the evidence, it explains
 it. Three coincidences became one mechanism with three inputs, and the closed-form row stopped
 being a lucky family and became the `A = 0` case.
+
+## r203 — the index became a copy, and the rule against it was already written
+
+**claimed** : `MEMORY.md` is an index, one line per entry (skill §14, which says in as many
+words that *an index that grows becomes a copy, and a copy of the thing it indexes is the
+artefact most likely to be read and least likely to be maintained*).
+
+**actual**  : **41.5 KB, ten round-entries of up to 6 KB each, and two "pointer" lines that had
+themselves grown into copies of the files they point at.** It was caught by a tool warning about
+a size limit, not by us — nothing in this project reads its own memory for shape.
+
+**check**   : the fold was mechanical — move the fat entries verbatim into `pnp-progress.md`,
+**assert every one of them is present in the destination**, and only then rewrite the source.
+That ordering is r200b's lesson, and this time it was designed in rather than survived. Result:
+41543 → 4306 bytes, all content preserved.
+
+**rule**    : **A file that says what it must not become needs something that measures whether
+it has become it.** The rule was correct, written down, and read at the start of every session
+for months, and the file drifted anyway, because *no step of any procedure ever looks at it*.
+> **Every artefact with a stated shape needs a check on the shape, or the statement is a wish.**
+> Candidate: one assertion in `check.py` on the byte size and the one-line-per-entry form of
+> `MEMORY.md`. Not written this round — naming it here rather than shipping it silently.
+
+**And a repeat offence worth its own line.** §9 says *pass PowerShell work as a script file, not
+`-Command`*, and *PowerShell mangles non-ASCII*. I hit both, in that order, in one session: first
+the `$` variables were eaten by the wrapper, then the same script as a `.ps1` had its Japanese
+string destroyed by PowerShell 5.1's encoding. **Having a rule and not reaching for it is not
+having the habit** — the third instance of that sentence in this ledger, and the fix is the same
+each time: for anything with non-ASCII or `$`, write Python and run it.
