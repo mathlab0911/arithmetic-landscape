@@ -62,3 +62,7 @@ outgoing/
 # material, kept on disk and deliberately out of the repository (r117).
 lean/pnp/spec_*.md
 lean/pnp/paper2_*.md
+
+# 解説シリーズ(賢太郎さん向けの現在地の説明)。book/ と同じ扱い:
+# 公開の陳列棚には出さず、作業場ブランチにのみバックアップする。
+kaisetsu/

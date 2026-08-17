@@ -26,7 +26,7 @@ $PRIV = 'https://github.com/mathlab0911/arithmetic-landscapes-private.git'
 Set-Location $TREE
 
 # the whitelist, and the only thing this repository is ever allowed to hold
-$PATHS = @('reports', 'book', 'paper-ja', 'docs', 'outgoing')
+$PATHS = @('reports', 'book', 'paper-ja', 'docs', 'outgoing', 'kaisetsu')
 $GLOBS = @('lean/pnp/spec_*.md', 'lean/pnp/paper2_*.md')
 
 if (-not (Test-Path $GD)) {
