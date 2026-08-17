@@ -1,0 +1,112 @@
+====================================================================================================
+abel_r220 -- an EXACT identity for arbitrary weights, and a theorem it gives free
+(B)  F_k(1/2+it) = 1 + (1/t)[ w_{k-1} rho^k sin(k th) + sum_j (w_{j-1}-w_j) rho^j sin(j th) ]
+derived by Abel summation on paper; nothing here is fitted or approximated
+====================================================================================================
+
+--- A1a  THE IDENTITY, RELATIVE agreement (see the asterisk in the header) ---
+      s      k              t          F (both routes)     rel diff
+      1     64       0.3*pred      5.91957913950549461    3.154e-61
+      1     64       1.0*pred      3.33696669393292335    8.392e-61
+      1     64       2.7*pred     -45308344.5650341411    3.456e-61
+      1    256       0.3*pred      6.68132726919765927    3.726e-61
+      1    256       1.0*pred      11.2890797524327538     8.82e-61
+      1    256       2.7*pred     -19429932521379.9238     4.93e-60
+      1   1024       0.3*pred      7.71667034581281078    1.048e-60
+      1   1024       1.0*pred     -5.89473906746220492    2.534e-60
+      1   1024       2.7*pred -3.29508363970455187e+18    6.206e-60
+      2     64       0.3*pred      3.93815419369701235     2.37e-61
+      2     64       1.0*pred      1.96596781855804378    7.913e-61
+      2     64       2.7*pred     -120002967991.717654    2.049e-60
+      2    256       0.3*pred      4.06598998411378424    1.531e-61
+      2    256       1.0*pred    0.0856271515927053096    4.045e-60
+      2    256       2.7*pred  4.88209039880593065e+22    5.538e-60
+      2   1024       0.3*pred      4.15550060247500292    1.797e-60
+      2   1024       1.0*pred    -0.788580983331474981    6.067e-60
+      2   1024       2.7*pred  3.69753216283960768e+34    1.075e-59
+      4     64       0.3*pred      3.15811178614089142          0.0
+      4     64       1.0*pred       3.2093634614562822    2.909e-61
+      4     64       2.7*pred      305647044558137.269    5.731e-61
+      4    256       0.3*pred      3.16215396343536627     4.92e-61
+      4    256       1.0*pred      3.48854497693793692    5.352e-61
+      4    256       2.7*pred  7.56397512744451529e+35    7.928e-60
+      4   1024       0.3*pred      3.16379055304035636    1.475e-60
+      4   1024       1.0*pred      7.31311838419500389    1.191e-60
+      4   1024       2.7*pred  1.29413631919905987e+62    2.448e-59
+  cases: 27 -> PASS
+
+--- A1b  THE INFORMATIVE HALF: absolute agreement AT THE ZERO, where F = 0 ---
+  there the direct sum cancels completely, so an absolute tolerance is the right one
+      s      k                  t_1        F_direct(t_1)  |direct-abel|
+      1     64    0.186199681451984           5.1164e-14      1.945e-60
+      1    256    0.106767212545108         -1.49195e-13      3.734e-60
+      1   1024      0.0543428673092          4.56791e-10      1.587e-59
+      2    256         0.1472309802          -2.39528e-8      3.112e-61
+      4   1024         0.1173883585           3.09217e-7      1.424e-59
+  cases: 5 -> PASS
+
+--- A2  it must COLLAPSE to Theorem 2 for constant weights ---
+  w0=0 w=0.5 k=  64 A=0.0  Thm2=49.013131033276  (B)=49.013131033276  |diff|=0.0
+  w0=0 w=0.5 k=  64 A=0.0  Thm2=7.4299407498177  (B)=7.4299407498177  |diff|=0.0
+  w0=0 w=0.5 k= 256 A=0.0  Thm2=194.33977405645  (B)=194.33977405645  |diff|=0.0
+  w0=0 w=0.5 k= 256 A=0.0  Thm2=28.41537876745  (B)=28.41537876745  |diff|=0.0
+  w0=1 w=0.5 k=  64 A=2.0  Thm2=51.013131033276  (B)=51.013131033276  |diff|=0.0
+  w0=1 w=0.5 k=  64 A=2.0  Thm2=9.4299407498177  (B)=9.4299407498177  |diff|=0.0
+  w0=1 w=0.5 k= 256 A=2.0  Thm2=196.33977405645  (B)=196.33977405645  |diff|=0.0
+  w0=1 w=0.5 k= 256 A=2.0  Thm2=30.41537876745  (B)=30.41537876745  |diff|=2.489e-60
+  w0=1 w=1 k=  64 A=1.0  Thm2=99.026262066553  (B)=99.026262066553  |diff|=0.0
+  w0=1 w=1 k=  64 A=1.0  Thm2=15.859881499635  (B)=15.859881499635  |diff|=0.0
+  w0=1 w=1 k= 256 A=1.0  Thm2=389.6795481129  (B)=389.6795481129  |diff|=0.0
+  w0=1 w=1 k= 256 A=1.0  Thm2=57.830757534899  (B)=57.830757534899  |diff|=0.0
+  cases: 12 -> PASS
+
+--- A3  THE THEOREM: non-increasing weights => F_k >= 1 for theta <= pi/k ---
+      s      k min F over theta<=pi/k at theta/(pi/k)
+      1     64        7.3257563768493            1.0
+      1    256      9.988366518564821            1.0
+      1   1024      12.73109230126149            1.0
+    1.5     64       5.18941789799002            1.0
+    1.5    256      5.689181548396993            1.0
+    1.5   1024      5.954249500713784            1.0
+      2     64       4.15999791131507            1.0
+      2    256      4.254123005852207            1.0
+      2   1024      4.280615144961184            1.0
+      4     64      3.164206808599743            1.0
+      4    256      3.164616744863904            1.0
+      4   1024       3.16464456784328            1.0
+  1/log    256      22.04586798067524              -
+  1/log   1024      48.05724373820943              -
+  cases: 14 -> PASS
+
+--- A4  CONTROL: does monotonicity do the work?  (profiles that are NOT decreasing) ---
+  registered expectation: at least one of the three dips below 1 in theta <= pi/k
+  ramp  w_j = (j+1)/k          k=  64  min F = -25.93489366973  at theta/(pi/k)=1.0   DIPS BELOW 1
+  ramp  w_j = (j+1)/k          k= 256  min F = -103.75210027165  at theta/(pi/k)=1.0   DIPS BELOW 1
+  bump  at j = k/2             k=  64  min F = 7.3257563768493  at theta/(pi/k)=1.0   stays >= 1
+  bump  at j = k/2             k= 256  min F = 9.9883665185648  at theta/(pi/k)=1.0   stays >= 1
+  alternating 1, 0.1, 1, ...   k=  64  min F = 1.9355211968906  at theta/(pi/k)=1.0   stays >= 1
+  alternating 1, 0.1, 1, ...   k= 256  min F = 1.9087246091661  at theta/(pi/k)=1.0   stays >= 1
+  profiles dipping below 1: 2 of 6  -> PASS: monotonicity is load-bearing
+
+--- A5  SLACK of the new bound (no verdict; this is what a sharpening must beat) ---
+      s      k     t_1 (measured)     (1/2)tan(pi/k)      ratio
+      1     64     0.186199681452    0.0245634248847    7.58036
+      1    256     0.106767212545   0.00613623118978    17.3995
+      1   1024    0.0543428673092   0.00153398560071    35.4259
+      2     64        0.302342703    0.0245634248847    12.3087
+      2    256       0.1472309802   0.00613623118978    23.9937
+      2   1024       0.0794766675   0.00153398560071    51.8106
+      4     64       0.4555441314    0.0245634248847    18.5456
+      4    256       0.2165900295   0.00613623118978    35.2969
+      4   1024       0.1173883585   0.00153398560071    76.5251
+  (t_1 values are quoted from dense_r216c / quantum_r216d logs; the bound is computed here)
+
+====================================================================================================
+  [A1a identity, relative] PASS
+  [A1b identity at the zero, absolute] PASS
+  [A2 collapses to Theorem 2] PASS
+  [A3 theorem (C) holds] PASS
+  [A4 monotonicity is load-bearing] PASS
+
+interpretation belongs in the report, not here.
+done.

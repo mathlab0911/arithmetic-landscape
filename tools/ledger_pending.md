@@ -540,3 +540,52 @@ where the weights are not — at large `j`, inside the tail the model already re
 
 Rule: in a product of two factors, the concentration of one is not the concentration of
 the product. Ask where the *product* lives before naming a term after one of its halves.
+
+## F99 (r220) — a tolerance is a claim about scale, and a replaced criterion keeps its log
+
+`abel_r220` registered "agreement to `1e-45` **absolute**" for an identity that the same
+script evaluates from `1e0` to `1.3e62`. It recorded FAIL. The identity was in fact exact
+to 60 significant digits at every point; the largest "failure" was a difference of 3168
+against a value of `1.3e62` — relative `2.4e-59`.
+
+The defect is visible **without the data** — the script prints the magnitude itself — so
+`abel_r220b` repairs it. But it is still a criterion rewritten after a run, so the
+original log is kept and committed and cited from the replacement's header. *A
+pre-registration edited after seeing data is not a pre-registration (r206); the way to
+keep that true is to leave the first one standing.*
+
+Rule: **state tolerances relative unless the magnitude is known in advance.** And when
+absolute is right — here, at the zero, where the direct sum cancels totally and `F = 0` —
+say why it is right *there* and not elsewhere. The far-from-zero points were nearly
+worthless as a test (one term dominates) and were what broke the criterion: **the check
+that is easiest to pass is the one most likely to set the tolerance.**
+
+## F100 (r220) — before modelling a term, try summing by parts
+
+Rounds r211, r216, r217, r219 built, refined, diagnosed and corrected a *model* of
+`Re G_k` as head plus geometric tail: `Hp(θ) + T sin(kθ)`. Four rounds, three revisions,
+a quantum that turned out to be the model's own simplification, and a domain argument
+that needed a Dirichlet-kernel slope to rescue it.
+
+One Abel summation removes all of it. With `D_j := w_j − w_{j+1}`,
+
+```
+    G_k(z) = [ w_{k−1}z^k + Σ_j D_j z^{j+1} − w_0 ] / (z − 1)
+```
+
+exactly, and on the line (`z − 1 = 2it`, so real parts become imaginary parts)
+
+```
+    F_k(½+it) = 1 + (1/t)[ w_{k−1}ρ^k sin(kθ) + Σ_{j=1}^{k−1}(w_{j−1}−w_j) ρ^j sin(jθ) ]
+```
+
+exactly, for **every** weight sequence. It contains Theorem 2 as the case where the sine
+series is empty, and because its coefficients are the weight *decrements* it is
+non-negative for non-increasing weights — which gives a theorem in two lines that the
+project had only for constant weights.
+
+Rule: **when a sum resists, before approximating it, ask what it looks like after
+summation by parts.** The tell here was there all along: the object's difficulty was
+always the competition between decaying `w_j` and growing `ρ^j`, and summation by parts
+is the standard instrument for exactly that competition. We reached for a model because
+the *model* was the thing we had just built, not because the sum demanded one.
