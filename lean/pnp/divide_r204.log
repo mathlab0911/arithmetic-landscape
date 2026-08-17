@@ -1,0 +1,49 @@
+============================================================================================
+divide_r204 -- is the dividing line SUMMABILITY, or merely DECAY?
+The two hypotheses separate on profiles that decay but do not sum.  Nothing measured
+so far lives there: every divergent-side profile to date has CONSTANT weights.
+============================================================================================
+
+--- FALSIFIER (instrument): constant w = 1/2, w_0 = 0 -> t_1 = (1/2)tan(pi/k) exactly ---
+  k=  64  exact=0.0245634248847336270526717  measured=0.0245634248847336270526717  rel.diff=4.562e-52
+  k= 128  exact=0.0122743110544627220522899  measured=0.0122743110544627220522899  rel.diff=4.562e-52
+  cases: 2  -> PASS
+
+--- harmonic  1/(j+1)   (divergent) ---
+       k        Gamma_k                    t_1          k*t_1     t_1/sqrt-law
+      64      10.487782     0.1861996814519841    11.91677961        1.0329887
+     128      11.866294     0.1409993892900241    18.04792183         1.024178
+     256       13.24869      0.106767212545108    27.33240641        1.0259239
+     512      14.633033    0.07234505270561657    37.04066699       0.92688282
+    1024      16.018351    0.05434286730924355    55.64709612       0.93410306
+
+--- 1/((j+2)log(j+2))   (divergent, barely) ---
+       k        Gamma_k                    t_1          k*t_1     t_1/sqrt-law
+      64      5.4509662     0.2393059670865268    15.31558189        1.3276089
+     128      5.7529496     0.1669787771475153    21.37328347        1.2128847
+     256      6.0173208     0.1197671418105002     30.6603883          1.15084
+     512      6.2517183    0.08445146164818397    43.23914836        1.0819898
+    1024       6.461924    0.06072184970131487    62.17917409        1.0437518
+
+--- power s=1.5   (convergent) ---
+       k        Gamma_k                    t_1          k*t_1     t_1/sqrt-law
+      64      5.7266962     0.2421927063058373     15.5003332        1.0970642
+     128      5.8718865     0.1699120964957792    21.74874835        1.0077131
+     256      5.9749946     0.1326150937948574    33.94946401        1.0404581
+     512      6.0480603    0.09151521562908376     46.8557904       0.95733441
+    1024      6.0997812    0.06975829113935333    71.43249013       0.97904454
+
+============================================================================================
+DECISION, by the rule registered before the run
+============================================================================================
+  pi/2 = 1.570796327
+  harmonic  1/(j+1)      divergent            k*t_1=55.647096    t_1/sqrt=0.934103    follows the sqrt law (ratio settling)
+  1/((j+2)log(j+2))      divergent, barely    k*t_1=62.179174    t_1/sqrt=1.04375     follows the sqrt law (ratio settling)
+  power s=1.5            convergent           k*t_1=71.43249     t_1/sqrt=0.979045    follows the sqrt law (ratio settling)
+
+  families decided: 3 of 3  -> PASS
+
+CONCLUSION: the conjecture as stated is REFUTED or unresolved on the harmonic family;
+see the row above.  The dividing line is not summability as written.
+
+done.

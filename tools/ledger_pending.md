@@ -132,3 +132,38 @@ the `$` variables were eaten by the wrapper, then the same script as a `.ps1` ha
 string destroyed by PowerShell 5.1's encoding. **Having a rule and not reaching for it is not
 having the habit** — the third instance of that sentence in this ledger, and the fix is the same
 each time: for anything with non-ASCII or `$`, write Python and run it.
+
+## r204 — the conjecture's dividing line was never on the line
+
+**claimed** : (published in `v1.1.1`, `rem:rateregimes` STATUS) *"the dividing line is conjectured
+to be `Σ_j w_j < ∞` rather than anything finer."*
+
+**actual**  : **disproved.** The harmonic profile `w_j = (j+1)^{-1}` has `Σ w_j = ∞` and takes the
+`√(s log k / 2k)` rate, not `π/2k`: `k·t_1` runs `11.9, 18.0, 27.3, 37.0, 55.6` at
+`k = 64…1024` — growing, not settling at `π/2 = 1.571`. The same for
+`w_j = ((j+2)log(j+2))^{-1}`. **The line is `w_j → 0` versus `w_j ↛ 0`.**
+
+**check**   : *test the dividing line on the line.* Every divergent-side profile ever measured
+here had **constant** weights, and every convergent-side one decayed like a power, so the data
+were equally consistent with a different statement — *constant versus decaying* — that nobody had
+written down. The two hypotheses separate only on profiles that **decay without summing**, and
+until r204 not one had been computed.
+
+**rule**    : **A dividing line is a claim about the profiles that lie ON it, and evidence from
+profiles far to either side does not test it.** Before conjecturing a boundary, ask which objects
+sit closest to it and compute one of those.
+> The two hypotheses had been *observationally equivalent on everything we owned*. That is not a
+> reason to prefer either; it is a reason to go and find the case that separates them, and the
+> cost here was one script.
+
+**And the mechanism had already said so.** The derivation reads: `w_k ρ^k ≈ k^{−s}e^{2kt²}` is
+`O(1)` when `2kt² = s log k`. **It uses `w_k` and never `Σ_j w_j`.** The summability clause was
+never one of its hypotheses; it was imported from the examples and attached to a derivation that
+does not need it.
+> **When a conjecture and its own mechanism disagree about what the hypothesis is, the mechanism
+> is the one that was derived.** Read the derivation back against the statement before publishing
+> the statement — the scope of a mechanism is legible in the mechanism.
+
+*(Fourth correction in one section in five rounds: `cos`/`sin`, `R ≥ 1 ⟺ Γ finite`, the missing
+clamp, and now this. Three of the four were found by building something new and noticing it
+contradicted a sentence elsewhere — F84's clause about new examples, firing again.)*

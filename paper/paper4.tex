@@ -1578,10 +1578,12 @@ $\Gamma^{(q)}_k=1+2\sum_j w_j\rho^{\,j}\cos(j\theta)$ with $w_j=m_j2^{-j}$,
 $\rho=\sqrt{1+4t^{2}}$ and $\theta=\arctan2t$, so $\rho^{\,j}=e^{2jt^{2}(1+O(t^{2}))}$ and the
 last term carries $w_k e^{2kt^{2}}$.
 \begin{itemize}
-\item If $w_j\to w>0$ --- equivalently $\Gamma$ divergent --- the growth factor is irrelevant at
-      $t\asymp1/k$ and the zero is produced by the \emph{phase} alone, at $k\theta=\pi$. That is
-      the ladder of Remark~\ref{rem:leeyanglacunary} and the rate is $\pi/2k$.
-\item If $w_j\asymp(j+1)^{-s}$ with $s>1$ --- $\Gamma$ convergent --- the phase cannot do it:
+\item If $w_j\to w>0$ --- which makes $\Gamma$ divergent, \emph{though not conversely} --- the
+      growth factor is irrelevant at $t\asymp1/k$ and the zero is produced by the \emph{phase}
+      alone, at $k\theta=\pi$. That is the ladder of Remark~\ref{rem:leeyanglacunary} and the rate
+      is $\pi/2k$.
+\item If $w_j\asymp(j+1)^{-s}$ with $s>0$ --- summable or not; \emph{the mechanism uses only the
+      size of $w_k$ and never the sum} --- the phase cannot do it:
       at $\theta=x/k$ every $\rho^{\,j}\to1$ for $j\le k$, so
       $\sum_j w_j\cos(jx/k)\to\sum_j w_j>0$ and there is no dip at that scale. What produces the
       zero is instead the growth $\rho^{\,j}$ overcoming the decay $w_j$: the quantity
@@ -1591,10 +1593,19 @@ last term carries $w_k e^{2kt^{2}}$.
 \end{itemize}
 Hence the dichotomy inside the boundary case:
 \[
-  \Gamma\text{ divergent:}\quad t_1\sim\frac{\pi}{2k},
+  w_j\not\to0:\quad t_1\sim\frac{\pi}{2k},
   \qquad\qquad
-  \Gamma\text{ convergent},\ w_j\asymp(j+1)^{-s}:\quad t_1\sim\sqrt{\frac{s\log k}{2k}} .
+  w_j\asymp(j+1)^{-s},\ s>0:\quad t_1\sim\sqrt{\frac{s\log k}{2k}} .
 \]
+\emph{The dividing line is the decay of $w_j$, not the convergence of $\sum_j w_j$, and an
+earlier version of this remark said the opposite.} The two agree on every profile measured before
+r204 --- which is why the wrong line survived --- and they separate exactly on profiles that decay
+without summing. The harmonic profile $w_j=(j+1)^{-1}$ is one: $\sum_j w_j=\infty$, and it sits on
+the $\sqrt{\ }$ side, with $k\cdot t_1$ running $11.9, 18.0, 27.3, 37.0, 55.6$ at
+$k=64,\dots,1024$ --- growing, not approaching $\pi/2$. So does $w_j=\bigl((j+2)\log(j+2)\bigr)^{-1}$,
+which diverges more slowly still ($k\cdot t_1$ reaching $62.2$). \textbf{The mechanism above was
+right and its stated scope was wrong}: it uses $w_k$ and never $\sum_j w_j$, so summability was
+never one of its hypotheses. \texttt{divide\_r204}.
 \textbf{The second is larger by a factor $\asymp\sqrt{k\log k}$: the pinch is slower, and it is
 slower in a way that reads off the exponent $s$.} There is no constant to fit in either.
 
@@ -1629,17 +1640,23 @@ direction and at the predicted size.
 
 \emph{What this does to Problem~\ref{prob:converse}, said plainly rather than quietly.} That
 problem was posed asking whether $R=1$ forces the pinch \emph{at rate $\pi/2k$}. The rate clause
-is answered \textbf{no}, by family C, and the problem below has been restated without it. The
+is answered \textbf{no}, by family C and now also by the harmonic profile, and the problem below
+has been restated without it. The
 question of whether $R=1$ forces a pinch \emph{at all} is untouched and remains open --- but it
 is now supported by five profiles instead of two, and by two different rates, which is better
 evidence for it than one repeated rate would have been.
 \STATUS{the mechanism is \textbf{derived} (asymptotically, not to the standard of the identities
-in this section); the two rates are \textbf{measured} with no fitted constant, at three exponents
+in this section); the two rates are \textbf{measured} with no fitted constant, at four exponents
 and five sizes, with a control that fails the law; the general two-regime law is
-\textbf{conjectured}, and the dividing line is conjectured to be $\sum_j w_j<\infty$ rather than
-anything finer. \texttt{rate\_r200}, whose four pre-registered falsifiers are printed in the log;
+\textbf{conjectured}. \textbf{The dividing line was conjectured to be $\sum_j w_j<\infty$ and that
+is \emph{disproved}} --- the harmonic profile is not summable and takes the $\sqrt{\ }$ rate; the
+line is $w_j\to0$. \emph{At $s=1$ the constant is not settled}: the ratio to
+$\sqrt{\log k/2k}$ measures $1.033, 1.024, 1.026, 0.927, 0.934$ at $k=64,\dots,1024$, which is
+non-monotone and is reported as such rather than averaged.
+\texttt{rate\_r200}, whose four pre-registered falsifiers are printed in the log ---
 the two instrument controls among them fired on the first run and caught both an index error here
-and the missing clamp in Remark~\ref{rem:nopinchreading}.}
+and the missing clamp in Remark~\ref{rem:nopinchreading} --- and \texttt{divide\_r204}, whose
+decision rule was registered before the run and returned the answer the author was not expecting.}
 \end{remark}
 
 \begin{problem}[does $R=1$ force the pinch?]\label{prob:converse}
@@ -1647,8 +1664,8 @@ For admissible profiles with $R=1$, do the zeros of $\Gamma^{(q)}$ approach $q=\
 $k\to\infty$ --- that is, does a first rung always exist?
 \emph{As first posed, this problem also asked whether that rung always descends at rate
 $\pi/2k$. It does not, and the clause is withdrawn here rather than dropped silently}
-(Remark~\ref{rem:rateregimes}): the rate is $\pi/2k$ when $\Gamma$ diverges and
-$\sqrt{s\log k/2k}$ when $w_j\asymp(j+1)^{-s}$. \textbf{What is open is the existence of the
+(Remark~\ref{rem:rateregimes}): the rate is $\pi/2k$ when $w_j\not\to0$ and
+$\sqrt{s\log k/2k}$ when $w_j\asymp(j+1)^{-s}$, $s>0$. \textbf{What is open is the existence of the
 pinch, not its speed}, and the two known speeds are evidence for the existence rather than
 against it.
 \emph{The missing ingredient is named rather than left to be located:} what is absent is the
