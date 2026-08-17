@@ -1,0 +1,62 @@
+========================================================================================
+trackm_r203 -- Track M (i) the reduction, (ii) the constant-weight theorem
+========================================================================================
+
+--- V1: closed form vs direct summation ---
+  cases: 60   worst agreement: 59 digits   -> PASS
+
+--- V2: t -> 0+ gives Gamma_k = 1 + 2w_0 + 2(k-1)w ---
+  2^i - 1    k= 16  Gamma_k=16.0  F(0+)=16.0  agree 57
+  2^i - 1    k= 70  Gamma_k=70.0  F(0+)=70.0  agree 56
+  2^i + 1    k= 16  Gamma_k=18.0  F(0+)=18.0  agree 57
+  2^i + 1    k= 70  Gamma_k=72.0  F(0+)=72.0  agree 56
+  layer c=2  k= 16  Gamma_k=33.0  F(0+)=33.0  agree 57
+  layer c=2  k= 70  Gamma_k=141.0  F(0+)=141.0  agree 56
+  cases: 6  -> PASS
+
+--- V3+V7: no sign change strictly inside 0 < theta < pi/k ---
+  cases: 12, all A >= 0  -> PASS
+
+--- V4: F_k < 0 at theta = 3pi/(2k); smallest k printed, not assumed ---
+  2^i - 1    holds for all k in [4, 199]
+  2^i + 1    holds for all k in [4, 199]
+  layer c=2  holds for all k in [4, 199]
+  cases: 3  -> PASS
+
+--- V5: t_1 inside the bracket, and k*t_1 -> pi/2 ---
+  profile         k                    t_1          k*t_1
+  2^i - 1        64  0.0245634248847336271    1.572059193
+  2^i - 1       128  0.0122743110544627221    1.571111815
+  2^i - 1       256 0.00613623118978313762    1.570875185
+  2^i - 1       512 0.00306800007881170098     1.57081604
+
+  2^i + 1        64  0.0252946761850082927    1.618859276
+  2^i + 1       128  0.0124616235003245563    1.595087808
+  2^i + 1       256 0.00618361602142709118    1.583005701
+  2^i + 1       512 0.00307991544960866154     1.57691671
+
+  layer c=2      64  0.0247426248662831241    1.583527991
+  layer c=2     128  0.0123206337893412911    1.577041125
+  layer c=2     256  0.0061480107406041565     1.57389075
+  layer c=2     512 0.00307097036787654866    1.572336828
+
+  cases: 12   (pi/2 = 1.570796327)  -> PASS
+
+--- V6 INSTRUMENT: (w_0,w) = (0,1/2) has the EXACT zero set (1/2)tan(n pi/k) ---
+    (references computed inside this precision block -- r202)
+  cases: 15, every one a zero of the DIRECT sum to ~55 digits  -> PASS
+
+========================================================================================
+  [V1] PASS
+  [V2] PASS
+  [V3+V7] PASS
+  [V4] PASS
+  [V5] PASS
+  [V6] PASS
+
+VERDICT: Track M (i) and (ii) verified as stated.
+  F_k(1/2+it) = A + w rho^k sin(k theta)/t,  A = 1 + 2w_0 - 2w  -- exact
+  zero on the line in ((1/2)tan(pi/k), (1/2)tan(3pi/2k)],  t_1 ~ pi/(2k)
+  and for A = 0 the zero set is exactly {(1/2)tan(n pi/k)}.
+
+done.

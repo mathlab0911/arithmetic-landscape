@@ -77,3 +77,29 @@ because the disagreement looks like a precision problem and invites the wrong re
   sentence nobody had touched, *"which is 1/2 at c = 1 (the odd numbers)"*. **Adding a
   clarification creates the contradiction it resolves, one paragraph away, and only reading the
   built page finds it.**
+
+## r203 — two families were one theorem, and the difference was a single constant
+
+**claimed** : the project held `a_i = 2^i−1`, `a_i = 2^i+1` and the layer family `c = 2` as
+**three** boundary families, measured separately, cited separately, and counted separately as
+evidence ("five profiles, two rates") for four rounds.
+
+**actual**  : they are one identity with one constant. For `w_0 ≥ 0` and `w_j = w` on
+`1 ≤ j ≤ k−1`, `F_k(½+it) = A + w ρ^k sin(kθ)/t` with `A = 1 + 2w_0 − 2w`, and the three profiles
+are `A = 0, 2, 1`. The one with a closed-form zero set is exactly the one with `A = 0`, i.e. the
+one whose `w_0` vanishes — because `a_1 = 1` contributes no layer. **The distinguishing feature
+was a single number, and nobody had computed it.**
+
+**check**   : write the general member of the class before measuring its instances. Two of these
+had been in the same section of the same paper for twenty rounds.
+
+**rule**    : **When a paper carries several examples of the same phenomenon, compute the general
+case once and read the examples off it.** Separately measured instances look like independent
+evidence and are not; the count "three families" was a count of *computations*, not of *cases*.
+> **Parameterise before you tabulate.** A table of instances with no parameter in it is a table
+> nobody has looked for the parameter of --- and here the parameter also *explained* which row
+> was special, which no amount of further measurement would have.
+
+*The consolation, and it is the honest half:* the merge does not weaken the evidence, it explains
+it. Three coincidences became one mechanism with three inputs, and the closed-form row stopped
+being a lucky family and became the `A = 0` case.
