@@ -473,3 +473,70 @@ the header had printed, so it looked like a timeout.
 Rule: convert at the boundary (`float(x)`), never rely on `repr` to produce a number.
 More generally: an idiom that works because of a value's type rather than its value has
 no test protecting it, and will change behaviour under a library upgrade with no warning.
+
+## F96 (r219) — when you credit "the steep term", check the term you called flat
+
+fable-5's r218 §2 explained why the v3 model fits the constant-weight case despite an
+O(1) level error: the root sits on a crossing of slope `≈ 2kT ≈ k²/π`, so a level error
+`ε` moves it by `ε/slope`, giving relative error `O(1/k)`. The rate is right and the data
+confirm it.
+
+But the slope was taken from **one of two terms of the same order.** For constant weights
+the head is a Dirichlet kernel — an oscillation with the *same* `k` — and at `θ = π/k`,
+where its numerator turns over, `2·dHp/dθ ≈ −k²/π`, equal to the oscillator's term at
+leading order. Measured ratio: 0.926, 0.962, 0.981, 0.990, 0.995, 0.9976, 0.9988 at
+`k = 64…4096`.
+
+Including both doubles the slope and turns a rate into a constant:
+
+```
+        relative error = 1/(2k)      exactly, not O(1/k)
+```
+
+`rel·2k` measured: 0.9702, 0.9849, 0.9924, 0.9962, 0.9981, 0.9990, 0.9995.
+
+Rule: **an effect attributed to one steep term is only attributed if the terms called
+flat have been differentiated.** "It varies slowly" is a claim about a derivative and
+costs one line to check. Corollary: a function that is *small* at a point can still be
+*steep* there — `Hp(π/k) = 0` exactly, and its slope is `O(k²)`.
+
+## F97 (r219b) — a criterion that tests an identity tests nothing
+
+Three of four pre-registered criteria in one run measured quantities that were
+algebraically determined and could not have come out otherwise.
+
+* **L2** asked whether the omitted head growth `Ω` cancels the level error `L`. But
+  `F_exact(t₁) = 0` forces `Ω = −(1+2Hp)`, so `L + Ω = 2T sin(kθ₁)` identically. The
+  criterion was reading the oscillator's value at the zero, not testing a candidate.
+* **L4** ran the same statistic on constant weights as a control that "must fail". There
+  `kθ₁ = π` exactly, so `2T sin(kθ₁) = 0` and the statistic is zero to 38 digits. The
+  control was measuring `sin π`.
+* **L3** failed on a bracketing bug, not a finding: where the bracket held, the level →
+  root conversion agreed to 0.9%.
+
+This is the third and fourth occurrence of F93 in three rounds (r216 P1, r217 M4, now L2
+and L4), so it is a habit rather than a run of accidents.
+
+Rule, sharper than F93: **before registering a criterion, ask whether its quantity could
+have come out otherwise.** If an identity in the setup determines it, the criterion has
+no power, and a PASS from it is worse than no criterion because it will be cited.
+
+## F98 (r219b) — the model's error is in the tail approximation, not the head
+
+The same run did produce the right decomposition, by identity rather than by criterion:
+
+```
+        L := F_model(t₁) = 2T sin(kθ₁) − Ω ,     Ω := 2 Σ_j w_j (ρ^j − 1) cos(jθ)
+```
+
+so the level error at the true zero **is exactly the geometric-tail replacement's error**
+and nothing else. Measured: `|Ω| ≈ 3–6` against `|L| ≈ 0.02–0.28`, i.e. the replacement is
+right to 1–7% of the quantity it replaces.
+
+This refutes the candidate in r218 §3 **on sign**: `Ω < 0` at 12 of 12 points, where the
+argument ("weights concentrated at small `j`, where `cos > 0`") predicted `Ω > 0`. The
+reason is that the factor `ρ^j − 1` **vanishes** at small `j`, so `Ω` is concentrated
+where the weights are not — at large `j`, inside the tail the model already represents.
+
+Rule: in a product of two factors, the concentration of one is not the concentration of
+the product. Ask where the *product* lives before naming a term after one of its halves.

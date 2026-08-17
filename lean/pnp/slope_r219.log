@@ -1,0 +1,61 @@
+====================================================================================================
+slope_r219 -- adversarial second reading of fable-5's r218 section 2
+claim under test: the root's accuracy on constant weights is 1/(2k), not 1/k,
+because the Dirichlet-kernel head has the SAME O(k^2) slope as the oscillator.
+====================================================================================================
+
+--- INSTRUMENT: the closed form for the head against direct summation ---
+  k=   64  sum=-1.7219155529623e-41  closed=-1.463628220018e-40  |diff|=1.291e-40
+  k=  512  sum=-3.0420508102335e-40  closed=-1.053238346562e-39  |diff|=7.49e-40
+  cases: 2 -> PASS
+
+--- S3  THE LEVEL, at the point where the answer is proved (theta = pi/k) ---
+  fable's own rule applied to fable's argument: ask the model its VALUE, not its root
+  k=   64  1+2Hp(pi/k) = 1.0      F_exact(pi/k) = A + 2T sin(pi) = 9.08989e-42
+  k=  256  1+2Hp(pi/k) = 1.0      F_exact(pi/k) = A + 2T sin(pi) = 3.43414e-41
+  k= 1024  1+2Hp(pi/k) = 1.0      F_exact(pi/k) = A + 2T sin(pi) = 1.354e-40
+  -> PASS: the level error is exactly 1
+
+--- S2  THE DECOMPOSITION: are the two slope terms the same order? ---
+  central differences at two step sizes, both printed; ratio must -> 1
+       k      |2 dHp/dth|          |2 T k|   ratio h1   ratio h2
+      64      1303.535484      1407.217893   0.926321   0.926321
+     128      5214.927373      5419.109758   0.962322   0.962322
+     256       20860.4949      21265.72407   0.980944   0.980944
+     512        83442.765      84250.11054   0.990417   0.990417
+    1024      333771.8454       335383.435   0.995195   0.995195
+    2048      1335088.167       1338308.25   0.997594   0.997594
+    4096      5340353.454      5346790.527   0.998796   0.998796
+  cases at k>=512: 4 -> PASS
+
+--- S1  THE CONSTANT: rel(k) against 1/(2k) ---
+       k    t proved (Thm 2e)     t from the model            rel     rel * 2k
+      64  0.02456342488473363  0.02474960246876417   0.0075794636   0.97017134
+     128  0.01227431105446272  0.01232153157315628   0.0038471014   0.98485795
+     256 0.006136231189783138 0.006148124595429658   0.0019382265   0.99237195
+     512 0.003068000078811701 0.003070984702698488  0.00097282393    0.9961717
+    1024 0.001533985600711332 0.001534733180715024  0.00048734486   0.99808228
+    2048 0.0007669909955443333 0.0007671780694882482  0.00024390631   0.99904025
+    4096 0.0003834952721715463 0.000383542063084188  0.00012201171    0.9995199
+  cases: 7 -> PASS
+
+--- S4  does the omission matter for DECAYING weights too? ---
+  there Hp converges and is not a Dirichlet kernel, so its slope should be lower order
+      s      k      |2 dHp/dth|          |2 T k|      ratio
+      2    512      1.698215483      3455.164744 0.000491501
+      2   1024      1.908228251      10350.75796 0.000184356
+      2   2048      2.098032971      29995.64727 6.99446e-5
+      4    512     0.1112081526      1046.365995 0.00010628
+      4   1024    0.09493812478      4263.888148 2.22656e-5
+      4   2048    0.07845070597      15203.89275 5.15991e-6
+  cases: 6 -> PASS -- the head is flat there, as expected
+
+====================================================================================================
+  [instrument (two routes to the head)] PASS
+  [S3 level error is exactly 1] PASS
+  [S2 head slope equals oscillator slope] PASS
+  [S1 the constant is 1/(2k)] PASS
+  [S4 head flat for decaying weights] PASS
+
+interpretation belongs in the report, not here.
+done.

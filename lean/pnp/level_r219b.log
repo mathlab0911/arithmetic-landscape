@@ -1,0 +1,67 @@
+====================================================================================================
+level_r219b -- N2's leftover: measure the model's LEVEL at the true zero
+L := F_model(t_1).  Since F_exact(t_1) = 0 by construction, L IS the level error,
+signed, at a point where the answer is known without any theorem.
+====================================================================================================
+
+--- INSTRUMENT: constant weights, first zero proved exactly (Thm 2(e), r205) ---
+  k=  256 proved=0.00613623118978313762 got=0.00613623118978313762 rel=2.192e-40
+  k= 1024 proved=0.00153398560071133249 got=0.00153398560071133249 rel=5.993e-40
+  cases: 2 -> PASS
+
+--- L1/L2: the level at the true zero, and whether the head's growth cancels it ---
+      s      k  L = F_model(t1)            Omega        L + Omega |L+Om|/|L|
+      1    256      -0.12707331       -4.6528544       -4.7799277     37.616
+      1    512    -0.0072584478       -5.2455641       -5.2528226     723.68
+      1   1024     -0.030338459       -5.7356794       -5.7660179     190.06
+      1   2048     -0.016968015       -6.2977145       -6.3146825     372.15
+
+      2    256     -0.080175535       -3.6963967       -3.7765722     47.104
+      2    512      -0.10059586       -3.8076535       -3.9082494     38.851
+      2   1024     -0.034669711       -3.9131979       -3.9478676     113.87
+      2   2048     -0.059728703       -3.9920685       -4.0517972     67.837
+
+      4    256     -0.097538459       -3.1317618       -3.2293003     33.108
+      4    512      -0.27958963       -3.1432637       -3.4228533     12.242
+      4   1024      -0.10209113       -3.1519552       -3.2540463     31.874
+      4   2048     -0.067963862       -3.1571951        -3.225159     47.454
+
+  population: 12 points
+
+--- L1  sign: the model must already be negative at t_1 (its root is early) ---
+  L < 0 at 12 of 12  -> PASS
+
+--- L2  candidate: does the head's growth account for >= 3/4 of it? ---
+  worst |L+Omega|/|L| = 723.68  -> FAIL
+
+--- L3  converting the level into a root shift (the step where a slope acts) ---
+      s      k  L/|dF/dt| at t1        t1 - t_v3      ratio
+      1    256    -2.3774252e-5     2.3765288e-5   -1.00038
+      1    512  v3 root not bracketed
+      1   1024  v3 root not bracketed
+      1   2048  v3 root not bracketed
+      2    256    -5.2988526e-5     5.2537107e-5   -1.00859
+      2    512  v3 root not bracketed
+      2   1024  v3 root not bracketed
+      2   2048  v3 root not bracketed
+      4    256  v3 root not bracketed
+      4    512  v3 root not bracketed
+      4   1024  v3 root not bracketed
+      4   2048    -2.7475043e-6      2.744644e-6   -1.00104
+  cases: 3 -> FAIL
+
+--- L4  CONTROL: on constant weights the same correction must NOT explain it ---
+  (there the level error is the double count, established at r219, not head growth)
+  k=  256  L=1.0  Omega=-1.0  |L+Om|/|L|=5.2851e-38
+  k= 1024  L=1.0  Omega=-1.0  |L+Om|/|L|=6.5882e-37
+  -> FAIL: it 'explains' both cases, so it explains neither
+
+====================================================================================================
+  [instrument] PASS
+  [L1 sign of the level error] PASS
+  [L2 head growth is the missing term] FAIL
+  [L3 level converts to the observed shift] FAIL
+  [L4 control: correction is case-specific] FAIL
+
+interpretation belongs in the report, not here.
+done.
