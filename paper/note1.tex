@@ -470,7 +470,8 @@ question rather than a conclusion.
 candidate & evidence & verdict\\
 \midrule
 $\lambda_{\mathrm{eff}}\to s-\tfrac12$ & $|\lambda_{\mathrm{eff}}-(s-\tfrac12)|$ stays
-  in $[0.34,0.48]$ and does not shrink & \textbf{refuted}\\
+  in $[0.34,0.48]$ and barely shrinks & \textbf{not refuted --- see
+  Remark~\ref{rem:oneshape}}\\
 $\lambda_{\mathrm{eff}}\to s$ & $|\lambda_{\mathrm{eff}}-s|$ reaches
   $0.16,\,0.14,\,0.099,\,0.093,\,0.018$ at $s=1,\tfrac32,2,3,4$ & consistent,
   \textbf{non-monotone}\\
@@ -510,6 +511,9 @@ Each column is near its target and none is monotone, and the departures at the l
 $k$ are of the same size as those at $k=128$. \emph{We report the sequences rather than
 a fitted constant}: a fit over these would produce a number the data do not support, and
 the honest content is that the scale is right and the constant is not established.
+Remark~\ref{rem:oneshape} explains \emph{why} these columns sit near $s$ while the
+mechanism's own asymptote is $s-\tfrac12$, and in doing so withdraws our refutation of
+that asymptote.
 
 \begin{remark}[on the observable]\label{rem:observable}
 \STATUS{methodological.}
@@ -594,16 +598,45 @@ oscillatory part has size $\asymp w_k\rho^{\,k}/\theta$ rather than $w_k\rho^{\,
 balancing \emph{that} against the constant term gives
 $k^{-s}e^{2kt^{2}}\asymp t$, hence $\lambda_{\mathrm{eff}}\to s-\tfrac12$.
 
-\begin{proposition}[the naive balance is refuted]\label{prop:notshalf}
-\STATUS{measured and decisive, \texttt{lambda\_r206}: $|\lambda_{\mathrm{eff}}-(s-\tfrac12)|$
-stays in $[0.34,0.48]$ over $k\le2048$ at five exponents and does not shrink.}
-For $w_j=(j+1)^{-s}$, $\lambda_{\mathrm{eff}}(k,s)$ does not approach $s-\tfrac12$.
+\begin{proposition}[the naive balance, and why it was wrongly refuted]\label{prop:notshalf}
+\STATUS{\textbf{withdrawn as a refutation.} It was recorded as one on the grounds that
+$|\lambda_{\mathrm{eff}}-(s-\tfrac12)|$ stays in $[0.34,0.48]$ over $k\le2048$ without
+shrinking. Remark~\ref{rem:oneshape} shows that band is exactly what the balance
+\emph{predicts} at those $k$. \texttt{lambda\_r206}, \texttt{rung0\_r211}.}
+The balance $k^{-s}e^{2kt^{2}}\asymp t$ gives $\lambda_{\mathrm{eff}}\to s-\tfrac12$ with
+an approach of size $(\log\log k)/(2\log k)$, which at $k=1024$ is $0.13966$. Over the
+computable range it therefore places $\lambda_{\mathrm{eff}}$ near $s$, not near
+$s-\tfrac12$, and the measurement cannot separate the two.
 \end{proposition}
 
-So the extra factor $1/\theta$ is not present, and \emph{a correct treatment must explain
-why the oscillatory sum does not gain it.} We believe the reason is that the amplitude
-$w_j\rho^{\,j}$ is not slowly varying on the scale of one half-period near $j=k$, but we
-have not turned that into an estimate, and we are not stating it as a claim.
+\begin{remark}[the two candidate shapes are one model at different $k$]\label{rem:oneshape}
+\STATUS{the model is \textbf{derived}; its agreement with the measurement is
+\textbf{measured} at $25$ pairs $(k,s)$ with no fitted parameter, worst error $9.9\%$,
+\texttt{rung0\_r211}. The asymptote is a consequence of the model and is
+\textbf{conjectured}.}
+Split $G_k$ into a head and a tail. For small $j$ the terms contribute
+$H:=\sum_{j<k}w_j$, real and positive; near $j=k$ the weights are nearly constant over
+the range on which $|z|^{\,j}$ changes, so the tail is geometric,
+\[
+  \sum_{j\text{ near }k}w_jz^{\,j}\;\approx\;w_{k-1}\frac{z^{k}}{z-1},
+  \qquad\text{modulus } T:=\frac{w_{k-1}\rho^{\,k}}{2t},
+  \qquad\text{argument } k\theta-\frac{\pi}{2},
+\]
+the quarter turn coming from $\arg(z-1)^{-1}=-\pi/2$ exactly. Hence
+$\operatorname{Re}G_k\approx H+T\sin(k\theta)$, and a zero of $F_k$ first becomes
+possible when $T=H+\tfrac12$. \textbf{Solving that for $t$, with nothing fitted,
+reproduces the measured first zero to within $9.9\%$ at every $(k,s)$ tested.}
+
+Asymptotically the same equation reads $k^{\lambda-s}=2t(H+\tfrac12)$, so
+\[
+  \lambda_{\mathrm{eff}}-s\;=\;-\tfrac12+\frac{\log\log k}{2\log k}+O\!\left(\frac{1}{\log k}\right).
+\]
+\textbf{The two shapes registered in \S\ref{sec:s1} are therefore the same statement at
+different $k$}: the correction term is $0.13966$ at $k=1024$ and decays like $1/\log k$,
+so over any computable range $\lambda_{\mathrm{eff}}$ sits near $s$ while tending to
+$s-\tfrac12$. \emph{Our own refutation of the second shape tested a limit that this model
+says is approached far too slowly to be seen, and is withdrawn.}
+\end{remark}
 
 \paragraph{Two instruments that do not exist or do not apply.}
 Remark~\ref{rem:s1notes} records both: the zeros are not a uniform ladder once the

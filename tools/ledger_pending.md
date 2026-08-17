@@ -282,3 +282,43 @@ different, and to a reader the same section — to the check, absent.
 **rule**    : F18's clause, met from the artefact side: **a name that a check keys on is
 part of the interface, not a matter of style.** Where a check names a required string, the
 artefact copies it; a paraphrase of the predicate is a new predicate, in either direction.
+
+## r211 — a refutation of our own, withdrawn by the model we built to satisfy a gate
+
+**claimed** : (r206, and it reached both the note and Part III) the candidate
+`λ_eff → s − ½` is **refuted**: `|λ_eff − (s−½)|` stays in `[0.34, 0.48]` over `k ≤ 2048`
+at five exponents and does not shrink.
+
+**actual**  : that band is **exactly what the candidate predicts at those `k`.** The
+head/tail model written to clear fable's rung 0 gives
+`λ_eff − s = −½ + (log log k)/(2 log k) + O(1/log k)`, and the correction term alone is
+`0.13966` at `k = 1024`. So the model's own `λ` sits near `s` over the whole computable
+range while tending to `s − ½`. **The two "candidate shapes" registered at r206 are one
+statement at two values of `k`.**
+
+**check**   : before recording a limit as refuted, compute the *predicted rate of approach*
+and ask whether the tested range could have seen it. Here the approach is `1/log k`: over
+`64 ≤ k ≤ 2048` the correction moves from `0.19` to `0.13`. **No decision rule keyed to
+"is it shrinking" could have passed, and none should have been trusted to fail.**
+
+**rule**    : **A refutation needs a resolution claim.** *"It did not converge"* is only
+evidence if the hypothesis predicts convergence you could have seen; otherwise it measures
+the range, not the hypothesis.
+> This is F51's clause (*a fail rule must state its measurement floor*) moved from
+> precision to **rate**: a decision rule about a limit must state the rate of approach it
+> is capable of detecting, and a hypothesis that predicts a slower approach is untested,
+> not refuted.
+
+**And the shape of how it was caught is the part worth keeping.** The model was not built
+to re-examine r206; it was built because fable-5 imposed a gate — *the phase picture must
+postdict the known scale before it earns an instrument* — and the gate's answer came with
+a consequence nobody was looking for. **The consequence was registered before the run**
+(clause D1 in `rung0_r211`), precisely so that it could not be assembled afterwards to fit
+whatever came out.
+> **A gate designed to stop you doing something premature can hand you the thing you were
+> not able to see.** fable's rung 0 was a brake, and the brake found the error.
+
+*Scope, honestly:* the model is a heuristic. It reproduces twenty-five measured first
+zeros to within `9.9%` with no fitted parameter, which is why its asymptote is worth
+believing more than our refutation was — but it is `derived`, not `proved`, and the note
+now says so at the statement.

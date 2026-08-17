@@ -10,6 +10,7 @@ prop:scale
 rem:nocancel
 rem:notnearest
 rem:observable
+rem:oneshape
 rem:onethree
 rem:ourerrors
 rem:pairing

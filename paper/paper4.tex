@@ -1653,6 +1653,16 @@ is \emph{disproved}} --- the harmonic profile is not summable and takes the $\sq
 line is $w_j\to0$. \emph{At $s=1$ the constant is not settled}: the ratio to
 $\sqrt{\log k/2k}$ measures $1.033, 1.024, 1.026, 0.927, 0.934$ at $k=64,\dots,1024$, which is
 non-monotone and is reported as such rather than averaged.
+\emph{And a heuristic now explains why it will stay unsettled at computable sizes.} Splitting
+$G_k$ into a head $H=\sum_jw_j$ and a geometric tail of modulus $w_{k-1}\rho^{\,k}/2t$ and
+argument $k\theta-\pi/2$ gives $\operatorname{Re}G_k\approx H+T\sin(k\theta)$, so a zero first
+becomes possible at $T=H+\tfrac12$; solved with nothing fitted, that reproduces the measured
+first zero to within $9.9\%$ at twenty-five pairs $(k,s)$. Its own asymptote is
+$2kt_1^{2}/\log k\to s-\tfrac12$, approached like $(\log\log k)/(2\log k)$, which is $0.13966$
+at $k=1024$. \textbf{So the constant we measure near $s$ and the asymptote $s-\tfrac12$ are the
+same statement at different $k$}, and \emph{an earlier version of this remark recorded
+$s-\tfrac12$ as refuted on the strength of a band that this heuristic predicts.} That
+refutation is withdrawn. \texttt{rung0\_r211}.
 \texttt{rate\_r200}, whose four pre-registered falsifiers are printed in the log ---
 the two instrument controls among them fired on the first run and caught both an index error here
 and the missing clamp in Remark~\ref{rem:nopinchreading} --- and \texttt{divide\_r204}, whose
