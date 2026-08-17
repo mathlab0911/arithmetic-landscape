@@ -424,3 +424,52 @@ how nearly tangent the excursion is, which is not a function of `k`.
 
 Rule: state an instrument's margin in every run that uses it. A margin with no trend
 cannot be extrapolated to the next size, so "it worked last time" is not evidence.
+
+## F93 (r216/r217) — enumerate what a criterion can SAY before registering it
+
+Twice in two rounds a pre-registered criterion failed for a reason it was not built to
+express.
+
+* r216 **P1**: worst case over a five-column population, registered for a refinement
+  aimed at one column. It failed while the refinement worked, because the max migrated
+  into a control column (that is F91).
+* r217 **M4**: "the predictor must FAIL outside its domain, so expect a large error."
+  The outcome was that the predictor is **undefined** there — no solution exists at all,
+  which is a *stronger* confirmation of the domain claim. The code counted undefined as
+  no-population and printed FAIL.
+
+Rule: **before registering a criterion, list the outcomes it can express and check that
+the interesting ones are on the list.** "Does not apply", "applies and is right", and
+"applies and is wrong" are three outcomes, not two; a criterion that can only say
+"wrong" will mislabel the other two.
+
+## F94 (r217b) — check whether the residual is your own simplification before naming it
+
+r211 replaced the model equation `Hp + T sin(kθ) = −1/2` by the threshold condition
+`T = Hp + 1/2`, i.e. the same equation with `sin` set to `−1`. It was a convenience and
+it was never revisited. Three rounds later r216d measured that reading's residual, found
+it bounded by `4π t₁/log k` at 69/69 points, derived that bound on paper, and named it
+**a quantum of the observable**.
+
+Solving the model as written brings the worst error from **0.165 to 0.0021** and the mean
+from **0.0288 to 0.00031**, and the residual falls to **1.9% of the quantum**. The
+quantum was almost entirely our own simplification.
+
+What survives: the oscillation in `λ_eff(k)` is real (r216c) and the quantum is the right
+scale for its amplitude. What does not: that it makes the constant *unsettleable*. It is
+**deterministic and computable**, so it can be removed rather than tolerated.
+
+Rule: when a residual has structure, the first suspect is a simplification you made
+yourself. Test that before deriving a mechanism for it — a derivation that fits a
+residual you created will look exactly like a discovery.
+
+## F95 (r217b) — an idiom that depends on a value's TYPE will break when the type changes
+
+`mpf(repr(x))` ran correctly in three earlier scripts because `x` happened to be a
+Python `float`. Here one branch left `x` as `numpy.float64`, whose `repr` under numpy 2
+is `np.float64(0.178…)`, and mpmath refused the string. The failure surfaced only after
+the header had printed, so it looked like a timeout.
+
+Rule: convert at the boundary (`float(x)`), never rely on `repr` to produce a number.
+More generally: an idiom that works because of a value's type rather than its value has
+no test protecting it, and will change behaviour under a library upgrade with no warning.
