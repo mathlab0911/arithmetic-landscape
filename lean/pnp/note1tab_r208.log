@@ -1,0 +1,20 @@
+====================================================================================
+note1tab_r208 -- the worked-example table of the Track M note
+family: w_0 = 0, w_j = 1/2  (A = 0);  closed form t_n = (1/2) tan(n pi / k)
+====================================================================================
+
+  k = 32
+    n         t_n = (1/2)tan(n pi/k)       k t_n / pi        F_direct at t_n
+    1          0.0492457016785821265        0.5016126           -7.62319e-60 ok
+    2          0.0994561836898290035         1.013052           -3.73381e-60 ok
+    3           0.151673341803671196         1.544932            6.53417e-60 ok
+
+  [C1] every printed t_n is a zero of the direct sum to 40+ digits: 3 of 3 -> PASS
+  [C2] k t_n / pi approaches n/2 (small angle): PASS  over 3 row(s)
+
+COPY THESE STRINGS INTO THE NOTE, and nothing else:
+  n=1   t_n = 0.0492457016785821265   k t_n / pi = 0.5016126
+  n=2   t_n = 0.0994561836898290035   k t_n / pi = 1.013052
+  n=3   t_n = 0.151673341803671196   k t_n / pi = 1.544932
+
+done.

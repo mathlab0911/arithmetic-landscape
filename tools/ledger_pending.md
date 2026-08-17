@@ -220,3 +220,31 @@ and something independent (here P1, a direct measurement of the spacing) has to 
 *Round outcome, stated as such:* the `s = 1` constant remains **unsettled**, which was one of the
 three registered outcomes. What was gained is a refuted alternative (`λ → s−½`), a scope
 correction that reached the paper (the ladder is constant-weight only), and one fewer wrong idea.
+
+## r208 — the note's own worked example was typed, not computed
+
+**claimed** : the Track M note's worked example table gave the first three zeros of the
+`A = 0` family at `k = 32`, from the closed form `t_n = ½tan(nπ/k)` that the same note
+proves.
+
+**actual**  : **two of the three rows were wrong in the seventh digit**, and both
+`k t_n / π` entries with them. They had been *typed from the formula* rather than
+evaluated. The correct values are `0.0994561836898290035` and `0.151673341803671196`;
+the draft said `0.099456464253591076` and `0.151936089156458`.
+
+**check**   : a script that evaluates the closed form, prints the strings to be copied,
+and — as its instrument control — confirms that the **direct sum** vanishes at each of
+them to sixty digits. `note1tab_r208`.
+
+**rule**    : **this is F87, committed inside the document that states F87.** The note's
+own §"what is verified" says a formula and the number printed beside it are two artefacts
+with one author; the author then produced exactly that pair, in the worked example chosen
+to be the note's most concrete page.
+> **A rule is not installed by being written down in the artefact it governs.** The
+> installation is a script, a check, or a habit — and the paragraph explaining the rule
+> is, if anything, the place where the author is most likely to feel the rule has already
+> been satisfied.
+
+*Scale of the near miss:* every other number in the note came from a log, because a log
+existed for it. The one table with no script behind it is the one that was wrong. **The
+provenance of a number predicts its correctness better than its importance does.**

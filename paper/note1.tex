@@ -1,0 +1,695 @@
+% note1.tex --- Track M: a standalone note for complex analysts, with no prerequisites
+% from the Arithmetic Landscapes series.  Commissioned by fable-5 at r192, audited at
+% r205 (Theorem 2 raised to *proved* by an independent reading along a disjoint route),
+% and green-lit for a manuscript at r207.
+%
+% Statuses are carried at every statement, as everywhere in this project.  The one
+% deliberate open item -- the constant at s = 1 -- is stated as unsettled with its full
+% record, because an honest unknown in a note is a gift to whoever closes it.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage[margin=28mm]{geometry}
+\usepackage{microtype}
+\usepackage[colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\STATUS}[1]{\textcolor{blue}{\textsf{[#1]}}}
+\newcommand{\Xref}[3]{#3}
+\newcommand{\Xlab}[2]{\textup{\texttt{#2}}}
+
+\title{Two speeds at the boundary:\\
+zeros of sums of conjugate sections of power series}
+\author{Kentaro Amauchi\thanks{Independent researcher.
+\href{mailto:amkn.sub03@gmail.com}{amkn.sub03@gmail.com},
+\url{https://mathlab0911.github.io/}, ORCID \url{https://orcid.org/0009-0000-0890-4395}}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $w_0,w_1,\dots$ be non-negative reals, $G(z)=\sum_{j\ge0}w_jz^{\,j}$ and
+$G_k(z)=\sum_{j<k}w_jz^{\,j}$ its sections. We study the zeros of
+\[
+  F_k(q)\;=\;1+G_k(2q)+G_k(2-2q),
+\]
+a sum of two sections under substitutions that are complex conjugates of one another on
+the line $\operatorname{Re}q=\tfrac12$, and in particular whether they approach the
+symmetry point $q=\tfrac12$ as $k\to\infty$.
+
+Jentzsch's theorem describes the zeros of a \emph{single} section, and adding functions
+can cancel zeros; we found no result covering sums of sections. The observation this note
+is built on is that on the symmetry line $F_k$ is \emph{real-valued}, so its zeros there
+are sign changes --- and a sign change cannot be cancelled. Two results follow. First,
+for constant weights we obtain a closed form
+$F_k(\tfrac12+it)=A+w\rho^{\,k}\sin(k\theta)/t$ with $A=1+2w_0-2w$, from which the zero
+nearest the symmetry point exists and satisfies $t_1=\pi/2k\,(1+O(1/k))$, and is given
+exactly by $t=\tfrac12\tan(n\pi/k)$ when $A=0$. Second, when the weights decay the rate
+changes: for $w_j\asymp(j+1)^{-s}$ we find $t_1\asymp\sqrt{s\log k/2k}$, slower by a
+factor $\asymp\sqrt{k\log k}$. The dividing line is the decay of $w_j$ and not the
+convergence of $\sum_jw_j$ --- a distinction that our own data did not test until a
+profile lying on the line was computed. The constant at $s=1$ is reported as unsettled,
+with the two candidate laws we have refuted or failed to resolve.
+\end{abstract}
+
+\section{The question}\label{sec:question}
+
+Throughout, $w_0,w_1,w_2,\dots$ are non-negative real numbers, not all zero,
+\[
+  G(z)=\sum_{j\ge0}w_j z^{\,j},\qquad
+  G_k(z)=\sum_{j=0}^{k-1}w_j z^{\,j},
+\]
+and $R\in(0,\infty]$ denotes the radius of convergence of $G$. The object of study is
+\begin{equation}\label{eq:F}
+  F_k(q)\;=\;1+G_k(2q)+G_k(2-2q),
+\end{equation}
+a polynomial of degree at most $k-1$, invariant under $q\mapsto1-q$. We ask where its
+zeros go as $k\to\infty$, and specifically whether they approach the symmetry point
+$q=\tfrac12$.
+
+\paragraph{Why this is not immediate.}
+The zeros of a \emph{single} section are classical. \textbf{Jentzsch's theorem} (1914)
+states that if $0<R<\infty$ then every point of $|z|=R$ is a limit point of the zeros of
+the sections $G_k$; Szeg\H{o}'s refinement gives angular equidistribution along a
+subsequence, and the result has been extended to Dirichlet, Kapteyn and Neumann series,
+to analytic curves and to ultrametric fields. Applied to $G$ with $R=1$, it says the
+zeros of $G_k$ accumulate at $z=1$, which is $q=\tfrac12$ under $z=2q$.
+
+But \eqref{eq:F} is a \emph{sum} of two sections under affine substitutions, plus a
+constant, and adding functions can cancel zeros: nothing in the single-section theory
+survives the sum automatically. We searched for a result covering sums of sections and
+found none; \S\ref{sec:lit} says exactly where we looked, so that a reader who knows
+otherwise can correct us cheaply.
+
+\paragraph{Where the object comes from.}
+$F_k$ arose as a one-parameter deformation of an arithmetic invariant, in which $w_j$ is
+a normalised gap statistic of a finite set of odd integers \cite{P1,P3}. \emph{Nothing
+below uses that}, and the reader who stops at this paragraph loses nothing.
+
+\subsection{Terminology}\label{sec:terminology-note}
+
+\emph{This note deliberately carries no vocabulary of its own.} Everything below is
+stated in the standard language of power series and their sections. Two phrases appear
+only in the titles of the companion papers cited at the end, and are glossed here so
+that a reader who meets them is not sent away:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{3.3cm}p{9.5cm}@{}}
+\toprule
+term & what it denotes\\
+\midrule
+\emph{gap series} & the arithmetic invariant of \cite{P1} from which the weights $w_j$
+  of this note arise as a normalised gap statistic. Not used here.\\
+\emph{coset identity} & an exact averaging identity of \cite{P3} for
+  $-\log|\cos\pi t|$ over an arithmetic progression, unrelated to the present
+  question and named only because it appears in that paper's title. Not used here.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{The reduction: on the symmetry line the object is real}\label{sec:reduction}
+
+\subsection{Why these two substitutions}\label{sec:whytwo}
+
+A reader may reasonably ask why \eqref{eq:F} pairs $G_k(2q)$ with $G_k(2-2q)$ rather than
+with some other companion. The answer is that this is the only affine pairing for which
+the two arguments are complex conjugates along a line, which is what makes
+\S\ref{sec:reduction} available.
+
+Concretely, let $\varphi_1(q)=\alpha q+\beta$ and $\varphi_2(q)=\gamma q+\delta$ with
+real coefficients. Then $\varphi_2(q)=\overline{\varphi_1(q)}$ for all $q$ on a vertical
+line $\operatorname{Re}q=c$ exactly when $\gamma=-\alpha$ and
+$\delta=\beta+2\alpha c$ --- that is, when $\varphi_2$ is $\varphi_1$ reflected in that
+line. Taking $\alpha=2$, $\beta=0$, $c=\tfrac12$ gives $\varphi_2(q)=2-2q$, which is
+\eqref{eq:F}.
+
+\begin{remark}[what the pairing costs and buys]\label{rem:pairing}
+\STATUS{proved; elementary.}
+The reflection is what creates the difficulty and also what resolves it. It creates it
+because $G_k(\varphi_1)+G_k(\varphi_2)$ is a genuine sum, to which the single-section
+theory does not apply. It resolves it because on the mirror line the sum is
+$2\operatorname{Re}G_k(\varphi_1)$, a real function --- and the zeros of a real function
+of one variable are visible by the intermediate value theorem, with no complex analysis
+at all.
+\end{remark}
+
+\emph{This is the note in one paragraph.} The rest is the work of finding, for each class
+of weights, a place where that real function is negative.
+
+
+
+\begin{proposition}[reduction]\label{prop:real}
+\STATUS{proved. Two independent derivations along disjoint routes (r203, r205);
+verified numerically against direct summation at $80$ digits, worst agreement
+$50$ digits, \texttt{trackm\_r203}.}
+Let the $w_j$ be real. Then for every real $t$,
+\[
+  F_k\!\left(\tfrac12+it\right)\;=\;1+2\operatorname{Re}G_k(1+2it)
+  \;=\;1+2\sum_{j<k}w_j\,\rho^{\,j}\cos(j\theta),
+\]
+where $\rho=|1+2it|=\sqrt{1+4t^{2}}$ and $\theta=\arg(1+2it)=\arctan 2t$. In particular
+$F_k$ is real-valued on $\operatorname{Re}q=\tfrac12$, and every sign change of
+$t\mapsto F_k(\tfrac12+it)$ is a zero of $F_k$ on that line.
+\end{proposition}
+
+\begin{proof}
+With $q=\tfrac12+it$ we have $2q=1+2it$ and $2-2q=1-2it=\overline{2q}$. Since the $w_j$
+are real, $G_k(\bar z)=\overline{G_k(z)}$, so $G_k(2q)+G_k(2-2q)=2\operatorname{Re}
+G_k(1+2it)$. Writing $1+2it=\rho e^{i\theta}$ gives the sum. \qed
+\end{proof}
+
+Two remarks, and the second is the whole method of this note.
+
+\begin{remark}[the shape of the sum]\label{rem:shape}
+\STATUS{immediate from Proposition~\ref{prop:real}.}
+The displayed sum is a cosine series with \emph{growing} amplitudes: $\rho>1$ for
+$t\ne0$, so the coefficients $w_j\rho^{\,j}$ may increase even when the $w_j$ decrease.
+Every estimate below is a competition between that growth and that decay.
+\end{remark}
+
+\begin{remark}[the cancellation problem disappears on the line]\label{rem:nocancel}
+\STATUS{proved; it is the content of Proposition~\ref{prop:real}.}
+The obstruction to transporting Jentzsch is that two sections may cancel each other's
+zeros. On $\operatorname{Re}q=\tfrac12$ the object is a real function of one real
+variable, and \textbf{a sign change of a real function cannot be cancelled by anything}.
+So the on-line zeros are exactly the sign changes, and their existence is a question
+about a real function --- which is why the results below are elementary where the
+general problem is not.
+\end{remark}
+
+\begin{remark}[what the reduction does \emph{not} say]\label{rem:notnearest}
+\STATUS{measured; the counterexample is explicit, \texttt{pinch\_r202}.}
+Proposition~\ref{prop:real} says the line is where $F_k$ is real. \textbf{It does not say
+the zero nearest $q=\tfrac12$ lies on it.} For $w_j=(c/2)^{j}$ with $c<2$ --- so $R>1$
+--- it does not: at $c=1$, $k=70$ the nearest \emph{on-line} zero is at distance
+$0.872$ while the nearest zero is at $0.504$, certified by the argument principle. The
+nearest zero lies on the line in the boundary regime $R=1$, where it was confirmed by an
+argument-principle count for $r\le0.25$, and this note asserts it only there.
+
+\emph{We record the point because we imported the on-line assumption across the two
+regimes ourselves, silently, and a winding-number certificate is what caught it.}
+\end{remark}
+
+\section{Constant weights: a closed form, and the pinch}\label{sec:const}
+
+\begin{theorem}[constant weights]\label{thm:const}
+\STATUS{proved. Written proof below; independently re-derived along a disjoint route by
+a second reader who did not see it (r205); consequences \textup{(a)--(e)} and the three
+constants of \S\ref{sec:instances} re-derived in that reading. Numerically verified,
+\texttt{trackm\_r203}.}
+Let $w_0\ge0$ and $w_j=w>0$ for $1\le j\le k-1$, and put
+\[
+  A\;:=\;1+2w_0-2w,\qquad \rho=\sqrt{1+4t^{2}},\qquad \theta=\arctan2t .
+\]
+Then for every $t>0$,
+\begin{equation}\label{eq:closed}
+  F_k\!\left(\tfrac12+it\right)\;=\;A+w\,\rho^{\,k}\,\frac{\sin(k\theta)}{t},
+\end{equation}
+exactly. Consequently:
+\begin{enumerate}
+\item[\textup{(a)}] $F_k(\tfrac12+it)\to1+2w_0+2(k-1)w$ as $t\to0^{+}$, the value at the
+      symmetry point;
+\item[\textup{(b)}] if $A\ge0$ then $F_k(\tfrac12+it)>0$ for $0<\theta<\pi/k$: no zero
+      before the first rung;
+\item[\textup{(c)}] at $\theta=3\pi/2k$, that is $t=\tfrac12\tan(3\pi/2k)$, one has
+      $\sin(k\theta)=-1$ and hence
+      $F_k\le A-w\,\tfrac{4k}{3\pi}\bigl(1+o(1)\bigr)<0$ for all large $k$;
+\item[\textup{(d)}] therefore $F_k$ has a zero on the line with
+      \[
+        \tfrac12\tan(\pi/k)\;<\;t_1\;\le\;\tfrac12\tan(3\pi/2k),
+        \qquad\text{so}\qquad t_1=\frac{\pi}{2k}\bigl(1+O(1/k)\bigr);
+      \]
+\item[\textup{(e)}] if $A=0$ the zero set on the line is \emph{exactly}
+      $t=\tfrac12\tan(n\pi/k)$, $n=1,2,\dots,\lfloor(k-1)/2\rfloor$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The sum is geometric:
+$G_k(z)=w_0+w\sum_{j=1}^{k-1}z^{\,j}=w_0+w\,(z^{k}-z)/(z-1)$, and on the line
+$z-1=2it$, so
+\[
+  \operatorname{Re}\frac{z^{k}-z}{2it}
+  =\frac{\operatorname{Im}(z^{k}-z)}{2t}
+  =\frac{\rho^{k}\sin(k\theta)-2t}{2t}
+  =\frac{\rho^{k}\sin(k\theta)}{2t}-1 .
+\]
+Substituting into Proposition~\ref{prop:real} gives
+$F_k=1+2w_0+2w\bigl[\rho^{k}\sin(k\theta)/2t-1\bigr]$, which is \eqref{eq:closed}.
+
+For (a), $\theta=2t+O(t^{3})$ and $\rho^{k}\to1$ as $t\to0$, so $\sin(k\theta)/t\to2k$
+and $F_k\to A+2kw=1+2w_0+2(k-1)w$. For (b), $\sin(k\theta)>0$ on $0<\theta<\pi/k$ while
+$w,\rho^{k},t>0$, so $F_k>A\ge0$. For (c), $t=\tfrac12\tan(3\pi/2k)\le(3\pi/4k)(1+O(k^{-2}))$
+and $\rho^{k}\ge1$, so $w\rho^{k}/t\ge 4kw/3\pi\,(1+o(1))$, which exceeds the constant
+$A$ once $k>3\pi A/4w$. Then (b) and (c) give opposite signs at the two ends of
+$[\tfrac12\tan(\pi/k),\tfrac12\tan(3\pi/2k)]$ and $F_k$ is continuous there, so it
+vanishes inside; both endpoints are $\tfrac{\pi}{2k}(1+O(1/k))$, which is (d). For (e),
+$A=0$ leaves $w\rho^{k}\sin(k\theta)/t$, and $w,\rho^{k},t$ are non-zero for $t>0$. \qed
+\end{proof}
+
+\subsection{Three instances, and why one is special}\label{sec:instances}
+
+The families that motivated this note are all instances of Theorem~\ref{thm:const},
+distinguished only by the value of $A$.
+
+\begin{center}
+\begin{tabular}{lccc l}
+\toprule
+weights & $w_0$ & $w$ & $A$ & zero set on the line\\
+\midrule
+$w_0=0$, $w_j=\tfrac12$ & $0$ & $\tfrac12$ & $\mathbf{0}$
+  & \emph{exactly} $t=\tfrac12\tan(n\pi/k)$\\
+$w_0=1$, $w_j=\tfrac12$ & $1$ & $\tfrac12$ & $2$
+  & bracketed, $t_1=\tfrac{\pi}{2k}(1+O(1/k))$\\
+$w_0=1$, $w_j=1$ & $1$ & $1$ & $1$ & the same\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}[one identity, three constants]\label{rem:onethree}
+\STATUS{proved, being Theorem~\ref{thm:const} evaluated three times.}
+These three had been measured, cited and counted separately as evidence before the
+general case was written down. They are one identity with one constant, and the row
+admitting a closed form is exactly the row with $A=0$, i.e.\ the row whose $w_0$
+vanishes.
+
+\emph{Separately computed instances of one mechanism look like independent evidence and
+are not: the count was a count of computations, not of cases.} Stating the general
+member also \emph{explains} which row is special, which no amount of further measurement
+would have done.
+\end{remark}
+
+\subsection{The $A=0$ family, written out}\label{sec:worked}
+
+The row with $A=0$ is worth seeing in full, because it is the one case in this note where
+the answer is a formula rather than a bracket. Take $w_0=0$ and $w_j=\tfrac12$ for
+$1\le j\le k-1$. Then \eqref{eq:closed} reads
+\[
+  F_k\!\left(\tfrac12+it\right)\;=\;\frac{\rho^{\,k}\sin(k\theta)}{2t},
+\]
+so on the line $F_k$ vanishes precisely where $\sin(k\theta)=0$, i.e.\ at
+$\theta=n\pi/k$, i.e.\ at $t=\tfrac12\tan(n\pi/k)$. The zeros therefore sit at
+\[
+  q\;=\;\tfrac12+\tfrac{i}{2}\tan\!\left(\frac{n\pi}{k}\right),
+  \qquad n=1,\dots,\left\lfloor\tfrac{k-1}{2}\right\rfloor,
+\]
+and nowhere else on the line. The first three, at $k=32$:
+
+\begin{center}
+\begin{tabular}{crr}
+\toprule
+$n$ & $t_n=\tfrac12\tan(n\pi/32)$ & $k\,t_n/\pi$\\
+\midrule
+$1$ & $0.0492457016785821265$ & $0.5016126$\\
+$2$ & $0.0994561836898290035$ & $1.013052$\\
+$3$ & $0.151673341803671196$  & $1.544932$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\STATUS{proved (Theorem~\ref{thm:const}(e)); the table is the formula evaluated, and
+\textbf{every entry is confirmed to be a zero of the direct sum to sixty digits} as an
+instrument control, \texttt{note1tab\_r208}. The first entry is reproduced independently
+in three further experiments, \texttt{pinch\_r202}, \texttt{trackm\_r203},
+\texttt{lambda\_r206}.}
+
+\emph{Two features of this list are used later.} The spacing is uniform in $\theta$ ---
+one rung per $\pi/k$ --- and $k\,t_n/\pi\to n/2$, so in $t$ the rungs are asymptotically
+evenly spaced as well. Both facts fail as soon as the weights decay
+(Remark~\ref{rem:s1notes}(i)), and the failure is not a small perturbation.
+
+\begin{corollary}[the pinch at $R=1$, for constant weights]\label{cor:pinch}
+\STATUS{proved; immediate from Theorem~\ref{thm:const}(d).}
+If $w_j\to w>0$ with $w_j$ eventually constant, then $R=1$ and the zeros of $F_k$
+approach $q=\tfrac12$ along the line $\operatorname{Re}q=\tfrac12$ at rate $\pi/2k$.
+\end{corollary}
+
+\section{Decaying weights: the second speed}\label{sec:decay}
+
+Corollary~\ref{cor:pinch} settles the constant-weight case. When the weights decay the
+pinch still occurs, and the rate is different.
+
+\begin{proposition}[the scale, derived]\label{prop:scale}
+\STATUS{derived, asymptotically and not to the standard of \S\ref{sec:const};
+\textbf{measured} at four exponents and five sizes with no fitted constant,
+\texttt{rate\_r200}, \texttt{divide\_r204}, \texttt{lambda\_r206}.}
+Suppose $w_j\asymp(j+1)^{-s}$ with $s>0$. In Proposition~\ref{prop:real},
+$\rho^{\,j}=e^{2jt^{2}(1+O(t^{2}))}$, so the last term of the sum carries
+$w_k\rho^{\,k}\asymp k^{-s}e^{2kt^{2}}$. This is $o(1)$ below the scale
+$2kt^{2}=s\log k$ and unbounded above it, so a zero cannot occur below that scale and
+the first one is expected at it:
+\[
+  t_1\;\asymp\;\sqrt{\frac{s\log k}{2k}} .
+\]
+\emph{The scale is exact; the constant in front of it is not, and nothing here claims
+one.}
+\end{proposition}
+
+The contrast with Corollary~\ref{cor:pinch} is a factor $\asymp\sqrt{k\log k}$:
+
+\begin{center}
+\begin{tabular}{rcccc}
+\toprule
+$k$ & $t_1$, $w_j=\tfrac12$ & $t_1$, $w_j=(j+1)^{-1}$ & $k\,t_1$ (left) & $k\,t_1$ (right)\\
+\midrule
+$64$   & $0.0245634248847336271$  & $0.1861996814519841$  & $1.5720592$ & $11.91677961$\\
+$128$  & $0.0122743110544627221$  & $0.1409993892900241$  & $1.5711118$ & $18.04792183$\\
+$256$  & $0.00613623118978313762$ & $0.106767212545108$   & $1.5708752$ & $27.33240641$\\
+$512$  & $0.00306800007881170098$ & $0.07234505270561657$ & $1.570816$  & $37.04066699$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The left column is $\tfrac12\tan(\pi/k)$, which Theorem~\ref{thm:const}(e) gives exactly;
+the right is measured. The two right-hand columns are the diagnostic: $k\,t_1$
+\emph{converges} to $\pi/2=1.5707963$ on the left and \emph{grows} on the right. That
+divergence is the whole content of the two-regime statement --- the second family does
+not merely pinch more slowly, it pinches at a different power of $k$.
+\STATUS{left column proved, \texttt{trackm\_r203}; right column measured,
+\texttt{divide\_r204}.}
+
+\subsection{Where the dividing line is}\label{sec:line}
+
+\begin{proposition}[the line is decay, not summability]\label{prop:line}
+\STATUS{the refutation is \textbf{measured} and decisive, \texttt{divide\_r204}; the
+positive statement is \textbf{conjectured}, see Conjecture~\ref{conj:line}.}
+The dividing line between the two rates is whether $w_j\to0$, and \emph{not} whether
+$\sum_jw_j$ converges. The harmonic profile $w_j=(j+1)^{-1}$ has $\sum_jw_j=\infty$ and
+takes the $\sqrt{\;}$ rate: $k\,t_1$ measures
+$11.9,\,18.0,\,27.3,\,37.0,\,55.6$ at $k=64,\dots,1024$, growing rather than approaching
+$\pi/2=1.5707963$. The same holds for $w_j=\bigl((j+2)\log(j+2)\bigr)^{-1}$, which
+diverges more slowly still ($k\,t_1$ reaching $62.2$).
+\end{proposition}
+
+\begin{remark}[how the wrong line survived, and what the mechanism said]\label{rem:whyline}
+\STATUS{methodological; no mathematical content beyond Proposition~\ref{prop:line}.}
+Every divergent-side profile we had computed had \emph{constant} weights and every
+convergent-side one decayed like a power, so the data were equally consistent with a
+different statement --- \emph{constant versus decaying} --- that had not been written
+down. The two separate only on profiles that decay without summing, and none had been
+computed. \emph{A dividing line is a claim about the profiles that lie on it, and
+evidence from far to either side does not test it.}
+
+Moreover the estimate in Proposition~\ref{prop:scale} uses $w_k$ and never uses
+$\sum_jw_j$: summability was never one of its hypotheses. \emph{When a conjecture and
+its own mechanism disagree about what the hypothesis is, the mechanism is the one that
+was derived.}
+\end{remark}
+
+\subsection{The constant at $s=1$, unsettled}\label{sec:s1}
+
+Proposition~\ref{prop:scale} names the scale but not the constant in it. Writing
+\[
+  \lambda_{\mathrm{eff}}(k,s)\;:=\;\frac{2k\,t_1^{2}}{\log k},
+\]
+the derived prediction is $\lambda_{\mathrm{eff}}\to s$. We report the state of that
+question rather than a conclusion.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+candidate & evidence & verdict\\
+\midrule
+$\lambda_{\mathrm{eff}}\to s-\tfrac12$ & $|\lambda_{\mathrm{eff}}-(s-\tfrac12)|$ stays
+  in $[0.34,0.48]$ and does not shrink & \textbf{refuted}\\
+$\lambda_{\mathrm{eff}}\to s$ & $|\lambda_{\mathrm{eff}}-s|$ reaches
+  $0.16,\,0.14,\,0.099,\,0.093,\,0.018$ at $s=1,\tfrac32,2,3,4$ & consistent,
+  \textbf{non-monotone}\\
+correction of size $1/\log k$ & $(\lambda_{\mathrm{eff}}-s)\log k$ does not settle
+  & \textbf{not resolved}\\
+correction of size $\log\log k/\log k$ & nor does
+  $(\lambda_{\mathrm{eff}}-s)\log k/\log\log k$ & \textbf{not resolved}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\STATUS{measured over $k\le2048$ at five exponents, \texttt{lambda\_r206}; the decision
+rule and the two candidate shapes were registered before the run.}
+
+The measurements behind that table, in full, are:
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$k$ & $\lambda_{\mathrm{eff}}$, $s=1$ & $\lambda_{\mathrm{eff}}$, $s=2$
+    & $\lambda_{\mathrm{eff}}$, $s=4$\\
+\midrule
+$64$   & $1.0670656$  & $2.8134049$ & $6.3869596$\\
+$128$  & $1.0489407$  & $2.0877026$ & $5.3173568$\\
+$256$  & $1.0525199$  & $2.0014877$ & $4.3314313$\\
+$512$  & $0.85911175$ & $1.978608$  & $4.3134221$\\
+$1024$ & $0.87254853$ & $1.86631$   & $4.071501$\\
+$2048$ & $0.83659266$ & $1.9008311$ & $3.9822736$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\STATUS{measured, \texttt{lambda\_r206}; $40$ working digits; the first zero located by
+scanning upward from $t=0$.}
+
+Each column is near its target and none is monotone, and the departures at the largest
+$k$ are of the same size as those at $k=128$. \emph{We report the sequences rather than
+a fitted constant}: a fit over these would produce a number the data do not support, and
+the honest content is that the scale is right and the constant is not established.
+
+\begin{remark}[on the observable]\label{rem:observable}
+\STATUS{methodological.}
+The natural thing to print is $t_1$ divided by $\sqrt{s\log k/2k}$, and we did so for
+four rounds. That ratio is $\sqrt{\lambda_{\mathrm{eff}}/s}$, and \textbf{a square root
+halves relative error}: a $14\%$ departure in the quantity the derivation names appears
+as $7\%$ on the page. \emph{Report the quantity the mechanism names; a monotone
+transform is not a neutral change of units but a lens with a computable magnification.}
+\end{remark}
+
+\begin{remark}[two readings we can rule out]\label{rem:s1notes}
+\STATUS{measured, \texttt{envelope\_r206b}.}
+Two natural explanations for the non-monotonicity fail.
+\begin{enumerate}
+\item[(i)] \emph{Quantisation.} One might expect $t_1$ to be pinned to a ladder of
+      troughs spaced $\pi/k$, as in Theorem~\ref{thm:const}(e), giving jitter
+      $\pi/(kt_1)$. But when the weights decay the zeros are \emph{not} evenly spaced:
+      the measured gaps run $0.17$ to $0.73$ in units of $\pi/k$, at $s=1$ and $s=2$
+      alike. \textbf{The even ladder is a constant-weight phenomenon.}
+\item[(ii)] \emph{An envelope threshold.} One might locate the first zero as the first
+      $t$ with $2|G_k(1+2it)|=1$. No such $t$ exists: $2|G_k|-1$ equals $+11.2$ at
+      $t=0$ for $s=1$, $k=1024$, since $|G_k(1)|$ is half the value at the symmetry
+      point. The zero is produced by the \emph{phase} turning, not by the envelope
+      growing.
+\end{enumerate}
+\end{remark}
+
+\section{The general question}\label{sec:general}
+
+\begin{problem}[does $R=1$ force the pinch?]\label{prob:general}
+\STATUS{\textbf{proved} for constant weights (Corollary~\ref{cor:pinch});
+\textbf{measured} for $w_j\asymp(j+1)^{-s}$ at four exponents; \textbf{open} in general.}
+Let $w_j\ge0$ with $R=1$. Do the zeros of $F_k$ approach $q=\tfrac12$ as $k\to\infty$?
+\end{problem}
+
+\begin{conjecture}[two speeds]\label{conj:line}
+\STATUS{conjectured; the constant-weight half is Corollary~\ref{cor:pinch} and is
+proved, the decaying half is derived and measured, and the constant at $s=1$ is
+unsettled (\S\ref{sec:s1}).}
+Let $w_j\ge0$ with $R=1$. Then $F_k$ has a zero on $\operatorname{Re}q=\tfrac12$
+approaching $q=\tfrac12$, at rate
+\[
+  t_1\sim\frac{\pi}{2k}\quad\text{if }w_j\not\to0,
+  \qquad\qquad
+  t_1\sim\sqrt{\frac{s\log k}{2k}}\quad\text{if }w_j\asymp(j+1)^{-s},\ s>0 .
+\]
+\end{conjecture}
+
+\paragraph{The missing analytic ingredient, named rather than left to be located.}
+What is absent for the general case is the non-vanishing of the limit of $G$ on its
+circle of convergence. Hurwitz's theorem gives non-accumulation on compact subsets of
+the region of analyticity; accumulation \emph{on} the boundary needs that non-vanishing,
+and it is a statement about $G$ alone.
+
+\paragraph{A fingerprint of the sum, with its scope.}
+Sections of a single geometric series have zeros at angular spacing $2\pi/k$; in the
+constant-weight case ours sit at $\theta_n=n\pi/k$, twice as densely. That doubling is
+what $\sin(k\theta)$ does and $e^{ik\theta}$ does not: taking a real part folds
+$e^{ik\theta}$ into $\sin(k\theta)$, whose zeros are twice as dense. \textbf{So the
+doubled ladder is exactly the part of the phenomenon the single-section theory does not
+describe} --- and, by Remark~\ref{rem:s1notes}(i), it is a statement about profiles with
+$w_j\not\to0$ and not a general one.
+\STATUS{proved for constant weights (Theorem~\ref{thm:const}(e)); the scope restriction
+is measured, \texttt{envelope\_r206b}.}
+
+\section{What a proof of the decaying case would have to supply}\label{sec:whatproof}
+
+Theorem~\ref{thm:const} works because the sum is geometric and collapses. When the
+weights decay there is no such collapse, and we record what we tried, so that the next
+attempt does not repeat it.
+
+\paragraph{The naive balance is wrong.}
+Near the first zero the sum in Proposition~\ref{prop:real} is dominated by $j$ close to
+$k$, where the phases $j\theta$ turn rapidly. Integrating by parts once suggests the
+oscillatory part has size $\asymp w_k\rho^{\,k}/\theta$ rather than $w_k\rho^{\,k}$, and
+balancing \emph{that} against the constant term gives
+$k^{-s}e^{2kt^{2}}\asymp t$, hence $\lambda_{\mathrm{eff}}\to s-\tfrac12$.
+
+\begin{proposition}[the naive balance is refuted]\label{prop:notshalf}
+\STATUS{measured and decisive, \texttt{lambda\_r206}: $|\lambda_{\mathrm{eff}}-(s-\tfrac12)|$
+stays in $[0.34,0.48]$ over $k\le2048$ at five exponents and does not shrink.}
+For $w_j=(j+1)^{-s}$, $\lambda_{\mathrm{eff}}(k,s)$ does not approach $s-\tfrac12$.
+\end{proposition}
+
+So the extra factor $1/\theta$ is not present, and \emph{a correct treatment must explain
+why the oscillatory sum does not gain it.} We believe the reason is that the amplitude
+$w_j\rho^{\,j}$ is not slowly varying on the scale of one half-period near $j=k$, but we
+have not turned that into an estimate, and we are not stating it as a claim.
+
+\paragraph{Two instruments that do not exist or do not apply.}
+Remark~\ref{rem:s1notes} records both: the zeros are not a uniform ladder once the
+weights decay, so no quantisation argument is available; and the first zero is not an
+envelope crossing, because $2|G_k(1+2it)|$ already exceeds $1$ at $t=0$ by a wide margin.
+\textbf{The zero is a phase event}: at the first zero, $\operatorname{Re}G_k=-\tfrac12$
+while $|G_k|$ remains large, so $\cos(\arg G_k)=-1/(2|G_k|)$, which is close to $0$ from
+below. A treatment in terms of $\arg G_k(1+2it)$ therefore has the right shape --- but a
+linear approximation to that phase predicts a crossing at $t\asymp k^{-(2-s)}$, which is
+not the observed scale, so any such treatment owes an account of how the amplitude
+redistributes with $t$.
+\STATUS{derived, at the level of a sketch; the linear-phase estimate is recorded because
+it is wrong in a specific and informative way.}
+
+\section{What is verified, and how}\label{sec:verified}
+
+This note carries a status at every statement, and the statuses are meant literally.
+Their evidence is as follows.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+status & what stands behind it here\\
+\midrule
+\emph{proved} & a written proof, plus an independent re-derivation along a disjoint
+  route by a second reader who had not seen it\\
+\emph{derived} & an asymptotic argument, stated as such; not to the standard of the
+  proofs in \S\ref{sec:const}\\
+\emph{measured} & a computation with a committed log, with the range stated; a range is
+  not a limit\\
+\emph{refuted} & a pre-registered falsifier fired\\
+\emph{conjectured}, \emph{open} & neither of the above\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two consequences of taking this seriously are visible in the text above.
+Theorem~\ref{thm:const} says \emph{proved} because it was written by one reader and
+re-derived from $G_k(z)=w_0+w(z-z^{k})/(1-z)$ by another who did not read the first
+derivation; Proposition~\ref{prop:scale} says \emph{derived} and not \emph{proved},
+although we believe it, because an asymptotic balance is not a proof.
+
+\begin{remark}[the record of this note's own errors]\label{rem:ourerrors}
+\STATUS{methodological; no mathematical content.}
+Three statements that appear above in corrected form were previously published, under a
+DOI, in incorrect form: an oscillator given as $\cos$ where the geometric sum gives
+$\sin$ (the phase of $1/(z-1)$ is exactly $-\pi/2$, and a quarter turn moves a ladder by
+half a rung); an equivalence ``$R\ge1$ if and only if $\sum_jw_j<\infty$'', which is false
+exactly at $R=1$ where both cases occur; and the dividing line of
+Conjecture~\ref{conj:line} given as summability rather than decay
+(Remark~\ref{rem:whyline}). Each is corrected at its statement in the companion paper and
+named in the release notes there.
+
+\emph{We record this because a note whose apparatus is part of its claim should say what
+that apparatus has caught.} Two of the three were found not by a check but by building
+something new and noticing that it contradicted a sentence written elsewhere.
+\end{remark}
+
+\section{Three questions}\label{sec:questions}
+
+\begin{enumerate}
+\item \textbf{Does a sum of two sections inherit boundary accumulation?} Precisely: for
+      $w_j\ge0$ with $R=1$, does $F_k$ have zeros approaching $q=\tfrac12$?
+      (Problem~\ref{prob:general}. Answered for $w_j\not\to0$;
+      measured for $w_j\asymp(j+1)^{-s}$; open in general.)
+\item \textbf{Is the dividing line exactly $w_j\to0$?} We have refuted summability as the
+      criterion and verified the decay criterion on both sides, including on profiles
+      that decay without summing --- but ``$w_j\to0$'' has not been shown to be
+      \emph{sharp}. A profile with $w_j\to0$ taking the $\pi/2k$ rate would refute
+      Conjecture~\ref{conj:line}.
+\item \textbf{What is the constant at $s=1$?} The scale $\sqrt{s\log k/2k}$ is derived
+      and measured at four exponents; at $s=1$ the constant is not established
+      (\S\ref{sec:s1}). \emph{This is the cheapest of the three to attack and the one we
+      most expect to be closed by someone else.}
+\end{enumerate}
+
+\section{Where we looked in the literature}\label{sec:lit}
+
+So that the claim ``we found nothing covering sums of sections'' can be checked or
+refuted cheaply, here is its extent. We consulted the classical statements of Jentzsch
+(1914) and Szeg\H{o}, and surveyed the extensions of Jentzsch--Szeg\H{o} to Dirichlet
+series, Kapteyn series, Neumann series, sections along analytic curves, and the
+ultrametric setting. All of these concern the zeros of the sections of \emph{one}
+series, or of one series composed with a map. We did not find a treatment of
+\[
+  \alpha\,G_k(\varphi_1(q))+\beta\,G_k(\varphi_2(q))+\gamma
+\]
+for affine $\varphi_1,\varphi_2$ --- in particular, of the conjugate pair that
+\eqref{eq:F} produces on a line. \STATUS{a negative result about our search, not about
+the literature; stated so that it can be overturned by one reference.}
+
+\section{Numerical conventions}\label{sec:num}
+
+Every number in this note is copied from a committed log, and every script named in a
+status is in the repository with its log beside it. Computations use \texttt{mpmath} at
+$30$--$120$ decimal digits, with the working precision printed; where a quantity is
+compared across precisions, the number of agreeing digits is printed rather than
+asserted. Zeros on the line are located by scanning $t$ upward \emph{from zero} and
+bisecting the first sign change, so that ``first'' is a claim about $(0,t_{\max})$ and
+not about a window; where a claim concerns zeros off the line as well, it is certified
+by an argument-principle count on a circle about $q=\tfrac12$.
+
+Each experiment registers its falsifiers before it runs, and at least one of them tests
+the \emph{instrument} against a value proved elsewhere in this note --- typically
+Theorem~\ref{thm:const}(e), whose zero set is exact. In the run that produced
+\S\ref{sec:decay} the three falsifiers testing the law all passed while both instrument
+controls failed, on an off-by-one in the weight index; the law-testing falsifiers alone
+would have confirmed a wrong apparatus.
+
+\section*{Tool and computational resource disclosure}
+\addcontentsline{toc}{section}{Tool and computational resource disclosure}
+
+This note was produced by one person using AI models as tools under his direction. Draft
+text, proofs, code and numerical experiments were generated in collaboration with large
+language models (Anthropic's Claude, models \texttt{opus-5} and \texttt{fable-5}); the
+author directed the work, chose what to keep, and is responsible for the content.
+
+Because work produced this way cannot be trusted on the author's word, the verification
+apparatus is part of the artefact and is public: every experiment writes a committed
+log, every number in this note is copied from one, statuses are carried at each
+statement, and a failure ledger recording the project's own errors --- including three
+corrections to statements that had already been published under a DOI --- is in the
+repository. Theorem~\ref{thm:const} was written by one model and independently
+re-derived along a disjoint route by the other before being labelled \emph{proved}.
+
+\begin{thebibliography}{9}
+\bibitem{P1} K.~Amauchi, \emph{Arithmetic landscapes I: the gap series}.
+  \url{https://github.com/mathlab0911/arithmetic-landscapes}
+\bibitem{P3} K.~Amauchi, \emph{Arithmetic landscapes III: deformed measures, random
+  sequences, and the coset identity}.
+  \url{https://github.com/mathlab0911/arithmetic-landscapes}
+\end{thebibliography}
+
+\end{document}
