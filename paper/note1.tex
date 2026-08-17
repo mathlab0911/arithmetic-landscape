@@ -97,33 +97,20 @@ survives the sum automatically. We searched for a result covering sums of sectio
 found none; \S\ref{sec:lit} says exactly where we looked, so that a reader who knows
 otherwise can correct us cheaply.
 
-\paragraph{Where the object comes from.}
-$F_k$ arose as a one-parameter deformation of an arithmetic invariant, in which $w_j$ is
-a normalised gap statistic of a finite set of odd integers \cite{P1,P3}. \emph{Nothing
-below uses that}, and the reader who stops at this paragraph loses nothing.
+\paragraph{Where the object comes from, and why it does not matter here.}
+$F_k$ arose elsewhere, as a one-parameter deformation of a quantity attached to a finite
+set of integers, in which the $w_j$ are a normalised gap statistic. \textbf{Nothing below
+uses that}, and the note is written so that it \emph{cannot}: every statement from here on
+is about $w_j$, $G$ and $F_k$ as defined above, and nothing else is assumed, cited or
+required.
 
 \subsection{Terminology}\label{sec:terminology-note}
 
-\emph{This note deliberately carries no vocabulary of its own.} Everything below is
-stated in the standard language of power series and their sections. Two phrases appear
-only in the titles of the companion papers cited at the end, and are glossed here so
-that a reader who meets them is not sent away:
-
-\begin{table}[htbp]
-\centering
-\small
-\begin{tabular}{@{}p{3.3cm}p{9.5cm}@{}}
-\toprule
-term & what it denotes\\
-\midrule
-\emph{gap series} & the arithmetic invariant of \cite{P1} from which the weights $w_j$
-  of this note arise as a normalised gap statistic. Not used here.\\
-\emph{coset identity} & an exact averaging identity of \cite{P3} for
-  $-\log|\cos\pi t|$ over an arithmetic progression, unrelated to the present
-  question and named only because it appears in that paper's title. Not used here.\\
-\bottomrule
-\end{tabular}
-\end{table}
+\emph{This note carries no vocabulary of its own, and there is therefore no terminology
+table.} Everything below is stated in the standard language of power series: coefficients,
+radius of convergence, sections, and zeros. The absence of a table is the point rather
+than an omission --- a reader should be able to check every statement here without
+acquiring a single term.
 
 
 \section{The reduction: on the symmetry line the object is real}\label{sec:reduction}
@@ -687,8 +674,9 @@ $\sin$ (the phase of $1/(z-1)$ is exactly $-\pi/2$, and a quarter turn moves a l
 half a rung); an equivalence ``$R\ge1$ if and only if $\sum_jw_j<\infty$'', which is false
 exactly at $R=1$ where both cases occur; and the dividing line of
 Conjecture~\ref{conj:line} given as summability rather than decay
-(Remark~\ref{rem:whyline}). Each is corrected at its statement in the companion paper and
-named in the release notes there.
+(Remark~\ref{rem:whyline}). Each was corrected at its statement in the version where it
+appeared, and named in that version's release notes; the record is public in the
+repository identified in the disclosure below.
 
 \emph{We record this because a note whose apparatus is part of its claim should say what
 that apparatus has caught.} Two of the three were found not by a check but by building
@@ -762,12 +750,12 @@ corrections to statements that had already been published under a DOI --- is in 
 repository. Theorem~\ref{thm:const} was written by one model and independently
 re-derived along a disjoint route by the other before being labelled \emph{proved}.
 
-\begin{thebibliography}{9}
-\bibitem{P1} K.~Amauchi, \emph{Arithmetic landscapes I: the gap series}.
-  \url{https://github.com/mathlab0911/arithmetic-landscapes}
-\bibitem{P3} K.~Amauchi, \emph{Arithmetic landscapes III: deformed measures, random
-  sequences, and the coset identity}.
-  \url{https://github.com/mathlab0911/arithmetic-landscapes}
-\end{thebibliography}
+Everything named in a status above --- every script, its log, the ledger, and the
+twenty-one mechanical checks that gate each commit --- is at
+\url{https://github.com/mathlab0911/arithmetic-landscapes}. \emph{A reader who wants to
+disbelieve a number in this note should be able to find the line that produced it without
+asking the author.}
+
+
 
 \end{document}

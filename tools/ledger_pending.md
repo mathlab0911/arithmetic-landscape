@@ -322,3 +322,31 @@ whatever came out.
 zeros to within `9.9%` with no fitted parameter, which is why its asymptote is worth
 believing more than our refutation was — but it is `derived`, not `proved`, and the note
 now says so at the statement.
+
+## r213 — the condition on the approval removed a load-bearing sentence nobody had noticed
+
+**claimed** : the note was self-contained. It said so twice — *"nothing below uses that"*,
+*"this note carries no vocabulary of its own"* — while carrying two citations to the
+companion papers, a terminology table whose only two entries existed **because** those
+titles were cited, and a bibliography containing nothing else.
+
+**actual**  : Kentaro approved it on one condition: **no sister papers, at all.** Removing
+them removed the entire bibliography — and with it **the only place the repository URL
+appeared.** `C10` fired immediately: *a reader of this note alone cannot find the code.*
+The disclosure section said the verification apparatus is public and did not say where.
+
+**check**   : `C10`, which asks of every paper whether a reader holding only that paper can
+reach the repository. It fired on the commit that made the note more self-contained.
+
+**rule**    : **Removing a dependency can remove a service the dependency was quietly
+providing.** The citations were doing two jobs — attribution, which the condition rightly
+struck, and *locating the evidence*, which nothing else was doing.
+> **Before deleting a section, ask what else was reachable only through it.** A
+> bibliography is a list of sources to one reader and a set of addresses to another.
+
+*And the shape of the approval is worth its own line.* The condition was one sentence, it
+was not about the mathematics, and it made the note **stronger**: a note that cites its
+parents invites the reader to go and check whether the parents are any good. **The whole
+point of this note is that it does not need them.** Saying so and then citing them twice
+was a contradiction that four rounds of review — including a full statement-by-statement
+referee pass — did not flag, because everyone reading it already knew the parents.
