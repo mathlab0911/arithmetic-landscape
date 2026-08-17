@@ -1,0 +1,46 @@
+============================================================================================
+envelope_r206b -- a proposed cause for r206's wobble, and its refutation
+============================================================================================
+
+--- INSTRUMENT: constant weights, zero set proved exactly (Thm 2(e), proved at r205) ---
+  k= 128 proved=0.0122743110544627221 measured=0.0122743110544627221  ok
+  k= 512 proved=0.00306800007881170098 measured=0.00306800007881170098  ok
+  cases: 2 -> PASS
+
+--- P1: are the zeros of F spaced pi/k?   k*(t_{n+1}-t_n)/pi, four zeros ---
+  s=1    k=  256  gaps: 0.409563, 0.588642, 0.500154   <-- not 1
+  s=1    k= 1024  gaps: 0.244372, 0.694097, 0.382969   <-- not 1
+  s=2    k=  256  gaps: 0.264596, 0.680403, 0.509193   <-- not 1
+  s=2    k= 1024  gaps: 0.171231, 0.727347, 0.403958   <-- not 1
+  cases: 4 -> FAIL -- the ladder reading is wrong
+
+--- P0 (added after the first run; see the header): is t* even defined? ---
+    t* was to be the smallest t with 2|G_k| = 1, which needs 2|G_k(1)| - 1 < 0 at t = 0.
+       s      k 2|G_k(1)| - 1  at t=0
+       1    256          11.24868993 <-- positive
+       1   1024          14.01835134 <-- positive
+       2    256          2.282070873 <-- positive
+       2   1024          2.287915962 <-- positive
+       4    256          1.164646428 <-- positive
+       4   1024          1.164646467 <-- positive
+  cases: 6 -> FAIL -- |G_k| starts LARGE and t* does not exist
+
+============================================================================================
+  [instrument] PASS
+  [P1 spacing] FAIL
+  [P0 instrument defined] FAIL
+
+WHAT THIS ROUND ESTABLISHES, which is not what it set out to establish:
+  1. The zeros of F are NOT a uniform ladder when the weights decay.  Gaps run
+     0.17-0.73 in units of pi/k, not 1.  The evenly spaced ladder theta_n = n pi/k
+     is a CONSTANT-WEIGHT phenomenon (Theorem 2(e)), not a general one -- and the
+     'doubled ladder' fingerprint must be stated with that scope in the note.
+  2. The proposed instrument t* does not exist: |G_k| is already far above the
+     threshold at t = 0 (it is essentially Gamma_k/2), so there is no first crossing
+     from below.  The zero is produced by the PHASE turning, not by the envelope
+     growing -- which also means the quantisation story was the wrong picture.
+  3. Therefore the s = 1 constant remains UNSETTLED, and the two shapes registered
+     at r206 stand as: shape B (lambda -> s-1/2) refuted; shape A (lambda -> s)
+     consistent but not monotone, |lambda-s| = 0.02 to 0.16 at the largest k.
+
+done.

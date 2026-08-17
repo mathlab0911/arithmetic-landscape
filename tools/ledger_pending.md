@@ -167,3 +167,56 @@ does not need it.
 *(Fourth correction in one section in five rounds: `cos`/`sin`, `R ≥ 1 ⟺ Γ finite`, the missing
 clamp, and now this. Three of the four were found by building something new and noticing it
 contradicted a sentence elsewhere — F84's clause about new examples, firing again.)*
+
+## r206 — the observable was halving the discrepancy before anyone looked at it
+
+**claimed** : the `s = 1` constant is anomalous — the ratio `t_1 / √(s log k/2k)` measured
+`1.033, 1.024, 1.026, 0.927, 0.934`, non-monotone and ~7% low.
+
+**actual**  : the mechanism does not predict `t_1`. It predicts the **scale**:
+`k^{−s}e^{2kt²} = O(1)` ⟺ `2kt² = λ log k` with `λ = s`. The quantity the hypothesis names is
+`λ_eff := 2k t_1²/log k`, and the ratio we had been printing is `√(λ_eff/s)` — **a square root
+that halves every discrepancy before it reaches the page.** In `λ` the same data read
+`|λ−s| = 0.02` to `0.16`, and `λ → s−½` (the naive stationary-phase balance) is refuted outright.
+
+**check**   : write down what the derivation predicts, and report *that*, not a monotone function
+of it.
+
+**rule**    : **Report the quantity the mechanism names.** A monotone transform is not a neutral
+change of units: `√` halves relative errors, so a law tested through it looks twice as good as it
+is, and a discrepancy that would have been obvious hides for four rounds.
+> F32 asks whether the observable is the one the hypothesis predicts. This is its quantitative
+> half: **an observable that compresses the error is a weaker instrument, and the compression
+> factor is computable in advance.**
+
+## r206b — a diagnosis that refuted itself, and the refutation is the result
+
+**claimed** : `λ_eff`'s wobble is integer granularity (F25) — `t_1` is stuck at troughs spaced
+`π/k`, giving relative jitter `π/(k t_1)` ≈ 8% in `t`, 16% in `λ`, which is the size observed.
+Proposed instrument: the envelope crossing `t*`, smallest `t` with `2|G_k(1+2it)| = 1`, smooth and
+granularity-free.
+
+**actual**  : **both wrong, and pre-registered clauses caught both.**
+- **P1**: the zeros are *not* spaced `π/k` when the weights decay — measured gaps run `0.17` to
+  `0.73` in units of `π/k`, at `s = 1` and `s = 2` alike. The even ladder is a **constant-weight**
+  phenomenon (Theorem 2(e)), not a general one.
+- **P0**: `t*` does not exist. `2|G_k| − 1` at `t = 0` is `+11.2` for `s = 1` — `|G_k|` starts
+  *far above* the threshold, because it is essentially `Γ_k/2`. There is no crossing from below.
+  **The zero is produced by the phase turning, not by the envelope growing**, so the picture the
+  instrument was built on was wrong too.
+
+**check**   : before building an instrument on a quantity, evaluate that quantity at the ends of
+its range. `2|G_k| − 1` at `t = 0` is one line and it voids the whole design.
+
+**rule**    : **An instrument defined by "the first crossing" needs its starting sign checked.**
+More generally: **a diagnosis and the instrument built to confirm it fail together, because the
+instrument is built from the diagnosis** — so the instrument cannot be the test of the diagnosis,
+and something independent (here P1, a direct measurement of the spacing) has to be.
+> And the honest bookkeeping: **P0 was added to the pre-registration after the first run printed
+> "not found".** A pre-registration edited after seeing data is not a pre-registration; the clause
+> is marked in the file as added late. **Saying so is the only thing that keeps the label worth
+> anything.**
+
+*Round outcome, stated as such:* the `s = 1` constant remains **unsettled**, which was one of the
+three registered outcomes. What was gained is a refuted alternative (`λ → s−½`), a scope
+correction that reached the paper (the ladder is constant-weight only), and one fewer wrong idea.
