@@ -374,3 +374,53 @@ outside the apparatus is the least comfortable and most informative place.
 
 Not repairable: the Zenodo deposit is cut from the tag, and the tag now carries a DOI, so
 the archived `CITATION.cff` keeps the wrong date permanently. Recorded rather than hidden.
+
+## F89 (r216c) — never define an instrument's sampling grid in units of what it measures
+
+The constant-weight instrument scanned `[0, 4r]` where `r` is the *exact answer*. A
+uniform grid on that interval has a node **at** `r` for every grid size — the instrument
+was aiming its samples at the one point where a sign-change detector has nothing to
+detect, and whether it passed came down to the last bit of a float64 rounding. It passed
+at 200000 points and failed at 20000, and **the failure looked like a resolution
+problem, which it was not.**
+
+Rule: an instrument's grid must be defined independently of the quantity under test.
+Use a non-round multiple, and let the bracket widen once before declaring no crossing.
+Corollary worth more than the fix: **a red light whose cause is unrelated to the thing
+being certified is worse than no light, because people learn to explain it away.**
+
+## F90 (r216d) — a refuted falsifier retires the hypothesis it named, not its neighbourhood
+
+r206 registered "the zeros sit on an evenly spaced ladder of troughs", shot it down
+correctly (gaps run 0.17–0.73 in units of `π/k` once the weights decay), and concluded
+that **no quantisation argument is available**. That does not follow, and the note says
+it. The zeros need not be evenly spaced for the FIRST one to be pinned to a phase grid
+of spacing `π/k`. r216d derives that quantum, `Δλ = 4π t₁/log k`, and it bounds the
+residual at **69 of 69 points** with nothing fitted.
+
+Rule: when a falsifier fires, write down what it retired — the named hypothesis — and
+resist widening the retirement to the idea the hypothesis came from. The wider claim was
+never tested.
+
+## F91 (r216) — a worst-case criterion cannot see an improvement that is localised
+
+A refinement aimed at one column of a five-column population was registered with two
+criteria: P1, worst case over the whole population, and P2, "the improvement must be
+concentrated at `s=1`". **P1 failed and P2 passed.** The refinement cut the `s=1` error
+by a third and cost the other four columns almost nothing — but the worst case migrated
+into a control column, so the max got slightly worse.
+
+Rule: a max over a population is the wrong statistic for a targeted change. Register the
+criterion at the resolution of the claim. (The criterion that carried the *explanation*
+was correctly designated in advance and it is the one that answered.)
+
+## F92 (r216b) — a safety margin that jumps around must be measured, not extrapolated
+
+Every `t_1` this project has published came from a 1500-point scan whose resolution had
+never been stated. A 200000-point re-scan moved **none** of the 25 published values — but
+the margin, measured for the first time, is as low as **1.88 old steps** (`s=1.5`,
+`k=512`), and it does not shrink smoothly with `k`: 54, 20, 21, 1.9, 7.6. It depends on
+how nearly tangent the excursion is, which is not a function of `k`.
+
+Rule: state an instrument's margin in every run that uses it. A margin with no trend
+cannot be extrapolated to the next size, so "it worked last time" is not evidence.
