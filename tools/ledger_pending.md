@@ -18,3 +18,62 @@ produces neither.*
 mathematics: the applier aborted three times before it ran, twice because an anchor straddled a
 line break — the same defect (F69) for the third time in this project. **An abort before the write
 is the cheap outcome, which is why the applier asserts every anchor occurs exactly once.***
+
+## r202 — the instrument control fired on the reference, not on the instrument
+
+**claimed** : falsifier 1 of `pinch_r202` compared both methods against `(1/2)tan(pi/k)`, the
+value `rem:leeyanglacunary` *proves* exact, and demanded 25 agreeing digits.
+
+**actual**  : it FAILED at 16 digits, while the two methods agreed with **each other** to 30.
+The reference was computed one line before `mp.dps` was raised — a **15-digit constant printed
+to 30 places and compared against 60-digit measurements.** The methods were right; the control's
+own reference was the defect.
+
+**check**   : evaluate the object at the reference point. `Gamma^(q)` there was `7.8e-61`, i.e.
+the closed form was correct and the *number* was not — which localised it in one step.
+
+**rule**    : **A control's reference is a measurement too, and it is the one nobody checks.**
+Compute every reference at the precision of the thing it will be compared with, and prefer
+computing it *inside* the same precision block rather than before it.
+> This is F87's small sibling — *a number retyped at a different precision is a new number* —
+> caught one level up: not in the paper, but in the apparatus written to police the paper.
+
+**And the shape of the failure was the informative part.** Two independent methods agreeing to 30
+digits while both missed the reference at 16 is not a symmetric situation: **when N independent
+instruments agree with each other and disagree with the reference, the reference is the outlier
+and should be audited first.** The first instinct was to loosen the threshold, which is F57
+(*a check loosened until it stops complaining has been switched off with extra steps*).
+
+## r202 — method B was measuring a different quantity, and only the certificate said so
+
+**claimed** : method B — scan the critical line for the first sign change — is an independent
+second measurement of *the distance from the fair coin to the nearest zero*.
+
+**actual**  : it measures the nearest **on-line** zero. For every profile in the table with
+`R > 1` the nearest zero is **off** the line: at `c = 1.00` the nearest on-line zero is at
+`0.872` and the nearest zero at `0.504`. The assumption came from the boundary families
+(`R = 1`), where r195's argument-principle count *had* shown every near zero to be on the line
+— **an assumption imported across a regime boundary without being written down.**
+
+**check**   : the winding-number certificate on `|q-1/2| = d(1-eps)` refused to certify, on every
+row but one. Without it the two columns would have been read as a method dispute rather than as
+two different quantities.
+
+**rule**    : **When two methods disagree, ask what each one measures before asking which one is
+wrong.** A "second method" that answers a different question is worse than no second method,
+because the disagreement looks like a precision problem and invites the wrong repair.
+> **Every method carries an unwritten domain assumption; the certificate is what makes it
+> writable.** B without the winding number was a claim about where we scanned (F60); B with it
+> is a claim about the disc — and it is the certificate, not the search, that failed.
+
+**Two smaller things from the same round.**
+
+- **A pre-registered falsifier passed on an empty population.** F3 (*ratio >= 1 and increasing
+  in c*) reported PASS in a run where every row was "not resolved" and no ratio existed. Fixed to
+  print the population and to fail at zero — **`expect_subjects` belongs in falsifiers too, not
+  only in `check.py`** (F60/F78).
+- **`F41` caught a self-contradiction two lines apart.** The rendered page showed the new text
+  establishing that at `c = 1` the family is *not* the odd numbers, and two lines below, in a
+  sentence nobody had touched, *"which is 1/2 at c = 1 (the odd numbers)"*. **Adding a
+  clarification creates the contradiction it resolves, one paragraph away, and only reading the
+  built page finds it.**

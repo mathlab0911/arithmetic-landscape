@@ -1483,24 +1483,48 @@ $a_i=2^{i}+1$ we have $w_j=\tfrac12$, $R=1$, and the distance is $0$: \textbf{th
 is no longer a second family --- it is the endpoint of a single scale.
 
 So the dichotomy should be a formula, and it is one. Build the interpolating profile with layer
-gaps $a_{j+1}-a_j=2c^{j}$, so $m_j=c^{j}$, $w_j=(c/2)^{j}$, $R=2/c$, and the prediction is
+gaps $a_{j+1}-a_j=2c^{j}$, so $m_j=c^{j}$, $w_j=(c/2)^{j}$, $R=2/c$.
+\emph{Two conventions, stated rather than inferred, because both were left to the reader until
+r202 and one of them changes the object.} First, the index runs $j=0,\dots,k-1$ and
+\textbf{$m_0=c^{0}=1$}, so $a_1=3$: at $c=1$ this family is $\{3,5,7,\dots\}$ and \textbf{not} the
+odd numbers $\{1,3,5,\dots\}$ of Corollary~\ref{cor:oddsclosed}, which have $m_0=0$. The two
+differ by the single weight $w_0=1$, hence by exactly $2$ in $\Gamma^{(q)}$, and they have
+different zeros. Second, $c^{j}$ is not an integer for general $c$, so \emph{the interpolating
+family is a weight sequence and not a set of odd numbers}; everything below is a statement about
+$\Gamma^{(q)}$ as defined by those weights. The prediction is
 \[
   \operatorname{dist}\Bigl(\tfrac12,\ \text{nearest zero of }\Gamma^{(q)}\Bigr)\;\longrightarrow\;
   \frac1c-\frac12 ,
 \]
-which is $\tfrac12$ at $c=1$ (the odd numbers) and $0$ at $c=2$ (the lacunary family), with no
-constant to fit.
+which is $\tfrac12$ at $c=1$ and $0$ at $c=2$ (the lacunary family $a_i=2^{i}+1$, which is what
+$m_0=1$ makes $c=2$), with no constant to fit.
 
 \begin{center}
-\begin{tabular}{lrrrrrrr}
+\begin{tabular}{lrrr}
 \hline
-$c$ & $1.00$ & $1.10$ & $1.25$ & $1.40$ & $1.60$ & $1.80$ & $2.00$\\
-predicted $1/c-1/2$ & $0.500000$ & $0.409091$ & $0.300000$ & $0.214286$ & $0.125000$ & $0.055556$ & $0$\\
-measured, $k=70$ & $0.503895$ & $0.413403$ & $0.305147$ & $0.220690$ & $0.133982$ & $0.070741$ & $0.022306$\\
-ratio & $1.0078$ & $1.0105$ & $1.0172$ & $1.0299$ & $1.0719$ & $1.2733$ & --- \\
+$c$ & predicted $1/c-1/2$ & measured, $k=70$ & ratio\\
+\hline
+$1.00$ & $0.500000$ & $0.504000614093$  & $1.008$\\
+$1.10$ & $0.409091$ & $0.413478990783$  & $1.0107$\\
+$1.25$ & $0.300000$ & $0.305160458152$  & $1.0172$\\
+$1.40$ & $0.214286$ & $0.220578563029$  & $1.0294$\\
+$1.60$ & $0.125000$ & $0.133924748893$  & $1.0714$\\
+$1.80$ & $0.055556$ & $0.0705434126383$ & $1.2698$\\
+$2.00$ & $0$        & $0.0226056740076$ & ---\\
 \hline
 \end{tabular}
 \end{center}
+
+\emph{Every digit above is one on which two independent methods agree.} One forms the polynomial
+and takes all of its roots; the other never forms it, locating the nearest zero by the argument
+principle --- bisecting the smallest radius whose disc is non-empty, then polishing on the
+directly summed function --- and certifying at the end that a slightly smaller disc is empty. The
+two agree to at least $94$ significant digits at every $c$, each is stable between $60$ and $120$
+digits of working precision, and both reproduce, to sixty digits, the zero that
+Remark~\ref{rem:leeyanglacunary} \emph{proves} exact for $a_i=2^{i}-1$. \textbf{The nearest zero
+is not on the critical line here}: at $c=1$ the nearest \emph{on-line} zero sits at $0.872$ while
+the nearest zero sits at $0.504$. On-line-ness is a property of the boundary families, not a
+general one, and assuming it silently changes which quantity is being measured.
 
 The ratio approaches $1$ from above and degrades gracefully as $c\to2$, which is what a finite
 $k$ must do when the quantity being predicted is going to zero. \emph{At $c=2$ the predicted
@@ -1531,7 +1555,17 @@ is a statement about $G$ and is not proved here.
 \textbf{open}; the rate $\pi/2k$ is \textbf{measured}, and \textbf{only on profiles with
 $\Gamma$ divergent} --- see Remark~\ref{rem:rateregimes} for the other regime, which was
 measured after this remark was written and which contradicts the unqualified reading of it.
-\texttt{leeyang5\_r183}, \texttt{rate\_r200}.}
+\texttt{leeyang5\_r183}, \texttt{rate\_r200}, \texttt{pinch\_r202}.
+ \;--- \textbf{Erratum against \texttt{v1.1.1}.} The $k=70$ row of the table above read
+$0.503895$, $0.413403$, $0.305147$, $0.220690$, $0.133982$, $0.070741$, $0.022306$. Those values
+are wrong from the fourth significant digit, with mixed signs and a largest error of
+$3\times10^{-4}$ at $c=2$. \emph{We cannot reconstruct what produced them}: the obvious
+hypothesis, an off-by-one in $k$, was tested and refused --- the published row matches neither
+$k=69$ nor $k=71$. What can be said is what the replacement carries and the original did not: two
+methods, mutual agreement to $94$ digits, stability across working precisions, an
+argument-principle certificate per row, and two instrument controls against values proved
+elsewhere in this paper. \emph{A number is only as good as the account of how it was obtained,
+and for the old row there is no account.}}
 \end{remark}
 
 \begin{remark}[the rate is not universal: two regimes at $R=1$]\label{rem:rateregimes}
@@ -1539,7 +1573,7 @@ $R=1$ decides that the fair coin sits \emph{on} the boundary of analyticity. It 
 how fast the zeros reach it, and the two halves of the pair in
 Remark~\ref{rem:nopinchreading} --- both with $R=1$ --- fall on opposite sides of that question.
 
-\emph{The mechanism is one line.} On the critical line
+\emph{The mechanism, in one display and two cases.} On the critical line
 $\Gamma^{(q)}_k=1+2\sum_j w_j\rho^{\,j}\cos(j\theta)$ with $w_j=m_j2^{-j}$,
 $\rho=\sqrt{1+4t^{2}}$ and $\theta=\arctan2t$, so $\rho^{\,j}=e^{2jt^{2}(1+O(t^{2}))}$ and the
 last term carries $w_k e^{2kt^{2}}$.
@@ -1550,8 +1584,10 @@ last term carries $w_k e^{2kt^{2}}$.
 \item If $w_j\asymp(j+1)^{-s}$ with $s>1$ --- $\Gamma$ convergent --- the phase cannot do it:
       at $\theta=x/k$ every $\rho^{\,j}\to1$ for $j\le k$, so
       $\sum_j w_j\cos(jx/k)\to\sum_j w_j>0$ and there is no dip at that scale. What produces the
-      zero is instead the growth $\rho^{\,j}$ overcoming the decay $w_j$, and
-      $k^{-s}e^{2kt^{2}}$ is $O(1)$ \emph{exactly} when $2kt^{2}=s\log k$.
+      zero is instead the growth $\rho^{\,j}$ overcoming the decay $w_j$: the quantity
+      $k^{-s}e^{2kt^{2}}$ is $o(1)$ below the scale $2kt^{2}=s\log k$ and unbounded above it, so
+      that scale is where the zero has to sit. \emph{The scale is exact; the constant in front of
+      it is not, and nothing below claims one.}
 \end{itemize}
 Hence the dichotomy inside the boundary case:
 \[

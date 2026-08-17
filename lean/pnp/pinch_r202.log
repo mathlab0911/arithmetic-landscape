@@ -1,0 +1,40 @@
+==========================================================================================
+pinch_r202 -- rem:pinchformula's k=70 table by two independent methods.
+Publish only the digits on which they agree.  Convention: m_j = c^j INCLUDING m_0 = 1.
+==========================================================================================
+
+--- FALSIFIER 1 (instrument): a_i = 2^i - 1, exact nearest zero = (1/2)tan(pi/k) ---
+  k= 32  exact=0.0492457016785821265385987606457
+         A   =0.0492457016785821265385987606457   agreeing digits: 60
+         B   =0.0492457016785821265385987606457   agreeing digits: 60   winding inside: -3.677e-61
+  k= 64  exact=0.0245634248847336270526716606357
+         A   =0.0245634248847336270526716606357   agreeing digits: 61
+         B   =0.0245634248847336270526716606357   agreeing digits: 61   winding inside: -4.643e-61
+  [F1] PASS -- both instruments reproduce a proved exact value
+
+--- FALSIFIER 2 (instrument): odd numbers, prop:nopinch proves |q-1/2|<1/6 zero-free ---
+  winding on |q-1/2| = 1/6 : -4.6667911e-63   [F2] PASS
+
+--- the table, k = 70 ---
+       c      predicted       method A (polyroots)    method B (line+winding)  convA  convB   A~B  cert
+    1.00            0.5     0.50400061409276526812     0.50400061409276526812     60     61   120  cert
+    1.10     0.40909091     0.41347899078341465647     0.41347899078341465647     57     61   117  cert
+    1.25            0.3     0.30516045815194425427     0.30516045815194425427     51     61   120  cert
+    1.40     0.21428571     0.22057856302942631797     0.22057856302942631797     46     60   106  cert
+    1.60          0.125     0.13392474889269671103     0.13392474889269671103     40     60    95  cert
+    1.80    0.055555556    0.070543412638257336714    0.070543412638257336714     35     61    94  cert
+    2.00            0.0    0.022605674007577077982    0.022605674007577077982     61     61   120  cert
+
+--- WHAT MAY BE PRINTED: min(convA, convB, A~B) significant digits, per row ---
+       c      predicted           measured     digits    ratio
+    1.00            0.5     0.504000614093         12    1.008
+    1.10     0.40909091     0.413478990783         12   1.0107
+    1.25            0.3     0.305160458152         12   1.0172
+    1.40     0.21428571     0.220578563029         12   1.0294
+    1.60          0.125     0.133924748893         12   1.0714
+    1.80    0.055555556    0.0705434126383         12   1.2698
+    2.00            0.0    0.0226056740076         12       --
+
+  [F3] ratio >= 1 and increasing in c, over 6 row(s): PASS
+
+done.

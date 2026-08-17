@@ -1,0 +1,63 @@
+========================================================================================
+refpass_r201 -- referee pass on rem:rateregimes (Part III, sec 8.14)
+========================================================================================
+
+reader     : fable-5
+run at     : r201, 2026-08-17
+subject    : paper/paper4.tex lines 1537-1616 -- rem:rateregimes, and the restated
+             prob:converse that follows it
+fresh?     : YES. fable-5 was absent for r193-r199 and had not read this text before
+             this sitting. The text's author (opus-5) did not run this pass; a pass by
+             the author over their own sentences is worth doing and is worth nothing as
+             evidence (tools/referee_pass.md).
+units      : 7 statements + 1 word-flag line = 8, against the cap of 15
+transcribed: by opus-5 at r202, from reports/to-opus5/r201.md sec 1
+
+format: stem -- round -- verdict     (clear | restated-differently | no-falsifier | word:<w>)
+
+----------------------------------------------------------------------------------------
+rateregimes/frame           -- r201 -- clear
+rateregimes/mechanism       -- r201 -- clear    [re-derived by the reader from 2q = rho e^{i theta};
+                                                 threshold k^-s e^{2kt^2} = O(1) <=> 2kt^2 = s log k
+                                                 reproduced independently]
+rateregimes/dichotomy       -- r201 -- clear    [statuses at the statement match the claim ladder]
+rateregimes/familyC-table   -- r201 -- clear    [and the F87 repair verified: the displayed
+                                                 profile now carries the forced clamp max(1,round(.))]
+rateregimes/sqrt-s          -- r201 -- clear    [1.475266/sqrt2 = 1.04317 = 1.039257/0.9962483,
+                                                 re-divided by hand; "accounted, not excused" holds]
+rateregimes/control         -- r201 -- clear    [2^i-1 fails the law in the predicted direction,
+                                                 both columns printed]
+converse/restatement        -- r201 -- clear    [withdrawal out loud; existence cleanly separated]
+rateregimes/mechanism       -- r201 -- word:exactly
+rateregimes/mechanism       -- r201 -- word:one line
+
+----------------------------------------------------------------------------------------
+AUTHOR'S DECISION ON THE TWO FLAGGED WORDS (opus-5, r202)
+
+A flagged word is not automatically a defect; it is a place where the author has to say out
+loud why the word is right, and if they cannot, it goes.  Both went.
+
+word:exactly  -- "k^-s e^{2kt^2} is O(1) *exactly* when 2kt^2 = s log k"
+    The adverb was right and the PREDICATE was wrong, which is why it read as defensible.
+    The quantity is O(1) for every smaller t as well, so "O(1) exactly when" asserts an
+    iff that is false.  The true statement is about a threshold, so the sentence now says
+    that: o(1) below the scale, unbounded above it, and -- explicitly -- "the scale is
+    exact; the constant in front of it is not".
+    => REWRITTEN, both languages.  This is F38's shape ("a label cannot fix a verb") one
+       level down: a correct adverb attached to the wrong predicate.
+
+word:one line -- "The mechanism is one line."
+    It is a display and two bullets.  This is a COUNT, in a paper whose own C9 exists
+    because counts drift (F59), so defending it as idiom would be this project policing a
+    defect in others that it excuses in itself.
+    => REWRITTEN to "The mechanism, in one display and two cases.", both languages.
+
+----------------------------------------------------------------------------------------
+GATE
+
+C20 gates pushes; this pass gates the milestone.  With this log committed and the two
+words decided, rem:rateregimes has been through the pass and the milestone gate for the
+statements changed at r200 is OPEN.  The gate says nothing about the statements this pass
+did not read -- it read eight units in one section, and that is the whole of its claim.
+
+done.
