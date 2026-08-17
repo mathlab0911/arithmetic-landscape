@@ -11,7 +11,8 @@ repository-code: "https://github.com/mathlab0911/arithmetic-landscapes"
 url: "https://mathlab0911.github.io/"
 abstract: >-
   A research repository in number theory. Three manuscripts study the subset-sum landscape of a
-  finite set of odd integers: the ratio of strict local minima to ground states converges to a
+  finite set of odd integers, and a fourth, standalone note states one of the questions they
+  raise in the language of power series with no prerequisites from the rest: the ratio of strict local minima to ground states converges to a
   rational invariant read off the set by counting, and that invariant is the annealed
   (independence) prediction itself, so the main theorem says the annealed count of metastable
   states is asymptotically exact. A lower bound that would normally cost a quantitative
@@ -31,6 +32,6 @@ keywords:
   - formal verification
   - disordered systems
 license: Apache-2.0
-version: "v1.1.1"
-date-released: "2026-08-16"
+version: "v1.2.0"
+date-released: "2026-08-18"
 doi: "10.5281/zenodo.21941261"
