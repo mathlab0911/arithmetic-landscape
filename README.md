@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21941261.svg)](https://doi.org/10.5281/zenodo.21941261) &nbsp; ORCID [0009-0000-0890-4395](https://orcid.org/0009-0000-0890-4395)
 
-*Archived release `v1.2.0` (2026-08-18). The DOI above resolves to the latest version; each release also gets its own. Manuscripts CC BY 4.0, code Apache-2.0. **Not peer-reviewed** — every statement carries its own status where it is stated.*
+*Archived release `v1.2.0` (2026-08-17). The DOI above resolves to the latest version; each release also gets its own. Manuscripts CC BY 4.0, code Apache-2.0. **Not peer-reviewed** — every statement carries its own status where it is stated.*
 
 **A DOI makes a version permanent; it does not make it true.** `v1.1.1` corrected three false sentences about the Lee–Yang ladder of Part III. `v1.2.0` corrects **four more** — a table wrong from the fourth digit, a displayed formula that does not generate the constant printed beside it, a conjectured dividing line the mechanism never used, and **a refutation of our own that is withdrawn**. Each is corrected at its own statement, none deleted, and all four are itemised in [the `v1.2.0` release notes](https://github.com/mathlab0911/arithmetic-landscapes/releases/tag/v1.2.0). *Three of the four were found by building something new and noticing it contradicted a sentence written elsewhere — not by any of the twenty-one mechanical checks.*
 

@@ -350,3 +350,27 @@ parents invites the reader to go and check whether the parents are any good. **T
 point of this note is that it does not need them.** Saying so and then citing them twice
 was a contradiction that four rounds of review — including a full statement-by-statement
 referee pass — did not flag, because everyone reading it already knew the parents.
+
+## F88 (r214d) — a fact every reader already knows is a fact nobody checks
+
+We published v1.2.0 dated 2026-08-18. The machine's clock said 2026-08-17 in both the
+local frame (+09:00) and UTC. The date was never computed: it was copied forward from a
+round header that had drifted, and by the time it reached `CITATION.cff` three artefacts
+agreed with it — three agreeing sources with one origin.
+
+No check caught it, and the reason generalises. C2 requires every number quoted in a
+report to be a substring of a committed log; that rule silently assumes a number is a
+*measurement*. A date is a fact about the world, equally cheap to verify, and unverified
+precisely because everybody in the room already knew it. Same shape as the citations
+read as courtesy (r213) and the just-edited paragraph (F35).
+
+Rule: **when a claim is about the world rather than about our computation, ask the world.**
+`date` costs nothing and does not remember yesterday's answer. Candidate check: any date
+literal in a prose artefact must be today's date or must be accompanied by the reason it
+is not.
+
+Zenodo caught this, because Zenodo does not take our word for the date. Detected from
+outside the apparatus is the least comfortable and most informative place.
+
+Not repairable: the Zenodo deposit is cut from the tag, and the tag now carries a DOI, so
+the archived `CITATION.cff` keeps the wrong date permanently. Recorded rather than hidden.
