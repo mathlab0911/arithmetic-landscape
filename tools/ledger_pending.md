@@ -248,3 +248,37 @@ to be the note's most concrete page.
 *Scale of the near miss:* every other number in the note came from a log, because a log
 existed for it. The one table with no script behind it is the one that was wrong. **The
 provenance of a number predicts its correctness better than its importance does.**
+
+## r210 — the pass exceeded its own cap, and said so
+
+**claimed** : `tools/referee_pass.md` caps a pass at **15 units per session**, because past
+that the context stops being fresh — which is the only thing the pass has going for it.
+
+**actual**  : the r209 pass on `note1.tex` ran **53 units in one sitting**, the whole
+document. The reader judged a ten-page note worth reading whole and did so.
+
+**check**   : none fired. Nothing in the apparatus counts units, so the cap is a sentence
+in a procedure document and not a property of anything.
+
+**rule**    : **When a procedure is exceeded for a good reason, record the excess in the
+log rather than in the decision.** A pass that quietly runs at 3.5× its cap and comes back
+green is indistinguishable, later, from one that ran inside it — and the cap exists to
+protect a property (freshness) that the reader cannot self-assess.
+> The note's own log now carries the departure in its own words, so it can be disagreed
+> with. **The alternative — adjusting the cap to match what we did — is F57's shape: a
+> limit loosened until it stops complaining has been switched off with extra steps.**
+
+*Open, deliberately:* whether 15 is the right number for a short self-contained document,
+or whether the cap should be stated per *page* rather than per unit. Named, not decided.
+
+## r210 — the disclosure heading, in the other language
+
+**claimed** : the Japanese edition of the note carried a section titled
+*道具および計算資源の開示*.
+
+**actual**  : C16 requires the exact declared name, *道具と計算資源の開示*. One particle
+different, and to a reader the same section — to the check, absent.
+
+**rule**    : F18's clause, met from the artefact side: **a name that a check keys on is
+part of the interface, not a matter of style.** Where a check names a required string, the
+artefact copies it; a paraphrase of the predicate is a new predicate, in either direction.

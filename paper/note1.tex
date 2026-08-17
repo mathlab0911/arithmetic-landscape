@@ -337,11 +337,50 @@ one rung per $\pi/k$ --- and $k\,t_n/\pi\to n/2$, so in $t$ the rungs are asympt
 evenly spaced as well. Both facts fail as soon as the weights decay
 (Remark~\ref{rem:s1notes}(i)), and the failure is not a small perturbation.
 
-\begin{corollary}[the pinch at $R=1$, for constant weights]\label{cor:pinch}
-\STATUS{proved; immediate from Theorem~\ref{thm:const}(d).}
-If $w_j\to w>0$ with $w_j$ eventually constant, then $R=1$ and the zeros of $F_k$
-approach $q=\tfrac12$ along the line $\operatorname{Re}q=\tfrac12$ at rate $\pi/2k$.
+\begin{corollary}[the pinch at $R=1$, for eventually constant weights]\label{cor:pinch}
+\STATUS{proved. \emph{Not} immediate from Theorem~\ref{thm:const}: that theorem admits
+one exceptional weight $w_0$, whereas ``eventually constant'' admits finitely many. The
+two lines that close the gap are given.}
+Suppose $w_j=w>0$ for all $j\ge j_0$, with $w_0,\dots,w_{j_0-1}\ge0$ arbitrary. Then
+$R=1$, and $F_k$ has a zero on $\operatorname{Re}q=\tfrac12$ with
+$t_1=\dfrac{\pi}{2k}\bigl(1+O(1/k)\bigr)$.
 \end{corollary}
+
+\begin{proof}
+Write $w_j=w+v_j$ for $j\ge1$, so $v_j=0$ once $j\ge j_0$, and put
+$B:=2\sum_{1\le j<j_0}|v_j|$. By Proposition~\ref{prop:real},
+\[
+  F_k\!\left(\tfrac12+it\right)
+  \;=\;\underbrace{A+w\rho^{\,k}\frac{\sin(k\theta)}{t}}_{\text{Theorem~\ref{thm:const}}}
+  \;+\;2\sum_{1\le j<j_0}v_j\,\rho^{\,j}\cos(j\theta),
+\]
+and on $0\le\theta\le 3\pi/2k$ we have $1\le\rho^{\,j}\le\rho^{\,j_0}\to1$ for fixed
+$j_0$, so the second sum is bounded by $B$ in absolute value for all large $k$,
+\emph{uniformly in $k$}. It therefore changes nothing that grows.
+
+At $\theta=3\pi/2k$ one has $\sin(k\theta)=-1$ and $t\le(3\pi/4k)(1+O(k^{-2}))$, so the
+main term is at most $A-4kw/3\pi\,(1+o(1))$, which beats $A+B$ once
+$k>3\pi(A+B)/4w$: the value is negative there, and (c) of
+Theorem~\ref{thm:const} survives with $A$ replaced by $A+B$.
+
+For the lower end, write $\theta=\pi/k-\varepsilon$ with $0<\varepsilon<\pi/k$. Then
+$\sin(k\theta)=\sin(k\varepsilon)\ge \tfrac{2}{\pi}k\varepsilon$ and
+$t=\tfrac12\tan\theta\le\pi/2k\,(1+O(k^{-2}))$, so the main term is at least
+$(4/\pi^{2})wk^{2}\varepsilon\,(1+o(1))$, which exceeds $B$ as soon as
+$\varepsilon\ge\pi^{2}B/(4wk^{2})$. Hence $F_k>0$ for
+$\theta\le\pi/k-O(k^{-2})$, so $t_1\ge\tfrac12\tan\bigl(\pi/k-O(k^{-2})\bigr)
+=\tfrac{\pi}{2k}\bigl(1-O(1/k)\bigr)$. Combining, $t_1=\tfrac{\pi}{2k}(1+O(1/k))$. \qed
+\end{proof}
+
+\begin{remark}[what the two lines buy]\label{rem:whybroader}
+\STATUS{proved, being the corollary.}
+The broad statement is the one Conjecture~\ref{conj:line}'s first branch needs to cite:
+``eventually constant'' is a class, whereas Theorem~\ref{thm:const} as stated is a
+family. The perturbation is bounded while the main term grows like $k$, which is why
+finitely many arbitrary weights cost nothing --- \emph{and it is worth noticing that the
+same estimate fails the moment infinitely many weights differ from $w$, which is exactly
+where \S\ref{sec:decay} begins.}
+\end{remark}
 
 \section{Decaying weights: the second speed}\label{sec:decay}
 
@@ -517,6 +556,12 @@ approaching $q=\tfrac12$, at rate
   \qquad\qquad
   t_1\sim\sqrt{\frac{s\log k}{2k}}\quad\text{if }w_j\asymp(j+1)^{-s},\ s>0 .
 \]
+\emph{The two displayed classes are illustrative and do not exhaust $R=1$.} They omit,
+for instance, profiles decaying more slowly than every power, such as
+$w_j=1/\log(j+2)$. We expect such profiles on the second branch with a local exponent in
+the role of $s$; that expectation is measured only at
+$w_j=\bigl((j+2)\log(j+2)\bigr)^{-1}$ and is deliberately \textbf{not} part of the
+conjecture.
 \end{conjecture}
 
 \paragraph{The missing analytic ingredient, named rather than left to be located.}

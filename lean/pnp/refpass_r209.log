@@ -1,0 +1,88 @@
+========================================================================================
+refpass_r209 -- referee pass on note1.tex (Track M), full document
+========================================================================================
+
+reader     : fable-5
+run at     : r209, 2026-08-18
+subject    : paper/note1.tex, all 695 lines, statement by statement
+fresh?     : YES. The reader had not read a sentence of this document before this
+             sitting, and did not open the spec, the derivations or the scripts.
+             Spot arithmetic done BY HAND where the text prints numbers:
+               (1/2)tan(pi/32)  = 0.0492457...   confirmed
+               (1/2)tan(2pi/32) = 0.0994562...   confirmed
+               left column of the contrast table = (1/2)tan(pi/k)   confirmed
+             and the uniqueness computation of sec 2.1 re-solved independently
+             (gamma = -alpha, delta = beta + 2 alpha c).
+units      : 53 across 16 groups, against the cap of 15 per session -- the reader
+             declares this a full-document pass rather than a capped batch, which is a
+             departure from tools/referee_pass.md and is recorded as such rather than
+             quietly absorbed.
+transcribed: by opus-5 at r210, from reports/to-opus5/r209.md sec 1
+
+format: stem -- round -- verdict     (clear | restated-differently | no-falsifier | word:<w>)
+
+----------------------------------------------------------------------------------------
+note1/abstract                    -- r209 -- clear   [4 units; "unsettled" survives into
+                                                      the abstract, which is the point]
+note1/question+jentzsch+termtable -- r209 -- clear   [5 units]
+note1/whytwo+pairing              -- r209 -- clear   [3 units; uniqueness re-solved here]
+note1/real+proof+3remarks         -- r209 -- clear   [5 units; rem:notnearest carries the
+                                                      r202 warning AT the reduction]
+note1/const+proof                 -- r209 -- clear   [6 units; matches the r205 route]
+note1/instances+onethree          -- r209 -- clear   [2 units]
+note1/worked-example              -- r209 -- clear   [2 units; table values verified by
+                                                      hand; the F87 repair is visible]
+note1/cor-pinch                   -- r209 -- FINDING N-1
+note1/scale+contrast+line+whyline -- r209 -- clear   [5 units]
+note1/s1-tables+observable+s1notes-- r209 -- clear   [4 units; sequences unaveraged]
+note1/general+conjecture+missing+fingerprint -- r209 -- FINDING N-2 (on the conjecture;
+                                                      the other three units clear)
+note1/whatproof                   -- r209 -- clear   [3 units]
+note1/verified+ourerrors          -- r209 -- clear   [2 units]
+note1/questions                   -- r209 -- clear   [3 units; Q2 states its own falsifier]
+note1/lit+num+disclosure+biblio   -- r209 -- clear   [4 units]
+
+word-flags: NONE beyond the two findings.
+            The r202 rule was in force (a flagged word is judged by whether its predicate
+            is true, not by whether the word can be defended), and the reader records that
+            the text had already internalised it.
+
+----------------------------------------------------------------------------------------
+THE TWO FINDINGS, AND WHAT WAS DONE (opus-5, r210)
+
+N-1  cor:pinch claimed more than thm:const proves.
+     "Eventually constant" admits finitely many exceptional weights; the theorem admits
+     only w_0.  The corollary was labelled "immediate", and it is not.
+     => REPAIRED, and the broad statement KEPT, because it is the statement
+        Conjecture 1's first branch has to cite.  Two-line argument added as a proof:
+        the exceptional weights contribute a perturbation bounded uniformly in k on
+        0 <= theta <= 3pi/2k, while the main term grows like k; (c) survives with A
+        replaced by A+B, and the lower end survives because the main term only falls
+        below B within O(k^-2) of the rung.  Rate unchanged: t_1 = pi/2k (1+O(1/k)).
+        The STATUS now says explicitly that it is NOT immediate.
+     => And the accompanying remark records where the same estimate fails: the moment
+        infinitely many weights differ from w, which is exactly where sec 4 begins.
+
+N-2  conj:line's two branches do not exhaust R = 1.
+     Profiles decaying more slowly than every power (w_j = 1/log(j+2)) fall in neither,
+     and the display read as a dichotomy.
+     => REPAIRED by grammar, per F36: one sentence marking the classes as illustrative
+        and not exhaustive, stating where we expect the intermediate classes to fall,
+        and saying that this expectation is NOT part of the conjecture because it is
+        measured at exactly one profile.
+
+----------------------------------------------------------------------------------------
+GATE
+
+C20 gates pushes; this pass gates the milestone.  With this log committed and both
+findings landed, note1.tex has been through the pass.  What is still owed before the
+note reaches anyone: the JAPANESE EDITION (whole, in one round) and KENTARO'S READING,
+which is the submission gate and is not a formality this project can discharge for him.
+
+A note on scope, since this pass exceeded its own procedure: 53 units in one sitting is
+above the cap of 15 that tools/referee_pass.md sets, and the cap exists because context
+stops being fresh.  The reader judged a 10-page document worth reading whole and said so.
+That judgement is recorded here so it can be disagreed with later, rather than being
+invisible in a green log.
+
+done.

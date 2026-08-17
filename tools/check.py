@@ -59,7 +59,7 @@ PAPER_JA = os.path.join(ROOT, 'paper-ja')
 # statements.  The scopes of C9, C13, C15 and C17 are updated in the same commit as the
 # removal -- the F60 lesson applied in advance rather than after.
 JA_PAIRS = [('paper1_ja.tex', 'paper.tex'), ('paper2_ja.tex', 'paper2.tex'),
-            ('paper4_ja.tex', 'paper4.tex')]
+            ('paper4_ja.tex', 'paper4.tex'), ('note1_ja.tex', 'note1.tex')]
 JA_TO_EN = dict(JA_PAIRS)
 
 fails = []
