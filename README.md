@@ -4,7 +4,7 @@
 
 *Archived release `v1.2.0` (2026-08-18). The DOI above resolves to the latest version; each release also gets its own. Manuscripts CC BY 4.0, code Apache-2.0. **Not peer-reviewed** — every statement carries its own status where it is stated.*
 
-**A DOI makes a version permanent; it does not make it true.** `v1.1.1` corrected three false sentences about the Lee–Yang ladder of Part III. `v1.2.0` corrects **four more** — a table wrong from the fourth digit, a displayed formula that does not generate the constant printed beside it, a conjectured dividing line the mechanism never used, and **a refutation of our own that is withdrawn**. Each is corrected at its own statement, none deleted, and all four are itemised in [the release notes](docs/RELEASE_v1.2.0.md). *Three of the four were found by building something new and noticing it contradicted a sentence written elsewhere — not by any of the twenty-one mechanical checks.*
+**A DOI makes a version permanent; it does not make it true.** `v1.1.1` corrected three false sentences about the Lee–Yang ladder of Part III. `v1.2.0` corrects **four more** — a table wrong from the fourth digit, a displayed formula that does not generate the constant printed beside it, a conjectured dividing line the mechanism never used, and **a refutation of our own that is withdrawn**. Each is corrected at its own statement, none deleted, and all four are itemised in [the `v1.2.0` release notes](https://github.com/mathlab0911/arithmetic-landscapes/releases/tag/v1.2.0). *Three of the four were found by building something new and noticing it contradicted a sentence written elsewhere — not by any of the twenty-one mechanical checks.*
 
 The **gap series** of a finite set `A` of odd positive integers with largest element `M` is
 
