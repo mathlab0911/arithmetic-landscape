@@ -1,0 +1,4 @@
+s=0.5 k=4096 (a point never printed by opus):
+  t_pred=0.017675952 t_1=0.01817002
+  lam_pred=0.307715 lam_eff=0.325158 |resid|=0.01744 D=0.02745 -> INSIDE
+  branch: |lam - s/2| = 0.07516 vs |lam - (s-1/2)| = 0.3252
