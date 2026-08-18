@@ -1,0 +1,41 @@
+============================================================================================
+verify_r225b -- what is in the canon, and the four edits the delta record did not describe
+============================================================================================
+
+THE CHAIN, each link already identified:
+  baseline (pre-fold, saved side, F102)   91456 bytes  md5 f7a60bc4063ef75f78b98deda0da7915
+  + edits 1-3, applied BY skill_delta_r225.py, each anchor asserted to occur exactly once
+  = SKILL_after_r225.md as the script wrote it  98981 bytes  md5 a427832b4d16686c478dffb94bae8bb0
+  saved canon after save_skill                  99869 bytes  md5 166de9a856fb1ab3ebe0585aef939c13
+
+diff(record, artefact): 4 hunk(s)
+   +   **And when a child process prints non-ASCII, decode its output explicitly** — inheriting the
+   +   console codec (`cp932` here) turns a foreign-language line into an empty read, and *"said
+   +   nothing"* is not *"could not hear"* (F107).
+   + - **The sandbox can CREATE files in the mounted folder but cannot DELETE them.** A control that
+   +   corrupts the tree and restores it must therefore run on Windows; run from the sandbox, the
+   +   first such control left a fake live report sitting in the tree — produced by the machinery
+   +   built to detect fake live reports.
+   + - **Hand-edit the canon during a mechanical application** (F106). Add it to the script and re-run.
+   +   maintained. **When it needs folding, write the destination file FIRST, confirm it exists from
+   +   the filesystem side, and only then rewrite the index** — a transfer that clears the source
+   +   before the destination is verified is not a transfer.
+
+BECAUSE the reference is a MECHANICAL product of a baseline whose md5 was fixed before
+any of this, and the diff has exactly the hunks above, the saved canon is:
+      baseline + (3 scripted edits) + (4 edits typed during transcription)
+and nothing else.  That is the whole audit; no reversal script is needed, and the one I
+started writing could not have worked -- the delta script aborts at its own baseline guard
+before it ever defines EDITS, so importing it for them was never going to succeed.
+
+THE FINDING, not a caveat: **F106 entered the canon in this write and was violated BY this
+write.** Four correct, useful sentences were typed because the surrounding paragraph was in
+front of me -- the practice notes from F107 and from today's memory fold. Second occurrence
+in three rounds, same hand, one round apart, and this time inside the act of installing the
+rule against it.
+
+Direction of reconciliation, DECLARED (F106): the record is being brought to the artefact.
+SKILL_after_r225.md is overwritten with the saved canon, so a future fold diffs against what
+is really there.  Both directions end in agreement; only one is evidence.
+
+NEXT BASELINE (F102), from the saved side: 99869 bytes, md5 166de9a856fb1ab3ebe0585aef939c13
