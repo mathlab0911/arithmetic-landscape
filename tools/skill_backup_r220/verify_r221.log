@@ -1,0 +1,44 @@
+# r221: verification of the r220 ledger fold after save_skill
+
+Standing rule applied: F82, "diff the saved result against the source before
+believing it". The write is the one step of the r220 fold that r220b deferred.
+
+## What was written
+
+  tool       : save_skill(name="pnp-research", overwrite=true)
+  source     : tools/skill_backup_r220/SKILL_after_r220.md
+  frontmatter: passed as the separate `name` and `description` parameters,
+               NOT inside `content` (the tool regenerates it)
+  body       : lines 5..1176 of the source, transcribed by hand into `content`
+
+## Read-back, from the skill cache and not from the source
+
+  source file          88258 bytes   md5 e82c6626ba7b16382620498e43b262c9
+  saved SKILL.md       88259 bytes
+  source body (5..)    md5 2573951a022c90ede8a01222b37eecae
+  saved body  (5..)    md5 0d32c42b8f277d6d7236e14a3b9345a6
+
+  diff <(tail -n +5 source) <(tail -n +5 saved):
+    1a2
+    >
+
+## Verdict
+
+PASS with one known difference, stated rather than rounded away.
+
+The saved canon carries ONE EXTRA BLANK LINE between the frontmatter and the
+`# Research routine` heading, because the `content` argument began with a
+newline and the source's own line 5 is already blank. Every other byte of the
+1172-line body is identical, so F88-F100 and the section 7.8 heading
+`F83--F100` are in the canon exactly as the delta script computed them.
+
+The difference is whitespace at a position where Markdown has no opinion, so
+it is recorded and not repaired: a second 88 KB write to delete one blank line
+would spend the whole budget of a turn to change nothing a reader can see,
+and the failure mode of that write is a corrupted canon (F82).
+
+## For whoever runs the next fold
+
+The next `skill_delta_rNNN.py` must take its baseline from the SAVED canon,
+not from this backup, or it will inherit a one-byte disagreement and report a
+drift that is not there. Baseline byte count going forward: 88259.
