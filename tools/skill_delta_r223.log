@@ -1,0 +1,24 @@
+baseline : skill_backup_r223/BASELINE_r223.md
+bytes    : 88259
+md5      : c921a3d54af59e1b2a1e8f6d9e7d2986
+edit 1   : anchor occurs 1 time(s)  [```...]
+edit 2   : anchor occurs 1 time(s)  [   model you are, and read the live report addressed to yo...]
+edit 3   : anchor occurs 1 time(s)  [- **Report a check as passing when it examined nothing** (...]
+edit 4   : anchor occurs 1 time(s)  [- **Secrets never go into memory or any repository.**...]
+edit 5   : anchor occurs 1 time(s)  [  the project. Seven, each found only because someone happ...]
+edit 6   : anchor occurs 1 time(s)  [  6. *The check catches its own author, ten rounds later.*...]
+edit 7   : anchor occurs 1 time(s)  [  the reader will hold.** *(Asserted, C16, over both trees...]
+edit 8   : anchor occurs 1 time(s)  [  reader stops discounting the list and starts reading it....]
+
+written  : /sessions/youthful-loving-gauss/mnt/study/tools/skill_backup_r223/SKILL_after_r223.md
+bytes    : 91400   (was 88259, delta +3141)
+md5      : 71673f63d1ddba3dfc2e88550bb122c4
+
+body md5 (everything after the 4-line frontmatter, which save_skill re-emits):
+           57c097d31dfc147faeb116607e7c6a68
+
+NEXT, AND IT IS NOT OPTIONAL: pass this file's body to save_skill, then re-read the
+cache and diff it against this file.  The write is unverifiable until that diff runs
+(F82).  Expected: zero differences, because the baseline was taken from the saved
+side this time (F102).
+done.

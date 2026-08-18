@@ -142,3 +142,42 @@ rule      : A singularity that CANCELS is a property of how you wrote the formul
 re-run, and chasing it produced the resonance family -- which no criterion in the file
 was looking for.  Pair it with F66 (*a wrong answer that is a clean function of the
 right one names its own bug*): here a wrong EXCEPTION named a real structure.
+
+## F106 (proposed, r223) -- "apply it mechanically" is broken by any hand edit, including a good one
+
+```
+claimed   : the r223 skill write followed F82 -- delta designed first, applied by
+            `tools/skill_delta_r223.py`, read back and diffed.
+actual    : four edits went through the script.  THREE MORE did not: while transcribing
+            the body into save_skill I noticed that F101's lessons belonged in F60
+            (an eighth scope instance), F64 (the purest delivery failure) and F35
+            (how to strike a false claim), and I wrote them in as I passed.  1561 bytes
+            the delta record did not describe.  The additions are correct and I would
+            make them again -- and the record still disagreed with the artefact, which
+            is the r220c defect exactly, one round after fixing it.
+check     : the F82 read-back diff.  It is the only thing in the procedure that could
+            have caught this, and it did, on the first run.
+rule      : "Apply it mechanically" is violated by ANY hand edit made during the
+            application.  The purpose of the mechanical step is that the record and the
+            artefact agree afterwards, and an improvement invented mid-transcription
+            breaks that even when the improvement is right.  Either put it in the script
+            and re-run, or make it next round.
+```
+
+**Repaired, and the order is recorded rather than hidden.** The three edits were added to
+the script as edits 5–8 and it was re-run against a reconstructed 88259-byte baseline
+(rebuilt from `skill_backup_r220` + the F102 blank line, md5 verified
+`c921a3d54af59e1b2a1e8f6d9e7d2986` before use). The body diff is now empty. **But the
+edits were made first and the script second**, and the script's own header says so —
+because a clean diff obtained by rewriting the record afterwards looks exactly like a
+clean diff obtained by following the procedure.
+
+> **When you reconcile a record to an artefact rather than the other way round, say which
+> direction you went. Both produce agreement; only one of them is evidence.**
+
+Two smaller things from the same write. **The script's baseline guard fired and refused
+to run** once the canon had already been updated — friction on the dangerous side (F77)
+working as intended, and it is why the reconstruction step exists at all. And the
+`description` field has a **1024-character limit** that is only enforced at save time:
+the first attempt was rejected after the whole body had been transmitted. *Measure a
+field against its limit before spending the write.*
