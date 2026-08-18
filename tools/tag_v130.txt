@@ -1,0 +1,13 @@
+v1.3.0 -- two proved theorems in the standalone note, and the proof of one of them
+
+ADDS; CORRECTS NOTHING THAT WAS PUBLIC.
+
+thm:monotone -- for every non-increasing profile w_0 >= ... >= w_{k-1} >= 0 and t > 0, arctan(2t) <= pi/k implies F_k(1/2+it) >= 1, so there is no zero on 0 < t <= (1/2)tan(pi/k).  Two lines from an exact summation-by-parts identity, now displayed in the note.  The previous version had this for constant weights only.  Proved, two routes.
+
+thm:decayrate -- for fixed s > 1 and w_j = (j+1)^{-s}, a first zero exists for all large k and 2 k t_1(k)^2 / log k -> s - 1/2.  The first complete analytic theorem in the programme at the level of the rate.  Proved, two routes; the written proof is published as paper/proof_decayrate.md, which is new to the public repository and is the reason this release is not just a text edit: the note labels the theorem PROVED, and until now .gitignore kept the proof out of the repository, so a reader holding the note could not reach it.
+
+rem:shape -- lambda_infty(s) = max(s/2, s-1/2) with the kink exactly where the weights stop being summable, statuses split rather than averaged, and the honest sentence that near the kink the measurement cannot decide.
+
+THE REFEREE PASS FLAGGED ALL NINE UNITS of the new section, on text that was green on twenty-two mechanical checks and built clean in both languages.  One sentence was false as written.  Eight flags accepted, one word defended with its reason recorded.  Log and adjudication: lean/pnp/refpass_r233.log.  Release notes: docs/RELEASE_v1.3.0.md in the workshop.
+
+A DOI makes a version permanent; it does not make it true.

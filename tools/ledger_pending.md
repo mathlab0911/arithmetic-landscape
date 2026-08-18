@@ -119,3 +119,76 @@ proxy — and F87 — a number and the thing that supposedly produced it, printe
 not a check on each other.)* Repaired by naming both populations in the sentence, which is F27's
 standing clause moved from measurements to counts: **name the population where the number is
 reported, every time.**
+
+
+---
+
+## F112 (proposed, r233) — a status is a claim about the repository, and `.gitignore` is a scope no check reads
+
+```
+claimed   : thm:decayrate in the public note carries STATUS{proved}, the programme's
+            strongest tier, whose definition in the note's own sec:verified is "a written
+            proof, plus an independent re-derivation along a disjoint route".
+actual    : the written proof was lean/pnp/spec_stheorem_r229.md, which .gitignore
+            excludes (the rule dates from r117, when twenty-four design documents were
+            found inside the public repository).  Both halves were right on their own
+            terms: the status was earned, and the exclusion was correct policy.  What was
+            wrong was that the FILE'S ROLE HAD CHANGED -- from a design document waiting
+            for ratification into the proof of record for a published theorem -- and its
+            location had been chosen under the old role.
+check     : for every statement whose status names evidence, fetch that evidence by the
+            route a reader has: the public raw URL.  Costs one request per status.
+rule      : **A status is a claim about the repository as much as about the mathematics.**
+            When a statement declares a tier, the artefact that discharges it must be
+            reachable from the artefact the reader holds -- and no check in this project
+            reads .gitignore, so an exclusion silently un-discharges every status that
+            depends on the excluded file.  **When a document is promoted in role, re-ask
+            where it lives; the old location was chosen to answer a question that has
+            changed.**
+```
+
+**Why no instrument saw it.** C16 asks whether the paper discloses AI use *in the paper*;
+C12 asks whether cited scripts exist with logs; C1 asks whether a script has a log. **None
+of them asks whether a named piece of evidence is in the repository at all** — and C1's blind
+spot in exactly this direction had been recorded four rounds earlier, at r229c, when fable's
+`fverify_r224` turned out to be untracked. *The same gap, found twice by hand, on two
+different artefacts, without the intervening round producing a check.*
+
+**The repair is not mathematics and took one file move**, which is the uncomfortable part:
+the cost of the defect was entirely in *not having looked*.
+
+---
+
+## F113 (proposed, r233) — compression loses factors, and the compressed form is the one the reader gets
+
+```
+claimed   : "the sine series concentrates near j ~ 1/2t rather than near j ~ k; ITS LIMIT
+            IS 2 zeta(s), and the top term must supply the rest."  (note1.tex, the
+            mechanism paragraph for thm:decayrate, both editions.)
+actual    : FALSE AS WRITTEN.  The sine series tends to 0 with t.  The quantity whose
+            limit is 2 zeta(s) is the series DIVIDED BY t, which is how it enters the
+            identity: sum_{j>=1} j D_j = sum_j w_j = zeta(s) and sin(j theta)/t -> 2j.
+            The factor 1/t is present and correct in the written proof, one paragraph
+            upstream in a different document, and was lost in the compression to prose.
+check     : restate the compressed sentence from the mathematics WITHOUT the source in
+            view, then compare.  Reading the summary against the derivation verifies the
+            summary against a description of itself (F52), because the eye supplies the
+            missing factor from the neighbouring display.
+rule      : **A summary is a new claim, not a shorter copy of an old one, and it must be
+            re-derived rather than checked against its source.**  Both authors read this
+            sentence and both read it correctly, because both knew which quantity was
+            meant -- which is precisely the reason neither could see it.  Sibling of F60's
+            eps*(Z) = eps*(Z): valid mathematics, wrong claim, invisible to every check and
+            to the typesetter.
+```
+
+**The pass that found it is the same instrument as r175 and r209**, and the signature is now
+three for three: *every finding was a claim about our own evidence or our own quantifiers,
+and none was an error in the mathematics.* **What this project lacks is not a better checker.
+It is a reader who is not us**, and the referee pass is the only mechanism that supplies one.
+
+**Second clause, from the same pass — an all-red result is a measurement of scope, not of
+quality.** Nine of nine units were flagged on text that was green on twenty-two mechanical
+checks and clean in two builds. **The number to report is not "nine defects" but "nine
+defects in the region no check looks at"**, and the honest form of a green suite is therefore
+always *"green on the classes it was built for"*.
