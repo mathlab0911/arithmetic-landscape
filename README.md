@@ -109,14 +109,16 @@ only after it had already happened, and the ones where the check itself was the 
 
 ## The formal development
 
-Everything settled lives in `lean/pnp/Pnp/Theory/` — **15 files, 134 theorems and lemmas**, Lean 4
+Everything settled lives in `lean/pnp/Pnp/Theory/` — **16 files, 138 theorems and lemmas**, Lean 4
 with Mathlib (`leanprover/lean4:v4.32.2`).
 
 - No declaration depends on `sorryAx`, or on any axiom beyond Lean's standard `propext`,
   `Classical.choice` and `Quot.sound`. The authority for that is the build's own
   `depends on axioms` output, not a grep of the source: a keyword search cannot distinguish a
   `sorry` from the comment saying there is none.
-- The canon additionally passes an **independent kernel replay** (`lean4checker`, **17 modules**),
+- The canon additionally passes an **independent kernel replay** (`lean4checker`, **18 modules** — the import closure of the root module `Pnp`, which is
+  the 16 files above plus `Pnp/Basic.lean` plus the root itself; the checker's own banner
+  says "17 modules" because it counts source files and not the root),
   which discards the elaborator and the tactic framework and rebuilds every constant from the
   imports through the kernel alone. The harness runs three deliberately poisoned modules first
   and refuses to report a pass unless all three are rejected: `tools/check_lean.ps1`.

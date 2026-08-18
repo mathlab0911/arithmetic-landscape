@@ -21,3 +21,7 @@ import Pnp.Theory.Cyclotomic
 -- r120: 極値定理(Γ の値域と両端の一意性・狭義単調性)。
 -- 論文1 §極値値 が引用する。
 import Pnp.Theory.Extremal
+-- r227: the two finite Abel identities the s>1 head bound rests on, (H1) and (H2).
+-- Finite and exact for every real weight sequence; the analysis around them is on paper
+-- only, and putting these in Lean does NOT raise that argument's status (see the file).
+import Pnp.Theory.AbelWeights
