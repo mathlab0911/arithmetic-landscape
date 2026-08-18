@@ -46,6 +46,13 @@ EXPECT_SRC_LEN = 80197
 # Grepped from the file, not retyped (F69).
 ANCHOR = "### 7.4 Writing and documents — F35–F42"
 
+# The section heading that names the ledger range this fold extends.  Changed INSIDE this
+# script, not by hand afterwards: on the first run it was edited separately, and the delta
+# record then disagreed by one byte with the file it describes -- which is exactly the drift
+# this script exists to prevent, appearing in the script's own output.
+HEAD_OLD = "### 7.8 Scales, boundaries, and the artefacts nobody checks --- F83--F87"
+HEAD_NEW = "### 7.8 Scales, boundaries, and the artefacts nobody checks --- F83--F100"
+
 # ---------------------------------------------------------------------------
 # The thirteen entries, written as canon: one rule in bold, the evidence that bought it in
 # parentheses, and only the follow-up that a later reader could not reconstruct.
@@ -174,7 +181,9 @@ def main():
         if ENTRIES.count(tag) != 1:
             die("F%d occurs %d times in the new entries" % (n, ENTRIES.count(tag)))
 
-    out = src.replace(ANCHOR, ENTRIES + "\n" + ANCHOR)
+    if src.count(HEAD_OLD) != 1:
+        die("section heading occurs %d times, expected exactly 1" % src.count(HEAD_OLD))
+    out = src.replace(ANCHOR, ENTRIES + "\n" + ANCHOR).replace(HEAD_OLD, HEAD_NEW)
 
     # ---- verify before writing anything ----
     for n in range(88, 101):
@@ -186,10 +195,17 @@ def main():
     # ---- 1. ARCHIVE FIRST.  The order is the lesson from r200b. ----
     pend = io.open(PENDING, encoding='utf-8').read()
     n_cases = pend.count("\n## F")
-    if n_cases != 13:
+    # Idempotent by design: a re-run regenerates the skill and the record, and must NOT
+    # append the case text to the archive a second time.  A script that is only safe to run
+    # once is a script nobody dares re-run, and then its output cannot be reproduced.
+    moved_already = (n_cases == 0 and 'Folded through **F100**' in pend)
+    if moved_already:
+        print("note: the archive move already happened; regenerating skill and record only")
+    elif n_cases != 13:
         die("pending holds %d cases, expected 13" % n_cases)
     arch = io.open(ARCHIVE, encoding='utf-8').read()
-    io.open(ARCHIVE, 'w', encoding='utf-8', newline='\n').write(
+    if not moved_already:
+      io.open(ARCHIVE, 'w', encoding='utf-8', newline='\n').write(
         arch.rstrip("\n")
         + "\n\n\n" + "=" * 78 + "\n"
         + "# Folded at r220: F88-F100 (rounds r214-r220)\n"
@@ -221,7 +237,8 @@ def main():
            ANCHOR, ENTRIES))
 
     # ---- 4. empty pending, LAST ----
-    io.open(PENDING, 'w', encoding='utf-8', newline='\n').write(
+    if not moved_already:
+      io.open(PENDING, 'w', encoding='utf-8', newline='\n').write(
         "# Ledger: pending entries\n\n"
         "Rules earned since the last fold, not yet in the canon (the canon is the skill).\n"
         "Folded through **F100** at r220; `tools/ledger_archive.md` holds the case text.\n\n"
@@ -230,8 +247,15 @@ def main():
     print("source  : %s  %d bytes" % (os.path.relpath(SRC, ROOT), len(src.encode('utf-8'))))
     print("result  : %s  %d bytes" % (os.path.relpath(OUT, ROOT), len(out.encode('utf-8'))))
     print("inserted: F88-F100, each exactly once")
-    print("archive : appended %d lines of case text BEFORE emptying pending" % pend.count("\n"))
-    print("pending : emptied")
+    # Report the branch that ran, not the branch the script usually runs.  A summary line
+    # that says "emptied" on a run that emptied nothing is a log that lies about its own work.
+    if moved_already:
+        print("archive : untouched (the move happened on an earlier run)")
+        print("pending : already empty")
+    else:
+        print("archive : appended %d lines of case text BEFORE emptying pending"
+              % pend.count("\n"))
+        print("pending : emptied")
     print()
     print("Now hand %s to save_skill (overwrite: true)." % os.path.relpath(OUT, ROOT))
 
