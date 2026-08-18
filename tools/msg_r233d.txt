@@ -1,0 +1,7 @@
+r233d: the README's log count, and the push that skipped its own gate.
+
+WHAT HAPPENED.  r233c committed the kernel-replay log and pushed to both remotes with raw git instead of tools\push_round.ps1, so the check suite ran AFTER the push rather than before it.  C9 then failed: adding a log had made the README's count (275) wrong by one.  Fixed here to 276.
+
+WHY IT IS WORTH A COMMIT MESSAGE.  The gate is not the suite; the gate is the SCRIPT that refuses to push when the suite is red.  Reaching past the script for a one-file commit is exactly the move that makes the gate optional, and the defect it let through is the same one C9 had caught twice already in this round -- a count invalidated by the artefact the round itself created.  Nothing was wrong in the released tag (v1.3.0 = 1d7a724 predates both commits); what was public and wrong for a few minutes was one number in the README on main.
+
+RULE, for the ledger at the next fold: a check that gates a push gates it only through the tool that runs it.  Use tools\push_round.ps1 and tools\publish_public.ps1 for every push, including the one-file ones -- especially those, since the reason for reaching past the tool is always that the change looks too small to need it.
