@@ -216,3 +216,38 @@ mounted folder but cannot DELETE them. A control that corrupts and restores must
 it can restore: the first attempt left `outgoing/to-fable5/r299.md` sitting in the tree —
 a fake live report, produced by the machinery built to detect fake live reports. **Run
 corrupt-and-restore controls on Windows.**
+
+## F108 (proposed, r225) -- one rate cannot test an error term that is a sum of two rates
+
+```
+claimed   : K2 registered "the proof's own error (B1+B2)/t decays like t^{s-1}",
+            and required the quotient to be stable across the k-ladder.
+actual    : the header of the same file states the error as
+            O(t^{s-1}) + O(k^{-1/2}/log k) -- TWO terms with different rates -- and
+            B1 and B2 were printed in SEPARATE COLUMNS three tables above.  At s=1.5
+            the first dominates (B1/t = 0.943 vs B2/t = 0.039) and the quotient is
+            stable to 1.02; at s=3.5 the second dominates (0.0057 vs 0.0389) and the
+            quotient drifts by 2.9, recording FAIL for a proof whose inequalities all
+            hold (K1 worst 0.22, K3 worst 0.83).  A second, smaller cause: J = ceil(1/2t)
+            makes a_J jump by ~(s+1)/J between k-values, ~20% at s=3.5.
+check     : test each summand against ITS OWN rate; only test the sum when one term
+            provably dominates over the whole population.
+rule      : "Test the rate" is well defined only for a single-rate error.  When the
+            error is a sum, a one-rate criterion silently tests whichever term happens
+            to dominate in your population -- so the verdict is a fact about the
+            parameter range, not about the argument.
+```
+
+**This is F103 committed inside the criterion written to apply F103**, one round later, by
+the author of F103. And **F47's corollary was already in the canon** — *when the quantity
+is a sum, ask whether the summands can be measured separately* — with the summands sitting
+in adjacent printed columns. **Having the rule, and having the data in the right shape, was
+not enough; the application is a separate act (F52).**
+
+**Second clause, from K6 in the same run: a control's threshold is a claim too.** K6 asked
+that the `s>1` bound fail to cover the `s<1` error *by a factor of three*. Measured: the
+bound covers at `s>1` (ratio ≤ 0.83) and does **not** cover at `s = 0.5` (ratio 1.27). The
+*direction* is exactly right and the *number* was invented — I never computed what
+separation the mechanism predicts before demanding it. **Recorded as a FAIL, not
+reinterpreted**, because a threshold rewritten after seeing the data is the thing the
+asterisk exists to prevent (F99).
