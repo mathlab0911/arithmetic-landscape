@@ -6,40 +6,44 @@ Folded through **F100** at r220; applied to the canon at **r221**
 
 ---
 
-## F101 (proposed, r221) — an existence check is not a currency check
+## F101 (proposed, r221; **corrected r222** — the first version of this entry was itself wrong)
 
 ```
-claimed   : the live outgoing report was `reports/to-fable5/r220.md`, carrying the
-            r214-r220 work. The memory index asserted this for two rounds running.
-actual    : the live file was `reports/to-fable5/r213.md`, last appended at r213.
-            SEVEN rounds -- r214, r214c, r214d, r215, r216, r217, r219, r220 -- were
-            never written into it. fable-5 read the commits and logs instead, at
-            Kentaro's direction, and said so in r218: "your r214-r217 work exists as
-            commits and logs WITHOUT a report ... your report is still owed."
-check     : C3/F21 asserts one live report per direction. It passed on every one of
-            those rounds, because a live file existed. Nothing anywhere compares the
-            round number IN the live filename to the round number of the newest commit.
-rule      : A check on the EXISTENCE of an artefact is not a check on its CURRENCY.
-            Where the procedure says "rename it to the current round", the rename is
-            the ONLY observable that separates a report which is up to date from one
-            that stopped being written -- so assert it: the live filename's rNNN must
-            not trail the newest committed round by more than one. (Proposed as C22.)
+claimed   : (r221, WITHDRAWN) seven rounds of work were never reported to fable-5, and
+            the memory index named a live file `to-fable5/r220.md` that did not exist.
+actual    : five of the seven WERE reported -- r215, r216, r217, r219, r220 all exist,
+            each headed "Live outgoing", in `outgoing/to-fable5/`, a directory neither
+            C3 nor the recipient reads.  `outgoing/to-fable5/r220.md` exists; the memory
+            index was wrong about the PATH, not about the file.  Only r214/r214c/r214d
+            have no report.  Meanwhile `reports/to-fable5/` sat at r213 and C3 passed on
+            it every round, and fable-5 -- looking in `reports/` -- wrote in r218 that
+            the work existed "without a report".
+check     : list the whole tree for files claiming to be a live report, not the one
+            directory the convention names.  `ls-tree -r` on the workshop branch found
+            it in one command, after two rounds of nobody looking.
+rule      : Two places can both hold "the live one", and a check that reads the
+            canonical path will certify the stale copy forever.  Assert BOTH: (C22)
+            exactly one file in the WHOLE TREE claims live status per direction, AND
+            its round number is not more than one behind the newest commit.  Either
+            clause alone passes this incident.
 ```
 
-**Three things worth keeping with it.**
+**Three things this cost, and the third is the worst.**
 
-- **The accretion rule has no deadline in it.** §3 says to keep appending to the live
-  file rather than starting a new one. That is the right rule and it removes the only
-  event that ever forced a decision — creating a file. An append that never happens
-  looks exactly like an append that was not needed yet.
-- **The stale claim was in memory, which is the artefact with no checker.** F35 says the
-  summary population drifts together and faster than the papers; here it drifted *away
-  from a document that did not exist*. **A memory line naming a file is a testable claim,
-  and `ls` is the test.** Nothing ran it for two rounds.
-- **The compensating action hid the cost.** fable read the primary sources and produced a
-  correct r218, so nothing downstream broke — which is precisely why nobody looked. **A
-  gap that someone else routes around stops generating symptoms while still being a gap**;
-  the only trace it left was one sentence in fable's preamble, in a file addressed to me.
+- **The writing happened and the delivery did not, and from the author's side those are
+  the same event.** F64 in its purest form: the reports were good, dated, and unread.
+- **A rule with no deadline has no event that forces a decision.** §3 says keep appending
+  to the live file rather than starting a new one — correct, and it removes the only
+  moment at which anyone would notice.
+- **The first version of this entry asserted "never written" after looking in exactly one
+  directory — while accusing C3 of doing precisely that.** F37's recursion clause fired
+  on the sentence stating the lesson, and F60 gains an eighth instance (*another
+  directory*). The false version was written into a report and sent. It was withdrawn the
+  same day, in the same file, marked rather than deleted (F35).
+
+> **When you catch a check for having too narrow a scope, the next sentence you write is
+> the one most likely to have the same scope.** You are, at that moment, holding exactly
+> the listing that misled the check.
 
 ## F102 (proposed, r221) — the interface you write through is part of the artefact
 
