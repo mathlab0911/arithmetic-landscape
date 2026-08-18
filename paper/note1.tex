@@ -528,6 +528,61 @@ Two natural explanations for the non-monotonicity fail.
 \end{enumerate}
 \end{remark}
 
+\section{Two theorems, and the shape of the answer}\label{sec:twothm}
+
+Since the first version of this note, the decaying case has stopped being a table of
+measurements. Two statements are now proved, and together they fix the shape of the answer.
+
+\begin{theorem}[every non-increasing profile]\label{thm:monotone}
+\STATUS{proved. Two independent derivations along disjoint routes; the identity it rests on
+was verified against direct summation to sixty digits, including at the zeros.}
+Let $w_0\ge w_1\ge\dots\ge w_{k-1}\ge0$. If $\arctan(2t)\le\pi/k$ then $F_k(\tfrac12+it)\ge1$.
+Consequently the first zero satisfies $t_1>\tfrac12\tan(\pi/k)$.
+\end{theorem}
+
+The proof is two lines from an exact identity obtained by summation by parts: writing
+$D_j=w_{j-1}-w_j$ and $z=1+2it=\rho e^{i\theta}$,
+\begin{equation}\label{eq:abel}
+  F_k(\tfrac12+it)\;=\;1+\frac1t\Big[\,w_{k-1}\rho^k\sin(k\theta)
+    +\sum_{j=1}^{k-1}D_j\,\rho^j\sin(j\theta)\,\Big].
+\end{equation}
+If the profile is non-increasing every $D_j$ is non-negative, and on $\theta\le\pi/k$ every
+$j\theta$ with $j\le k$ lies in $(0,\pi]$, so every sine is non-negative and the bracket cannot
+be negative. Theorem~\ref{thm:const} is the special case in which the sine series is empty.
+\emph{Monotonicity is doing work and is not necessary}: an increasing ramp drives $F_k$ well
+below $1$, while a bump and an alternating profile stay above it without being monotone.
+
+\begin{theorem}[the second speed, for power weights]\label{thm:decayrate}
+\STATUS{proved. Written proof and an independent re-derivation along a different route; the
+two moment identities it uses are additionally replayed through the Lean kernel.}
+Fix $s>1$ and let $w_j=(j+1)^{-s}$. Then
+\[
+  \frac{2k\,t_1(k)^2}{\log k}\;\longrightarrow\;s-\tfrac12\qquad(k\to\infty).
+\]
+\end{theorem}
+
+The mechanism is visible in \eqref{eq:abel}. The coefficients are the weight
+\emph{decrements}, which decay one power faster than the weights themselves, so the sine
+series concentrates near $j\asymp1/2t$ rather than near $j\asymp k$; its limit is $2\zeta(s)$,
+and the top term must supply the rest. The tail is controlled by cancellation and not by
+absolute values --- the sum of $|D_j\rho^j|$ over the tail diverges for $1<s<2$ at this scale
+--- which is possible because $D_j\rho^j$ has exactly one interior minimum, $D_j$ being
+log-convex as the integral of a log-convex function over a unit interval.
+
+\begin{remark}[what the two speeds are, and where they meet]\label{rem:shape}
+\STATUS{$s>1$ \textbf{proved} (Theorem~\ref{thm:decayrate}); $s<1$ \textbf{measured},
+decisively, the two candidate limits differing by more than twenty times the observable's own
+resolution; $s=1$ \textbf{derived} by two independent routes.}
+For $w_j=(j+1)^{-s}$ the effective exponent $\lambda=2kt_1^2/\log k$ appears to satisfy
+\[
+  \lambda_\infty(s)\;=\;\max\Big(\frac{s}{2},\;s-\frac12\Big),
+\]
+with the kink at $s=1$ --- exactly where $\sum_j w_j$ stops converging. Above the kink the
+convergent weight sum sets the level and the top term alone places the zero; below it the sum
+diverges and drags the zero outward. The constant governing $s<1$ is
+$2^{s-1}\pi/(\Gamma(s)\cos(\pi s/2))$, whose surviving poles sit at the odd integers.
+\end{remark}
+
 \section{The general question}\label{sec:general}
 
 \begin{problem}[does $R=1$ force the pinch?]\label{prob:general}

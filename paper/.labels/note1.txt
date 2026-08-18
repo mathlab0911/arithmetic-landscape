@@ -1,6 +1,7 @@
 conj:line
 cor:pinch
 eq:F
+eq:abel
 eq:closed
 prob:general
 prop:line
@@ -30,8 +31,11 @@ sec:questions
 sec:reduction
 sec:s1
 sec:terminology-note
+sec:twothm
 sec:verified
 sec:whatproof
 sec:whytwo
 sec:worked
 thm:const
+thm:decayrate
+thm:monotone
