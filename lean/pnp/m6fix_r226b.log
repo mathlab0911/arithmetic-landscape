@@ -1,0 +1,61 @@
+================================================================================================
+m6fix_r226b -- the phase sweep, measured over the window the criterion NAMED
+================================================================================================
+
+--- N1  as registered: forward from t_1 by L = pi(1+4t^2)/k.  Expected to FAIL. ---
+      s        k            t_1              L    advance / 2pi
+    1.5     1024   0.0697582911   3.127679e-03         0.999132
+    1.5     4096   0.0366175392   7.711041e-04         0.999887
+    1.5    32768   0.0141620444   9.595071e-05         0.999995
+    2.0     1024   0.0794766675   3.145477e-03         0.999013
+    2.0     4096   0.0428178653   7.726151e-04         0.999868
+    2.0    32768   0.0166596990   9.598024e-05         0.999994
+    2.5     1024   0.0917620123   3.171294e-03         0.998863
+    2.5     4096   0.0489430903   7.743395e-04         0.999849
+    2.5    32768   0.0188715143   9.601037e-05         0.999993
+    3.5     1024   0.1080021649   3.211106e-03         0.998664
+    3.5     4096   0.0582881522   7.774138e-04         0.999820
+    3.5    32768   0.0227995999   9.607315e-05         0.999991
+  points below 2 pi: 12 of 12 ; worst shortfall 1.336e-03 -> FAILS AS REGISTERED, as predicted
+  arctan is concave, so the forward rate is strictly below the linearised 2k/(1+4t^2)
+  from which the constant pi was taken.  The claim was always going to miss by a hair.
+
+--- N2  the repair: window 2 pi (1+4t^2)/k ---
+      s        k    advance / 2pi      clears?
+    1.5     1024         1.996482          yes
+    1.5     4096         1.999544          yes
+    1.5    32768         1.999978          yes
+    2.0     1024         1.996006          yes
+    2.0     4096         1.999468          yes
+    2.0    32768         1.999974          yes
+    2.5     1024         1.995406          yes
+    2.5     4096         1.999393          yes
+    2.5    32768         1.999971          yes
+    3.5     1024         1.994613          yes
+    3.5     4096         1.999279          yes
+    3.5    32768         1.999965          yes
+  -> PASS
+
+--- N3  the repair must not matter: (extra window)/T -> 0 ---
+      s        k      extra / t_1
+    1.5     1024        4.484e-02
+    1.5     4096        2.106e-02
+    1.5    32768        6.775e-03
+    2.0     1024        3.958e-02
+    2.0     4096        1.804e-02
+    2.0    32768        5.761e-03
+    2.5     1024        3.456e-02
+    2.5     4096        1.582e-02
+    2.5    32768        5.088e-03
+    3.5     1024        2.973e-02
+    3.5     4096        1.334e-02
+    3.5    32768        4.214e-03
+  -> PASS, decreasing in k at every s (the added term is O(1/k) against T ~ sqrt(log k / k), so it stays o(T))
+
+================================================================================================
+  [N1 registered window] FAILS -- and that is the finding, not a surprise
+  [N2 repaired window]   PASS
+  [N3 repair is harmless asymptotically] PASS
+
+The bracket (Z) keeps its form with pi replaced by 2 pi.  lambda -> s - 1/2 is untouched.
+done.

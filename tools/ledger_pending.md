@@ -47,3 +47,35 @@ rule      : A rule does not begin to bind when it is written down, and it does n
   before `EDITS` exists. Deleted rather than repaired, because the diff already in hand was a
   complete audit. **Before building an instrument, check whether the measurement has already
   been made.**
+
+## F110 (proposed, r226) -- a ratio is a margin only if the measured thing is the required thing
+
+```
+claimed   : M6 registered "over a window of length L = pi(1+4t^2)/k the phase k theta
+            advances by at least 2 pi", and the run printed advance/2pi = 2.000 at every
+            point -- read, and nearly reported, as a factor-two safety margin.
+actual    : the code measured [t_1 - L, t_1 + L].  That is width 2L, so the advance was
+            4 pi and the "2.000" was the WIDTH, not margin.  Measured over the window
+            actually registered -- forward from t_1 by L -- the advance is 0.999995 of
+            2 pi at k=32768 and 0.998664 at k=1024.  THE REGISTERED CLAIM IS FALSE, by a
+            hair, and in the direction nobody checks: arctan is concave, so the forward
+            sweep is slightly SLOWER than the linearised rate 2k/(1+4t^2) that produced
+            the constant pi.
+check     : measure the interval the criterion names.  A symmetric window around a point
+            is not the forward window from it.
+rule      : A ratio of measured to required is a margin ONLY IF the measured quantity is
+            the required quantity.  When it is not, the discrepancy presents itself AS
+            safety -- which is the one disguise that stops anybody looking.
+```
+
+**The repair costs a constant and nothing else.** State the window as `2 pi (1+4t^2)/k`; the
+bracket (Z) picks up a factor two in a term that is `O(1/k)` against a `T ~ sqrt(log k / k)`,
+so it remains `o(T)` and the conclusion `lambda -> s - 1/2` is untouched. **The argument was
+never in danger; the printed evidence for one of its steps was.**
+
+Two things worth keeping. **A claim derived from a linearisation inherits the sign of the
+linearisation's error**, and here concavity meant the honest constant is larger than the
+linearised one — so "exactly 2 pi in exactly the linearised time" was always going to fail by
+a hair. **And this is F49's shape** (*when a quantity carries an index, measure it AT that
+index*) moved from an index to an interval: the criterion named a set, and a different set
+was measured.
