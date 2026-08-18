@@ -1,0 +1,19 @@
+r233: the referee pass flagged nine of nine, and one of them was that the proof was not in the repository.
+
+The note's new section went through the standing referee pass before the milestone -- a reader in fresh context, three jobs, nothing else.  It flagged ALL NINE units of text that was green on C1-C22 and built clean in both languages with zero undefined references.  Eight flags accepted, one word defended with its reason recorded, its secondary finding accepted.  Log and adjudication: lean/pnp/refpass_r233.log.
+
+THE TWO THAT MATTERED.
+
+(1) thm:decayrate carried STATUS{proved} while its written proof sat in lean/pnp/spec_stheorem_r229.md, which .gitignore excludes.  A reader holding the note could not reach a line of the proof of its headline theorem -- F64 in its purest form.  The proof is now paper/proof_decayrate.md, tracked, named in the status beside the Lean module, with a pointer left at the old path saying why it moved and that no second copy is kept.
+
+(2) "the sine series concentrates near j ~ 1/2t; its limit is 2 zeta(s)" was FALSE AS WRITTEN.  The sine series tends to zero; the quantity with limit 2 zeta(s) is the series divided by t, as it enters eq:abel.  Right in the write-up, lost one factor in the compression to a paragraph, and read correctly by both authors because both knew what it meant.  This is the eps*(Z) = eps*(Z) class.
+
+The other seven: "Consequently the first zero..." presupposed a zero the hypotheses do not give (restated as an exclusion zone, with the t > 0 the proof's (0,pi] needs); "well below 1" understated what the log says -- the ramp reaches -25.93, so the CONCLUSION fails and not merely the bound; "appears to satisfy" hedged a branch its own status calls proved; "decisively" and "twenty times the observable's resolution" had no tier, no range and no log (now s=0.5, 0.75 at k=32768, gaps 22.2 and 20.5 times the quantum 4 pi t_1 / log k, hstar_r222c and quantum_r216d, plus the sentence the log carries and we had dropped: near the kink the measurement cannot decide); "fix the shape" and "has stopped being a table of measurements" claimed a determination the section's own statuses withhold.
+
+Both editions moved together, six paired edits each.  pdflatex and xelatex both exit 0, zero undefined references, 12 pp. each.  C13 633 literals, C19 4 pairs, C1-C22 green.
+
+THE F79 SWEEP -- what did this release make false?  Four artefacts, none of them a paper: the deposit's page count (11 -> 12), the README's release line and its log count (C9 caught the second one on the log this very pass created), the note's own "twenty-one mechanical checks" in both editions (there are twenty-two; C22 was added the day after v1.2.0 was tagged, so it was true when written), and the homepage in the other repository -- which still called Part III's three headline theorems CONDITIONAL, eight days after they stopped being so, and did not mention the note at all.  C18 reports every run that it cannot see the homepage; it was honest and the artefact still went eight days wrong.
+
+Release notes docs/RELEASE_v1.3.0.md; version and date raised in CITATION.cff and .zenodo.json; date taken from the machine rather than copied forward (F88).  Report to fable: reports/to-fable5/r233.md, self-contained, with the accreted r221-r229 file archived.
+
+Pending: F109-F111, fold at next canonical fold, baseline 99869 / md5 166de9a8, script-only per F109.

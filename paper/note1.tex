@@ -530,14 +530,21 @@ Two natural explanations for the non-monotonicity fail.
 
 \section{Two theorems, and the shape of the answer}\label{sec:twothm}
 
-Since the first version of this note, the decaying case has stopped being a table of
-measurements. Two statements are now proved, and together they fix the shape of the answer.
+Since the first version of this note, part of the decaying case has stopped being a table
+of measurements. Two statements are now proved: one keeps the first zero away from the
+origin for every non-increasing profile, the other settles the rate for power weights with
+$s>1$. Together they determine the upper branch of the shape below and the position of its
+kink from one side. \emph{Everything at $s\le1$ is still measurement}, and the tables of
+\S\ref{sec:decay} are still the whole of its evidence.
 
 \begin{theorem}[every non-increasing profile]\label{thm:monotone}
-\STATUS{proved. Two independent derivations along disjoint routes; the identity it rests on
-was verified against direct summation to sixty digits, including at the zeros.}
-Let $w_0\ge w_1\ge\dots\ge w_{k-1}\ge0$. If $\arctan(2t)\le\pi/k$ then $F_k(\tfrac12+it)\ge1$.
-Consequently the first zero satisfies $t_1>\tfrac12\tan(\pi/k)$.
+\STATUS{proved. Written derivation, and an independent re-derivation along a disjoint route
+by a second reader who did not see it (r224); the identity it rests on was checked against
+direct summation to sixty digits at $27$ points, and to the same absolute accuracy at the
+zeros, where the direct sum cancels completely, \texttt{abel\_r220b}.}
+Let $w_0\ge w_1\ge\dots\ge w_{k-1}\ge0$ and let $t>0$. If $\arctan(2t)\le\pi/k$ then
+$F_k(\tfrac12+it)\ge1$. Hence $F_k$ has no zero on $0<t\le\tfrac12\tan(\pi/k)$: a first
+zero, if there is one, satisfies $t_1>\tfrac12\tan(\pi/k)$.
 \end{theorem}
 
 The proof is two lines from an exact identity obtained by summation by parts: writing
@@ -546,16 +553,22 @@ $D_j=w_{j-1}-w_j$ and $z=1+2it=\rho e^{i\theta}$,
   F_k(\tfrac12+it)\;=\;1+\frac1t\Big[\,w_{k-1}\rho^k\sin(k\theta)
     +\sum_{j=1}^{k-1}D_j\,\rho^j\sin(j\theta)\,\Big].
 \end{equation}
-If the profile is non-increasing every $D_j$ is non-negative, and on $\theta\le\pi/k$ every
+If the profile is non-increasing every $D_j$ is non-negative, and on $0<\theta\le\pi/k$ every
 $j\theta$ with $j\le k$ lies in $(0,\pi]$, so every sine is non-negative and the bracket cannot
 be negative. Theorem~\ref{thm:const} is the special case in which the sine series is empty.
-\emph{Monotonicity is doing work and is not necessary}: an increasing ramp drives $F_k$ well
-below $1$, while a bump and an alternating profile stay above it without being monotone.
+\emph{Monotonicity is doing work, and it is not necessary.} It is doing work in the strong
+sense that the conclusion fails without it, not merely the bound: the increasing ramp
+$w_j=(j+1)/k$ drives $F_k$ \emph{negative} inside the window --- its minimum there is
+$-25.93$ at $k=64$ and $-103.75$ at $k=256$, so a zero enters. It is not necessary because a
+bump at $j=k/2$ and an alternating profile stay above $1$ without being monotone
+(\texttt{abel\_r220b}).
 
 \begin{theorem}[the second speed, for power weights]\label{thm:decayrate}
-\STATUS{proved. Written proof and an independent re-derivation along a different route; the
-two moment identities it uses are additionally replayed through the Lean kernel.}
-Fix $s>1$ and let $w_j=(j+1)^{-s}$. Then
+\STATUS{proved. The written proof is \texttt{paper/proof\_decayrate.md} in the repository;
+it was re-derived independently along a different route by the second reader, who had not
+seen it (r228), and the two moment identities it uses are additionally replayed through the
+Lean kernel (\texttt{Pnp/Theory/AbelWeights.lean}).}
+Fix $s>1$ and let $w_j=(j+1)^{-s}$. Then for all large $k$ a first zero $t_1(k)$ exists, and
 \[
   \frac{2k\,t_1(k)^2}{\log k}\;\longrightarrow\;s-\tfrac12\qquad(k\to\infty).
 \]
@@ -563,24 +576,35 @@ Fix $s>1$ and let $w_j=(j+1)^{-s}$. Then
 
 The mechanism is visible in \eqref{eq:abel}. The coefficients are the weight
 \emph{decrements}, which decay one power faster than the weights themselves, so the sine
-series concentrates near $j\asymp1/2t$ rather than near $j\asymp k$; its limit is $2\zeta(s)$,
-and the top term must supply the rest. The tail is controlled by cancellation and not by
+series concentrates near $j\asymp1/2t$ rather than near $j\asymp k$. Divided by $t$, which is
+how it enters \eqref{eq:abel}, that series tends to $2\zeta(s)$ as $t\to0$ --- the sine
+series itself tends to $0$, and the $1/t$ is not decoration --- and the top term must supply
+the rest. The tail is controlled by cancellation and not by
 absolute values --- the sum of $|D_j\rho^j|$ over the tail diverges for $1<s<2$ at this scale
 --- which is possible because $D_j\rho^j$ has exactly one interior minimum, $D_j$ being
 log-convex as the integral of a log-convex function over a unit interval.
 
 \begin{remark}[what the two speeds are, and where they meet]\label{rem:shape}
-\STATUS{$s>1$ \textbf{proved} (Theorem~\ref{thm:decayrate}); $s<1$ \textbf{measured},
-decisively, the two candidate limits differing by more than twenty times the observable's own
-resolution; $s=1$ \textbf{derived} by two independent routes.}
-For $w_j=(j+1)^{-s}$ the effective exponent $\lambda=2kt_1^2/\log k$ appears to satisfy
+\STATUS{$s>1$ \textbf{proved} (Theorem~\ref{thm:decayrate}). $s<1$ \textbf{measured} at
+$s=0.5$ and $s=0.75$, $k=32768$: the two candidate limits are separated there by $22.2$ and
+$20.5$ times the observable's own quantum $4\pi t_1/\log k$, \texttt{hstar\_r222c},
+\texttt{quantum\_r216d}. $s=1$ \textbf{derived} by two independent routes. \emph{Near the
+kink the measurement cannot decide}: at $s=0.9$ and $s=1.1$ the branches are $0.05$ apart
+against a quantum of about $0.012$, and that comparison is reported without a verdict.}
+For $w_j=(j+1)^{-s}$ the effective exponent $\lambda=2kt_1^2/\log k$ has the limit
 \[
   \lambda_\infty(s)\;=\;\max\Big(\frac{s}{2},\;s-\frac12\Big),
 \]
-with the kink at $s=1$ --- exactly where $\sum_j w_j$ stops converging. Above the kink the
-convergent weight sum sets the level and the top term alone places the zero; below it the sum
-diverges and drags the zero outward. The constant governing $s<1$ is
-$2^{s-1}\pi/(\Gamma(s)\cos(\pi s/2))$, whose surviving poles sit at the odd integers.
+with the kink at $s=1$ --- exactly where $\sum_j w_j$ stops converging. The two branches
+carry different statuses and we do not average them: above the kink this is
+Theorem~\ref{thm:decayrate}, below it a measurement. Above the kink the convergent weight sum
+sets the level and the top term alone places the zero; below it the sum diverges and drags
+the zero outward. What replaces the level there is the second term of the same bracket: for
+$s<1$ its expansion reads $2\zeta(s)+C_st^{s-1}+\dots$ with
+$C_s=2^s\Gamma(1-s)\sin(\pi s/2)=2^{s-1}\pi/(\Gamma(s)\cos(\pi s/2))$, a form in which the
+poles of $\Gamma$ at the even integers have already cancelled against the zeros of the
+cosine, so the surviving poles sit at the odd integers --- exactly where $t^{s-1}$ collides
+with the analytic powers $t^0,t^2,t^4,\dots$
 \end{remark}
 
 \section{The general question}\label{sec:general}
@@ -805,8 +829,9 @@ corrections to statements that had already been published under a DOI --- is in 
 repository. Theorem~\ref{thm:const} was written by one model and independently
 re-derived along a disjoint route by the other before being labelled \emph{proved}.
 
-Everything named in a status above --- every script, its log, the ledger, and the
-twenty-one mechanical checks that gate each commit --- is at
+Everything named in a status above --- every script, its log, the written proof of
+Theorem~\ref{thm:decayrate}, the ledger, and the twenty-two mechanical checks that gate each
+commit --- is at
 \url{https://github.com/mathlab0911/arithmetic-landscapes}. \emph{A reader who wants to
 disbelieve a number in this note should be able to find the line that produced it without
 asking the author.}

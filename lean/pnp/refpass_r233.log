@@ -1,0 +1,64 @@
+# refpass_r233 — referee pass, `note1.tex` §`sec:twothm`
+
+**Round**: r233. **Date**: 2026-08-18. **Procedure**: `tools/referee_pass.md`.
+**Context**: fresh — a reader that had not written the section, had not seen the rounds
+behind it (r220–r232), and was given the three jobs and nothing else. It read `note1.tex`
+to fix notation and reported only on the nine units of the new section.
+**Batch**: 9 units, cap 15. **Gate**: this pass gates the milestone (v1.3.0), not the push.
+
+## The log
+
+| # | unit | verdict |
+|---|---|---|
+| 1 | `thm:monotone` statement | `word:Consequently` |
+| 2 | `thm:monotone` STATUS | `word:independent` |
+| 3 | paragraph after `thm:monotone` (`eq:abel`) | `word:well` |
+| 4 | `thm:decayrate` statement | `word:=` |
+| 5 | `thm:decayrate` STATUS | `word:proved` |
+| 6 | paragraph after `thm:decayrate` (mechanism) | `word:its` |
+| 7 | `rem:shape` body | `word:appears` |
+| 8 | `rem:shape` STATUS | `word:decisively` |
+| 9 | section opening paragraph | `word:fix` |
+
+**Nine of nine flagged. Zero `clear`.** That is the highest yield any pass in this project
+has returned, and the section had passed C1–C22 green and two builds with zero undefined
+references before it ran. *A green suite is evidence about the classes of defect the suite
+was built to catch, and about nothing else* (F60).
+
+## Adjudication — the author saying out loud why each word is right, or removing it
+
+A flagged word is not automatically a defect (`referee_pass.md`). Eight went; one stayed
+with its reason recorded, and its secondary finding was accepted.
+
+| # | finding | ruling |
+|---|---|---|
+| 1 | *Consequently* presupposes that a first zero exists; the theorem's own hypotheses do not supply one (take `w_0>0`, the rest zero). | **Accepted.** Restated as an exclusion zone: no zero on `0<t≤½tan(π/k)`, and *if* a first zero exists it is beyond it. `t>0` added, which the proof's `(0,π]` needs and the hypothesis `arctan(2t)≤π/k` does not give. |
+| 2 | *independent* is left unoperationalised here while `thm:const`'s status spells it out; and the status names no artefact, unlike every other numeric status in the note. | **Accepted.** Now carries `abel_r220b` and the same clause as `thm:const` ("a second reader who did not see it"). |
+| 3 | *well below 1* is unquantified, and dropping below **1** only shows the bound fails, not that a zero enters the window. | **Accepted, and it makes the sentence stronger.** The log says the ramp drives `F_k` to **−25.93** at `k=64` and **−103.75** at `k=256` — negative, so the conclusion itself fails, not merely the bound. The referee's objection was answered by the measurement we already had, printed one line above the claim it did not match (`abel_r220b` A4). |
+| 4 | `=` could be read as `≍` by a reader arriving from `prop:scale`, `prob:general`, `conj:line`, which use `≍` for this family. | **Word defended**: the theorem is about that one profile, and the equality sign is exactly what restricts it. **Secondary accepted**: `t_1(k)` presupposed existence for all large `k`; existence is part of what was proved (r226, the steepness argument) and is now stated. |
+| 5 | *proved* is the note's strongest tier, and the written proof is neither in the note nor locatable from it. | **Accepted — the heaviest finding.** The proof was in `lean/pnp/spec_stheorem_r229.md`, which `.gitignore` excludes: **a reader holding the note could not reach the proof of its headline theorem** (F64). The proof is now the public artefact `paper/proof_decayrate.md`, named in the status beside the Lean module. |
+| 6 | *its limit is `2ζ(s)`* — the antecedent is the sine series, which tends to `0`; the quantity with that limit is the series divided by `t`. | **Accepted; the sentence was false as written.** `Σ_{j≥1} jD_j = Σ_j w_j = ζ(s)` and `sin(jθ)/t → 2j`, so the limit belongs to the series *as it enters `eq:abel`*, with its `1/t`. This is the `ε*(Z)=ε*(Z)` class: valid mathematics, wrong claim, invisible to every check. |
+| 7 | *appears to satisfy* hedges a branch the same block's status calls **proved**; and "the constant governing `s<1`" names no expansion to be the constant of. | **Accepted.** The hedge is gone and the statuses carry the distinction (F38: a status cannot fix a verb). The constant is now attached to the second term `C_s t^{s-1}` of the same bracket, with the reflection identity that makes its surviving poles odd (F105). |
+| 8 | *decisively* is not a tier in `sec:verified`; "the observable's own resolution" is defined nowhere in the note; no range, no `s` values, no log — which the note's own definition of *measured* requires. | **Accepted.** Replaced by the numbers: `s=0.5, 0.75` at `k=32768`, separations `22.2` and `20.5` times the quantum `4πt_1/log k`, `hstar_r222c` and `quantum_r216d` — plus the sentence the log carries and the note had dropped: **near the kink the measurement cannot decide** (`0.05` against a quantum of `~0.012`, reported without a verdict). |
+| 9 | *fix the shape* claims a determination the section's own statuses withhold; *stopped being a table of measurements* is contradicted by the surviving tables. | **Accepted.** The two theorems determine the upper branch and the kink from one side; `s≤1` is still measurement and `\S sec:decay` is still its evidence. |
+
+## What the pass found that was not on its list
+
+Grepping outward from unit 8 (which asked where a number in a status comes from) found
+**"the twenty-one mechanical checks"** in the disclosure paragraph of both editions. There
+are twenty-two: `C22` was added at r223, *after* v1.2.0 was tagged. **The count was true
+when it was written and the artefact kept asserting it** — F79 exactly, in the paper rather
+than in the metadata, where no check looks because C9 counts the README's claims and not
+the note's.
+
+## The instrument, reported honestly
+
+- This was **the cheap instrument**, not the expensive one: it is a referee pass, not an
+  independent reading, and nothing here re-verifies the mathematics of the `s>1` proof.
+  The independent reading of that proof is fable-5's r228, delivered once (F80's clause on
+  not inflating the count of the expensive instrument).
+- **The pass could have come back green.** The same form returned `clear` on most of the
+  note's fifty-three units at r209 — the abstract, the constant-weight theorem and its
+  proof, the worked example, the `s=1` tables — so the nine flags here are a measurement
+  and not a property of the instrument.
+- Every repair above is a *claim* repair. **No number in the note changed.**
