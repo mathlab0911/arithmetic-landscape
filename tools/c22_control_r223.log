@@ -1,0 +1,41 @@
+================================================================================================
+c22_control_r223 -- negative control for C22.  A check that has never been seen red
+                   is a check nobody has tested.
+================================================================================================
+
+--- P0  POSITIVE CONTROL: the suite is green BEFORE any corruption ---
+    exit=0   all checks pass
+
+--- A  C22a: a live report appears outside the report directories ---
+       reproducing outgoing/to-fable5/, which held five of these for seven rounds
+       exit=1   C22a fired: True
+       FAIL C22a/F101: file(s) outside reports/to-fable5 and reports/to-opus5 declare themselves live -- two places both holding "the live one" is how five reports went unread for seven rounds: outgoing/to-f
+       -> PASS (the check went red)
+
+--- B  C22b: rounds ship and the live report stops moving ---
+       adding an experiment script+log for r299 while the live report sits at r222
+       exit=1   C22b fired: True
+       FAIL C22b/F101: the live outgoing report is reports/to-fable5/r222.md but the newest round in the tree is r299 -- it trails by 77. Rounds are shipping without being reported, and C3 cannot see it because a live file exists.
+       -> PASS (the check went red)
+
+--- C  THE CHECK MUST NOT FIRE ON THE PAST: archived reports keep their claim ---
+       every archived report says 'Live outgoing' -- it did, honestly, when it was
+       live.  A check that convicts the past cannot audit it (F78).
+       archived reports carrying the phrase: 8
+       C22a fired on them in run A or B: False
+       -> PASS (exempted, and the exemption has a subject)
+
+--- P1  POSITIVE CONTROL: green again once the corruptions are removed ---
+    exit=0   all checks pass
+
+================================================================================================
+  [P0 green before] PASS
+  [A  C22a fires on a live claim outside reports/] PASS
+  [B  C22b fires when the live report trails the tree] PASS
+  [C  archived claims exempted, exemption non-empty] PASS
+  [P1 green after cleanup] PASS
+
+C22 has now been observed red on both of the corruptions it exists to catch, and
+green on the artefact it must not convict.  Before this run it had only ever agreed
+with a tree that was already correct, which is no evidence at all.
+done.

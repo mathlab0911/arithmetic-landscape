@@ -4,7 +4,7 @@
 
 *Archived release `v1.2.0` (2026-08-17). The DOI above resolves to the latest version; each release also gets its own. Manuscripts CC BY 4.0, code Apache-2.0. **Not peer-reviewed** — every statement carries its own status where it is stated.*
 
-**A DOI makes a version permanent; it does not make it true.** `v1.1.1` corrected three false sentences about the Lee–Yang ladder of Part III. `v1.2.0` corrects **four more** — a table wrong from the fourth digit, a displayed formula that does not generate the constant printed beside it, a conjectured dividing line the mechanism never used, and **a refutation of our own that is withdrawn**. Each is corrected at its own statement, none deleted, and all four are itemised in [the `v1.2.0` release notes](https://github.com/mathlab0911/arithmetic-landscapes/releases/tag/v1.2.0). *Three of the four were found by building something new and noticing it contradicted a sentence written elsewhere — not by any of the twenty-one mechanical checks.*
+**A DOI makes a version permanent; it does not make it true.** `v1.1.1` corrected three false sentences about the Lee–Yang ladder of Part III. `v1.2.0` corrects **four more** — a table wrong from the fourth digit, a displayed formula that does not generate the constant printed beside it, a conjectured dividing line the mechanism never used, and **a refutation of our own that is withdrawn**. Each is corrected at its own statement, none deleted, and all four are itemised in [the `v1.2.0` release notes](https://github.com/mathlab0911/arithmetic-landscapes/releases/tag/v1.2.0). *Three of the four were found by building something new and noticing it contradicted a sentence written elsewhere — not by any of the twenty-two mechanical checks.*
 
 The **gap series** of a finite set `A` of odd positive integers with largest element `M` is
 
@@ -102,7 +102,7 @@ level it does. **Work produced this way cannot be trusted on the author's word; 
 checkable, and checkable by someone who does not trust the author.** So every settled theorem
 goes into Lean and is replayed through the kernel by an independent checker that must first
 reject three deliberately poisoned modules; every number quoted in a paper must exist in a
-committed log; every statement must declare its status where it is stated; and twenty-one mechanical
+committed log; every statement must declare its status where it is stated; and twenty-two mechanical
 checks enforce those rules before each commit. The failure ledger in `tools/` records, in full,
 every mistake this process has actually made — including the ones a check was built to catch
 only after it had already happened, and the ones where the check itself was the defect.
@@ -166,6 +166,7 @@ python3 tools/check.py
 | C19 | every Japanese edition has the same labels, theorem environments and status declarations as its source |
 | C20 | no statement rests on measurement alone: prove it, disprove it, or name it as open |
 | C21 | no file in the tree has a name that says it holds credentials — and the check announces its own limit, since it cannot see a secret that is innocently named |
+| C22 | exactly one artefact **in the whole tree** claims to be the live report, and the direction being written is not more than one round behind the newest round in the tree — C3 checked one directory and passed for seven rounds while five live reports sat in another |
 
 A check that examined nothing **fails**: silence is good news only if the check spoke.
 

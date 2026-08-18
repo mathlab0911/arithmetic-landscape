@@ -181,3 +181,38 @@ working as intended, and it is why the reconstruction step exists at all. And th
 `description` field has a **1024-character limit** that is only enforced at save time:
 the first attempt was rejected after the whole body had been transmitted. *Measure a
 field against its limit before spending the write.*
+
+## F107 (proposed, r223) -- the test harness is code, and it needs its own controls
+
+```
+claimed   : c22_control_r223.py verified C22 by watching it go red on two corruptions.
+actual    : on its first Windows run it reported "C22a did not fire" and "C22b did not
+            fire" -- on corruptions where C22 had demonstrably fired minutes earlier in
+            the sandbox.  The harness read the suite's output with subprocess text=True,
+            which inherits the console codec; on this machine that is cp932, check.py
+            prints Japanese, the reader thread died with UnicodeDecodeError, and the
+            captured text came back EMPTY.  "The tool printed no FAIL line" and "the tool
+            printed nothing" are different facts and the harness could not tell them
+            apart.  Then, under a table of two FAILs, it printed its closing paragraph
+            anyway: "C22 has now been observed red on both of the corruptions it exists
+            to catch."
+check     : decode every process boundary explicitly (bytes + .decode("utf-8")), and make
+            every summary sentence a function of the verdicts it summarises.
+rule      : A harness written to test a check is itself untested code, and its two
+            characteristic failures are ENCODING at the boundary and a CONCLUSION that
+            does not read its own results.  The second is F47 in a new costume: an
+            explanation that cannot fail is not protecting the claim, it is occupying the
+            slot where a real one would go.
+```
+
+**What saved it was F58**: the harness disagreed with something already measured, so the
+harness was tested first rather than the check being rewritten. Had the order been
+reversed, C22 would have been "fixed" until it stopped failing — which is F57's *a check
+loosened until it stops complaining has been switched off with extra steps*, reached by a
+completely different road.
+
+**One practice note, from the same run (section 9).** The sandbox can CREATE files in the
+mounted folder but cannot DELETE them. A control that corrupts and restores must run where
+it can restore: the first attempt left `outgoing/to-fable5/r299.md` sitting in the tree —
+a fake live report, produced by the machinery built to detect fake live reports. **Run
+corrupt-and-restore controls on Windows.**

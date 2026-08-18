@@ -1243,12 +1243,98 @@ def c21_no_secret_files():
                  'that is innocently named, and it never reads contents to decide.' % (n, len(SECRET_OK)))
 
 
+# ------------------------------------------------------------------ C22 (F101)
+# Bought at r222b, which cost two false statements in one day.
+#
+# C3 asserts "one live report per direction" over `reports/to-*/` and passed for SEVEN
+# rounds while five files headed "**Live outgoing.**" sat in `outgoing/to-fable5/` -- a
+# directory neither C3 nor fable-5 reads.  The round that finally noticed the stale live
+# file then asserted the reports had never been written, after listing exactly one
+# directory.  So the entry has two clauses and EITHER ONE ALONE PASSES THAT INCIDENT:
+#
+#   C22a  no file OUTSIDE the two report directories may declare itself live.
+#   C22b  the live file the repository is currently WRITING must not trail the newest
+#         round evidenced in the tree by more than one.
+#
+# Scope note, because scope is the whole point here (F60): C22a walks the entire tree,
+# not `reports/`.  Archived reports are exempt -- they carried the claim honestly when
+# they were live, and a check that convicts the past cannot audit it (F78).
+LIVE_CLAIM = re.compile(r'^\s*[*_`>#\s]*live\s+(?:outgoing|incoming)\b', re.I)
+REPORT_DIRS = ('reports/to-fable5', 'reports/to-opus5')
+
+
+def _round_of(name):
+    m = re.search(r'r(\d{3})', name)
+    return int(m.group(1)) if m else None
+
+
+def c22_live_claims_and_currency():
+    # ---- C22a: who claims to be live, anywhere in the tree
+    scanned, exempt, rogue = 0, 0, []
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in ('.git', '__pycache__', '.lake')]
+        for fn_ in filenames:
+            if not fn_.endswith('.md'):
+                continue
+            full = os.path.join(dirpath, fn_)
+            rel = os.path.relpath(full, ROOT).replace('\\', '/')
+            if rel.startswith(REPORT_DIRS):
+                exempt += 1          # the two report directories, live and archive alike
+                continue
+            scanned += 1
+            # Only the header declares status; a later paragraph QUOTING the phrase (this
+            # ledger does, in F101) is not a claim.  Fifteen lines, at a line start.
+            head = _read(full).split('\n')[:15]
+            for i, line in enumerate(head):
+                if LIVE_CLAIM.match(line):
+                    rogue.append('%s:%d: %s' % (rel, i + 1, line.strip()[:70]))
+                    break
+    if rogue:
+        fail('C22a/F101', 'file(s) outside %s declare themselves live -- two places both '
+                          'holding "the live one" is how five reports went unread for seven '
+                          'rounds: %s' % (' and '.join(REPORT_DIRS), '; '.join(sorted(rogue))))
+    expect_subjects('C22a/F101', scanned, 'markdown files outside the report directories')
+
+    # ---- C22b: is the direction we are writing actually current?
+    newest = max([_round_of(f) for f in os.listdir(PNP)
+                  if re.fullmatch(r'.+_r\d{2,3}\.(py|log)', f) and _round_of(f)] or [0])
+    live = {}
+    for d in ('to-fable5', 'to-opus5'):
+        md = [f for f in os.listdir(os.path.join(ROOT, 'reports', d)) if f.endswith('.md')]
+        if len(md) == 1 and _round_of(md[0]):
+            live[d] = _round_of(md[0])
+    if not live or not newest:
+        fail('C22b/F101', 'could not determine the live rounds (%s) or the newest round in '
+                          'the tree (%s); the check found no subject' % (live, newest))
+    else:
+        # The outgoing direction is the one carrying the higher round: that is the file
+        # this repository is writing.  The INCOMING one legitimately trails, because it
+        # stays live until its reply arrives (section 3).
+        d_out = max(live, key=live.get)
+        if newest - live[d_out] > 1:
+            fail('C22b/F101', 'the live outgoing report is reports/%s/r%03d.md but the newest '
+                              'round in the tree is r%03d -- it trails by %d. Rounds are '
+                              'shipping without being reported, and C3 cannot see it because '
+                              'a live file exists.' % (d_out, live[d_out], newest,
+                                                       newest - live[d_out]))
+        notes.append('C22b/F101 live outgoing reports/%s/r%03d.md against newest round r%03d '
+                     'in the tree (trails by %d, limit 1); incoming %s may trail and does'
+                     % (d_out, live[d_out], newest, newest - live[d_out],
+                        ', '.join('%s r%03d' % (k, v) for k, v in sorted(live.items())
+                                  if k != d_out) or 'none'))
+    notes.append('C22a/F101 markdown files scanned for a live self-declaration: %d, with %d '
+                 'inside the report directories exempted (an archived report carried the '
+                 'claim honestly when it was live). Header only, first 15 lines, at a line '
+                 'start -- a later paragraph quoting the phrase is not a claim.'
+                 % (scanned, exempt))
+
+
 CHECKS = (c1_logs, c2_numbers, c3_one_live, c4_labels, c5_naming, c6_pending,
           c7_lean_citations, c8_status_at_statement, c9_readme_counts, c10_repo_url,
           c11_constants, c12_cited_scripts, c13_translation_drift,
           c14_enumeration_form, c15_cross_document, c16_ai_disclosure, c17_terminology,
           c18_landing_pages, c19_translation_parity, c20_measured_only,
-          c21_no_secret_files)
+          c21_no_secret_files, c22_live_claims_and_currency)
 
 if __name__ == '__main__':
     for fn in CHECKS:
